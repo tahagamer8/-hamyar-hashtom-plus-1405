@@ -1,0 +1,53 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      # اگر پوشه android در پروژه نبود، اسکلت اندروید ساخته می‌شود
+      - name: Create Android platform if missing
+        run: |
+          if [ ! -d android ]; then
+            flutter create --platforms=android --project-name hamyar_hashtom_plus --org ir.hamyar /tmp/scaffold
+            cp -r /tmp/scaffold/android ./android
+            sed -i 's/android:label="[^"]*"/android:label="همیار هشتم پلاس"/' android/app/src/main/AndroidManifest.xml
+          fi
+
+      # اگر فایل‌های فونت داخل مخزن نبودند، از مخزن رسمی وزیرمتن دانلود می‌شوند
+      - name: Ensure Vazirmatn fonts
+        run: |
+          if [ ! -f assets/fonts/Vazirmatn/Vazirmatn-Regular.ttf ]; then
+            mkdir -p assets/fonts/Vazirmatn /tmp/vazir
+            curl -fL -o /tmp/vazir.zip https://github.com/rastikerdar/vazirmatn/releases/download/v33.003/vazirmatn-v33.003.zip
+            unzip -q /tmp/vazir.zip -d /tmp/vazir
+            find /tmp/vazir -path '*ttf*' -name 'Vazirmatn-*.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
+          fi
+          ls assets/fonts/Vazirmatn
+
+      - run: flutter pub get
+      - run: flutter analyze --no-fatal-infos
+      - run: flutter test
+      - run: flutter build apk --release --split-per-abi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hamyar-hashtom-plus-apk
+          path: build/app/outputs/flutter-apk/*.apk
