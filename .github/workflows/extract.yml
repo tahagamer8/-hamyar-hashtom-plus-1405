@@ -1,0 +1,20 @@
+name: Extract project zip
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          unzip -q hamyar_hashtom_plus_step1.zip -d /tmp/x
+          SRC=/tmp/x/hamyar_hashtom_plus
+          cp $SRC/.github/workflows/build_apk.yml build_apk.yml.txt
+          rsync -a --exclude='.github' $SRC/ ./
+          rm hamyar_hashtom_plus_step1.zip
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Add project step 1"
+          git push
