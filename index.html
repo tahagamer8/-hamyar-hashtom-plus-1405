@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111329">
+  <meta name="description" content="فهمینو؛ همراه یادگیری پایه هشتم. آموزش، جزوه، گام‌به‌گام و نمونه‌سؤال در یک جا.">
+  <title>فهمینو | همراه یادگیری پایه هشتم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1022;
+      --surface: #171b35;
+      --surface-2: #1e2444;
+      --text: #f5f6ff;
+      --muted: #aeb5d2;
+      --purple: #8b5cf6;
+      --blue: #4f8cff;
+      --cyan: #48c6ef;
+      --border: rgba(255,255,255,.09);
+      --shadow: 0 22px 70px rgba(0,0,0,.28);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--text); background:
+        radial-gradient(ellipse at 85% 5%, rgba(91,77,220,.20), transparent 34rem),
+        radial-gradient(ellipse at 10% 35%, rgba(38,145,224,.12), transparent 32rem),
+        var(--bg);
+      font-family: "Vazirmatn", Tahoma, sans-serif; line-height: 1.9;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:22px 0; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:900; font-size:1.25rem; }
+    .logo { width:43px; height:43px; display:grid; place-items:center; border-radius:14px; background:linear-gradient(135deg,var(--purple),var(--blue)); box-shadow:0 8px 25px #7356e955; font-size:1.3rem; }
+    .navlinks { display:flex; gap:26px; color:var(--muted); font-size:.92rem; }
+    .navlinks a:hover { color:white; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:11px 19px; border-radius:13px; font-weight:700; border:1px solid var(--border); transition:.2s; }
+    .btn-primary { background:linear-gradient(110deg,var(--purple),var(--blue)); box-shadow:0 10px 28px #6258d744; border:0; }
+    .btn:hover { transform:translateY(-2px); }
+    .hero { display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:45px; padding:70px 0 90px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; color:#c8c4ff; background:#8b5cf61c; border:1px solid #9b82ff38; padding:6px 13px; border-radius:999px; font-size:.85rem; }
+    h1 { font-size:clamp(2.5rem,5vw,4.3rem); line-height:1.35; margin:18px 0 12px; font-weight:900; letter-spacing:-1.5px; }
+    .gradient-text { background:linear-gradient(100deg,#b69aff,#68baff); color:transparent; background-clip:text; -webkit-background-clip:text; }
+    .hero p { color:var(--muted); font-size:1.08rem; max-width:560px; margin:0 0 26px; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; }
+    .hero-note { color:#8e97b9; font-size:.82rem; margin-top:14px; }
+    .app-preview { position:relative; max-width:420px; margin:auto; width:100%; }
+    .glow { position:absolute; inset:12% 8%; background:linear-gradient(135deg,var(--purple),var(--blue)); filter:blur(65px); opacity:.35; }
+    .phone { position:relative; width:min(300px,85%); margin:auto; padding:12px; border:1px solid #ffffff2c; border-radius:35px; background:linear-gradient(145deg,#30385f,#11152d 65%); box-shadow:var(--shadow); transform:rotate(-3deg); }
+    .screen { min-height:480px; border-radius:25px; padding:18px 15px; background:linear-gradient(160deg,#202a55,#11162d 70%); overflow:hidden; }
+    .screen-top { display:flex; justify-content:space-between; align-items:center; color:#cbd5ff; font-size:.78rem; }
+    .screen-title { margin:23px 0 4px; font-size:1.35rem; font-weight:900; }
+    .screen-sub { color:#aeb8df; font-size:.75rem; }
+    .mini-banner { margin:17px 0; border-radius:16px; padding:14px; background:linear-gradient(110deg,#7955dc,#398de9); }
+    .mini-banner strong { display:block; font-size:1rem; }
+    .mini-banner span { font-size:.7rem; opacity:.9; }
+    .mini-grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+    .mini-card { background:#ffffff0d; border:1px solid #ffffff12; border-radius:13px; padding:13px 8px; text-align:center; font-size:.76rem; }
+    .mini-icon { display:block; font-size:1.35rem; margin-bottom:4px; }
+    .mini-courses { margin-top:17px; color:#cbd5ff; font-size:.8rem; font-weight:700; }
+    .course-line { display:flex; justify-content:space-between; margin-top:9px; padding:9px 10px; border-radius:10px; background:#ffffff0c; color:#dfe5ff; font-size:.72rem; }
+    section { padding:65px 0; }
+    .section-head { text-align:center; max-width:650px; margin:0 auto 34px; }
+    .section-head h2 { font-size:clamp(1.7rem,3vw,2.4rem); margin:0 0 8px; }
+    .section-head p { color:var(--muted); margin:0; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .feature { background:linear-gradient(145deg,#1a1f3c,#14182f); border:1px solid var(--border); border-radius:20px; padding:23px; }
+    .feature-icon { width:46px; height:46px; display:grid; place-items:center; border-radius:14px; background:linear-gradient(135deg,#895cf633,#4f8cff33); font-size:1.4rem; }
+    .feature h3 { margin:12px 0 5px; font-size:1.08rem; }
+    .feature p { margin:0; color:var(--muted); font-size:.9rem; }
+    .subjects { display:flex; flex-wrap:wrap; justify-content:center; gap:11px; }
+    .subject { padding:10px 17px; border-radius:13px; border:1px solid var(--border); background:#ffffff08; color:#e3e7ff; }
+    .cta { text-align:center; padding:38px 25px; border-radius:26px; border:1px solid #9c8bff35; background:linear-gradient(120deg,#7654d52b,#398de92b); }
+    .cta h2 { margin:0 0 8px; font-size:1.8rem; }
+    .cta p { margin:0 auto 20px; color:var(--muted); max-width:600px; }
+    footer { border-top:1px solid var(--border); margin-top:70px; padding:25px 0; color:#929bbd; font-size:.85rem; }
+    .footer-inner { display:flex; justify-content:space-between; gap:15px; flex-wrap:wrap; }
+    @media(max-width:800px) {
+      .hero { grid-template-columns:1fr; text-align:center; padding:48px 0 60px; gap:38px; }
+      .hero p { margin-inline:auto; }
+      .actions { justify-content:center; }
+      .navlinks { display:none; }
+      .features { grid-template-columns:repeat(2,1fr); }
+    }
+    @media(max-width:520px) {
+      .container { width:min(100% - 28px,1120px); }
+      .features { grid-template-columns:1fr; }
+      .hero { padding-top:35px; }
+      .phone { transform:none; }
+      .footer-inner { justify-content:center; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="container nav">
+    <a class="brand" href="#home" aria-label="فهمینو">
+      <span class="logo">ف</span><span>فهمینو</span>
+    </a>
+    <nav class="navlinks" aria-label="ناوبری اصلی">
+      <a href="#features">امکانات</a>
+      <a href="#subjects">درس‌ها</a>
+      <a href="#about">درباره فهمینو</a>
+    </nav>
+    <a class="btn btn-primary" href="#download">آشنایی با اپ</a>
+  </header>
+
+  <main>
+    <section class="container hero" id="home">
+      <div>
+        <span class="eyebrow">✦ همراه یادگیری پایه هشتم</span>
+        <h1>یادگیری، ساده‌تر<br><span class="gradient-text">با فهمینو</span></h1>
+        <p>فهمینو یک همراه آموزشی برای دانش‌آموزان پایه هشتم است؛ جایی برای دسترسی منظم به آموزش، جزوه، گام‌به‌گام و نمونه‌سؤال‌ها.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#features">امکانات فهمینو</a>
+          <a class="btn" href="#subjects">دیدن درس‌ها <span>←</span></a>
+        </div>
+        <div class="hero-note">ویژه پایه هشتم · طراحی فارسی و راست‌چین</div>
+      </div>
+
+      <div class="app-preview" aria-label="پیش‌نمایش گرافیکی محیط فهمینو">
+        <div class="glow"></div>
+        <div class="phone">
+          <div class="screen">
+            <div class="screen-top"><span>۹:۴۱</span><span>● ● ●</span></div>
+            <div class="screen-title">همراه یادگیری تو</div>
+            <div class="screen-sub">به فهمینو خوش آمدی</div>
+            <div class="mini-banner"><strong>همیار هشتم پلاس</strong><span>یادگیری قدم‌به‌قدم، در یک جا</span></div>
+            <div class="mini-grid">
+              <div class="mini-card"><span class="mini-icon">📘</span>آموزش فصل‌به‌فصل</div>
+              <div class="mini-card"><span class="mini-icon">📝</span>جزوه و خلاصه</div>
+              <div class="mini-card"><span class="mini-icon">📚</span>گام‌به‌گام</div>
+              <div class="mini-card"><span class="mini-icon">✍️</span>نمونه‌سؤال</div>
+              <div class="mini-card"><span class="mini-icon">🎯</span>آزمون</div>
+              <div class="mini-card"><span class="mini-icon">⭐</span>علاقه‌مندی‌ها</div>
+            </div>
+            <div class="mini-courses">درس‌های پایه هشتم</div>
+            <div class="course-line"><span>ریاضی</span><span>علوم</span><span>فارسی</span></div>
+            <div class="course-line"><span>عربی</span><span>انگلیسی</span><span>مطالعات</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="features">
+      <div class="section-head">
+        <h2>امکانات فهمینو</h2>
+        <p>ابزارهای درسی موردنیاز، با دسترسی ساده و مرتب</p>
+      </div>
+      <div class="features">
+        <article class="feature"><div class="feature-icon">📖</div><h3>آموزش فصل‌به‌فصل</h3><p>مطالب درسی را به بخش‌های کوچک‌تر تقسیم کن و مرحله‌به‌مرحله پیش برو.</p></article>
+        <article class="feature"><div class="feature-icon">🗒️</div><h3>جزوه و خلاصه</h3><p>نکته‌ها و خلاصه‌های درسی را یک‌جا پیدا کن.</p></article>
+        <article class="feature"><div class="feature-icon">🧩</div><h3>گام‌به‌گام</h3><p>برای فهم بهتر تمرین‌ها، راه‌حل‌ها را مرحله‌به‌مرحله دنبال کن.</p></article>
+        <article class="feature"><div class="feature-icon">✍️</div><h3>نمونه‌سؤال</h3><p>با سؤال‌های متنوع، آموخته‌هایت را مرور کن.</p></article>
+        <article class="feature"><div class="feature-icon">🎯</div><h3>آزمون</h3><p>دانسته‌هایت را بسنج و بخش‌هایی را که نیاز به تمرین دارند پیدا کن.</p></article>
+        <article class="feature"><div class="feature-icon">⭐</div><h3>علاقه‌مندی‌ها</h3><p>مطالبی را که می‌خواهی دوباره ببینی، ذخیره کن.</p></article>
+      </div>
+    </section>
+
+    <section class="container" id="subjects">
+      <div class="section-head">
+        <h2>درس‌های پایه هشتم</h2>
+        <p>فهمینو برای همراهی با درس‌های پایه هشتم طراحی شده است.</p>
+      </div>
+      <div class="subjects">
+        <span class="subject">ریاضی</span><span class="subject">علوم</span>
+        <span class="subject">فارسی و نگارش</span><span class="subject">عربی</span>
+        <span class="subject">زبان انگلیسی</span><span class="subject">مطالعات اجتماعی</span>
+        <span class="subject">پیام‌های آسمان</span><span class="subject">قرآن</span>
+      </div>
+    </section>
+
+    <section class="container" id="download">
+      <div class="cta">
+        <h2>همراه یادگیری‌ات باش</h2>
+        <p>فهمینو در حال توسعه است. به‌زودی اطلاعات نسخه‌ها و راهنمای دریافت برنامه از همین صفحه منتشر می‌شود.</p>
+        <a class="btn btn-primary" href="#about">درباره فهمینو</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="about">
+    <div class="container footer-inner">
+      <span><strong>فهمینو</strong> — همراه یادگیری پایه هشتم</span>
+      <span>ساخته‌شده برای یادگیری ساده‌تر · ۱۴۰۵</span>
+    </div>
+  </footer>
+</body>
+</html>
