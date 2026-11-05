@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hamyar_hashtom_plus/app.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_constants.dart';
@@ -7,14 +8,12 @@ import 'package:hamyar_hashtom_plus/features/content/presentation/screens/conten
 import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_screen.dart';
 
 Future<void> openMathContent(WidgetTester tester, String featureId) async {
+  await tester.runAsync(() => rootBundle.loadString('assets/content/catalog_fa.json'));
   await tester.pumpWidget(
     MaterialApp(
       key: ValueKey<String>('content-$featureId'),
       home: ContentLibraryScreen(subjectId: 'math', featureId: featureId),
     ),
-  );
-  await tester.runAsync(
-    () => Future<void>.delayed(const Duration(seconds: 1)),
   );
   await tester.pumpAndSettle();
 }
@@ -68,10 +67,8 @@ void main() {
   });
 
   testWidgets('search filters the learning catalog', (tester) async {
+    await tester.runAsync(() => rootBundle.loadString('assets/content/catalog_fa.json'));
     await tester.pumpWidget(const MaterialApp(home: SearchScreen()));
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(seconds: 1)),
-    );
     await tester.pumpAndSettle();
     expect(find.byType(TextField), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'عددهای صحیح');
