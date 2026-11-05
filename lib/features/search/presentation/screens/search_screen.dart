@@ -14,17 +14,23 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final _controller = TextEditingController();
-  late final Future<Map<String, dynamic>> _catalogFuture;
+  Future<Map<String, dynamic>>? _catalogFuture;
   String _query = '';
 
   @override
   void initState() {
     super.initState();
-    _catalogFuture = rootBundle.loadString('assets/content/catalog_fa.json')
-        .then((raw) => jsonDecode(raw) as Map<String, dynamic>);
     _controller.addListener(() {
       if (mounted) setState(() => _query = _controller.text.trim());
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _catalogFuture ??= DefaultAssetBundle.of(context)
+        .loadString('assets/content/catalog_fa.json')
+        .then((raw) => jsonDecode(raw) as Map<String, dynamic>);
   }
 
   @override
