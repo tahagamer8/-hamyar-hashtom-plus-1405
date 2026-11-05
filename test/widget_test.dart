@@ -11,9 +11,14 @@ Future<void> openMathFeature(WidgetTester tester, String feature) async {
   await tester.pumpAndSettle();
   await tester.tap(find.text('ریاضی').first);
   await tester.pumpAndSettle();
-  await tester.ensureVisible(find.text(feature));
+  await tester.scrollUntilVisible(
+    find.text(feature),
+    100,
+    scrollable: find.byType(Scrollable).last,
+  );
   await tester.tap(find.text(feature));
-  await tester.pumpAndSettle();
+  await tester.pump();
+  await tester.pump(const Duration(seconds: 1));
 }
 
 void main() {
@@ -68,9 +73,11 @@ void main() {
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
     await tester.pumpAndSettle();
     await tester.tap(find.text('جست‌وجو'));
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
     await tester.enterText(find.byType(TextField), 'عددهای صحیح');
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
     expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
   });
 }
