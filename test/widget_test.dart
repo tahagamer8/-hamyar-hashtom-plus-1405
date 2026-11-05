@@ -20,7 +20,7 @@ Future<void> openMathFeature(WidgetTester tester, String feature) async {
     ),
   );
   await tester.tap(find.text(feature));
-  await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 100)));
+  await tester.runAsync(() => Future<void>.delayed(const Duration(seconds: 1)));
   await tester.pump();
 }
 
@@ -76,7 +76,7 @@ void main() {
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
     await tester.pumpAndSettle();
     await tester.tap(find.text('جست‌وجو').last);
-    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 100)));
+    await tester.runAsync(() => Future<void>.delayed(const Duration(seconds: 1)));
     await tester.pump();
     await tester.enterText(find.byType(TextField), 'عددهای صحیح');
     await tester.pump();
