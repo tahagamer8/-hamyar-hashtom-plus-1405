@@ -9,13 +9,14 @@ import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_
 Future<void> openMathContent(WidgetTester tester, String featureId) async {
   await tester.pumpWidget(
     MaterialApp(
+      key: ValueKey<String>('content-$featureId'),
       home: ContentLibraryScreen(subjectId: 'math', featureId: featureId),
     ),
   );
   await tester.runAsync(
     () => Future<void>.delayed(const Duration(seconds: 1)),
   );
-  await tester.pump();
+  await tester.pumpAndSettle();
 }
 
 void main() {
@@ -71,7 +72,7 @@ void main() {
     await tester.runAsync(
       () => Future<void>.delayed(const Duration(seconds: 1)),
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
     expect(find.byType(TextField), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'عددهای صحیح');
     await tester.pump();
