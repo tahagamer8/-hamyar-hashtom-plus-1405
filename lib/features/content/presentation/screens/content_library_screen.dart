@@ -19,16 +19,21 @@ class ContentLibraryScreen extends StatefulWidget {
 }
 
 class _ContentLibraryScreenState extends State<ContentLibraryScreen> {
-  late Future<Map<String, dynamic>> _contentFuture;
+  Future<Map<String, dynamic>>? _contentFuture;
 
   @override
   void initState() {
     super.initState();
-    _contentFuture = _loadContent();
   }
 
-  Future<Map<String, dynamic>> _loadContent() async {
-    final raw = await rootBundle.loadString('assets/content/catalog_fa.json');
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _contentFuture ??= _loadContent(DefaultAssetBundle.of(context));
+  }
+
+  Future<Map<String, dynamic>> _loadContent(AssetBundle bundle) async {
+    final raw = await bundle.loadString('assets/content/catalog_fa.json');
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
     final subject = decoded[widget.subjectId];
     if (subject is! Map<String, dynamic>) {
