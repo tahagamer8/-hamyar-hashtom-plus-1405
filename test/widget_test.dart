@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hamyar_hashtom_plus/app.dart';
@@ -10,6 +11,7 @@ Future<void> openMathFeature(WidgetTester tester, String feature) async {
   await tester.pumpAndSettle();
   await tester.tap(find.text('ریاضی').first);
   await tester.pumpAndSettle();
+  await tester.ensureVisible(find.text(feature));
   await tester.tap(find.text(feature));
   await tester.pumpAndSettle();
 }
