@@ -14,11 +14,14 @@ Future<void> openMathFeature(WidgetTester tester, String feature) async {
   await tester.scrollUntilVisible(
     find.text(feature),
     100,
-    scrollable: find.byType(Scrollable).last,
+    scrollable: find.descendant(
+      of: find.byType(ListView).last,
+      matching: find.byType(Scrollable),
+    ),
   );
   await tester.tap(find.text(feature));
+  await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 100)));
   await tester.pump();
-  await tester.pump(const Duration(seconds: 1));
 }
 
 void main() {
@@ -72,12 +75,11 @@ void main() {
   testWidgets('search filters the learning catalog', (tester) async {
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('جست‌وجو'));
+    await tester.tap(find.text('جست‌وجو').last);
+    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 100)));
     await tester.pump();
-    await tester.pump(const Duration(seconds: 1));
     await tester.enterText(find.byType(TextField), 'عددهای صحیح');
     await tester.pump();
-    await tester.pump(const Duration(seconds: 1));
     expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
   });
 }
