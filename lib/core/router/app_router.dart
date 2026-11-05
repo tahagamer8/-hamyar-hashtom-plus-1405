@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hamyar_hashtom_plus/core/router/app_routes.dart';
 import 'package:hamyar_hashtom_plus/core/widgets/main_shell.dart';
+import 'package:hamyar_hashtom_plus/features/content/presentation/screens/content_library_screen.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:hamyar_hashtom_plus/features/home/presentation/screens/home_screen.dart';
 import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_screen.dart';
@@ -37,6 +38,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                     builder: (context, state) => SubjectDetailScreen(
                       subjectId: state.pathParameters['subjectId']!,
                     ),
+                    routes: [
+                      GoRoute(
+                        path: ':featureId',
+                        builder: (context, state) => ContentLibraryScreen(
+                          subjectId: state.pathParameters['subjectId']!,
+                          featureId: state.pathParameters['featureId']!,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -85,10 +95,8 @@ class _NotFoundScreen extends StatelessWidget {
           children: [
             const Icon(Icons.explore_off_rounded, size: 64),
             const SizedBox(height: 16),
-            Text(
-              'صفحه‌ای پیدا نشد',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            Text('صفحه‌ای پیدا نشد',
+                style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 16),
             FilledButton(
               onPressed: () => context.go(AppRoutes.home),

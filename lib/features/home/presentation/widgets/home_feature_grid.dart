@@ -19,7 +19,8 @@ class HomeFeatureGrid extends StatelessWidget {
         crossAxisSpacing: 12,
         childAspectRatio: 0.8,
         children: [
-          for (final feature in AppFeature.values) _FeatureTile(feature: feature),
+          for (final feature in AppFeature.values)
+            _FeatureTile(feature: feature),
         ],
       ),
     );
@@ -28,14 +29,12 @@ class HomeFeatureGrid extends StatelessWidget {
 
 class _FeatureTile extends StatelessWidget {
   const _FeatureTile({required this.feature});
-
   final AppFeature feature;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final radius = BorderRadius.circular(20);
-
     return Material(
       color: AppColors.card(context),
       shape: RoundedRectangleBorder(
@@ -44,9 +43,10 @@ class _FeatureTile extends StatelessWidget {
       ),
       child: InkWell(
         borderRadius: radius,
-        // در مراحل بعدی هر امکان مسیر اختصاصی خودش را می‌گیرد.
         onTap: () => context.go(
-          feature.isSubjectSection ? AppRoutes.subjects : AppRoutes.favorites,
+          feature == AppFeature.favorites
+              ? AppRoutes.favorites
+              : AppRoutes.subjects,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
@@ -63,15 +63,10 @@ class _FeatureTile extends StatelessWidget {
                 child: Icon(feature.icon, color: feature.color, size: 24),
               ),
               const SizedBox(height: 8),
-              Text(
-                feature.title,
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              Text(feature.title, maxLines: 2, textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.labelMedium
+                      ?.copyWith(fontWeight: FontWeight.w600)),
             ],
           ),
         ),

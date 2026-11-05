@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/core/theme/app_colors.dart';
 import 'package:hamyar_hashtom_plus/features/subjects/domain/entities/subject.dart';
@@ -14,7 +15,6 @@ class SubjectDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final subjectAsync = ref.watch(subjectProvider(subjectId));
-
     return Scaffold(
       appBar: AppBar(title: Text(subjectAsync.value?.title ?? 'درس')),
       body: subjectAsync.when(
@@ -31,7 +31,6 @@ class SubjectDetailScreen extends ConsumerWidget {
 
 class _SubjectBody extends StatelessWidget {
   const _SubjectBody({required this.subject});
-
   final Subject subject;
 
   @override
@@ -39,8 +38,7 @@ class _SubjectBody extends StatelessWidget {
     final theme = Theme.of(context);
     final style = styleForSubject(subject.id);
     final sections =
-        AppFeature.values.where((f) => f.isSubjectSection).toList();
-
+        AppFeature.values.where((feature) => feature.isSubjectSection);
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -70,18 +68,12 @@ class _SubjectBody extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      subject.title,
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
-                    Text(
-                      subject.description,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: Colors.white.withAlpha(220),
-                      ),
-                    ),
+                    Text(subject.title,
+                        style: theme.textTheme.titleLarge
+                            ?.copyWith(color: Colors.white)),
+                    Text(subject.description,
+                        style: theme.textTheme.bodyMedium
+                            ?.copyWith(color: Colors.white.withAlpha(220))),
                   ],
                 ),
               ),
@@ -89,12 +81,12 @@ class _SubjectBody extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        Text('بخش‌های درس', style: theme.textTheme.titleMedium),
+        Text('محتوای درس', style: theme.textTheme.titleMedium),
         const SizedBox(height: 12),
         for (final feature in sections)
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
-            child: _SectionTile(feature: feature),
+            child: _SectionTile(feature: feature, subjectId: subject.id),
           ),
       ],
     );
@@ -102,15 +94,14 @@ class _SubjectBody extends StatelessWidget {
 }
 
 class _SectionTile extends StatelessWidget {
-  const _SectionTile({required this.feature});
-
+  const _SectionTile({required this.feature, required this.subjectId});
   final AppFeature feature;
+  final String subjectId;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final radius = BorderRadius.circular(18);
-
     return Material(
       color: AppColors.card(context),
       shape: RoundedRectangleBorder(
@@ -119,19 +110,9 @@ class _SectionTile extends StatelessWidget {
       ),
       child: InkWell(
         borderRadius: radius,
-        onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text(
-                  'بخش «${feature.title}» در مراحل بعدی اضافه می‌شود.',
-                ),
-              ),
-            );
-        },
+        onTap: () => context.push('/subjects/$subjectId/${feature.name}'),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
           child: Row(
             children: [
               Container(
@@ -144,23 +125,10 @@ class _SectionTile extends StatelessWidget {
                 child: Icon(feature.icon, color: feature.color, size: 22),
               ),
               const SizedBox(width: 12),
-              Expanded(
-                child: Text(feature.title, style: theme.textTheme.titleSmall),
-              ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primary.withAlpha(24),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  'به‌زودی',
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: theme.colorScheme.primary,
-                  ),
-                ),
-              ),
+              Expanded(child: Text(feature.title,
+                  style: theme.textTheme.titleSmall)),
+              Icon(Icons.chevron_left_rounded,
+                  color: theme.colorScheme.onSurfaceVariant),
             ],
           ),
         ),

@@ -1,10 +1,13 @@
-name: Build APK
+name: Build Fahmino APK
 
 on:
   push:
     branches: [main]
   pull_request:
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -22,32 +25,44 @@ jobs:
           channel: stable
           cache: true
 
-      # اگر پوشه android در پروژه نبود، اسکلت اندروید ساخته می‌شود
       - name: Create Android platform if missing
         run: |
           if [ ! -d android ]; then
-            flutter create --platforms=android --project-name hamyar_hashtom_plus --org ir.hamyar /tmp/scaffold
-            cp -r /tmp/scaffold/android ./android
-            sed -i 's/android:label="[^"]*"/android:label="همیار هشتم پلاس"/' android/app/src/main/AndroidManifest.xml
+            flutter create --platforms=android --project-name hamyar_hashtom_plus --org ir.fahmino /tmp/fahmino
+            cp -r /tmp/fahmino/android ./android
           fi
+          sed -i 's/android:label="[^"]*"/android:label="فهمینو"/' android/app/src/main/AndroidManifest.xml
 
-      # اگر فایل‌های فونت داخل مخزن نبودند، از مخزن رسمی وزیرمتن دانلود می‌شوند
       - name: Ensure Vazirmatn fonts
         run: |
           if [ ! -f assets/fonts/Vazirmatn/Vazirmatn-Regular.ttf ]; then
             mkdir -p assets/fonts/Vazirmatn /tmp/vazir
             curl -fL -o /tmp/vazir.zip https://github.com/rastikerdar/vazirmatn/releases/download/v33.003/vazirmatn-v33.003.zip
             unzip -q /tmp/vazir.zip -d /tmp/vazir
-            find /tmp/vazir -path '*ttf*' -name 'Vazirmatn-*.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
+            find /tmp/vazir -type f -name 'Vazirmatn-Regular.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
+            find /tmp/vazir -type f -name 'Vazirmatn-Medium.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
+            find /tmp/vazir -type f -name 'Vazirmatn-SemiBold.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
+            find /tmp/vazir -type f -name 'Vazirmatn-Bold.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
           fi
-          ls assets/fonts/Vazirmatn
+          test -s assets/fonts/Vazirmatn/Vazirmatn-Regular.ttf
+          test -s assets/fonts/Vazirmatn/Vazirmatn-Medium.ttf
+          test -s assets/fonts/Vazirmatn/Vazirmatn-SemiBold.ttf
+          test -s assets/fonts/Vazirmatn/Vazirmatn-Bold.ttf
 
-      - run: flutter pub get
-      - run: flutter analyze --no-fatal-infos
-      - run: flutter test
-      - run: flutter build apk --release --split-per-abi
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze Dart code
+        run: flutter analyze
+
+      - name: Run widget and unit tests
+        run: flutter test --reporter expanded
+
+      - name: Build release APKs
+        run: flutter build apk --release --split-per-abi
 
       - uses: actions/upload-artifact@v4
         with:
-          name: hamyar-hashtom-plus-apk
+          name: fahmino-apk
           path: build/app/outputs/flutter-apk/*.apk
+          if-no-files-found: error
