@@ -31,6 +31,8 @@ SubjectStyle styleForSubject(String id) {
       return const SubjectStyle(Icons.psychology_rounded, Color(0xFFDB2777));
     case 'work':
       return const SubjectStyle(Icons.construction_rounded, Color(0xFFEA580C));
+    case 'culture_art':
+      return const SubjectStyle(Icons.palette_rounded, Color(0xFFBE185D));
     default:
       return const SubjectStyle(Icons.book_rounded, Color(0xFF4F46E5));
   }
