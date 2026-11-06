@@ -334,17 +334,17 @@ class ChapterPdfResources extends StatefulWidget {
 }
 
 class _ChapterPdfResourcesState extends State<ChapterPdfResources> {
-  late Future<List<Map<String, dynamic>>> _resources;
+  Future<List<Map<String, dynamic>>>? _resources;
   String? _opening;
 
   @override
-  void initState() {
-    super.initState();
-    _resources = _loadResources();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _resources ??= _loadResources(DefaultAssetBundle.of(context));
   }
 
-  Future<List<Map<String, dynamic>>> _loadResources() async {
-    final raw = await rootBundle.loadString('assets/generated_pdfs/manifest.json');
+  Future<List<Map<String, dynamic>>> _loadResources(AssetBundle bundle) async {
+    final raw = await bundle.loadString('assets/generated_pdfs/manifest.json');
     final entries = (jsonDecode(raw) as List<dynamic>).cast<Map<String, dynamic>>();
     return entries.where((entry) =>
       entry['subjectId'] == widget.subjectId &&
@@ -357,7 +357,7 @@ class _ChapterPdfResourcesState extends State<ChapterPdfResources> {
     if (_opening != null) return;
     setState(() => _opening = fileName);
     try {
-      final data = await rootBundle.load('assets/generated_pdfs/' + fileName);
+      final data = await DefaultAssetBundle.of(context).load('assets/generated_pdfs/' + fileName);
       final directory = await getApplicationSupportDirectory();
       final file = File(directory.path + '/' + fileName);
       await file.writeAsBytes(data.buffer.asUint8List(), flush: true);
