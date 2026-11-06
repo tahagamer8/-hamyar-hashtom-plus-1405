@@ -464,31 +464,38 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   }
 
   Widget _emptyState(ThemeData theme) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(28),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.auto_awesome_rounded,
-                size: 54, color: theme.colorScheme.primary),
-            const SizedBox(height: 14),
-            Text('سلام! من دستیار هوشمند فهمینو هستم.',
-                textAlign: TextAlign.center,
-                style: theme.textTheme.titleMedium),
-            const SizedBox(height: 8),
-            Text(
-              'می‌توانی دربارهٔ ریاضی، علوم، فارسی، انگلیسی و دیگر درس‌های هشتم سؤال بپرسی.',
-              textAlign: TextAlign.center,
-              style: theme.textTheme.bodyMedium,
+    return LayoutBuilder(
+      builder: (context, constraints) => SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: constraints.maxHeight),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.auto_awesome_rounded,
+                    size: 48, color: theme.colorScheme.primary),
+                const SizedBox(height: 12),
+                Text(
+                  'سلام! من دستیار هوشمند فهمینو هستم.',
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.titleMedium,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'می‌توانی دربارهٔ ریاضی، علوم، فارسی، انگلیسی و دیگر درس‌های هشتم سؤال بپرسی.',
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'پاسخ‌های هوش مصنوعی ممکن است اشتباه باشند؛ با کتاب درسی هم بررسی کن.',
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.bodySmall,
+                ),
+              ],
             ),
-            const SizedBox(height: 10),
-            Text(
-              'پاسخ‌های هوش مصنوعی ممکن است اشتباه باشند؛ با کتاب درسی هم بررسی کن.',
-              textAlign: TextAlign.center,
-              style: theme.textTheme.bodySmall,
-            ),
-          ],
+          ),
         ),
       ),
     );
