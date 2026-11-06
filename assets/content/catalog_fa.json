@@ -125,7 +125,51 @@
             ]
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "حاصل عبارت ‏(−۵/۶ + ۳/۴) ÷ (−۱/۲۴) کدام است؟",
+            "options": [
+              "۲",
+              "−۲",
+              "۱/۲",
+              "−۱/۲"
+            ],
+            "answer": 0,
+            "explanation": "−۵/۶ + ۳/۴ = −۱/۱۲ و تقسیم بر −۱/۲۴ برابر ۲ می‌شود.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "مقدار ‏|−۳/۲| − |۱/۲ − ۵/۴| کدام است؟",
+            "options": [
+              "۳/۴",
+              "۹/۴",
+              "۳/۲",
+              "۱/۴"
+            ],
+            "answer": 0,
+            "explanation": "قدر مطلق‌ها به‌ترتیب ۳/۲ و ۳/۴ هستند؛ تفاضل آن‌ها ۳/۴ است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "اگر a=−۲/۳ و b=۳/۴ باشد، مقدار ۲a−۳b چیست؟",
+            "options": [
+              "−۴۳/۱۲",
+              "−۳۵/۱۲",
+              "۴۳/۱۲",
+              "−۷/۱۲"
+            ],
+            "answer": 0,
+            "explanation": "۲a=−۴/۳=−۱۶/۱۲ و ۳b=۹/۴=۲۷/۱۲؛ پس حاصل −۴۳/۱۲ است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          }
+        ]
       },
       {
         "title": "عددهای اول",
@@ -196,7 +240,51 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کوچک‌ترین عدد طبیعی n که ۱۸۰n مربع کامل شود کدام است؟",
+            "options": [
+              "۲",
+              "۳",
+              "۵",
+              "۱۰"
+            ],
+            "answer": 2,
+            "explanation": "۱۸۰=۲²×۳²×۵ است؛ برای زوج‌شدن توان همهٔ عامل‌ها باید در ۵ ضرب شود.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "حاصل‌ضرب دو عدد ۵۴۰ و ب.م.م آن‌ها ۶ است. ک.م.م آن‌ها چند است؟",
+            "options": [
+              "۶۰",
+              "۹۰",
+              "۱۸۰",
+              "۳۲۴۰"
+            ],
+            "answer": 1,
+            "explanation": "حاصل‌ضرب دو عدد برابر حاصل‌ضرب ب.م.م و ک.م.م است؛ ۵۴۰÷۶=۹۰.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "تعداد شمارنده‌های مثبت عدد ۲³×۳²×۵ چند است؟",
+            "options": [
+              "۱۲",
+              "۱۸",
+              "۲۴",
+              "۳۰"
+            ],
+            "answer": 2,
+            "explanation": "تعداد شمارنده‌ها برابر (۳+۱)(۲+۱)(۱+۱)=۲۴ است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          }
+        ]
       },
       {
         "title": "چندضلعی‌ها",
@@ -266,7 +354,51 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "مجموع زاویه‌های داخلی یک چندضلعی ۱۹۸۰ درجه است. چند ضلع دارد؟",
+            "options": [
+              "۱۱",
+              "۱۲",
+              "۱۳",
+              "۱۴"
+            ],
+            "answer": 2,
+            "explanation": "(n−۲)×۱۸۰=۱۹۸۰؛ بنابراین n−۲=۱۱ و n=۱۳.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "هر زاویهٔ خارجی یک چندضلعی منتظم ۱۸ درجه است. اندازهٔ هر زاویهٔ داخلی آن چند درجه است؟",
+            "options": [
+              "۱۴۴",
+              "۱۵۰",
+              "۱۵۶",
+              "۱۶۲"
+            ],
+            "answer": 3,
+            "explanation": "زاویهٔ داخلی و خارجی مجاور مکمل‌اند؛ ۱۸۰−۱۸=۱۶۲ درجه.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "تعداد قطرهای یک دوازده‌ضلعی چندتاست؟",
+            "options": [
+              "۴۸",
+              "۵۴",
+              "۶۰",
+              "۶۶"
+            ],
+            "answer": 1,
+            "explanation": "تعداد قطرها n(n−۳)/۲ است؛ ۱۲×۹÷۲=۵۴.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          }
+        ]
       },
       {
         "title": "جبر و معادله",
@@ -336,7 +468,51 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "معادلهٔ ۲(۳x−۴)−۳(x+۱)=۷ چه جوابی دارد؟",
+            "options": [
+              "۴",
+              "۵",
+              "۶",
+              "۷"
+            ],
+            "answer": 2,
+            "explanation": "۶x−۸−۳x−۳=۷؛ پس ۳x=۱۸ و x=۶.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "اگر ۲x+۳y=۱۳ و x−y=۱ باشد، مقدار x+y کدام است؟",
+            "options": [
+              "۲۷/۵",
+              "۲۳/۵",
+              "۱۱/۵",
+              "۱۶/۵"
+            ],
+            "answer": 0,
+            "explanation": "از x=y+۱؛ پس ۵y+۲=۱۳ و y=۱۱/۵، x=۱۶/۵ و جمع ۲۷/۵ است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "اگر (x+۲)²−(x−۲)²=۴۰ باشد، x چند است؟",
+            "options": [
+              "۳",
+              "۴",
+              "۵",
+              "۶"
+            ],
+            "answer": 2,
+            "explanation": "با اتحاد تفاضل دو مربع، عبارت برابر ۸x است؛ بنابراین x=۵.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          }
+        ]
       },
       {
         "title": "بردار و مختصات",
@@ -406,7 +582,51 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اگر A=(۳،−۲) و B=(−۱،۴) باشد، بردار ۲A−B کدام است؟",
+            "options": [
+              "(۷،−۸)",
+              "(۵،−۶)",
+              "(−۷،۸)",
+              "(۲،−۴)"
+            ],
+            "answer": 0,
+            "explanation": "۲A=(۶،−۴) و با کم‌کردن B، مختصات (۷،−۸) به دست می‌آید.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "نقطهٔ A برابر (−۲،۵) و بردار AB برابر (۴،−۳) است. مختصات B چیست؟",
+            "options": [
+              "(۲،۲)",
+              "(−۶،۸)",
+              "(۲،۸)",
+              "(−۶،۲)"
+            ],
+            "answer": 0,
+            "explanation": "مختصات بردار را به مختصات A اضافه می‌کنیم: (−۲+۴،۵−۳)=(۲،۲).",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "اگر u=(۲،۱) و v=(−۳،۴) باشد، مختصات u+۲v چیست؟",
+            "options": [
+              "(−۴،۹)",
+              "(۸،۹)",
+              "(−۱،۵)",
+              "(۴،−۷)"
+            ],
+            "answer": 0,
+            "explanation": "۲v=(−۶،۸) و u+۲v=(۲−۶،۱+۸)=(−۴،۹).",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          }
+        ]
       },
       {
         "title": "مثلث",
@@ -476,7 +696,51 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "زاویه‌های یک مثلث به نسبت ۳ به ۴ به ۵ هستند. بزرگ‌ترین زاویه چند درجه است؟",
+            "options": [
+              "۴۵",
+              "۶۰",
+              "۷۵",
+              "۹۰"
+            ],
+            "answer": 2,
+            "explanation": "مجموع نسبت‌ها ۱۲ است؛ هر سهم ۱۵ درجه و بزرگ‌ترین زاویه ۵×۱۵=۷۵ درجه است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "در مثلث متساوی‌الساقین، زاویهٔ رأس ۳۶ درجه است. زاویهٔ خارجی یکی از رأس‌های قاعده چند درجه است؟",
+            "options": [
+              "۱۰۸",
+              "۱۱۷",
+              "۱۲۶",
+              "۱۴۴"
+            ],
+            "answer": 2,
+            "explanation": "هر زاویهٔ قاعده (۱۸۰−۳۶)÷۲=۷۲ است؛ زاویهٔ خارجی ۱۰۸ درجه است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "دو ضلع مثلث ۵ و ۷ هستند. چند عدد طبیعی می‌تواند طول ضلع سوم باشد؟",
+            "options": [
+              "۷",
+              "۸",
+              "۹",
+              "۱۰"
+            ],
+            "answer": 2,
+            "explanation": "طبق نامساوی مثلث، ۲<x<۱۲؛ اعداد طبیعی ۳ تا ۱۱ هستند، یعنی ۹ عدد.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          }
+        ]
       },
       {
         "title": "توان و جذر",
@@ -546,7 +810,51 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "حاصل √۲۰۰−√۵۰+√۸ کدام است؟",
+            "options": [
+              "۵√۲",
+              "۶√۲",
+              "۷√۲",
+              "۸√۲"
+            ],
+            "answer": 2,
+            "explanation": "√۲۰۰=۱۰√۲، √۵۰=۵√۲ و √۸=۲√۲؛ حاصل ۷√۲ است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "حاصل (۳⁴×۹²)÷۲۷² کدام است؟",
+            "options": [
+              "۳",
+              "۶",
+              "۹",
+              "۲۷"
+            ],
+            "answer": 2,
+            "explanation": "۹²=۳⁴ و ۲۷²=۳⁶؛ پس ۳⁸÷۳⁶=۳²=۹.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "جذر عدد ۰٫۰۰۰۹ کدام است؟",
+            "options": [
+              "۰٫۳",
+              "۰٫۰۳",
+              "۰٫۰۰۳",
+              "۰٫۰۰۰۳"
+            ],
+            "answer": 1,
+            "explanation": "۰٫۰۳×۰٫۰۳=۰٫۰۰۰۹ است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          }
+        ]
       },
       {
         "title": "آمار و احتمال",
@@ -616,7 +924,51 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "میانگین پنج عدد برابر ۱۲ است. اگر عدد ۱۸ به داده‌ها افزوده شود، میانگین جدید چند می‌شود؟",
+            "options": [
+              "۱۲",
+              "۱۲٫۵",
+              "۱۳",
+              "۱۴"
+            ],
+            "answer": 2,
+            "explanation": "مجموع پنج عدد ۶۰ است؛ با افزودن ۱۸ مجموع ۷۸ و تعداد ۶ می‌شود؛ میانگین ۱۳ است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "در پرتاب دو تاس سالم، احتمال اینکه مجموع دو عدد ۹ شود چقدر است؟",
+            "options": [
+              "۱/۱۲",
+              "۱/۹",
+              "۱/۶",
+              "۵/۳۶"
+            ],
+            "answer": 1,
+            "explanation": "حالت‌های مطلوب (۳،۶)،(۴،۵)،(۵،۴)،(۶،۳) چهار حالت از ۳۶ حالت است؛ ۱/۹.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "داده‌های مرتب ۴، ۶، ۷، ۷، ۸، ۱۰ چه میانه‌ای دارند؟",
+            "options": [
+              "۶",
+              "۶٫۵",
+              "۷",
+              "۷٫۵"
+            ],
+            "answer": 2,
+            "explanation": "دو دادهٔ میانی هر دو ۷ هستند؛ میانگین آن‌ها ۷ است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          }
+        ]
       },
       {
         "title": "دایره",
@@ -686,7 +1038,51 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "دایره‌ای شعاع ۷ دارد. طول کمان متناظر با زاویهٔ مرکزی ۱۲۰ درجه چقدر است؟",
+            "options": [
+              "۷π/۳",
+              "۱۴π/۳",
+              "۷π/۲",
+              "۱۴π"
+            ],
+            "answer": 1,
+            "explanation": "کمان یک‌سوم محیط است؛ محیط ۱۴π و یک‌سوم آن ۱۴π/۳ است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "محیط دایره‌ای ۱۸π است. مساحت آن چند است؟",
+            "options": [
+              "۳۶π",
+              "۶۳π",
+              "۸۱π",
+              "۹۰π"
+            ],
+            "answer": 2,
+            "explanation": "۲πr=۱۸π پس r=۹ و مساحت π×۹²=۸۱π است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          },
+          {
+            "question": "فاصلهٔ مرکز دایره تا وتری به طول ۱۶، برابر ۶ است. شعاع دایره چند است؟",
+            "options": [
+              "۸",
+              "۹",
+              "۱۰",
+              "۱۲"
+            ],
+            "answer": 2,
+            "explanation": "عمود مرکز بر وتر، آن را نصف می‌کند؛ شعاع وتر و فاصلهٔ ۶ را می‌سازد: √(۸²+۶²)=۱۰.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook",
+            "difficulty": "advanced"
+          }
+        ]
       }
     ],
     "alignmentReview": {
@@ -7425,5 +7821,442 @@
       "referenceBasis": "فقط عنوان هفت درس کتاب اصلی تأیید شده؛ تمرین‌های این کتاب‌کار در PDF رسمی بررسی نشده‌اند.",
       "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
     }
+  },
+  "culture_art": {
+    "title": "فرهنگ و هنر",
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": "https://www.daneshchi.ir/farhang-honar-8/",
+      "referenceTitle": "فهرست بخش‌ها و درس‌های فرهنگ و هنر هشتم",
+      "referenceBasis": "فهرست ثانویهٔ منتشرشده برای چاپ ۱۴۰۵–۱۴۰۶؛ برای تأیید نهایی باید با PDF رسمی همان سال تطبیق داده شود.",
+      "note": "ساختار ۹ فصل از فهرست ثانویه استخراج شده است؛ متن درس‌ها، ترتیب صفحات و فعالیت‌ها هنوز با PDF رسمی تأیید نشده‌اند."
+    },
+    "chapters": [
+      {
+        "title": "طراحی",
+        "summary": "در طراحی، مشاهدهٔ دقیق، شناخت تناسبات، ساده‌سازی شکل‌ها، نمایش حالت و چیدمان عناصر به ساخت تصویری خوانا کمک می‌کند.",
+        "points": [
+          "تناسب، رابطهٔ اندازهٔ اجزای یک موضوع با یکدیگر است.",
+          "ساده‌سازی باید ویژگی‌های اصلی موضوع را حفظ کند.",
+          "ترکیب‌بندی به سازمان‌دهی عناصر در کادر می‌پردازد."
+        ],
+        "example": "برای طراحی یک گلدان، ابتدا محور و نسبت ارتفاع به عرض را مشخص کن؛ سپس جزئیات را اضافه کن.",
+        "solutionSteps": [
+          "موضوع را از چند زاویه مشاهده کن.",
+          "شکل کلی و نسبت‌های اصلی را با خطوط کم‌رنگ مشخص کن.",
+          "حالت و جزئیات را اصلاح کن.",
+          "عناصر را در کادر متعادل بچین."
+        ],
+        "questions": [
+          {
+            "question": "در یک طراحی، همهٔ اجزا درست ترسیم شده‌اند اما نگاه بیننده میان چند نقطهٔ نامرتبط سرگردان می‌شود. کدام مرحله بیش از همه نیاز به بازنگری دارد؟",
+            "options": [
+              "تناسبات",
+              "ترکیب‌بندی",
+              "ساده‌سازی",
+              "نمایش بافت"
+            ],
+            "answer": 1,
+            "explanation": "ترکیب‌بندی مسیر نگاه و رابطهٔ عناصر را در کادر سامان می‌دهد.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "هنگام ساده‌سازی یک شیء، کدام کار نتیجهٔ دقیق‌تری می‌دهد؟",
+            "options": [
+              "حذف تصادفی جزئیات",
+              "تغییر نسبت اجزای اصلی",
+              "حفظ ویژگی‌های شاخص و حذف جزئیات کم‌اهمیت",
+              "تبدیل همهٔ شکل‌ها به مربع"
+            ],
+            "answer": 2,
+            "explanation": "ساده‌سازی خوب، ویژگی‌های هویتی و تناسبات اصلی را نگه می‌دارد.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [],
+        "bookSolutions": [],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+      },
+      {
+        "title": "تصویرسازی",
+        "summary": "تصویرسازی با استفادهٔ هدفمند از خط، سطح، شکل و رنگ، معنا یا روایت را به زبان تصویر منتقل می‌کند. انتخاب روش باید با موضوع و مخاطب هماهنگ باشد.",
+        "points": [
+          "خط می‌تواند جهت، حرکت و حالت را القا کند.",
+          "کیفیت سطح بر حس بصری تصویر اثر می‌گذارد.",
+          "روند تصویرسازی معمولاً از ایده و اتود به اجرای نهایی می‌رسد."
+        ],
+        "example": "برای تصویرسازی یک داستان آرام، می‌توان از خطوط نرم و سطح‌های کم‌تنش استفاده کرد.",
+        "solutionSteps": [
+          "موضوع و پیام تصویر را مشخص کن.",
+          "چند اتود کوچک با ترکیب‌بندی متفاوت بزن.",
+          "خط و سطح متناسب با پیام انتخاب کن.",
+          "نسخهٔ نهایی را با جزئیات لازم اجرا کن."
+        ],
+        "questions": [
+          {
+            "question": "برای نشان دادن حرکت سریع در تصویرسازی، کدام انتخاب بصری معمولاً مؤثرتر است؟",
+            "options": [
+              "خطوط جهت‌دار و تکرار کنترل‌شده",
+              "حذف همهٔ خط‌ها",
+              "استفاده از سطح‌های کاملاً یکسان",
+              "قرار دادن همهٔ عناصر در مرکز"
+            ],
+            "answer": 0,
+            "explanation": "خطوط جهت‌دار و تکرار می‌توانند مسیر و سرعت حرکت را القا کنند.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "چرا پیش از اجرای نهایی چند اتود کوچک تهیه می‌شود؟",
+            "options": [
+              "برای زیاد کردن جزئیات",
+              "برای مقایسهٔ ترکیب‌بندی‌ها و انتخاب راه‌حل مناسب",
+              "برای حذف موضوع اصلی",
+              "برای جلوگیری از انتخاب رنگ"
+            ],
+            "answer": 1,
+            "explanation": "اتودهای کوچک امکان مقایسهٔ سریع ایده‌ها و چیدمان‌ها را می‌دهند.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [],
+        "bookSolutions": [],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+      },
+      {
+        "title": "عکاسی",
+        "summary": "عکاسی با انتخاب بافت، قاب‌بندی، زاویهٔ دید و رنگ، برداشت بیننده از موضوع را شکل می‌دهد. ثبت تصویر فقط فشردن دکمه نیست؛ تصمیم‌گیری دربارهٔ کادر و نقطهٔ دید اهمیت دارد.",
+        "points": [
+          "قاب‌بندی مشخص می‌کند چه چیزی در تصویر دیده شود.",
+          "زاویهٔ دید بر برداشت از اندازه و اهمیت موضوع اثر می‌گذارد.",
+          "بافت و رنگ می‌توانند حس تصویر را تقویت کنند."
+        ],
+        "example": "برای نشان دادن بافت یک برگ، نزدیک‌شدن به سطح و نور مناسب جزئیات را آشکارتر می‌کند.",
+        "solutionSteps": [
+          "موضوع و پیام موردنظر را انتخاب کن.",
+          "چند قاب و زاویهٔ دید را امتحان کن.",
+          "نور و رنگ را بررسی کن.",
+          "تصویری را انتخاب کن که پیام را روشن‌تر منتقل می‌کند."
+        ],
+        "questions": [
+          {
+            "question": "اگر هدف، برجسته‌کردن بافت زبر یک سطح باشد، کدام تصمیم عکاسی مناسب‌تر است؟",
+            "options": [
+              "فاصلهٔ بسیار زیاد و نور یکنواخت از روبه‌رو",
+              "نمای نزدیک همراه با نور مایل کنترل‌شده",
+              "قرار دادن موضوع خارج از قاب",
+              "کاهش وضوح تصویر"
+            ],
+            "answer": 1,
+            "explanation": "نمای نزدیک و نور مایل، برجستگی‌ها و فرورفتگی‌های سطح را بهتر آشکار می‌کنند.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "عکاس برای کوچک‌تر و کم‌اهمیت‌تر نشان‌دادن یک سوژهٔ بلند، معمولاً کدام زاویه را انتخاب می‌کند؟",
+            "options": [
+              "زاویهٔ پایین",
+              "زاویهٔ هم‌سطح",
+              "زاویهٔ بالا",
+              "نمای کاملاً روبه‌رو بدون تغییر زاویه"
+            ],
+            "answer": 2,
+            "explanation": "زاویهٔ بالا می‌تواند سوژه را کوچک‌تر و کم‌قدرت‌تر جلوه دهد.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [],
+        "bookSolutions": [],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+      },
+      {
+        "title": "خوشنویسی",
+        "summary": "خوشنویسی به شناخت ابزار، شیوهٔ درست در دست گرفتن قلم، تناسب حروف و رعایت قواعد هر خط وابسته است. تمرین پیوسته به هماهنگی چشم و دست کمک می‌کند.",
+        "points": [
+          "زاویه و پهنای قلم بر ضخامت و شکل حرکت اثر می‌گذارد.",
+          "هر خط ویژگی‌های ساختاری و تناسبی ویژه‌ای دارد.",
+          "تمرین سطرنویسی به نظم و هماهنگی حروف کمک می‌کند."
+        ],
+        "example": "پیش از نوشتن یک سطر، چند حرکت پایه را با فشار و زاویهٔ ثابت تمرین کن.",
+        "solutionSteps": [
+          "ابزار مناسب و سالم را آماده کن.",
+          "زاویهٔ قلم و وضعیت دست را تنظیم کن.",
+          "حرکت‌های پایه را جداگانه تمرین کن.",
+          "حروف را با رعایت فاصله و تناسب در سطر بنویس."
+        ],
+        "questions": [
+          {
+            "question": "اگر ضخامت حرکت‌های قلم در یک حرف پیوسته و ناخواسته تغییر کند، نخستین موردی که باید بررسی شود چیست؟",
+            "options": [
+              "زاویه و فشار قلم",
+              "رنگ کاغذ",
+              "اندازهٔ میز",
+              "فاصلهٔ چشم تا پنجره"
+            ],
+            "answer": 0,
+            "explanation": "زاویه و فشار نامنظم قلم می‌تواند ضخامت حرکت را ناخواسته تغییر دهد.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "هدف اصلی تمرین سطرنویسی در خوشنویسی چیست؟",
+            "options": [
+              "نوشتن سریع‌تر بدون توجه به شکل",
+              "هماهنگی حروف، فاصله‌ها و امتداد سطر",
+              "تغییر شکل حروف در هر بار نوشتن",
+              "حذف تناسبات"
+            ],
+            "answer": 1,
+            "explanation": "سطرنویسی به هماهنگی و نظم اجزای نوشتار کمک می‌کند.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [],
+        "bookSolutions": [],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+      },
+      {
+        "title": "طراحی سنتی نقوش",
+        "summary": "در طراحی سنتی نقوش، واحدهای ساده با تکرار، تقارن و شبکه‌بندی به نقش‌های منظم و پیچیده‌تر تبدیل می‌شوند. شناخت رابطهٔ جزء و کل برای ساخت نقش ضروری است.",
+        "points": [
+          "شبکه به حفظ نظم و اندازه‌ها کمک می‌کند.",
+          "تکرار و تقارن از راه‌های سازمان‌دهی نقش‌اند.",
+          "تغییر یک واحد می‌تواند بر هماهنگی کل نقش اثر بگذارد."
+        ],
+        "example": "با تکرار یک واحد هندسی در شبکهٔ منظم می‌توان حاشیه‌ای پیوسته ساخت.",
+        "solutionSteps": [
+          "واحد اصلی نقش را انتخاب کن.",
+          "شبکه و محورهای تقارن را رسم کن.",
+          "واحد را با فاصلهٔ منظم تکرار کن.",
+          "اتصال‌ها و هماهنگی نقش را بازبینی کن."
+        ],
+        "questions": [
+          {
+            "question": "در یک نقش هندسی تکرارشونده، اگر فاصلهٔ واحدها در هر ردیف اندکی تغییر کند، کدام ویژگی بیش از همه آسیب می‌بیند؟",
+            "options": [
+              "هماهنگی و نظم شبکه",
+              "رنگ طبیعی کاغذ",
+              "جنس ابزار",
+              "نام نقش"
+            ],
+            "answer": 0,
+            "explanation": "تغییر فاصله‌ها نظم شبکه و هماهنگی تکرار را برهم می‌زند.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "برای ساخت نقشی متقارن، کدام روش مطمئن‌تر است؟",
+            "options": [
+              "ترسیم آزاد بدون محور",
+              "تعریف محور تقارن و انتقال کنترل‌شدهٔ اجزا",
+              "تغییر اندازهٔ هر واحد",
+              "حذف خطوط راهنما پیش از طراحی"
+            ],
+            "answer": 1,
+            "explanation": "محور تقارن مرجع ثابتی برای جای‌گذاری هماهنگ اجزا فراهم می‌کند.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [],
+        "bookSolutions": [],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+      },
+      {
+        "title": "بافت سنتی پارچه",
+        "summary": "در بافت تاری‌ـ‌پودی، نخ‌های تار در امتداد طول و نخ‌های پود در عرض قرار می‌گیرند. نوع عبور این نخ‌ها، استحکام و ظاهر پارچه را تغییر می‌دهد.",
+        "points": [
+          "تار در جهت طول پارچه کشیده می‌شود.",
+          "پود از میان تارها عبور می‌کند.",
+          "در بافت ساده، پود به‌صورت یکی‌درمیان از رو و زیر تار می‌گذرد."
+        ],
+        "example": "در بافت ساده، هر پود از یک تار رو و از تار بعدی زیر عبور می‌کند.",
+        "solutionSteps": [
+          "تارها را موازی و با کشش مناسب آماده کن.",
+          "نخ پود را از میان تارها عبور بده.",
+          "در هر ردیف ترتیب رو و زیر را جابه‌جا کن.",
+          "تراکم و یکنواختی بافت را بررسی کن."
+        ],
+        "questions": [
+          {
+            "question": "اگر نخ‌های طولی پارچه شل و ناموازی باشند، کدام بخش از فرایند بافت باید اصلاح شود؟",
+            "options": [
+              "آماده‌سازی و کشش تارها",
+              "رنگ‌آمیزی نهایی",
+              "برش حاشیه پس از اتمام",
+              "انتخاب نام پارچه"
+            ],
+            "answer": 0,
+            "explanation": "تارها باید پیش از بافت موازی و با کشش مناسب آماده شوند.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "ویژگی شاخص بافت ساده یا تافته کدام است؟",
+            "options": [
+              "عبور پود همیشه از روی همهٔ تارها",
+              "عبور یکی‌درمیان پود از رو و زیر تارها",
+              "نبودن نخ تار",
+              "استفاده از گره به‌جای عبور نخ"
+            ],
+            "answer": 1,
+            "explanation": "در بافت ساده، پود به‌طور متناوب از رو و زیر تارها عبور می‌کند.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [],
+        "bookSolutions": [],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+      },
+      {
+        "title": "چاپ دستی",
+        "summary": "چاپ دستی با انتقال نقش از یک واسطه به سطح انجام می‌شود. مواد طبیعی، روش گره‌ورنگ و شابلون استنسیل از راه‌های متفاوت ایجاد نقش‌اند.",
+        "points": [
+          "در استنسیل، بخش‌های باز شابلون محل عبور رنگ‌اند.",
+          "در گره‌ورنگ، بستن یا تا کردن پارچه مانع نفوذ یکنواخت رنگ می‌شود.",
+          "آزمایش روی نمونهٔ کوچک از خطا در اجرای نهایی کم می‌کند."
+        ],
+        "example": "با پوشاندن بخش‌هایی از پارچه و رنگ‌کردن بخش‌های باز، می‌توان نقش استنسیل ایجاد کرد.",
+        "solutionSteps": [
+          "طرح را ساده و قابل انتقال آماده کن.",
+          "شابلون یا بست‌های پارچه را بساز.",
+          "رنگ را با فشار کنترل‌شده منتقل کن.",
+          "پس از خشک‌شدن، نتیجه را بررسی کن."
+        ],
+        "questions": [
+          {
+            "question": "در چاپ استنسیل، چرا بخش‌های پوشیدهٔ شابلون رنگ نمی‌گیرند؟",
+            "options": [
+              "چون رنگ فقط از قسمت‌های باز عبور می‌کند",
+              "چون رنگ در همهٔ بخش‌ها تبخیر می‌شود",
+              "چون کاغذ رنگ را جذب نمی‌کند",
+              "چون شابلون باید خیس باشد"
+            ],
+            "answer": 0,
+            "explanation": "شابلون مسیر انتقال رنگ را محدود می‌کند و قسمت‌های پوشیده را محافظت می‌کند.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "در روش گره‌ورنگ، تفاوت اصلی نواحی روشن و تیره معمولاً از چه چیزی پدید می‌آید؟",
+            "options": [
+              "تفاوت در میزان نفوذ رنگ به بخش‌های بسته و باز",
+              "تفاوت وزن پارچه",
+              "تغییر اندازهٔ قاب",
+              "استفاده از دو نوع قلم"
+            ],
+            "answer": 0,
+            "explanation": "بستن یا تا کردن پارچه مانع رسیدن کامل رنگ به بعضی نواحی می‌شود.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [],
+        "bookSolutions": [],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+      },
+      {
+        "title": "هنرهای آوایی",
+        "summary": "هنرهای آوایی با سازمان‌دهی صدا، ریتم، ملودی، رنگ صوتی، بافت و فرم، تجربه‌ای شنیداری می‌سازند. هر عنصر نقش متفاوتی در شکل‌گیری اثر دارد.",
+        "points": [
+          "ریتم به نظم زمانی صداها مربوط است.",
+          "ملودی از توالی زیر و بمی صداها شکل می‌گیرد.",
+          "رنگ صوتی به تشخیص جنس صدای سازها و صداها کمک می‌کند."
+        ],
+        "example": "دو ساز می‌توانند یک نت را با بلندی برابر اجرا کنند، اما به دلیل رنگ صوتی متفاوت، صدایشان قابل تشخیص باشد.",
+        "solutionSteps": [
+          "به الگوی زمانی صداها گوش کن.",
+          "توالی نت‌ها و تغییرات ملودی را دنبال کن.",
+          "جنس صداها و تعداد لایه‌های صوتی را تشخیص بده.",
+          "رابطهٔ بخش‌ها و فرم کلی اثر را بررسی کن."
+        ],
+        "questions": [
+          {
+            "question": "دو ساز یک نت را با بلندی یکسان اجرا می‌کنند اما شنونده آن‌ها را از هم تشخیص می‌دهد. عامل اصلی چیست؟",
+            "options": [
+              "ریتم",
+              "رنگ صوتی",
+              "سرعت",
+              "سکوت"
+            ],
+            "answer": 1,
+            "explanation": "رنگ صوتی یا طنین، ویژگی‌ای است که جنس صدای سازها را متمایز می‌کند.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام توصیف بیشتر به ریتم مربوط است، نه ملودی؟",
+            "options": [
+              "الگوی کشش و تکرار زمانی صداها",
+              "توالی زیر و بمی نت‌ها",
+              "جنس صدای ساز",
+              "تعداد سازهای گروه"
+            ],
+            "answer": 0,
+            "explanation": "ریتم سازمان زمانی و کشش صداها را توصیف می‌کند.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [],
+        "bookSolutions": [],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+      },
+      {
+        "title": "هنرهای نمایشی",
+        "summary": "هنرهای نمایشی با بازیگری، بدن و حرکت، صدا، احساس و تخیل، موقعیت و شخصیت را برای تماشاگر زنده می‌کنند. هماهنگی این عناصر به باورپذیری اجرا کمک می‌کند.",
+        "points": [
+          "حرکت بدن و حالت چهره بخشی از بیان بازیگرند.",
+          "تغییر لحن می‌تواند معنا و احساس جمله را عوض کند.",
+          "تخیل به بازیگر در ساخت موقعیت و واکنش باورپذیر کمک می‌کند."
+        ],
+        "example": "یک جملهٔ یکسان با لحن آرام، خشمگین یا شگفت‌زده معنا و اثر متفاوتی پیدا می‌کند.",
+        "solutionSteps": [
+          "هدف و ویژگی شخصیت را بشناس.",
+          "احساس و موقعیت صحنه را مشخص کن.",
+          "لحن، حالت چهره و حرکت بدن را هماهنگ کن.",
+          "اجرا را تمرین و بازبینی کن."
+        ],
+        "questions": [
+          {
+            "question": "بازیگری جمله‌ای را درست ادا می‌کند اما حرکت بدن و حالت چهره با احساس شخصیت هماهنگ نیست. کدام بخش اجرا نیاز به اصلاح دارد؟",
+            "options": [
+              "هماهنگی بیان بدنی و احساسی",
+              "سرعت تعویض دکور",
+              "اندازهٔ صحنه",
+              "تعداد تماشاگران"
+            ],
+            "answer": 0,
+            "explanation": "باورپذیری شخصیت به هماهنگی گفتار، حرکت و احساس وابسته است.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "چرا تخیل در بازیگری اهمیت دارد؟",
+            "options": [
+              "برای حفظ‌کردن بی‌تغییر همهٔ حرکات",
+              "برای درک موقعیت و ساخت واکنش متناسب با شخصیت",
+              "برای حذف ارتباط با دیگر بازیگران",
+              "برای بی‌اهمیت‌کردن متن نمایش"
+            ],
+            "answer": 1,
+            "explanation": "تخیل به بازیگر کمک می‌کند موقعیت را درک کند و واکنش متناسب بسازد.",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [],
+        "bookSolutions": [],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+      }
+    ]
   }
 }
