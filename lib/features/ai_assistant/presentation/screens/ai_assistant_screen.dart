@@ -70,6 +70,13 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
     }
   }
 
+  String _clipText(Object? value, int maxLength) {
+    final text = value?.toString() ?? '';
+    return text.length <= maxLength
+        ? text
+        : '${text.substring(0, maxLength)}…';
+  }
+
   Map<String, dynamic> _makeStudyContext(
     Map<String, dynamic> subject,
     Map<String, dynamic> chapter,
@@ -95,8 +102,8 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
     }
     final practiceQuestions = <String>[];
     for (final raw in [
-      ...(chapter['questions'] as List<dynamic>? ?? []).take(2),
-      ...(chapter['challengeQuestions'] as List<dynamic>? ?? []).take(3),
+      ...(chapter['questions'] as List<dynamic>? ?? []).take(1),
+      ...(chapter['challengeQuestions'] as List<dynamic>? ?? []).take(2),
     ]) {
       if (raw is! Map) continue;
       final prompt = raw['question']?.toString() ?? '';
@@ -113,23 +120,33 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
       }
     }
     return {
-      'subjectTitle': subject['title']?.toString() ?? 'درس',
-      'chapterTitle': chapter['title']?.toString() ?? 'فصل',
-      'bookChapterTitle': chapter['bookChapterTitle']?.toString() ?? '',
-      'bookScope': chapter['bookScope']?.toString() ?? '',
-      'alignmentStatus': chapter['alignmentStatus']?.toString() ??
-          'not_verified_against_1405_1406_pdf',
-      'summary': chapter['summary']?.toString() ?? '',
-      'points': studyPoints.take(8).map((point) =>
-          point.length > 400 ? point.substring(0, 400) : point).toList(),
-      'example': chapter['example']?.toString() ?? '',
+      'subjectTitle': _clipText(subject['title'] ?? 'درس', 100),
+      'chapterTitle': _clipText(chapter['title'] ?? 'فصل', 100),
+      'bookChapterTitle': _clipText(chapter['bookChapterTitle'], 160),
+      'bookScope': _clipText(chapter['bookScope'], 300),
+      'alignmentStatus': _clipText(
+        chapter['alignmentStatus'] ?? 'not_verified_against_1405_1406_pdf',
+        80,
+      ),
+      'summary': _clipText(chapter['summary'], 900),
+      'points': studyPoints.take(6).map((point) => _clipText(point, 180)).toList(),
+      'example': _clipText(chapter['example'], 400),
       'solutionSteps': (chapter['solutionSteps'] as List<dynamic>? ?? [])
-          .whereType<String>().take(8).toList(),
-      'practiceQuestions': practiceQuestions.take(4).toList(),
-      'sourceLabel': chapter['source'] is Map
-          ? (chapter['source'] as Map)['title']?.toString() ??
-              'محتوای فعلی فهمینو؛ منبع نیازمند بررسی است'
-          : 'محتوای تألیفی فهمینو؛ نیازمند تطبیق با کتاب رسمی',
+          .whereType<String>()
+          .take(5)
+          .map((step) => _clipText(step, 180))
+          .toList(),
+      'practiceQuestions': practiceQuestions
+          .take(3)
+          .map((question) => _clipText(question, 350))
+          .toList(),
+      'sourceLabel': _clipText(
+        chapter['source'] is Map
+            ? (chapter['source'] as Map)['title'] ??
+                'محتوای فعلی فهمینو؛ منبع نیازمند بررسی است'
+            : 'محتوای تألیفی فهمینو؛ نیازمند تطبیق با کتاب رسمی',
+        160,
+      ),
     };
   }
 
