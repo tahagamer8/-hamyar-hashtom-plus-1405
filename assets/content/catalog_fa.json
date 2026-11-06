@@ -2809,7 +2809,7 @@
             "explanation": "بعد از can فعل به شکل ساده می‌آید."
           },
           {
-            "question": "Which sentence correctly describes Ali's ability?",
+            "question": "What does “cannot” mean?",
             "options": [
               "می‌تواند",
               "نمی‌تواند",
@@ -2817,7 +2817,7 @@
               "می‌خواهد"
             ],
             "answer": 1,
-            "explanation": "Can't شکل کوتاه cannot است."
+            "explanation": "Cannot یا can't به معنی نمی‌تواند است."
           }
         ]
       },
@@ -2887,15 +2887,15 @@
             "explanation": "برای اسم مفرد از there is استفاده می‌شود."
           },
           {
-            "question": "Complete the sentence about one park: There ___ a park near my school.",
+            "question": "Complete the sentence: There ___ a park near my school.",
             "options": [
-              "داخل",
-              "کنار",
-              "دور از",
-              "پشت"
+              "are",
+              "is",
+              "am",
+              "be"
             ],
             "answer": 1,
-            "explanation": "Next to یعنی در کنار."
+            "explanation": "Park مفرد است؛ بنابراین از There is استفاده می‌کنیم."
           }
         ]
       },
@@ -2967,7 +2967,7 @@
         ],
         "questions": [
           {
-            "question": "How do you ask someone about their hobby?",
+            "question": "What does “hobby” mean?",
             "options": [
               "تکلیف",
               "سرگرمی",
@@ -2975,7 +2975,7 @@
               "مسافرت"
             ],
             "answer": 1,
-            "explanation": "Hobby به معنی سرگرمی است."
+            "explanation": "Hobby به معنی سرگرمی یا فعالیت دلخواه در اوقات فراغت است."
           },
           {
             "question": "Which question asks about a person's favourite free-time activity?",
@@ -6024,18 +6024,18 @@
         ],
         "questions": [
           {
-            "question": "Which question asks a person about their country of origin?",
+            "question": "Which question asks someone about their country of origin?",
             "options": [
-              "am",
-              "is",
-              "are",
-              "be"
+              "Where are you from?",
+              "How old are you?",
+              "What is your name?",
+              "What time is it?"
             ],
-            "answer": 1,
-            "explanation": "برای She از is استفاده می‌کنیم."
+            "answer": 0,
+            "explanation": "پرسش Where are you from? درباره کشور مبدأ فرد است."
           },
           {
-            "question": "Choose the correct way to ask someone's country.",
+            "question": "Choose the correct nationality for a person from Kuwait.",
             "options": [
               "Kuwaiti",
               "Qatari",
@@ -6043,7 +6043,7 @@
               "Iranian"
             ],
             "answer": 0,
-            "explanation": "ملیت فرد اهل کویت Kuwaiti است."
+            "explanation": "شخص اهل کویت، Kuwaiti نامیده می‌شود."
           },
           {
             "question": "Which question is correctly formed with are?",
@@ -6124,7 +6124,7 @@
         ],
         "questions": [
           {
-            "question": "Which sentence correctly uses can before a base verb?",
+            "question": "Which verb form follows “can”?",
             "options": [
               "plays",
               "playing",
@@ -6132,10 +6132,10 @@
               "to play"
             ],
             "answer": 2,
-            "explanation": "بعد از can شکل ساده فعل می‌آید."
+            "explanation": "پس از can از شکل ساده فعل بدون to استفاده می‌کنیم."
           },
           {
-            "question": "Which sentence uses can with the base form of the verb?",
+            "question": "What does “cannot” mean?",
             "options": [
               "می‌تواند",
               "نمی‌تواند",
@@ -6143,7 +6143,7 @@
               "دوست دارد"
             ],
             "answer": 1,
-            "explanation": "Cannot به معنی نمی‌تواند است."
+            "explanation": "Cannot یا can't به معنی نمی‌تواند است."
           },
           {
             "question": "Which option completes the sentence after can?",
@@ -6224,7 +6224,7 @@
         ],
         "questions": [
           {
-            "question": "Which sentence describes three shops in a town?",
+            "question": "Complete the sentence: There ___ a museum in my town.",
             "options": [
               "are",
               "is",
@@ -6232,10 +6232,10 @@
               "be"
             ],
             "answer": 1,
-            "explanation": "Museum مفرد است؛ پس There is درست است."
+            "explanation": "Museum مفرد است؛ بنابراین There is درست است."
           },
           {
-            "question": "Which sentence correctly describes three shops?",
+            "question": "What does “opposite” mean?",
             "options": [
               "کنار",
               "داخل",
@@ -6243,7 +6243,7 @@
               "پشت"
             ],
             "answer": 2,
-            "explanation": "Opposite یعنی روبه‌رو."
+            "explanation": "Opposite به معنی روبه‌رو یا مقابل است."
           },
           {
             "question": "Which sentence uses there are with a plural place noun?",
