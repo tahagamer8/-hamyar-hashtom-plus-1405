@@ -203,11 +203,15 @@ void main() {
     expect(find.text('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
   });
 
-  testWidgets('sample questions display answer key', (tester) async {
+  testWidgets('sample questions reveal answer key on demand', (tester) async {
     await tester.pumpWidget(_contentApp('sampleExams'));
     await tester.pumpAndSettle();
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
+    expect(find.text('پاسخ: ۳/۴'), findsNothing);
+    await tester.tap(find.text('نمایش پاسخ و توضیح'));
+    await tester.pump();
     expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
+    expect(find.textContaining('۱/۲ برابر ۲/۴ است'), findsOneWidget);
   });
 
   testWidgets('combined quiz has a timer and reveals answers after submission', (tester) async {
