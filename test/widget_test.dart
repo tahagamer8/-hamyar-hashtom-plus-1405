@@ -86,7 +86,9 @@ void main() {
         final chapter = rawChapter as Map<String, dynamic>;
         expect(chapter['title'], isA<String>(), reason: entry.key);
         expect(chapter['summary'], isA<String>(), reason: entry.key);
-        expect((chapter['summary'] as String).trim(), isNotEmpty, reason: '${entry.key}/${chapter['title']}');
+        expect((chapter['summary'] as String).trim().length, greaterThanOrEqualTo(30), reason: '${entry.key}/${chapter['title']}');
+        expect(chapter['example'], isA<String>(), reason: '${entry.key}/${chapter['title']}');
+        expect((chapter['example'] as String).trim(), isNotEmpty, reason: '${entry.key}/${chapter['title']}');
         expect(chapter['points'], isA<List<dynamic>>(), reason: entry.key);
         expect((chapter['points'] as List<dynamic>), isNotEmpty, reason: '${entry.key}/${chapter['title']}');
         expect(chapter['solutionSteps'], isA<List<dynamic>>(), reason: entry.key);
@@ -107,7 +109,7 @@ void main() {
           expect(questionText, isNotEmpty, reason: entry.key);
           expect(uniqueQuestionTexts.add(normalizedText), isTrue,
               reason: 'پرسش تکراری: ${question['question']}');
-          expect(options.length, greaterThanOrEqualTo(2), reason: questionText);
+          expect(options.length, greaterThanOrEqualTo(4), reason: questionText);
           expect(options.toSet().length, options.length, reason: 'گزینه تکراری: $questionText');
           expect(answer, inInclusiveRange(0, options.length - 1),
               reason: question['question'] as String);
@@ -116,7 +118,11 @@ void main() {
         }
       }
     }
-    expect(totalQuestions, greaterThanOrEqualTo(345));
+    expect(totalQuestions, 369);
+    expect(((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
+        .fold<int>(0, (sum, chapter) => sum + ((chapter as Map<String, dynamic>)['questions'] as List<dynamic>).length), 36);
+    expect(((catalog['science'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
+        .fold<int>(0, (sum, chapter) => sum + ((chapter as Map<String, dynamic>)['questions'] as List<dynamic>).length), 60);
     expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(24));
     expect((catalog['english'] as Map<String, dynamic>)['chapters'], hasLength(7));
     expect((catalog['english_workbook'] as Map<String, dynamic>)['chapters'], hasLength(7));
