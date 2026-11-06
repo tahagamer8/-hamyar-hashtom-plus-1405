@@ -12,6 +12,7 @@ void main() {
 
     expect(catalog, isNotEmpty);
 
+    var totalAdvancedQuestions = 0;
     for (final entry in catalog.entries) {
       final subject = entry.value as Map<String, dynamic>;
       expect(subject['title'], isA<String>(), reason: entry.key);
@@ -22,6 +23,7 @@ void main() {
         final chapter = chapterValue as Map<String, dynamic>;
         final challengeQuestions = chapter['challengeQuestions'] as List<dynamic>? ?? [];
         for (final rawChallenge in challengeQuestions) {
+          totalAdvancedQuestions++;
           final challenge = rawChallenge as Map<String, dynamic>;
           final options = challenge['options'] as List<dynamic>;
           expect(challenge['difficulty'], 'advanced');
@@ -55,5 +57,12 @@ void main() {
         }
       }
     }
+    expect(totalAdvancedQuestions, greaterThanOrEqualTo(224));
+    expect(
+      ((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
+          .fold<int>(0, (sum, chapter) =>
+              sum + ((chapter as Map<String, dynamic>)['challengeQuestions'] as List<dynamic>).length),
+      45,
+    );
   });
 }
