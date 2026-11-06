@@ -1,7 +1,7 @@
 const MODEL = "gemini-3.8-flash";
 const MAX_MESSAGES = 12;
 const MAX_MESSAGE_LENGTH = 3000;
-const MAX_OUTPUT_TOKENS = 4096;
+const MAX_OUTPUT_TOKENS = 8192;
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -187,7 +187,7 @@ export default {
       generationConfig: {
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         thinkingConfig: {
-          thinkingLevel: "MEDIUM",
+          thinkingLevel: "medium",
         },
       },
     };
@@ -205,7 +205,7 @@ export default {
               "x-goog-api-key": env.GEMINI_API_KEY,
             },
             body: JSON.stringify(payload),
-            signal: AbortSignal.timeout(18_000),
+            signal: AbortSignal.timeout(25_000),
           }
         );
         if (upstream.status !== 502 && upstream.status !== 503 && upstream.status !== 504) {
