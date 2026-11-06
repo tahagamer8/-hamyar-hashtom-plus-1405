@@ -269,7 +269,7 @@ void main() {
     expect(find.text('سؤال‌های دشوار و ترکیبی'), findsOneWidget);
     expect(find.textContaining('حاصل (−۳/۴ + ۵/۶)'), findsOneWidget);
     expect(find.text('پاسخ: ۳/۴'), findsNothing);
-    await tester.tap(find.text('نمایش پاسخ و توضیح'));
+    await tester.tap(find.text('نمایش پاسخ و توضیح').first);
     await tester.pump();
     expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
     expect(find.textContaining('۱/۲ برابر ۲/۴ است'), findsOneWidget);
