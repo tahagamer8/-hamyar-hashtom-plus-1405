@@ -189,7 +189,7 @@ void main() {
         return chapterSum + ((chapter['challengeQuestions'] as List<dynamic>?)?.length ?? 0);
       });
     });
-    expect(allAdvancedCount, 206);
+    expect(allAdvancedCount, 224);
     expect(((catalog['science'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
         .fold<int>(0, (sum, chapter) => sum + ((chapter as Map<String, dynamic>)['questions'] as List<dynamic>).length), 60);
     expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(24));
