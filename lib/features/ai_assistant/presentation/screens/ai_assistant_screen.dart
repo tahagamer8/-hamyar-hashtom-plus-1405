@@ -27,25 +27,41 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   }
 
   Future<void> _loadUrl() async {
-    final prefs = await SharedPreferences.getInstance();
-    _urlInput.text = prefs.getString(_urlKey) ?? '';
-    if (mounted) setState(() => _ready = true);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      _urlInput.text = prefs.getString(_urlKey) ?? '';
+    } catch (_) {
+      _error = 'تنظیمات اتصال بارگذاری نشد؛ دوباره برنامه را باز کن.';
+    } finally {
+      if (mounted) setState(() => _ready = true);
+    }
   }
 
   Future<void> _saveUrl() async {
     final value = _urlInput.text.trim().replaceFirst(RegExp(r'/+$'), '');
     final uri = Uri.tryParse(value);
-    if (uri == null || uri.scheme != 'https' || !uri.hasAuthority) {
-      setState(() => _error = 'آدرس معتبر HTTPS وارد کن.');
+    if (uri == null ||
+        uri.scheme != 'https' ||
+        !uri.hasAuthority ||
+        uri.userInfo.isNotEmpty ||
+        uri.path.isNotEmpty && uri.path != '/' ||
+        uri.hasQuery ||
+        uri.hasFragment) {
+      setState(() => _error = 'فقط آدرس پایهٔ معتبر HTTPS را وارد کن.');
       return;
     }
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_urlKey, value);
-    if (mounted) {
-      setState(() => _error = null);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('آدرس سرور ذخیره شد.')),
-      );
+
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_urlKey, value);
+      if (mounted) {
+        setState(() => _error = null);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('آدرس سرور ذخیره شد.')),
+        );
+      }
+    } catch (_) {
+      if (mounted) setState(() => _error = 'ذخیرهٔ آدرس انجام نشد؛ دوباره تلاش کن.');
     }
   }
 
@@ -65,13 +81,14 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
     });
     _scrollToBottom();
 
-    final history = _messages
-        .takeLast(12)
-        .map((m) => {
-              'role': m.isUser ? 'user' : 'model',
-              'text': m.text,
-            })
-        .toList();
+    final history = prepareGeminiHistory(
+      _messages
+          .map((m) => {
+                'role': m.isUser ? 'user' : 'model',
+                'text': m.text,
+              })
+          .toList(),
+    );
 
     try {
       final answer = await _service.sendMessages(
@@ -81,10 +98,15 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
       if (!mounted) return;
       setState(() => _messages.add(_ChatMessage(text: answer, isUser: false)));
     } on GeminiApiException catch (e) {
-      if (mounted) setState(() {
-        if (_messages.isNotEmpty && _messages.last.isUser) _messages.removeLast();
-        _error = e.message;
-      });
+      if (mounted) {
+        setState(() {
+          if (_messages.isNotEmpty && _messages.last.isUser) {
+            _messages.removeLast();
+          }
+          _input.text = text;
+          _error = e.message;
+        });
+      }
     } finally {
       if (mounted) {
         setState(() => _loading = false);
@@ -128,10 +150,12 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
           ),
           IconButton(
             tooltip: 'گفت‌وگوی جدید',
-            onPressed: _loading ? null : () => setState(() {
-              _messages.clear();
-              _error = null;
-            }),
+            onPressed: _loading
+                ? null
+                : () => setState(() {
+                      _messages.clear();
+                      _error = null;
+                    }),
             icon: const Icon(Icons.add_comment_outlined),
           ),
         ],
@@ -167,7 +191,8 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
                 if (_error != null)
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                    child: Text(_error!, style: TextStyle(color: theme.colorScheme.error)),
+                    child: Text(_error!,
+                        style: TextStyle(color: theme.colorScheme.error)),
                   ),
                 SafeArea(
                   top: false,
@@ -187,7 +212,8 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
                             decoration: const InputDecoration(
                               hintText: 'سؤالت را درباره درس‌ها بپرس…',
                               border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 12),
                             ),
                           ),
                         ),
@@ -219,7 +245,8 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.lock_outline, size: 18, color: theme.colorScheme.primary),
+                  Icon(Icons.lock_outline,
+                      size: 18, color: theme.colorScheme.primary),
                   const SizedBox(width: 6),
                   Expanded(
                     child: Text(
@@ -258,7 +285,8 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.auto_awesome_rounded, size: 54, color: theme.colorScheme.primary),
+            Icon(Icons.auto_awesome_rounded,
+                size: 54, color: theme.colorScheme.primary),
             const SizedBox(height: 14),
             Text('سلام! من دستیار هوشمند فهمینو هستم.',
                 textAlign: TextAlign.center,
@@ -270,9 +298,11 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
               style: theme.textTheme.bodyMedium,
             ),
             const SizedBox(height: 10),
-            Text('پاسخ‌های هوش مصنوعی ممکن است اشتباه باشند؛ با کتاب درسی هم بررسی کن.',
-                textAlign: TextAlign.center,
-                style: theme.textTheme.bodySmall),
+            Text(
+              'پاسخ‌های هوش مصنوعی ممکن است اشتباه باشند؛ با کتاب درسی هم بررسی کن.',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodySmall,
+            ),
           ],
         ),
       ),
@@ -285,11 +315,12 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
       builder: (context) => AlertDialog(
         title: const Text('تنظیم اتصال'),
         content: const Text(
-          'آدرس HTTPS مربوط به Cloudflare Worker را در کادر بالای صفحه وارد و ذخیره کن. '
-          'کلید Gemini فقط باید در Secretهای سرور نگهداری شود؛ آن را اینجا یا در GitHub ننویس. پیش از فعال‌سازی، سهمیه و احتمال هزینه را با والد یا سرپرست بررسی کن.',
+          'آدرس HTTPS مربوط به Cloudflare Worker را در کادر بالای صفحه وارد و ذخیره کن. کلید Gemini فقط باید در Secretهای سرور نگهداری شود؛ آن را اینجا یا در GitHub ننویس. پیش از فعال‌سازی، سهمیه و احتمال هزینه را با والد یا سرپرست بررسی کن.',
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('متوجه شدم')),
+          TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('متوجه شدم')),
         ],
       ),
     );
@@ -300,10 +331,6 @@ class _ChatMessage {
   const _ChatMessage({required this.text, required this.isUser});
   final String text;
   final bool isUser;
-}
-
-extension _LastItems<T> on List<T> {
-  Iterable<T> takeLast(int count) => skip(length > count ? length - count : 0);
 }
 
 class _Bubble extends StatelessWidget {
@@ -324,7 +351,8 @@ class _Bubble extends StatelessWidget {
         ? theme.colorScheme.primaryContainer
         : theme.colorScheme.surfaceContainerHighest;
     return Align(
-      alignment: isUser ? AlignmentDirectional.centerEnd : AlignmentDirectional.centerStart,
+      alignment:
+          isUser ? AlignmentDirectional.centerEnd : AlignmentDirectional.centerStart,
       child: Container(
         constraints: const BoxConstraints(maxWidth: 340),
         margin: const EdgeInsets.symmetric(vertical: 6),
@@ -336,7 +364,9 @@ class _Bubble extends StatelessWidget {
         child: SelectableText(
           text,
           style: theme.textTheme.bodyMedium?.copyWith(
-            color: isUser ? theme.colorScheme.onPrimaryContainer : theme.colorScheme.onSurface,
+            color: isUser
+                ? theme.colorScheme.onPrimaryContainer
+                : theme.colorScheme.onSurface,
           ),
         ),
       ),
