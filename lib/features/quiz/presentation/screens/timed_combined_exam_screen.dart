@@ -24,12 +24,10 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
     super.initState();
     questions = [];
     for (final chapter in widget.chapters) {
-      final advancedItems = chapter['challengeQuestions'];
-      final standardItems = chapter['questions'];
       // This screen is the challenging exam mode. Never silently replace a
       // missing advanced bank with easier recall questions.
-      final items = advancedItems is List ? advancedItems : const <dynamic>[];
-      if (items is! List) continue;
+      final items = chapter['challengeQuestions'] as List<dynamic>? ??
+          const <dynamic>[];
       for (final item in items) {
         if (item is! Map) continue;
         final q = Map<String, dynamic>.from(item);
