@@ -22,6 +22,7 @@ class ContentLibraryScreen extends ConsumerStatefulWidget {
 
 class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   Future<Map<String, dynamic>>? _contentFuture;
+  int _selectedChapterIndex = 0;
 
   @override
   void didChangeDependencies() {
@@ -47,7 +48,9 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _feature == AppFeature.quiz ? null : AppBar(title: Text(_feature.title)),
+      appBar: _feature == AppFeature.quiz
+          ? AppBar(title: const Text('آزمون فصل انتخاب‌شده'))
+          : AppBar(title: Text(_feature.title)),
       body: FutureBuilder<Map<String, dynamic>>(
         future: _contentFuture,
         builder: (context, snapshot) {
@@ -66,30 +69,55 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               ),
             );
           }
+
           final subject = snapshot.data!;
           final chapters = (subject['chapters'] as List<dynamic>? ?? [])
               .cast<Map<String, dynamic>>();
+          if (chapters.isEmpty) {
+            return const Center(child: Text('برای این کتاب فصلی ثبت نشده است.'));
+          }
+
+          final safeIndex = _selectedChapterIndex.clamp(0, chapters.length - 1);
+          final selectedChapter = chapters[safeIndex];
+
           if (_feature == AppFeature.quiz) {
-            return TimedCombinedExamScreen(
-              subjectTitle: subject['title'] as String? ?? 'درس',
-              chapters: chapters,
+            return ListView(
+              padding: const EdgeInsets.all(16),
+              children: [
+                _ChapterPicker(
+                  chapters: chapters,
+                  selectedIndex: safeIndex,
+                  onChanged: (index) => setState(() => _selectedChapterIndex = index),
+                ),
+                const SizedBox(height: 12),
+                TimedCombinedExamScreen(
+                  subjectTitle: subject['title'] as String? ?? 'درس',
+                  chapters: [selectedChapter],
+                ),
+              ],
             );
           }
+
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              Text(subject['title'] as String? ?? 'درس',
-                  style: Theme.of(context).textTheme.titleLarge),
-              const SizedBox(height: 6),
-              Text('محتوای آموزشی تألیفی فهمینو',
-                  style: Theme.of(context).textTheme.bodySmall),
-              const SizedBox(height: 16),
-              for (final chapter in chapters)
-                _ChapterContent(
-                  chapter: chapter,
-                  feature: _feature,
-                  favoriteKey: '${widget.subjectId}::${chapter['title']}',
-                ),
+              Text(
+                subject['title'] as String? ?? 'درس',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 12),
+              _ChapterPicker(
+                chapters: chapters,
+                selectedIndex: safeIndex,
+                onChanged: (index) => setState(() => _selectedChapterIndex = index),
+              ),
+              const SizedBox(height: 12),
+              _ChapterContent(
+                chapter: selectedChapter,
+                feature: _feature,
+                favoriteKey: widget.subjectId + '::' +
+                    (selectedChapter['title']?.toString() ?? ''),
+              ),
             ],
           );
         },
@@ -98,8 +126,63 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   }
 }
 
+class _ChapterPicker extends StatelessWidget {
+  const _ChapterPicker({
+    required this.chapters,
+    required this.selectedIndex,
+    required this.onChanged,
+  });
+
+  final List<Map<String, dynamic>> chapters;
+  final int selectedIndex;
+  final ValueChanged<int> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('انتخاب فصل یا درس', style: Theme.of(context).textTheme.titleSmall),
+            const SizedBox(height: 8),
+            DropdownButtonFormField<int>(
+              value: selectedIndex,
+              isExpanded: true,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              ),
+              items: [
+                for (var i = 0; i < chapters.length; i++)
+                  DropdownMenuItem<int>(
+                    value: i,
+                    child: Text(
+                      chapters[i]['title'] as String? ?? ('بخش ' + (i + 1).toString()),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+              ],
+              onChanged: (value) {
+                if (value != null) onChanged(value);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _ChapterContent extends ConsumerWidget {
-  const _ChapterContent({required this.chapter, required this.feature, required this.favoriteKey});
+  const _ChapterContent({
+    required this.chapter,
+    required this.feature,
+    required this.favoriteKey,
+  });
+
   final Map<String, dynamic> chapter;
   final AppFeature feature;
   final String favoriteKey;
@@ -110,14 +193,12 @@ class _ChapterContent extends ConsumerWidget {
     final title = chapter['title'] as String? ?? 'درس';
     final summary = chapter['summary'] as String? ?? '';
     final points = (chapter['points'] as List<dynamic>? ?? []).cast<String>();
-    final steps = (chapter['solutionSteps'] as List<dynamic>? ?? [])
-        .cast<String>();
+    final example = chapter['example'] as String? ?? '';
+    final steps = (chapter['solutionSteps'] as List<dynamic>? ?? []).cast<String>();
     final questions =
         (chapter['questions'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
-
-    if (feature == AppFeature.quiz) {
-      return _QuizChapter(title: title, questions: questions);
-    }
+    final bookSolutions =
+        (chapter['bookSolutions'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
 
     return Card(
       margin: const EdgeInsets.only(bottom: 14),
@@ -130,45 +211,115 @@ class _ChapterContent extends ConsumerWidget {
               children: [
                 Expanded(child: Text(title, style: theme.textTheme.titleMedium)),
                 IconButton(
-                  tooltip: ref.watch(favoritesProvider).contains(favoriteKey) ? 'حذف از علاقه‌مندی‌ها' : 'افزودن به علاقه‌مندی‌ها',
-                  onPressed: () => ref.read(favoritesProvider.notifier).toggle(favoriteKey),
-                  icon: Icon(ref.watch(favoritesProvider).contains(favoriteKey) ? Icons.bookmark_rounded : Icons.bookmark_add_outlined),
+                  tooltip: ref.watch(favoritesProvider).contains(favoriteKey)
+                      ? 'حذف از علاقه‌مندی‌ها'
+                      : 'افزودن به علاقه‌مندی‌ها',
+                  onPressed: () =>
+                      ref.read(favoritesProvider.notifier).toggle(favoriteKey),
+                  icon: Icon(
+                    ref.watch(favoritesProvider).contains(favoriteKey)
+                        ? Icons.bookmark_rounded
+                        : Icons.bookmark_add_outlined,
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            const Divider(),
             if (feature == AppFeature.lessons) ...[
+              Text('آموزش این بخش', style: theme.textTheme.titleSmall),
+              const SizedBox(height: 8),
               Text(summary, style: theme.textTheme.bodyMedium),
               if (points.isNotEmpty) ...[
-                const SizedBox(height: 12),
-                Text('نکته‌های کلیدی', style: theme.textTheme.titleSmall),
-                for (final point in points)
-                  _Bullet(text: point),
+                const SizedBox(height: 14),
+                Text('نکته‌های مهم', style: theme.textTheme.titleSmall),
+                for (final point in points) _Bullet(text: point),
+              ],
+              if (example.isNotEmpty) ...[
+                const SizedBox(height: 14),
+                Text('مثال آموزشی', style: theme.textTheme.titleSmall),
+                Text(example),
+                for (var i = 0; i < steps.length; i++)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CircleAvatar(radius: 12, child: Text((i + 1).toString())),
+                        const SizedBox(width: 10),
+                        Expanded(child: Text(steps[i])),
+                      ],
+                    ),
+                  ),
               ],
             ] else if (feature == AppFeature.notes) ...[
-              for (final point in points) _Bullet(text: point),
-            ] else if (feature == AppFeature.solutions) ...[
-              Text(chapter['example'] as String? ?? 'مثال آموزشی',
-                  style: theme.textTheme.bodyMedium),
+              Text('جزوه و نکته‌های این فصل', style: theme.textTheme.titleSmall),
+              const SizedBox(height: 8),
+              Text(summary),
               const SizedBox(height: 10),
-              for (var i = 0; i < steps.length; i++)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CircleAvatar(radius: 12, child: Text('${i + 1}')),
-                      const SizedBox(width: 10),
-                      Expanded(child: Text(steps[i])),
-                    ],
-                  ),
-                ),
+              for (final point in points) _Bullet(text: point),
+              const SizedBox(height: 10),
+              Text(
+                'این بخش فعلاً نکته‌های ثبت‌شده را نشان می‌دهد؛ جزوه‌های PDF باید به تفکیک همین فصل به فهرست منابع اضافه شوند.',
+                style: theme.textTheme.bodySmall,
+              ),
+            ] else if (feature == AppFeature.solutions) ...[
+              Text('پاسخ تمرین‌ها و فعالیت‌های کتاب', style: theme.textTheme.titleSmall),
+              const SizedBox(height: 8),
+              if (bookSolutions.isEmpty)
+                const _MissingBookSolutions()
+              else
+                for (final item in bookSolutions) _BookSolutionItem(item: item),
             ] else if (feature == AppFeature.sampleExams) ...[
+              Text('نمونه‌سؤال‌های این فصل', style: theme.textTheme.titleSmall),
               for (var i = 0; i < questions.length; i++)
                 _ReadOnlyQuestion(question: questions[i], number: i + 1),
+              if (questions.isEmpty)
+                const Text('برای این فصل هنوز نمونه‌سؤالی ثبت نشده است.'),
             ],
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _MissingBookSolutions extends StatelessWidget {
+  const _MissingBookSolutions();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: const Text(
+        'پاسخ‌های فعالیت‌ها و تمرین‌های خودِ کتاب هنوز برای این فصل با نسخهٔ رسمی کتاب تطبیق و ثبت نشده‌اند. برای جلوگیری از نمایش جواب ساختگی، فعلاً پاسخ نمونه یا مثال آموزشی را به‌جای گام‌به‌گام کتاب نشان نمی‌دهیم.',
+      ),
+    );
+  }
+}
+
+class _BookSolutionItem extends StatelessWidget {
+  const _BookSolutionItem({required this.item});
+  final Map<String, dynamic> item;
+
+  @override
+  Widget build(BuildContext context) {
+    final page = item['page']?.toString() ?? '—';
+    final prompt = item['question'] as String? ?? '';
+    final answer = item['answer'] as String? ?? '';
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('صفحه ' + page, style: Theme.of(context).textTheme.labelLarge),
+          if (prompt.isNotEmpty) Text(prompt),
+          if (answer.isNotEmpty) Text('پاسخ تشریحی: ' + answer),
+          const Divider(height: 24),
+        ],
       ),
     );
   }
