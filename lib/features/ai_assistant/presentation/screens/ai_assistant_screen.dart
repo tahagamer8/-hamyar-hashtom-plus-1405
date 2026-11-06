@@ -119,6 +119,41 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
         );
       }
     }
+    final pageReferences = <String>[];
+    final rawPageReferences = chapter['pageReferences'];
+    if (rawPageReferences is List) {
+      for (final raw in rawPageReferences.take(6)) {
+        if (raw is String && raw.trim().isNotEmpty) {
+          pageReferences.add(_clipText(raw, 160));
+        } else if (raw is Map) {
+          final page = raw['page'] ?? raw['pageNumber'] ?? raw['pages'];
+          final title = raw['title']?.toString() ?? '';
+          final status = raw['verificationStatus']?.toString() ?? 'نامشخص';
+          if (page != null || title.isNotEmpty) {
+            pageReferences.add(_clipText(
+              'صفحه: ${page ?? 'نامشخص'}؛ ${title.isEmpty ? '' : '$title؛ '}وضعیت: $status',
+              160,
+            ));
+          }
+        }
+      }
+    }
+    final bookSolutions = <String>[];
+    for (final raw in (chapter['bookSolutions'] as List<dynamic>? ?? []).take(4)) {
+      if (raw is! Map) continue;
+      final page = raw['page'] ?? raw['pageNumber'] ?? 'نامشخص';
+      final prompt = raw['question']?.toString() ?? raw['prompt']?.toString() ?? '';
+      final answer = raw['answer']?.toString() ?? '';
+      final explanation = raw['explanation']?.toString() ?? '';
+      final status = raw['verificationStatus']?.toString() ?? 'نامشخص';
+      if (answer.isNotEmpty) {
+        bookSolutions.add(_clipText(
+          'صفحه: $page | پرسش: $prompt | پاسخ: $answer | توضیح: $explanation | وضعیت تأیید: $status',
+          900,
+        ));
+      }
+    }
+
     return {
       'subjectTitle': _clipText(subject['title'] ?? 'درس', 100),
       'chapterTitle': _clipText(chapter['title'] ?? 'فصل', 100),
@@ -140,6 +175,12 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
           .take(3)
           .map((question) => _clipText(question, 350))
           .toList(),
+      'pageReferences': pageReferences,
+      'bookSolutions': bookSolutions,
+      'contentVerificationStatus': _clipText(
+        chapter['verificationStatus'] ?? 'not_verified_against_official_textbook',
+        80,
+      ),
       'sourceLabel': _clipText(
         chapter['source'] is Map
             ? (chapter['source'] as Map)['title'] ??
