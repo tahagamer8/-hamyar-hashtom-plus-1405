@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -115,6 +116,8 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               _ChapterContent(
                 chapter: selectedChapter,
                 feature: _feature,
+                subjectId: widget.subjectId,
+                chapterIndex: safeIndex,
                 favoriteKey: widget.subjectId + '::' +
                     (selectedChapter['title']?.toString() ?? ''),
               ),
@@ -181,11 +184,15 @@ class _ChapterContent extends ConsumerWidget {
     required this.chapter,
     required this.feature,
     required this.favoriteKey,
+    required this.subjectId,
+    required this.chapterIndex,
   });
 
   final Map<String, dynamic> chapter;
   final AppFeature feature;
   final String favoriteKey;
+  final String subjectId;
+  final int chapterIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -258,9 +265,11 @@ class _ChapterContent extends ConsumerWidget {
               const SizedBox(height: 10),
               for (final point in points) _Bullet(text: point),
               const SizedBox(height: 10),
-              Text(
-                'این بخش فعلاً نکته‌های ثبت‌شده را نشان می‌دهد؛ جزوه‌های PDF باید به تفکیک همین فصل به فهرست منابع اضافه شوند.',
-                style: theme.textTheme.bodySmall,
+              const SizedBox(height: 12),
+              ChapterPdfResources(
+                subjectId: subjectId,
+                chapterIndex: chapterIndex,
+                type: 'notes',
               ),
             ] else if (feature == AppFeature.solutions) ...[
               Text('پاسخ تمرین‌ها و فعالیت‌های کتاب', style: theme.textTheme.titleSmall),
@@ -275,10 +284,120 @@ class _ChapterContent extends ConsumerWidget {
                 _ReadOnlyQuestion(question: questions[i], number: i + 1),
               if (questions.isEmpty)
                 const Text('برای این فصل هنوز نمونه‌سؤالی ثبت نشده است.'),
+              const SizedBox(height: 12),
+              ChapterPdfResources(
+                subjectId: subjectId,
+                chapterIndex: chapterIndex,
+                type: 'sampleExams',
+              ),
             ],
           ],
         ),
       ),
+    );
+  }
+}
+
+
+class ChapterPdfResources extends StatefulWidget {
+  const ChapterPdfResources({
+    super.key,
+    required this.subjectId,
+    required this.chapterIndex,
+    required this.type,
+  });
+
+  final String subjectId;
+  final int chapterIndex;
+  final String type;
+
+  @override
+  State<ChapterPdfResources> createState() => _ChapterPdfResourcesState();
+}
+
+class _ChapterPdfResourcesState extends State<ChapterPdfResources> {
+  late Future<List<Map<String, dynamic>>> _resources;
+  String? _opening;
+
+  @override
+  void initState() {
+    super.initState();
+    _resources = _loadResources();
+  }
+
+  Future<List<Map<String, dynamic>>> _loadResources() async {
+    final raw = await rootBundle.loadString('assets/generated_pdfs/manifest.json');
+    final entries = (jsonDecode(raw) as List<dynamic>).cast<Map<String, dynamic>>();
+    return entries.where((entry) =>
+      entry['subjectId'] == widget.subjectId &&
+      entry['chapterIndex'] == widget.chapterIndex &&
+      entry['type'] == widget.type
+    ).toList();
+  }
+
+  Future<void> _openPdf(String fileName) async {
+    if (_opening != null) return;
+    setState(() => _opening = fileName);
+    try {
+      final data = await rootBundle.load('assets/generated_pdfs/' + fileName);
+      final directory = await getApplicationSupportDirectory();
+      final file = File(directory.path + '/' + fileName);
+      await file.writeAsBytes(data.buffer.asUint8List(), flush: true);
+      final result = await OpenFilex.open(file.path, type: 'application/pdf');
+      if (!mounted) return;
+      if (result.type != ResultType.done) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('باز کردن فایل ممکن نشد: ' + result.message)),
+        );
+      }
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('فایل PDF این فصل در این نسخه آماده نیست.')),
+      );
+    } finally {
+      if (mounted) setState(() => _opening = null);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: _resources,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Padding(
+            padding: EdgeInsets.all(12),
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+        if (snapshot.hasError || !snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Text('فایل PDF جداگانه‌ای برای این فصل ثبت نشده است.');
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('فایل‌های PDF این فصل', style: Theme.of(context).textTheme.titleSmall),
+            for (final resource in snapshot.data!)
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.picture_as_pdf_rounded),
+                title: Text(resource['title'] as String? ?? 'فایل PDF'),
+                subtitle: Text(resource['chapterTitle'] as String? ?? ''),
+                trailing: _opening == resource['fileName']
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.open_in_new_rounded),
+                onTap: _opening == null
+                    ? () => _openPdf(resource['fileName'] as String)
+                    : null,
+              ),
+          ],
+        );
+      },
     );
   }
 }
