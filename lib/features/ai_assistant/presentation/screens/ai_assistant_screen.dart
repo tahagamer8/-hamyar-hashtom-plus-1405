@@ -337,11 +337,14 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
       if (!mounted) return;
       final configured = health['geminiSecretConfigured'] == true &&
           health['rateLimiterConfigured'] == true;
+      final identityMatches = health['serviceIdentityMatches'] == true;
       setState(() {
-        _connectionHealthy = configured;
-        _connectionStatus = configured
-            ? 'سرور پاسخ می‌دهد و تنظیمات لازم روی Cloudflare وجود دارد.'
-            : 'سرور پاسخ می‌دهد، اما بخشی از تنظیمات آن کامل نیست.';
+        _connectionHealthy = configured && identityMatches;
+        _connectionStatus = !configured
+            ? 'سرور پاسخ می‌دهد، اما بخشی از تنظیمات آن کامل نیست.'
+            : identityMatches
+                ? 'سرور پاسخ می‌دهد و تنظیمات لازم روی Cloudflare وجود دارد.'
+                : 'سرور و تنظیمات فعال‌اند، اما شناسهٔ نسخهٔ مستقر قدیمی است؛ برای هماهنگی کامل باید Worker به‌روزرسانی شود.';
       });
     } on GeminiApiException catch (e) {
       if (!mounted) return;

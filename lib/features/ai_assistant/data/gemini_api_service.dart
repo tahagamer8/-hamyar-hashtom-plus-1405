@@ -53,12 +53,10 @@ class GeminiApiService {
       if (response.statusCode == 200 &&
           decoded is Map<String, dynamic> &&
           decoded['ok'] == true) {
-        if (decoded['service'] != expectedWorkerService) {
-          throw const GeminiApiException(
-            'این آدرس به Worker اصلی فهمینو متصل نیست؛ آدرس سرور را بررسی کن.',
-          );
-        }
-        return decoded;
+        return {
+          ...decoded,
+          'serviceIdentityMatches': decoded['service'] == expectedWorkerService,
+        };
       }
       if (decoded is Map<String, dynamic> && decoded['error'] is String) {
         throw GeminiApiException(decoded['error'] as String);

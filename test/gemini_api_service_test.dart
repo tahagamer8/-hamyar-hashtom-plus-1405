@@ -63,7 +63,7 @@ void main() {
   });
 
 
-  test('rejects a different Worker even when its health endpoint is healthy', () async {
+  test('flags a stale deployed Worker identity without blocking health data', () async {
     final service = GeminiApiService(
       client: MockClient((_) async => http.Response(
             jsonEncode({
@@ -77,10 +77,11 @@ void main() {
           )),
     );
 
-    expect(
-      () => service.checkHealth(workerUrl: 'https://old-worker.example.workers.dev'),
-      throwsA(isA<GeminiApiException>()),
+    final health = await service.checkHealth(
+      workerUrl: 'https://old-worker.example.workers.dev',
     );
+    expect(health['ok'], true);
+    expect(health['serviceIdentityMatches'], false);
     service.dispose();
   });
 
