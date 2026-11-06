@@ -64,10 +64,10 @@ jobs:
           def escaped(value):
               return value.replace("\\", "\\\\").replace(":", "\\:").replace("=", "\\=")
           props = (
-              "storeFile=fahmino-release.jks\\n"
-              f"storePassword={escaped(values['FAHMINO_KEYSTORE_PASSWORD'])}\\n"
-              f"keyAlias={escaped(values['FAHMINO_KEY_ALIAS'])}\\n"
-              f"keyPassword={escaped(values['FAHMINO_KEY_PASSWORD'])}\\n"
+              "storeFile=fahmino-release.jks\n"
+              f"storePassword={escaped(values['FAHMINO_KEYSTORE_PASSWORD'])}\n"
+              f"keyAlias={escaped(values['FAHMINO_KEY_ALIAS'])}\n"
+              f"keyPassword={escaped(values['FAHMINO_KEY_PASSWORD'])}\n"
           )
           Path("android/key.properties").write_text(props, encoding="utf-8")
           PY
@@ -78,10 +78,10 @@ jobs:
             mkdir -p assets/fonts/Vazirmatn /tmp/vazir
             curl -fL -o /tmp/vazir.zip https://github.com/rastikerdar/vazirmatn/releases/download/v33.003/vazirmatn-v33.003.zip
             unzip -q /tmp/vazir.zip -d /tmp/vazir
-            find /tmp/vazir -type f -name 'Vazirmatn-Regular.ttf' -exec cp {} assets/fonts/Vazirmatn/ \\;
-            find /tmp/vazir -type f -name 'Vazirmatn-Medium.ttf' -exec cp {} assets/fonts/Vazirmatn/ \\;
-            find /tmp/vazir -type f -name 'Vazirmatn-SemiBold.ttf' -exec cp {} assets/fonts/Vazirmatn/ \\;
-            find /tmp/vazir -type f -name 'Vazirmatn-Bold.ttf' -exec cp {} assets/fonts/Vazirmatn/ \\;
+            find /tmp/vazir -type f -name 'Vazirmatn-Regular.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
+            find /tmp/vazir -type f -name 'Vazirmatn-Medium.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
+            find /tmp/vazir -type f -name 'Vazirmatn-SemiBold.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
+            find /tmp/vazir -type f -name 'Vazirmatn-Bold.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
           fi
           test -s assets/fonts/Vazirmatn/Vazirmatn-Regular.ttf
           test -s assets/fonts/Vazirmatn/Vazirmatn-Medium.ttf
