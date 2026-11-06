@@ -168,6 +168,34 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook",
             "difficulty": "advanced"
+          },
+          {
+            "question": "حاصل عبارت (۳/۵ − ۷/۱۰) ÷ (−۱/۴) − ۲/۳ کدام است؟",
+            "options": [
+              "−۴/۱۵",
+              "۴/۱۵",
+              "−۱۶/۱۵",
+              "۱۶/۱۵"
+            ],
+            "answer": 0,
+            "explanation": "ابتدا ۳/۵−۷/۱۰=−۱/۱۰. تقسیم بر −۱/۴ برابر ۲/۵ است؛ سپس ۲/۵−۲/۳=۶/۱۵−۱۰/۱۵=−۴/۱۵.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "اگر a=−۳/۴ و b=۵/۶ باشد، مقدار |۲a−b|−|a+۲b| کدام است؟",
+            "options": [
+              "۱۷/۱۲",
+              "۵/۴",
+              "۷/۱۲",
+              "۲۹/۱۲"
+            ],
+            "answer": 0,
+            "explanation": "۲a−b=−۳/۲−۵/۶=−۷/۳ و قدرمطلق آن ۷/۳ است. a+۲b=−۳/۴+۵/۳=۱۱/۱۲؛ پس ۷/۳−۱۱/۱۲=۱۷/۱۲.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
           }
         ]
       },
@@ -283,6 +311,34 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook",
             "difficulty": "advanced"
+          },
+          {
+            "question": "کوچک‌ترین عدد طبیعی n که حاصل‌ضرب ۲⁴×۳³×۵²×n را مکعب کامل کند، کدام است؟",
+            "options": [
+              "۲۰",
+              "۱۰",
+              "۴۰",
+              "۵"
+            ],
+            "answer": 0,
+            "explanation": "توان عامل‌های اول باید مضرب ۳ شود. توان ۲ به ۶ و توان ۵ به ۳ می‌رسد؛ پس باید در ۲²×۵=۲۰ ضرب کنیم.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "چند شمارندهٔ مثبتِ عدد ۲⁴×۳²×۷، مضرب ۱۲ هستند؟",
+            "options": [
+              "۱۲",
+              "۸",
+              "۱۶",
+              "۱۸"
+            ],
+            "answer": 0,
+            "explanation": "برای مضرب ۱۲، توان ۲ دست‌کم ۲ و توان ۳ دست‌کم ۱ است. برای ۲ سه انتخاب، برای ۳ دو انتخاب و برای ۷ دو انتخاب داریم؛ ۳×۲×۲=۱۲.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
           }
         ]
       },
@@ -397,6 +453,34 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook",
             "difficulty": "advanced"
+          },
+          {
+            "question": "هر زاویهٔ خارجی یک چندضلعی منتظم ۲۴ درجه است. تعداد قطرهای آن چندتاست؟",
+            "options": [
+              "۹۰",
+              "۷۵",
+              "۱۰۵",
+              "۱۲۰"
+            ],
+            "answer": 0,
+            "explanation": "تعداد ضلع‌ها ۳۶۰÷۲۴=۱۵ است. تعداد قطرها برابر n(n−۳)/۲؛ بنابراین ۱۵×۱۲÷۲=۹۰.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "تعداد قطرهای یک چندضلعی محدب ۵۴ است. این چندضلعی چند ضلع دارد؟",
+            "options": [
+              "۱۲",
+              "۱۰",
+              "۱۴",
+              "۱۸"
+            ],
+            "answer": 0,
+            "explanation": "از n(n−۳)/۲=۵۴ داریم n²−۳n−۱۰۸=۰؛ تجزیه برابر (n−۱۲)(n+۹)=۰ است و جواب مثبت n=۱۲ است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
           }
         ]
       },
@@ -511,6 +595,34 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook",
             "difficulty": "advanced"
+          },
+          {
+            "question": "جواب معادلهٔ ۳(۲x−۱)−۲(x+۴)=۵x−۹ کدام است؟",
+            "options": [
+              "−۲",
+              "۲",
+              "−۲۰",
+              "۲۰"
+            ],
+            "answer": 0,
+            "explanation": "طرف چپ را ساده می‌کنیم: ۶x−۳−۲x−۸=۴x−۱۱. پس ۴x−۱۱=۵x−۹ و در نتیجه x=−۲.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "جواب معادلهٔ (x−۲)/۳ +(۲x+۱)/۴ =۵ کدام است؟",
+            "options": [
+              "۱۳/۲",
+              "۱۱/۲",
+              "۵",
+              "۷"
+            ],
+            "answer": 0,
+            "explanation": "در ۱۲ ضرب می‌کنیم: ۴(x−۲)+۳(۲x+۱)=۶۰؛ پس ۱۰x−۵=۶۰ و x=۶۵/۱۰=۱۳/۲.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
           }
         ]
       },
@@ -625,6 +737,34 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook",
             "difficulty": "advanced"
+          },
+          {
+            "question": "اگر A=(−۲،۳) و B=(۴،−۱) باشد، مختصات بردار ۳B−۲A کدام است؟",
+            "options": [
+              "(۱۶،−۹)",
+              "(۸،−۳)",
+              "(−۱۶،۹)",
+              "(۱۴،−۷)"
+            ],
+            "answer": 0,
+            "explanation": "۳B=(۱۲،−۳) و ۲A=(−۴،۶)؛ با کم‌کردن، (۱۲−(−۴)،−۳−۶)=(۱۶،−۹) به دست می‌آید.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "A=(۱،−۲)، B=(−۳،۴) و C=(۲،۱) هستند. مختصات بردار AC+۲BC کدام است؟",
+            "options": [
+              "(۱۱،−۳)",
+              "(−۹،۹)",
+              "(۶،۰)",
+              "(۱،۳)"
+            ],
+            "answer": 0,
+            "explanation": "AC=C−A=(۱،۳) و BC=C−B=(۵،−۳) است. پس AC+۲BC=(۱،۳)+(۱۰،−۶)=(۱۱،−۳).",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
           }
         ]
       },
@@ -739,6 +879,34 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook",
             "difficulty": "advanced"
+          },
+          {
+            "question": "در یک مثلث متساوی‌الساقین، زاویهٔ خارجیِ یکی از رأس‌های قاعده ۱۳۰ درجه است. زاویهٔ رأس مثلث چند درجه است؟",
+            "options": [
+              "۸۰",
+              "۷۰",
+              "۵۰",
+              "۱۰۰"
+            ],
+            "answer": 0,
+            "explanation": "زاویهٔ داخلی قاعده ۱۸۰−۱۳۰=۵۰ درجه است. دو زاویهٔ قاعده برابرند؛ پس زاویهٔ رأس ۱۸۰−۵۰−۵۰=۸۰ درجه است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "دو ضلع مثلث ۷ و ۱۱ واحدند. چند مقدار طبیعی برای ضلع سوم وجود دارد که محیط مثلث عددی زوج باشد؟",
+            "options": [
+              "۶",
+              "۵",
+              "۷",
+              "۸"
+            ],
+            "answer": 0,
+            "explanation": "نامساوی مثلث می‌دهد ۴<x<۱۸؛ پس x از ۵ تا ۱۷ است. چون ۷+۱۱+x=۱۸+x باید زوج باشد، x باید زوج باشد: ۶،۸،۱۰،۱۲،۱۴،۱۶؛ در مجموع ۶ مقدار.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
           }
         ]
       },
@@ -853,6 +1021,34 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook",
             "difficulty": "advanced"
+          },
+          {
+            "question": "حاصل √۷۲+√۵۰−√۸ کدام است؟",
+            "options": [
+              "۹√۲",
+              "۷√۲",
+              "۱۱√۲",
+              "۱۳√۲"
+            ],
+            "answer": 0,
+            "explanation": "√۷۲=۶√۲، √۵۰=۵√۲ و √۸=۲√۲؛ بنابراین حاصل (۶+۵−۲)√۲=۹√۲ است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "حاصل (۲⁵×۴³)÷(۸²×۲) کدام است؟",
+            "options": [
+              "۱۶",
+              "۸",
+              "۳۲",
+              "۴"
+            ],
+            "answer": 0,
+            "explanation": "۴³=۲⁶ و ۸²=۲⁶؛ پس عبارت ۲⁵×۲⁶÷(۲⁶×۲)=۲⁵÷۲=۲⁴=۱۶ است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
           }
         ]
       },
@@ -967,6 +1163,34 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook",
             "difficulty": "advanced"
+          },
+          {
+            "question": "در پرتاب دو تاس سالم، احتمال اینکه مجموع دو عدد ۸ یا ۱۰ شود چقدر است؟",
+            "options": [
+              "۲/۹",
+              "۱/۶",
+              "۵/۳۶",
+              "۱/۴"
+            ],
+            "answer": 0,
+            "explanation": "برای مجموع ۸ پنج حالت و برای مجموع ۱۰ سه حالت وجود دارد؛ در مجموع ۸ حالت از ۳۶ حالت، یعنی ۸/۳۶=۲/۹.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "میانگین نمرهٔ ۸ دانش‌آموز ۱۴ است. اگر نمرهٔ ۲۰ حذف شود، میانگین ۷ نفر باقی‌مانده چقدر است؟",
+            "options": [
+              "۹۲/۷",
+              "۱۳",
+              "۱۴",
+              "۱۵"
+            ],
+            "answer": 0,
+            "explanation": "مجموع نمره‌ها ۸×۱۴=۱۱۲ است. پس از حذف ۲۰، مجموع ۹۲ می‌شود و میانگین جدید ۹۲÷۷ است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
           }
         ]
       },
@@ -1081,6 +1305,34 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook",
             "difficulty": "advanced"
+          },
+          {
+            "question": "طول یک کمان دایره ۵π و شعاع دایره ۱۵ است. زاویهٔ مرکزی متناظر با کمان چند درجه است؟",
+            "options": [
+              "۶۰",
+              "۳۰",
+              "۴۵",
+              "۹۰"
+            ],
+            "answer": 0,
+            "explanation": "نسبت طول کمان به محیط برابر ۵π÷۳۰π=۱/۶ است؛ پس زاویهٔ مرکزی ۳۶۰÷۶=۶۰ درجه می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "وتری به طول ۲۴ در دایره‌ای با شعاع ۱۳ قرار دارد. اگر شعاع دایره به ۱۵ افزایش یابد و طول وتر ثابت بماند، فاصلهٔ مرکز تا وتر چند می‌شود؟",
+            "options": [
+              "۹",
+              "۸",
+              "۱۰",
+              "۱۲"
+            ],
+            "answer": 0,
+            "explanation": "نصف وتر ۱۲ است. فاصلهٔ مرکز تا وتر از رابطهٔ فیثاغورس به دست می‌آید: √(۱۵²−۱۲²)=√۸۱=۹.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
           }
         ]
       }
