@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import worker from "../src/index.js";
 
 const originalFetch = globalThis.fetch;
+const allowLimiter = { limit: async () => ({ success: true }) };
+
 afterEach(() => {
   globalThis.fetch = originalFetch;
 });
@@ -59,6 +61,19 @@ test("returns a clear configuration error when the API key is missing", async ()
   assert.equal(response.status, 503);
 });
 
+test("fails closed when the rate limiter binding is missing", async () => {
+  let called = false;
+  globalThis.fetch = async () => {
+    called = true;
+    throw new Error("Gemini must not be called");
+  };
+  const response = await worker.fetch(makeRequest({ body: validBody }), {
+    GEMINI_API_KEY: "test-key",
+  });
+  assert.equal(response.status, 503);
+  assert.equal(called, false);
+});
+
 test("forwards valid chat and returns Gemini text", async () => {
   let capturedUrl;
   let capturedInit;
@@ -70,7 +85,10 @@ test("forwards valid chat and returns Gemini text", async () => {
     }), { status: 200, headers: { "content-type": "application/json" } });
   };
 
-  const response = await worker.fetch(makeRequest({ body: validBody }), { GEMINI_API_KEY: "test-key" });
+  const response = await worker.fetch(makeRequest({ body: validBody }), {
+    GEMINI_API_KEY: "test-key",
+    CHAT_LIMITER: allowLimiter,
+  });
   assert.equal(response.status, 200);
   assert.equal((await response.json()).answer, "عدد گویا را می‌توان به شکل کسر نوشت.");
   assert.equal(capturedUrl, "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent");
@@ -80,7 +98,10 @@ test("forwards valid chat and returns Gemini text", async () => {
 
 test("maps Gemini quota responses to HTTP 429", async () => {
   globalThis.fetch = async () => new Response(JSON.stringify({ error: { message: "quota" } }), { status: 429 });
-  const response = await worker.fetch(makeRequest({ body: validBody }), { GEMINI_API_KEY: "test-key" });
+  const response = await worker.fetch(makeRequest({ body: validBody }), {
+    GEMINI_API_KEY: "test-key",
+    CHAT_LIMITER: allowLimiter,
+  });
   assert.equal(response.status, 429);
   assert.match((await response.json()).error, /سهمیه/);
 });
@@ -128,7 +149,10 @@ test("maps non-quota Gemini failures to a generic 502 without leaking provider d
   globalThis.fetch = async () => new Response(JSON.stringify({
     error: { message: "sensitive upstream diagnostic" },
   }), { status: 500 });
-  const response = await worker.fetch(makeRequest({ body: validBody }), { GEMINI_API_KEY: "test-key" });
+  const response = await worker.fetch(makeRequest({ body: validBody }), {
+    GEMINI_API_KEY: "test-key",
+    CHAT_LIMITER: allowLimiter,
+  });
   assert.equal(response.status, 502);
   const body = await response.json();
   assert.match(body.error, /سرویس هوش مصنوعی/);
@@ -137,14 +161,20 @@ test("maps non-quota Gemini failures to a generic 502 without leaking provider d
 
 test("returns a controlled error when Gemini has no text candidate", async () => {
   globalThis.fetch = async () => new Response(JSON.stringify({ candidates: [] }), { status: 200 });
-  const response = await worker.fetch(makeRequest({ body: validBody }), { GEMINI_API_KEY: "test-key" });
+  const response = await worker.fetch(makeRequest({ body: validBody }), {
+    GEMINI_API_KEY: "test-key",
+    CHAT_LIMITER: allowLimiter,
+  });
   assert.equal(response.status, 502);
   assert.match((await response.json()).error, /پاسخ متنی/);
 });
 
 test("returns a controlled error when Gemini responds with non-JSON content", async () => {
   globalThis.fetch = async () => new Response("upstream unavailable", { status: 502 });
-  const response = await worker.fetch(makeRequest({ body: validBody }), { GEMINI_API_KEY: "test-key" });
+  const response = await worker.fetch(makeRequest({ body: validBody }), {
+    GEMINI_API_KEY: "test-key",
+    CHAT_LIMITER: allowLimiter,
+  });
   assert.equal(response.status, 502);
   assert.match((await response.json()).error, /قابل خواندن نیست/);
 });
