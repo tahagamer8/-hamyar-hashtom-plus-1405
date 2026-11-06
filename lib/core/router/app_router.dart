@@ -85,8 +85,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.aiAssistant,
         builder: (context, state) {
           final extra = state.extra;
+          final payload = extra is Map<String, dynamic> ? extra : null;
+          final nestedContext = payload?['studyContext'];
           return AiAssistantScreen(
-            studyContext: extra is Map<String, dynamic> ? extra : null,
+            studyContext: nestedContext is Map<String, dynamic>
+                ? nestedContext
+                : payload,
+            initialPrompt: payload?['initialPrompt'] as String?,
           );
         },
       ),
