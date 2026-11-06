@@ -16,8 +16,13 @@ class _SearchScreenState extends State<SearchScreen> {
       .toLowerCase()
       .replaceAll('ي', 'ی')
       .replaceAll('ك', 'ک')
+      .replaceAll('ۀ', 'ه')
+      .replaceAll('ة', 'ه')
       .replaceAll(RegExp(r'[\u064B-\u065F\u0670]'), '')
-      .replaceAll(RegExp(r'\s+'), ' ');
+      .replaceAll(RegExp(r'[\u200c\u200f\u200e]'), ' ')
+      .replaceAll(RegExp(r'[،؛؟!,:;.]'), ' ')
+      .replaceAll(RegExp(r'\s+'), ' ')
+      .trim();
   final _controller = TextEditingController();
   Future<Map<String, dynamic>>? _catalogFuture;
   String _query = '';
@@ -58,30 +63,59 @@ class _SearchScreenState extends State<SearchScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           final entries = <Map<String, String>>[];
-          for (final item in snapshot.data!.entries) {
-            final subjectId = item.key;
-            final subject = item.value as Map<String, dynamic>;
-            final subjectTitle = subject['title'] as String? ?? subjectId;
-            final chapters = (subject['chapters'] as List<dynamic>? ?? [])
-                .cast<Map<String, dynamic>>();
-            for (var chapterIndex = 0; chapterIndex < chapters.length; chapterIndex++) {
-              final chapter = chapters[chapterIndex];
-              final chapterTitle = chapter['title'] as String? ?? '';
-              final summary = chapter['summary'] as String? ?? '';
-              final points = (chapter['points'] as List<dynamic>? ?? []).join(' ');
-              final steps = (chapter['solutionSteps'] as List<dynamic>? ?? []).join(' ');
-              final example = chapter['example'] as String? ?? '';
-              final questions = (chapter['questions'] as List<dynamic>? ?? [])
-                  .map((item) => (item as Map<String, dynamic>)['question'] ?? '')
-                  .join(' ');
-              final searchable = _normalize('$subjectTitle $chapterTitle $summary $points $steps $example $questions');
-              if (_query.isEmpty || searchable.contains(_normalize(_query))) {
+          final query = _normalize(_query);
+          if (query.isNotEmpty) {
+            for (final item in snapshot.data!.entries) {
+              final subjectId = item.key;
+              final subject = item.value as Map<String, dynamic>;
+              final subjectTitle = subject['title'] as String? ?? subjectId;
+              final chapters = (subject['chapters'] as List<dynamic>? ?? [])
+                  .whereType<Map<String, dynamic>>()
+                  .toList();
+
+              for (var chapterIndex = 0; chapterIndex < chapters.length; chapterIndex++) {
+                final chapter = chapters[chapterIndex];
+                final chapterTitle = chapter['title'] as String? ?? '';
+                final summary = chapter['summary'] as String? ?? '';
+                final points = (chapter['points'] as List<dynamic>? ?? [])
+                    .whereType<String>()
+                    .toList();
+                final steps = (chapter['solutionSteps'] as List<dynamic>? ?? [])
+                    .whereType<String>()
+                    .toList();
+                final example = chapter['example'] as String? ?? '';
+                final questions = (chapter['questions'] as List<dynamic>? ?? [])
+                    .whereType<Map<String, dynamic>>()
+                    .toList();
+
+                final fields = <MapEntry<String, String>>[
+                  MapEntry('نام درس', subjectTitle),
+                  MapEntry('عنوان فصل', chapterTitle),
+                  MapEntry('درسنامه', summary),
+                  ...points.map((value) => MapEntry('نکتهٔ آموزشی', value)),
+                  ...steps.map((value) => MapEntry('حل مثال', value)),
+                  MapEntry('مثال', example),
+                  ...questions.map((value) => MapEntry(
+                        'نمونه‌سؤال',
+                        value['question'] as String? ?? '',
+                      )),
+                ];
+                final matched = fields.where((field) =>
+                    _normalize(field.value).contains(query)).toList();
+                if (matched.isEmpty) continue;
+
+                final bestMatch = matched.firstWhere(
+                  (field) => field.key != 'نام درس' && field.key != 'عنوان فصل',
+                  orElse: () => matched.first,
+                );
                 entries.add({
                   'subjectId': subjectId,
                   'subjectTitle': subjectTitle,
                   'chapterTitle': chapterTitle,
                   'chapterIndex': chapterIndex.toString(),
                   'summary': summary,
+                  'matchType': bestMatch.key,
+                  'matchedText': bestMatch.value,
                 });
               }
             }
@@ -110,8 +144,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               Expanded(
-                child: entries.isEmpty
-                    ? const Center(child: Text('مطلبی پیدا نشد. عبارت دیگری را امتحان کن.'))
+                child: _query.isEmpty
+                    ? const Center(child: Text('نام درس، عنوان فصل یا بخشی از سؤال را جست‌وجو کن.'))
+                    : entries.isEmpty
+                        ? const Center(child: Text('مطلبی پیدا نشد. عبارت دیگری را امتحان کن.'))
                     : ListView.separated(
                         padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
                         itemCount: entries.length,
@@ -125,7 +161,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               ),
                               title: Text(entry['chapterTitle']!),
                               subtitle: Text(
-                                '${entry['subjectTitle']}\n${entry['summary']}',
+                                '${entry['subjectTitle']} • ${entry['matchType']}\n${entry['matchedText']}',
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                               ),
