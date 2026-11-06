@@ -149,7 +149,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
       _history
         ..add({'role': 'user', 'text': text})
         ..add({'role': 'model', 'text': answer});
-      while (_history.length > 10) {
+      while (_history.length > 8) {
         _history.removeRange(0, 2);
       }
 
@@ -293,7 +293,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                     }),
                     const SizedBox(height: 4),
                     Text(
-                      'محتوای انتخاب‌شده هنوز با PDF رسمی ۱۴۰۵–۱۴۰۶ تأیید نهایی نشده است.',
+                      'محتوای انتخاب‌شده هنوز با PDF رسمی ۱۴۰۵–۱۴۰۶ تأیید نهایی نشده است. اطلاعات شخصی، رمز یا شماره تلفن نفرست؛ در سطح رایگان ممکن است داده‌ها برای بهبود سرویس استفاده شوند.',
                       style: theme.textTheme.bodySmall,
                       textAlign: TextAlign.center,
                     ),
