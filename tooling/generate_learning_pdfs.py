@@ -44,7 +44,7 @@ def load_catalog(path: Path) -> dict:
             for key in ("title", "summary", "points", "solutionSteps", "questions"):
                 if key not in chapter:
                     raise ValueError(f"Missing {key} in {subject_id}/{chapter.get('title')}")
-            for question in chapter["questions"]:
+            for question in [*chapter["questions"], *chapter.get("challengeQuestions", [])]:
                 options = question.get("options")
                 answer = question.get("answer")
                 if not isinstance(options, list) or not options:
@@ -109,7 +109,7 @@ def page_footer(canvas, doc):
 
 def build_notes(catalog, output: Path, styles_map):
     topic_count = sum(len(subject['chapters']) for subject in catalog.values())
-    question_count = sum(len(chapter['questions']) for subject in catalog.values() for chapter in subject['chapters'])
+    question_count = sum(len(chapter['questions']) + len(chapter.get('challengeQuestions', [])) for subject in catalog.values() for chapter in subject['chapters'])
     story = [
         Spacer(1, 28*mm),
         Paragraph(rtl("جزوه‌های خلاصه و نکته‌ای"), styles_map["title"]),
@@ -169,9 +169,14 @@ def build_questions(catalog, output: Path, styles_map):
         story.append(Paragraph(rtl(subject["title"]), styles_map["subject"]))
         for chapter in subject["chapters"]:
             story.append(Paragraph(rtl(chapter["title"]), styles_map["chapter"]))
-            for question in chapter["questions"]:
+            question_pool = [
+                *chapter["questions"],
+                *chapter.get("challengeQuestions", []),
+            ]
+            for question in question_pool:
                 number += 1
-                story.append(Paragraph(rtl(f"{number}. {question['question']}"), styles_map["question"]))
+                level = " (چالشی)" if question.get("difficulty") == "advanced" else ""
+                story.append(Paragraph(rtl(f"{number}. {question['question']}{level}"), styles_map["question"]))
                 for idx, option in enumerate(question["options"]):
                     label = letters[idx] if idx < len(letters) else str(idx+1)
                     story.append(Paragraph(rtl(f"{label}) {option}"), styles_map["option"]))
