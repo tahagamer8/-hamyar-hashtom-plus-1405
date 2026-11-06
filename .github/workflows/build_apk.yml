@@ -134,7 +134,7 @@ jobs:
           FAHMINO_WORKER_URL: https://fahmino-api-2.tahamrh2.workers.dev
         run: |
           health="$(curl --retry 3 --retry-delay 3 --fail --silent --show-error "$FAHMINO_WORKER_URL/health")"
-          python -c 'import json,sys; d=json.load(sys.stdin); assert d.get("ok") is True; assert d.get("geminiSecretConfigured") is True; assert d.get("rateLimiterConfigured") is True; print("Worker health, Gemini secret binding, and rate limiter are configured.")' <<< "$health"
+          python -c 'import json,sys; d=json.load(sys.stdin); assert d.get("ok") is True; assert d.get("service") == "fahmino-api-2"; assert d.get("geminiSecretConfigured") is True; assert d.get("rateLimiterConfigured") is True; print("Worker health, Gemini secret binding, and rate limiter are configured.")' <<< "$health"
           status="$(curl --silent --show-error -o /tmp/fahmino-worker-invalid.json -w '%{http_code}' -X POST -H 'Content-Type: application/json' --data '{"messages":[]}' "$FAHMINO_WORKER_URL/api/chat")"
           test "$status" = "400"
           echo "Worker chat route and request validation responded without invoking Gemini."
