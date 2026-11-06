@@ -1,10 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-const _assistantEndpoint = 'https://fahmino-api-2.tahamrh2.workers.dev/api/chat';
 
 class AiChatScreen extends StatefulWidget {
   const AiChatScreen({super.key});
@@ -17,11 +14,9 @@ class _AiChatScreenState extends State<AiChatScreen> {
   final _controller = TextEditingController();
   final _scrollController = ScrollController();
   final _visibleMessages = <_ChatMessage>[];
-  final _history = <Map<String, String>>[];
   Map<String, dynamic> _catalog = {};
   String? _selectedSubjectId;
   int _selectedChapterIndex = 0;
-  bool _sending = false;
 
   @override
   void initState() {
@@ -33,55 +28,14 @@ class _AiChatScreenState extends State<AiChatScreen> {
     try {
       final raw = await rootBundle.loadString('assets/content/catalog_fa.json');
       final decoded = jsonDecode(raw);
-      if (decoded is! Map<String, dynamic>) return;
-      if (!mounted) return;
+      if (decoded is! Map<String, dynamic> || !mounted) return;
       setState(() {
         _catalog = decoded;
         _selectedSubjectId = decoded.isEmpty ? null : decoded.keys.first;
       });
     } catch (_) {
-      // The chat remains usable without local study context.
+      // The local helper stays available with a clear empty state.
     }
-  }
-
-  Map<String, dynamic>? _buildStudyContext() {
-    final id = _selectedSubjectId;
-    final subject = id == null ? null : _catalog[id];
-    if (subject is! Map<String, dynamic>) return null;
-    final chapters = (subject['chapters'] as List<dynamic>? ?? [])
-        .whereType<Map<String, dynamic>>()
-        .toList();
-    if (chapters.isEmpty) {
-      return {
-        'subjectTitle': subject['title'] as String? ?? 'درس',
-        'alignmentStatus': 'not_verified_against_1405_1406_pdf',
-        'contentVerificationStatus': 'not_verified_against_1405_1406_pdf',
-        'bookScope': 'محتوای تألیفی فهمینو برای پایه هشتم',
-      };
-    }
-    final index = _selectedChapterIndex >= chapters.length
-        ? chapters.length - 1
-        : _selectedChapterIndex;
-    final chapter = chapters[index];
-    final questions = (chapter['questions'] as List<dynamic>? ?? [])
-        .whereType<Map<String, dynamic>>()
-        .take(4)
-        .map((question) => question['question'])
-        .whereType<String>()
-        .toList();
-    return {
-      'subjectTitle': subject['title'] as String? ?? 'درس',
-      'chapterTitle': chapter['title'] as String? ?? '',
-      'bookChapterTitle': chapter['title'] as String? ?? '',
-      'bookScope': 'محتوای تألیفی فهمینو برای پایه هشتم؛ نه متن رسمی کتاب',
-      'alignmentStatus': 'not_verified_against_1405_1406_pdf',
-      'contentVerificationStatus': 'not_verified_against_1405_1406_pdf',
-      'summary': chapter['summary'] as String? ?? '',
-      'example': chapter['example'] as String? ?? '',
-      'points': (chapter['points'] as List<dynamic>? ?? []).whereType<String>().take(8).toList(),
-      'solutionSteps': (chapter['solutionSteps'] as List<dynamic>? ?? []).whereType<String>().take(8).toList(),
-      'practiceQuestions': questions,
-    };
   }
 
   @override
@@ -91,96 +45,149 @@ class _AiChatScreenState extends State<AiChatScreen> {
     super.dispose();
   }
 
-  Future<void> _send() async {
-    final text = _controller.text.trim();
-    if (text.isEmpty || _sending) return;
-    if (text.length > 3000) {
-      _showMessage('هر پیام باید حداکثر ۳۰۰۰ نویسه باشد.');
-      return;
-    }
+  String _normalise(String value) => value
+      .toLowerCase()
+      .replaceAll('ي', 'ی')
+      .replaceAll('ك', 'ک')
+      .replaceAll(RegExp('[ًٌٍَُِّْٰ]'), '')
+      .replaceAll(RegExp('[^0-9a-zA-Zء-ي]+'), ' ')
+      .trim();
 
-    _controller.clear();
-    setState(() {
-      _sending = true;
-      _visibleMessages.add(_ChatMessage(text: text, isUser: true));
-    });
-    _scrollToBottom();
-
-    final messages = <Map<String, String>>[
-      ..._history,
-      {'role': 'user', 'text': text},
-    ];
-    final client = HttpClient()..connectionTimeout = const Duration(seconds: 10);
-
-    try {
-      final request = await client
-          .postUrl(Uri.parse(_assistantEndpoint))
-          .timeout(const Duration(seconds: 12));
-      request.headers.contentType = ContentType.json;
-      request.headers.set(HttpHeaders.acceptHeader, 'application/json');
-      final studyContext = _buildStudyContext();
-      request.add(utf8.encode(jsonEncode({
-        'messages': messages,
-        if (studyContext != null) 'studyContext': studyContext,
-      })));
-
-      final response = await request.close().timeout(const Duration(seconds: 28));
-      final responseText = await response
-          .transform(utf8.decoder)
-          .join()
-          .timeout(const Duration(seconds: 5));
-      final decoded = jsonDecode(responseText);
-      if (decoded is! Map<String, dynamic>) {
-        throw const FormatException('پاسخ سرور قابل خواندن نیست.');
-      }
-
-      if (response.statusCode < 200 || response.statusCode >= 300) {
-        final message = decoded['error'] is String
-            ? decoded['error'] as String
-            : 'ارتباط با دستیار برقرار نشد. دوباره تلاش کن.';
-        throw HttpException(message);
-      }
-
-      final answer = decoded['answer'];
-      if (answer is! String || answer.trim().isEmpty) {
-        throw const FormatException('پاسخ متنی دریافت نشد.');
-      }
-
-      _history
-        ..add({'role': 'user', 'text': text})
-        ..add({'role': 'model', 'text': answer});
-      while (_history.length > 8) {
-        _history.removeRange(0, 2);
-      }
-
-      if (!mounted) return;
-      setState(() {
-        _visibleMessages.add(_ChatMessage(
-          text: answer,
-          isUser: false,
-          truncated: decoded['truncated'] == true,
-        ));
-      });
-      _scrollToBottom();
-    } on SocketException {
-      _showMessage('اتصال اینترنت برقرار نیست. اتصال را بررسی کن.');
-    } on HttpException catch (error) {
-      _showMessage(error.message);
-    } on FormatException {
-      _showMessage('پاسخ سرور نامعتبر بود. کمی بعد دوباره تلاش کن.');
-    } on Exception {
-      _showMessage('در دریافت پاسخ مشکلی پیش آمد. دوباره تلاش کن.');
-    } finally {
-      client.close(force: true);
-      if (mounted) setState(() => _sending = false);
-    }
+  Set<String> _tokens(String value) {
+    const stopWords = {
+      'و', 'در', 'از', 'به', 'را', 'که', 'این', 'آن', 'برای', 'با',
+      'چیست', 'چگونه', 'کدام', 'است', 'هست', 'شود', 'می', 'یک', 'من',
+      'لطفا', 'لطفاً', 'میشه', 'کن', 'کنید',
+    };
+    return _normalise(value)
+        .split(' ')
+        .where((word) => word.length > 1 && !stopWords.contains(word))
+        .toSet();
   }
 
-  void _showMessage(String message) {
-    if (!mounted) return;
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(message)));
+  int _score(String text, Set<String> tokens) {
+    final normalized = _normalise(text);
+    return tokens.where(normalized.contains).length;
+  }
+
+  String _answerLocally(String question) {
+    final subject = _selectedSubjectId == null
+        ? null
+        : _catalog[_selectedSubjectId];
+    if (subject is! Map<String, dynamic>) {
+      return 'محتوای این درس هنوز روی دستگاه بارگذاری نشده است. بعداً دوباره بخش درس‌ها را بررسی کن.';
+    }
+
+    final chapters = (subject['chapters'] as List<dynamic>? ?? [])
+        .whereType<Map<String, dynamic>>()
+        .toList();
+    if (chapters.isEmpty) return 'برای این درس هنوز محتوای آموزشی ثبت نشده است.';
+
+    final tokens = _tokens(question);
+    final scored = <({Map<String, dynamic> chapter, int index, int score})>[];
+    for (var i = 0; i < chapters.length; i++) {
+      final chapter = chapters[i];
+      final points = (chapter['points'] as List<dynamic>? ?? []).whereType<String>();
+      final questions = (chapter['questions'] as List<dynamic>? ?? [])
+          .whereType<Map<String, dynamic>>()
+          .map((item) => item['question'])
+          .whereType<String>();
+      final searchable = [
+        chapter['title'] as String? ?? '',
+        chapter['summary'] as String? ?? '',
+        chapter['example'] as String? ?? '',
+        ...points,
+        ...questions,
+      ].join(' ');
+      scored.add((chapter: chapter, index: i, score: _score(searchable, tokens)));
+    }
+
+    scored.sort((a, b) => b.score.compareTo(a.score));
+    final fallbackIndex = _selectedChapterIndex >= scored.length
+        ? scored.length - 1
+        : _selectedChapterIndex;
+    final best = scored.first.score > 0
+        ? scored.take(2).toList()
+        : [scored[fallbackIndex]];
+
+    final asksForExample = RegExp('مثال|حل|مرحله|گام|محاسبه|تمرین').hasMatch(question);
+    final asksForQuestions = RegExp('سوال|سؤال|آزمون|تست|تمرین').hasMatch(question);
+    final out = StringBuffer()
+      ..writeln('راهنمای آفلاین فهمینو — ' + (subject['title'] as String? ?? 'درس'))
+      ..writeln('این پاسخ از محتوای ذخیره‌شده در برنامه پیدا شده است؛ مدل هوش مصنوعی مولد نیست.')
+      ..writeln();
+
+    for (final result in best) {
+      final chapter = result.chapter;
+      out.writeln('**' + (chapter['title'] as String? ?? 'بخش آموزشی') + '**');
+      final summary = chapter['summary'] as String? ?? '';
+      if (summary.isNotEmpty) {
+        out.writeln(summary);
+        out.writeln();
+      }
+
+      final points = (chapter['points'] as List<dynamic>? ?? [])
+          .whereType<String>()
+          .toList();
+      final relevantPoints = tokens.isEmpty
+          ? points.take(4).toList()
+          : points.where((point) => _score(point, tokens) > 0).take(4).toList();
+      final chosenPoints = relevantPoints.isNotEmpty
+          ? relevantPoints
+          : points.take(3).toList();
+      if (chosenPoints.isNotEmpty) {
+        out.writeln('نکته‌های مرتبط:');
+        for (final point in chosenPoints) {
+          out.writeln('• ' + point);
+        }
+        out.writeln();
+      }
+
+      if (asksForExample) {
+        final example = chapter['example'] as String? ?? '';
+        final steps = (chapter['solutionSteps'] as List<dynamic>? ?? [])
+            .whereType<String>()
+            .toList();
+        if (example.isNotEmpty) out.writeln('مثال آموزشی: ' + example);
+        if (steps.isNotEmpty) {
+          out.writeln('مراحل ثبت‌شده در فهمینو:');
+          for (var i = 0; i < steps.length; i++) {
+            out.writeln((i + 1).toString() + '. ' + steps[i]);
+          }
+        }
+        out.writeln();
+      }
+
+      if (asksForQuestions) {
+        final questions = (chapter['questions'] as List<dynamic>? ?? [])
+            .whereType<Map<String, dynamic>>()
+            .take(3)
+            .toList();
+        if (questions.isNotEmpty) {
+          out.writeln('چند پرسش تمرینی از همین بخش:');
+          for (var i = 0; i < questions.length; i++) {
+            out.writeln((i + 1).toString() + '. ' + (questions[i]['question'] as String? ?? ''));
+          }
+        }
+        out.writeln();
+      }
+    }
+
+    out.write('یادآوری: محتوای فعلی هنوز با نسخه رسمی کتاب‌های ۱۴۰۵–۱۴۰۶ صفحه‌به‌صفحه تأیید نشده است؛ برای پاسخ قطعی کتابی، متن کتاب را هم بررسی کن.');
+    return out.toString();
+  }
+
+  void _send() {
+    final text = _controller.text.trim();
+    if (text.isEmpty) return;
+    _controller.clear();
+    final answer = _answerLocally(text);
+    setState(() {
+      _visibleMessages
+        ..add(_ChatMessage(text: text, isUser: true))
+        ..add(_ChatMessage(text: answer, isUser: false));
+    });
+    _scrollToBottom();
   }
 
   void _scrollToBottom() {
@@ -200,16 +207,11 @@ class _AiChatScreenState extends State<AiChatScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('دستیار هوشمند فهمینو'),
+        title: const Text('دستیار آفلاین فهمینو'),
         actions: [
           IconButton(
             tooltip: 'گفت‌وگوی تازه',
-            onPressed: _sending
-                ? null
-                : () => setState(() {
-                      _history.clear();
-                      _visibleMessages.clear();
-                    }),
+            onPressed: () => setState(_visibleMessages.clear),
             icon: const Icon(Icons.refresh_rounded),
           ),
         ],
@@ -224,7 +226,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
               child: Column(
                 children: [
                   const Text(
-                    'می‌توانی دربارهٔ درس‌ها سؤال بپرسی یا برای فهم بهتر یک مبحث، مثال و تمرین بخواهی. پاسخ هوش مصنوعی ممکن است اشتباه باشد؛ جواب‌های کتاب‌محور را با کتاب درسی بررسی کن.',
+                    'این بخش بدون اینترنت کار می‌کند و فقط محتوای ذخیره‌شده در فهمینو را جست‌وجو می‌کند. پیام‌ها از دستگاه خارج نمی‌شوند؛ پاسخ‌ها تولید هوش مصنوعی نیستند.',
                     textAlign: TextAlign.center,
                   ),
                   if (_catalog.isNotEmpty) ...[
@@ -248,12 +250,10 @@ class _AiChatScreenState extends State<AiChatScreen> {
                             ),
                           ),
                       ],
-                      onChanged: _sending
-                          ? null
-                          : (value) => setState(() {
-                                _selectedSubjectId = value;
-                                _selectedChapterIndex = 0;
-                              }),
+                      onChanged: (value) => setState(() {
+                        _selectedSubjectId = value;
+                        _selectedChapterIndex = 0;
+                      }),
                     ),
                     const SizedBox(height: 8),
                     Builder(builder: (context) {
@@ -281,22 +281,14 @@ class _AiChatScreenState extends State<AiChatScreen> {
                           for (var i = 0; i < chapters.length; i++)
                             DropdownMenuItem(
                               value: i,
-                              child: Text(chapters[i]['title'] as String? ?? 'بخش \${i + 1}'),
+                              child: Text(chapters[i]['title'] as String? ?? 'بخش ' + (i + 1).toString()),
                             ),
                         ],
-                        onChanged: _sending
-                            ? null
-                            : (value) => setState(() {
-                                  _selectedChapterIndex = value ?? 0;
-                                }),
+                        onChanged: (value) => setState(() {
+                          _selectedChapterIndex = value ?? 0;
+                        }),
                       );
                     }),
-                    const SizedBox(height: 4),
-                    Text(
-                      'محتوای انتخاب‌شده هنوز با PDF رسمی ۱۴۰۵–۱۴۰۶ تأیید نهایی نشده است. اطلاعات شخصی، رمز یا شماره تلفن نفرست؛ در سطح رایگان ممکن است داده‌ها برای بهبود سرویس استفاده شوند.',
-                      style: theme.textTheme.bodySmall,
-                      textAlign: TextAlign.center,
-                    ),
                   ],
                 ],
               ),
@@ -307,13 +299,9 @@ class _AiChatScreenState extends State<AiChatScreen> {
                   : ListView.builder(
                       controller: _scrollController,
                       padding: const EdgeInsets.all(16),
-                      itemCount: _visibleMessages.length + (_sending ? 1 : 0),
-                      itemBuilder: (context, index) {
-                        if (_sending && index == _visibleMessages.length) {
-                          return const _TypingIndicator();
-                        }
-                        return _MessageBubble(message: _visibleMessages[index]);
-                      },
+                      itemCount: _visibleMessages.length,
+                      itemBuilder: (context, index) =>
+                          _MessageBubble(message: _visibleMessages[index]),
                     ),
             ),
             Padding(
@@ -326,12 +314,12 @@ class _AiChatScreenState extends State<AiChatScreen> {
                       controller: _controller,
                       minLines: 1,
                       maxLines: 5,
-                      maxLength: 3000,
+                      maxLength: 500,
                       textDirection: TextDirection.rtl,
                       textInputAction: TextInputAction.send,
                       onSubmitted: (_) => _send(),
                       decoration: InputDecoration(
-                        hintText: 'سؤالت را بنویس...',
+                        hintText: 'درباره درس انتخاب‌شده بپرس...',
                         counterText: '',
                         filled: true,
                         border: OutlineInputBorder(
@@ -347,15 +335,9 @@ class _AiChatScreenState extends State<AiChatScreen> {
                   ),
                   const SizedBox(width: 8),
                   IconButton.filled(
-                    tooltip: 'ارسال پیام',
-                    onPressed: _sending ? null : _send,
-                    icon: _sending
-                        ? const SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                        : const Icon(Icons.send_rounded),
+                    tooltip: 'جست‌وجوی محلی',
+                    onPressed: _send,
+                    icon: const Icon(Icons.search_rounded),
                   ),
                 ],
               ),
@@ -368,15 +350,9 @@ class _AiChatScreenState extends State<AiChatScreen> {
 }
 
 class _ChatMessage {
-  const _ChatMessage({
-    required this.text,
-    required this.isUser,
-    this.truncated = false,
-  });
-
+  const _ChatMessage({required this.text, required this.isUser});
   final String text;
   final bool isUser;
-  final bool truncated;
 }
 
 class _MessageBubble extends StatelessWidget {
@@ -393,7 +369,7 @@ class _MessageBubble extends StatelessWidget {
       alignment: message.isUser ? Alignment.centerLeft : Alignment.centerRight,
       child: Container(
         constraints: BoxConstraints(
-          maxWidth: MediaQuery.sizeOf(context).width * .86,
+          maxWidth: MediaQuery.sizeOf(context).width * .9,
         ),
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(14),
@@ -401,23 +377,10 @@ class _MessageBubble extends StatelessWidget {
           color: color,
           borderRadius: BorderRadius.circular(18),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SelectableText(
-              message.text,
-              textDirection: TextDirection.rtl,
-              style: theme.textTheme.bodyMedium,
-            ),
-            if (message.truncated)
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text(
-                  'برای ادامهٔ پاسخ، «ادامه بده» را بفرست.',
-                  style: theme.textTheme.bodySmall,
-                ),
-              ),
-          ],
+        child: SelectableText(
+          message.text,
+          textDirection: TextDirection.rtl,
+          style: theme.textTheme.bodyMedium,
         ),
       ),
     );
@@ -436,13 +399,13 @@ class _EmptyChat extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.auto_awesome_rounded,
+            Icon(Icons.offline_bolt_rounded,
                 size: 54, color: theme.colorScheme.primary),
             const SizedBox(height: 14),
             Text('از کجا شروع کنیم؟', style: theme.textTheme.titleLarge),
             const SizedBox(height: 8),
             const Text(
-              'مثلاً بپرس: «عددهای گویا را با یک مثال توضیح بده.»',
+              'مثلاً بپرس: «عددهای گویا چیست؟» یا «مراحل حل مثال این فصل را نشان بده.»',
               textAlign: TextAlign.center,
             ),
           ],
@@ -450,28 +413,4 @@ class _EmptyChat extends StatelessWidget {
       ),
     );
   }
-}
-
-class _TypingIndicator extends StatelessWidget {
-  const _TypingIndicator();
-
-  @override
-  Widget build(BuildContext context) => const Align(
-        alignment: Alignment.centerRight,
-        child: Padding(
-          padding: EdgeInsets.all(12),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                width: 16,
-                height: 16,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              ),
-              SizedBox(width: 10),
-              Text('فهمینو در حال پاسخ‌گویی است...'),
-            ],
-          ),
-        ),
-      );
 }
