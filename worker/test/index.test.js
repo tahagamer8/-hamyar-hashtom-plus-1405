@@ -137,6 +137,9 @@ test("forwards selected study context as untrusted educational reference", async
         summary: "عددهای گویا به صورت کسر نوشته می‌شوند.",
         sourceLabel: "محتوای اولیهٔ فهمینو",
         points: ["مخرج کسر نباید صفر باشد."],
+        practiceQuestions: [
+          "تمرین: حاصل ۱/۲ + ۱/۴؟ | پاسخ: ۳/۴ | توضیح: مخرج مشترک می‌گیریم.",
+        ],
       },
     },
   }), { GEMINI_API_KEY: "test-key", CHAT_LIMITER: allowLimiter });
@@ -149,6 +152,8 @@ test("forwards selected study context as untrusted educational reference", async
   assert.match(instruction, /not_verified_against_1405_1406_pdf/);
   assert.match(instruction, /تأییدشده یا عین پاسخ کتاب معرفی نکن/);
   assert.match(instruction, /فصل اول ریاضی/);
+  assert.match(instruction, /practiceQuestions نمونه‌تمرین‌های تألیفی فهمینو هستند/);
+  assert.match(instruction, /حاصل ۱\/۲ \+ ۱\/۴/);
 });
 
 test("rejects oversized or malformed study context", async () => {
@@ -157,6 +162,8 @@ test("rejects oversized or malformed study context", async () => {
     { summary: "x".repeat(1201) },
     { points: ["x".repeat(401)] },
     { points: Array.from({ length: 9 }, () => "نکته") },
+    { practiceQuestions: Array.from({ length: 5 }, () => "تمرین") },
+    { practiceQuestions: ["x".repeat(501)] },
   ]) {
     const response = await worker.fetch(makeRequest({
       body: { ...validBody, studyContext },
