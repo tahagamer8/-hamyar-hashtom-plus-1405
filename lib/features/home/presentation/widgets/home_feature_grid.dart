@@ -43,11 +43,9 @@ class _FeatureTile extends StatelessWidget {
       ),
       child: InkWell(
         borderRadius: radius,
-        onTap: () => context.go(
-          feature == AppFeature.favorites
-              ? AppRoutes.favorites
-              : AppRoutes.subjects,
-        ),
+        onTap: () => feature == AppFeature.favorites
+            ? context.go(AppRoutes.favorites)
+            : context.push(AppRoutes.featureSubjects(feature.name),),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
           child: Column(
