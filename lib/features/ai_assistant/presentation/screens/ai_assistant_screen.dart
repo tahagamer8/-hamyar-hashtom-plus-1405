@@ -3,7 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hamyar_hashtom_plus/features/ai_assistant/data/gemini_api_service.dart';
 
 class AiAssistantScreen extends StatefulWidget {
-  const AiAssistantScreen({super.key});
+  const AiAssistantScreen({super.key, this.studyContext});
+
+  final Map<String, dynamic>? studyContext;
 
   @override
   State<AiAssistantScreen> createState() => _AiAssistantScreenState();
@@ -97,6 +99,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
       final answer = await _service.sendMessages(
         workerUrl: _urlInput.text,
         messages: history,
+        studyContext: widget.studyContext,
       );
       if (!mounted) return;
       setState(() => _messages.add(_ChatMessage(text: answer, isUser: false)));
@@ -168,6 +171,8 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
           : Column(
               children: [
                 _connectionPanel(theme),
+                if (widget.studyContext != null)
+                  _studyContextPanel(theme),
                 Expanded(
                   child: _messages.isEmpty
                       ? _emptyState(theme)
@@ -276,6 +281,34 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _studyContextPanel(ThemeData theme) {
+    final subject = widget.studyContext?['subjectTitle']?.toString() ?? 'درس';
+    final chapter = widget.studyContext?['chapterTitle']?.toString() ?? 'فصل';
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.primaryContainer.withAlpha(100),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.menu_book_rounded, color: theme.colorScheme.primary),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                'زمینهٔ گفتگو: $subject — $chapter',
+                style: theme.textTheme.bodySmall,
+              ),
+            ),
+          ],
         ),
       ),
     );
