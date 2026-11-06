@@ -236,7 +236,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                   if (_catalog.isNotEmpty) ...[
                     const SizedBox(height: 10),
                     DropdownButtonFormField<String>(
-                      value: _selectedSubjectId,
+                      initialValue: _selectedSubjectId,
                       isExpanded: true,
                       decoration: const InputDecoration(
                         labelText: 'درس',
@@ -274,7 +274,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                           ? chapters.length - 1
                           : _selectedChapterIndex;
                       return DropdownButtonFormField<int>(
-                        value: selectedIndex,
+                        initialValue: selectedIndex,
                         isExpanded: true,
                         decoration: const InputDecoration(
                           labelText: 'فصل یا درس',
