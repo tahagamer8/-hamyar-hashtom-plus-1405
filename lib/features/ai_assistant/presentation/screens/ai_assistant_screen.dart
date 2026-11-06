@@ -241,7 +241,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
               ),
               const SizedBox(height: 5),
               Text(
-                'پیام‌ها برای پاسخ‌گویی به سرویس Gemini فرستاده می‌شوند؛ اطلاعات شخصی وارد نکن. کلید API را هم اینجا ننویس.',
+                'پیام‌ها برای پاسخ‌گویی به Gemini فرستاده می‌شوند؛ اطلاعات شخصی وارد نکن و کلید API را اینجا ننویس. مصرف سرویس تابع سهمیه و تنظیمات حساب است؛ فعال‌سازی را با والد یا سرپرست انجام بده.',
                 style: theme.textTheme.bodySmall,
               ),
             ],
@@ -286,7 +286,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
         title: const Text('تنظیم اتصال'),
         content: const Text(
           'آدرس HTTPS مربوط به Cloudflare Worker را در کادر بالای صفحه وارد و ذخیره کن. '
-          'کلید Gemini فقط باید در Secretهای سرور نگهداری شود؛ آن را اینجا یا در GitHub ننویس.',
+          'کلید Gemini فقط باید در Secretهای سرور نگهداری شود؛ آن را اینجا یا در GitHub ننویس. پیش از فعال‌سازی، سهمیه و احتمال هزینه را با والد یا سرپرست بررسی کن.',
         ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: const Text('متوجه شدم')),
