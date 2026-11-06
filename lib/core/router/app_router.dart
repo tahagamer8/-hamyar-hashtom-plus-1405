@@ -83,7 +83,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: AppRoutes.aiAssistant,
-        builder: (context, state) => const AiAssistantScreen(),
+        builder: (context, state) {
+          final extra = state.extra;
+          return AiAssistantScreen(
+            studyContext: extra is Map<String, dynamic> ? extra : null,
+          );
+        },
       ),
     ],
     errorBuilder: (context, state) => const _NotFoundScreen(),
