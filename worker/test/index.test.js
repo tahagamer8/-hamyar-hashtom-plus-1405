@@ -116,13 +116,51 @@ test("forwards valid chat and returns Gemini text", async () => {
   const payload = JSON.parse(capturedInit.body);
   assert.equal(payload.contents[0].role, "user");
   assert.equal(payload.generationConfig.thinkingConfig.thinkingLevel, "MEDIUM");
-  assert.equal(payload.generationConfig.maxOutputTokens, 2400);
+  assert.equal(payload.generationConfig.maxOutputTokens, 4096);
   const tutorInstruction = payload.systemInstruction.parts[0].text;
   assert.match(tutorInstruction, /درسنامهٔ کامل/);
   assert.match(tutorInstruction, /پنج تمرین تألیفی/);
   assert.match(tutorInstruction, /بازنشر یا بازنویسی نزدیک/);
   assert.match(tutorInstruction, /آموزش تکمیلی تألیفی فهمینو/);
   assert.equal("temperature" in payload.generationConfig, false);
+});
+
+
+test("retries one transient Gemini 503 response and then returns the answer", async () => {
+  let attempts = 0;
+  globalThis.fetch = async () => {
+    attempts++;
+    if (attempts === 1) {
+      return new Response(JSON.stringify({ error: { message: "temporarily unavailable" } }), { status: 503 });
+    }
+    return new Response(JSON.stringify({
+      candidates: [{ finishReason: "STOP", content: { parts: [{ text: "پاسخ آزمایشی" }] } }],
+    }), { status: 200, headers: { "content-type": "application/json" } });
+  };
+  const response = await worker.fetch(makeRequest({ body: validBody }), {
+    GEMINI_API_KEY: "test-key",
+    CHAT_LIMITER: allowLimiter,
+  });
+  assert.equal(response.status, 200);
+  assert.equal(attempts, 2);
+  assert.equal((await response.json()).answer, "پاسخ آزمایشی");
+});
+
+test("marks answers that reach the configured token limit", async () => {
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    candidates: [{
+      finishReason: "MAX_TOKENS",
+      content: { parts: [{ text: "بخش نخست پاسخ" }] },
+    }],
+  }), { status: 200, headers: { "content-type": "application/json" } });
+  const response = await worker.fetch(makeRequest({ body: validBody }), {
+    GEMINI_API_KEY: "test-key",
+    CHAT_LIMITER: allowLimiter,
+  });
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.truncated, true);
+  assert.match(body.answer, /برای ادامه/);
 });
 
 test("forwards selected study context as untrusted educational reference", async () => {
