@@ -57,7 +57,9 @@ void main() {
     expect(find.text('برای پاسخ دقیق‌تر، زمینهٔ کتاب را مشخص کن'), findsOneWidget);
     expect(find.text('یادگیری، با گفت‌وگو ساده‌تر می‌شود'), findsOneWidget);
     expect(find.text('از کجا شروع کنیم؟'), findsOneWidget);
-    expect(find.text('آزمون چالشی'), findsOneWidget);
+    expect(find.text('آزمون سطح بالا'), findsOneWidget);
+    expect(find.text('درسنامهٔ کامل فصل'), findsOneWidget);
+    expect(find.text('تمرین تشریحی'), findsOneWidget);
     expect(find.text('حل مسئلهٔ ریاضی'), findsOneWidget);
   });
 }
