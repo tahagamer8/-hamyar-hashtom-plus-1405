@@ -86,3 +86,30 @@ test("stops before calling Gemini when the rate limiter denies a request", async
   assert.equal(response.status, 429);
   assert.equal(called, false);
 });
+
+test("rejects more than 12 messages and messages longer than 3000 characters", async () => {
+  const tooMany = { messages: Array.from({ length: 13 }, () => ({ role: "user", text: "سلام" })) };
+  const tooLong = { messages: [{ role: "user", text: "ا".repeat(3001) }] };
+  for (const body of [tooMany, tooLong]) {
+    const response = await worker.fetch(makeRequest({ body }), { GEMINI_API_KEY: "test-key" });
+    assert.equal(response.status, 400);
+  }
+});
+
+test("maps non-quota Gemini failures to a generic 502 without leaking provider details", async () => {
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    error: { message: "sensitive upstream diagnostic" },
+  }), { status: 500 });
+  const response = await worker.fetch(makeRequest({ body: validBody }), { GEMINI_API_KEY: "test-key" });
+  assert.equal(response.status, 502);
+  const body = await response.json();
+  assert.match(body.error, /سرویس هوش مصنوعی/);
+  assert.doesNotMatch(body.error, /sensitive upstream diagnostic/);
+});
+
+test("returns a controlled error when Gemini has no text candidate", async () => {
+  globalThis.fetch = async () => new Response(JSON.stringify({ candidates: [] }), { status: 200 });
+  const response = await worker.fetch(makeRequest({ body: validBody }), { GEMINI_API_KEY: "test-key" });
+  assert.equal(response.status, 502);
+  assert.match((await response.json()).error, /پاسخ متنی/);
+});
