@@ -1167,7 +1167,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "مخلوطی از شن، نمک و آب داریم. برای جداکردن هر دو جزء جامد، کدام ترتیب مناسب‌تر است؟",
+            "options": [
+              "ابتدا صاف‌کردن، سپس تبخیر آب",
+              "ابتدا تبخیر، سپس افزودن آب و صاف‌کردن",
+              "فقط استفاده از آهن‌ربا",
+              "فقط صاف‌کردن دوباره"
+            ],
+            "answer": 0,
+            "explanation": "با صاف‌کردن شن جدا می‌شود؛ نمک در آب محلول است و با تبخیر آب بازیابی می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "چرا محلول آب‌نمک را نمی‌توان با کاغذ صافی به آب و نمک جدا کرد؟",
+            "options": [
+              "چون نمک در آب به‌طور یکنواخت حل شده است",
+              "چون آب از صافی عبور نمی‌کند",
+              "چون نمک خاصیت مغناطیسی دارد",
+              "چون کاغذ صافی فقط گازها را عبور می‌دهد"
+            ],
+            "answer": 0,
+            "explanation": "ذرات حل‌شده از منافذ صافی عبور می‌کنند؛ صاف‌کردن برای جامد نامحلول مناسب است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "تغییرات شیمیایی در خدمت زندگی",
@@ -1237,7 +1267,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در یک ظرف دربسته، دو ماده واکنش می‌دهند و گاز تولید می‌شود. اگر جرم ظرف و محتویات پیش و پس از واکنش اندازه‌گیری شود، چه نتیجه‌ای انتظار می‌رود؟",
+            "options": [
+              "جرم کل افزایش می‌یابد",
+              "جرم کل کاهش می‌یابد",
+              "جرم کل ثابت می‌ماند",
+              "جرم فقط به رنگ مواد بستگی دارد"
+            ],
+            "answer": 2,
+            "explanation": "در سامانهٔ بسته، اتم‌ها بازآرایی می‌شوند و جرم کل حفظ می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام مشاهده به‌تنهایی برای اثبات قطعی تغییر شیمیایی کافی نیست؟",
+            "options": [
+              "تشکیل ماده‌ای با ویژگی تازه",
+              "تولید گاز همراه با شواهد دیگر",
+              "تغییر شکل فیزیکی بدون تشکیل مادهٔ تازه",
+              "تشکیل رسوب تازه"
+            ],
+            "answer": 2,
+            "explanation": "تغییر شکل می‌تواند فیزیکی باشد؛ برای تشخیص باید تشکیل مادهٔ جدید بررسی شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "از درون اتم چه خبر",
@@ -1307,7 +1367,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اتمی ۱۷ پروتون و ۱۸ الکترون دارد. بار خالص آن چیست؟",
+            "options": [
+              "۱+",
+              "۱−",
+              "۲−",
+              "خنثی"
+            ],
+            "answer": 1,
+            "explanation": "یک الکترون بیش از پروتون دارد؛ بنابراین بار خالص آن منفی یک است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "دو اتم تعداد پروتون یکسان ولی تعداد نوترون متفاوت دارند. این دو اتم چه رابطه‌ای دارند؟",
+            "options": [
+              "عدد اتمی متفاوت دارند",
+              "ایزوتوپ یک عنصرند",
+              "حتماً یون‌های هم‌بارند",
+              "به دو عنصر متفاوت تعلق دارند"
+            ],
+            "answer": 1,
+            "explanation": "ایزوتوپ‌ها پروتون یکسان و نوترون متفاوت دارند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "تنظیم عصبی",
@@ -1377,7 +1467,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "دست دانش‌آموز به جسم داغ برخورد می‌کند و پیش از تصمیم‌گیری آگاهانه، دست را عقب می‌کشد. کدام بخش در هماهنگی سریع این پاسخ نقش مهمی دارد؟",
+            "options": [
+              "نخاع",
+              "مخچه به‌تنهایی",
+              "غدهٔ تیروئید",
+              "شبکیه"
+            ],
+            "answer": 0,
+            "explanation": "بسیاری از پاسخ‌های انعکاسی از مسیر نخاعی عبور می‌کنند تا واکنش سریع انجام شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "در مسیر یک پیام انعکاسی، ترتیب کلی کدام است؟",
+            "options": [
+              "گیرنده، نورون حسی، مرکز عصبی، نورون حرکتی، ماهیچه",
+              "ماهیچه، گیرنده، نورون حرکتی، مغز",
+              "غده، خون، گیرنده، ماهیچه",
+              "نورون حرکتی، گیرنده، نورون حسی، استخوان"
+            ],
+            "answer": 0,
+            "explanation": "گیرنده محرک را دریافت می‌کند و پیام از راه نورون حسی به مرکز عصبی و سپس از راه نورون حرکتی به اندام پاسخ‌دهنده می‌رسد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "حس و حرکت",
@@ -1447,7 +1567,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کدام ساختار ماهیچه را به استخوان متصل می‌کند؟",
+            "options": [
+              "رباط",
+              "زردپی",
+              "غضروف مفصلی",
+              "مغز استخوان"
+            ],
+            "answer": 1,
+            "explanation": "زردپی یا تاندون، ماهیچه را به استخوان وصل می‌کند؛ رباط استخوان‌ها را به هم پیوند می‌دهد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "هنگام خم‌کردن آرنج، برای حرکت هماهنگ معمولاً چه اتفاقی در ماهیچه‌های دوسر و سه‌سر بازو رخ می‌دهد؟",
+            "options": [
+              "هر دو هم‌زمان کاملاً شل می‌شوند",
+              "دوسر منقبض و سه‌سر شل می‌شود",
+              "سه‌سر منقبض و دوسر شل می‌شود",
+              "هر دو استخوان را کوتاه می‌کنند"
+            ],
+            "answer": 1,
+            "explanation": "در خم‌کردن آرنج، ماهیچهٔ دوسر منقبض و ماهیچهٔ سه‌سر در حالت شل‌تر قرار می‌گیرد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "تنظیم هورمونی",
@@ -1517,7 +1667,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "پس از افزایش قند خون، کدام پاسخ به بازگرداندن آن به محدودهٔ مناسب کمک می‌کند؟",
+            "options": [
+              "ترشح انسولین و کمک به ورود گلوکز به سلول‌ها",
+              "کاهش کامل جریان خون",
+              "توقف فعالیت همهٔ غده‌ها",
+              "افزایش ترشح بزاق"
+            ],
+            "answer": 0,
+            "explanation": "انسولین در تنظیم قند خون نقش دارد و به کاهش قند خون کمک می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام تفاوت، تنظیم هورمونی را از انتقال پیام عصبی متمایز می‌کند؟",
+            "options": [
+              "هورمون‌ها معمولاً از راه خون منتقل می‌شوند",
+              "هورمون‌ها فقط از راه استخوان حرکت می‌کنند",
+              "پیام عصبی همیشه از راه خون می‌رود",
+              "هورمون‌ها هیچ اندام هدفی ندارند"
+            ],
+            "answer": 0,
+            "explanation": "غده‌های درون‌ریز هورمون را به خون می‌ریزند و آن را به اندام هدف می‌رسانند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "الفبای زیست‌فناوری",
@@ -1587,7 +1767,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "خمیر نان پس از افزودن مخمر و قرارگرفتن در شرایط مناسب حجیم می‌شود. علت مستقیم افزایش حجم چیست؟",
+            "options": [
+              "تولید گاز کربن‌دی‌اکسید در فرایند تخمیر",
+              "تولید اکسیژن توسط آرد",
+              "تبدیل همهٔ نشاسته به آب",
+              "جذب نور توسط خمیر"
+            ],
+            "answer": 0,
+            "explanation": "مخمر در تخمیر گاز کربن‌دی‌اکسید تولید می‌کند و حباب‌های گاز خمیر را متخلخل و حجیم می‌کنند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام نمونه کاربرد زیست‌فناوری است؟",
+            "options": [
+              "استفاده از مخمر برای تولید نان",
+              "جداکردن شن با صافی",
+              "شکستن سنگ با چکش",
+              "بازتاب نور از آینه"
+            ],
+            "answer": 0,
+            "explanation": "زیست‌فناوری از جانداران یا اجزای آن‌ها برای تولید محصول یا خدمت استفاده می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "تولیدمثل در جانداران",
@@ -1657,7 +1867,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اگر در یک جمعیت، تولیدمثل غیرجنسی بدون جهش رخ دهد، فرزندان از نظر ژنتیکی معمولاً چگونه‌اند؟",
+            "options": [
+              "بسیار متفاوت از والد",
+              "بسیار شبیه والد",
+              "فاقد مادهٔ وراثتی",
+              "دارای دو برابر کروموزوم در همهٔ موارد"
+            ],
+            "answer": 1,
+            "explanation": "در تولیدمثل غیرجنسی، فرزندان معمولاً از نظر ژنتیکی به والد شبیه‌اند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام رویداد ویژگی شاخص تولیدمثل جنسی است؟",
+            "options": [
+              "تقسیم یک سلول بدون ترکیب گامت",
+              "ترکیب گامت نر و ماده در لقاح",
+              "جوانه‌زدن مخمر بدون گامت",
+              "تولیدمثل از راه قطعه‌قطعه‌شدن"
+            ],
+            "answer": 1,
+            "explanation": "در تولیدمثل جنسی، گامت‌ها با هم ترکیب می‌شوند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "الکتریسیته",
@@ -1727,7 +1967,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "دو لامپ در مدار موازی قرار دارند. اگر یکی از لامپ‌ها بسوزد، در صورت سالم‌بودن شاخهٔ دیگر چه رخ می‌دهد؟",
+            "options": [
+              "هر دو لامپ خاموش می‌شوند",
+              "لامپ دیگر می‌تواند روشن بماند",
+              "باتری فوراً بی‌اثر می‌شود",
+              "جریان در همهٔ شاخه‌ها صفر می‌شود"
+            ],
+            "answer": 1,
+            "explanation": "در مدار موازی شاخه‌ها مسیرهای جدا دارند؛ قطع یک شاخه الزاماً شاخهٔ دیگر را قطع نمی‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "چرا در مدار ساده، بازبودن کلید مانع روشن‌شدن لامپ می‌شود؟",
+            "options": [
+              "مسیر پیوستهٔ عبور جریان قطع می‌شود",
+              "ولتاژ باتری به نور تبدیل می‌شود",
+              "لامپ دیگر رسانا نیست",
+              "سیم‌ها به آهن‌ربا تبدیل می‌شوند"
+            ],
+            "answer": 0,
+            "explanation": "برای عبور جریان، مدار باید مسیر بسته و پیوسته داشته باشد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "مغناطیس",
@@ -1797,7 +2067,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "یک آهن‌ربای میله‌ای را به دو قسمت می‌شکنیم. انتظار درست چیست؟",
+            "options": [
+              "یک قطعه فقط شمال و دیگری فقط جنوب دارد",
+              "هر قطعه یک آهن‌ربای کوچک با دو قطب می‌شود",
+              "قطب‌ها کاملاً از بین می‌روند",
+              "فقط قطعهٔ بزرگ‌تر میدان دارد"
+            ],
+            "answer": 1,
+            "explanation": "با شکستن آهن‌ربا، هر قطعه همچنان قطب شمال و جنوب خواهد داشت.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "اگر قطب شمال آهن‌ربا را به قطب شمال قطب‌نمای آزاد نزدیک کنیم، عقربه چه واکنشی نشان می‌دهد؟",
+            "options": [
+              "قطب شمال عقربه از آن دور می‌شود",
+              "قطب شمال عقربه به آن می‌چسبد",
+              "عقربه بی‌حرکت می‌شود",
+              "قطب‌نما به رسانای الکتریکی تبدیل می‌شود"
+            ],
+            "answer": 0,
+            "explanation": "قطب‌های هم‌نام یکدیگر را دفع می‌کنند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "کانی‌ها",
@@ -1867,7 +2167,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "برای شناسایی دو کانی با رنگ ظاهری مشابه، کدام آزمون می‌تواند اطلاعات قابل‌اعتماد‌تری بدهد؟",
+            "options": [
+              "بررسی رنگ خاکه و سختی",
+              "فقط نگاه‌کردن به اندازهٔ بلور",
+              "سنجش دمای اتاق",
+              "بررسی صدای محیط"
+            ],
+            "answer": 0,
+            "explanation": "رنگ خاکه و سختی از ویژگی‌های تشخیصی مهم کانی‌ها هستند و رنگ ظاهری به‌تنهایی کافی نیست.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام ویژگی برای آنکه یک ماده کانی محسوب شود اهمیت بنیادی دارد؟",
+            "options": [
+              "ساختار بلوری و ترکیب مشخص طبیعی",
+              "رنگ بسیار درخشان",
+              "ساخته‌شدن در کارخانه",
+              "حل‌شدن سریع در آب"
+            ],
+            "answer": 0,
+            "explanation": "کانی ماده‌ای طبیعی با ترکیب شیمیایی و ساختار بلوری مشخص است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "سنگ‌ها",
@@ -1937,7 +2267,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "سنگی دارای لایه‌های رسوبی و فسیل است. محتمل‌ترین گروه آن کدام است؟",
+            "options": [
+              "آذرین",
+              "رسوبی",
+              "دگرگونی",
+              "فلزی خالص"
+            ],
+            "answer": 1,
+            "explanation": "فسیل‌ها بیشتر در سنگ‌های رسوبی حفظ می‌شوند و لایه‌بندی نیز از ویژگی‌های رایج آن‌هاست.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "سنگی از سردشدن و تبلور مواد مذاب در عمق زمین تشکیل شده است. کدام گروه است؟",
+            "options": [
+              "رسوبی",
+              "دگرگونی",
+              "آذرین درونی",
+              "آذرین بیرونی"
+            ],
+            "answer": 2,
+            "explanation": "سردشدن مواد مذاب درون زمین سنگ آذرین درونی ایجاد می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "هوازدگی",
@@ -2007,7 +2367,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "یخ‌زدن آب در شکاف سنگ و گسترش آن، بدون تغییر اساسی ترکیب شیمیایی سنگ، نمونهٔ چیست؟",
+            "options": [
+              "هوازدگی فیزیکی",
+              "هوازدگی شیمیایی",
+              "رسوب‌گذاری",
+              "فرسایش بادی"
+            ],
+            "answer": 0,
+            "explanation": "انبساط یخ باعث خردشدن مکانیکی سنگ می‌شود؛ این هوازدگی فیزیکی است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "سنگی در محل خود خرد می‌شود و سپس قطعات آن به‌وسیلهٔ رودخانه جابه‌جا می‌شوند. کدام گزینه تفاوت دو فرایند را درست بیان می‌کند؟",
+            "options": [
+              "خردشدن هوازدگی و جابه‌جایی فرسایش است",
+              "هر دو فقط رسوب‌گذاری‌اند",
+              "خردشدن فرسایش و جابه‌جایی هوازدگی است",
+              "هر دو تغییر شیمیایی‌اند"
+            ],
+            "answer": 0,
+            "explanation": "هوازدگی سنگ را در محل خرد یا دگرگون می‌کند؛ فرسایش مواد را جابه‌جا می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "نور و ویژگی‌های آن",
@@ -2077,7 +2467,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اگر جسمی کدر در مسیر پرتوهای موازی نور قرار گیرد، چرا پشت آن ناحیهٔ سایه تشکیل می‌شود؟",
+            "options": [
+              "نور در محیط یکنواخت مستقیم منتشر می‌شود و جسم کدر مانع عبور آن است",
+              "نور همیشه از جسم کدر عبور می‌کند",
+              "نور فقط در آب حرکت می‌کند",
+              "جسم کدر نور را تولید می‌کند"
+            ],
+            "answer": 0,
+            "explanation": "انتشار مستقیم نور و ناتوانی جسم کدر در عبور دادن نور باعث تشکیل سایه می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "سطحی نور را به‌صورت منظم بازمی‌تاباند. کدام ویژگی سطح در این پدیده مؤثرتر است؟",
+            "options": [
+              "صاف و هموار بودن سطح",
+              "تیره بودن همیشگی سطح",
+              "شفاف بودن کامل سطح",
+              "داشتن سوراخ‌های فراوان"
+            ],
+            "answer": 0,
+            "explanation": "سطح صاف بازتاب منظم‌تری ایجاد می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "شکست نور",
@@ -2147,7 +2567,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "پرتوی نور از هوا وارد شیشه می‌شود. در حالت معمول، سرعت نور و جهت پرتو نسبت به خط عمود چگونه تغییر می‌کند؟",
+            "options": [
+              "سرعت کم و پرتو به خط عمود نزدیک می‌شود",
+              "سرعت زیاد و پرتو از خط عمود دور می‌شود",
+              "سرعت ثابت و مسیر همیشه مستقیم می‌ماند",
+              "سرعت کم و پرتو موازی سطح می‌شود"
+            ],
+            "answer": 0,
+            "explanation": "نور در شیشه کندتر از هوا حرکت می‌کند و هنگام ورود مایل به محیط غلیظ‌تر نوری به خط عمود نزدیک می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "عدسی همگرا پرتوهای موازی محور اصلی را پس از عبور چگونه می‌کند؟",
+            "options": [
+              "آن‌ها را به سوی کانون همگرا می‌کند",
+              "آن‌ها را کاملاً جذب می‌کند",
+              "همه را موازی‌تر می‌کند",
+              "جهت آن‌ها را بدون شکست حفظ می‌کند"
+            ],
+            "answer": 0,
+            "explanation": "عدسی همگرا پرتوهای موازی محور اصلی را در کانون جمع می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ],
     "alignmentReview": {
@@ -2218,7 +2668,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در عبارت «ابر، چتر خاکستری آسمان شد»، کدام ویژگی ادبی برجسته‌تر است؟",
+            "options": [
+              "تشبیه صریح با ادات",
+              "استعاره از ابر به چتر",
+              "تضاد واژگانی",
+              "واج‌آرایی"
+            ],
+            "answer": 1,
+            "explanation": "ابر به چتر مانند شده، اما ادات تشبیه نیامده و تصویر استعاری ساخته شده است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "برای تعیین پیام یک شعر، کدام روش دقیق‌تر است؟",
+            "options": [
+              "برداشت از یک واژه به‌تنهایی",
+              "توجه هم‌زمان به واژه‌ها، تصویرها و ارتباط بیت‌ها",
+              "نادیده‌گرفتن بافت شعر",
+              "انتخاب نخستین معنی فرهنگ لغت"
+            ],
+            "answer": 1,
+            "explanation": "پیام کلی از ارتباط اجزای شعر و بافت آن به دست می‌آید.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فصل دوم: خوب جهان را ببین",
@@ -2275,7 +2755,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "نویسنده برای توصیف باران از صدای قطره‌ها، بوی خاک و درخشش خیابان استفاده می‌کند. این روش چه اثری دارد؟",
+            "options": [
+              "متن را به گزارش آماری تبدیل می‌کند",
+              "تصویر حسی و ملموس‌تری می‌سازد",
+              "پیام متن را حذف می‌کند",
+              "زاویه دید را ناممکن می‌کند"
+            ],
+            "answer": 1,
+            "explanation": "به‌کارگیری چند حس، تجربهٔ توصیف‌شده را برای خواننده ملموس‌تر می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام جمله به‌جای کلی‌گویی، مشاهدهٔ دقیق‌تری ارائه می‌کند؟",
+            "options": [
+              "باغ خیلی زیبا بود.",
+              "همه‌چیز عالی بود.",
+              "قطره‌ها روی برگ‌های پهن می‌درخشیدند و بوی خاک نم‌خورده در هوا بود.",
+              "طبیعت خوب است."
+            ],
+            "answer": 2,
+            "explanation": "جملهٔ سوم جزئیات دیداری و بویایی مشخص دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فصل سوم: ارمغان ایران",
@@ -2332,7 +2842,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "نویسنده می‌گوید «این بنا در دورهٔ صفوی ساخته شده» و سپس می‌نویسد «به‌نظر من زیباترین بنای شهر است». کدام تفکیک درست است؟",
+            "options": [
+              "هر دو واقعیت قطعی‌اند",
+              "جملهٔ اول اطلاعات تاریخی و جملهٔ دوم دیدگاه شخصی است",
+              "جملهٔ اول نظر و جملهٔ دوم سند تاریخی است",
+              "هیچ‌کدام قابل تشخیص نیست"
+            ],
+            "answer": 1,
+            "explanation": "اطلاعات تاریخی را باید از ارزیابی شخصی نویسنده جدا کرد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "برای سنجش اعتبار یک ادعای تاریخی در متن، کدام کار مناسب‌تر است؟",
+            "options": [
+              "توجه به شواهد و منبع ادعا",
+              "تکیه بر هیجان جمله",
+              "نادیده‌گرفتن زمان رویداد",
+              "پذیرفتن هر نظر نویسنده"
+            ],
+            "answer": 0,
+            "explanation": "ادعای تاریخی باید با شواهد و منبع معتبر بررسی شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فصل چهارم: سفر شکفتن",
@@ -2389,7 +2929,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اگر راوی از واژه‌هایی مانند «دیدم»، «احساس کردم» و «به یاد آوردم» استفاده کند، کدام زاویهٔ دید محتمل‌تر است؟",
+            "options": [
+              "اول‌شخص",
+              "دانای کل",
+              "دوم‌شخص",
+              "راوی بیرونی بدون حضور"
+            ],
+            "answer": 0,
+            "explanation": "این نشانه‌ها از حضور راوی در تجربه و روایت اول‌شخص خبر می‌دهند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "برای شناخت بهتر شخصیت در یک روایت، کدام مقایسه سودمندتر است؟",
+            "options": [
+              "مقایسهٔ گفتار شخصیت با رفتار او",
+              "شمارش تعداد جمله‌ها",
+              "نادیده‌گرفتن واکنش‌ها",
+              "توجه فقط به نام شخصیت"
+            ],
+            "answer": 0,
+            "explanation": "گاهی رفتار شخصیت با گفتارش تفاوت دارد و این مقایسه لایه‌های شخصیت را آشکار می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فصل پنجم: آزادگی و نیک‌بختی",
@@ -2446,7 +3016,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "شخصیتی برای حفظ عزت نفس، پیشنهاد سودمند اما ناعادلانه‌ای را رد می‌کند. این رفتار بیشتر با کدام مفهوم پیوند دارد؟",
+            "options": [
+              "آزادگی",
+              "شتاب‌زدگی",
+              "خودنمایی",
+              "بی‌تفاوتی"
+            ],
+            "answer": 0,
+            "explanation": "آزادگی با پایبندی به ارزش‌ها و نپذیرفتن خواری یا ستم ناسازگار است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "برای استخراج پیام اخلاقی یک حکایت، کدام شاهد معتبرتر است؟",
+            "options": [
+              "رفتار و پیامد انتخاب شخصیت‌ها",
+              "طول عنوان حکایت",
+              "تعداد واژه‌های دشوار",
+              "نام ناشر"
+            ],
+            "answer": 0,
+            "explanation": "پیام اخلاقی باید از رویدادها، انتخاب‌ها و پیامدهای داستان پشتیبانی شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فصل ششم: نوجوان باهوش و اندیشه‌ورزی",
@@ -2503,7 +3103,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در بررسی یک متن استدلالی، دانش‌آموز ادعا را پیدا می‌کند اما دلیل پشتیبان آن را نمی‌یابد. چه نتیجه‌ای درست‌تر است؟",
+            "options": [
+              "ادعا حتماً درست است",
+              "استدلال هنوز پشتوانهٔ کافی نشان نداده است",
+              "نتیجه از ادعا مهم‌تر نیست",
+              "وجود ادعا به‌تنهایی اثبات است"
+            ],
+            "answer": 1,
+            "explanation": "ادعا بدون دلیل و شواهد کافی، استدلال کامل و قانع‌کننده نمی‌سازد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "در جملهٔ «دانش‌آموزان کتاب را خواندند»، کدام بخش نهاد است؟",
+            "options": [
+              "کتاب را",
+              "خواندند",
+              "دانش‌آموزان",
+              "را"
+            ],
+            "answer": 2,
+            "explanation": "نهاد دربارهٔ آنچه جمله می‌گوید اطلاع می‌دهد؛ انجام‌دهندگان خواندن دانش‌آموزان‌اند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ],
     "alignmentReview": {
@@ -3045,7 +3675,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در عبارت «هذانِ طالِبانِ مُجتَهِدانِ»، چرا «هذانِ» به‌کار رفته است؟",
+            "options": [
+              "برای اشاره به دو نفر مذکر",
+              "برای اشاره به یک نفر مؤنث",
+              "برای اشاره به چند نفر مؤنث",
+              "برای اشاره به مکان دور"
+            ],
+            "answer": 0,
+            "explanation": "هذانِ اسم اشارهٔ مثنای مذکر نزدیک است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام ضمیر با «نَحنُ» هم‌معناست؟",
+            "options": [
+              "من",
+              "ما",
+              "شما دو نفر",
+              "آن‌ها"
+            ],
+            "answer": 1,
+            "explanation": "نَحنُ به معنی ماست.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "الدرس الثاني: أَهَمِّيَّةُ اللُّغَةِ الْعَرَبِيَّةِ",
@@ -3103,7 +3763,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در جملهٔ «نَقرَأُ الکِتابَ»، نقش معنایی «الکِتابَ» چیست؟",
+            "options": [
+              "انجام‌دهندهٔ خواندن",
+              "چیزی که خوانده می‌شود",
+              "زمان انجام کار",
+              "مکان انجام کار"
+            ],
+            "answer": 1,
+            "explanation": "الکتاب مفعول فعل نقرأ است؛ یعنی کتاب را می‌خوانیم.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "ترجمهٔ دقیق‌تر «اللُّغَةُ العَرَبِيَّةُ مُهِمَّةٌ» کدام است؟",
+            "options": [
+              "زبان عربی مهم است.",
+              "عرب‌ها زبان مهمی دارند.",
+              "زبان مهم عربی را بخوان.",
+              "زبان عربی دیروز بود."
+            ],
+            "answer": 0,
+            "explanation": "مهمّة صفت مؤنث است و جمله دربارهٔ مهم‌بودن زبان عربی خبر می‌دهد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "الدرس الثالث: مِهْنَتُكَ فِي الْمُسْتَقْبَلِ",
@@ -3161,7 +3851,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کدام ترجمه برای «سَوفَ نَعمَلُ» درست‌تر است؟",
+            "options": [
+              "کار کردیم",
+              "کار می‌کنیم یا خواهیم کرد",
+              "کار نکنید",
+              "کار کرده‌اند"
+            ],
+            "answer": 1,
+            "explanation": "سوف پیش از فعل مضارع می‌آید و معنای آینده می‌سازد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "در جملهٔ «سَأَصبِحُ مُعَلِّماً»، کدام بخش نشانهٔ آینده است؟",
+            "options": [
+              "سَـ",
+              "مُعَلِّماً",
+              "أنا",
+              "ـاً"
+            ],
+            "answer": 0,
+            "explanation": "سَـ پیش از فعل مضارع نشانهٔ آینده است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "الدرس الرابع: التَّجْرِبَةُ الْجَديدَةُ",
@@ -3219,7 +3939,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در جملهٔ «ذَهَبتُ إِلَى المَدرَسَةِ أَمسِ»، کدام واژه زمان گذشته را روشن می‌کند؟",
+            "options": [
+              "إلى",
+              "المدرسة",
+              "أمس",
+              "ذهبت"
+            ],
+            "answer": 2,
+            "explanation": "أمس یعنی دیروز و زمان رخداد را مشخص می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "فعل «ذَهَبتُ» از نظر زمان و شخص چه ویژگی‌ای دارد؟",
+            "options": [
+              "ماضی، اول‌شخص مفرد",
+              "مضارع، سوم‌شخص",
+              "امر، دوم‌شخص",
+              "ماضی، سوم‌شخص جمع"
+            ],
+            "answer": 0,
+            "explanation": "شناسهٔ تُ در فعل ماضی، اول‌شخص مفرد را نشان می‌دهد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "الدرس الخامس: الصَّداقَةُ",
@@ -3277,7 +4027,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در ترکیب «صَديقَةٌ صادِقَةٌ»، چرا هر دو واژه به صورت مؤنث آمده‌اند؟",
+            "options": [
+              "چون صفت با اسم از نظر جنس هماهنگ شده است",
+              "چون جمله دربارهٔ دو نفر است",
+              "چون صفت همیشه مؤنث است",
+              "چون واژهٔ اول فعل است"
+            ],
+            "answer": 0,
+            "explanation": "صفت در جنس و شمار با موصوف هماهنگ می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "معنی «الصَّديقُ الصّالِحُ» کدام است؟",
+            "options": [
+              "دوست شایسته",
+              "دوستی تازه",
+              "دوستان راست‌گو",
+              "دشمن نادان"
+            ],
+            "answer": 0,
+            "explanation": "الصديق یعنی دوست و الصالح یعنی شایسته یا نیک.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "الدرس السادس: فِي السَّفَرِ",
@@ -3335,7 +4115,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در عبارت «سافَرتُ مِنَ المَدينَةِ إِلَى القَريَةِ»، کدام بخش مبدأ حرکت را نشان می‌دهد؟",
+            "options": [
+              "إلى القرية",
+              "من المدينة",
+              "سافرت",
+              "القریة"
+            ],
+            "answer": 1,
+            "explanation": "مِن مبدأ و إِلى مقصد را نشان می‌دهد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام ترجمه برای «إِلَى المَطارِ» درست است؟",
+            "options": [
+              "از فرودگاه",
+              "در فرودگاه",
+              "به‌سوی فرودگاه",
+              "با فرودگاه"
+            ],
+            "answer": 2,
+            "explanation": "إلى جهت یا مقصد را نشان می‌دهد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "الدرس السابع: أَرْضُ اللّهِ واسِعَةٌ",
@@ -3393,7 +4203,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در ترکیب «أَرضٌ واسِعَةٌ»، چرا «واسِعَةٌ» با تاء مربوطه آمده است؟",
+            "options": [
+              "چون صفت برای اسم مؤنث است",
+              "چون اسم جمع مذکر است",
+              "چون واژه فعل ماضی است",
+              "چون جمله پرسشی است"
+            ],
+            "answer": 0,
+            "explanation": "أرض مؤنث است و صفت آن نیز به صورت مؤنث آمده است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام ترجمه برای «البِلادُ واسِعَةٌ» درست‌تر است؟",
+            "options": [
+              "کشورها گسترده‌اند.",
+              "کشور کوچک است.",
+              "زمین بارانی است.",
+              "شهرها نزدیک‌اند."
+            ],
+            "answer": 0,
+            "explanation": "البلاد جمع بلد و واسعة به معنی گسترده است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "الدرس الثامن: الِاعْتِمادُ عَلَى النَّفْسِ",
@@ -3451,7 +4291,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کدام گزینه فعل امر و ترجمهٔ درست آن را نشان می‌دهد؟",
+            "options": [
+              "يَكتُبُ: بنویس",
+              "اُكتُبْ: بنویس",
+              "كَتَبَ: می‌نویسد",
+              "نَكتُبُ: بنویسید"
+            ],
+            "answer": 1,
+            "explanation": "اُکتُبْ فعل امر برای مخاطب مفرد مذکر و به معنی بنویس است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "اگر مخاطب یک نفر باشد، کدام گزینه درخواست «بخوان» را بیان می‌کند؟",
+            "options": [
+              "اِقرَأْ",
+              "يَقرَأُ",
+              "قَرَأَ",
+              "نَقرَأُ"
+            ],
+            "answer": 0,
+            "explanation": "اِقرأْ فعل امر و خطاب به یک نفر است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "الدرس التاسع: السَّفْرَةُ الْعِلْمِيَّةُ",
@@ -3509,7 +4379,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "برای آنکه گزارش یک سفر علمی قابل پیگیری باشد، کدام ترتیب مناسب‌تر است؟",
+            "options": [
+              "نتیجه، سپس زمان، سپس مکان و رویدادها",
+              "زمان و مکان، مشاهده‌ها به ترتیب، سپس نتیجه",
+              "فقط نظر شخصی بدون مشاهده",
+              "فهرست واژه‌ها بدون ارتباط زمانی"
+            ],
+            "answer": 1,
+            "explanation": "گزارش منظم از زمان و مکان شروع می‌شود، رویدادها را به ترتیب می‌آورد و با نتیجه پایان می‌یابد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام کار مشاهده را از حدس جدا می‌کند؟",
+            "options": [
+              "ثبت آنچه واقعاً دیده شده و جداکردن برداشت شخصی",
+              "نوشتن نتیجه پیش از بازدید",
+              "حذف زمان و مکان",
+              "جایگزین‌کردن شنیده‌ها با مشاهده"
+            ],
+            "answer": 0,
+            "explanation": "ثبت شواهد مستقیم و جداکردن برداشت، گزارش را دقیق‌تر می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "الدرس العاشر: الْمَراقِدُ الدِّينِيَّةُ",
@@ -3567,7 +4467,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در عبارت «الطّالِبُ في المَرقَدِ الأَوَّلِ»، واژهٔ «الأَوَّلِ» چه نوع عددی است؟",
+            "options": [
+              "عدد اصلی",
+              "عدد ترتیبی",
+              "عدد کسری",
+              "عدد شمارشی جمع"
+            ],
+            "answer": 1,
+            "explanation": "الأول یعنی نخستین و عدد ترتیبی است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "کدام گزینه معنی «الثّامِن» را می‌دهد؟",
+            "options": [
+              "ششم",
+              "هفتم",
+              "هشتم",
+              "نهم"
+            ],
+            "answer": 2,
+            "explanation": "الثامن به معنی هشتم است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ],
     "alignmentReview": {
@@ -3625,7 +4555,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "Mina is from Canada. Which sentence gives her nationality correctly?",
+            "options": [
+              "She is Canada.",
+              "She is Canadian.",
+              "She are Canadian.",
+              "She from Canadian."
+            ],
+            "answer": 1,
+            "explanation": "Canadian نام ملیت است؛ برای معرفی از She is Canadian استفاده می‌کنیم.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "Which question matches the answer “I am from Oman”?",
+            "options": [
+              "What is your nationality?",
+              "Where are you from?",
+              "How old are you?",
+              "What is your hobby?"
+            ],
+            "answer": 1,
+            "explanation": "پاسخ دربارهٔ کشور مبدأ است؛ پرسش مناسب Where are you from? است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Unit 2: My Week",
@@ -3669,7 +4629,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "Choose the sentence that is grammatically correct.",
+            "options": [
+              "My brother play football every day.",
+              "My brother plays football every day.",
+              "My brother playing football every day.",
+              "My brother does plays football every day."
+            ],
+            "answer": 1,
+            "explanation": "در زمان حال ساده برای فاعل سوم‌شخص مفرد، به فعل معمولاً s اضافه می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "Choose the correct position of the adverb of frequency.",
+            "options": [
+              "She goes always to school by bus.",
+              "She always goes to school by bus.",
+              "Always she goes to school by bus every.",
+              "She goes to school by bus always is."
+            ],
+            "answer": 1,
+            "explanation": "قید تکرار معمولاً پیش از فعل اصلی و پس از فعل be قرار می‌گیرد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Unit 3: My Abilities",
@@ -3713,7 +4703,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "Which question and answer are both correct?",
+            "options": [
+              "Can he swims? — Yes, he can.",
+              "Does he can swim? — Yes, he does.",
+              "Can he swim? — Yes, he can.",
+              "Can he to swim? — Yes, he can."
+            ],
+            "answer": 2,
+            "explanation": "پس از can فعل ساده می‌آید و در پاسخ کوتاه نیز can تکرار می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "Choose the sentence that expresses inability correctly.",
+            "options": [
+              "She can't to drive.",
+              "She doesn't can drive.",
+              "She cannot drives.",
+              "She cannot drive."
+            ],
+            "answer": 3,
+            "explanation": "پس از cannot شکل سادهٔ فعل بدون to یا s به کار می‌رود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Unit 4: My Health",
@@ -3757,7 +4777,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "A student says “I have a toothache.” Which advice is the most suitable?",
+            "options": [
+              "You should see a dentist.",
+              "You should eat more candy.",
+              "You can ignore it forever.",
+              "You should run faster."
+            ],
+            "answer": 0,
+            "explanation": "برای دندان‌درد، مراجعه به دندان‌پزشک توصیهٔ مناسب‌تری است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "Choose the grammatically correct advice.",
+            "options": [
+              "You should to rest.",
+              "You should resting.",
+              "You should rest.",
+              "You should rests."
+            ],
+            "answer": 2,
+            "explanation": "پس از should شکل سادهٔ فعل می‌آید.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Unit 5: My City",
@@ -3801,7 +4851,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "There ___ a library and two parks near our school.",
+            "options": [
+              "are",
+              "is",
+              "am",
+              "be"
+            ],
+            "answer": 1,
+            "explanation": "در ساختار there is/are، فعل با نخستین اسم پس از آن هماهنگ می‌شود؛ نخستین اسم مفرد library است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "The bank is ___ the post office and the supermarket.",
+            "options": [
+              "between",
+              "under",
+              "inside",
+              "behind of"
+            ],
+            "answer": 0,
+            "explanation": "برای قرارگرفتن میان دو مکان از between استفاده می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Unit 6: My Village",
@@ -3859,7 +4939,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "A village has fields, a river and a few small houses. Which description is the best summary?",
+            "options": [
+              "It is a crowded industrial capital.",
+              "It is a rural place with natural and agricultural features.",
+              "It is a large airport.",
+              "It is a desert with no settlement."
+            ],
+            "answer": 1,
+            "explanation": "مزرعه، رودخانه و خانه‌های کوچک با توصیف یک محیط روستایی سازگارند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "Choose the sentence that correctly describes location.",
+            "options": [
+              "The river is next the village.",
+              "The river is next to the village.",
+              "The river next to is village.",
+              "The river is between to village."
+            ],
+            "answer": 1,
+            "explanation": "عبارت درست مکانی next to است و پس از آن اسم مکان می‌آید.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Unit 7: My Hobbies",
@@ -3917,7 +5027,37 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "Which sentence correctly describes a hobby?",
+            "options": [
+              "My hobby is collect stamps.",
+              "My hobby collecting stamps is.",
+              "My hobby is collecting stamps.",
+              "My hobby are collecting stamps."
+            ],
+            "answer": 2,
+            "explanation": "در این ساختار، بعد از is می‌توان از شکل ing فعل برای نام‌بردن فعالیت استفاده کرد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          },
+          {
+            "question": "Which question best asks about someone's free-time activity?",
+            "options": [
+              "Where do you live?",
+              "What do you do in your free time?",
+              "How many books are there?",
+              "Where are you from?"
+            ],
+            "answer": 1,
+            "explanation": "این پرسش مستقیماً دربارهٔ فعالیت‌های اوقات فراغت است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ],
     "alignmentReview": {
@@ -3976,7 +5116,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "تعاون"
+        "bookChapterTitle": "تعاون",
+        "challengeQuestions": [
+          {
+            "question": "در یک گروه، یک نفر همهٔ کارها را انجام می‌دهد و دیگران فقط نتیجه را دریافت می‌کنند. کدام اصل تعاون رعایت نشده است؟",
+            "options": [
+              "تقسیم منصفانهٔ مسئولیت",
+              "داشتن هدف مشترک",
+              "شناخت زمان",
+              "استفاده از ابزار"
+            ],
+            "answer": 0,
+            "explanation": "تعاون مؤثر نیازمند تقسیم مسئولیت و مشارکت متناسب اعضاست.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 2: تعاون (۲)",
@@ -4021,7 +5177,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "تعاون"
+        "bookChapterTitle": "تعاون",
+        "challengeQuestions": [
+          {
+            "question": "در سیل، گروهی داوطلب می‌خواهند کمک‌رسانی کنند. کدام اقدام مسئولانه‌تر است؟",
+            "options": [
+              "ورود بدون هماهنگی به منطقه خطر",
+              "هماهنگی با نهادهای امدادی و تقسیم وظایف",
+              "انتشار شایعه برای جذب کمک",
+              "جمع‌آوری کمک بدون ثبت و نظارت"
+            ],
+            "answer": 1,
+            "explanation": "کمک‌رسانی در بحران باید هماهنگ با نهادهای مسئول باشد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 3: ساختار و تشکیلات دولت",
@@ -4066,7 +5238,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "نقش دولت در اداره کشور"
+        "bookChapterTitle": "نقش دولت در اداره کشور",
+        "challengeQuestions": [
+          {
+            "question": "اگر قانونی تصویب شده اما هنوز اجرا نشده باشد، مسئولیت اجرای آن عمدتاً بر عهدهٔ کدام قوه است؟",
+            "options": [
+              "قوهٔ قضائیه",
+              "قوهٔ مجریه",
+              "قوهٔ مقننه",
+              "شوراهای محلی به‌تنهایی"
+            ],
+            "answer": 1,
+            "explanation": "قوهٔ مجریه مسئول اجرای قوانین است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 4: وظایف دولت",
@@ -4111,7 +5299,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "نقش دولت در اداره کشور"
+        "bookChapterTitle": "نقش دولت در اداره کشور",
+        "challengeQuestions": [
+          {
+            "question": "دولت درآمدی از مالیات دریافت می‌کند و آن را برای ساخت مدرسه و درمانگاه اختصاص می‌دهد. این تصمیم در کدام سند مالی پیش‌بینی می‌شود؟",
+            "options": [
+              "بودجه",
+              "شناسنامه",
+              "قانون مدنی",
+              "گزارش هواشناسی"
+            ],
+            "answer": 0,
+            "explanation": "بودجه درآمدها و هزینه‌های پیش‌بینی‌شدهٔ عمومی را نشان می‌دهد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 5: آسیب‌های اجتماعی و پیشگیری از آن‌ها",
@@ -4156,7 +5360,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "نوجوانان و قانون"
+        "bookChapterTitle": "نوجوانان و قانون",
+        "challengeQuestions": [
+          {
+            "question": "دانش‌آموزی در فضای مجازی با پیشنهادی مشکوک روبه‌رو می‌شود. کدام واکنش پیشگیرانه مناسب‌تر است؟",
+            "options": [
+              "پذیرش فوری برای حفظ دوستی",
+              "مشورت با فرد بزرگسال مورد اعتماد و بررسی پیامدها",
+              "ارسال اطلاعات شخصی",
+              "پنهان‌کردن موضوع از همه"
+            ],
+            "answer": 1,
+            "explanation": "آگاهی و کمک‌گرفتن از افراد مورد اعتماد از راه‌های پیشگیری است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 6: قوهٔ قضائیه",
@@ -4201,7 +5421,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "نوجوانان و قانون"
+        "bookChapterTitle": "نوجوانان و قانون",
+        "challengeQuestions": [
+          {
+            "question": "در یک پرونده، قاضی باید به ادعاهای دو طرف و شواهد توجه کند. کدام اصل بیش از همه اهمیت دارد؟",
+            "options": [
+              "بی‌طرفی و رسیدگی بر پایهٔ قانون",
+              "توجه به شهرت یک طرف",
+              "تصمیم‌گیری پیش از شنیدن دفاع",
+              "پیروی از نظر جمعیت"
+            ],
+            "answer": 0,
+            "explanation": "عدالت قضایی به بررسی بی‌طرفانهٔ شواهد و دفاع طرف‌ها نیاز دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 7: ارتباط و رسانه",
@@ -4246,7 +5482,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "عصر ارتباطات"
+        "bookChapterTitle": "عصر ارتباطات",
+        "challengeQuestions": [
+          {
+            "question": "پیامی از یک رسانه به مخاطبان منتقل می‌شود. اگر مخاطب پیام را دریافت کند اما منظور فرستنده را اشتباه بفهمد، کدام بخش ارتباط نیازمند بررسی است؟",
+            "options": [
+              "فقط تعداد مخاطبان",
+              "وضوح پیام و بازخورد گیرنده",
+              "رنگ دستگاه",
+              "اندازهٔ صفحه"
+            ],
+            "answer": 1,
+            "explanation": "ارتباط مؤثر به پیام روشن و بررسی بازخورد برای اطمینان از فهم درست نیاز دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 8: رسانه‌ها در زندگی ما",
@@ -4291,7 +5543,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "عصر ارتباطات"
+        "bookChapterTitle": "عصر ارتباطات",
+        "challengeQuestions": [
+          {
+            "question": "خبری با تیتر هیجان‌انگیز منتشر شده اما منبع و شواهد ندارد. سواد رسانه‌ای چه می‌طلبد؟",
+            "options": [
+              "بازنشر فوری",
+              "بررسی منبع، شواهد و هدف پیام",
+              "اعتماد به تعداد بازدید",
+              "قضاوت فقط از روی تصویر"
+            ],
+            "answer": 1,
+            "explanation": "تیتر و بازدید، جایگزین منبع معتبر و شواهد نیستند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 9: ظهور اسلام در شبه‌جزیرهٔ عربستان",
@@ -4336,7 +5604,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "از حرا تا نینوا"
+        "bookChapterTitle": "از حرا تا نینوا",
+        "challengeQuestions": [
+          {
+            "question": "برای توضیح علت اهمیت هجرت پیامبر به مدینه، کدام تحلیل تاریخی مناسب‌تر است؟",
+            "options": [
+              "بررسی پیامدهای آن در شکل‌گیری جامعهٔ اسلامی",
+              "توجه فقط به فاصلهٔ جغرافیایی",
+              "نادیده‌گرفتن رویدادهای پس از آن",
+              "مقایسه با فناوری امروز"
+            ],
+            "answer": 0,
+            "explanation": "اهمیت تاریخی هجرت با نقش آن در شکل‌گیری جامعهٔ اسلامی روشن می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 10: از رحلت پیامبر تا قیام کربلا (نینوا)",
@@ -4381,7 +5665,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "از حرا تا نینوا"
+        "bookChapterTitle": "از حرا تا نینوا",
+        "challengeQuestions": [
+          {
+            "question": "برای بررسی رویدادهای فاصلهٔ رحلت پیامبر تا قیام کربلا، کدام روش مانع اشتباه زمانی می‌شود؟",
+            "options": [
+              "مرتب‌کردن رویدادها بر اساس ترتیب زمانی و منابع",
+              "ترتیب‌دادن بر اساس طول نام‌ها",
+              "حذف تاریخ‌ها",
+              "استفاده از یک روایت بدون مقایسه"
+            ],
+            "answer": 0,
+            "explanation": "خط زمانی و بررسی منابع، توالی رخدادها را روشن می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 11: ورود اسلام به ایران",
@@ -4426,7 +5726,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "عصری تازه در تاریخ ایران"
+        "bookChapterTitle": "عصری تازه در تاریخ ایران",
+        "challengeQuestions": [
+          {
+            "question": "چرا ورود اسلام به ایران را باید فرایندی تدریجی دانست؟",
+            "options": [
+              "زیرا همهٔ مناطق در یک روز تغییر کردند",
+              "زیرا زمان و شرایط مناطق مختلف یکسان نبود",
+              "زیرا هیچ تحول فرهنگی رخ نداد",
+              "زیرا فقط یک شهر درگیر بود"
+            ],
+            "answer": 1,
+            "explanation": "گسترش اسلام در مناطق مختلف با زمان‌ها و شرایط متفاوت رخ داد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 12: عصر طلایی فرهنگ و تمدن ایرانی ـ اسلامی",
@@ -4471,7 +5787,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "عصری تازه در تاریخ ایران"
+        "bookChapterTitle": "عصری تازه در تاریخ ایران",
+        "challengeQuestions": [
+          {
+            "question": "کدام شاهد برای نشان‌دادن نقش دانشمندان ایرانی در تمدن ایرانی ـ اسلامی مناسب‌تر است؟",
+            "options": [
+              "آثار علمی و دستاوردهای ثبت‌شده در پزشکی و ریاضی",
+              "فقط تعداد جنگ‌ها",
+              "فقط وسعت قلمرو حکومت",
+              "تغییرات آب‌وهوا"
+            ],
+            "answer": 0,
+            "explanation": "آثار علمی و دستاوردهای رشته‌های مختلف شواهد مناسبی برای نقش علمی‌اند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 13: غزنویان، سلجوقیان و خوارزمشاهیان",
@@ -4516,7 +5848,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "از غزنویان تا هجوم چنگیز خان"
+        "bookChapterTitle": "از غزنویان تا هجوم چنگیز خان",
+        "challengeQuestions": [
+          {
+            "question": "برای مقایسهٔ غزنویان، سلجوقیان و خوارزمشاهیان، کدام جدول مفیدتر است؟",
+            "options": [
+              "نام، بازهٔ زمانی، قلمرو و رویدادهای شاخص",
+              "فقط رنگ پرچم‌ها",
+              "نام شهرهای امروزی بدون تاریخ",
+              "تعداد حروف نام هر حکومت"
+            ],
+            "answer": 0,
+            "explanation": "مقایسهٔ تاریخی به معیارهای مشترک مانند زمان، قلمرو و رویداد نیاز دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 14: میراث فرهنگی ایران در عصر سلجوقی",
@@ -4561,7 +5909,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "از غزنویان تا هجوم چنگیز خان"
+        "bookChapterTitle": "از غزنویان تا هجوم چنگیز خان",
+        "challengeQuestions": [
+          {
+            "question": "اگر بنایی از دورهٔ سلجوقی آسیب ببیند، کدام اقدام به حفظ میراث فرهنگی کمک می‌کند؟",
+            "options": [
+              "مرمت علمی همراه با ثبت و حفاظت",
+              "تغییر کامل بنا بدون مستندات",
+              "برداشتن کتیبه‌ها",
+              "نادیده‌گرفتن آسیب"
+            ],
+            "answer": 0,
+            "explanation": "حفاظت از میراث به مستندسازی و مرمت آگاهانه نیاز دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 15: حملهٔ چنگیز و تیمور به ایران",
@@ -4606,7 +5970,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "عصر مغول و تیموری"
+        "bookChapterTitle": "عصر مغول و تیموری",
+        "challengeQuestions": [
+          {
+            "question": "برای بررسی پیامدهای حملهٔ مغول و تیمور، کدام تحلیل کامل‌تر است؟",
+            "options": [
+              "توجه هم‌زمان به پیامدهای انسانی، اقتصادی و سیاسی",
+              "توجه فقط به نام فرماندهان",
+              "نادیده‌گرفتن تفاوت دوره‌ها",
+              "بررسی فقط یک شهر"
+            ],
+            "answer": 0,
+            "explanation": "پیامدهای یورش‌ها چندبعدی و در مناطق مختلف متفاوت بودند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 16: پیروزی فرهنگ بر شمشیر",
@@ -4651,7 +6031,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "عصر مغول و تیموری"
+        "bookChapterTitle": "عصر مغول و تیموری",
+        "challengeQuestions": [
+          {
+            "question": "اگر پس از یک دورهٔ ویرانی، هنر و دانش دوباره رشد کند، کدام مفهوم بهتر توضیح‌دهندهٔ این پدیده است؟",
+            "options": [
+              "پایداری و بازآفرینی فرهنگی",
+              "توقف کامل تاریخ",
+              "نبود تعامل اجتماعی",
+              "تغییرات طبیعی آب‌وهوا"
+            ],
+            "answer": 0,
+            "explanation": "زبان، هنر و دانش با تلاش نسل‌ها می‌توانند پس از بحران دوباره شکوفا شوند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 17: ویژگی‌های طبیعی آسیا",
@@ -4696,7 +6092,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "آسیا، پهناورترین قاره"
+        "bookChapterTitle": "آسیا، پهناورترین قاره",
+        "challengeQuestions": [
+          {
+            "question": "برای مقایسهٔ دو ناحیهٔ آسیا، کدام مجموعه داده جغرافیایی مناسب‌تر است؟",
+            "options": [
+              "ناهمواری، آب‌وهوا و منابع آب",
+              "فقط نام پایتخت‌ها",
+              "فقط تعداد پرچم‌ها",
+              "رنگ نقشه"
+            ],
+            "answer": 0,
+            "explanation": "ویژگی‌های طبیعی با هم تصویر جغرافیایی دقیق‌تری می‌سازند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 18: ویژگی‌های انسانی و اقتصادی آسیا",
@@ -4741,7 +6153,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "آسیا، پهناورترین قاره"
+        "bookChapterTitle": "آسیا، پهناورترین قاره",
+        "challengeQuestions": [
+          {
+            "question": "دو منطقهٔ آسیایی شرایط طبیعی متفاوت دارند و تراکم جمعیت آن‌ها نیز فرق می‌کند. کدام عامل باید در تحلیل بررسی شود؟",
+            "options": [
+              "ترکیب شرایط طبیعی، فرصت‌های شغلی و دسترسی‌ها",
+              "فقط نام زبان رسمی",
+              "فقط اندازهٔ پرچم",
+              "تعداد حروف نام شهر"
+            ],
+            "answer": 0,
+            "explanation": "پراکندگی جمعیت به چند عامل طبیعی و انسانی وابسته است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 19: ویژگی‌های منطقهٔ جنوب‌غربی آسیا",
@@ -4786,7 +6214,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "منطقه جنوب غربی آسیا و جایگاه ایران در آن"
+        "bookChapterTitle": "منطقه جنوب غربی آسیا و جایگاه ایران در آن",
+        "challengeQuestions": [
+          {
+            "question": "چرا جنوب‌غربی آسیا از نظر ارتباطی اهمیت دارد؟",
+            "options": [
+              "به دلیل قرارگرفتن در پیوند میان چند قاره و مسیرهای مهم",
+              "به دلیل نداشتن هیچ مسیر دریایی",
+              "به دلیل قرارگرفتن در قطب جنوب",
+              "به دلیل یکسان‌بودن آب‌وهوا"
+            ],
+            "answer": 0,
+            "explanation": "موقعیت میان آسیا، اروپا و آفریقا و راه‌های ارتباطی اهمیت منطقه را افزایش می‌دهد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 20: ایران و منطقهٔ جنوب‌غربی آسیا",
@@ -4831,7 +6275,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "منطقه جنوب غربی آسیا و جایگاه ایران در آن"
+        "bookChapterTitle": "منطقه جنوب غربی آسیا و جایگاه ایران در آن",
+        "challengeQuestions": [
+          {
+            "question": "کدام ترکیب، موقعیت ایران را در جنوب‌غربی آسیا بهتر توصیف می‌کند؟",
+            "options": [
+              "دسترسی به دریای خزر در شمال و خلیج فارس و دریای عمان در جنوب",
+              "قرارگیری کامل در نیمکرهٔ غربی",
+              "نداشتن همسایهٔ زمینی",
+              "قرارگیری در اقیانوس آرام"
+            ],
+            "answer": 0,
+            "explanation": "ایران در شمال به دریای خزر و در جنوب به خلیج فارس و دریای عمان دسترسی دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 21: ویژگی‌های طبیعی و انسانی اروپا",
@@ -4876,7 +6336,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "اروپا و آفریقا، دو چهره متفاوت"
+        "bookChapterTitle": "اروپا و آفریقا، دو چهره متفاوت",
+        "challengeQuestions": [
+          {
+            "question": "برای توضیح تفاوت فعالیت‌های اقتصادی دو منطقهٔ اروپا، کدام روش علمی‌تر است؟",
+            "options": [
+              "بررسی هم‌زمان آب‌وهوا، منابع، جمعیت و دسترسی",
+              "نسبت‌دادن همهٔ تفاوت‌ها به یک عامل",
+              "نادیده‌گرفتن جغرافیا",
+              "استفاده از یک نمونهٔ تصادفی"
+            ],
+            "answer": 0,
+            "explanation": "فعالیت اقتصادی از ترکیب شرایط طبیعی و انسانی اثر می‌پذیرد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 22: ویژگی‌های طبیعی و انسانی آفریقا",
@@ -4921,7 +6397,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "اروپا و آفریقا، دو چهره متفاوت"
+        "bookChapterTitle": "اروپا و آفریقا، دو چهره متفاوت",
+        "challengeQuestions": [
+          {
+            "question": "اگر ناحیه‌ای در آفریقا نزدیک خط استوا باشد، کدام نتیجه دربارهٔ آب‌وهوا نیازمند بررسی بیشتر است؟",
+            "options": [
+              "تأثیر بارش و پوشش گیاهی در کنار موقعیت عرض جغرافیایی",
+              "اینکه حتماً بیابان سرد است",
+              "اینکه هیچ رودخانه‌ای ندارد",
+              "اینکه فصل‌ها در همه‌جا یکسان‌اند"
+            ],
+            "answer": 0,
+            "explanation": "عرض جغرافیایی مهم است، اما بارش و عوامل محلی نیز باید بررسی شوند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 23: قارهٔ آمریکا",
@@ -4966,7 +6458,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "بر جدید"
+        "bookChapterTitle": "بر جدید",
+        "challengeQuestions": [
+          {
+            "question": "چرا توصیف قارهٔ آمریکا فقط با اشاره به یک کشور کامل نیست؟",
+            "options": [
+              "زیرا این قاره از دو بخش اصلی و محیط‌ها و فرهنگ‌های متنوع تشکیل شده است",
+              "زیرا همهٔ کشورها یکسان‌اند",
+              "زیرا هیچ تمدن بومی نداشته است",
+              "زیرا فقط یک آب‌وهوا دارد"
+            ],
+            "answer": 0,
+            "explanation": "آمریکای شمالی و جنوبی تنوع طبیعی و انسانی فراوانی دارند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 24: قارهٔ استرالیا و اقیانوسیه",
@@ -5011,7 +6519,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookChapterTitle": "بر جدید"
+        "bookChapterTitle": "بر جدید",
+        "challengeQuestions": [
+          {
+            "question": "برای بررسی ویژگی‌های اقیانوسیه، کدام عامل اهمیت ویژه‌ای دارد؟",
+            "options": [
+              "پراکندگی جزایر در پهنهٔ اقیانوس آرام",
+              "نبود هرگونه جزیره",
+              "قرارگیری همهٔ کشورها در نیمکرهٔ شمالی",
+              "همسانی کامل آب‌وهوا"
+            ],
+            "answer": 0,
+            "explanation": "پراکندگی جزایر و موقعیت در اقیانوس آرام از ویژگی‌های مهم منطقه است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ],
     "alignmentReview": {
