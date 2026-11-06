@@ -72,7 +72,7 @@ class _ContentLibraryScreenState extends State<ContentLibraryScreen> {
               Text(subject['title'] as String? ?? 'درس',
                   style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 6),
-              const Text('محتوای آموزشی تألیفی فهمینو',
+              Text('محتوای آموزشی تألیفی فهمینو',
                   style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 16),
               for (final chapter in chapters)
@@ -265,23 +265,24 @@ class _QuizChapterState extends State<_QuizChapter> {
               style: Theme.of(context).textTheme.titleSmall),
           RadioGroup<int>(
             groupValue: _answers[index],
-            onChanged: checked
-                ? null
-                : (value) {
-                    if (value != null) {
-                      setState(() => _answers[index] = value);
-                    }
-                  },
-            child: Column(
-              children: [
-                for (var option = 0; option < options.length; option++)
-                  RadioListTile<int>(
-                    dense: true,
-                    contentPadding: EdgeInsets.zero,
-                    value: option,
-                    title: Text(options[option]),
-                  ),
-              ],
+            onChanged: (value) {
+              if (!checked && value != null) {
+                setState(() => _answers[index] = value);
+              }
+            },
+            child: IgnorePointer(
+              ignoring: checked,
+              child: Column(
+                children: [
+                  for (var option = 0; option < options.length; option++)
+                    RadioListTile<int>(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      value: option,
+                      title: Text(options[option]),
+                    ),
+                ],
+              ),
             ),
           ),
           if (!checked)
