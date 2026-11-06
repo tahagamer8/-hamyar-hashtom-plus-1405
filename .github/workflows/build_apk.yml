@@ -106,6 +106,9 @@ jobs:
       - name: Run widget and unit tests (three passes)
         run: flutter test --reporter expanded && flutter test --reporter expanded && flutter test --reporter expanded
 
+      - name: Test Gemini Worker
+        run: npm --prefix worker test
+
       - name: Build release APKs
         run: flutter build apk --release --split-per-abi
 
