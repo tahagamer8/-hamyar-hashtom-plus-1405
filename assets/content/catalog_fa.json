@@ -116,7 +116,8 @@
               "تقسیم بر صفر تعریف نشده است."
             ]
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "عددهای اول",
@@ -178,7 +179,8 @@
             "answer": 1,
             "explanation": "شمارنده‌های مشترک این دو عدد ۱، ۲، ۳ و ۶ هستند؛ بزرگ‌ترین آن‌ها ۶ است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "چندضلعی‌ها",
@@ -239,7 +241,8 @@
             "answer": 1,
             "explanation": "(۷−۲)×۱۸۰=۹۰۰ درجه."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "جبر و معادله",
@@ -300,7 +303,8 @@
             "answer": 0,
             "explanation": "۵x−۲x=۳x و عدد ثابت ۴ باقی می‌ماند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "بردار و مختصات",
@@ -361,7 +365,8 @@
             "answer": 2,
             "explanation": "هر دو مؤلفه منفی‌اند؛ پس نقطه در ناحیهٔ سوم است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "مثلث",
@@ -422,7 +427,8 @@
             "answer": 1,
             "explanation": "۱۸۰−(۴۵+۸۵)=۵۰ درجه."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "توان و جذر",
@@ -483,7 +489,8 @@
             "answer": 0,
             "explanation": "در ضرب توان‌های هم‌پایه، توان‌ها جمع می‌شوند: ۲+۳=۵."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "آمار و احتمال",
@@ -544,7 +551,8 @@
             "answer": 1,
             "explanation": "داده‌ها مرتب‌اند و مقدار وسط، ۷ است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "دایره",
@@ -605,9 +613,19 @@
             "answer": 2,
             "explanation": "قطر دو برابر شعاع است؛ ۲×۶=۱۲."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": "https://www.roshd.ir/riazi/Content/کتاب-ریاضی-پایه-هشتم",
+      "referenceTitle": "کتاب ریاضی پایه هشتم – شبکه رشد",
+      "referenceBasis": "فهرست ۹ فصل در معرفی رسمی شبکه رشد؛ صفحه قدیمی‌تر از ویرایش ۱۴۰۵–۱۴۰۶ است.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   },
   "science": {
     "title": "علوم تجربی",
@@ -672,7 +690,8 @@
             "answer": 1,
             "explanation": "آهن به آهن‌ربا جذب می‌شود و از ماسه جدا می‌گردد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "تغییرات شیمیایی در خدمت زندگی",
@@ -733,7 +752,8 @@
             "answer": 2,
             "explanation": "در زنگ‌زدن آهن، ماده‌ای تازه با ویژگی‌های متفاوت تشکیل می‌شود."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "از درون اتم چه خبر",
@@ -794,7 +814,8 @@
             "answer": 2,
             "explanation": "الکترون بار منفی، پروتون بار مثبت و نوترون بار خنثی دارد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "تنظیم عصبی",
@@ -855,7 +876,8 @@
             "answer": 0,
             "explanation": "مغز اطلاعات را بررسی و پاسخ‌های مناسب را هماهنگ می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "حس و حرکت",
@@ -916,7 +938,8 @@
             "answer": 0,
             "explanation": "مفصل محل ارتباط استخوان‌هاست و در بسیاری موارد حرکت را ممکن می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "تنظیم هورمونی",
@@ -977,7 +1000,8 @@
             "answer": 0,
             "explanation": "غده‌های درون‌ریز هورمون را وارد خون می‌کنند تا به بافت هدف برسد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "الفبای زیست‌فناوری",
@@ -1038,7 +1062,8 @@
             "answer": 0,
             "explanation": "در این کاربرد از فعالیت جاندار برای تولید محصول سودمند استفاده می‌شود."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "تولیدمثل در جانداران",
@@ -1099,7 +1124,8 @@
             "answer": 1,
             "explanation": "در تولیدمثل جنسی، گامت‌ها با هم ترکیب می‌شوند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "الکتریسیته",
@@ -1160,7 +1186,8 @@
             "answer": 1,
             "explanation": "جریان در مدار ساده زمانی برقرار می‌شود که مسیر رسانا بسته باشد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "مغناطیس",
@@ -1221,7 +1248,8 @@
             "answer": 1,
             "explanation": "قطب‌های هم‌نام آهن‌ربا یکدیگر را دفع می‌کنند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "کانی‌ها",
@@ -1282,7 +1310,8 @@
             "answer": 0,
             "explanation": "سختی کانی نشان می‌دهد در برابر خراشیده شدن چقدر مقاومت دارد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "سنگ‌ها",
@@ -1343,7 +1372,8 @@
             "answer": 2,
             "explanation": "سنگ‌های آذرین از سرد شدن و سخت شدن مواد مذاب به وجود می‌آیند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "هوازدگی",
@@ -1404,7 +1434,8 @@
             "answer": 0,
             "explanation": "آب هنگام یخ زدن افزایش حجم می‌دهد و می‌تواند شکاف سنگ را گسترش دهد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "نور و ویژگی‌های آن",
@@ -1465,7 +1496,8 @@
             "answer": 1,
             "explanation": "آینهٔ تخت تصویری مجازی، مستقیم و هم‌اندازهٔ جسم ایجاد می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "شکست نور",
@@ -1526,9 +1558,19 @@
             "answer": 1,
             "explanation": "نور هنگام عبور از آب به هوا می‌شکند و جای ظاهری بخش زیر آب جابه‌جا دیده می‌شود."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": "https://www.roshd.ir/olum/Content/کتاب-علوم-تجربی-پایه-هشتم",
+      "referenceTitle": "کتاب علوم تجربی پایه هشتم – شبکه رشد",
+      "referenceBasis": "فهرست ۱۵ فصل در معرفی رسمی شبکه رشد؛ تطبیق صفحه‌به‌صفحه با PDF چاپ جدید انجام نشده است.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   },
   "persian": {
     "title": "فارسی",
@@ -1581,7 +1623,8 @@
             "answer": 0,
             "explanation": "معنی واژه‌ها و ارتباط مصراع‌ها در فهم پیام بیت نقش دارند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فصل دوم: خوب جهان را ببین",
@@ -1631,7 +1674,8 @@
             "answer": 1,
             "explanation": "دل به دریا مانند شده و ادات تشبیه و وجه شبه آشکار نیامده است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فصل سوم: ارمغان ایران",
@@ -1681,7 +1725,8 @@
             "answer": 0,
             "explanation": "سند و پژوهش معتبر برای شناخت تاریخ قابل اتکاترند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فصل چهارم: سفر شکفتن",
@@ -1731,7 +1776,8 @@
             "answer": 0,
             "explanation": "راوی کسی است که رویدادهای داستان را برای خواننده بازگو می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فصل پنجم: آزادگی و نیک‌بختی",
@@ -1781,7 +1827,8 @@
             "answer": 0,
             "explanation": "آزادگی با حفظ کرامت و پایبندی به ارزش‌های درست همراه است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فصل ششم: نوجوان باهوش و اندیشه‌ورزی",
@@ -1831,9 +1878,19 @@
             "answer": 1,
             "explanation": "کتاب چیزی است که خواندن روی آن انجام شده و مفعول جمله است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": null,
+      "referenceTitle": null,
+      "referenceBasis": "برای این درس هنوز منبع رسمیِ قابل‌دسترسی با فهرست جزئیات در این بررسی پیدا نشد.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   },
   "writing": {
     "title": "نگارش",
@@ -1886,7 +1943,8 @@
             "answer": 0,
             "explanation": "خاطره معمولاً از نگاه فردی که تجربه را داشته، با زاویه دید اول‌شخص نوشته می‌شود."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۲: توصیف",
@@ -1936,7 +1994,8 @@
             "answer": 2,
             "explanation": "جملهٔ سوم با اشاره به بو و دمای هوا تصویر روشن‌تری می‌سازد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۳: گزارش‌نویسی",
@@ -1986,7 +2045,8 @@
             "answer": 0,
             "explanation": "زمان و مکان از اطلاعات پایه و قابل بررسی گزارش هستند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۴: سفرنامه",
@@ -2036,7 +2096,8 @@
             "answer": 0,
             "explanation": "عبارت نخست تجربه و مشاهدهٔ مستقیم نویسنده را بیان می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۵: داستان‌نویسی",
@@ -2086,7 +2147,8 @@
             "answer": 0,
             "explanation": "شخصیت‌ها و رویدادها از عناصر اصلی شکل‌گیری داستان‌اند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۶: بازنویسی",
@@ -2136,7 +2198,8 @@
             "answer": 0,
             "explanation": "بازنویسی می‌تواند جمله‌بندی را تغییر دهد، اما باید پیام اصلی را حفظ کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۷: حکایت‌نگاری",
@@ -2186,7 +2249,8 @@
             "answer": 0,
             "explanation": "حکایت معمولاً کوتاه و دارای پیام یا نکته‌ای معنادار است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۸: نامه‌نگاری و ویرایش",
@@ -2236,9 +2300,19 @@
             "answer": 0,
             "explanation": "نامهٔ رسمی باید لحن محترمانه و هدف روشن داشته باشد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": "https://www.roshd.ir/farsi/Content/کتاب-نگارش-پایه-هشتم",
+      "referenceTitle": "کتاب نگارش پایه هشتم – شبکه رشد",
+      "referenceBasis": "فهرست معرفی‌شده در شبکه رشد با عناوین فعلی کاتالوگ یکسان نیست؛ باید با نسخه ۱۴۰۵–۱۴۰۶ بازبینی شود.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   },
   "arabic": {
     "title": "عربی",
@@ -2292,7 +2366,8 @@
             "answer": 2,
             "explanation": "نَحنُ ضمیر متکلم جمع و به معنی ماست."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "الدرس الثاني: أَهَمِّيَّةُ اللُّغَةِ الْعَرَبِيَّةِ",
@@ -2343,7 +2418,8 @@
             "answer": 0,
             "explanation": "أهمّیّة به معنی اهمیت و مهم‌بودن است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "الدرس الثالث: مِهْنَتُكَ فِي الْمُسْتَقْبَلِ",
@@ -2394,7 +2470,8 @@
             "answer": 1,
             "explanation": "سوف پیش از فعل مضارع می‌آید و آینده را نشان می‌دهد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "الدرس الرابع: التَّجْرِبَةُ الْجَديدَةُ",
@@ -2445,7 +2522,8 @@
             "answer": 0,
             "explanation": "ذَهَبْتُ یعنی من رفتم؛ شناسهٔ تُ به متکلم مفرد اشاره دارد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "الدرس الخامس: الصَّداقَةُ",
@@ -2496,7 +2574,8 @@
             "answer": 0,
             "explanation": "الصديق یعنی دوست و الصالح یعنی شایسته."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "الدرس السادس: فِي السَّفَرِ",
@@ -2547,7 +2626,8 @@
             "answer": 1,
             "explanation": "مِنْ مبدأ را با معنی از و إِلى مقصد را با معنی به‌سوی نشان می‌دهد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "الدرس السابع: أَرْضُ اللّهِ واسِعَةٌ",
@@ -2598,7 +2678,8 @@
             "answer": 0,
             "explanation": "أرض به معنی زمین و واسعة به معنی گسترده است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "الدرس الثامن: الِاعْتِمادُ عَلَى النَّفْسِ",
@@ -2649,7 +2730,8 @@
             "answer": 0,
             "explanation": "اعتمد على نفسك یعنی به خودت تکیه کن."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "الدرس التاسع: السَّفْرَةُ الْعِلْمِيَّةُ",
@@ -2700,7 +2782,8 @@
             "answer": 0,
             "explanation": "السفرة به معنی سفر و العلمية به معنی علمی است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "الدرس العاشر: الْمَراقِدُ الدِّينِيَّةُ",
@@ -2751,9 +2834,19 @@
             "answer": 0,
             "explanation": "المراقد جمع مرقد و به معنی آرامگاه‌هاست."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": "https://www.roshd.ir/quran/Content/کتاب-گویا-عربی-پایه-هشتم",
+      "referenceTitle": "کتاب گویای عربی پایه هشتم – شبکه رشد",
+      "referenceBasis": "فهرست درس‌ها در کتاب گویای رسمی شبکه رشد؛ عنوان درس دهم در منابع و چاپ‌ها اختلاف دارد.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   },
   "english": {
     "title": "زبان انگلیسی",
@@ -2795,7 +2888,8 @@
             "answer": 1,
             "explanation": "با She از فعل is استفاده می‌کنیم."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Unit 2: My Week",
@@ -2834,7 +2928,8 @@
             "answer": 1,
             "explanation": "Usually به معنی معمولاً است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Unit 3: My Abilities",
@@ -2873,7 +2968,8 @@
             "answer": 1,
             "explanation": "Can't شکل کوتاه cannot است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Unit 4: My Health",
@@ -2912,7 +3008,8 @@
             "answer": 1,
             "explanation": "Should برای پیشنهاد و توصیه به کار می‌رود."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Unit 5: My City",
@@ -2941,7 +3038,7 @@
             "explanation": "برای اسم مفرد از there is استفاده می‌شود."
           },
           {
-            "question": "Complete the sentence about one park: There ___ a park near my school.",
+            "question": "What does “next to” mean?",
             "options": [
               "داخل",
               "کنار",
@@ -2951,7 +3048,8 @@
             "answer": 1,
             "explanation": "Next to یعنی در کنار."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Unit 6: My Village",
@@ -3002,7 +3100,8 @@
             "answer": 1,
             "explanation": "Cloudy به معنی ابری است و وضعیت آب‌وهوا را توصیف می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Unit 7: My Hobbies",
@@ -3021,7 +3120,7 @@
         ],
         "questions": [
           {
-            "question": "How do you ask someone about their hobby?",
+            "question": "What does “hobby” mean?",
             "options": [
               "تکلیف",
               "سرگرمی",
@@ -3053,9 +3152,19 @@
             "answer": 0,
             "explanation": "Reading به معنی خواندن یا مطالعه کردن است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": "https://www.roshd.ir/zaban/Content/کتاب-زبان-انگلیسی-2-پایه-هشتم",
+      "referenceTitle": "کتاب زبان انگلیسی (۲) پایه هشتم – شبکه رشد",
+      "referenceBasis": "هفت عنوان My Nationality تا My Hobbies در معرفی رسمی شبکه رشد آمده‌اند.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   },
   "social": {
     "title": "مطالعات اجتماعی",
@@ -3097,7 +3206,9 @@
             "answer": 1,
             "explanation": "تقسیم روشن وظایف، مشارکت و مسئولیت‌پذیری را تقویت می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "تعاون"
       },
       {
         "title": "درس 2: تعاون (۲)",
@@ -3136,7 +3247,9 @@
             "answer": 2,
             "explanation": "در تعاون، اعضا برای هدف مشترک مسئولیت‌ها را تقسیم می‌کنند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "تعاون"
       },
       {
         "title": "درس 3: ساختار و تشکیلات دولت",
@@ -3175,7 +3288,9 @@
             "answer": 0,
             "explanation": "قوهٔ مجریه مسئول اجرای قوانین و ادارهٔ امور اجرایی کشور است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "نقش دولت در اداره کشور"
       },
       {
         "title": "درس 4: وظایف دولت",
@@ -3214,7 +3329,9 @@
             "answer": 2,
             "explanation": "برنامه‌ریزی به استفادهٔ مناسب از منابع محدود عمومی کمک می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "نقش دولت در اداره کشور"
       },
       {
         "title": "درس 5: آسیب‌های اجتماعی و پیشگیری از آن‌ها",
@@ -3253,7 +3370,9 @@
             "answer": 1,
             "explanation": "آگاهی و دریافت حمایت از افراد یا نهادهای مسئول می‌تواند به پیشگیری و حل مسئله کمک کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "نوجوانان و قانون"
       },
       {
         "title": "درس 6: قوهٔ قضائیه",
@@ -3292,7 +3411,9 @@
             "answer": 2,
             "explanation": "قوهٔ قضائیه به دادخواهی‌ها و اختلاف‌ها رسیدگی می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "نوجوانان و قانون"
       },
       {
         "title": "درس 7: ارتباط و رسانه",
@@ -3331,7 +3452,9 @@
             "answer": 1,
             "explanation": "رسانهٔ جمعی پیام را به گروه بزرگی از مخاطبان منتقل می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "عصر ارتباطات"
       },
       {
         "title": "درس 8: رسانه‌ها در زندگی ما",
@@ -3370,7 +3493,9 @@
             "answer": 0,
             "explanation": "شناخت فرستنده و هدف پیام، بخشی از تحلیل آگاهانهٔ رسانه‌ای است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "عصر ارتباطات"
       },
       {
         "title": "درس 9: ظهور اسلام در شبه‌جزیرهٔ عربستان",
@@ -3409,7 +3534,9 @@
             "answer": 1,
             "explanation": "آغاز دعوت پیامبر اسلام در شهر مکه بود."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "از حرا تا نینوا"
       },
       {
         "title": "درس 10: از رحلت پیامبر تا قیام کربلا (نینوا)",
@@ -3448,7 +3575,9 @@
             "answer": 1,
             "explanation": "خط زمان ترتیب وقوع رویدادها را نشان می‌دهد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "از حرا تا نینوا"
       },
       {
         "title": "درس 11: ورود اسلام به ایران",
@@ -3487,7 +3616,9 @@
             "answer": 1,
             "explanation": "تحولات تاریخی گسترده معمولاً در زمان و مناطق مختلف به‌تدریج رخ می‌دهند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "عصری تازه در تاریخ ایران"
       },
       {
         "title": "درس 12: عصر طلایی فرهنگ و تمدن ایرانی ـ اسلامی",
@@ -3526,7 +3657,9 @@
             "answer": 1,
             "explanation": "مراکز علمی و فعالیت علمی در رشد و انتقال دانش نقش داشتند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "عصری تازه در تاریخ ایران"
       },
       {
         "title": "درس 13: غزنویان، سلجوقیان و خوارزمشاهیان",
@@ -3565,7 +3698,9 @@
             "answer": 1,
             "explanation": "زمان، قلمرو و رویدادها معیارهای مناسبی برای مقایسهٔ حکومت‌ها هستند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "از غزنویان تا هجوم چنگیز خان"
       },
       {
         "title": "درس 14: میراث فرهنگی ایران در عصر سلجوقی",
@@ -3604,7 +3739,9 @@
             "answer": 0,
             "explanation": "بناها و آثار تاریخیِ برجای‌مانده بخشی از میراث فرهنگی‌اند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "از غزنویان تا هجوم چنگیز خان"
       },
       {
         "title": "درس 15: حملهٔ چنگیز و تیمور به ایران",
@@ -3643,7 +3780,9 @@
             "answer": 1,
             "explanation": "رویداد تاریخی را باید از جنبه‌های گوناگون و پیامدهای آن بررسی کرد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "عصر مغول و تیموری"
       },
       {
         "title": "درس 16: پیروزی فرهنگ بر شمشیر",
@@ -3682,7 +3821,9 @@
             "answer": 0,
             "explanation": "این تعبیر به ماندگاری فرهنگ و دانش در گذر زمان اشاره دارد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "عصر مغول و تیموری"
       },
       {
         "title": "درس 17: ویژگی‌های طبیعی آسیا",
@@ -3721,7 +3862,9 @@
             "answer": 0,
             "explanation": "فرایندهای زمین‌شناختی در شکل‌گیری ناهمواری‌ها نقش دارند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "آسیا، پهناورترین قاره"
       },
       {
         "title": "درس 18: ویژگی‌های انسانی و اقتصادی آسیا",
@@ -3760,7 +3903,9 @@
             "answer": 0,
             "explanation": "منابع آب، شرایط طبیعی و فرصت‌های اقتصادی بر محل زندگی مردم اثر می‌گذارند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "آسیا، پهناورترین قاره"
       },
       {
         "title": "درس 19: ویژگی‌های منطقهٔ جنوب‌غربی آسیا",
@@ -3799,7 +3944,9 @@
             "answer": 0,
             "explanation": "موقعیت این منطقه در پیوند میان آسیا، اروپا و آفریقا اهمیت ارتباطی ایجاد می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "منطقه جنوب غربی آسیا و جایگاه ایران در آن"
       },
       {
         "title": "درس 20: ایران و منطقهٔ جنوب‌غربی آسیا",
@@ -3838,7 +3985,9 @@
             "answer": 0,
             "explanation": "نفت و گاز از منابع مهم اقتصادی برخی کشورهای منطقه‌اند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "منطقه جنوب غربی آسیا و جایگاه ایران در آن"
       },
       {
         "title": "درس 21: ویژگی‌های طبیعی و انسانی اروپا",
@@ -3877,7 +4026,9 @@
             "answer": 0,
             "explanation": "عرض جغرافیایی و فاصله از دریا از عوامل اثرگذار بر آب‌وهوا هستند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "اروپا و آفریقا، دو چهره متفاوت"
       },
       {
         "title": "درس 22: ویژگی‌های طبیعی و انسانی آفریقا",
@@ -3916,7 +4067,9 @@
             "answer": 1,
             "explanation": "گستردگی قاره و عبور خط استوا باعث تنوع نواحی آب‌وهوایی آفریقا شده است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "اروپا و آفریقا، دو چهره متفاوت"
       },
       {
         "title": "درس 23: قارهٔ آمریکا",
@@ -3955,7 +4108,9 @@
             "answer": 1,
             "explanation": "قاره آمریکا معمولاً به دو بخش آمریکای شمالی و آمریکای جنوبی تقسیم می‌شود."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "بر جدید"
       },
       {
         "title": "درس 24: قارهٔ استرالیا و اقیانوسیه",
@@ -3994,9 +4149,20 @@
             "answer": 0,
             "explanation": "پراکندگی جزایر در پهنه اقیانوس آرام، مسیرهای دریایی را برای ارتباط و مبادله مهم می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookChapterTitle": "بر جدید"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": "https://www.roshd.ir/ejtemaee/Content/کتاب-مطالعات-اجتماعی-پایه-هشتم",
+      "referenceTitle": "کتاب مطالعات اجتماعی پایه هشتم – شبکه رشد",
+      "referenceBasis": "معرفی رسمی، ساختار ۱۲ فصل و ۲۴ درس را تأیید می‌کند؛ عنوان‌های فصل با درس‌های کاتالوگ گروه‌بندی شده‌اند.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   },
   "religion": {
     "title": "پیام‌های آسمان",
@@ -4038,7 +4204,8 @@
             "answer": 0,
             "explanation": "اندیشه در جهان می‌تواند شناخت و سپاسگزاری را بیشتر کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۲: عفو و گذشت",
@@ -4077,7 +4244,8 @@
             "answer": 0,
             "explanation": "عذرخواهی واقعی مسئولیت و جبران را در بر دارد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۳: همه چیز در دست تو",
@@ -4116,7 +4284,8 @@
             "answer": 0,
             "explanation": "انسان در برابر انتخاب‌های خود مسئول است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۴: پیوند جاودان",
@@ -4155,7 +4324,8 @@
             "answer": 0,
             "explanation": "مراجعه به منابع معتبر از برداشت نادرست جلوگیری می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۵: روزی که اسلام کامل شد",
@@ -4194,7 +4364,8 @@
             "answer": 0,
             "explanation": "زمینه و منبع معتبر به فهم دقیق‌تر تاریخ کمک می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۶: نردبان آسمان",
@@ -4233,7 +4404,8 @@
             "answer": 0,
             "explanation": "نماز عبادتی برای یاد و ارتباط با خداوند است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۷: یک فرصت طلایی",
@@ -4272,7 +4444,8 @@
             "answer": 0,
             "explanation": "فرصت‌ها محدودند و استفاده درست از آن‌ها اهمیت دارد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۸: نشان ارزشمندی",
@@ -4311,7 +4484,8 @@
             "answer": 2,
             "explanation": "ارزش انسان را نباید فقط با ظاهر و دارایی سنجید."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۹: تدبیر زندگانی",
@@ -4350,7 +4524,8 @@
             "answer": 1,
             "explanation": "مشورت زاویه‌های تازه‌ای نشان می‌دهد، اما تصمیم‌گیری مسئولانه همچنان لازم است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۱۰: دو سرمایهٔ گران‌بها",
@@ -4389,7 +4564,8 @@
             "answer": 1,
             "explanation": "اندیشه کمک می‌کند تصمیم را با دلیل و توجه به پیامدها بگیریم."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۱۱: آفت‌های زبان",
@@ -4428,7 +4604,8 @@
             "answer": 2,
             "explanation": "بازنشر خبر تأییدنشده ممکن است به دیگران آسیب بزند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۱۲: ارزش کار",
@@ -4467,7 +4644,8 @@
             "answer": 0,
             "explanation": "شناخت سهم واقعی اعضا به عدالت و همکاری بهتر کمک می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۱۳: کلید گنج‌ها",
@@ -4506,7 +4684,8 @@
             "answer": 0,
             "explanation": "خیرخواهی برای دیگران با روح دعا و مهربانی سازگار است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۱۴: ما مسلمانان",
@@ -4545,7 +4724,8 @@
             "answer": 0,
             "explanation": "گفت‌وگوی محترمانه امکان فهم بهتر و حفظ حرمت افراد را فراهم می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "درس ۱۵: حق‌الناس",
@@ -4584,7 +4764,8 @@
             "answer": 1,
             "explanation": "جبران حق مردم نیازمند پذیرش مسئولیت و اقدام برای بازگرداندن حق است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "مرور تکمیلی: اخلاق و بندگی",
@@ -4623,9 +4804,19 @@
             "answer": 0,
             "explanation": "تمرین مداوم به تبدیل رفتار خوب به عادت کمک می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": "https://www.roshd.ir/hekmat/Content/کتاب-پیام-های-آسمان-پایه-هشتم",
+      "referenceTitle": "کتاب پیام‌های آسمان پایه هشتم – شبکه رشد",
+      "referenceBasis": "صفحه رسمی شش محور کلی کتاب را معرفی می‌کند، نه فهرست کامل درس‌های چاپ جدید.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   },
   "quran": {
     "title": "قرآن",
@@ -4678,7 +4869,9 @@
             "answer": 0,
             "explanation": "درس نخست با بخش‌هایی از سوره‌های مؤمنون و نور همراه است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ مؤمنون و سورهٔ نور؛ همراه با آموزش مفاهیم و نامه‌ای از یک پدر به فرزند"
       },
       {
         "title": "درس 2: باد و خاک و آب و آتش بنده‌اند",
@@ -4728,7 +4921,9 @@
             "answer": 0,
             "explanation": "طبق فهرست درس‌های قرآن هشتم، درس دوم با سوره فرقان همراه است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ فرقان؛ همراه با آموزش مفاهیم و رسانه‌های قرآنی"
       },
       {
         "title": "درس 3: همه عالم جمال طلعت اوست؛ تا که را چشم این نظر باشد",
@@ -4778,7 +4973,9 @@
             "answer": 0,
             "explanation": "درس سوم با بخش‌هایی از سوره شعرا همراه است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ شعرا؛ همراه با آموزش مفاهیم و دعای آمرزش برای خود و پدر و مادر"
       },
       {
         "title": "درس 4: چون سلیمان از خدا حاجت بخواه؛ والدینت را دعا کن هر پگاه",
@@ -4828,7 +5025,9 @@
             "answer": 0,
             "explanation": "در فهرست کتاب، سوره نمل در درس چهارم آمده است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ نمل؛ همراه با آموزش مفاهیم و انس با قرآن کریم"
       },
       {
         "title": "درس 5: ای وارث پیمبر و قرآن و دین بیا",
@@ -4878,7 +5077,9 @@
             "answer": 0,
             "explanation": "سوره قصص در درس پنجم کتاب قرآن هشتم قرار دارد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ قصص؛ همراه با آموزش مفاهیم و روایت فضیل"
       },
       {
         "title": "درس 6: معبودهای باطل چون تار عنکبوت‌اند؛ با نسیم ایمان، معدوم و بی‌ثبات‌اند",
@@ -4929,7 +5130,9 @@
             "answer": 0,
             "explanation": "درس ششم با بخش‌هایی از سوره عنکبوت همراه است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ عنکبوت؛ همراه با آموزش مفاهیم و موضوع جایگاه زن در قرآن"
       },
       {
         "title": "درس 7: هر روز عمر مشق کن این شعر ناب را؛ فردای مرگ، اول صبح قیامت است",
@@ -4979,7 +5182,9 @@
             "answer": 0,
             "explanation": "درس هفتم شامل بخش‌هایی از سوره‌های روم و لقمان است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ روم و سورهٔ لقمان؛ همراه با آموزش مفاهیم و روایت چگونه مسلمان شدم؟"
       },
       {
         "title": "درس 8: راهرو گر صد هنر دارد، توکل بایدش",
@@ -5029,7 +5234,9 @@
             "answer": 0,
             "explanation": "سوره احزاب در درس هشتم کتاب قرار دارد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ احزاب؛ همراه با آموزش مفاهیم و معرفی شهریار پرهیزگار"
       },
       {
         "title": "درس 9: کدام دانه فرو رفت در زمین که نرست؟ چرا به دانه انسانت این گمان باشد؟",
@@ -5079,7 +5286,9 @@
             "answer": 0,
             "explanation": "درس نهم با بخش‌هایی از سوره‌های سبأ و فاطر همراه است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ سبأ و سورهٔ فاطر؛ همراه با آموزش مفاهیم و موضوع قرآن بخوان"
       },
       {
         "title": "درس 10: دستور خدا، سلام بر توست؛ ذکر تو و احترام بر توست",
@@ -5129,7 +5338,9 @@
             "answer": 0,
             "explanation": "درس دهم با سوره‌های یس و صافات همراه است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ یس و سورهٔ صافات؛ همراه با آموزش مفاهیم و تفسیر نمونه"
       },
       {
         "title": "درس 11: همنشین تو از تو به باشد؛ تا تو را عقل و دین بیفزاید",
@@ -5179,7 +5390,9 @@
             "answer": 0,
             "explanation": "درس یازدهم با بخش‌هایی از سوره‌های ص و زمر همراه است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ ص و سورهٔ زمر؛ همراه با آموزش مفاهیم و پرواز به سوی آسمان"
       },
       {
         "title": "درس 12: یا غافر الخطایا! دریاب بی‌نوا را؛ یا واهب العطایا! تغییر ده قضا را",
@@ -5229,9 +5442,20 @@
             "answer": 0,
             "explanation": "درس دوازدهم با سوره غافر همراه است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "bookScope": "سورهٔ غافر؛ همراه با آموزش مفاهیم و موضوع راز سرانگشتان"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": "https://www.roshd.ir/quran/Content/کتاب-آموزش-قرآن-پایه-هشتم",
+      "referenceTitle": "کتاب آموزش قرآن پایه هشتم – شبکه رشد",
+      "referenceBasis": "معرفی رسمی، ۱۲ درس و سوره‌های مربوط را فهرست می‌کند؛ ویرایش ۱۴۰۵–۱۴۰۶ صفحه‌به‌صفحه بررسی نشده است.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   },
   "thinking": {
     "title": "تفکر و سبک زندگی",
@@ -5285,7 +5509,8 @@
             "answer": 0,
             "explanation": "مشاهده بر دادهٔ قابل دیدن یا اندازه‌گیری تکیه دارد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فعالیت: پروژه و پژوهش",
@@ -5336,7 +5561,8 @@
             "answer": 0,
             "explanation": "ذکر منبع به خواننده اجازه می‌دهد اطلاعات را بررسی کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فعالیت: آداب معاشرت و گفت‌وگو",
@@ -5387,7 +5613,8 @@
             "answer": 1,
             "explanation": "گوش‌دادن فعال با توجه، فهم و پرسش مرتبط همراه است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فعالیت: رسانه‌ها و زندگی ما",
@@ -5438,7 +5665,8 @@
             "answer": 0,
             "explanation": "هدف پیام و منبع آن کمک می‌کند خبر را از محتوای تبلیغاتی تشخیص دهیم."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فعالیت: مهار نفس و خویشتن‌داری",
@@ -5489,7 +5717,8 @@
             "answer": 0,
             "explanation": "مکث کوتاه فرصت می‌دهد احساس و پیامد رفتار را بررسی کنیم."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فعالیت: تصمیم‌گیری مسئولانه",
@@ -5540,7 +5769,8 @@
             "answer": 0,
             "explanation": "سنجش پیامدها به تصمیم‌گیری مسئولانه کمک می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فعالیت: مدیریت فشار روانی و خشم",
@@ -5591,7 +5821,8 @@
             "answer": 0,
             "explanation": "برنامه‌ریزی متعادل و حمایت اجتماعی می‌تواند مدیریت فشار را آسان‌تر کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "فعالیت: آداب سفر و بازدید علمی",
@@ -5642,9 +5873,19 @@
             "answer": 0,
             "explanation": "آگاهی از هدف و مقررات، آمادگی و رعایت مسئولیت‌های گروهی را بیشتر می‌کند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": null,
+      "referenceTitle": null,
+      "referenceBasis": "برای این درس هنوز منبع رسمیِ قابل‌دسترسی با فهرست جزئیات در این بررسی پیدا نشد.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   },
   "work": {
     "title": "کار و فناوری",
@@ -5698,7 +5939,8 @@
             "answer": 0,
             "explanation": "انتخاب ماده باید با کاربرد، وزن و استحکام موردنیاز سازگار باشد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "پودمان ۲: الکترونیک",
@@ -5749,7 +5991,8 @@
             "answer": 0,
             "explanation": "مقاومت برای محدودکردن جریان در مدار به کار می‌رود."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "پودمان ۳: شهروند الکترونیکی (۱) و پست الکترونیکی",
@@ -5800,7 +6043,8 @@
             "answer": 1,
             "explanation": "عنوان روشن به گیرنده کمک می‌کند موضوع پیام را سریع تشخیص دهد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "پودمان ۴: صنایع دستی (بافت)",
@@ -5851,7 +6095,8 @@
             "answer": 0,
             "explanation": "تار و پود با نظم مشخص در هم قرار می‌گیرند و ساختار بافت را ایجاد می‌کنند."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "پودمان ۵: شهروند الکترونیکی (۲)",
@@ -5902,7 +6147,8 @@
             "answer": 0,
             "explanation": "اطلاعات شخصی را فقط در موقعیت‌های ضروری و برای مخاطب معتبر به اشتراک می‌گذاریم."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "پودمان ۶: پرورش و نگهداری از حیوانات",
@@ -5953,7 +6199,8 @@
             "answer": 0,
             "explanation": "نگهداری مسئولانه به زمان، محیط، خوراک و مراقبت پیوسته نیاز دارد."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "پودمان ۷: امور اداری و مالی",
@@ -6004,7 +6251,8 @@
             "answer": 0,
             "explanation": "بودجه برنامه‌ای برای پیش‌بینی و مدیریت درآمدها و هزینه‌هاست."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "پودمان ۸: معماری و سازه (ماکت‌سازی)",
@@ -6055,9 +6303,19 @@
             "answer": 2,
             "explanation": "در مقیاس ۱:۱۰۰، هر ۱ سانتی‌متر در ماکت برابر ۱۰۰ سانتی‌متر یا ۱ متر در واقعیت است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": "https://www.roshd.ir/fanavari/Content/کتاب-کار-و-فناوری-پایه-هشتم",
+      "referenceTitle": "کتاب کار و فناوری پایه هشتم – شبکه رشد",
+      "referenceBasis": "هشت پودمان رسمی در معرفی شبکه رشد با عناوین کاتالوگ هم‌خوانی کلی دارند.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   },
   "english_workbook": {
     "title": "کتاب کار زبان انگلیسی",
@@ -6078,7 +6336,7 @@
         ],
         "questions": [
           {
-            "question": "Which question asks a person about their country of origin?",
+            "question": "Which form of “be” completes this sentence: She ___ Iranian?",
             "options": [
               "am",
               "is",
@@ -6089,7 +6347,7 @@
             "explanation": "برای She از is استفاده می‌کنیم."
           },
           {
-            "question": "Choose the correct way to ask someone's country.",
+            "question": "Which nationality means “اهل کویت”؟",
             "options": [
               "Kuwaiti",
               "Qatari",
@@ -6110,7 +6368,8 @@
             "answer": 0,
             "explanation": "ترتیب درست پرسش Where are you from? است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Lesson 2: My Week",
@@ -6160,7 +6419,8 @@
             "answer": 1,
             "explanation": "Every week یعنی هر هفته."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Lesson 3: My Abilities",
@@ -6178,7 +6438,7 @@
         ],
         "questions": [
           {
-            "question": "Which sentence correctly uses can before a base verb?",
+            "question": "Which verb form completes the sentence: can ___?",
             "options": [
               "plays",
               "playing",
@@ -6189,7 +6449,7 @@
             "explanation": "بعد از can شکل ساده فعل می‌آید."
           },
           {
-            "question": "Which sentence uses can with the base form of the verb?",
+            "question": "What does “cannot” mean?",
             "options": [
               "می‌تواند",
               "نمی‌تواند",
@@ -6210,7 +6470,8 @@
             "answer": 2,
             "explanation": "ساختار درست فاعل + can + فعل ساده است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Lesson 4: My Health",
@@ -6260,7 +6521,8 @@
             "answer": 0,
             "explanation": "What's wrong? یعنی چه مشکلی پیش آمده؟"
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Lesson 5: My City",
@@ -6278,18 +6540,18 @@
         ],
         "questions": [
           {
-            "question": "Which sentence describes three shops in a town?",
+            "question": "Complete the sentence: There ___ three shops in a town.",
             "options": [
               "are",
               "is",
               "am",
               "be"
             ],
-            "answer": 1,
-            "explanation": "Museum مفرد است؛ پس There is درست است."
+            "answer": 0,
+            "explanation": "چون shops جمع است، از There are استفاده می‌کنیم."
           },
           {
-            "question": "Which sentence correctly describes three shops?",
+            "question": "What does “opposite” mean?",
             "options": [
               "کنار",
               "داخل",
@@ -6310,7 +6572,8 @@
             "answer": 2,
             "explanation": "برای اسم جمع shops از There are استفاده می‌کنیم."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Lesson 6: My Village",
@@ -6360,7 +6623,8 @@
             "answer": 0,
             "explanation": "Mountain village یعنی روستایی در ناحیه کوهستانی."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       },
       {
         "title": "Lesson 7: My Hobbies",
@@ -6410,8 +6674,18 @@
             "answer": 0,
             "explanation": "How about you? برای پرسیدن نظر یا وضعیت طرف مقابل مناسب است."
           }
-        ]
+        ],
+        "alignmentStatus": "not_verified_against_1405_1406_pdf"
       }
-    ]
+    ],
+    "alignmentReview": {
+      "targetEdition": "۱۴۰۵–۱۴۰۶",
+      "status": "needs_exact_edition_pdf_review",
+      "officialPortal": "https://chap.sch.ir",
+      "curriculumReference": "https://www.roshd.ir/zaban/Content/کتاب-زبان-انگلیسی-2-پایه-هشتم",
+      "referenceTitle": "کتاب زبان انگلیسی (۲) پایه هشتم – شبکه رشد",
+      "referenceBasis": "فقط عنوان هفت درس کتاب اصلی تأیید شده؛ تمرین‌های این کتاب‌کار در PDF رسمی بررسی نشده‌اند.",
+      "note": "این بررسیِ اولیه جایگزین تطبیق صفحه‌به‌صفحه با PDF رسمی چاپ ۱۴۰۵–۱۴۰۶ نیست. هیچ محتوای این درس صرفاً به دلیل وجود در کاتالوگ، تأییدشده تلقی نمی‌شود."
+    }
   }
 }
