@@ -1,0 +1,15 @@
+name = "fahmino-gemini-api"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+# GEMINI_API_KEY را اینجا ننویس؛ فقط به‌صورت Secret روی سرویس تنظیم شود.
+
+# محدودسازی تقریبی: حداکثر ۲۰ درخواست از هر IP در هر ۶۰ ثانیه.
+# برای حساب Cloudflare خودت یک namespace_id عددی یکتا انتخاب کن.
+[[ratelimits]]
+name = "CHAT_LIMITER"
+namespace_id = "481206"
+[ratelimits.simple]
+limit = 20
+period = 60
