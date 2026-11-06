@@ -66,7 +66,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
     _scrollToBottom();
 
     final history = _messages
-        .takeLast(11)
+        .takeLast(12)
         .map((m) => {
               'role': m.isUser ? 'user' : 'model',
               'text': m.text,
