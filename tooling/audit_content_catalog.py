@@ -116,6 +116,10 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
                 if not isinstance(question, dict):
                     errors.append(f"{qlabel}: question must be an object")
                     continue
+                if question.get("contentOrigin") != "fahmino_authored_practice":
+                    errors.append(f"{qlabel}: question origin must be labeled as Fahmino-authored practice")
+                if question.get("verificationStatus") != "not_verified_against_official_textbook":
+                    errors.append(f"{qlabel}: question must not be presented as textbook-verified")
                 prompt = question.get("question")
                 if not isinstance(prompt, str) or not prompt.strip():
                     errors.append(f"{qlabel}: question text is empty")
