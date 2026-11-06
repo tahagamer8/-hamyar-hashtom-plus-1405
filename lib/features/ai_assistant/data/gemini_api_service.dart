@@ -87,7 +87,7 @@ class GeminiApiService {
               if (studyContext != null) 'studyContext': studyContext,
             }),
           )
-          .timeout(const Duration(seconds: 45));
+          .timeout(const Duration(seconds: 60));
 
       final decoded = jsonDecode(utf8.decode(response.bodyBytes));
       if (decoded is Map<String, dynamic>) {
