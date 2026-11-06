@@ -96,8 +96,18 @@ jobs:
       - name: Generate Persian PDF assets
         run: |
           python tooling/generate_learning_pdfs.py --output-dir assets/generated_pdfs
-          test -s assets/generated_pdfs/Fahmino-Grade8-Notes-FA.pdf
-          test -s assets/generated_pdfs/Fahmino-Grade8-Sample-Questions-FA.pdf
+          test -s assets/generated_pdfs/manifest.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("assets/generated_pdfs/manifest.json").read_text(encoding="utf-8"))
+          if len(manifest) < 20:
+              raise SystemExit(f"Expected chapter-level PDF resources, found {len(manifest)}")
+          missing = [item["fileName"] for item in manifest if not (Path("assets/generated_pdfs") / item["fileName"]).is_file()]
+          if missing:
+              raise SystemExit("Missing generated PDFs: " + ", ".join(missing[:10]))
+          print(f"Verified {len(manifest)} chapter PDF resources.")
+          PY
 
       - name: Install dependencies
         run: flutter pub get
