@@ -34,6 +34,8 @@ jobs:
           sed -i 's/android:label="[^"]*"/android:label="فهمینو"/' android/app/src/main/AndroidManifest.xml
 
       - name: Keep Android application identity stable
+        env:
+          FAHMINO_PREVIEW_BUILD: ${{ github.ref != 'refs/heads/main' }}
         run: python tooling/configure_android_gradle.py
 
       - name: Configure persistent release signing
