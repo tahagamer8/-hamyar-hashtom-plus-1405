@@ -9,10 +9,11 @@
 1. از Worker موجود با نام دقیق `fahmino-api-2` استفاده کنید؛ Worker قدیمی `fahmino-api` را تغییر ندهید.
 2. محتوای `worker/src/index.js` را در Worker با نام `fahmino-api-2` قرار دهید.
 3. در Settings → Variables and Secrets یک Secret با نام دقیق `GEMINI_API_KEY` ایجاد کنید. مقدار کلید را در کد، GitHub، APK یا گفت‌وگو قرار ندهید.
-4. اگر از تنظیمات `worker/wrangler.toml` استفاده می‌کنید، پیش از انتشار مطمئن شوید شناسهٔ `namespace_id` برای حساب شما یکتا است.
-5. Worker را Deploy کنید. آدرس پایهٔ آن در فهمینو از قبل تنظیم شده است:
+4. در بخش Bindings یک Rate Limiting binding با نام دقیق `CHAT_LIMITER` بسازید؛ محدودیت پیشنهادی ۲۰ درخواست در ۶۰ ثانیه برای هر IP است. بدون این binding، Worker عمداً درخواست‌های چت را با خطای پیکربندی رد می‌کند.
+5. اگر از تنظیمات `worker/wrangler.toml` استفاده می‌کنید، پیش از انتشار مطمئن شوید شناسهٔ `namespace_id` برای حساب شما یکتا است.
+6. Worker را Deploy کنید. آدرس پایهٔ آن در فهمینو از قبل تنظیم شده است:
    `https://fahmino-api-2.tahamrh2.workers.dev`
-6. مسیر API به‌صورت خودکار `/api/chat` است.
+7. مسیر API به‌صورت خودکار `/api/chat` است.
 
 ## محدودیت‌های نسخهٔ آزمایشی
 - حداکثر ۱۲ پیام در هر درخواست و ۳۰۰۰ نویسه برای هر پیام
