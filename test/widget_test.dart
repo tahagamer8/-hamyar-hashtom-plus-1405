@@ -71,6 +71,8 @@ void main() {
     expect(catalog.length, greaterThanOrEqualTo(12));
     expect(catalog.values.fold<int>(0, (sum, item) => sum + ((item as Map<String, dynamic>)['chapters'] as List<dynamic>).length), greaterThanOrEqualTo(130));
     expect((catalog['math'] as Map<String, dynamic>)['chapters'], hasLength(9));
+    final firstMathChapter = ((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>).first as Map<String, dynamic>;
+    expect(firstMathChapter['learningSections'], hasLength(4));
     expect((catalog['science'] as Map<String, dynamic>)['chapters'], hasLength(15));
     expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(24));
     final religionChapters = (catalog['religion'] as Map<String, dynamic>)['chapters'] as List<dynamic>;
