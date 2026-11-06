@@ -111,6 +111,9 @@ test("forwards selected study context as untrusted educational reference", async
       studyContext: {
         subjectTitle: "ریاضی",
         chapterTitle: "عددهای صحیح و گویا",
+        bookChapterTitle: "عددهای صحیح و گویا",
+        bookScope: "فصل اول ریاضی",
+        alignmentStatus: "not_verified_against_1405_1406_pdf",
         summary: "عددهای گویا به صورت کسر نوشته می‌شوند.",
         sourceLabel: "محتوای اولیهٔ فهمینو",
         points: ["مخرج کسر نباید صفر باشد."],
