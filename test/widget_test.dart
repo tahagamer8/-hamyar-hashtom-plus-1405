@@ -68,8 +68,8 @@ void main() {
     final file = File('assets/content/catalog_fa.json');
     expect(await file.exists(), isTrue);
     final catalog = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
-    expect(catalog.length, greaterThanOrEqualTo(12));
-    expect(catalog.values.fold<int>(0, (sum, item) => sum + ((item as Map<String, dynamic>)['chapters'] as List<dynamic>).length), greaterThanOrEqualTo(130));
+    expect(catalog.length, greaterThanOrEqualTo(13));
+    expect(catalog.values.fold<int>(0, (sum, item) => sum + ((item as Map<String, dynamic>)['chapters'] as List<dynamic>).length), greaterThanOrEqualTo(139));
     expect((catalog['math'] as Map<String, dynamic>)['chapters'], hasLength(9));
     final firstMathChapter = ((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>).first as Map<String, dynamic>;
     expect(firstMathChapter['learningSections'], hasLength(4));
@@ -123,9 +123,18 @@ void main() {
         }
       }
     }
-    expect(totalQuestions, 369);
+    expect(totalQuestions, 387);
     expect(((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
         .fold<int>(0, (sum, chapter) => sum + ((chapter as Map<String, dynamic>)['questions'] as List<dynamic>).length), 36);
+    final mathChapters = (catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>;
+    final advancedCount = mathChapters.fold<int>(0, (sum, raw) {
+      final chapter = raw as Map<String, dynamic>;
+      final advanced = chapter['challengeQuestions'] as List<dynamic>? ?? [];
+      expect(advanced.every((q) => (q as Map<String, dynamic>)['difficulty'] == 'advanced'), isTrue);
+      return sum + advanced.length;
+    });
+    expect(advancedCount, 27);
+    expect((catalog['culture_art'] as Map<String, dynamic>)['chapters'], hasLength(9));
     expect(((catalog['science'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
         .fold<int>(0, (sum, chapter) => sum + ((chapter as Map<String, dynamic>)['questions'] as List<dynamic>).length), 60);
     expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(24));
