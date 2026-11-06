@@ -38,6 +38,7 @@ class GeminiApiService {
   Future<String> sendMessages({
     required String workerUrl,
     required List<Map<String, String>> messages,
+    Map<String, dynamic>? studyContext,
   }) async {
     final base = workerUrl.trim().replaceFirst(RegExp(r'/+$'), '');
     final uri = Uri.tryParse('$base/api/chat');
@@ -51,7 +52,10 @@ class GeminiApiService {
           .post(
             uri,
             headers: const {'Content-Type': 'application/json'},
-            body: jsonEncode({'messages': messages}),
+            body: jsonEncode({
+              'messages': messages,
+              if (studyContext != null) 'studyContext': studyContext,
+            }),
           )
           .timeout(const Duration(seconds: 45));
 
