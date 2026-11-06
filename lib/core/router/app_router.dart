@@ -92,6 +92,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 ? nestedContext
                 : payload,
             initialPrompt: payload?['initialPrompt'] as String?,
+            lessonCacheKey: payload?['lessonCacheKey'] as String?,
           );
         },
       ),
