@@ -104,12 +104,17 @@ jobs:
           import json
           from pathlib import Path
           manifest = json.loads(Path("assets/generated_pdfs/manifest.json").read_text(encoding="utf-8"))
-          if len(manifest) < 20:
-              raise SystemExit(f"Expected chapter-level PDF resources, found {len(manifest)}")
-          missing = [item["fileName"] for item in manifest if not (Path("assets/generated_pdfs") / item["fileName"]).is_file()]
+          catalog = json.loads(Path("assets/content/catalog_fa.json").read_text(encoding="utf-8"))
+          chapter_count = sum(len(subject["chapters"]) for subject in catalog.values())
+          expected_count = chapter_count * 2 + 2
+          if len(manifest) != expected_count:
+              raise SystemExit(f"Expected {expected_count} chapter and aggregate PDF resources, found {len(manifest)}")
+          required = ["Fahmino-Grade8-Notes-FA.pdf", "Fahmino-Grade8-Sample-Questions-FA.pdf"]
+          missing = [name for name in required if not (Path("assets/generated_pdfs") / name).is_file()]
+          missing += [item["fileName"] for item in manifest if not (Path("assets/generated_pdfs") / item["fileName"]).is_file()]
           if missing:
               raise SystemExit("Missing generated PDFs: " + ", ".join(missing[:10]))
-          print(f"Verified {len(manifest)} chapter PDF resources.")
+          print(f"Verified {len(manifest)} chapter and aggregate PDF resources.")
           PY
 
       - name: Install dependencies
@@ -124,6 +129,15 @@ jobs:
       - name: Test Gemini Worker
         run: npm --prefix worker test
 
+      - name: Smoke test deployed Gemini Worker without a model request
+        env:
+          FAHMINO_WORKER_URL: https://fahmino-api-2.tahamrh2.workers.dev
+        run: |
+          health="$(curl --retry 3 --retry-delay 3 --fail --silent --show-error "$FAHMINO_WORKER_URL/health")"
+          python -c 'import json,sys; d=json.load(sys.stdin); assert d.get("ok") is True; assert d.get("geminiSecretConfigured") is True; assert d.get("rateLimiterConfigured") is True; print("Worker health, Gemini secret binding, and rate limiter are configured.")' <<< "$health"
+          status="$(curl --silent --show-error -o /tmp/fahmino-worker-invalid.json -w '%{http_code}' -X POST -H 'Content-Type: application/json' --data '{"messages":[]}' "$FAHMINO_WORKER_URL/api/chat")"
+          test "$status" = "400"
+          echo "Worker chat route and request validation responded without invoking Gemini."
       - name: Build release APKs
         run: flutter build apk --release --split-per-abi
 
