@@ -65,6 +65,15 @@ export default {
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: corsHeaders });
     }
+    if (request.method === "GET" && url.pathname === "/health") {
+      return json({
+        ok: true,
+        service: "fahmino-api",
+        model: MODEL,
+        geminiSecretConfigured: Boolean(env.GEMINI_API_KEY),
+        rateLimiterConfigured: Boolean(env.CHAT_LIMITER),
+      });
+    }
     if (request.method !== "POST" || url.pathname !== "/api/chat") {
       return json({ error: "مسیر درخواست پیدا نشد." }, 404);
     }
