@@ -88,10 +88,36 @@ class _SearchScreenState extends State<SearchScreen> {
                     .whereType<Map<String, dynamic>>()
                     .toList();
 
+                final learningSections =
+                    (chapter['learningSections'] as List<dynamic>? ?? [])
+                        .whereType<Map<String, dynamic>>()
+                        .toList();
+                final sectionFields = <MapEntry<String, String>>[];
+                for (final section in learningSections) {
+                  sectionFields.add(MapEntry(
+                    'بخش درسنامه',
+                    section['title'] as String? ?? '',
+                  ));
+                  sectionFields.add(MapEntry(
+                    'متن درسنامه',
+                    section['content'] as String? ?? '',
+                  ));
+                  sectionFields.addAll(
+                    (section['keyPoints'] as List<dynamic>? ?? [])
+                        .whereType<String>()
+                        .map((value) => MapEntry('نکتهٔ درسنامه', value)),
+                  );
+                  sectionFields.addAll(
+                    (section['examples'] as List<dynamic>? ?? [])
+                        .whereType<String>()
+                        .map((value) => MapEntry('مثال درسنامه', value)),
+                  );
+                }
                 final fields = <MapEntry<String, String>>[
                   MapEntry('نام درس', subjectTitle),
                   MapEntry('عنوان فصل', chapterTitle),
                   MapEntry('درسنامه', summary),
+                  ...sectionFields,
                   ...points.map((value) => MapEntry('نکتهٔ آموزشی', value)),
                   ...steps.map((value) => MapEntry('حل مثال', value)),
                   MapEntry('مثال', example),
