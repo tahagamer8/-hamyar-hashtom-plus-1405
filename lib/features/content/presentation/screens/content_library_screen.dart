@@ -289,6 +289,9 @@ class _ChapterContent extends ConsumerWidget {
     final points = (chapter['points'] as List<dynamic>? ?? []).cast<String>();
     final questions =
         (chapter['questions'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
+    final challengeQuestions =
+        (chapter['challengeQuestions'] as List<dynamic>? ?? [])
+            .cast<Map<String, dynamic>>();
     final bookSolutions =
         (chapter['bookSolutions'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
 
@@ -405,7 +408,18 @@ class _ChapterContent extends ConsumerWidget {
               Text('نمونه‌سؤال‌های این فصل', style: theme.textTheme.titleSmall),
               for (var i = 0; i < questions.length; i++)
                 _ReadOnlyQuestion(question: questions[i], number: i + 1),
-              if (questions.isEmpty)
+              if (challengeQuestions.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                Text('سؤال‌های دشوار و ترکیبی',
+                    style: theme.textTheme.titleSmall),
+                const SizedBox(height: 4),
+                for (var i = 0; i < challengeQuestions.length; i++)
+                  _ReadOnlyQuestion(
+                    question: challengeQuestions[i],
+                    number: questions.length + i + 1,
+                  ),
+              ],
+              if (questions.isEmpty && challengeQuestions.isEmpty)
                 const Text('برای این فصل هنوز نمونه‌سؤالی ثبت نشده است.'),
               const SizedBox(height: 12),
               ChapterPdfResources(
