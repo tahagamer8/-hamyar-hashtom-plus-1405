@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hamyar_hashtom_plus/features/ai_assistant/data/gemini_api_service.dart';
 
@@ -20,6 +23,9 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   final _scroll = ScrollController();
   final _service = GeminiApiService();
   final List<_ChatMessage> _messages = [];
+  Map<String, dynamic>? _activeStudyContext;
+  Future<Map<String, dynamic>>? _catalogFuture;
+  String? _selectedStudyKey;
   bool _loading = false;
   bool _ready = false;
   String? _error;
@@ -27,7 +33,139 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   @override
   void initState() {
     super.initState();
+    _activeStudyContext = widget.studyContext;
     _loadUrl();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _catalogFuture ??= DefaultAssetBundle.of(context)
+        .loadString('assets/content/catalog_fa.json')
+        .then((raw) {
+      final catalog = jsonDecode(raw) as Map<String, dynamic>;
+      _resolveInitialStudySelection(catalog);
+      return catalog;
+    });
+  }
+
+  void _resolveInitialStudySelection(Map<String, dynamic> catalog) {
+    final context = _activeStudyContext;
+    if (context == null) return;
+    for (final subjectEntry in catalog.entries) {
+      final subject = subjectEntry.value as Map<String, dynamic>;
+      final chapters = (subject['chapters'] as List<dynamic>? ?? []);
+      for (var index = 0; index < chapters.length; index++) {
+        final chapter = chapters[index] as Map<String, dynamic>;
+        if ((subject['title']?.toString() ?? '') == context['subjectTitle'] &&
+            (chapter['title']?.toString() ?? '') == context['chapterTitle']) {
+          _selectedStudyKey = '${subjectEntry.key}::$index';
+          return;
+        }
+      }
+    }
+  }
+
+  Map<String, dynamic> _makeStudyContext(
+    String subjectId,
+    Map<String, dynamic> subject,
+    Map<String, dynamic> chapter,
+  ) {
+    return {
+      'subjectTitle': subject['title']?.toString() ?? 'درس',
+      'chapterTitle': chapter['title']?.toString() ?? 'فصل',
+      'summary': chapter['summary']?.toString() ?? '',
+      'points': (chapter['points'] as List<dynamic>? ?? [])
+          .whereType<String>().take(8).toList(),
+      'example': chapter['example']?.toString() ?? '',
+      'solutionSteps': (chapter['solutionSteps'] as List<dynamic>? ?? [])
+          .whereType<String>().take(8).toList(),
+      'sourceLabel': 'محتوای فعلی فهمینو؛ ممکن است هنوز با چاپ رسمی تطبیق کامل نشده باشد',
+    };
+  }
+
+  Widget _studyPicker(ThemeData theme) {
+    return FutureBuilder<Map<String, dynamic>>(
+      future: _catalogFuture,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return const SizedBox.shrink();
+        final options = <DropdownMenuItem<String>>[];
+        final lookup = <String, Map<String, dynamic>>{};
+        for (final entry in snapshot.data!.entries) {
+          final subject = entry.value as Map<String, dynamic>;
+          final chapters = (subject['chapters'] as List<dynamic>? ?? []);
+          for (var index = 0; index < chapters.length; index++) {
+            final chapter = chapters[index] as Map<String, dynamic>;
+            final key = '${entry.key}::$index';
+            lookup[key] = {
+              'subjectId': entry.key,
+              'subject': subject,
+              'chapter': chapter,
+            };
+            options.add(DropdownMenuItem<String>(
+              value: key,
+              child: Text(
+                '${subject['title'] ?? entry.key} — ${chapter['title'] ?? 'فصل'}',
+                overflow: TextOverflow.ellipsis,
+              ),
+            ));
+          }
+        }
+        final selected = lookup.containsKey(_selectedStudyKey)
+            ? _selectedStudyKey
+            : null;
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
+          child: Card(
+            margin: EdgeInsets.zero,
+            child: ExpansionTile(
+              initiallyExpanded: selected == null,
+              leading: Icon(Icons.menu_book_rounded, color: theme.colorScheme.primary),
+              title: const Text('پایه و فصل موردنظر را انتخاب کن'),
+              subtitle: Text(selected == null
+                  ? 'برای پاسخ دقیق‌تر، زمینهٔ کتاب را مشخص کن'
+                  : 'فصل انتخاب‌شده به دستیار فرستاده می‌شود'),
+              childrenPadding: const EdgeInsets.fromLTRB(14, 0, 14, 14),
+              children: [
+                DropdownButtonFormField<String>(
+                  key: ValueKey(selected),
+                  initialValue: selected,
+                  isExpanded: true,
+                  decoration: const InputDecoration(
+                    labelText: 'درس و فصل',
+                    border: OutlineInputBorder(),
+                  ),
+                  items: options,
+                  onChanged: (key) {
+                    if (key == null) return;
+                    final selectedData = lookup[key]!;
+                    setState(() {
+                      _selectedStudyKey = key;
+                      _activeStudyContext = _makeStudyContext(
+                        selectedData['subjectId'] as String,
+                        selectedData['subject'] as Map<String, dynamic>,
+                        selectedData['chapter'] as Map<String, dynamic>,
+                      );
+                    });
+                  },
+                ),
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: TextButton.icon(
+                    onPressed: () => setState(() {
+                      _selectedStudyKey = null;
+                      _activeStudyContext = null;
+                    }),
+                    icon: const Icon(Icons.close_rounded),
+                    label: const Text('حذف زمینهٔ درسی'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Future<void> _loadUrl() async {
@@ -99,7 +237,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
       final answer = await _service.sendMessages(
         workerUrl: _urlInput.text,
         messages: history,
-        studyContext: widget.studyContext,
+        studyContext: _activeStudyContext,
       );
       if (!mounted) return;
       setState(() => _messages.add(_ChatMessage(text: answer, isUser: false)));
@@ -171,7 +309,8 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
           : Column(
               children: [
                 _connectionPanel(theme),
-                if (widget.studyContext != null)
+                _studyPicker(theme),
+                if (_activeStudyContext != null)
                   _studyContextPanel(theme),
                 Expanded(
                   child: _messages.isEmpty
@@ -282,8 +421,8 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   }
 
   Widget _studyContextPanel(ThemeData theme) {
-    final subject = widget.studyContext?['subjectTitle']?.toString() ?? 'درس';
-    final chapter = widget.studyContext?['chapterTitle']?.toString() ?? 'فصل';
+    final subject = _activeStudyContext?['subjectTitle']?.toString() ?? 'درس';
+    final chapter = _activeStudyContext?['chapterTitle']?.toString() ?? 'فصل';
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
       child: Container(
