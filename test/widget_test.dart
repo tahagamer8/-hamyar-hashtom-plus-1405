@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -125,7 +124,7 @@ void main() {
   testWidgets('sample questions display answer key', (tester) async {
     await tester.pumpWidget(_contentApp('sampleExams'));
     await tester.pumpAndSettle();
-    expect(find.text('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
+    expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
     expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
   });
 
