@@ -1,7 +1,7 @@
 const MODEL = "gemini-3.8-flash";
 const MAX_MESSAGES = 12;
 const MAX_MESSAGE_LENGTH = 3000;
-const MAX_OUTPUT_TOKENS = 2400;
+const MAX_OUTPUT_TOKENS = 4096;
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -192,51 +192,71 @@ export default {
       },
     };
 
-    try {
-      const upstream = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-goog-api-key": env.GEMINI_API_KEY,
-          },
-          body: JSON.stringify(payload),
-          signal: AbortSignal.timeout(30_000),
-        }
-      );
-
-      let result;
+    let upstream;
+    let lastError;
+    for (let attempt = 0; attempt < 2; attempt++) {
       try {
-        result = await upstream.json();
-      } catch {
-        return json({ error: "پاسخ سرویس هوش مصنوعی قابل خواندن نیست." }, 502);
+        upstream = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-goog-api-key": env.GEMINI_API_KEY,
+            },
+            body: JSON.stringify(payload),
+            signal: AbortSignal.timeout(18_000),
+          }
+        );
+        if (upstream.status !== 502 && upstream.status !== 503 && upstream.status !== 504) {
+          break;
+        }
+        if (attempt === 1) break;
+      } catch (error) {
+        lastError = error;
+        if (attempt === 1) break;
       }
+      await new Promise((resolve) => setTimeout(resolve, 350));
+    }
 
-      if (!upstream.ok) {
-        return json({
-          error: upstream.status === 429
-            ? "سهمیهٔ درخواست‌ها فعلاً تمام شده؛ کمی بعد دوباره امتحان کن."
-            : "ارتباط با سرویس هوش مصنوعی برقرار نشد. تنظیمات سرور را بررسی کن."
-        }, upstream.status === 429 ? 429 : 502);
-      }
-
-      const answer = result.candidates?.[0]?.content?.parts
-        ?.map((part) => typeof part.text === "string" ? part.text : "")
-        .join("")
-        .trim();
-
-      if (!answer) {
-        return json({ error: "پاسخ متنی دریافت نشد؛ سؤال را دوباره بفرست." }, 502);
-      }
-      return json({ answer });
-    } catch (error) {
-      const timedOut = error?.name === "TimeoutError" || error?.name === "AbortError";
+    if (!upstream) {
+      const timedOut = lastError?.name === "TimeoutError" || lastError?.name === "AbortError";
       return json({
         error: timedOut
           ? "پاسخ‌گویی بیش از حد طول کشید؛ دوباره تلاش کن."
           : "خطای ارتباطی رخ داد. اتصال اینترنت را بررسی کن."
       }, 502);
     }
+
+    let result;
+    try {
+      result = await upstream.json();
+    } catch {
+      return json({ error: "پاسخ سرویس هوش مصنوعی قابل خواندن نیست." }, 502);
+    }
+
+    if (!upstream.ok) {
+      return json({
+        error: upstream.status === 429
+          ? "سهمیهٔ درخواست‌ها فعلاً تمام شده؛ کمی بعد دوباره امتحان کن."
+          : "ارتباط با سرویس هوش مصنوعی برقرار نشد. تنظیمات سرور را بررسی کن."
+      }, upstream.status === 429 ? 429 : 502);
+    }
+
+    const candidate = result.candidates?.[0];
+    const answer = candidate?.content?.parts
+      ?.map((part) => typeof part.text === "string" ? part.text : "")
+      .join("")
+      .trim();
+
+    if (!answer) {
+      return json({ error: "پاسخ متنی دریافت نشد؛ سؤال را دوباره بفرست." }, 502);
+    }
+    return json({
+      answer: candidate.finishReason === "MAX_TOKENS"
+        ? `${answer}\n\n[پاسخ به محدودیت طول رسید؛ برای ادامه، «ادامه بده» را بفرست.]`
+        : answer,
+      truncated: candidate.finishReason === "MAX_TOKENS",
+    });
   },
 };
