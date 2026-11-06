@@ -81,8 +81,11 @@ void main() {
         final chapter = rawChapter as Map<String, dynamic>;
         expect(chapter['title'], isA<String>(), reason: entry.key);
         expect(chapter['summary'], isA<String>(), reason: entry.key);
+        expect((chapter['summary'] as String).trim(), isNotEmpty, reason: '${entry.key}/${chapter['title']}');
         expect(chapter['points'], isA<List<dynamic>>(), reason: entry.key);
+        expect((chapter['points'] as List<dynamic>), isNotEmpty, reason: '${entry.key}/${chapter['title']}');
         expect(chapter['solutionSteps'], isA<List<dynamic>>(), reason: entry.key);
+        expect((chapter['solutionSteps'] as List<dynamic>), isNotEmpty, reason: '${entry.key}/${chapter['title']}');
         final questions = chapter['questions'] as List<dynamic>;
         expect(questions.length, greaterThanOrEqualTo(2), reason: '${entry.key}/${chapter['title']}');
         totalQuestions += questions.length;
@@ -90,13 +93,21 @@ void main() {
           final question = rawQuestion as Map<String, dynamic>;
           final options = question['options'] as List<dynamic>;
           final answer = question['answer'] as int;
-          final normalizedText = (question['question'] as String).toLowerCase().trim();
+          final questionText = (question['question'] as String).trim();
+          final normalizedText = questionText
+              .toLowerCase()
+              .replaceAll(RegExp(r'[\\s\\u200c\\u0640؟،.!؛:]', unicode: true), '')
+              .replaceAll('ي', 'ی')
+              .replaceAll('ك', 'ک');
+          expect(questionText, isNotEmpty, reason: entry.key);
           expect(uniqueQuestionTexts.add(normalizedText), isTrue,
               reason: 'پرسش تکراری: ${question['question']}');
-          expect(options, isNotEmpty, reason: question['question'] as String);
+          expect(options.length, greaterThanOrEqualTo(2), reason: questionText);
+          expect(options.toSet().length, options.length, reason: 'گزینه تکراری: $questionText');
           expect(answer, inInclusiveRange(0, options.length - 1),
               reason: question['question'] as String);
           expect(question['explanation'], isA<String>());
+          expect((question['explanation'] as String).trim(), isNotEmpty, reason: questionText);
         }
       }
     }
