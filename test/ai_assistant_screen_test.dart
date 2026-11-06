@@ -60,6 +60,6 @@ void main() {
     expect(find.text('آزمون سطح بالا'), findsOneWidget);
     expect(find.text('درسنامهٔ کامل فصل'), findsOneWidget);
     expect(find.text('تمرین تشریحی'), findsOneWidget);
-    expect(find.text('حل مسئلهٔ ریاضی'), findsOneWidget);
+    expect(find.text('حل مسئلهٔ چندمرحله‌ای'), findsOneWidget);
   });
 }
