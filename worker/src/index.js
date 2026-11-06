@@ -42,7 +42,9 @@ export default {
 
     let body;
     try { body = await request.json(); } catch { return json({ error: "درخواست نامعتبر است." }, 400); }
-    if (!validMessages(body.messages)) return json({ error: "پیام‌ها نامعتبرند یا تعدادشان بیش از حد است." }, 400);
+    if (!body || typeof body !== "object" || !validMessages(body.messages)) {
+      return json({ error: "پیام‌ها نامعتبرند یا تعدادشان بیش از حد است." }, 400);
+    }
 
     const contents = body.messages.map((m) => ({
       role: m.role,
