@@ -106,6 +106,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('امکانات'), findsOneWidget);
+    expect(find.text('باز کردن جزوه'), findsOneWidget);
+    expect(find.text('باز کردن نمونه‌سؤال'), findsOneWidget);
   });
 
   testWidgets('navigates to subjects tab', (tester) async {
