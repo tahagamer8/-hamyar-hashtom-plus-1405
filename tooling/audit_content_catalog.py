@@ -257,9 +257,6 @@ def main() -> int:
     audit_known_question_regressions(data, errors)
     for key, value in stats.items():
         print(f"{key}: {value}")
-    print("learning_sections_by_subject:")
-    for subject_id, count in sorted(sections_by_subject.items()):
-        print(f"  {subject_id}: {count}")
     if stats and stats["chapters"]:
         print(
             "source_coverage: "
