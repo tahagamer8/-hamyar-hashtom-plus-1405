@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 from pathlib import Path
 from xml.sax.saxutils import escape
 
@@ -23,8 +24,16 @@ from reportlab.platypus import (
     HRFlowable
 )
 
+# Keep arithmetic spans in left-to-right embedding so bidi shaping cannot
+# silently swap operands such as ۳/۴ − ۱/۲ in generated PDFs.
+_MATH_SPAN = re.compile(
+    r"(?<![\\w])(?:[۰-۹0-9A-Za-z]+(?:\\s*/\\s*[۰-۹0-9A-Za-z]+)?"
+    r"(?:\\s*[+\\-−×÷=<>≤≥]\\s*[۰-۹0-9A-Za-z]+(?:\\s*/\\s*[۰-۹0-9A-Za-z]+)?)+)(?![\\w])"
+)
+
 def rtl(value: object) -> str:
     text = str(value or "")
+    text = _MATH_SPAN.sub(lambda match: "\\u202A" + match.group(0) + "\\u202C", text)
     shaped = arabic_reshaper.reshape(text)
     return escape(get_display(shaped))
 
