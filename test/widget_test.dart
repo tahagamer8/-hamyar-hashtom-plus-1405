@@ -141,7 +141,8 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
     expect(find.text('کتاب کار زبان انگلیسی'), findsOneWidget);
     expect(find.text('Lesson 1: My Nationality'), findsOneWidget);
   });
