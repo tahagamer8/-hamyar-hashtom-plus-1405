@@ -26,9 +26,9 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
     for (final chapter in widget.chapters) {
       final advancedItems = chapter['challengeQuestions'];
       final standardItems = chapter['questions'];
-      final items = advancedItems is List && advancedItems.isNotEmpty
-          ? advancedItems
-          : standardItems;
+      // This screen is the challenging exam mode. Never silently replace a
+      // missing advanced bank with easier recall questions.
+      final items = advancedItems is List ? advancedItems : const <dynamic>[];
       if (items is! List) continue;
       for (final item in items) {
         if (item is! Map) continue;
@@ -101,8 +101,39 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     if (questions.isEmpty) {
-      return Scaffold(appBar: AppBar(title: const Text('آزمون آنلاین')),
-        body: const Center(child: Text('برای این درس هنوز سؤال ثبت نشده است.')));
+      return Scaffold(
+        appBar: AppBar(title: const Text('آزمون دشوار')),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(28),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.psychology_alt_rounded,
+                    size: 48, color: theme.colorScheme.primary),
+                const SizedBox(height: 14),
+                Text(
+                  'بانک سؤال دشوار این بخش هنوز آماده نیست',
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.titleMedium,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'برای اینکه آزمون به‌اشتباه ساده معرفی نشود، سؤال‌های معمولی جایگزین سؤال‌های چالشی نشده‌اند.',
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 16),
+                OutlinedButton.icon(
+                  onPressed: () => Navigator.of(context).maybePop(),
+                  icon: const Icon(Icons.arrow_back_rounded),
+                  label: const Text('بازگشت به درس'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
     }
     return Scaffold(
       appBar: AppBar(title: Text(submitted ? 'نتیجه آزمون' : 'آزمون جامع ${widget.subjectTitle}'),
