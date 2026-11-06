@@ -52,6 +52,9 @@ jobs:
       - name: Install PDF generation dependencies
         run: python -m pip install --disable-pip-version-check 'reportlab>=4.2,<5' 'arabic-reshaper>=3,<4' 'python-bidi>=0.6,<1'
 
+      - name: Test Persian PDF text direction
+        run: python -m unittest tooling.test_pdf_bidi
+
       - name: Generate Persian PDF assets
         run: |
           python tooling/generate_learning_pdfs.py --output-dir assets/generated_pdfs
