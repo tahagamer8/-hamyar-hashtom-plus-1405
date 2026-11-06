@@ -27,8 +27,8 @@ from reportlab.platypus import (
 # Keep arithmetic spans in left-to-right embedding so bidi shaping cannot
 # silently swap operands such as ۳/۴ − ۱/۲ in generated PDFs.
 _MATH_SPAN = re.compile(
-    r"(?<![\\w])(?:[۰-۹0-9A-Za-z]+(?:\\s*/\\s*[۰-۹0-9A-Za-z]+)?"
-    r"(?:\\s*[+\\-−×÷=<>≤≥]\\s*[۰-۹0-9A-Za-z]+(?:\\s*/\\s*[۰-۹0-9A-Za-z]+)?)+)(?![\\w])"
+    r"(?<![A-Za-z0-9۰-۹])(?:[۰-۹0-9A-Za-z]+(?:[ \\t]*/[ \\t]*[۰-۹0-9A-Za-z]+)?"
+    r"(?:[ \\t]*[-+−×÷=<>≤≥][ \\t]*[۰-۹0-9A-Za-z]+(?:[ \\t]*/[ \\t]*[۰-۹0-9A-Za-z]+)?)+)(?![A-Za-z0-9۰-۹])"
 )
 
 def rtl(value: object) -> str:
