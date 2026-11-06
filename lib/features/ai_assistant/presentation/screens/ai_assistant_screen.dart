@@ -682,12 +682,11 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   Widget _emptyState(ThemeData theme) {
     final colors = theme.colorScheme;
     final suggestions = <({IconData icon, String title, String prompt})>[
-      (icon: Icons.calculate_rounded, title: 'حل مسئلهٔ ریاضی', prompt: 'یک مسئلهٔ دشوار ریاضی هشتم را مرحله‌به‌مرحله برایم توضیح بده.'),
-      (icon: Icons.science_rounded, title: 'فهم علوم', prompt: 'یک مفهوم مهم علوم هشتم را با مثال و پرسش مفهومی توضیح بده.'),
-      (icon: Icons.quiz_rounded, title: 'آزمون چالشی', prompt: 'از فصل انتخاب‌شده یک آزمون دشوار و مفهومی طراحی کن؛ پاسخ‌ها را تا پایان آزمون نشان نده.'),
-      (icon: Icons.menu_book_rounded, title: 'مرور درس', prompt: 'نکات کلیدی فصل انتخاب‌شده را منظم و قابل مرور توضیح بده.'),
-    ];
-    return SingleChildScrollView(
+      (icon: Icons.menu_book_rounded, title: 'درسنامهٔ کامل فصل', prompt: 'برای فصل انتخاب‌شده یک درسنامهٔ کامل و منظم تهیه کن: هدف‌های یادگیری، پیش‌نیازها، آموزش مفهومی مرحله‌به‌مرحله، دست‌کم دو مثال مستقل و حل‌شده، اشتباه‌های رایج و پنج تمرین تألیفی از متوسط تا دشوار با پاسخ تشریحی. اگر بخشی از محتوای کتاب را نداری، آن را آموزش تکمیلی تألیفی فهمینو معرفی کن و شماره صفحه یا متن رسمی حدس نزن.'),
+      (icon: Icons.calculate_rounded, title: 'حل مسئلهٔ چندمرحله‌ای', prompt: 'از فصل انتخاب‌شده یک مسئلهٔ دشوار و چندمرحله‌ای طرح کن؛ ابتدا فقط صورت سؤال را بده، بعد از پاسخ من راه‌حل مرحله‌به‌مرحله و بررسی نهایی را توضیح بده.'),
+      (icon: Icons.quiz_rounded, title: 'آزمون سطح بالا', prompt: 'از فصل انتخاب‌شده یک آزمون دشوار و مفهومی در سطح تیزهوشان طراحی کن؛ سؤال‌ها متنوع و چندمرحله‌ای باشند و پاسخ‌ها را تا وقتی جواب نداده‌ام فاش نکن.'),
+      (icon: Icons.edit_note_rounded, title: 'تمرین تشریحی', prompt: 'از فصل انتخاب‌شده پنج تمرین تشریحی مستقل از متوسط تا دشوار طراحی کن؛ هر بار فقط یک سؤال بپرس و پس از پاسخ من، دقیق تصحیح کن و اشکال‌ها را توضیح بده.'),
+    ];    return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
