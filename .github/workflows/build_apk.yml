@@ -33,16 +33,55 @@ jobs:
           fi
           sed -i 's/android:label="[^"]*"/android:label="فهمینو"/' android/app/src/main/AndroidManifest.xml
 
+      - name: Keep Android application identity stable
+        run: python tooling/configure_android_gradle.py
+
+      - name: Configure persistent release signing
+        if: github.event_name != 'pull_request'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.FAHMINO_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.FAHMINO_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.FAHMINO_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.FAHMINO_KEY_PASSWORD }}
+        run: |
+          python - <<'PY'
+          import base64, os
+          from pathlib import Path
+          values = {
+              "FAHMINO_KEYSTORE_BASE64": os.environ.get("KEYSTORE_BASE64", ""),
+              "FAHMINO_KEYSTORE_PASSWORD": os.environ.get("KEYSTORE_PASSWORD", ""),
+              "FAHMINO_KEY_ALIAS": os.environ.get("KEY_ALIAS", ""),
+              "FAHMINO_KEY_PASSWORD": os.environ.get("KEY_PASSWORD", ""),
+          }
+          missing = [name for name, value in values.items() if not value]
+          if missing:
+              raise SystemExit(
+                  "Release signing is not configured. Add these GitHub Actions secrets: "
+                  + ", ".join(missing)
+              )
+          keystore = base64.b64decode(values["FAHMINO_KEYSTORE_BASE64"], validate=True)
+          Path("android/app/fahmino-release.jks").write_bytes(keystore)
+          def escaped(value):
+              return value.replace("\\", "\\\\").replace(":", "\\:").replace("=", "\\=")
+          props = (
+              "storeFile=fahmino-release.jks\\n"
+              f"storePassword={escaped(values['FAHMINO_KEYSTORE_PASSWORD'])}\\n"
+              f"keyAlias={escaped(values['FAHMINO_KEY_ALIAS'])}\\n"
+              f"keyPassword={escaped(values['FAHMINO_KEY_PASSWORD'])}\\n"
+          )
+          Path("android/key.properties").write_text(props, encoding="utf-8")
+          PY
+
       - name: Ensure Vazirmatn fonts
         run: |
           if [ ! -f assets/fonts/Vazirmatn/Vazirmatn-Regular.ttf ]; then
             mkdir -p assets/fonts/Vazirmatn /tmp/vazir
             curl -fL -o /tmp/vazir.zip https://github.com/rastikerdar/vazirmatn/releases/download/v33.003/vazirmatn-v33.003.zip
             unzip -q /tmp/vazir.zip -d /tmp/vazir
-            find /tmp/vazir -type f -name 'Vazirmatn-Regular.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
-            find /tmp/vazir -type f -name 'Vazirmatn-Medium.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
-            find /tmp/vazir -type f -name 'Vazirmatn-SemiBold.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
-            find /tmp/vazir -type f -name 'Vazirmatn-Bold.ttf' -exec cp {} assets/fonts/Vazirmatn/ \;
+            find /tmp/vazir -type f -name 'Vazirmatn-Regular.ttf' -exec cp {} assets/fonts/Vazirmatn/ \\;
+            find /tmp/vazir -type f -name 'Vazirmatn-Medium.ttf' -exec cp {} assets/fonts/Vazirmatn/ \\;
+            find /tmp/vazir -type f -name 'Vazirmatn-SemiBold.ttf' -exec cp {} assets/fonts/Vazirmatn/ \\;
+            find /tmp/vazir -type f -name 'Vazirmatn-Bold.ttf' -exec cp {} assets/fonts/Vazirmatn/ \\;
           fi
           test -s assets/fonts/Vazirmatn/Vazirmatn-Regular.ttf
           test -s assets/fonts/Vazirmatn/Vazirmatn-Medium.ttf
