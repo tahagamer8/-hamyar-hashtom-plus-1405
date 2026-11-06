@@ -176,7 +176,7 @@ void main() {
       expect(advanced.every((q) => (q as Map<String, dynamic>)['difficulty'] == 'advanced'), isTrue);
       return sum + advanced.length;
     });
-    expect(advancedCount, 27);
+    expect(advancedCount, 45);
     expect((catalog['culture_art'] as Map<String, dynamic>)['chapters'], hasLength(9));
     final optionalFaithPackage = catalog['from_me_to_god'] as Map<String, dynamic>;
     expect(optionalFaithPackage['curriculumApplicability'], 'pilot_in_some_provinces');
