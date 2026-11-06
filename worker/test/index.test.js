@@ -144,6 +144,9 @@ test("forwards selected study context as untrusted educational reference", async
         practiceQuestions: [
           "تمرین: حاصل ۱/۲ + ۱/۴؟ | پاسخ: ۳/۴ | توضیح: مخرج مشترک می‌گیریم.",
         ],
+        pageReferences: ["صفحه: ۱۲؛ وضعیت: نیازمند بررسی"],
+        bookSolutions: ["صفحه: ۱۲ | پرسش: تمرین ۱ | پاسخ: ۳/۴ | وضعیت تأیید: needs_review"],
+        contentVerificationStatus: "not_verified_against_official_textbook",
       },
     },
   }), { GEMINI_API_KEY: "test-key", CHAT_LIMITER: allowLimiter });
@@ -158,6 +161,9 @@ test("forwards selected study context as untrusted educational reference", async
   assert.match(instruction, /فصل اول ریاضی/);
   assert.match(instruction, /practiceQuestions نمونه‌تمرین‌های تألیفی فهمینو هستند/);
   assert.match(instruction, /حاصل ۱\/۲ \+ ۱\/۴/);
+  assert.match(instruction, /pageReferences فقط نشانی صفحه‌هایی/);
+  assert.match(instruction, /bookSolutions فقط وقتی پاسخ کتابیِ تأییدشده/);
+  assert.match(instruction, /صفحه: ۱۲/);
 });
 
 test("rejects oversized or malformed study context", async () => {
@@ -168,6 +174,10 @@ test("rejects oversized or malformed study context", async () => {
     { points: Array.from({ length: 9 }, () => "نکته") },
     { practiceQuestions: Array.from({ length: 5 }, () => "تمرین") },
     { practiceQuestions: ["x".repeat(501)] },
+    { pageReferences: Array.from({ length: 7 }, () => "صفحه") },
+    { pageReferences: ["x".repeat(161)] },
+    { bookSolutions: Array.from({ length: 5 }, () => "پاسخ") },
+    { bookSolutions: ["x".repeat(901)] },
   ]) {
     const response = await worker.fetch(makeRequest({
       body: { ...validBody, studyContext },
