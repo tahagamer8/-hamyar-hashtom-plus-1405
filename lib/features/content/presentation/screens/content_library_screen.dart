@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 
-class ContentLibraryScreen extends StatefulWidget {
+class ContentLibraryScreen extends ConsumerStatefulWidget {
   const ContentLibraryScreen({
     super.key,
     required this.subjectId,
@@ -14,10 +16,10 @@ class ContentLibraryScreen extends StatefulWidget {
   final String featureId;
 
   @override
-  State<ContentLibraryScreen> createState() => _ContentLibraryScreenState();
+  ConsumerState<ContentLibraryScreen> createState() => _ContentLibraryScreenState();
 }
 
-class _ContentLibraryScreenState extends State<ContentLibraryScreen> {
+class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   Future<Map<String, dynamic>>? _contentFuture;
 
   @override
@@ -79,6 +81,7 @@ class _ContentLibraryScreenState extends State<ContentLibraryScreen> {
                 _ChapterContent(
                   chapter: chapter,
                   feature: _feature,
+                  favoriteKey: '${widget.subjectId}::${chapter['title']}',
                 ),
             ],
           );
@@ -88,13 +91,14 @@ class _ContentLibraryScreenState extends State<ContentLibraryScreen> {
   }
 }
 
-class _ChapterContent extends StatelessWidget {
-  const _ChapterContent({required this.chapter, required this.feature});
+class _ChapterContent extends ConsumerWidget {
+  const _ChapterContent({required this.chapter, required this.feature, required this.favoriteKey});
   final Map<String, dynamic> chapter;
   final AppFeature feature;
+  final String favoriteKey;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final title = chapter['title'] as String? ?? 'درس';
     final summary = chapter['summary'] as String? ?? '';
@@ -115,7 +119,16 @@ class _ChapterContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: theme.textTheme.titleMedium),
+            Row(
+              children: [
+                Expanded(child: Text(title, style: theme.textTheme.titleMedium)),
+                IconButton(
+                  tooltip: ref.watch(favoritesProvider).contains(favoriteKey) ? 'حذف از علاقه‌مندی‌ها' : 'افزودن به علاقه‌مندی‌ها',
+                  onPressed: () => ref.read(favoritesProvider.notifier).toggle(favoriteKey),
+                  icon: Icon(ref.watch(favoritesProvider).contains(favoriteKey) ? Icons.bookmark_rounded : Icons.bookmark_add_outlined),
+                ),
+              ],
+            ),
             const SizedBox(height: 10),
             if (feature == AppFeature.lessons) ...[
               Text(summary, style: theme.textTheme.bodyMedium),
