@@ -6,6 +6,8 @@ import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hamyar_hashtom_plus/core/router/app_routes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
@@ -125,6 +127,30 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                 chapters: chapters,
                 selectedIndex: safeIndex,
                 onChanged: (index) => setState(() => _selectedChapterIndex = index),
+              ),
+              const SizedBox(height: 8),
+              OutlinedButton.icon(
+                onPressed: () => context.push(
+                  AppRoutes.aiAssistant,
+                  extra: <String, dynamic>{
+                    'subjectTitle': subject['title'] as String? ?? 'درس',
+                    'chapterTitle': selectedChapter['title'] as String? ?? 'فصل',
+                    'summary': selectedChapter['summary'] as String? ?? '',
+                    'points': (selectedChapter['points'] as List<dynamic>? ?? [])
+                        .whereType<String>()
+                        .take(8)
+                        .toList(),
+                    'example': selectedChapter['example'] as String? ?? '',
+                    'solutionSteps':
+                        (selectedChapter['solutionSteps'] as List<dynamic>? ?? [])
+                            .whereType<String>()
+                            .take(8)
+                            .toList(),
+                    'sourceLabel': 'محتوای اولیهٔ فهمینو؛ نیازمند تطبیق با کتاب رسمی',
+                  },
+                ),
+                icon: const Icon(Icons.auto_awesome_rounded),
+                label: const Text('پرسش از دستیار دربارهٔ این فصل'),
               ),
               const SizedBox(height: 8),
               _DraftContentNotice(feature: _feature),
