@@ -2007,7 +2007,7 @@
             "explanation": "بعد از can فعل به شکل ساده می‌آید."
           },
           {
-            "question": "What does «can't» mean?",
+            "question": "Which sentence correctly describes Ali's ability?",
             "options": [
               "می‌تواند",
               "نمی‌تواند",
@@ -2085,7 +2085,7 @@
             "explanation": "برای اسم مفرد از there is استفاده می‌شود."
           },
           {
-            "question": "What does «next to» mean?",
+            "question": "Complete the sentence about one park: There ___ a park near my school.",
             "options": [
               "داخل",
               "کنار",
@@ -2229,6 +2229,17 @@
             ],
             "answer": 1,
             "explanation": "رعایت قانون و مراقبت از محیط عمومی به سود همهٔ اعضای جامعه است."
+          },
+          {
+            "question": "وقتی چند نفر برای حل یک مسئلهٔ مشترک توانایی‌ها و مسئولیت‌های خود را هماهنگ می‌کنند، کدام مفهوم را نشان می‌دهند؟",
+            "options": [
+              "رقابت ناسالم",
+              "تعاون",
+              "بی‌تفاوتی",
+              "وابستگی بدون مسئولیت"
+            ],
+            "answer": 1,
+            "explanation": "تعاون یعنی همکاری آگاهانه و تقسیم مسئولیت برای رسیدن به هدف یا حل مسئلهٔ مشترک."
           }
         ]
       },
@@ -4429,7 +4440,7 @@
             "explanation": "برای She از is استفاده می‌کنیم."
           },
           {
-            "question": "A person from Kuwait is _____.",
+            "question": "Choose the correct way to ask someone's country.",
             "options": [
               "Kuwaiti",
               "Qatari",
@@ -4529,7 +4540,7 @@
             "explanation": "بعد از can شکل ساده فعل می‌آید."
           },
           {
-            "question": "“Cannot” means _____.",
+            "question": "Which sentence uses can with the base form of the verb?",
             "options": [
               "می‌تواند",
               "نمی‌تواند",
@@ -4629,7 +4640,7 @@
             "explanation": "Museum مفرد است؛ پس There is درست است."
           },
           {
-            "question": "What does “opposite” mean?",
+            "question": "Which sentence correctly describes three shops?",
             "options": [
               "کنار",
               "داخل",
