@@ -136,6 +136,10 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                     extra: <String, dynamic>{
                       'subjectTitle': subject['title'] as String? ?? 'درس',
                       'chapterTitle': selectedChapter['title'] as String? ?? 'فصل',
+                      'bookChapterTitle': selectedChapter['bookChapterTitle'] as String? ?? '',
+                      'bookScope': selectedChapter['bookScope'] as String? ?? '',
+                      'alignmentStatus': selectedChapter['alignmentStatus'] as String? ??
+                          'not_verified_against_1405_1406_pdf',
                       'summary': selectedChapter['summary'] as String? ?? '',
                       'points': (selectedChapter['points'] as List<dynamic>? ?? [])
                           .whereType<String>()
