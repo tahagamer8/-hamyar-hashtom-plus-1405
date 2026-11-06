@@ -87,6 +87,14 @@ class _SearchScreenState extends State<SearchScreen> {
                 final questions = (chapter['questions'] as List<dynamic>? ?? [])
                     .whereType<Map<String, dynamic>>()
                     .toList();
+                final challengeQuestions =
+                    (chapter['challengeQuestions'] as List<dynamic>? ?? [])
+                        .whereType<Map<String, dynamic>>()
+                        .toList();
+                final bookSolutions =
+                    (chapter['bookSolutions'] as List<dynamic>? ?? [])
+                        .whereType<Map<String, dynamic>>()
+                        .toList();
 
                 final learningSections =
                     (chapter['learningSections'] as List<dynamic>? ?? [])
@@ -132,6 +140,37 @@ class _SearchScreenState extends State<SearchScreen> {
                         MapEntry(
                           'توضیح پاسخ',
                           value['explanation'] as String? ?? '',
+                        ),
+                      ]),
+                  ...challengeQuestions.expand((value) => <MapEntry<String, String>>[
+                        MapEntry(
+                          'سؤال چالشی',
+                          value['question'] as String? ?? '',
+                        ),
+                        ...(value['options'] as List<dynamic>? ?? [])
+                            .whereType<String>()
+                            .map((option) => MapEntry('گزینهٔ سؤال چالشی', option)),
+                        MapEntry(
+                          'توضیح پاسخ چالشی',
+                          value['explanation'] as String? ?? '',
+                        ),
+                      ]),
+                  ...bookSolutions.expand((value) => <MapEntry<String, String>>[
+                        MapEntry(
+                          'پاسخ فعالیت کتاب',
+                          value['question'] as String? ?? value['prompt'] as String? ?? '',
+                        ),
+                        MapEntry(
+                          'پاسخ تشریحی کتاب',
+                          value['answer'] as String? ?? '',
+                        ),
+                        MapEntry(
+                          'توضیح پاسخ کتاب',
+                          value['explanation'] as String? ?? '',
+                        ),
+                        MapEntry(
+                          'شماره صفحه',
+                          (value['page'] ?? value['pageNumber'] ?? '').toString(),
                         ),
                       ]),
                 ];
