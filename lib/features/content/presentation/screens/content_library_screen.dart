@@ -1,6 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:path_provider/path_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
@@ -49,9 +53,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _feature == AppFeature.quiz
-          ? AppBar(title: const Text('آزمون فصل انتخاب‌شده'))
-          : AppBar(title: Text(_feature.title)),
+      appBar: _feature == AppFeature.quiz ? null : AppBar(title: Text(_feature.title)),
       body: FutureBuilder<Map<String, dynamic>>(
         future: _contentFuture,
         builder: (context, snapshot) {
@@ -78,22 +80,25 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
             return const Center(child: Text('برای این کتاب فصلی ثبت نشده است.'));
           }
 
-          final safeIndex = _selectedChapterIndex.clamp(0, chapters.length - 1);
+          final safeIndex = _selectedChapterIndex.clamp(0, chapters.length - 1).toInt();
           final selectedChapter = chapters[safeIndex];
 
           if (_feature == AppFeature.quiz) {
-            return ListView(
-              padding: const EdgeInsets.all(16),
+            return Column(
               children: [
-                _ChapterPicker(
-                  chapters: chapters,
-                  selectedIndex: safeIndex,
-                  onChanged: (index) => setState(() => _selectedChapterIndex = index),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
+                  child: _ChapterPicker(
+                    chapters: chapters,
+                    selectedIndex: safeIndex,
+                    onChanged: (index) => setState(() => _selectedChapterIndex = index),
+                  ),
                 ),
-                const SizedBox(height: 12),
-                TimedCombinedExamScreen(
-                  subjectTitle: subject['title'] as String? ?? 'درس',
-                  chapters: [selectedChapter],
+                Expanded(
+                  child: TimedCombinedExamScreen(
+                    subjectTitle: subject['title'] as String? ?? 'درس',
+                    chapters: [selectedChapter],
+                  ),
                 ),
               ],
             );
