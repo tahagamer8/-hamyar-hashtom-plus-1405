@@ -19,6 +19,7 @@ class SubjectsRepositoryImpl implements SubjectsRepository {
     Subject(id: 'quran', title: 'قرآن', description: 'روخوانی و مفاهیم'),
     Subject(id: 'thinking', title: 'تفکر و سبک زندگی', description: 'مهارت‌های زندگی'),
     Subject(id: 'work', title: 'کار و فناوری', description: 'مهارت و فناوری'),
+    Subject(id: 'culture_art', title: 'فرهنگ و هنر', description: 'هنرهای تجسمی، سنتی، آوایی و نمایشی'),
   ];
 
   @override
