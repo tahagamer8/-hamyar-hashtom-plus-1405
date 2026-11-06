@@ -17,6 +17,7 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
     errors: list[str] = []
     subjects = chapters = questions = 0
     sourced_chapters = verified_chapters = learning_sections = book_solutions = 0
+    chapters_with_alignment_status = subjects_with_review_metadata = 0
     seen_questions: dict[str, str] = {}
 
     if not isinstance(data, dict) or not data:
@@ -29,6 +30,14 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
             continue
         if not isinstance(subject.get("title"), str) or not subject["title"].strip():
             errors.append(f"{subject_id}: missing subject title")
+        review = subject.get("alignmentReview")
+        if not isinstance(review, dict):
+            errors.append(f"{subject_id}: missing alignmentReview metadata")
+        elif review.get("targetEdition") != "۱۴۰۵–۱۴۰۶" or review.get("status") != "needs_exact_edition_pdf_review":
+            errors.append(f"{subject_id}: alignmentReview must explicitly identify the target edition and pending PDF review")
+        else:
+            subjects_with_review_metadata += 1
+
         items = subject.get("chapters")
         if not isinstance(items, list) or not items:
             errors.append(f"{subject_id}: chapters must be a non-empty list")
@@ -40,6 +49,11 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
             if not isinstance(chapter, dict):
                 errors.append(f"{label}: chapter must be an object")
                 continue
+            if chapter.get("alignmentStatus") != "not_verified_against_1405_1406_pdf":
+                errors.append(f"{label}: missing or unsafe textbook alignment status")
+            else:
+                chapters_with_alignment_status += 1
+
             title = chapter.get("title")
             if not isinstance(title, str) or not title.strip():
                 errors.append(f"{label}: missing title")
@@ -134,6 +148,8 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
         "chapters_verified_against_edition": verified_chapters,
         "learning_sections": learning_sections,
         "book_solutions": book_solutions,
+        "subjects_with_review_metadata": subjects_with_review_metadata,
+        "chapters_with_alignment_status": chapters_with_alignment_status,
     }
     return errors, stats
 
