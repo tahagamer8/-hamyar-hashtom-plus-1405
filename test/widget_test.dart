@@ -126,6 +126,22 @@ void main() {
     expect(find.text('ریاضی'), findsWidgets);
   });
 
+  testWidgets('English workbook opens as a separate subject', (tester) async {
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: MaterialApp(
+          home: ContentLibraryScreen(
+            subjectId: 'english_workbook',
+            featureId: 'lessons',
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('کتاب کار زبان انگلیسی'), findsOneWidget);
+    expect(find.text('Lesson 1: My Nationality'), findsOneWidget);
+  });
+
   testWidgets('lesson content loads from catalog bundle', (tester) async {
     await tester.pumpWidget(_contentApp('lessons'));
     await tester.pumpAndSettle();
