@@ -54,6 +54,18 @@ function normalizeStudyContext(value) {
     result[key] = value[key].map((item) => item.trim()).filter(Boolean);
   }
 
+  if (value.practiceQuestions !== undefined) {
+    if (!Array.isArray(value.practiceQuestions) ||
+        value.practiceQuestions.length > 4 ||
+        value.practiceQuestions.some((item) =>
+          typeof item !== "string" || item.length > 500)) {
+      return false;
+    }
+    result.practiceQuestions = value.practiceQuestions
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
   if (JSON.stringify(result).length > 6000) return false;
   return result;
 }
@@ -130,6 +142,8 @@ export default {
           "اگر اطلاعات زمینه کافی نیست، حدس نزن و از دانش‌آموز بخواه متن یا تصویر همان بخش کتاب را ارائه کند.",
           "اگر alignmentStatus برابر not_verified_against_1405_1406_pdf است، محتوا را تأییدشده یا عین پاسخ کتاب معرفی نکن؛ در پاسخ کتاب‌محور این محدودیت را کوتاه و روشن بگو.",
           "bookChapterTitle و bookScope فقط راهنمای شناسایی فصل و محدوده‌اند و به‌تنهایی صحت summary یا پاسخ‌ها را اثبات نمی‌کنند.",
+          "practiceQuestions نمونه‌تمرین‌های تألیفی فهمینو هستند؛ از آن‌ها برای توضیح روش حل و ساخت تمرین مشابه استفاده کن، اما آن‌ها را سؤال رسمی کتاب معرفی نکن.",
+          "اگر برای یک سؤال تمرینی پاسخ یا توضیح ثبت شده، آن را دوباره محاسبه و بررسی کن؛ در صورت ناسازگاری، با صداقت خطا را اعلام کن.",
           "زمینهٔ درسی (JSON):",
           JSON.stringify(studyContext)
         ].join("\n")
