@@ -111,7 +111,8 @@ void main() {
         }
       }
     }
-    expect(totalQuestions, greaterThanOrEqualTo(245));
+    expect(totalQuestions, greaterThanOrEqualTo(269));
+    expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(24));
     expect((catalog['english'] as Map<String, dynamic>)['chapters'], hasLength(7));
     expect((catalog['english_workbook'] as Map<String, dynamic>)['chapters'], hasLength(7));
     for (final id in ['persian', 'writing', 'arabic', 'english', 'english_workbook', 'religion', 'quran', 'thinking', 'work']) {
