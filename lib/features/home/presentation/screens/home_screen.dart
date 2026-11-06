@@ -12,12 +12,54 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           const SliverToBoxAdapter(child: HomeHeader()),
           const SliverToBoxAdapter(child: SectionHeader(title: 'امکانات')),
           const SliverToBoxAdapter(child: HomeFeatureGrid()),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 14, 20, 4),
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                child: InkWell(
+                  onTap: () => context.push(AppRoutes.ai),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            color: colors.primaryContainer,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Icon(Icons.auto_awesome_rounded,
+                              color: colors.onPrimaryContainer),
+                        ),
+                        const SizedBox(width: 14),
+                        const Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('دستیار هوشمند فهمینو',
+                                  style: TextStyle(fontWeight: FontWeight.w700)),
+                              SizedBox(height: 3),
+                              Text('پرسش درسی، آموزش و تمرین با کمک هوش مصنوعی'),
+                            ],
+                          ),
+                        ),
+                        const Icon(Icons.chevron_left_rounded),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
           const SliverToBoxAdapter(child: LearningPdfsCard()),
           SliverToBoxAdapter(
             child: SectionHeader(
