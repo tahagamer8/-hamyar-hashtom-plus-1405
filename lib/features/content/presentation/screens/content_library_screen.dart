@@ -233,6 +233,8 @@ class _ChapterContent extends ConsumerWidget {
     final theme = Theme.of(context);
     final title = chapter['title'] as String? ?? 'درس';
     final summary = chapter['summary'] as String? ?? '';
+    final lessonSections = (chapter['learningSections'] as List<dynamic>? ?? [])
+        .cast<Map<String, dynamic>>();
     final points = (chapter['points'] as List<dynamic>? ?? []).cast<String>();
     final example = chapter['example'] as String? ?? '';
     final steps = (chapter['solutionSteps'] as List<dynamic>? ?? []).cast<String>();
@@ -267,31 +269,13 @@ class _ChapterContent extends ConsumerWidget {
             ),
             const Divider(),
             if (feature == AppFeature.lessons) ...[
-              Text('آموزش این بخش', style: theme.textTheme.titleSmall),
+              Text('درسنامهٔ کامل این فصل', style: theme.textTheme.titleSmall),
               const SizedBox(height: 8),
-              Text(summary, style: theme.textTheme.bodyMedium),
-              if (points.isNotEmpty) ...[
-                const SizedBox(height: 14),
-                Text('نکته‌های مهم', style: theme.textTheme.titleSmall),
-                for (final point in points) _Bullet(text: point),
-              ],
-              if (example.isNotEmpty) ...[
-                const SizedBox(height: 14),
-                Text('مثال آموزشی', style: theme.textTheme.titleSmall),
-                Text(example),
-                for (var i = 0; i < steps.length; i++)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CircleAvatar(radius: 12, child: Text((i + 1).toString())),
-                        const SizedBox(width: 10),
-                        Expanded(child: Text(steps[i])),
-                      ],
-                    ),
-                  ),
-              ],
+              if (lessonSections.isEmpty)
+                const _MissingLearningSections()
+              else
+                for (final section in lessonSections)
+                  _LearningSectionCard(section: section),
             ] else if (feature == AppFeature.notes) ...[
               Text('جزوه و نکته‌های این فصل', style: theme.textTheme.titleSmall),
               const SizedBox(height: 8),
@@ -432,6 +416,57 @@ class _ChapterPdfResourcesState extends State<ChapterPdfResources> {
           ],
         );
       },
+    );
+  }
+}
+
+class _MissingLearningSections extends StatelessWidget {
+  const _MissingLearningSections();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: const Text(
+        'برای این فصل هنوز درسنامهٔ کاملِ بخش‌بندی‌شده ثبت نشده است. خلاصه و چند نکته را به‌جای آموزش کامل نمایش نمی‌دهیم؛ درسنامه باید با سرفصل‌های کتاب رسمی و مثال‌های مرحله‌ای تکمیل شود.',
+      ),
+    );
+  }
+}
+
+class _LearningSectionCard extends StatelessWidget {
+  const _LearningSectionCard({required this.section});
+  final Map<String, dynamic> section;
+
+  @override
+  Widget build(BuildContext context) {
+    final title = section['title'] as String? ?? 'بخش آموزشی';
+    final body = section['content'] as String? ?? '';
+    final examples = (section['examples'] as List<dynamic>? ?? []).cast<String>();
+    final keyPoints = (section['keyPoints'] as List<dynamic>? ?? []).cast<String>();
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: Theme.of(context).textTheme.titleSmall),
+          if (body.isNotEmpty) Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Text(body),
+          ),
+          for (final point in keyPoints) _Bullet(text: point),
+          for (final example in examples)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(example),
+            ),
+          const Divider(height: 24),
+        ],
+      ),
     );
   }
 }
