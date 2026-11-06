@@ -93,6 +93,25 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
         (section['examples'] as List<dynamic>? ?? []).whereType<String>(),
       );
     }
+    final practiceQuestions = <String>[];
+    for (final raw in [
+      ...(chapter['questions'] as List<dynamic>? ?? []).take(2),
+      ...(chapter['challengeQuestions'] as List<dynamic>? ?? []).take(3),
+    ]) {
+      if (raw is! Map) continue;
+      final prompt = raw['question']?.toString() ?? '';
+      final options = (raw['options'] as List<dynamic>? ?? []).whereType<String>();
+      final answerIndex = raw['answer'];
+      final answer = answerIndex is int && answerIndex >= 0 && answerIndex < options.length
+          ? options.elementAt(answerIndex)
+          : '';
+      final explanation = raw['explanation']?.toString() ?? '';
+      if (prompt.isNotEmpty) {
+        practiceQuestions.add(
+          'تمرین: $prompt | گزینه‌ها: ${options.join('؛ ')} | پاسخ: $answer | توضیح: $explanation',
+        );
+      }
+    }
     return {
       'subjectTitle': subject['title']?.toString() ?? 'درس',
       'chapterTitle': chapter['title']?.toString() ?? 'فصل',
@@ -106,6 +125,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
       'example': chapter['example']?.toString() ?? '',
       'solutionSteps': (chapter['solutionSteps'] as List<dynamic>? ?? [])
           .whereType<String>().take(8).toList(),
+      'practiceQuestions': practiceQuestions.take(4).toList(),
       'sourceLabel': chapter['source'] is Map
           ? (chapter['source'] as Map)['title']?.toString() ??
               'محتوای فعلی فهمینو؛ منبع نیازمند بررسی است'
