@@ -95,6 +95,39 @@ void main() {
       }
     }
 
+    final arabicChapters =
+        (catalog['arabic'] as Map<String, dynamic>)['chapters'] as List<dynamic>;
+    final englishChapters =
+        (catalog['english'] as Map<String, dynamic>)['chapters'] as List<dynamic>;
+    expect(
+      arabicChapters.fold<int>(
+        0,
+        (sum, chapter) =>
+            sum + ((chapter as Map<String, dynamic>)['learningSections'] as List<dynamic>).length,
+      ),
+      40,
+    );
+    expect(
+      englishChapters.fold<int>(
+        0,
+        (sum, chapter) =>
+            sum + ((chapter as Map<String, dynamic>)['learningSections'] as List<dynamic>).length,
+      ),
+      28,
+    );
+    for (final chapter in [...arabicChapters, ...englishChapters]) {
+      final sections =
+          (chapter as Map<String, dynamic>)['learningSections'] as List<dynamic>;
+      expect(sections.length, 4);
+      for (final sectionValue in sections) {
+        final section = sectionValue as Map<String, dynamic>;
+        expect((section['title'] as String).trim(), isNotEmpty);
+        expect((section['content'] as String).trim().length, greaterThan(50));
+        expect((section['examples'] as List<dynamic>), isNotEmpty);
+        expect((section['keyPoints'] as List<dynamic>), isNotEmpty);
+      }
+    }
+
     expect(totalAdvancedQuestions, greaterThanOrEqualTo(224));
     expect(
       ((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
