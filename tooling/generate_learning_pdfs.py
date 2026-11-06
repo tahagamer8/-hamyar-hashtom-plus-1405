@@ -33,7 +33,7 @@ _MATH_SPAN = re.compile(
 
 def rtl(value: object) -> str:
     text = str(value or "")
-    text = _MATH_SPAN.sub(lambda match: "\\u202A" + match.group(0) + "\\u202C", text)
+    text = _MATH_SPAN.sub(lambda match: "\u202A" + match.group(0) + "\u202C", text)
     shaped = arabic_reshaper.reshape(text)
     return escape(get_display(shaped))
 
