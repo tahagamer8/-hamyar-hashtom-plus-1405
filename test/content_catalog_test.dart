@@ -140,7 +140,7 @@ void main() {
       for (final chapterValue in chapters) {
         final chapter = chapterValue as Map<String, dynamic>;
         final sections = chapter['learningSections'] as List<dynamic>;
-        expect(sections.length, greaterThanOrEqualTo(2), reason: entry.key + ': ' + chapter['title'] as String);
+        expect(sections.length, greaterThanOrEqualTo(2), reason: entry.key);
         for (final sectionValue in sections) {
           final section = sectionValue as Map<String, dynamic>;
           expect((section['title'] as String).trim(), isNotEmpty);
