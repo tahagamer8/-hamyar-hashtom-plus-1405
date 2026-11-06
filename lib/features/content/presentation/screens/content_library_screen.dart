@@ -16,10 +16,12 @@ class ContentLibraryScreen extends ConsumerStatefulWidget {
     super.key,
     required this.subjectId,
     required this.featureId,
+    this.initialChapterIndex = 0,
   });
 
   final String subjectId;
   final String featureId;
+  final int initialChapterIndex;
 
   @override
   ConsumerState<ContentLibraryScreen> createState() => _ContentLibraryScreenState();
@@ -28,10 +30,17 @@ class ContentLibraryScreen extends ConsumerStatefulWidget {
 class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   Future<Map<String, dynamic>>? _contentFuture;
   int _selectedChapterIndex = 0;
+  bool _initialChapterApplied = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (!_initialChapterApplied) {
+      _selectedChapterIndex = widget.initialChapterIndex < 0
+          ? 0
+          : widget.initialChapterIndex;
+      _initialChapterApplied = true;
+    }
     _contentFuture ??= _loadContent(DefaultAssetBundle.of(context));
   }
 
