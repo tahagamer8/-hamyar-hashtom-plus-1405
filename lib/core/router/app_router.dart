@@ -32,12 +32,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '${AppRoutes.featureSelection}/:featureId',
-                builder: (context, state) => FeatureSubjectsScreen(
-                  featureId: state.pathParameters['featureId']!,
-                ),
-              ),
-              GoRoute(
                 path: AppRoutes.subjects,
                 builder: (context, state) => const SubjectsScreen(),
                 routes: [
@@ -57,6 +51,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                     ],
                   ),
                 ],
+              ),
+              GoRoute(
+                path: '${AppRoutes.featureSelection}/:featureId',
+                builder: (context, state) => FeatureSubjectsScreen(
+                  featureId: state.pathParameters['featureId']!,
+                ),
               ),
             ],
           ),
