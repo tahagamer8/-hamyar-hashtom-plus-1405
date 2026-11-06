@@ -86,17 +86,27 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
       studyPoints.addAll(
         (section['keyPoints'] as List<dynamic>? ?? []).whereType<String>(),
       );
+      studyPoints.addAll(
+        (section['examples'] as List<dynamic>? ?? []).whereType<String>(),
+      );
     }
     return {
       'subjectTitle': subject['title']?.toString() ?? 'درس',
       'chapterTitle': chapter['title']?.toString() ?? 'فصل',
+      'bookChapterTitle': chapter['bookChapterTitle']?.toString() ?? '',
+      'bookScope': chapter['bookScope']?.toString() ?? '',
+      'alignmentStatus': chapter['alignmentStatus']?.toString() ??
+          'not_verified_against_1405_1406_pdf',
       'summary': chapter['summary']?.toString() ?? '',
       'points': studyPoints.take(8).map((point) =>
           point.length > 400 ? point.substring(0, 400) : point).toList(),
       'example': chapter['example']?.toString() ?? '',
       'solutionSteps': (chapter['solutionSteps'] as List<dynamic>? ?? [])
           .whereType<String>().take(8).toList(),
-      'sourceLabel': 'محتوای فعلی فهمینو؛ ممکن است هنوز با چاپ رسمی تطبیق کامل نشده باشد',
+      'sourceLabel': chapter['source'] is Map
+          ? (chapter['source'] as Map)['title']?.toString() ??
+              'محتوای فعلی فهمینو؛ منبع نیازمند بررسی است'
+          : 'محتوای تألیفی فهمینو؛ نیازمند تطبیق با کتاب رسمی',
     };
   }
 
@@ -274,6 +284,12 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
     }
   }
 
+  void _askSuggested(String prompt) {
+    if (_loading) return;
+    _input.text = prompt;
+    _send();
+  }
+
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scroll.hasClients) {
@@ -402,8 +418,8 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
         child: ExpansionTile(
           initiallyExpanded: false,
           leading: Icon(Icons.cloud_done_outlined, color: theme.colorScheme.primary),
-          title: const Text('اتصال هوش مصنوعی'),
-          subtitle: const Text('تنظیم سرور فهمینو و وضعیت حریم خصوصی'),
+          title: const Text('اتصال امن به Gemini'),
+          subtitle: const Text('از مسیر Cloudflare Worker فهمینو'),
           childrenPadding: const EdgeInsets.fromLTRB(14, 0, 14, 14),
           children: [
             TextField(
@@ -426,7 +442,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
               ),
             ),
             Text(
-              'پیام‌ها برای پاسخ‌گویی به Gemini فرستاده می‌شوند. اطلاعات شخصی یا کلید API را وارد نکن. فعال‌سازی سرویس و بررسی سهمیه یا هزینه باید با والد یا سرپرست انجام شود.',
+              'پیام پرسش برای پاسخ‌گویی به Gemini از سرور Cloudflare فهمینو عبور می‌کند. کلید API روی سرور نگهداری می‌شود؛ آن را در برنامه وارد نکن. دربارهٔ سهمیه و هزینه با والد یا سرپرست هماهنگ کن.',
               style: theme.textTheme.bodySmall,
             ),
           ],
@@ -438,23 +454,41 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   Widget _studyContextPanel(ThemeData theme) {
     final subject = _activeStudyContext?['subjectTitle']?.toString() ?? 'درس';
     final chapter = _activeStudyContext?['chapterTitle']?.toString() ?? 'فصل';
+    final scope = _activeStudyContext?['bookScope']?.toString() ?? '';
+    final unverified = _activeStudyContext?['alignmentStatus'] ==
+        'not_verified_against_1405_1406_pdf';
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: theme.colorScheme.primaryContainer.withAlpha(100),
-          borderRadius: BorderRadius.circular(12),
+          color: theme.colorScheme.primaryContainer.withAlpha(90),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: theme.colorScheme.primary.withAlpha(35)),
         ),
         child: Row(
           children: [
             Icon(Icons.menu_book_rounded, color: theme.colorScheme.primary),
-            const SizedBox(width: 8),
+            const SizedBox(width: 10),
             Expanded(
-              child: Text(
-                'زمینهٔ گفتگو: $subject — $chapter',
-                style: theme.textTheme.bodySmall,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('$subject — $chapter', style: theme.textTheme.labelLarge),
+                  if (scope.isNotEmpty)
+                    Text(scope, style: theme.textTheme.bodySmall),
+                  Text(
+                    unverified
+                        ? 'محتوای این فصل هنوز با PDF چاپ ۱۴۰۵–۱۴۰۶ تأیید نشده'
+                        : 'زمینهٔ درسی برای پاسخ‌گویی فعال است',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: unverified
+                          ? theme.colorScheme.error
+                          : theme.colorScheme.primary,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -464,39 +498,126 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   }
 
   Widget _emptyState(ThemeData theme) {
-    return LayoutBuilder(
-      builder: (context, constraints) => SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: constraints.maxHeight),
-          child: Center(
+    final colors = theme.colorScheme;
+    final suggestions = <({IconData icon, String title, String prompt})>[
+      (icon: Icons.calculate_rounded, title: 'حل مسئلهٔ ریاضی', prompt: 'یک مسئلهٔ دشوار ریاضی هشتم را مرحله‌به‌مرحله برایم توضیح بده.'),
+      (icon: Icons.science_rounded, title: 'فهم علوم', prompt: 'یک مفهوم مهم علوم هشتم را با مثال و پرسش مفهومی توضیح بده.'),
+      (icon: Icons.quiz_rounded, title: 'آزمون چالشی', prompt: 'از فصل انتخاب‌شده یک آزمون دشوار و مفهومی طراحی کن؛ پاسخ‌ها را تا پایان آزمون نشان نده.'),
+      (icon: Icons.menu_book_rounded, title: 'مرور درس', prompt: 'نکات کلیدی فصل انتخاب‌شده را منظم و قابل مرور توضیح بده.'),
+    ];
+    return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: AlignmentDirectional.topStart,
+                end: AlignmentDirectional.bottomEnd,
+                colors: [
+                  colors.primary,
+                  Color.lerp(colors.primary, colors.tertiary, 0.55)!,
+                ],
+              ),
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: colors.primary.withAlpha(45),
+                  blurRadius: 22,
+                  offset: const Offset(0, 10),
+                ),
+              ],
+            ),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.auto_awesome_rounded,
-                    size: 48, color: theme.colorScheme.primary),
-                const SizedBox(height: 12),
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withAlpha(35),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Icon(Icons.auto_awesome_rounded,
+                      color: Colors.white, size: 27),
+                ),
+                const SizedBox(height: 18),
                 Text(
-                  'سلام! من دستیار هوشمند فهمینو هستم.',
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.titleMedium,
+                  'یادگیری، با گفت‌وگو ساده‌تر می‌شود',
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'می‌توانی دربارهٔ ریاضی، علوم، فارسی، انگلیسی و دیگر درس‌های هشتم سؤال بپرسی.',
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.bodyMedium,
+                  'از دستیار فهمینو بخواه مفهوم‌ها را توضیح دهد، مسئله‌ها را مرحله‌به‌مرحله حل کند یا از تو آزمون بگیرد.',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: Colors.white.withAlpha(235),
+                    height: 1.8,
+                  ),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  'پاسخ‌های هوش مصنوعی ممکن است اشتباه باشند؛ با کتاب درسی هم بررسی کن.',
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.bodySmall,
+                const SizedBox(height: 14),
+                Row(
+                  children: [
+                    const Icon(Icons.shield_outlined,
+                        color: Colors.white, size: 16),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        'پاسخ‌ها را با کتاب و منبع درسی بررسی کن.',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: Colors.white.withAlpha(225),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-        ),
+          const SizedBox(height: 22),
+          Text('از کجا شروع کنیم؟', style: theme.textTheme.titleMedium),
+          const SizedBox(height: 10),
+          for (final item in suggestions)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 9),
+              child: Material(
+                color: colors.surfaceContainerLow,
+                borderRadius: BorderRadius.circular(17),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(17),
+                  onTap: () => _askSuggested(item.prompt),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 13),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 42,
+                          height: 42,
+                          decoration: BoxDecoration(
+                            color: colors.primaryContainer,
+                            borderRadius: BorderRadius.circular(13),
+                          ),
+                          child: Icon(item.icon, color: colors.primary),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(item.title,
+                              style: theme.textTheme.titleSmall),
+                        ),
+                        Icon(Icons.arrow_back_ios_new_rounded,
+                            size: 16, color: colors.onSurfaceVariant),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
