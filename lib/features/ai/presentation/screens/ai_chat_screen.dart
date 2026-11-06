@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 const _assistantEndpoint = 'https://fahmino-api-2.tahamrh2.workers.dev/api/chat';
 
@@ -17,7 +18,71 @@ class _AiChatScreenState extends State<AiChatScreen> {
   final _scrollController = ScrollController();
   final _visibleMessages = <_ChatMessage>[];
   final _history = <Map<String, String>>[];
+  Map<String, dynamic> _catalog = {};
+  String? _selectedSubjectId;
+  int _selectedChapterIndex = 0;
   bool _sending = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCatalog();
+  }
+
+  Future<void> _loadCatalog() async {
+    try {
+      final raw = await rootBundle.loadString('assets/content/catalog_fa.json');
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map<String, dynamic>) return;
+      if (!mounted) return;
+      setState(() {
+        _catalog = decoded;
+        _selectedSubjectId = decoded.isEmpty ? null : decoded.keys.first;
+      });
+    } catch (_) {
+      // The chat remains usable without local study context.
+    }
+  }
+
+  Map<String, dynamic>? _buildStudyContext() {
+    final id = _selectedSubjectId;
+    final subject = id == null ? null : _catalog[id];
+    if (subject is! Map<String, dynamic>) return null;
+    final chapters = (subject['chapters'] as List<dynamic>? ?? [])
+        .whereType<Map<String, dynamic>>()
+        .toList();
+    if (chapters.isEmpty) {
+      return {
+        'subjectTitle': subject['title'] as String? ?? 'درس',
+        'alignmentStatus': 'not_verified_against_1405_1406_pdf',
+        'contentVerificationStatus': 'not_verified_against_1405_1406_pdf',
+        'bookScope': 'محتوای تألیفی فهمینو برای پایه هشتم',
+      };
+    }
+    final index = _selectedChapterIndex >= chapters.length
+        ? chapters.length - 1
+        : _selectedChapterIndex;
+    final chapter = chapters[index];
+    final questions = (chapter['questions'] as List<dynamic>? ?? [])
+        .whereType<Map<String, dynamic>>()
+        .take(4)
+        .map((question) => question['question'])
+        .whereType<String>()
+        .toList();
+    return {
+      'subjectTitle': subject['title'] as String? ?? 'درس',
+      'chapterTitle': chapter['title'] as String? ?? '',
+      'bookChapterTitle': chapter['title'] as String? ?? '',
+      'bookScope': 'محتوای تألیفی فهمینو برای پایه هشتم؛ نه متن رسمی کتاب',
+      'alignmentStatus': 'not_verified_against_1405_1406_pdf',
+      'contentVerificationStatus': 'not_verified_against_1405_1406_pdf',
+      'summary': chapter['summary'] as String? ?? '',
+      'example': chapter['example'] as String? ?? '',
+      'points': (chapter['points'] as List<dynamic>? ?? []).whereType<String>().take(8).toList(),
+      'solutionSteps': (chapter['solutionSteps'] as List<dynamic>? ?? []).whereType<String>().take(8).toList(),
+      'practiceQuestions': questions,
+    };
+  }
 
   @override
   void dispose() {
@@ -53,7 +118,11 @@ class _AiChatScreenState extends State<AiChatScreen> {
           .timeout(const Duration(seconds: 12));
       request.headers.contentType = ContentType.json;
       request.headers.set(HttpHeaders.acceptHeader, 'application/json');
-      request.add(utf8.encode(jsonEncode({'messages': messages})));
+      final studyContext = _buildStudyContext();
+      request.add(utf8.encode(jsonEncode({
+        'messages': messages,
+        if (studyContext != null) 'studyContext': studyContext,
+      })));
 
       final response = await request.close().timeout(const Duration(seconds: 28));
       final responseText = await response
@@ -152,9 +221,84 @@ class _AiChatScreenState extends State<AiChatScreen> {
               width: double.infinity,
               padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
               color: theme.colorScheme.surfaceContainerHighest.withAlpha(110),
-              child: const Text(
-                'می‌توانی دربارهٔ درس‌ها سؤال بپرسی یا برای فهم بهتر یک مبحث، مثال و تمرین بخواهی. پاسخ هوش مصنوعی ممکن است اشتباه باشد؛ جواب‌های کتاب‌محور را با کتاب درسی بررسی کن.',
-                textAlign: TextAlign.center,
+              child: Column(
+                children: [
+                  const Text(
+                    'می‌توانی دربارهٔ درس‌ها سؤال بپرسی یا برای فهم بهتر یک مبحث، مثال و تمرین بخواهی. پاسخ هوش مصنوعی ممکن است اشتباه باشد؛ جواب‌های کتاب‌محور را با کتاب درسی بررسی کن.',
+                    textAlign: TextAlign.center,
+                  ),
+                  if (_catalog.isNotEmpty) ...[
+                    const SizedBox(height: 10),
+                    DropdownButtonFormField<String>(
+                      value: _selectedSubjectId,
+                      isExpanded: true,
+                      decoration: const InputDecoration(
+                        labelText: 'درس',
+                        isDense: true,
+                        border: OutlineInputBorder(),
+                      ),
+                      items: [
+                        for (final entry in _catalog.entries)
+                          DropdownMenuItem(
+                            value: entry.key,
+                            child: Text(
+                              entry.value is Map<String, dynamic>
+                                  ? (entry.value['title'] as String? ?? entry.key)
+                                  : entry.key,
+                            ),
+                          ),
+                      ],
+                      onChanged: _sending
+                          ? null
+                          : (value) => setState(() {
+                                _selectedSubjectId = value;
+                                _selectedChapterIndex = 0;
+                              }),
+                    ),
+                    const SizedBox(height: 8),
+                    Builder(builder: (context) {
+                      final subject = _selectedSubjectId == null
+                          ? null
+                          : _catalog[_selectedSubjectId];
+                      final chapters = subject is Map<String, dynamic>
+                          ? (subject['chapters'] as List<dynamic>? ?? [])
+                              .whereType<Map<String, dynamic>>()
+                              .toList()
+                          : <Map<String, dynamic>>[];
+                      if (chapters.isEmpty) return const SizedBox.shrink();
+                      final selectedIndex = _selectedChapterIndex >= chapters.length
+                          ? chapters.length - 1
+                          : _selectedChapterIndex;
+                      return DropdownButtonFormField<int>(
+                        value: selectedIndex,
+                        isExpanded: true,
+                        decoration: const InputDecoration(
+                          labelText: 'فصل یا درس',
+                          isDense: true,
+                          border: OutlineInputBorder(),
+                        ),
+                        items: [
+                          for (var i = 0; i < chapters.length; i++)
+                            DropdownMenuItem(
+                              value: i,
+                              child: Text(chapters[i]['title'] as String? ?? 'بخش \${i + 1}'),
+                            ),
+                        ],
+                        onChanged: _sending
+                            ? null
+                            : (value) => setState(() {
+                                  _selectedChapterIndex = value ?? 0;
+                                }),
+                      );
+                    }),
+                    const SizedBox(height: 4),
+                    Text(
+                      'محتوای انتخاب‌شده هنوز با PDF رسمی ۱۴۰۵–۱۴۰۶ تأیید نهایی نشده است.',
+                      style: theme.textTheme.bodySmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ],
               ),
             ),
             Expanded(
