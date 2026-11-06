@@ -241,7 +241,7 @@ class _ChapterContent extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final title = chapter['title'] as String? ?? 'درس';
-    final summary = chapter['summary'] as String? ?? '';
+    final summary = chapter['summary'] as String? ?? '';\n    final example = chapter['example'] as String? ?? '';\n    final solutionSteps = (chapter['solutionSteps'] as List<dynamic>? ?? [])\n        .whereType<String>()\n        .toList();
     final lessonSections = (chapter['learningSections'] as List<dynamic>? ?? [])
         .cast<Map<String, dynamic>>();
     final points = (chapter['points'] as List<dynamic>? ?? []).cast<String>();
@@ -276,13 +276,45 @@ class _ChapterContent extends ConsumerWidget {
             ),
             const Divider(),
             if (feature == AppFeature.lessons) ...[
-              Text('درسنامهٔ کامل این فصل', style: theme.textTheme.titleSmall),
+              Text(
+                lessonSections.isEmpty
+                    ? 'خلاصهٔ آموزشی فصل'
+                    : 'درسنامهٔ فصل',
+                style: theme.textTheme.titleSmall,
+              ),
               const SizedBox(height: 8),
-              if (lessonSections.isEmpty)
-                const _MissingLearningSections()
-              else
+              if (lessonSections.isNotEmpty) ...[
                 for (final section in lessonSections)
                   _LearningSectionCard(section: section),
+              ] else if (summary.isNotEmpty || points.isNotEmpty) ...[
+                if (summary.isNotEmpty) Text(summary),
+                for (final point in points) _Bullet(text: point),
+                if (example.isNotEmpty) ...[
+                  const SizedBox(height: 10),
+                  Text('مثال آموزشی', style: theme.textTheme.titleSmall),
+                  const SizedBox(height: 4),
+                  Text(example),
+                ],
+                if (solutionSteps.isNotEmpty) ...[
+                  const SizedBox(height: 8),
+                  Text('راه‌حل مرحله‌به‌مرحله',
+                      style: theme.textTheme.titleSmall),
+                  const SizedBox(height: 4),
+                  for (var i = 0; i < solutionSteps.length; i++)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: Text('${i + 1}. ${solutionSteps[i]}'),
+                    ),
+                ],
+                const SizedBox(height: 8),
+                Text(
+                  'این محتوا خلاصهٔ اولیه است؛ هنوز درسنامهٔ کاملِ تطبیق‌داده‌شده با چاپ رسمی نیست.',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ] else
+                const _MissingLearningSections(),
             ] else if (feature == AppFeature.notes) ...[
               Text('جزوه و نکته‌های این فصل', style: theme.textTheme.titleSmall),
               const SizedBox(height: 8),
