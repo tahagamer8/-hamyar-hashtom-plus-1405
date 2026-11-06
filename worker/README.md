@@ -1,23 +1,11 @@
-# Fahmino Gemini Worker
+# Fahmino Worker
 
-This directory tracks the module currently deployed as Cloudflare Worker `fahmino-api-2`.
+The deployed Worker is intentionally in offline-only mode.
 
-## Required bindings
+- `GET /health` reports that external AI is disabled.
+- `POST /api/chat` returns HTTP 410 and never calls a model provider.
+- No model API key or paid service is used by this Worker.
 
-- Secret text binding: `GEMINI_API_KEY` (Google Gemini Developer API key; keep it in Cloudflare Secrets, never commit it).
-- Rate-limit binding: `CHAT_LIMITER` (20 requests per IP per 60 seconds).
+Fahmino is a grade-eight learning app and its intended audience includes people under 18. The current Gemini API Additional Terms require API users to be 18+ and prohibit using the API in apps directed to or likely accessed by under-18 users. Therefore this Worker must remain disabled for external Gemini calls. See Google's current terms: https://ai.google.dev/gemini-api/terms
 
-## API
-
-- `GET /health`: reports whether the required bindings exist; it does not send a Gemini request.
-- `POST /api/chat`: accepts alternating `user` / `model` messages and optional lesson context.
-
-## Model and cost safeguards
-
-The worker currently uses `gemini-3.8-flash`. Google's Gemini Developer API pricing page lists Standard Free Tier input and output tokens for this model as free of charge, subject to quotas and eligibility. Do not enable a paid billing tier or add paid tools/grounding without an adult account owner reviewing the settings first.
-
-The per-IP rate limit is an abuse-control measure, not a guaranteed monthly spending cap. Check Google AI Studio / API project usage and quotas regularly. A configured API key alone does not prove that the project is on the Free Tier.
-
-## Deployment note
-
-The production Worker is managed in Cloudflare. Keep this source file synchronized with the deployed script before future deployments. Never copy secret values into this repository.
+The app uses a local, on-device content helper instead. It searches the authored Fahmino catalog and does not send lesson questions or personal information to a remote AI provider.
