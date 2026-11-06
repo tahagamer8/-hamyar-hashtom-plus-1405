@@ -51,7 +51,7 @@ void main() {
     await tester.pumpWidget(_testApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('دستیار آفلاین فهمینو'), findsOneWidget);
+    expect(find.text('راهنمای هوشمند آفلاین فهمینو'), findsOneWidget);
     expect(find.text('از کجا شروع کنیم؟'), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
     expect(find.byType(DropdownButtonFormField<String>), findsOneWidget);
@@ -66,7 +66,7 @@ void main() {
     await tester.tap(find.byTooltip('جست‌وجوی محلی'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('راهنمای آفلاین فهمینو'), findsOneWidget);
+    expect(find.textContaining('راهنمای هوشمند فهمینو'), findsOneWidget);
     expect(find.textContaining('عددهای صحیح و گویا'), findsWidgets);
     expect(find.textContaining('مدل هوش مصنوعی مولد نیست'), findsOneWidget);
   });
