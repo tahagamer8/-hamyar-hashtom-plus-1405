@@ -12,6 +12,7 @@
 - [ ] از Worker موجود با نام دقیق `fahmino-api-2` استفاده کنید؛ Worker قدیمی `fahmino-api` را تغییر ندهید.
 - [ ] محتوای `worker/src/index.js` را در Worker با نام `fahmino-api-2` قرار دهید.
 - [ ] در بخش Settings → Variables and Secrets یک Secret با نام دقیق `GEMINI_API_KEY` ایجاد کنید.
+- [ ] در بخش Bindings یک Rate Limiting binding با نام دقیق `CHAT_LIMITER` بسازید؛ محدودیت پیشنهادی ۲۰ درخواست در ۶۰ ثانیه برای هر IP است.
 - [ ] مقدار کلید فقط در فرم Secret وارد شود؛ آن را در کد، GitHub، APK یا گفت‌وگو قرار ندهید.
 - [ ] Worker را Deploy کنید.
 
@@ -26,6 +27,7 @@
 
 ## ۵) بررسی نهایی
 - [ ] درخواست بدون کلید، خطای کنترل‌شده برگرداند.
+- [ ] درخواست بدون Rate Limiting binding، با خطای پیکربندی رد شود.
 - [ ] درخواست بیش از سهمیه، با پیام محدودیت روبه‌رو شود.
 - [ ] کلید Gemini در فایل APK و مخزن وجود نداشته باشد.
 - [ ] مصرف و خطاهای Worker را در داشبورد Cloudflare پایش کنید.
