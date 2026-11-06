@@ -129,31 +129,33 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                 onChanged: (index) => setState(() => _selectedChapterIndex = index),
               ),
               const SizedBox(height: 8),
-              OutlinedButton.icon(
-                onPressed: () => context.push(
-                  AppRoutes.aiAssistant,
-                  extra: <String, dynamic>{
-                    'subjectTitle': subject['title'] as String? ?? 'درس',
-                    'chapterTitle': selectedChapter['title'] as String? ?? 'فصل',
-                    'summary': selectedChapter['summary'] as String? ?? '',
-                    'points': (selectedChapter['points'] as List<dynamic>? ?? [])
-                        .whereType<String>()
-                        .take(8)
-                        .toList(),
-                    'example': selectedChapter['example'] as String? ?? '',
-                    'solutionSteps':
-                        (selectedChapter['solutionSteps'] as List<dynamic>? ?? [])
-                            .whereType<String>()
-                            .take(8)
-                            .toList(),
-                    'sourceLabel': 'محتوای اولیهٔ فهمینو؛ نیازمند تطبیق با کتاب رسمی',
-                  },
+              if (_feature != AppFeature.sampleExams) ...[
+                OutlinedButton.icon(
+                  onPressed: () => context.push(
+                    AppRoutes.aiAssistant,
+                    extra: <String, dynamic>{
+                      'subjectTitle': subject['title'] as String? ?? 'درس',
+                      'chapterTitle': selectedChapter['title'] as String? ?? 'فصل',
+                      'summary': selectedChapter['summary'] as String? ?? '',
+                      'points': (selectedChapter['points'] as List<dynamic>? ?? [])
+                          .whereType<String>()
+                          .take(8)
+                          .toList(),
+                      'example': selectedChapter['example'] as String? ?? '',
+                      'solutionSteps':
+                          (selectedChapter['solutionSteps'] as List<dynamic>? ?? [])
+                              .whereType<String>()
+                              .take(8)
+                              .toList(),
+                      'sourceLabel': 'محتوای اولیهٔ فهمینو؛ نیازمند تطبیق با کتاب رسمی',
+                    },
+                  ),
+                  icon: const Icon(Icons.auto_awesome_rounded),
+                  label: const Text('پرسش از دستیار دربارهٔ این فصل'),
                 ),
-                icon: const Icon(Icons.auto_awesome_rounded),
-                label: const Text('پرسش از دستیار دربارهٔ این فصل'),
-              ),
-              const SizedBox(height: 8),
-              _DraftContentNotice(feature: _feature),
+                const SizedBox(height: 8),
+                _DraftContentNotice(feature: _feature),
+              ],
               const SizedBox(height: 12),
               _ChapterContent(
                 chapter: selectedChapter,
@@ -163,6 +165,10 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                 favoriteKey: widget.subjectId + '::' +
                     (selectedChapter['title']?.toString() ?? ''),
               ),
+              if (_feature == AppFeature.sampleExams) ...[
+                const SizedBox(height: 8),
+                _DraftContentNotice(feature: _feature),
+              ],
             ],
           );
         },
