@@ -115,8 +115,8 @@ test("forwards valid chat and returns Gemini text", async () => {
   assert.equal(capturedInit.headers["x-goog-api-key"], "test-key");
   const payload = JSON.parse(capturedInit.body);
   assert.equal(payload.contents[0].role, "user");
-  assert.equal(payload.generationConfig.thinkingConfig.thinkingLevel, "MEDIUM");
-  assert.equal(payload.generationConfig.maxOutputTokens, 4096);
+  assert.equal(payload.generationConfig.thinkingConfig.thinkingLevel, "medium");
+  assert.equal(payload.generationConfig.maxOutputTokens, 8192);
   const tutorInstruction = payload.systemInstruction.parts[0].text;
   assert.match(tutorInstruction, /درسنامهٔ کامل/);
   assert.match(tutorInstruction, /پنج تمرین تألیفی/);
