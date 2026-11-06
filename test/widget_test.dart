@@ -70,6 +70,11 @@ void main() {
     expect((catalog['math'] as Map<String, dynamic>)['chapters'], hasLength(9));
     expect((catalog['science'] as Map<String, dynamic>)['chapters'], hasLength(15));
     expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(24));
+    final religionChapters = (catalog['religion'] as Map<String, dynamic>)['chapters'] as List<dynamic>;
+    expect(religionChapters, hasLength(16));
+    expect((religionChapters.first as Map<String, dynamic>)['title'], startsWith('درس ۱:'));
+    expect((religionChapters[14] as Map<String, dynamic>)['title'], startsWith('درس ۱۵:'));
+    expect((religionChapters.last as Map<String, dynamic>)['title'], startsWith('مرور تکمیلی'));
     var totalQuestions = 0;
     final uniqueQuestionTexts = <String>{};
     for (final entry in catalog.entries) {
