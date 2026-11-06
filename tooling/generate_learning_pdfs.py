@@ -27,7 +27,7 @@ from reportlab.platypus import (
 # Keep arithmetic spans in left-to-right embedding so bidi shaping cannot
 # silently swap operands such as ۳/۴ − ۱/۲ in generated PDFs.
 _MATH_SPAN = re.compile(
-    r"(?<![A-Za-z0-9۰-۹])(?:[۰-۹0-9A-Za-z]+(?:[ \\t]*/[ \\t]*[۰-۹0-9A-Za-z]+)?"
+    r"(?<![A-Za-z0-9۰-۹])(?:[۰-۹0-9A-Za-z]+(?:[ ]*/[ \\t]*[۰-۹0-9A-Za-z]+)?"
     r"(?:[ \\t]*[-+−×÷=<>≤≥][ \\t]*[۰-۹0-9A-Za-z]+(?:[ \\t]*/[ \\t]*[۰-۹0-9A-Za-z]+)?)+)(?![A-Za-z0-9۰-۹])"
 )
 
