@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hamyar_hashtom_plus/core/router/app_routes.dart';
 import 'package:hamyar_hashtom_plus/core/widgets/main_shell.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/screens/content_library_screen.dart';
+import 'package:hamyar_hashtom_plus/features/ai_assistant/presentation/screens/ai_assistant_screen.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:hamyar_hashtom_plus/features/home/presentation/screens/home_screen.dart';
 import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_screen.dart';
@@ -44,6 +45,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                         builder: (context, state) => ContentLibraryScreen(
                           subjectId: state.pathParameters['subjectId']!,
                           featureId: state.pathParameters['featureId']!,
+                          initialChapterIndex:
+                              int.tryParse(state.uri.queryParameters['chapter'] ?? '') ?? 0,
                         ),
                       ),
                     ],
@@ -77,6 +80,21 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
         ],
+      ),
+      GoRoute(
+        path: AppRoutes.aiAssistant,
+        builder: (context, state) {
+          final extra = state.extra;
+          final payload = extra is Map<String, dynamic> ? extra : null;
+          final nestedContext = payload?['studyContext'];
+          return AiAssistantScreen(
+            studyContext: nestedContext is Map<String, dynamic>
+                ? nestedContext
+                : payload,
+            initialPrompt: payload?['initialPrompt'] as String?,
+            lessonCacheKey: payload?['lessonCacheKey'] as String?,
+          );
+        },
       ),
     ],
     errorBuilder: (context, state) => const _NotFoundScreen(),

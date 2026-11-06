@@ -1,0 +1,279 @@
+#!/usr/bin/env python3
+"""Structural quality audit for Fahmino's authored grade-eight content catalog.
+
+This tool validates data shape and consistency. It deliberately does not claim
+that educational statements or answer keys are correct unless they are reviewed
+against the matching official textbook edition by a human reviewer.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+
+def audit(path: Path) -> tuple[list[str], dict[str, int]]:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    errors: list[str] = []
+    subjects = chapters = questions = 0
+    sourced_chapters = verified_chapters = learning_sections = book_solutions = 0
+    chapters_with_learning_sections = chapters_without_learning_sections = 0
+    chapters_with_alignment_status = subjects_with_review_metadata = 0
+    sections_by_subject: dict[str, int] = {}
+    seen_questions: dict[str, str] = {}
+
+    if not isinstance(data, dict) or not data:
+        return ["catalog must be a non-empty JSON object"], {}
+
+    subjects = len(data)
+    for subject_id, subject in data.items():
+        if not isinstance(subject, dict):
+            errors.append(f"{subject_id}: subject must be an object")
+            continue
+        if not isinstance(subject.get("title"), str) or not subject["title"].strip():
+            errors.append(f"{subject_id}: missing subject title")
+        review = subject.get("alignmentReview")
+        if not isinstance(review, dict):
+            errors.append(f"{subject_id}: missing alignmentReview metadata")
+        elif review.get("targetEdition") != "۱۴۰۵–۱۴۰۶" or review.get("status") != "needs_exact_edition_pdf_review":
+            errors.append(f"{subject_id}: alignmentReview must explicitly identify the target edition and pending PDF review")
+        else:
+            subjects_with_review_metadata += 1
+
+        items = subject.get("chapters")
+        if not isinstance(items, list) or not items:
+            errors.append(f"{subject_id}: chapters must be a non-empty list")
+            continue
+        local_titles: set[str] = set()
+        for index, chapter in enumerate(items):
+            label = f"{subject_id}/chapter-{index + 1}"
+            chapters += 1
+            if not isinstance(chapter, dict):
+                errors.append(f"{label}: chapter must be an object")
+                continue
+            if chapter.get("alignmentStatus") != "not_verified_against_1405_1406_pdf":
+                errors.append(f"{label}: missing or unsafe textbook alignment status")
+            else:
+                chapters_with_alignment_status += 1
+
+            title = chapter.get("title")
+            if not isinstance(title, str) or not title.strip():
+                errors.append(f"{label}: missing title")
+            elif title.strip() in local_titles:
+                errors.append(f"{label}: duplicate chapter title {title!r}")
+            else:
+                local_titles.add(title.strip())
+
+            for key in ("summary", "example"):
+                if not isinstance(chapter.get(key), str) or not chapter[key].strip():
+                    errors.append(f"{label}: {key} must be non-empty text")
+            for key in ("points", "solutionSteps", "questions"):
+                if not isinstance(chapter.get(key), list):
+                    errors.append(f"{label}: {key} must be a list")
+
+            for key in ("points", "solutionSteps"):
+                values = chapter.get(key, [])
+                if isinstance(values, list):
+                    for item_index, value in enumerate(values):
+                        if not isinstance(value, str) or not value.strip():
+                            errors.append(f"{label}: {key}[{item_index}] is empty or not text")
+
+            raw_sections = chapter.get("learningSections", [])
+            if not isinstance(raw_sections, list):
+                errors.append(f"{label}: learningSections must be a list")
+                raw_sections = []
+            learning_sections += len(raw_sections)
+            sections_by_subject[subject_id] = sections_by_subject.get(subject_id, 0) + len(raw_sections)
+            if len(raw_sections) >= 2:
+                chapters_with_learning_sections += 1
+            else:
+                chapters_without_learning_sections += 1
+                errors.append(f"{label}: at least two structured learning sections are required")
+            for section_index, section in enumerate(raw_sections):
+                section_label = f"{label}/section-{section_index + 1}"
+                if not isinstance(section, dict):
+                    errors.append(f"{section_label}: section must be an object")
+                    continue
+                if not isinstance(section.get("title"), str) or not section["title"].strip():
+                    errors.append(f"{section_label}: title is missing")
+                content = section.get("content")
+                if not isinstance(content, str) or len(content.strip()) < 50:
+                    errors.append(f"{section_label}: content must contain at least 50 characters")
+                for list_key in ("keyPoints", "examples"):
+                    values = section.get(list_key, [])
+                    if not isinstance(values, list) or not values or any(
+                        not isinstance(value, str) or not value.strip() for value in values
+                    ):
+                        errors.append(f"{section_label}: {list_key} must contain non-empty text items")
+            raw_solutions = chapter.get("bookSolutions", [])
+            if not isinstance(raw_solutions, list):
+                errors.append(f"{label}: bookSolutions must be a list")
+                raw_solutions = []
+            book_solutions += len(raw_solutions)
+            source = chapter.get("source")
+            if isinstance(source, dict) and source.get("url"):
+                sourced_chapters += 1
+                if source.get("verified") is True and source.get("edition"):
+                    verified_chapters += 1
+
+            chapter_questions = chapter.get("questions", [])
+            if not isinstance(chapter_questions, list):
+                continue
+            for q_index, question in enumerate(chapter_questions):
+                questions += 1
+                qlabel = f"{label}/question-{q_index + 1}"
+                if not isinstance(question, dict):
+                    errors.append(f"{qlabel}: question must be an object")
+                    continue
+                if question.get("contentOrigin") != "fahmino_authored_practice":
+                    errors.append(f"{qlabel}: question origin must be labeled as Fahmino-authored practice")
+                if question.get("verificationStatus") != "not_verified_against_official_textbook":
+                    errors.append(f"{qlabel}: question must not be presented as textbook-verified")
+                prompt = question.get("question")
+                if not isinstance(prompt, str) or not prompt.strip():
+                    errors.append(f"{qlabel}: question text is empty")
+                else:
+                    normalized = " ".join(prompt.split())
+                    if normalized in seen_questions:
+                        errors.append(f"{qlabel}: duplicate question also appears at {seen_questions[normalized]}")
+                    else:
+                        seen_questions[normalized] = qlabel
+
+                options = question.get("options")
+                if not isinstance(options, list) or len(options) < 2:
+                    errors.append(f"{qlabel}: at least two options are required")
+                    continue
+                if any(not isinstance(option, str) or not option.strip() for option in options):
+                    errors.append(f"{qlabel}: every option must be non-empty text")
+                if len(set(options)) != len(options):
+                    errors.append(f"{qlabel}: duplicate options")
+                answer = question.get("answer")
+                if type(answer) is not int or answer < 0 or answer >= len(options):
+                    errors.append(f"{qlabel}: answer index is outside the options")
+                if not isinstance(question.get("explanation"), str) or not question["explanation"].strip():
+                    errors.append(f"{qlabel}: explanation is missing")
+
+            raw_challenge = chapter.get("challengeQuestions", [])
+            if not isinstance(raw_challenge, list):
+                errors.append(f"{label}: challengeQuestions must be a list")
+                raw_challenge = []
+            if not raw_challenge:
+                errors.append(f"{label}: at least one advanced challenge question is required")
+            for challenge_index, question in enumerate(raw_challenge):
+                questions += 1
+                qlabel = f"{label}/challenge-{challenge_index + 1}"
+                if not isinstance(question, dict):
+                    errors.append(f"{qlabel}: challenge question must be an object")
+                    continue
+                if question.get("difficulty") != "advanced":
+                    errors.append(f"{qlabel}: challenge difficulty must be advanced")
+                if question.get("contentOrigin") != "fahmino_authored_practice":
+                    errors.append(f"{qlabel}: challenge origin must be labeled as Fahmino-authored practice")
+                if question.get("verificationStatus") != "not_verified_against_official_textbook":
+                    errors.append(f"{qlabel}: challenge must not be presented as textbook-verified")
+                prompt = question.get("question")
+                if not isinstance(prompt, str) or not prompt.strip():
+                    errors.append(f"{qlabel}: question text is empty")
+                options = question.get("options")
+                if not isinstance(options, list) or len(options) < 4:
+                    errors.append(f"{qlabel}: at least four options are required")
+                    continue
+                if any(not isinstance(option, str) or not option.strip() for option in options):
+                    errors.append(f"{qlabel}: every option must be non-empty text")
+                if len(set(options)) != len(options):
+                    errors.append(f"{qlabel}: duplicate options")
+                answer = question.get("answer")
+                if type(answer) is not int or answer < 0 or answer >= len(options):
+                    errors.append(f"{qlabel}: answer index is outside the options")
+                if not isinstance(question.get("explanation"), str) or not question["explanation"].strip():
+                    errors.append(f"{qlabel}: explanation is missing")
+
+    stats = {
+        "subjects": subjects,
+        "chapters": chapters,
+        "questions": questions,
+        "chapters_with_source": sourced_chapters,
+        "chapters_verified_against_edition": verified_chapters,
+        "learning_sections": learning_sections,
+        "chapters_with_learning_sections": chapters_with_learning_sections,
+        "chapters_without_learning_sections": chapters_without_learning_sections,
+        "book_solutions": book_solutions,
+        "subjects_with_review_metadata": subjects_with_review_metadata,
+        "chapters_with_alignment_status": chapters_with_alignment_status,
+    }
+    return errors, stats
+
+
+def audit_known_question_regressions(data: dict, errors: list[str]) -> None:
+    """Guard against previously found prompt/option/answer mismatches."""
+    checks = [
+        ("english", 4, 1, ("next to",), "کنار"),
+        ("english", 6, 0, ("hobby",), "سرگرمی"),
+        ("english_workbook", 0, 0, ("she", "be"), "is"),
+        ("english_workbook", 0, 1, ("اهل کویت",), "Kuwaiti"),
+        ("english_workbook", 2, 0, ("can",), "play"),
+        ("english_workbook", 2, 1, ("cannot",), "نمی‌تواند"),
+        ("english_workbook", 4, 0, ("three shops",), "are"),
+        ("english_workbook", 4, 1, ("opposite",), "روبه‌رو"),
+    ]
+    for subject_id, chapter_index, question_index, required_terms, expected_answer in checks:
+        try:
+            question = data[subject_id]["chapters"][chapter_index]["questions"][question_index]
+            prompt = question["question"].casefold()
+            options = question["options"]
+            answer_index = question["answer"]
+            actual_answer = options[answer_index]
+        except (KeyError, IndexError, TypeError):
+            errors.append(
+                f"{subject_id}/chapter-{chapter_index + 1}/question-{question_index + 1}: "
+                "known-question regression fixture is missing or malformed"
+            )
+            continue
+        if any(term.casefold() not in prompt for term in required_terms):
+            errors.append(
+                f"{subject_id}/chapter-{chapter_index + 1}/question-{question_index + 1}: "
+                f"prompt must include {required_terms!r}"
+            )
+        if actual_answer != expected_answer:
+            errors.append(
+                f"{subject_id}/chapter-{chapter_index + 1}/question-{question_index + 1}: "
+                f"expected answer {expected_answer!r}, got {actual_answer!r}"
+            )
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--catalog", default="assets/content/catalog_fa.json")
+    parser.add_argument(
+        "--require-verified-sources",
+        action="store_true",
+        help="fail unless every chapter has a verified source and edition",
+    )
+    args = parser.parse_args()
+
+    catalog_path = Path(args.catalog)
+    data = json.loads(catalog_path.read_text(encoding="utf-8"))
+    errors, stats = audit(catalog_path)
+    audit_known_question_regressions(data, errors)
+    for key, value in stats.items():
+        print(f"{key}: {value}")
+    if stats and stats["chapters"]:
+        print(
+            "source_coverage: "
+            f"{stats['chapters_with_source']}/{stats['chapters']} "
+            f"(verified: {stats['chapters_verified_against_edition']})"
+        )
+    if args.require_verified_sources and stats.get("chapters_verified_against_edition", 0) != stats.get("chapters", 0):
+        errors.append("not every chapter is verified against a named textbook edition")
+
+    if errors:
+        print("\nCONTENT CATALOG ERRORS:")
+        for error in errors:
+            print(f"- {error}")
+        return 1
+    print("\nStructural content audit passed. Educational accuracy still requires textbook review.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

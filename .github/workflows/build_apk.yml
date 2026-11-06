@@ -28,10 +28,51 @@ jobs:
       - name: Create Android platform if missing
         run: |
           if [ ! -d android ]; then
-            flutter create --platforms=android --project-name hamyar_hashtom_plus --org ir.hamyar /tmp/fahmino
+            flutter create --platforms=android --project-name hamyar_hashtom_plus --org ir.fahmino /tmp/fahmino
             cp -r /tmp/fahmino/android ./android
           fi
           sed -i 's/android:label="[^"]*"/android:label="فهمینو"/' android/app/src/main/AndroidManifest.xml
+
+      - name: Keep Android application identity stable
+        env:
+          FAHMINO_PREVIEW_BUILD: ${{ github.ref != 'refs/heads/main' }}
+        run: python tooling/configure_android_gradle.py
+
+      - name: Configure persistent release signing
+        if: github.ref == 'refs/heads/main'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.FAHMINO_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.FAHMINO_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.FAHMINO_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.FAHMINO_KEY_PASSWORD }}
+        run: |
+          python - <<'PY'
+          import base64, os
+          from pathlib import Path
+          values = {
+              "FAHMINO_KEYSTORE_BASE64": os.environ.get("KEYSTORE_BASE64", ""),
+              "FAHMINO_KEYSTORE_PASSWORD": os.environ.get("KEYSTORE_PASSWORD", ""),
+              "FAHMINO_KEY_ALIAS": os.environ.get("KEY_ALIAS", ""),
+              "FAHMINO_KEY_PASSWORD": os.environ.get("KEY_PASSWORD", ""),
+          }
+          missing = [name for name, value in values.items() if not value]
+          if missing:
+              raise SystemExit(
+                  "Release signing is not configured. Add these GitHub Actions secrets: "
+                  + ", ".join(missing)
+              )
+          keystore = base64.b64decode(values["FAHMINO_KEYSTORE_BASE64"], validate=True)
+          Path("android/app/fahmino-release.jks").write_bytes(keystore)
+          def escaped(value):
+              return value.replace("\\", "\\\\").replace(":", "\\:").replace("=", "\\=")
+          props = (
+              "storeFile=fahmino-release.jks\n"
+              f"storePassword={escaped(values['FAHMINO_KEYSTORE_PASSWORD'])}\n"
+              f"keyAlias={escaped(values['FAHMINO_KEY_ALIAS'])}\n"
+              f"keyPassword={escaped(values['FAHMINO_KEY_PASSWORD'])}\n"
+          )
+          Path("android/key.properties").write_text(props, encoding="utf-8")
+          PY
 
       - name: Ensure Vazirmatn fonts
         run: |
@@ -52,11 +93,29 @@ jobs:
       - name: Install PDF generation dependencies
         run: python -m pip install --disable-pip-version-check 'reportlab>=4.2,<5' 'arabic-reshaper>=3,<4' 'python-bidi>=0.6,<1'
 
+      - name: Audit learning content catalog
+        run: python tooling/audit_content_catalog.py --catalog assets/content/catalog_fa.json
+
       - name: Generate Persian PDF assets
         run: |
           python tooling/generate_learning_pdfs.py --output-dir assets/generated_pdfs
-          test -s assets/generated_pdfs/Fahmino-Grade8-Notes-FA.pdf
-          test -s assets/generated_pdfs/Fahmino-Grade8-Sample-Questions-FA.pdf
+          test -s assets/generated_pdfs/manifest.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("assets/generated_pdfs/manifest.json").read_text(encoding="utf-8"))
+          catalog = json.loads(Path("assets/content/catalog_fa.json").read_text(encoding="utf-8"))
+          chapter_count = sum(len(subject["chapters"]) for subject in catalog.values())
+          expected_count = chapter_count * 2 + 2
+          if len(manifest) != expected_count:
+              raise SystemExit(f"Expected {expected_count} chapter and aggregate PDF resources, found {len(manifest)}")
+          required = ["Fahmino-Grade8-Notes-FA.pdf", "Fahmino-Grade8-Sample-Questions-FA.pdf"]
+          missing = [name for name in required if not (Path("assets/generated_pdfs") / name).is_file()]
+          missing += [item["fileName"] for item in manifest if not (Path("assets/generated_pdfs") / item["fileName"]).is_file()]
+          if missing:
+              raise SystemExit("Missing generated PDFs: " + ", ".join(missing[:10]))
+          print(f"Verified {len(manifest)} chapter and aggregate PDF resources.")
+          PY
 
       - name: Install dependencies
         run: flutter pub get
@@ -67,17 +126,41 @@ jobs:
       - name: Run widget and unit tests (three passes)
         run: flutter test --reporter expanded && flutter test --reporter expanded && flutter test --reporter expanded
 
+      - name: Test Gemini Worker
+        run: npm --prefix worker test
+
+      - name: Smoke test deployed Gemini Worker without a model request
+        env:
+          FAHMINO_WORKER_URL: https://fahmino-api-2.tahamrh2.workers.dev
+        run: |
+          health="$(curl --retry 3 --retry-delay 3 --fail --silent --show-error "$FAHMINO_WORKER_URL/health")"
+          python -c 'import json,sys; d=json.load(sys.stdin); assert d.get("ok") is True; assert d.get("geminiSecretConfigured") is True; assert d.get("rateLimiterConfigured") is True; print("Worker health, Gemini secret binding, and rate limiter are configured.")' <<< "$health"
+          status="$(curl --silent --show-error -o /tmp/fahmino-worker-invalid.json -w '%{http_code}' -X POST -H 'Content-Type: application/json' --data '{"messages":[]}' "$FAHMINO_WORKER_URL/api/chat")"
+          test "$status" = "400"
+          echo "Worker chat route and request validation responded without invoking Gemini."
       - name: Build release APKs
         run: flutter build apk --release --split-per-abi
 
+      - name: Verify all ABI APKs exist
+        run: |
+          test -s build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+          test -s build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+          test -s build/app/outputs/flutter-apk/app-x86_64-release.apk
+
       - uses: actions/upload-artifact@v4
         with:
-          name: fahmino-apk
-          path: build/app/outputs/flutter-apk/*.apk
+          name: fahmino-arm64-v8a
+          path: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
           if-no-files-found: error
 
       - uses: actions/upload-artifact@v4
         with:
-          name: fahmino-learning-pdfs
-          path: assets/generated_pdfs/*.pdf
+          name: fahmino-armeabi-v7a
+          path: build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fahmino-x86_64
+          path: build/app/outputs/flutter-apk/app-x86_64-release.apk
           if-no-files-found: error

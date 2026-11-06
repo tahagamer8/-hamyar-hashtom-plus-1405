@@ -44,7 +44,7 @@ def load_catalog(path: Path) -> dict:
             for key in ("title", "summary", "points", "solutionSteps", "questions"):
                 if key not in chapter:
                     raise ValueError(f"Missing {key} in {subject_id}/{chapter.get('title')}")
-            for question in chapter["questions"]:
+            for question in [*chapter["questions"], *chapter.get("challengeQuestions", [])]:
                 options = question.get("options")
                 answer = question.get("answer")
                 if not isinstance(options, list) or not options:
@@ -109,7 +109,7 @@ def page_footer(canvas, doc):
 
 def build_notes(catalog, output: Path, styles_map):
     topic_count = sum(len(subject['chapters']) for subject in catalog.values())
-    question_count = sum(len(chapter['questions']) for subject in catalog.values() for chapter in subject['chapters'])
+    question_count = sum(len(chapter['questions']) + len(chapter.get('challengeQuestions', [])) for subject in catalog.values() for chapter in subject['chapters'])
     story = [
         Spacer(1, 28*mm),
         Paragraph(rtl("جزوه‌های خلاصه و نکته‌ای"), styles_map["title"]),
@@ -130,6 +130,14 @@ def build_notes(catalog, output: Path, styles_map):
                 story.append(Paragraph(rtl("نکته‌های کلیدی"), styles_map["question"]))
                 for point in chapter["points"]:
                     story.append(Paragraph(rtl("• " + point), styles_map["body"]))
+            for section in chapter.get("learningSections", []):
+                story.append(Paragraph(rtl(section.get("title", "بخش آموزشی")), styles_map["question"]))
+                if section.get("content"):
+                    story.append(Paragraph(rtl(section["content"]), styles_map["body"]))
+                for point in section.get("keyPoints", []):
+                    story.append(Paragraph(rtl("• " + point), styles_map["body"]))
+                for example_text in section.get("examples", []):
+                    story.append(Paragraph(rtl("مثال: " + example_text), styles_map["body"]))
             if chapter.get("example"):
                 story.append(Paragraph(rtl("مثال آموزشی: " + chapter["example"]), styles_map["question"]))
             if chapter["solutionSteps"]:
@@ -143,7 +151,7 @@ def build_notes(catalog, output: Path, styles_map):
 
 def build_questions(catalog, output: Path, styles_map):
     topic_count = sum(len(subject['chapters']) for subject in catalog.values())
-    question_count = sum(len(chapter['questions']) for subject in catalog.values() for chapter in subject['chapters'])
+    question_count = sum(len(chapter['questions']) + len(chapter.get('challengeQuestions', [])) for subject in catalog.values() for chapter in subject['chapters'])
     story = [
         Spacer(1, 28*mm),
         Paragraph(rtl("نمونه‌سؤال و آزمونک‌های آموزشی"), styles_map["title"]),
@@ -161,9 +169,14 @@ def build_questions(catalog, output: Path, styles_map):
         story.append(Paragraph(rtl(subject["title"]), styles_map["subject"]))
         for chapter in subject["chapters"]:
             story.append(Paragraph(rtl(chapter["title"]), styles_map["chapter"]))
-            for question in chapter["questions"]:
+            question_pool = [
+                *chapter["questions"],
+                *chapter.get("challengeQuestions", []),
+            ]
+            for question in question_pool:
                 number += 1
-                story.append(Paragraph(rtl(f"{number}. {question['question']}"), styles_map["question"]))
+                level = " (چالشی)" if question.get("difficulty") == "advanced" else ""
+                story.append(Paragraph(rtl(f"{number}. {question['question']}{level}"), styles_map["question"]))
                 for idx, option in enumerate(question["options"]):
                     label = letters[idx] if idx < len(letters) else str(idx+1)
                     story.append(Paragraph(rtl(f"{label}) {option}"), styles_map["option"]))
@@ -198,9 +211,67 @@ def main():
     out = Path(args.output_dir)
     out.mkdir(parents=True, exist_ok=True)
     style_map = styles()
-    build_notes(catalog, out / "Fahmino-Grade8-Notes-FA.pdf", style_map)
-    build_questions(catalog, out / "Fahmino-Grade8-Sample-Questions-FA.pdf", style_map)
-    print(f"Generated 2 PDFs for {len(catalog)} subjects.")
+    manifest = []
+    for subject_id, subject in catalog.items():
+        for chapter_index, chapter in enumerate(subject["chapters"]):
+            single_chapter = {subject_id: {**subject, "chapters": [chapter]}}
+            prefix = f"{subject_id}-chapter-{chapter_index + 1:02d}"
+            notes_name = prefix + "-notes-fa.pdf"
+            questions_name = prefix + "-sample-questions-fa.pdf"
+            build_notes(single_chapter, out / notes_name, style_map)
+            build_questions(single_chapter, out / questions_name, style_map)
+            manifest.extend([
+                {
+                    "subjectId": subject_id,
+                    "subjectTitle": subject["title"],
+                    "chapterIndex": chapter_index,
+                    "chapterTitle": chapter["title"],
+                    "type": "notes",
+                    "title": "جزوه مرور فصل",
+                    "fileName": notes_name,
+                },
+                {
+                    "subjectId": subject_id,
+                    "chapterIndex": chapter_index,
+                    "chapterTitle": chapter["title"],
+                    "type": "sampleExams",
+                    "title": "نمونه‌سؤال فصل",
+                    "fileName": questions_name,
+                },
+            ])
+    # Aggregate files back the home-screen shortcuts; chapter files remain available
+    # from each lesson's PDF resources section.
+    aggregate_notes = "Fahmino-Grade8-Notes-FA.pdf"
+    aggregate_questions = "Fahmino-Grade8-Sample-Questions-FA.pdf"
+    build_notes(catalog, out / aggregate_notes, style_map)
+    build_questions(catalog, out / aggregate_questions, style_map)
+    manifest.extend([
+        {
+            "subjectId": "all",
+            "subjectTitle": "همهٔ درس‌ها",
+            "chapterIndex": -1,
+            "chapterTitle": "همهٔ فصل‌ها",
+            "type": "notes",
+            "title": "جزوهٔ همهٔ درس‌ها",
+            "fileName": aggregate_notes,
+        },
+        {
+            "subjectId": "all",
+            "subjectTitle": "همهٔ درس‌ها",
+            "chapterIndex": -1,
+            "chapterTitle": "همهٔ فصل‌ها",
+            "type": "sampleExams",
+            "title": "بانک نمونه‌سؤال همهٔ درس‌ها",
+            "fileName": aggregate_questions,
+        },
+    ])
+    (out / "manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(
+        f"Generated {len(manifest) - 2} chapter PDFs and 2 aggregate PDFs "
+        f"for {len(catalog)} subjects."
+    )
 
 if __name__ == "__main__":
     main()

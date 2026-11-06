@@ -10,6 +10,7 @@ import 'package:hamyar_hashtom_plus/app.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_constants.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/screens/content_library_screen.dart';
 import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
 
 const _testCatalog = r'''
 {
@@ -26,6 +27,27 @@ const _testCatalog = r'''
         "options": ["۱/۶", "۲/۶", "۳/۴", "۱"],
         "answer": 2,
         "explanation": "۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ = ۳/۴."
+      }],
+      "challengeQuestions": [{
+        "question": "حاصل (−۳/۴ + ۵/۶) ÷ (−۱/۱۲) کدام است؟",
+        "options": ["−۱", "۱", "−۱۲", "۱۲"],
+        "answer": 0,
+        "explanation": "ابتدا مجموع برابر ۱/۱۲ و سپس خارج‌قسمت برابر −۱ می‌شود.",
+        "difficulty": "advanced",
+        "contentOrigin": "fahmino_authored_practice",
+        "verificationStatus": "not_verified_against_official_textbook"
+      }]
+    }, {
+      "title": "عددهای اول",
+      "summary": "عدد اول فقط دو شمارندهٔ مثبت دارد.",
+      "points": ["عدد ۱ اول نیست."],
+      "example": "عدد ۷ اول است.",
+      "solutionSteps": ["شمارنده‌ها را بررسی می‌کنیم."],
+      "questions": [{
+        "question": "کدام عدد اول است؟",
+        "options": ["۴", "۶", "۷", "۹"],
+        "answer": 2,
+        "explanation": "۷ فقط بر ۱ و خودش بخش‌پذیر است."
       }]
     }]
   }
@@ -39,10 +61,13 @@ class _MemoryAssetBundle extends CachingAssetBundle {
 
   @override
   Future<ByteData> load(String key) async {
-    if (key != 'assets/content/catalog_fa.json') {
-      throw FlutterError('Unexpected test asset: $key');
+    if (key == 'assets/content/catalog_fa.json') {
+      return ByteData.sublistView(Uint8List.fromList(utf8.encode(catalog)));
     }
-    return ByteData.sublistView(Uint8List.fromList(utf8.encode(catalog)));
+    if (key == 'assets/generated_pdfs/manifest.json') {
+      return ByteData.sublistView(Uint8List.fromList(utf8.encode('[]')));
+    }
+    throw FlutterError('Unexpected test asset: $key');
   }
 }
 
@@ -65,9 +90,11 @@ void main() {
     final file = File('assets/content/catalog_fa.json');
     expect(await file.exists(), isTrue);
     final catalog = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
-    expect(catalog.length, greaterThanOrEqualTo(12));
-    expect(catalog.values.fold<int>(0, (sum, item) => sum + ((item as Map<String, dynamic>)['chapters'] as List<dynamic>).length), greaterThanOrEqualTo(130));
+    expect(catalog.length, greaterThanOrEqualTo(14));
+    expect(catalog.values.fold<int>(0, (sum, item) => sum + ((item as Map<String, dynamic>)['chapters'] as List<dynamic>).length), greaterThanOrEqualTo(150));
     expect((catalog['math'] as Map<String, dynamic>)['chapters'], hasLength(9));
+    final firstMathChapter = ((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>).first as Map<String, dynamic>;
+    expect(firstMathChapter['learningSections'], hasLength(4));
     expect((catalog['science'] as Map<String, dynamic>)['chapters'], hasLength(15));
     expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(24));
     final religionChapters = (catalog['religion'] as Map<String, dynamic>)['chapters'] as List<dynamic>;
@@ -93,6 +120,9 @@ void main() {
         expect((chapter['points'] as List<dynamic>), isNotEmpty, reason: '${entry.key}/${chapter['title']}');
         expect(chapter['solutionSteps'], isA<List<dynamic>>(), reason: entry.key);
         expect((chapter['solutionSteps'] as List<dynamic>), isNotEmpty, reason: '${entry.key}/${chapter['title']}');
+        final challengeQuestions = chapter['challengeQuestions'] as List<dynamic>? ?? [];
+        expect(challengeQuestions, isNotEmpty,
+            reason: 'سؤال چالشی برای ${entry.key}/${chapter['title']} ثبت نشده است');
         final questions = chapter['questions'] as List<dynamic>;
         expect(questions.length, greaterThanOrEqualTo(2), reason: '${entry.key}/${chapter['title']}');
         totalQuestions += questions.length;
@@ -118,9 +148,48 @@ void main() {
         }
       }
     }
-    expect(totalQuestions, 369);
+    expect(totalQuestions, 409);
+    final answerPositionCounts = List<int>.filled(4, 0);
+    for (final subjectValue in catalog.values) {
+      final subject = subjectValue as Map<String, dynamic>;
+      for (final rawChapter in subject['chapters'] as List<dynamic>) {
+        final chapter = rawChapter as Map<String, dynamic>;
+        for (final group in [
+          chapter['questions'] as List<dynamic>,
+          chapter['challengeQuestions'] as List<dynamic>,
+        ]) {
+          for (final rawQuestion in group) {
+            final question = rawQuestion as Map<String, dynamic>;
+            answerPositionCounts[question['answer'] as int]++;
+          }
+        }
+      }
+    }
+    expect(answerPositionCounts.reduce((a, b) => a > b ? a : b) -
+        answerPositionCounts.reduce((a, b) => a < b ? a : b), lessThanOrEqualTo(1));
     expect(((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
         .fold<int>(0, (sum, chapter) => sum + ((chapter as Map<String, dynamic>)['questions'] as List<dynamic>).length), 36);
+    final mathChapters = (catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>;
+    final advancedCount = mathChapters.fold<int>(0, (sum, raw) {
+      final chapter = raw as Map<String, dynamic>;
+      final advanced = chapter['challengeQuestions'] as List<dynamic>? ?? [];
+      expect(advanced.every((q) => (q as Map<String, dynamic>)['difficulty'] == 'advanced'), isTrue);
+      return sum + advanced.length;
+    });
+    expect(advancedCount, 45);
+    expect((catalog['culture_art'] as Map<String, dynamic>)['chapters'], hasLength(9));
+    final optionalFaithPackage = catalog['from_me_to_god'] as Map<String, dynamic>;
+    expect(optionalFaithPackage['curriculumApplicability'], 'pilot_in_some_provinces');
+    expect(optionalFaithPackage['chapters'], hasLength(11));
+    final allAdvancedCount = catalog.values.fold<int>(0, (sum, subjectValue) {
+      final subject = subjectValue as Map<String, dynamic>;
+      final chapters = subject['chapters'] as List<dynamic>;
+      return sum + chapters.fold<int>(0, (chapterSum, rawChapter) {
+        final chapter = rawChapter as Map<String, dynamic>;
+        return chapterSum + ((chapter['challengeQuestions'] as List<dynamic>?)?.length ?? 0);
+      });
+    });
+    expect(allAdvancedCount, 224);
     expect(((catalog['science'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
         .fold<int>(0, (sum, chapter) => sum + ((chapter as Map<String, dynamic>)['questions'] as List<dynamic>).length), 60);
     expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(24));
@@ -138,12 +207,13 @@ void main() {
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('امکانات'), findsOneWidget);
     await tester.scrollUntilVisible(
-      find.text('باز کردن جزوه'),
+      find.text('دستیار هوشمند فهمینو'),
       250,
       scrollable: find.byType(Scrollable).first,
     );
-    expect(find.text('باز کردن جزوه'), findsOneWidget);
-    expect(find.text('باز کردن نمونه‌سؤال'), findsOneWidget);
+    expect(find.text('دستیار هوشمند فهمینو'), findsOneWidget);
+    expect(find.text('باز کردن جزوه'), findsNothing);
+    expect(find.text('باز کردن نمونه‌سؤال'), findsNothing);
   });
 
   testWidgets('navigates to subjects tab', (tester) async {
@@ -187,14 +257,18 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 20));
     expect(find.text('کتاب کار زبان انگلیسی'), findsOneWidget);
-    expect(find.text('Lesson 1: My Nationality'), findsOneWidget);
+    expect(find.text('Lesson 1: My Nationality'), findsWidgets);
   });
 
   testWidgets('lesson content loads from catalog bundle', (tester) async {
     await tester.pumpWidget(_contentApp('lessons'));
     await tester.pumpAndSettle();
-    expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
-    expect(find.textContaining('عددهای گویا را می‌توان'), findsOneWidget);
+    expect(find.text('عددهای صحیح و گویا'), findsWidgets);
+    expect(find.text('خلاصهٔ آموزشی فصل'), findsOneWidget);
+    expect(find.textContaining('عددهای گویا را می‌توان به صورت کسر نوشت.'), findsOneWidget);
+    expect(find.text('مثال آموزشی'), findsOneWidget);
+    expect(find.text('راه‌حل مرحله‌به‌مرحله'), findsOneWidget);
+    expect(find.textContaining('خلاصهٔ اولیه است'), findsOneWidget);
   });
 
   testWidgets('notes content loads from catalog bundle', (tester) async {
@@ -206,15 +280,17 @@ void main() {
   testWidgets('step-by-step solution loads from catalog bundle', (tester) async {
     await tester.pumpWidget(_contentApp('solutions'));
     await tester.pumpAndSettle();
-    expect(find.text('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
+    expect(find.textContaining('پاسخ‌های فعالیت‌ها و تمرین‌های خودِ کتاب هنوز'), findsOneWidget);
   });
 
   testWidgets('sample questions reveal answer key on demand', (tester) async {
     await tester.pumpWidget(_contentApp('sampleExams'));
     await tester.pumpAndSettle();
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
+    expect(find.text('سؤال‌های دشوار و ترکیبی'), findsOneWidget);
+    expect(find.textContaining('حاصل (−۳/۴ + ۵/۶)'), findsOneWidget);
     expect(find.text('پاسخ: ۳/۴'), findsNothing);
-    await tester.tap(find.text('نمایش پاسخ و توضیح'));
+    await tester.tap(find.text('نمایش پاسخ و توضیح').first);
     await tester.pump();
     expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
     expect(find.textContaining('۱/۲ برابر ۲/۴ است'), findsOneWidget);
@@ -227,7 +303,8 @@ void main() {
     expect(find.text('10:00'), findsOneWidget);
     await tester.pump(const Duration(seconds: 1));
     expect(find.text('09:59'), findsOneWidget);
-    await tester.tap(find.text('۳/۴').first);
+    expect(find.textContaining('سطح دشوار و ترکیبی'), findsOneWidget);
+    await tester.tap(find.text('−۱').first);
     await tester.pump();
     expect(find.textContaining('پاسخ درست:'), findsNothing);
     await tester.tap(find.text('ثبت و پایان آزمون'));
@@ -235,7 +312,31 @@ void main() {
     await tester.tap(find.text('ثبت آزمون'));
     await tester.pumpAndSettle();
     expect(find.textContaining('نمره:'), findsOneWidget);
-    expect(find.textContaining('پاسخ درست: ۳/۴'), findsOneWidget);
+    expect(find.textContaining('پاسخ درست: −۱'), findsOneWidget);
+  });
+
+  testWidgets('quiz switches between selected chapter and whole subject', (tester) async {
+    await tester.pumpWidget(_contentApp('quiz'));
+    await tester.pumpAndSettle();
+
+    var exam = tester.widget<TimedCombinedExamScreen>(
+      find.byType(TimedCombinedExamScreen),
+    );
+    expect(exam.chapters, hasLength(1));
+
+    await tester.tap(find.text('کل درس'));
+    await tester.pumpAndSettle();
+    exam = tester.widget<TimedCombinedExamScreen>(
+      find.byType(TimedCombinedExamScreen),
+    );
+    expect(exam.chapters, hasLength(2));
+
+    await tester.tap(find.text('فصل انتخابی'));
+    await tester.pumpAndSettle();
+    exam = tester.widget<TimedCombinedExamScreen>(
+      find.byType(TimedCombinedExamScreen),
+    );
+    expect(exam.chapters, hasLength(1));
   });
 
   testWidgets('chapter can be added to favorites', (tester) async {
@@ -258,6 +359,7 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.byType(TextField), findsOneWidget);
+    expect(find.textContaining('بخشی از سؤال را جست‌وجو کن'), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'حاصل ۱/۲ + ۱/۴');
     await tester.pump();
     expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
