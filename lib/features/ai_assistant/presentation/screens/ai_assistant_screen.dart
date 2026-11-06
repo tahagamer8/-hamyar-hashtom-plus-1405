@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hamyar_hashtom_plus/features/ai_assistant/data/gemini_api_service.dart';
+import 'package:hamyar_hashtom_plus/features/lessons/data/ai_lesson_cache.dart';
 
 class AiAssistantScreen extends StatefulWidget {
-  const AiAssistantScreen({super.key, this.studyContext, this.initialPrompt});
+  const AiAssistantScreen({super.key, this.studyContext, this.initialPrompt, this.lessonCacheKey});
 
   final Map<String, dynamic>? studyContext;
   final String? initialPrompt;
+  final String? lessonCacheKey;
 
   @override
   State<AiAssistantScreen> createState() => _AiAssistantScreenState();
@@ -30,6 +32,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   bool _loading = false;
   bool _ready = false;
   bool _checkingConnection = false;
+  bool _initialLessonSaved = false;
   bool? _connectionHealthy;
   String? _connectionStatus;
   String? _error;
@@ -384,6 +387,25 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
       );
       if (!mounted) return;
       setState(() => _messages.add(_ChatMessage(text: answer, isUser: false)));
+      final cacheKey = widget.lessonCacheKey?.trim();
+      if (!_initialLessonSaved &&
+          widget.initialPrompt?.trim().isNotEmpty == true &&
+          cacheKey != null &&
+          cacheKey.isNotEmpty) {
+        try {
+          await AiLessonCache.save(lessonKey: cacheKey, content: answer);
+          _initialLessonSaved = true;
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('درسنامهٔ تکمیلی روی همین دستگاه ذخیره شد.')),
+            );
+          }
+        } catch (_) {
+          if (mounted) {
+            setState(() => _error = 'پاسخ دریافت شد، اما ذخیرهٔ محلی آن انجام نشد.');
+          }
+        }
+      }
     } on GeminiApiException catch (e) {
       if (mounted) {
         setState(() {
