@@ -96,7 +96,7 @@ void main() {
           final questionText = (question['question'] as String).trim();
           final normalizedText = questionText
               .toLowerCase()
-              .replaceAll(RegExp(r'[\\s\\u200c\\u0640؟،.!؛:]', unicode: true), '')
+              .replaceAll(RegExp(r'[\s\u200c\u0640؟،.!؛:]', unicode: true), '')
               .replaceAll('ي', 'ی')
               .replaceAll('ك', 'ک');
           expect(questionText, isNotEmpty, reason: entry.key);
