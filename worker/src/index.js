@@ -1,7 +1,7 @@
 const MODEL = "gemini-3.8-flash";
-const MAX_MESSAGES = 12;
+const MAX_MESSAGES = 9;
 const MAX_MESSAGE_LENGTH = 3000;
-const MAX_OUTPUT_TOKENS = 8192;
+const MAX_OUTPUT_TOKENS = 4096;
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -160,9 +160,13 @@ export default {
     }
     try {
       const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
-      const { success } = await env.CHAT_LIMITER.limit({ key: clientIp });
-      if (!success) {
-        return json({ error: "تعداد درخواست‌ها زیاد است؛ یک دقیقه بعد دوباره امتحان کن." }, 429);
+      const perIpLimit = await env.CHAT_LIMITER.limit({ key: clientIp });
+      if (!perIpLimit.success) {
+        return json({ error: "تعداد درخواست‌ها از این اتصال زیاد است؛ یک دقیقه بعد دوباره امتحان کن." }, 429);
+      }
+      const globalLimit = await env.CHAT_LIMITER.limit({ key: "global" });
+      if (!globalLimit.success) {
+        return json({ error: "ظرفیت رایگان سرویس در این دقیقه پر شده است؛ کمی بعد دوباره تلاش کن." }, 429);
       }
     } catch {
       return json({ error: "محدودکنندهٔ درخواست موقتاً در دسترس نیست." }, 503);
