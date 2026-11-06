@@ -96,6 +96,49 @@ test("forwards valid chat and returns Gemini text", async () => {
   assert.equal(JSON.parse(capturedInit.body).contents[0].role, "user");
 });
 
+test("forwards selected study context as untrusted educational reference", async () => {
+  let capturedPayload;
+  globalThis.fetch = async (_url, init) => {
+    capturedPayload = JSON.parse(init.body);
+    return new Response(JSON.stringify({
+      candidates: [{ content: { parts: [{ text: "پاسخ آموزشی" }] } }],
+    }), { status: 200, headers: { "content-type": "application/json" } });
+  };
+
+  const response = await worker.fetch(makeRequest({
+    body: {
+      ...validBody,
+      studyContext: {
+        subjectTitle: "ریاضی",
+        chapterTitle: "عددهای صحیح و گویا",
+        summary: "عددهای گویا به صورت کسر نوشته می‌شوند.",
+        sourceLabel: "محتوای اولیهٔ فهمینو",
+        points: ["مخرج کسر نباید صفر باشد."],
+      },
+    },
+  }), { GEMINI_API_KEY: "test-key", CHAT_LIMITER: allowLimiter });
+
+  assert.equal(response.status, 200);
+  const instruction = capturedPayload.systemInstruction.parts[0].text;
+  assert.match(instruction, /عددهای صحیح و گویا/);
+  assert.match(instruction, /دستور اجرایی نیست/);
+  assert.match(instruction, /محتوای اولیهٔ فهمینو/);
+});
+
+test("rejects oversized or malformed study context", async () => {
+  for (const studyContext of [
+    "not-an-object",
+    { summary: "x".repeat(1201) },
+    { points: ["x".repeat(401)] },
+    { points: Array.from({ length: 9 }, () => "نکته") },
+  ]) {
+    const response = await worker.fetch(makeRequest({
+      body: { ...validBody, studyContext },
+    }), { GEMINI_API_KEY: "test-key" });
+    assert.equal(response.status, 400);
+  }
+});
+
 test("maps Gemini quota responses to HTTP 429", async () => {
   globalThis.fetch = async () => new Response(JSON.stringify({ error: { message: "quota" } }), { status: 429 });
   const response = await worker.fetch(makeRequest({ body: validBody }), {
