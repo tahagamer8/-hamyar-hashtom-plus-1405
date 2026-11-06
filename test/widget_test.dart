@@ -157,6 +157,8 @@ void main() {
     expect(find.textContaining('پاسخ درست:'), findsNothing);
     await tester.tap(find.text('ثبت و پایان آزمون'));
     await tester.pumpAndSettle();
+    await tester.tap(find.text('ثبت آزمون'));
+    await tester.pumpAndSettle();
     expect(find.textContaining('نمره:'), findsOneWidget);
     expect(find.textContaining('پاسخ درست: ۳/۴'), findsOneWidget);
   });
