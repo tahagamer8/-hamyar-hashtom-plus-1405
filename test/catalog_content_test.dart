@@ -15,7 +15,7 @@ void main() {
     expect(nationalityQuestion['question'], contains('Which nationality describes'));
     expect(nationalityQuestion['options'][nationalityQuestion['answer']], 'Canadian');
     final abilitiesLesson = (english['chapters'] as List<dynamic>)[2];
-    final can'tQuestion = (abilitiesLesson['questions'] as List<dynamic>)[1];
+    final cantQuestion = (abilitiesLesson['questions'] as List<dynamic>)[1];
     expect(cantQuestion['question'], contains("can't"));
     expect(cantQuestion['options'][cantQuestion['answer']], 'نمی‌تواند');
 
