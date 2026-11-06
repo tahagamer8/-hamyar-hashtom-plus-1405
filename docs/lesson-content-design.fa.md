@@ -70,7 +70,7 @@
 ## منابع عمومی مقایسه و مرجع
 
 - پادرس در شبکهٔ رشد: https://www.roshdmag.ir/fa/article/30628/پا-درس
-- همیار آموزش: https://hamyar.in/
+- همیار آموزش: https://hamyar.me/
 - گاما: https://gama.ir/
 - معرفی امکانات گاما و جست‌وجو/آزمون: https://apppage.net/preview/ir.gama.android.gama
 - پایگاه رسمی کتاب‌های درسی: https://chap.sch.ir/
