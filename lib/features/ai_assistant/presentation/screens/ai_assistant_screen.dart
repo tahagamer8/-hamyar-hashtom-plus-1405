@@ -243,44 +243,39 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   Widget _connectionPanel(ThemeData theme) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-      child: Material(
-        color: theme.colorScheme.surfaceContainerHighest.withAlpha(100),
-        borderRadius: BorderRadius.circular(14),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.lock_outline,
-                      size: 18, color: theme.colorScheme.primary),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      'اتصال به Gemini',
-                      style: theme.textTheme.labelLarge,
-                    ),
-                  ),
-                  TextButton(onPressed: _saveUrl, child: const Text('ذخیره')),
-                ],
+      child: Card(
+        margin: EdgeInsets.zero,
+        child: ExpansionTile(
+          initiallyExpanded: false,
+          leading: Icon(Icons.cloud_done_outlined, color: theme.colorScheme.primary),
+          title: const Text('اتصال هوش مصنوعی'),
+          subtitle: const Text('تنظیم سرور فهمینو و وضعیت حریم خصوصی'),
+          childrenPadding: const EdgeInsets.fromLTRB(14, 0, 14, 14),
+          children: [
+            TextField(
+              controller: _urlInput,
+              keyboardType: TextInputType.url,
+              decoration: const InputDecoration(
+                isDense: true,
+                labelText: 'آدرس پایهٔ سرور',
+                hintText: 'https://your-worker.workers.dev',
+                border: OutlineInputBorder(),
               ),
-              TextField(
-                controller: _urlInput,
-                keyboardType: TextInputType.url,
-                decoration: const InputDecoration(
-                  isDense: true,
-                  hintText: 'https://your-worker.workers.dev',
-                  border: OutlineInputBorder(),
-                ),
+            ),
+            const SizedBox(height: 8),
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: FilledButton.tonalIcon(
+                onPressed: _saveUrl,
+                icon: const Icon(Icons.save_outlined),
+                label: const Text('ذخیرهٔ آدرس'),
               ),
-              const SizedBox(height: 5),
-              Text(
-                'پیام‌ها برای پاسخ‌گویی به Gemini فرستاده می‌شوند؛ اطلاعات شخصی وارد نکن و کلید API را اینجا ننویس. مصرف سرویس تابع سهمیه و تنظیمات حساب است؛ فعال‌سازی را با والد یا سرپرست انجام بده.',
-                style: theme.textTheme.bodySmall,
-              ),
-            ],
-          ),
+            ),
+            Text(
+              'پیام‌ها برای پاسخ‌گویی به Gemini فرستاده می‌شوند. اطلاعات شخصی یا کلید API را وارد نکن. فعال‌سازی سرویس و بررسی سهمیه یا هزینه باید با والد یا سرپرست انجام شود.',
+              style: theme.textTheme.bodySmall,
+            ),
+          ],
         ),
       ),
     );
