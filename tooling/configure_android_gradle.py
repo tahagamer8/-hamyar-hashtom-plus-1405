@@ -10,13 +10,13 @@ if not gradle.is_file():
 source = gradle.read_text(encoding="utf-8")
 application_id = "ir.fahmino.hamyar_hashtom_plus"
 
-source, ns_count = re.subn(r'namespace\\s*=\\s*"[^"]+"', f'namespace = "{application_id}"', source, count=1)
-source, app_count = re.subn(r'applicationId\\s*=\\s*"[^"]+"', f'applicationId = "{application_id}"', source, count=1)
+source, ns_count = re.subn(r'namespace\s*=\s*"[^"]+"', f'namespace = "{application_id}"', source, count=1)
+source, app_count = re.subn(r'applicationId\s*=\s*"[^"]+"', f'applicationId = "{application_id}"', source, count=1)
 if ns_count != 1 or app_count != 1:
     raise SystemExit("Could not safely set Android namespace/applicationId in Gradle file.")
 
 if "import java.util.Properties" not in source:
-    source = "import java.util.Properties\\nimport java.io.FileInputStream\\n\\n" + source
+    source = "import java.util.Properties\nimport java.io.FileInputStream\n\n" + source
 
 marker = "android {"
 if marker not in source:
@@ -33,7 +33,6 @@ if (keystorePropertiesFile.exists()) {
 if "val keystoreProperties = Properties()" not in source:
     source = source.replace(marker, signing + marker, 1)
 
-android_open = "android {"
 signing_configs = """
     signingConfigs {
         create("release") {
@@ -48,18 +47,22 @@ signing_configs = """
 
 """
 if 'create("release")' not in source:
-    source = source.replace(android_open, android_open + signing_configs, 1)
+    source = source.replace(marker, marker + signing_configs, 1)
 
 release_debug = 'signingConfig = signingConfigs.getByName("debug")'
 release_custom = 'signingConfig = if (keystorePropertiesFile.exists()) signingConfigs.getByName("release") else signingConfigs.getByName("debug")'
 if release_debug in source:
     source = source.replace(release_debug, release_custom, 1)
 elif 'signingConfig = signingConfigs.getByName("release")' not in source:
-    # Flutter templates may omit an explicit release signing line.
-    build_types = re.search(r'buildTypes\\s*{', source)
+    build_types = re.search(r'buildTypes\s*{', source)
     if not build_types:
         raise SystemExit("Could not locate buildTypes block to configure release signing.")
-    source = source[:build_types.end()] + '\\n        getByName("release") {\\n            signingConfig = if (keystorePropertiesFile.exists()) signingConfigs.getByName("release") else signingConfigs.getByName("debug")\\n        }' + source[build_types.end():]
+    insertion = """
+        getByName("release") {
+            signingConfig = if (keystorePropertiesFile.exists()) signingConfigs.getByName("release") else signingConfigs.getByName("debug")
+        }
+"""
+    source = source[:build_types.end()] + insertion + source[build_types.end():]
 
 gradle.write_text(source, encoding="utf-8")
 print(f"Configured Android application ID: {application_id}")
