@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeModeNotifier extends Notifier<ThemeMode> {
   static const _storageKey = 'fahmino_theme_mode';
+  bool _userChanged = false;
 
   @override
   ThemeMode build() {
@@ -20,10 +21,11 @@ class ThemeModeNotifier extends Notifier<ThemeMode> {
       'system' => ThemeMode.system,
       _ => ThemeMode.system,
     };
-    state = restored;
+    if (!_userChanged) state = restored;
   }
 
   Future<void> set(ThemeMode mode) async {
+    _userChanged = true;
     state = mode;
     final value = switch (mode) {
       ThemeMode.light => 'light',
