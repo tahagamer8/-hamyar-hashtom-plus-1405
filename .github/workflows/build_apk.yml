@@ -1,4 +1,4 @@
-name: Build Fahmino APK
+name: Build Fahmino Separate APK
 
 on:
   push:
@@ -28,10 +28,10 @@ jobs:
       - name: Create Android platform if missing
         run: |
           if [ ! -d android ]; then
-            flutter create --platforms=android --project-name fahmino --org ir.fahmino /tmp/fahmino
+            flutter create --platforms=android --project-name fahminoseparate --org ir.fahmino.clone /tmp/fahmino
             cp -r /tmp/fahmino/android ./android
           fi
-          sed -i 's/android:label="[^"]*"/android:label="فهمینو"/' android/app/src/main/AndroidManifest.xml
+          sed -i 's/android:label="[^"]*"/android:label="فهمینو نسخه جدا"/' android/app/src/main/AndroidManifest.xml
 
       - name: Ensure Vazirmatn fonts
         run: |
@@ -75,7 +75,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: fahmino-apk
+          name: fahmino-separate-apk
           path: build/app/outputs/flutter-apk/*.apk
           if-no-files-found: error
 
