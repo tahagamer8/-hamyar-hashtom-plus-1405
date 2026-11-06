@@ -42,6 +42,18 @@ test("rejects null and invalid message payloads without throwing", async () => {
   }
 });
 
+test("rejects a conversation that starts with a model message or has unmatched turns", async () => {
+  const invalidBodies = [
+    { messages: [{ role: "model", text: "سلام" }] },
+    { messages: [{ role: "user", text: "سلام" }, { role: "user", text: "پرسش دوم" }] },
+    { messages: [{ role: "user", text: "سلام" }, { role: "model", text: "پاسخ" }] },
+  ];
+  for (const body of invalidBodies) {
+    const response = await worker.fetch(makeRequest({ body }), { GEMINI_API_KEY: "test" });
+    assert.equal(response.status, 400);
+  }
+});
+
 test("returns a clear configuration error when the API key is missing", async () => {
   const response = await worker.fetch(makeRequest({ body: validBody }), {});
   assert.equal(response.status, 503);
@@ -87,13 +99,29 @@ test("stops before calling Gemini when the rate limiter denies a request", async
   assert.equal(called, false);
 });
 
+test("returns a controlled error if the rate limiter itself fails", async () => {
+  const response = await worker.fetch(makeRequest({ body: validBody }), {
+    GEMINI_API_KEY: "test-key",
+    CHAT_LIMITER: { limit: async () => { throw new Error("binding unavailable"); } },
+  });
+  assert.equal(response.status, 503);
+});
+
 test("rejects more than 12 messages and messages longer than 3000 characters", async () => {
-  const tooMany = { messages: Array.from({ length: 13 }, () => ({ role: "user", text: "سلام" })) };
+  const tooMany = { messages: Array.from({ length: 13 }, (_, i) => ({ role: i % 2 ? "model" : "user", text: "سلام" })) };
   const tooLong = { messages: [{ role: "user", text: "ا".repeat(3001) }] };
   for (const body of [tooMany, tooLong]) {
     const response = await worker.fetch(makeRequest({ body }), { GEMINI_API_KEY: "test-key" });
     assert.equal(response.status, 400);
   }
+});
+
+test("rejects oversized request bodies", async () => {
+  const response = await worker.fetch(makeRequest({
+    body: " ".repeat(100_001),
+    headers: { "content-type": "application/json" },
+  }), { GEMINI_API_KEY: "test-key" });
+  assert.equal(response.status, 413);
 });
 
 test("maps non-quota Gemini failures to a generic 502 without leaking provider details", async () => {
@@ -112,4 +140,11 @@ test("returns a controlled error when Gemini has no text candidate", async () =>
   const response = await worker.fetch(makeRequest({ body: validBody }), { GEMINI_API_KEY: "test-key" });
   assert.equal(response.status, 502);
   assert.match((await response.json()).error, /پاسخ متنی/);
+});
+
+test("returns a controlled error when Gemini responds with non-JSON content", async () => {
+  globalThis.fetch = async () => new Response("upstream unavailable", { status: 502 });
+  const response = await worker.fetch(makeRequest({ body: validBody }), { GEMINI_API_KEY: "test-key" });
+  assert.equal(response.status, 502);
+  assert.match((await response.json()).error, /قابل خواندن نیست/);
 });
