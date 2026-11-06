@@ -27,6 +27,26 @@ test("answers CORS preflight without requiring an API key", async () => {
   assert.equal(response.headers.get("access-control-allow-origin"), "*");
 });
 
+test("health endpoint reports configured bindings without calling Gemini", async () => {
+  let geminiCalled = false;
+  globalThis.fetch = async () => {
+    geminiCalled = true;
+    throw new Error("Health check must not call Gemini");
+  };
+  const response = await worker.fetch(
+    makeRequest({ method: "GET", path: "/health" }),
+    { GEMINI_API_KEY: "test-key", CHAT_LIMITER: allowLimiter },
+  );
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.ok, true);
+  assert.equal(body.service, "fahmino-api");
+  assert.equal(body.model, "gemini-3.8-flash");
+  assert.equal(body.geminiSecretConfigured, true);
+  assert.equal(body.rateLimiterConfigured, true);
+  assert.equal(geminiCalled, false);
+});
+
 test("rejects unknown paths", async () => {
   const response = await worker.fetch(makeRequest({ path: "/wrong" }), {});
   assert.equal(response.status, 404);
