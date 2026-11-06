@@ -154,6 +154,43 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
     return errors, stats
 
 
+def audit_known_question_regressions(data: dict, errors: list[str]) -> None:
+    """Guard against previously found prompt/option/answer mismatches."""
+    checks = [
+        ("english", 4, 1, ("next to",), "کنار"),
+        ("english", 6, 0, ("hobby",), "سرگرمی"),
+        ("english_workbook", 0, 0, ("she", "be"), "is"),
+        ("english_workbook", 0, 1, ("kuwait",), "Kuwaiti"),
+        ("english_workbook", 2, 0, ("can",), "play"),
+        ("english_workbook", 2, 1, ("cannot",), "نمی‌تواند"),
+        ("english_workbook", 4, 0, ("three shops",), "are"),
+        ("english_workbook", 4, 1, ("opposite",), "روبه‌رو"),
+    ]
+    for subject_id, chapter_index, question_index, required_terms, expected_answer in checks:
+        try:
+            question = data[subject_id]["chapters"][chapter_index]["questions"][question_index]
+            prompt = question["question"].casefold()
+            options = question["options"]
+            answer_index = question["answer"]
+            actual_answer = options[answer_index]
+        except (KeyError, IndexError, TypeError):
+            errors.append(
+                f"{subject_id}/chapter-{chapter_index + 1}/question-{question_index + 1}: "
+                "known-question regression fixture is missing or malformed"
+            )
+            continue
+        if any(term.casefold() not in prompt for term in required_terms):
+            errors.append(
+                f"{subject_id}/chapter-{chapter_index + 1}/question-{question_index + 1}: "
+                f"prompt must include {required_terms!r}"
+            )
+        if actual_answer != expected_answer:
+            errors.append(
+                f"{subject_id}/chapter-{chapter_index + 1}/question-{question_index + 1}: "
+                f"expected answer {expected_answer!r}, got {actual_answer!r}"
+            )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--catalog", default="assets/content/catalog_fa.json")
@@ -164,7 +201,10 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    errors, stats = audit(Path(args.catalog))
+    catalog_path = Path(args.catalog)
+    data = json.loads(catalog_path.read_text(encoding="utf-8"))
+    errors, stats = audit(catalog_path)
+    audit_known_question_regressions(data, errors)
     for key, value in stats.items():
         print(f"{key}: {value}")
     if stats and stats["chapters"]:
