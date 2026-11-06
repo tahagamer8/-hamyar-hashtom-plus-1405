@@ -35,7 +35,10 @@ function normalizeStudyContext(value) {
   if (typeof value !== "object" || Array.isArray(value)) return false;
 
   const result = {};
-  const stringFields = ["subjectTitle", "chapterTitle", "summary", "example", "sourceLabel"];
+  const stringFields = [
+    "subjectTitle", "chapterTitle", "bookChapterTitle", "bookScope",
+    "alignmentStatus", "summary", "example", "sourceLabel"
+  ];
   for (const key of stringFields) {
     if (value[key] === undefined) continue;
     if (typeof value[key] !== "string" || value[key].length > 1200) return false;
