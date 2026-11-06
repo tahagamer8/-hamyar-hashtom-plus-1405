@@ -127,12 +127,16 @@ void main() {
   });
 
   testWidgets('English workbook opens as a separate subject', (tester) async {
+    final catalog = await File('assets/content/catalog_fa.json').readAsString();
     await tester.pumpWidget(
-      const ProviderScope(
+      ProviderScope(
         child: MaterialApp(
-          home: ContentLibraryScreen(
-            subjectId: 'english_workbook',
-            featureId: 'lessons',
+          home: DefaultAssetBundle(
+            bundle: _MemoryAssetBundle(catalog),
+            child: const ContentLibraryScreen(
+              subjectId: 'english_workbook',
+              featureId: 'lessons',
+            ),
           ),
         ),
       ),
