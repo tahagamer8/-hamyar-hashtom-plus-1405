@@ -11,6 +11,8 @@ class AiAssistantScreen extends StatefulWidget {
 
 class _AiAssistantScreenState extends State<AiAssistantScreen> {
   static const _urlKey = 'fahmino_gemini_worker_url';
+  static const _defaultWorkerUrl =
+      'https://fahmino-api-2.tahamrh2.workers.dev';
   final _input = TextEditingController();
   final _urlInput = TextEditingController();
   final _scroll = ScrollController();
@@ -29,9 +31,10 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   Future<void> _loadUrl() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      _urlInput.text = prefs.getString(_urlKey) ?? '';
+      _urlInput.text = prefs.getString(_urlKey) ?? _defaultWorkerUrl;
     } catch (_) {
-      _error = 'تنظیمات اتصال بارگذاری نشد؛ دوباره برنامه را باز کن.';
+      _urlInput.text = _defaultWorkerUrl;
+      _error = 'تنظیمات اتصال بارگذاری نشد؛ آدرس پیش‌فرض نمایش داده شد.';
     } finally {
       if (mounted) setState(() => _ready = true);
     }
@@ -44,7 +47,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
         uri.scheme != 'https' ||
         !uri.hasAuthority ||
         uri.userInfo.isNotEmpty ||
-        uri.path.isNotEmpty && uri.path != '/' ||
+        (uri.path.isNotEmpty && uri.path != '/') ||
         uri.hasQuery ||
         uri.hasFragment) {
       setState(() => _error = 'فقط آدرس پایهٔ معتبر HTTPS را وارد کن.');
