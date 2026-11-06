@@ -28,10 +28,51 @@ jobs:
       - name: Create Android platform if missing
         run: |
           if [ ! -d android ]; then
-            flutter create --platforms=android --project-name hamyar_hashtom_plus --org ir.hamyar /tmp/fahmino
+            flutter create --platforms=android --project-name hamyar_hashtom_plus --org ir.fahmino /tmp/fahmino
             cp -r /tmp/fahmino/android ./android
           fi
           sed -i 's/android:label="[^"]*"/android:label="فهمینو"/' android/app/src/main/AndroidManifest.xml
+
+      - name: Keep Android application identity stable
+        env:
+          FAHMINO_PREVIEW_BUILD: ${{ github.ref != 'refs/heads/main' }}
+        run: python tooling/configure_android_gradle.py
+
+      - name: Configure persistent release signing
+        if: github.ref == 'refs/heads/main'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.FAHMINO_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.FAHMINO_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.FAHMINO_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.FAHMINO_KEY_PASSWORD }}
+        run: |
+          python - <<'PY'
+          import base64, os
+          from pathlib import Path
+          values = {
+              "FAHMINO_KEYSTORE_BASE64": os.environ.get("KEYSTORE_BASE64", ""),
+              "FAHMINO_KEYSTORE_PASSWORD": os.environ.get("KEYSTORE_PASSWORD", ""),
+              "FAHMINO_KEY_ALIAS": os.environ.get("KEY_ALIAS", ""),
+              "FAHMINO_KEY_PASSWORD": os.environ.get("KEY_PASSWORD", ""),
+          }
+          missing = [name for name, value in values.items() if not value]
+          if missing:
+              raise SystemExit(
+                  "Release signing is not configured. Add these GitHub Actions secrets: "
+                  + ", ".join(missing)
+              )
+          keystore = base64.b64decode(values["FAHMINO_KEYSTORE_BASE64"], validate=True)
+          Path("android/app/fahmino-release.jks").write_bytes(keystore)
+          def escaped(value):
+              return value.replace("\\", "\\\\").replace(":", "\\:").replace("=", "\\=")
+          props = (
+              "storeFile=fahmino-release.jks\n"
+              f"storePassword={escaped(values['FAHMINO_KEYSTORE_PASSWORD'])}\n"
+              f"keyAlias={escaped(values['FAHMINO_KEY_ALIAS'])}\n"
+              f"keyPassword={escaped(values['FAHMINO_KEY_PASSWORD'])}\n"
+          )
+          Path("android/key.properties").write_text(props, encoding="utf-8")
+          PY
 
       - name: Ensure Vazirmatn fonts
         run: |
@@ -66,6 +107,9 @@ jobs:
 
       - name: Run widget and unit tests (three passes)
         run: flutter test --reporter expanded && flutter test --reporter expanded && flutter test --reporter expanded
+
+      - name: Test Gemini Worker
+        run: npm --prefix worker test
 
       - name: Build release APKs
         run: flutter build apk --release --split-per-abi
