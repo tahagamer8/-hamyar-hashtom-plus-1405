@@ -33,6 +33,34 @@ void main() {
         ['user', 'model', 'user']);
   });
 
+  test('checks the Worker health endpoint without sending a chat request', () async {
+    Uri? requestedUri;
+    final service = GeminiApiService(
+      client: MockClient((request) async {
+        requestedUri = request.url;
+        return http.Response(
+          jsonEncode({
+            'ok': true,
+            'service': 'fahmino-api',
+            'geminiSecretConfigured': true,
+            'rateLimiterConfigured': true,
+          }),
+          200,
+          headers: {'content-type': 'application/json'},
+        );
+      }),
+    );
+
+    final health = await service.checkHealth(
+      workerUrl: 'https://fahmino.example.workers.dev/',
+    );
+
+    expect(requestedUri.toString(), 'https://fahmino.example.workers.dev/health');
+    expect(health['geminiSecretConfigured'], true);
+    expect(health['rateLimiterConfigured'], true);
+    service.dispose();
+  });
+
   test('sends chat history to the Worker endpoint and returns the answer', () async {
     Uri? requestedUri;
     Map<String, dynamic>? requestedBody;
