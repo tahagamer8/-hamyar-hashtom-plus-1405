@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hamyar_hashtom_plus/core/router/app_routes.dart';
 import 'package:hamyar_hashtom_plus/core/widgets/main_shell.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/screens/content_library_screen.dart';
+import 'package:hamyar_hashtom_plus/features/ai_assistant/presentation/screens/ai_assistant_screen.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:hamyar_hashtom_plus/features/home/presentation/screens/home_screen.dart';
 import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_screen.dart';
@@ -77,6 +78,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
         ],
+      ),
+      GoRoute(
+        path: AppRoutes.aiAssistant,
+        builder: (context, state) => const AiAssistantScreen(),
       ),
     ],
     errorBuilder: (context, state) => const _NotFoundScreen(),

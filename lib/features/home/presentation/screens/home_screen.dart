@@ -18,6 +18,20 @@ class HomeScreen extends StatelessWidget {
           const SliverToBoxAdapter(child: HomeHeader()),
           const SliverToBoxAdapter(child: SectionHeader(title: 'امکانات')),
           const SliverToBoxAdapter(child: HomeFeatureGrid()),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 4, 20, 14),
+              child: Card(
+                child: ListTile(
+                  leading: const CircleAvatar(child: Icon(Icons.auto_awesome_rounded)),
+                  title: const Text('دستیار هوشمند فهمینو'),
+                  subtitle: const Text('پرسش و پاسخ درسی با Gemini'),
+                  trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                  onTap: () => context.push(AppRoutes.aiAssistant),
+                ),
+              ),
+            ),
+          ),
           const SliverToBoxAdapter(child: LearningPdfsCard()),
           SliverToBoxAdapter(
             child: SectionHeader(
