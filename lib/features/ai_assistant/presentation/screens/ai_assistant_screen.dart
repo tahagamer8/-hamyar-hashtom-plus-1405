@@ -223,7 +223,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
                   const SizedBox(width: 6),
                   Expanded(
                     child: Text(
-                      'اتصال امن به Gemini',
+                      'اتصال به Gemini',
                       style: theme.textTheme.labelLarge,
                     ),
                   ),
@@ -241,7 +241,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
               ),
               const SizedBox(height: 5),
               Text(
-                'آدرس سرور را وارد کن؛ کلید API نباید در این قسمت نوشته شود.',
+                'پیام‌ها برای پاسخ‌گویی به سرویس Gemini فرستاده می‌شوند؛ اطلاعات شخصی وارد نکن. کلید API را هم اینجا ننویس.',
                 style: theme.textTheme.bodySmall,
               ),
             ],
