@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Set a stable Android application ID and release signing configuration."""
+"""Set Android identity and release signing; isolate preview builds from production."""
 from pathlib import Path
+import os
 import re
 
 gradle = Path("android/app/build.gradle.kts")
@@ -8,10 +9,22 @@ if not gradle.is_file():
     raise SystemExit("Expected android/app/build.gradle.kts; Android project generation failed.")
 
 source = gradle.read_text(encoding="utf-8")
-application_id = "ir.fahmino.hamyar_hashtom_plus"
+base_application_id = "ir.fahmino.hamyar_hashtom_plus"
+is_preview = os.environ.get("FAHMINO_PREVIEW_BUILD", "").lower() in {"1", "true", "yes"}
+application_id = f"{base_application_id}.preview" if is_preview else base_application_id
 
-source, ns_count = re.subn(r'namespace\s*=\s*"[^"]+"', f'namespace = "{application_id}"', source, count=1)
-source, app_count = re.subn(r'applicationId\s*=\s*"[^"]+"', f'applicationId = "{application_id}"', source, count=1)
+source, ns_count = re.subn(
+    r'namespace\s*=\s*"[^"]+"',
+    f'namespace = "{base_application_id}"',
+    source,
+    count=1,
+)
+source, app_count = re.subn(
+    r'applicationId\s*=\s*"[^"]+"',
+    f'applicationId = "{application_id}"',
+    source,
+    count=1,
+)
 if ns_count != 1 or app_count != 1:
     raise SystemExit("Could not safely set Android namespace/applicationId in Gradle file.")
 
@@ -65,4 +78,5 @@ elif 'signingConfig = signingConfigs.getByName("release")' not in source:
     source = source[:build_types.end()] + insertion + source[build_types.end():]
 
 gradle.write_text(source, encoding="utf-8")
+print(f"Configured Android namespace: {base_application_id}")
 print(f"Configured Android application ID: {application_id}")
