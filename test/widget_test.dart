@@ -116,7 +116,7 @@ void main() {
         }
       }
     }
-    expect(totalQuestions, greaterThanOrEqualTo(315));
+    expect(totalQuestions, greaterThanOrEqualTo(345));
     expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(24));
     expect((catalog['english'] as Map<String, dynamic>)['chapters'], hasLength(7));
     expect((catalog['english_workbook'] as Map<String, dynamic>)['chapters'], hasLength(7));
