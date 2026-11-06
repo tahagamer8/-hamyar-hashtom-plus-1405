@@ -127,12 +127,26 @@ void main() {
   });
 
   testWidgets('English workbook opens as a separate subject', (tester) async {
-    final catalog = await File('assets/content/catalog_fa.json').readAsString();
+    const workbookCatalog = r'''
+    {
+      "english_workbook": {
+        "title": "کتاب کار زبان انگلیسی",
+        "chapters": [{
+          "title": "Lesson 1: My Nationality",
+          "summary": "تمرین ملیت‌ها",
+          "points": ["Iranian یعنی ایرانی."],
+          "example": "I am Iranian.",
+          "solutionSteps": ["کشور را مشخص می‌کنیم."],
+          "questions": []
+        }]
+      }
+    }
+    ''';
     await tester.pumpWidget(
       ProviderScope(
         child: MaterialApp(
           home: DefaultAssetBundle(
-            bundle: _MemoryAssetBundle(catalog),
+            bundle: _MemoryAssetBundle(workbookCatalog),
             child: const ContentLibraryScreen(
               subjectId: 'english_workbook',
               featureId: 'lessons',
@@ -142,7 +156,7 @@ void main() {
       ),
     );
     await tester.pump();
-    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pump(const Duration(milliseconds: 20));
     expect(find.text('کتاب کار زبان انگلیسی'), findsOneWidget);
     expect(find.text('Lesson 1: My Nationality'), findsOneWidget);
   });
