@@ -20,6 +20,17 @@ void main() {
 
       for (final chapterValue in chapters) {
         final chapter = chapterValue as Map<String, dynamic>;
+        final challengeQuestions = chapter['challengeQuestions'] as List<dynamic>? ?? [];
+        for (final rawChallenge in challengeQuestions) {
+          final challenge = rawChallenge as Map<String, dynamic>;
+          final options = challenge['options'] as List<dynamic>;
+          expect(challenge['difficulty'], 'advanced');
+          expect(challenge['contentOrigin'], 'fahmino_authored_practice');
+          expect(challenge['verificationStatus'], 'not_verified_against_official_textbook');
+          expect(options.length, greaterThanOrEqualTo(4));
+          expect(challenge['answer'], inInclusiveRange(0, options.length - 1));
+          expect((challenge['explanation'] as String).trim(), isNotEmpty);
+        }
         expect(chapter['title'], isA<String>());
         expect((chapter['title'] as String).trim(), isNotEmpty);
         expect(chapter['summary'], isA<String>());
