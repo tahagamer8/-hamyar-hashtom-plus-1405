@@ -16,39 +16,68 @@ function json(data, status = 200) {
 }
 
 function validMessages(messages) {
-  if (!Array.isArray(messages) || messages.length === 0 || messages.length > MAX_MESSAGES) return false;
-  return messages.every((m) =>
-    m && ["user", "model"].includes(m.role) &&
-    typeof m.text === "string" &&
-    m.text.trim().length > 0 &&
-    m.text.length <= MAX_MESSAGE_LENGTH
+  if (!Array.isArray(messages) || messages.length === 0 ||
+      messages.length > MAX_MESSAGES || messages.length % 2 === 0) {
+    return false;
+  }
+
+  return messages.every((message, index) =>
+    message &&
+    message.role === (index % 2 === 0 ? "user" : "model") &&
+    typeof message.text === "string" &&
+    message.text.trim().length > 0 &&
+    message.text.length <= MAX_MESSAGE_LENGTH
   );
 }
 
 export default {
   async fetch(request, env) {
-    if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders });
     const url = new URL(request.url);
+
+    if (request.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers: corsHeaders });
+    }
     if (request.method !== "POST" || url.pathname !== "/api/chat") {
       return json({ error: "مسیر درخواست پیدا نشد." }, 404);
     }
-    if (!env.GEMINI_API_KEY) return json({ error: "کلید سرویس روی سرور تنظیم نشده است." }, 503);
-
-    if (env.CHAT_LIMITER) {
-      const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
-      const { success } = await env.CHAT_LIMITER.limit({ key: clientIp });
-      if (!success) return json({ error: "تعداد درخواست‌ها زیاد است؛ یک دقیقه بعد دوباره امتحان کن." }, 429);
+    if (!env.GEMINI_API_KEY) {
+      return json({ error: "کلید سرویس روی سرور تنظیم نشده است." }, 503);
     }
 
     let body;
-    try { body = await request.json(); } catch { return json({ error: "درخواست نامعتبر است." }, 400); }
-    if (!body || typeof body !== "object" || !validMessages(body.messages)) {
-      return json({ error: "پیام‌ها نامعتبرند یا تعدادشان بیش از حد است." }, 400);
+    try {
+      const declaredLength = Number(request.headers.get("Content-Length") || 0);
+      if (declaredLength > 100_000) {
+        return json({ error: "حجم درخواست بیش از حد مجاز است." }, 413);
+      }
+      const rawBody = await request.text();
+      if (rawBody.length > 100_000) {
+        return json({ error: "حجم درخواست بیش از حد مجاز است." }, 413);
+      }
+      body = JSON.parse(rawBody);
+    } catch {
+      return json({ error: "درخواست نامعتبر است." }, 400);
     }
 
-    const contents = body.messages.map((m) => ({
-      role: m.role,
-      parts: [{ text: m.text.trim() }],
+    if (!body || typeof body !== "object" || !validMessages(body.messages)) {
+      return json({ error: "پیام‌ها نامعتبرند؛ گفت‌وگو باید از پرسش شروع شود و نوبت‌ها یکی‌درمیان باشند." }, 400);
+    }
+
+    if (env.CHAT_LIMITER) {
+      try {
+        const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
+        const { success } = await env.CHAT_LIMITER.limit({ key: clientIp });
+        if (!success) {
+          return json({ error: "تعداد درخواست‌ها زیاد است؛ یک دقیقه بعد دوباره امتحان کن." }, 429);
+        }
+      } catch {
+        return json({ error: "محدودکنندهٔ درخواست موقتاً در دسترس نیست." }, 503);
+      }
+    }
+
+    const contents = body.messages.map((message) => ({
+      role: message.role,
+      parts: [{ text: message.text.trim() }],
     }));
 
     const payload = {
@@ -82,22 +111,41 @@ export default {
             "x-goog-api-key": env.GEMINI_API_KEY,
           },
           body: JSON.stringify(payload),
+          signal: AbortSignal.timeout(30_000),
         }
       );
-      const result = await upstream.json();
-      if (!upstream.ok) {
-        return json({ error: upstream.status === 429
-          ? "سهمیهٔ درخواست‌ها فعلاً تمام شده؛ کمی بعد دوباره امتحان کن."
-          : "ارتباط با سرویس هوش مصنوعی برقرار نشد. تنظیمات سرور را بررسی کن." }, upstream.status === 429 ? 429 : 502);
+
+      let result;
+      try {
+        result = await upstream.json();
+      } catch {
+        return json({ error: "پاسخ سرویس هوش مصنوعی قابل خواندن نیست." }, 502);
       }
+
+      if (!upstream.ok) {
+        return json({
+          error: upstream.status === 429
+            ? "سهمیهٔ درخواست‌ها فعلاً تمام شده؛ کمی بعد دوباره امتحان کن."
+            : "ارتباط با سرویس هوش مصنوعی برقرار نشد. تنظیمات سرور را بررسی کن."
+        }, upstream.status === 429 ? 429 : 502);
+      }
+
       const answer = result.candidates?.[0]?.content?.parts
-        ?.map((part) => part.text || "")
+        ?.map((part) => typeof part.text === "string" ? part.text : "")
         .join("")
         .trim();
-      if (!answer) return json({ error: "پاسخ متنی دریافت نشد؛ سؤال را دوباره بفرست." }, 502);
+
+      if (!answer) {
+        return json({ error: "پاسخ متنی دریافت نشد؛ سؤال را دوباره بفرست." }, 502);
+      }
       return json({ answer });
-    } catch {
-      return json({ error: "خطای ارتباطی رخ داد. اتصال اینترنت را بررسی کن." }, 502);
+    } catch (error) {
+      const timedOut = error?.name === "TimeoutError" || error?.name === "AbortError";
+      return json({
+        error: timedOut
+          ? "پاسخ‌گویی بیش از حد طول کشید؛ دوباره تلاش کن."
+          : "خطای ارتباطی رخ داد. اتصال اینترنت را بررسی کن."
+      }, 502);
     }
   },
 };
