@@ -61,6 +61,7 @@ void main() {
     expect(await file.exists(), isTrue);
     final catalog = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
     expect(catalog.length, greaterThanOrEqualTo(11));
+    expect(Object.values(catalog).fold<int>(0, (sum, item) => sum + ((item as Map<String, dynamic>)['chapters'] as List<dynamic>).length), greaterThanOrEqualTo(100));
     expect((catalog['math'] as Map<String, dynamic>)['chapters'], hasLength(9));
     expect((catalog['science'] as Map<String, dynamic>)['chapters'], hasLength(15));
     expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(12));
@@ -89,7 +90,10 @@ void main() {
         }
       }
     }
-    expect(totalQuestions, greaterThanOrEqualTo(82));
+    expect(totalQuestions, greaterThanOrEqualTo(200));
+    for (final id in ['persian', 'writing', 'arabic', 'english', 'religion', 'quran', 'thinking', 'work']) {
+      expect(((catalog[id] as Map<String, dynamic>)['chapters'] as List<dynamic>).length, greaterThanOrEqualTo(5), reason: id);
+    }
   });
 
   testWidgets('home screen renders Fahmino branding', (tester) async {
