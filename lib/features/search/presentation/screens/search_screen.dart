@@ -121,10 +121,19 @@ class _SearchScreenState extends State<SearchScreen> {
                   ...points.map((value) => MapEntry('نکتهٔ آموزشی', value)),
                   ...steps.map((value) => MapEntry('حل مثال', value)),
                   MapEntry('مثال', example),
-                  ...questions.map((value) => MapEntry(
-                        'نمونه‌سؤال',
-                        value['question'] as String? ?? '',
-                      )),
+                  ...questions.expand((value) => <MapEntry<String, String>>[
+                        MapEntry(
+                          'نمونه‌سؤال',
+                          value['question'] as String? ?? '',
+                        ),
+                        ...(value['options'] as List<dynamic>? ?? [])
+                            .whereType<String>()
+                            .map((option) => MapEntry('گزینهٔ سؤال', option)),
+                        MapEntry(
+                          'توضیح پاسخ',
+                          value['explanation'] as String? ?? '',
+                        ),
+                      ]),
                 ];
                 final matched = fields.where((field) =>
                     _normalize(field.value).contains(query)).toList();
