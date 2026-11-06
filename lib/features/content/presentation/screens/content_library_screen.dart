@@ -97,9 +97,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
 
           if (_feature == AppFeature.quiz) {
             final examChapters = _wholeSubjectExam ? chapters : [selectedChapter];
-            final examTitle = _wholeSubjectExam
-                ? '${subject['title'] as String? ?? 'درس'} — آزمون جامع'
-                : selectedChapter['title'] as String? ?? 'فصل انتخابی';
+            final examTitle = subject['title'] as String? ?? 'درس';
             return Column(
               children: [
                 Padding(
