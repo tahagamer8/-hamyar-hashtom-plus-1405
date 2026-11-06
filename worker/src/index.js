@@ -37,7 +37,8 @@ function normalizeStudyContext(value) {
   const result = {};
   const stringFields = [
     "subjectTitle", "chapterTitle", "bookChapterTitle", "bookScope",
-    "alignmentStatus", "summary", "example", "sourceLabel"
+    "alignmentStatus", "summary", "example", "sourceLabel",
+    "contentVerificationStatus"
   ];
   for (const key of stringFields) {
     if (value[key] === undefined) continue;
@@ -45,10 +46,17 @@ function normalizeStudyContext(value) {
     result[key] = value[key].trim();
   }
 
-  for (const key of ["points", "solutionSteps"]) {
+  const arrayLimits = {
+    points: { count: 8, length: 400 },
+    solutionSteps: { count: 8, length: 400 },
+    pageReferences: { count: 6, length: 160 },
+    bookSolutions: { count: 4, length: 900 },
+  };
+  for (const [key, limits] of Object.entries(arrayLimits)) {
     if (value[key] === undefined) continue;
-    if (!Array.isArray(value[key]) || value[key].length > 8 ||
-        value[key].some((item) => typeof item !== "string" || item.length > 400)) {
+    if (!Array.isArray(value[key]) || value[key].length > limits.count ||
+        value[key].some((item) =>
+          typeof item !== "string" || item.length > limits.length)) {
       return false;
     }
     result[key] = value[key].map((item) => item.trim()).filter(Boolean);
@@ -66,7 +74,7 @@ function normalizeStudyContext(value) {
       .filter(Boolean);
   }
 
-  if (JSON.stringify(result).length > 6000) return false;
+  if (JSON.stringify(result).length > 9000) return false;
   return result;
 }
 
@@ -143,6 +151,8 @@ export default {
           "اگر alignmentStatus برابر not_verified_against_1405_1406_pdf است، محتوا را تأییدشده یا عین پاسخ کتاب معرفی نکن؛ در پاسخ کتاب‌محور این محدودیت را کوتاه و روشن بگو.",
           "bookChapterTitle و bookScope فقط راهنمای شناسایی فصل و محدوده‌اند و به‌تنهایی صحت summary یا پاسخ‌ها را اثبات نمی‌کنند.",
           "practiceQuestions نمونه‌تمرین‌های تألیفی فهمینو هستند؛ از آن‌ها برای توضیح روش حل و ساخت تمرین مشابه استفاده کن، اما آن‌ها را سؤال رسمی کتاب معرفی نکن.",
+          "pageReferences فقط نشانی صفحه‌هایی است که در داده آمده‌اند؛ شماره صفحهٔ دیگری را حدس نزن و این ارجاع‌ها را به‌تنهایی دلیل تأیید پاسخ ندان.",
+          "bookSolutions فقط وقتی پاسخ کتابیِ تأییدشده محسوب می‌شوند که همان رکورد صریحاً وضعیت verified_against_official_textbook داشته باشد؛ در غیر این صورت آن را پیش‌نویس یا بررسی‌نشده معرفی کن.",
           "اگر برای یک سؤال تمرینی پاسخ یا توضیح ثبت شده، آن را دوباره محاسبه و بررسی کن؛ در صورت ناسازگاری، با صداقت خطا را اعلام کن.",
           "زمینهٔ درسی (JSON):",
           JSON.stringify(studyContext)
