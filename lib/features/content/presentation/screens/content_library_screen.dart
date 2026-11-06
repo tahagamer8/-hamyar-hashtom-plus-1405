@@ -12,6 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
+import 'package:hamyar_hashtom_plus/features/lessons/data/ai_lesson_cache.dart';
 
 class ContentLibraryScreen extends ConsumerStatefulWidget {
   const ContentLibraryScreen({
@@ -209,6 +210,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                     AppRoutes.aiAssistant,
                     extra: <String, dynamic>{
                       'studyContext': studyContext,
+                      'lessonCacheKey': '${widget.subjectId}::$safeIndex',
                       'initialPrompt':
                           'برای درس ${studyContext['subjectTitle']} و فصل ${studyContext['chapterTitle']} یک درسنامهٔ کامل، دقیق و مرحله‌به‌مرحله آماده کن. هدف‌های یادگیری، پیش‌نیازها، بخش‌بندی مفهومی، مثال‌های مستقل و حل‌شده، اشتباه‌های رایج، پنج تمرین تألیفی از متوسط تا دشوار و پاسخ تشریحی آن‌ها را بیاور. فقط مطالب درست و متناسب با پایه هشتم را بنویس. اگر دادهٔ کتاب کافی نیست، بخش تکمیلی را با عنوان «آموزش تکمیلی تألیفی فهمینو» مشخص کن و هیچ شماره صفحه یا پاسخ رسمی حدس نزن.',
                     },
@@ -228,6 +230,11 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                 favoriteKey: widget.subjectId + '::' +
                     (selectedChapter['title']?.toString() ?? ''),
               ),
+              if (_feature == AppFeature.lessons)
+                _SavedAiLessonCard(
+                  key: ValueKey('${widget.subjectId}::$safeIndex'),
+                  lessonKey: '${widget.subjectId}::$safeIndex',
+                ),
               if (_feature == AppFeature.sampleExams) ...[
                 const SizedBox(height: 8),
                 _DraftContentNotice(feature: _feature),
@@ -868,6 +875,64 @@ class _QuizChapterState extends State<_QuizChapter> {
           const Divider(height: 24),
         ],
       ),
+    );
+  }
+}
+
+
+class _SavedAiLessonCard extends StatefulWidget {
+  const _SavedAiLessonCard({super.key, required this.lessonKey});
+  final String lessonKey;
+
+  @override
+  State<_SavedAiLessonCard> createState() => _SavedAiLessonCardState();
+}
+
+class _SavedAiLessonCardState extends State<_SavedAiLessonCard> {
+  late Future<String?> _lessonFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _lessonFuture = AiLessonCache.read(widget.lessonKey);
+  }
+
+  Future<void> _delete() async {
+    await AiLessonCache.delete(widget.lessonKey);
+    if (!mounted) return;
+    setState(() => _lessonFuture = Future<String?>.value(null));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<String?>(
+      future: _lessonFuture,
+      builder: (context, snapshot) {
+        final lesson = snapshot.data;
+        if (snapshot.connectionState != ConnectionState.done ||
+            lesson == null ||
+            lesson.trim().isEmpty) {
+          return const SizedBox.shrink();
+        }
+        final theme = Theme.of(context);
+        return Card(
+          margin: const EdgeInsets.only(bottom: 14),
+          child: ExpansionTile(
+            leading: Icon(Icons.auto_awesome_rounded, color: theme.colorScheme.primary),
+            title: const Text('درسنامهٔ تکمیلی ذخیره‌شده'),
+            subtitle: const Text('تألیفی با هوش مصنوعی؛ پاسخ رسمی کتاب نیست'),
+            trailing: IconButton(
+              tooltip: 'حذف درسنامهٔ ذخیره‌شده',
+              onPressed: _delete,
+              icon: const Icon(Icons.delete_outline_rounded),
+            ),
+            childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            children: [
+              SelectableText(lesson),
+            ],
+          ),
+        );
+      },
     );
   }
 }
