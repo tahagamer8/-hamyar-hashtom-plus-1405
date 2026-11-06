@@ -62,8 +62,31 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
                         if not isinstance(value, str) or not value.strip():
                             errors.append(f"{label}: {key}[{item_index}] is empty or not text")
 
-            learning_sections += len(chapter.get("learningSections", [])) if isinstance(chapter.get("learningSections", []), list) else 0
-            book_solutions += len(chapter.get("bookSolutions", [])) if isinstance(chapter.get("bookSolutions", []), list) else 0
+            raw_sections = chapter.get("learningSections", [])
+            if not isinstance(raw_sections, list):
+                errors.append(f"{label}: learningSections must be a list")
+                raw_sections = []
+            learning_sections += len(raw_sections)
+            for section_index, section in enumerate(raw_sections):
+                section_label = f"{label}/section-{section_index + 1}"
+                if not isinstance(section, dict):
+                    errors.append(f"{section_label}: section must be an object")
+                    continue
+                if not isinstance(section.get("title"), str) or not section["title"].strip():
+                    errors.append(f"{section_label}: title is missing")
+                if not isinstance(section.get("content"), str) or not section["content"].strip():
+                    errors.append(f"{section_label}: content is missing")
+                for list_key in ("keyPoints", "examples"):
+                    values = section.get(list_key, [])
+                    if not isinstance(values, list) or any(
+                        not isinstance(value, str) or not value.strip() for value in values
+                    ):
+                        errors.append(f"{section_label}: {list_key} must contain non-empty text items")
+            raw_solutions = chapter.get("bookSolutions", [])
+            if not isinstance(raw_solutions, list):
+                errors.append(f"{label}: bookSolutions must be a list")
+                raw_solutions = []
+            book_solutions += len(raw_solutions)
             source = chapter.get("source")
             if isinstance(source, dict) and source.get("url"):
                 sourced_chapters += 1
