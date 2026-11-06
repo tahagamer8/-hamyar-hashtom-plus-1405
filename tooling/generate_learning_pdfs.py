@@ -108,6 +108,8 @@ def page_footer(canvas, doc):
     canvas.restoreState()
 
 def build_notes(catalog, output: Path, styles_map):
+    topic_count = sum(len(subject['chapters']) for subject in catalog.values())
+    question_count = sum(len(chapter['questions']) for subject in catalog.values() for chapter in subject['chapters'])
     story = [
         Spacer(1, 28*mm),
         Paragraph(rtl("جزوه‌های خلاصه و نکته‌ای"), styles_map["title"]),
@@ -115,7 +117,7 @@ def build_notes(catalog, output: Path, styles_map):
         HRFlowable(width="100%", thickness=1, color=colors.HexColor("#C7D2FE")),
         Spacer(1, 8*mm),
         Paragraph(rtl("توضیح دربارهٔ پوشش محتوا"), styles_map["chapter"]),
-        Paragraph(rtl("این فایل فقط موضوعات و فصل‌هایی را پوشش می‌دهد که در کاتالوگ فعلی فهمینو ثبت شده‌اند. این نسخه هنوز همهٔ فصل‌های کتاب‌های رسمی پایه هشتم را پوشش نمی‌دهد و نباید به‌عنوان جزوهٔ کامل سال تحصیلی استفاده شود."), styles_map["body"]),
+        Paragraph(rtl(f"این نسخه شامل {topic_count} موضوع آموزشی از {len(catalog)} درس است. با این حال، عنوان و ترتیب برخی موضوع‌ها و پوشش تمام صفحات کتاب‌های رسمی هنوز تطبیق نهایی نشده است؛ بنابراین این فایل را جزوهٔ منتخب و تألیفی بدان، نه جایگزین کامل کتاب درسی."), styles_map["body"]),
         Paragraph(rtl("مطالب این فایل تألیفی و آموزشی‌اند؛ برای تطبیق نهایی سرفصل‌ها باید نسخهٔ رسمی کتاب همان سال بررسی شود."), styles_map["body"]),
         PageBreak(),
     ]
@@ -140,6 +142,8 @@ def build_notes(catalog, output: Path, styles_map):
     doc.build(story, onFirstPage=page_footer, onLaterPages=page_footer)
 
 def build_questions(catalog, output: Path, styles_map):
+    topic_count = sum(len(subject['chapters']) for subject in catalog.values())
+    question_count = sum(len(chapter['questions']) for subject in catalog.values() for chapter in subject['chapters'])
     story = [
         Spacer(1, 28*mm),
         Paragraph(rtl("نمونه‌سؤال و آزمونک‌های آموزشی"), styles_map["title"]),
@@ -147,7 +151,7 @@ def build_questions(catalog, output: Path, styles_map):
         HRFlowable(width="100%", thickness=1, color=colors.HexColor("#C7D2FE")),
         Spacer(1, 8*mm),
         Paragraph(rtl("راهنما: ابتدا سؤال‌ها را بدون نگاه کردن به پاسخ‌نامه حل کن. پاسخ‌نامه و توضیح‌ها در بخش پایانی آمده‌اند."), styles_map["body"]),
-        Paragraph(rtl("هشدار پوشش: این نسخه فقط سؤال‌های ثبت‌شده در کاتالوگ فعلی را دارد و هنوز بانک کامل آزمون همهٔ فصل‌های پایه هشتم نیست."), styles_map["body"]),
+        Paragraph(rtl(f"این نسخه شامل {question_count} پرسش تألیفی در {topic_count} موضوع است. پرسش‌ها نمونه‌های تمرینی‌اند و جایگزین همهٔ تمرین‌ها و آزمون‌های کتاب رسمی نیستند."), styles_map["body"]),
         PageBreak(),
     ]
     answer_rows = []
