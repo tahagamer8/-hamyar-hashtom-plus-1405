@@ -5334,6 +5334,61 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
           }
+        ],
+        "learningSections": [
+          {
+            "title": "ضمائر المنفصلة",
+            "content": "الضمائر المنفصلة كلمات تدل على المتكلم أو المخاطب أو الغائب، وتأتي مستقلة في الجملة. من أمثلتها: أنا، نحن، أنتَ، أنتِ، هو، هي، هم.",
+            "examples": [
+              "أنا طالبٌ.",
+              "هي طالبةٌ."
+            ],
+            "keyPoints": [
+              "أنا للمتكلم المفرد.",
+              "نحن للمتكلم الجمع.",
+              "هو للمذكر الغائب وهي للمؤنث الغائب."
+            ]
+          },
+          {
+            "title": "أسماء الإشارة",
+            "content": "أسماء الإشارة تدل على شخص أو شيء معيّن. نستخدم هذا للمفرد المذكر القريب، وهذه للمفرد المؤنث القريب، وهؤلاء للجمع القريب.",
+            "examples": [
+              "هذا كتابٌ.",
+              "هذه مدرسةٌ.",
+              "هؤلاء طلابٌ."
+            ],
+            "keyPoints": [
+              "هذا للمذكر المفرد.",
+              "هذه للمؤنث المفرد.",
+              "هؤلاء للجمع."
+            ]
+          },
+          {
+            "title": "المفرد والمثنى والجمع",
+            "content": "الاسم المفرد يدل على واحد، والمثنى يدل على اثنين، والجمع يدل على أكثر من اثنين. تتغير صيغة الاسم بحسب العدد.",
+            "examples": [
+              "طالبٌ: مفرد؛ طالبانِ: مثنى؛ طلابٌ: جمع.",
+              "كتابٌ: مفرد؛ كتابانِ: مثنى."
+            ],
+            "keyPoints": [
+              "انتبه إلى علامة المثنى.",
+              "قد يكون للجمع صيغ مختلفة.",
+              "السياق يساعد على تحديد العدد."
+            ]
+          },
+          {
+            "title": "فهم الجملة الاسمية والفعلية",
+            "content": "الجملة الاسمية تبدأ غالباً باسم وتتكون من مبتدأ وخبر. الجملة الفعلية تبدأ بفعل، وقد تتكون من فعل وفاعل ومفعول به.",
+            "examples": [
+              "الجوُّ جميلٌ: جملة اسمية.",
+              "كتبَ الطالبُ الدرسَ: جملة فعلية."
+            ],
+            "keyPoints": [
+              "المبتدأ والخبر مكوّنان أساسيان للجملة الاسمية.",
+              "الفعل والفاعل أساس الجملة الفعلية.",
+              "ليس كل اسم في الجملة فاعلاً."
+            ]
+          }
         ]
       },
       {
@@ -5421,6 +5476,59 @@
             "difficulty": "advanced",
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [
+          {
+            "title": "المفردات وفهم السياق",
+            "content": "لفهم كلمة جديدة، اقرأ الجملة كاملة وابحث عن الكلمات القريبة التي توضح معناها. لا تعتمد على معنى واحد للكلمة في جميع السياقات.",
+            "examples": [
+              "اللغة وسيلة للتواصل.",
+              "العلم يساعد الإنسان على الفهم."
+            ],
+            "keyPoints": [
+              "السياق يحدد المعنى المقصود.",
+              "اربط الكلمة بموضوع النص.",
+              "راجع المفردات في جمل قصيرة."
+            ]
+          },
+          {
+            "title": "المذكر والمؤنث",
+            "content": "تتغير بعض الأسماء والصفات بحسب التذكير والتأنيث. من علامات التأنيث الشائعة التاء المربوطة، لكن ليست كل كلمة مؤنثة تنتهي بها.",
+            "examples": [
+              "طالبٌ مجتهدٌ؛ طالبةٌ مجتهدةٌ.",
+              "كتابٌ جديدٌ؛ مجلةٌ جديدةٌ."
+            ],
+            "keyPoints": [
+              "طابق الصفة مع الموصوف.",
+              "التاء المربوطة علامة شائعة وليست قاعدة مطلقة.",
+              "انتبه إلى جنس الاسم في الجملة."
+            ]
+          },
+          {
+            "title": "الصفة والموصوف",
+            "content": "الصفة كلمة تصف اسماً قبلها، وتوافقه غالباً في التذكير والتأنيث والإفراد والتثنية والجمع والتعريف والتنكير وفق قواعد المطابقة.",
+            "examples": [
+              "اللغةُ العربيةُ جميلةٌ.",
+              "طالبانِ مجتهدانِ."
+            ],
+            "keyPoints": [
+              "حدد الاسم الذي تصفه الصفة.",
+              "انتبه إلى المطابقة.",
+              "قد تتعدد الصفات للاسم الواحد."
+            ]
+          },
+          {
+            "title": "استخراج الفكرة الرئيسة",
+            "content": "الفكرة الرئيسة هي المعنى الأهم الذي يدور حوله النص. ابحث عن موضوع النص والجمل التي تدعمه، ثم لخّصه بجملة من صياغتك.",
+            "examples": [
+              "إذا تكرر الحديث عن أهمية تعلم اللغات، فقد تكون الفكرة الرئيسة قيمة اللغة في التواصل والمعرفة."
+            ],
+            "keyPoints": [
+              "لا تنسخ جملة طويلة دون فهمها.",
+              "ميّز الفكرة الرئيسة من المثال والتفصيل.",
+              "اكتب خلاصة موجزة وواضحة."
+            ]
           }
         ]
       },
@@ -5510,6 +5618,61 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
           }
+        ],
+        "learningSections": [
+          {
+            "title": "أسماء المهن",
+            "content": "تدل أسماء المهن على الأعمال التي يؤديها الناس. تعلم الاسم مع جملة قصيرة يساعد على تذكره واستخدامه في السياق.",
+            "examples": [
+              "طبيبٌ، معلّمٌ، مهندسٌ، ممرّضٌ.",
+              "المعلّمُ يعلّمُ الطلابَ."
+            ],
+            "keyPoints": [
+              "اربط المهنة بالفعل الذي يصف عملها.",
+              "انتبه إلى المذكر والمؤنث عند الحاجة.",
+              "لا تحكم على قيمة الأشخاص من مهنتهم."
+            ]
+          },
+          {
+            "title": "الفعل المضارع",
+            "content": "يدل الفعل المضارع غالباً على حدث يقع في الحاضر أو المستقبل. من حروف المضارعة: أ، ن، ي، ت، وتظهر في بداية الفعل.",
+            "examples": [
+              "أكتبُ، نكتبُ، يكتبُ، تكتبُ.",
+              "المهندسُ يعملُ في المشروع."
+            ],
+            "keyPoints": [
+              "حروف المضارعة أربعة: أ، ن، ي، ت.",
+              "يتغير الفعل مع الضمير.",
+              "اقرأ الضمير لتختار صيغة الفعل."
+            ]
+          },
+          {
+            "title": "ضمائر الفاعل مع المضارع",
+            "content": "يتغير شكل الفعل المضارع ليتناسب مع الفاعل. يجب أن نطابق الفعل مع الضمير في العدد والشخص والجنس.",
+            "examples": [
+              "أنا أدرسُ.",
+              "نحن نعملُ.",
+              "هم يقرؤونَ."
+            ],
+            "keyPoints": [
+              "أنا غالباً مع أدرسُ.",
+              "نحن مع ندرسُ.",
+              "هم مع يدرسونَ أو يقرؤونَ بحسب الفعل."
+            ]
+          },
+          {
+            "title": "التعبير عن الطموح",
+            "content": "يمكن التعبير عن المهنة المستقبلية بجملة واضحة، مع ذكر سبب مناسب. استخدم مفردات بسيطة وتجنب الجمل الطويلة غير المترابطة.",
+            "examples": [
+              "أريد أن أكون طبيباً لأنني أحب مساعدة الناس.",
+              "أحب الهندسة لأنها تعتمد على التفكير."
+            ],
+            "keyPoints": [
+              "اذكر المهنة ثم السبب.",
+              "استخدم مفردات درستها.",
+              "احترم اختلاف اهتمامات الآخرين."
+            ]
+          }
         ]
       },
       {
@@ -5597,6 +5760,59 @@
             "difficulty": "advanced",
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [
+          {
+            "title": "أفعال الماضي",
+            "content": "الفعل الماضي يدل على حدث وقع قبل زمن الكلام. تتغير نهايته أو صورته بحسب الفاعل.",
+            "examples": [
+              "ذهبَ الطالبُ إلى المدرسةِ.",
+              "كتبتْ فاطمةُ الدرسَ."
+            ],
+            "keyPoints": [
+              "الماضي يدل على حدث سابق.",
+              "انتبه إلى تاء التأنيث الساكنة.",
+              "ابحث عن الفاعل لمعرفة المقصود."
+            ]
+          },
+          {
+            "title": "أدوات الاستفهام",
+            "content": "تستخدم أدوات الاستفهام لطلب معلومة. من أمثلتها: مَن للعاقل، ما لغير العاقل أو السؤال عن الشيء، أين للمكان، متى للزمان، وكيف للحال.",
+            "examples": [
+              "أينَ المدرسةُ؟",
+              "متى رجعتَ؟",
+              "كيف كانت الرحلةُ؟"
+            ],
+            "keyPoints": [
+              "اختر أداة السؤال بحسب نوع المعلومة.",
+              "تنتهي جملة السؤال بعلامة استفهام.",
+              "قد تختلف الإجابة بحسب السياق."
+            ]
+          },
+          {
+            "title": "ترتيب أحداث تجربة",
+            "content": "عند وصف تجربة، رتب الأحداث بحسب زمن وقوعها، واستعمل كلمات مثل أولاً، ثم، بعد ذلك، أخيراً.",
+            "examples": [
+              "أولاً وصلتُ إلى المكان، ثم بدأتُ النشاط، وأخيراً كتبتُ ملاحظاتي."
+            ],
+            "keyPoints": [
+              "حافظ على الترتيب الزمني.",
+              "استخدم روابط واضحة.",
+              "لا تضف حدثاً غير موجود في النص."
+            ]
+          },
+          {
+            "title": "قراءة نص قصير",
+            "content": "اقرأ العنوان أولاً، ثم حدّد الشخصيات أو المكان أو الحدث، وبعد ذلك استخرج الفكرة العامة والتفاصيل الداعمة.",
+            "examples": [
+              "عنوان عن رحلة علمية قد يشير إلى مكان الزيارة وهدفها."
+            ],
+            "keyPoints": [
+              "العنوان يساعد على توقع الموضوع.",
+              "التفاصيل تجيب عن أسئلة من ومتى وأين وكيف.",
+              "فرّق بين المعلومة الصريحة والاستنتاج."
+            ]
           }
         ]
       },
@@ -5686,6 +5902,61 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
           }
+        ],
+        "learningSections": [
+          {
+            "title": "مفردات العلاقات الاجتماعية",
+            "content": "تصف مفردات مثل الصديق، التعاون، الاحترام، الوفاء والتسامح العلاقات بين الناس. فهم هذه الكلمات يساعد على فهم النصوص الاجتماعية.",
+            "examples": [
+              "الصديقُ الوفيُّ يساعدُ صديقَهُ.",
+              "الاحترامُ أساسُ العلاقةِ الجيدةِ."
+            ],
+            "keyPoints": [
+              "افهم الكلمة داخل جملة.",
+              "اربط المفردات بمعانيها لا بترجمة منفردة فقط.",
+              "استخدم الكلمات في تعبير من إنشائك."
+            ]
+          },
+          {
+            "title": "الضمائر المتصلة",
+            "content": "تتصل بعض الضمائر بالأسماء أو الأفعال أو حروف الجر. مثل كتابي، كتابه، ساعدني، له. ويتحدد معناها بحسب الكلمة التي اتصلت بها والسياق.",
+            "examples": [
+              "كتابي جديدٌ.",
+              "ساعدني صديقي.",
+              "له كتابٌ."
+            ],
+            "keyPoints": [
+              "ـي قد تدل على المتكلم.",
+              "ـه قد تدل على الغائب المذكر.",
+              "حدد مرجع الضمير من السياق."
+            ]
+          },
+          {
+            "title": "النفي في العربية",
+            "content": "تستخدم أدوات مثل لا، ما، ليس، لم بحسب نوع الجملة والزمن. يجب اختيار أداة النفي المناسبة وعدم الخلط بينها.",
+            "examples": [
+              "لا أهملُ واجبي.",
+              "ما تأخّرَ الطالبُ.",
+              "ليس الجوُّ بارداً."
+            ],
+            "keyPoints": [
+              "لا تستخدم في سياقات متعددة بحسب الفعل.",
+              "ليس تدخل على الجملة الاسمية.",
+              "افهم زمن الفعل قبل اختيار أداة النفي."
+            ]
+          },
+          {
+            "title": "كتابة جمل عن الصداقة",
+            "content": "اكتب جملتين أو ثلاثاً عن صفات الصديق الجيد، مع استعمال صفة وفعل مناسبين. راجع التذكير والتأنيث وعلامات الترقيم.",
+            "examples": [
+              "الصديقُ الصادقُ يحفظُ السرَّ ويعاملُ الآخرينَ باحترامٍ."
+            ],
+            "keyPoints": [
+              "اكتب فكرة واحدة في كل جملة.",
+              "استخدم الصفات المناسبة.",
+              "راجع مطابقة الفعل والفاعل."
+            ]
+          }
         ]
       },
       {
@@ -5773,6 +6044,59 @@
             "difficulty": "advanced",
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [
+          {
+            "title": "مفردات السفر والمواصلات",
+            "content": "تتعلق مفردات السفر بالمكان والوقت ووسيلة النقل والأمتعة. تعلمها في مجموعات يسهل استخدامها في حوار.",
+            "examples": [
+              "مطارٌ، محطةٌ، قطارٌ، حقيبةٌ، تذكرةٌ.",
+              "أسافرُ بالقطارِ."
+            ],
+            "keyPoints": [
+              "صنّف المفردات حسب الموضوع.",
+              "انتبه إلى حرف الجر مع وسيلة النقل.",
+              "استخدم المفردة في جملة."
+            ]
+          },
+          {
+            "title": "حروف الجر",
+            "content": "حروف الجر تدخل على الأسماء، ومن أمثلتها: في، من، إلى، على، بـ، لـ. الاسم بعدها يكون مجروراً في العربية الفصحى.",
+            "examples": [
+              "ذهبتُ إلى المدرسةِ.",
+              "سافرتُ بالقطارِ."
+            ],
+            "keyPoints": [
+              "حرف الجر يسبق الاسم.",
+              "انتبه إلى حركة الاسم بعد حرف الجر.",
+              "اختر الحرف بحسب العلاقة المقصودة."
+            ]
+          },
+          {
+            "title": "ظروف المكان والزمان",
+            "content": "توضح ظروف المكان أين يقع الحدث، وظروف الزمان متى يقع. تساعد هذه الكلمات على فهم تفاصيل الرحلة أو القصة.",
+            "examples": [
+              "وصلتُ صباحاً.",
+              "الحقيبةُ تحتَ المقعدِ."
+            ],
+            "keyPoints": [
+              "صباحاً ظرف زمان.",
+              "تحتَ ظرف مكان في المثال.",
+              "اسأل متى؟ أو أين؟ لتحديد النوع."
+            ]
+          },
+          {
+            "title": "حوار في محطة السفر",
+            "content": "الحوار الجيد يتضمن تحية وسؤالاً واضحاً وجواباً مناسباً. يمكن السؤال عن موعد الانطلاق أو الوجهة أو التذكرة.",
+            "examples": [
+              "متى ينطلق القطار؟ ينطلق الساعة الثامنة."
+            ],
+            "keyPoints": [
+              "ابدأ بالتحية عند الحاجة.",
+              "اجعل السؤال محدداً.",
+              "استخدم جواباً يطابق السؤال."
+            ]
           }
         ]
       },
@@ -5862,6 +6186,59 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
           }
+        ],
+        "learningSections": [
+          {
+            "title": "أسماء الأماكن والاتجاهات",
+            "content": "تساعد أسماء البلدان والمدن والاتجاهات على وصف المواقع. استخدم الشرق والغرب والشمال والجنوب بحسب الخريطة أو السياق.",
+            "examples": [
+              "تقع المدينةُ شمالَ البلادِ.",
+              "سافرتُ إلى مدينةٍ أخرى."
+            ],
+            "keyPoints": [
+              "ميّز اسم المكان من اسم الاتجاه.",
+              "استخدم الخريطة للتحقق من الاتجاه.",
+              "لا تخلط بين شمال الخريطة واتجاه الشخص."
+            ]
+          },
+          {
+            "title": "اسم التفضيل",
+            "content": "يدل اسم التفضيل على اشتراك شيئين في صفة مع زيادة أحدهما فيها، مثل أكبر وأصغر وأجمل. ينبغي فهم المقارنة من سياق الجملة.",
+            "examples": [
+              "هذه المدينةُ أكبرُ من تلك.",
+              "الطريقُ الأقصرُ أسرعُ."
+            ],
+            "keyPoints": [
+              "أكبر وأصغر من أشهر صيغ التفضيل.",
+              "تحتاج المقارنة إلى طرفين مفهومين.",
+              "قد تأتي صيغة التفضيل مع من."
+            ]
+          },
+          {
+            "title": "المقارنة بين الأماكن",
+            "content": "عند المقارنة، حدد الصفة المشتركة ثم اذكر ما يميز كل مكان. تجنب الأحكام المطلقة إذا لم يدعمها النص أو الدليل.",
+            "examples": [
+              "القريةُ أهدأُ من المدينةِ.",
+              "هذا الطريقُ أقصرُ من الطريقِ الآخرِ."
+            ],
+            "keyPoints": [
+              "حدد الطرفين قبل المقارنة.",
+              "استخدم صفة مناسبة.",
+              "استند إلى معلومة واضحة."
+            ]
+          },
+          {
+            "title": "تلخيص نص عن الأرض والسفر",
+            "content": "لخص النص بذكر فكرته الرئيسة وأهم معلومتين، مع الحفاظ على المعنى وعدم إدخال تفاصيل من خارج النص.",
+            "examples": [
+              "قد يتناول النص تنوع البلدان واتساع الأرض واختلاف البيئات."
+            ],
+            "keyPoints": [
+              "لا تغيّر معنى النص.",
+              "احذف التكرار والأمثلة الثانوية.",
+              "اكتب بأسلوبك."
+            ]
+          }
         ]
       },
       {
@@ -5949,6 +6326,59 @@
             "difficulty": "advanced",
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [
+          {
+            "title": "الأفعال والأعمال اليومية",
+            "content": "تصف الأفعال اليومية ما يقوم به الإنسان من دراسة وعمل وتنظيم. اختر فعلاً يناسب الفاعل والزمن.",
+            "examples": [
+              "ينظّمُ الطالبُ وقتَهُ.",
+              "أساعدُ أسرتي."
+            ],
+            "keyPoints": [
+              "طابق الفعل مع الفاعل.",
+              "حدد زمن الحدث.",
+              "استخدم فعلاً دقيقاً."
+            ]
+          },
+          {
+            "title": "فعل الأمر",
+            "content": "يستخدم فعل الأمر لطلب القيام بعمل. تختلف صيغته بحسب الفعل والمخاطب، ويأتي غالباً في التعليمات والإرشادات.",
+            "examples": [
+              "اكتبْ واجبَكَ.",
+              "نظّمي وقتَكِ."
+            ],
+            "keyPoints": [
+              "الأمر موجّه إلى المخاطب.",
+              "انتبه إلى صيغة المذكر والمؤنث.",
+              "استخدم الأمر بأدب في الحوار."
+            ]
+          },
+          {
+            "title": "النصيحة والتوجيه",
+            "content": "يمكن تقديم النصيحة بأسلوب لطيف، مع توضيح السبب. في العربية يمكن استخدام فعل الأمر أو تراكيب مثل ينبغي أن.",
+            "examples": [
+              "نظّمْ وقتَكَ لكي تنجزَ أعمالَكَ.",
+              "ينبغي أن نعتمدَ على أنفسِنا."
+            ],
+            "keyPoints": [
+              "اجعل النصيحة واضحة ومهذبة.",
+              "اذكر سبباً عند الحاجة.",
+              "لا تستخدم أسلوباً جارحاً."
+            ]
+          },
+          {
+            "title": "كتابة خطوات عمل",
+            "content": "اكتب الخطوات بترتيب منطقي، مستخدماً أفعالاً واضحة وروابط زمنية. تأكد من أن كل خطوة قابلة للفهم.",
+            "examples": [
+              "أولاً أرتب كتبي، ثم أراجع دروسي، وبعد ذلك أجهز حقيبتي."
+            ],
+            "keyPoints": [
+              "رتب الخطوات زمنياً.",
+              "ابدأ كل خطوة بفعل واضح.",
+              "راجع أن الخطوات لا تتعارض."
+            ]
           }
         ]
       },
@@ -6038,6 +6468,59 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
           }
+        ],
+        "learningSections": [
+          {
+            "title": "مفردات العلوم والطبيعة",
+            "content": "تساعد مفردات مثل عالم، تجربة، ملاحظة، نبات، صخر ومتحف على وصف النشاط العلمي والزيارة التعليمية.",
+            "examples": [
+              "شاهدنا الصخورَ في المتحفِ.",
+              "كتبَ الطلابُ ملاحظاتِهم."
+            ],
+            "keyPoints": [
+              "اربط المفردة بموضوع الدرس.",
+              "ميّز الاسم من الفعل.",
+              "استخدم الكلمات في جمل صحيحة."
+            ]
+          },
+          {
+            "title": "الماضي والمضارع في وصف الأحداث",
+            "content": "يستخدم الماضي للأحداث التي تمت، والمضارع للأحداث الجارية أو المتكررة. يمكن الجمع بينهما عند وصف تجربة وما نتعلمه منها.",
+            "examples": [
+              "زرنا المتحفَ وتعلّمنا معلوماتٍ جديدةً.",
+              "يدرسُ العلماءُ الصخورَ."
+            ],
+            "keyPoints": [
+              "الماضي لحدث مكتمل.",
+              "المضارع للحاضر أو العادة أو المستقبل بحسب السياق.",
+              "حافظ على اتساق الزمن."
+            ]
+          },
+          {
+            "title": "أدوات الربط",
+            "content": "تربط الكلمات والجمل لتوضيح الترتيب أو السبب أو الإضافة. من أمثلتها: و، ثم، لأن، لذلك، لكن.",
+            "examples": [
+              "ذهبنا إلى المتحف ثم كتبنا التقرير.",
+              "تأخرنا لأن الطريق كان مزدحماً."
+            ],
+            "keyPoints": [
+              "ثم تفيد الترتيب مع التراخي.",
+              "لأن تقدم السبب.",
+              "لذلك تقدم النتيجة."
+            ]
+          },
+          {
+            "title": "تقرير قصير عن رحلة",
+            "content": "يتضمن التقرير عنواناً وهدف الزيارة ومكانها وأبرز الملاحظات والنتيجة. اكتب المعلومات التي شاهدتها أو تعلمتها فعلاً.",
+            "examples": [
+              "كان هدف الزيارة التعرف إلى الصخور. شاهدنا نماذج مختلفة وسجلنا خصائصها."
+            ],
+            "keyPoints": [
+              "اكتب الهدف بوضوح.",
+              "فرّق بين الملاحظة والرأي.",
+              "اختم بما تعلمته."
+            ]
+          }
         ]
       },
       {
@@ -6125,6 +6608,58 @@
             "difficulty": "advanced",
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [
+          {
+            "title": "المفردات وفهم النص الديني",
+            "content": "عند قراءة نص ذي موضوع ديني أو تاريخي، افهم المفردات من السياق، وحدد الشخصيات والأماكن والأحداث من النص نفسه.",
+            "examples": [
+              "المزار مكان يقصده الزائر.",
+              "التاريخ يذكر أحداثاً وقعت في الماضي."
+            ],
+            "keyPoints": [
+              "احترم سياق النص وموضوعه.",
+              "لا تنسب معلومة إلى النص إن لم ترد فيه.",
+              "ميّز المعلومة التاريخية من الرأي."
+            ]
+          },
+          {
+            "title": "الصفة والإضافة",
+            "content": "الإضافة تركيب من اسمين يوضح علاقة الأول بالثاني، مثل كتاب الطالب. الصفة تصف اسماً، مثل الكتاب المفيد. التمييز بينهما يساعد على فهم تركيب العبارة.",
+            "examples": [
+              "بابُ المدرسةِ: تركيب إضافي.",
+              "المكانُ الجميلُ: موصوف وصفة."
+            ],
+            "keyPoints": [
+              "المضاف يتصل بالمضاف إليه دون تنوين.",
+              "الصفة تتبع الموصوف في المطابقة.",
+              "اسأل: لمن؟ أو أيّ؟ للمساعدة في التمييز."
+            ]
+          },
+          {
+            "title": "استخراج المعلومات من النص",
+            "content": "ابحث عن الأسماء والأماكن والأزمنة والأحداث الصريحة، ثم أجب بجمل قصيرة. إذا طُلب استنتاج، اربطه بدليل من النص.",
+            "examples": [
+              "من زار المكان؟ متى حدثت الزيارة؟ ما الهدف منها؟"
+            ],
+            "keyPoints": [
+              "ابدأ بالسؤال لتحديد المعلومة المطلوبة.",
+              "أجب من النص لا من التخمين.",
+              "اذكر الدليل عند الاستنتاج."
+            ]
+          },
+          {
+            "title": "مراجعة قواعد الدروس",
+            "content": "للمراجعة، صنّف الأمثلة إلى اسم وفعل وحرف، ثم حدد الضمير والفعل والزمن والصفة أو الإضافة. طبّق القاعدة على جمل جديدة بدلاً من حفظ المثال وحده.",
+            "examples": [
+              "في 'ذهب الطالب إلى المدرسة'، ذهب فعل ماضٍ، الطالب فاعل، إلى حرف جر."
+            ],
+            "keyPoints": [
+              "التطبيق على أمثلة جديدة يثبت الفهم.",
+              "حدد وظيفة الكلمة من موقعها وسياقها.",
+              "راجع الأخطاء المتكررة."
+            ]
           }
         ]
       }
@@ -6214,6 +6749,61 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
           }
+        ],
+        "learningSections": [
+          {
+            "title": "Countries and nationalities",
+            "content": "A country is a place; a nationality describes a person from that country. Use capital letters for country names and nationalities. The question 'Where are you from?' asks about a person's country.",
+            "examples": [
+              "Iran → Iranian; Oman → Omani; Kuwait → Kuwaiti; Qatar → Qatari.",
+              "I am from Iran. I am Iranian."
+            ],
+            "keyPoints": [
+              "Country names and nationalities begin with capital letters.",
+              "Use 'from' to name a country of origin.",
+              "Nationality words do not always follow one spelling pattern."
+            ]
+          },
+          {
+            "title": "The verb be: am, is, are",
+            "content": "Use am with I, is with he/she/it and singular nouns, and are with you/we/they and plural nouns. The verb be connects a subject to information about it.",
+            "examples": [
+              "I am a student.",
+              "She is Iranian.",
+              "They are friends."
+            ],
+            "keyPoints": [
+              "I am; he/she/it is; you/we/they are.",
+              "Do not omit the verb be in a standard present-tense sentence.",
+              "Match the verb to the subject."
+            ]
+          },
+          {
+            "title": "Questions and short answers with be",
+            "content": "Put am, is or are before the subject to make a yes/no question. Short answers repeat the correct form of be and use a subject pronoun.",
+            "examples": [
+              "Are you from Iran? Yes, I am.",
+              "Is he a teacher? No, he isn't."
+            ],
+            "keyPoints": [
+              "Be + subject makes a yes/no question.",
+              "Use the same be form in the short answer.",
+              "Use a pronoun in short answers."
+            ]
+          },
+          {
+            "title": "Introducing yourself",
+            "content": "A short introduction can include a name, country, nationality, age or role. Use clear sentences and appropriate punctuation; do not share private information with strangers online.",
+            "examples": [
+              "Hello. My name is Sara. I am from Iran. I am Iranian.",
+              "This is Ali. He is my classmate."
+            ],
+            "keyPoints": [
+              "Start greetings with a capital letter where needed.",
+              "Use a full stop at the end of statements.",
+              "Share only information that is appropriate and safe."
+            ]
+          }
         ]
       },
       {
@@ -6287,6 +6877,60 @@
             "difficulty": "advanced",
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [
+          {
+            "title": "Days and weekly routines",
+            "content": "The days of the week are proper names and begin with capital letters. Use on before a day when describing a regular activity.",
+            "examples": [
+              "I play football on Friday.",
+              "We have English on Monday."
+            ],
+            "keyPoints": [
+              "Days: Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday.",
+              "Use 'on' with days.",
+              "Days of the week are capitalized."
+            ]
+          },
+          {
+            "title": "Present simple: habits",
+            "content": "Use the present simple to describe habits, routines and facts. With I, you, we and they, use the base form of most verbs. With he, she and it, most verbs take -s or -es.",
+            "examples": [
+              "I study every day.",
+              "She watches TV in the evening."
+            ],
+            "keyPoints": [
+              "Use present simple for routines.",
+              "Add -s/-es with he, she and it.",
+              "Frequency words often appear before the main verb."
+            ]
+          },
+          {
+            "title": "Negative sentences with do and does",
+            "content": "Use do not (don't) with I/you/we/they and does not (doesn't) with he/she/it. After doesn't, use the base form of the verb.",
+            "examples": [
+              "I don't get up late.",
+              "He doesn't play tennis."
+            ],
+            "keyPoints": [
+              "Do not add -s to the verb after doesn't.",
+              "Use don't with I/you/we/they.",
+              "Use doesn't with he/she/it."
+            ]
+          },
+          {
+            "title": "Asking about routines",
+            "content": "Use Do or Does at the beginning of present-simple yes/no questions. Use question words such as what, when and where to ask for details.",
+            "examples": [
+              "Do you study on Friday?",
+              "When does Mina go to school?"
+            ],
+            "keyPoints": [
+              "Do + I/you/we/they + base verb?",
+              "Does + he/she/it + base verb?",
+              "Use a question mark at the end."
+            ]
           }
         ]
       },
@@ -6362,6 +7006,60 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
           }
+        ],
+        "learningSections": [
+          {
+            "title": "Can and can't",
+            "content": "Use can to talk about ability or possibility and can't to express inability. The verb after can is always in its base form.",
+            "examples": [
+              "I can swim.",
+              "She can't drive."
+            ],
+            "keyPoints": [
+              "Can does not change with the subject.",
+              "Use the base form after can/can't.",
+              "Can is followed directly by the main verb."
+            ]
+          },
+          {
+            "title": "Questions with can",
+            "content": "Put can before the subject to ask about ability. Short answers use can or can't.",
+            "examples": [
+              "Can you ride a bike? Yes, I can.",
+              "Can he cook? No, he can't."
+            ],
+            "keyPoints": [
+              "Can + subject + base verb?",
+              "Short answers repeat can/can't.",
+              "Do not use do/does with can questions."
+            ]
+          },
+          {
+            "title": "Ability verbs and activities",
+            "content": "Choose a verb that accurately describes an activity, such as read, draw, sing, swim or speak. Use an object or language after the verb when needed.",
+            "examples": [
+              "I can speak English.",
+              "They can draw pictures."
+            ],
+            "keyPoints": [
+              "A verb names an action or state.",
+              "Some verbs need an object; others do not.",
+              "Use can + base verb."
+            ]
+          },
+          {
+            "title": "Talking about what people can do",
+            "content": "Use subject pronouns to avoid repeating names. Keep the modal can unchanged for singular and plural subjects.",
+            "examples": [
+              "Nima can play chess. He can also swim.",
+              "My friends can sing."
+            ],
+            "keyPoints": [
+              "He/she/it can; they can.",
+              "Can is not followed by 'to'.",
+              "Use also to add another ability."
+            ]
+          }
         ]
       },
       {
@@ -6436,6 +7134,61 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
           }
+        ],
+        "learningSections": [
+          {
+            "title": "Health vocabulary",
+            "content": "Health words describe how people feel and common problems. Learn the difference between a symptom and advice, and use simple, respectful language when someone feels unwell.",
+            "examples": [
+              "I have a headache.",
+              "She has a cold."
+            ],
+            "keyPoints": [
+              "Use have/has for many common health problems.",
+              "Use a/an with singular countable nouns where appropriate.",
+              "Health descriptions should be clear and not exaggerated."
+            ]
+          },
+          {
+            "title": "Have and has",
+            "content": "Use have with I/you/we/they and has with he/she/it in the present simple. In questions and negatives with does, return to have.",
+            "examples": [
+              "I have a sore throat.",
+              "He has a toothache.",
+              "Does she have a fever?"
+            ],
+            "keyPoints": [
+              "Have: I/you/we/they.",
+              "Has: he/she/it.",
+              "After does/doesn't, use have."
+            ]
+          },
+          {
+            "title": "Giving simple advice",
+            "content": "Use should to give advice and shouldn't to advise against an action. The verb after should is in the base form.",
+            "examples": [
+              "You should rest.",
+              "You shouldn't stay up late."
+            ],
+            "keyPoints": [
+              "Should is the same for all subjects.",
+              "Use the base verb after should.",
+              "Advice is not a substitute for professional medical help."
+            ]
+          },
+          {
+            "title": "Asking how someone feels",
+            "content": "Use 'How do you feel?' or 'What's the matter?' to ask about someone's condition. Answer politely and ask for help from a trusted adult when needed.",
+            "examples": [
+              "How do you feel? I feel tired.",
+              "What's the matter? I have a cough."
+            ],
+            "keyPoints": [
+              "Use feel + adjective.",
+              "Use have + noun for many symptoms.",
+              "Be kind and respectful when asking."
+            ]
+          }
         ]
       },
       {
@@ -6509,6 +7262,60 @@
             "difficulty": "advanced",
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [
+          {
+            "title": "Places in a city",
+            "content": "City vocabulary names public places and services. Use 'there is' for one item and 'there are' for more than one.",
+            "examples": [
+              "There is a park near my home.",
+              "There are two schools in this area."
+            ],
+            "keyPoints": [
+              "There is + singular noun.",
+              "There are + plural noun.",
+              "Use a/an with singular countable nouns."
+            ]
+          },
+          {
+            "title": "Prepositions of place",
+            "content": "Prepositions describe where something is. Common examples include in, on, under, next to, between, behind and in front of.",
+            "examples": [
+              "The bank is next to the library.",
+              "The bus stop is in front of the school."
+            ],
+            "keyPoints": [
+              "Choose a preposition that matches the spatial relationship.",
+              "Between is commonly used for two reference points.",
+              "Use a complete sentence to describe a location."
+            ]
+          },
+          {
+            "title": "Asking for and giving directions",
+            "content": "Use polite questions to ask for directions. Imperatives such as go straight, turn left and turn right can give simple instructions.",
+            "examples": [
+              "Excuse me, where is the museum?",
+              "Go straight and turn left."
+            ],
+            "keyPoints": [
+              "Begin politely with 'Excuse me'.",
+              "Use left/right from the traveler's point of view.",
+              "Give directions in a clear order."
+            ]
+          },
+          {
+            "title": "There is/are: questions and negatives",
+            "content": "To ask, put is or are before there. Use isn't/aren't for negatives. Match the verb to the noun that follows.",
+            "examples": [
+              "Is there a hospital nearby?",
+              "There aren't any shops here."
+            ],
+            "keyPoints": [
+              "Is there + singular noun?",
+              "Are there + plural noun?",
+              "Use any commonly in negative and question forms."
+            ]
           }
         ]
       },
@@ -6598,6 +7405,59 @@
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
           }
+        ],
+        "learningSections": [
+          {
+            "title": "Describing a village",
+            "content": "Use adjectives to describe places, such as quiet, beautiful, small, clean and green. Adjectives usually come before nouns or after be.",
+            "examples": [
+              "It is a quiet village.",
+              "There are green fields near the river."
+            ],
+            "keyPoints": [
+              "Adjectives describe nouns.",
+              "Use be + adjective.",
+              "Avoid repeating the same adjective too often."
+            ]
+          },
+          {
+            "title": "Comparing places",
+            "content": "Use comparative adjectives to compare two people or places. Many short adjectives take -er; longer adjectives often use more. Some forms are irregular.",
+            "examples": [
+              "A village is quieter than a busy city.",
+              "This road is longer than that one."
+            ],
+            "keyPoints": [
+              "Use than after a comparative in a comparison.",
+              "Do not use more and -er together.",
+              "Good → better; bad → worse."
+            ]
+          },
+          {
+            "title": "Describing weather and nature",
+            "content": "Use simple weather expressions and nature vocabulary to describe a place. It is commonly used in weather sentences.",
+            "examples": [
+              "It is sunny today.",
+              "There are mountains around the village."
+            ],
+            "keyPoints": [
+              "It is + weather adjective.",
+              "Use plural nouns for more than one natural feature.",
+              "Choose words that fit the season and place."
+            ]
+          },
+          {
+            "title": "Writing a short place description",
+            "content": "Organize a description with an opening sentence, details about location and features, and a closing opinion. Use linking words such as and, but and because.",
+            "examples": [
+              "My village is small but beautiful. It is near a river. I like it because it is peaceful."
+            ],
+            "keyPoints": [
+              "Keep ideas in a logical order.",
+              "Use linking words to connect sentences.",
+              "Check spelling, capitals and punctuation."
+            ]
+          }
         ]
       },
       {
@@ -6685,6 +7545,60 @@
             "difficulty": "advanced",
             "contentOrigin": "fahmino_authored_practice",
             "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ],
+        "learningSections": [
+          {
+            "title": "Hobbies and free-time activities",
+            "content": "Hobbies are activities people enjoy in their free time. Use common activity verbs and expressions to talk about interests.",
+            "examples": [
+              "I enjoy reading books.",
+              "My hobby is taking photos."
+            ],
+            "keyPoints": [
+              "Use enjoy + verb-ing.",
+              "Hobby names can be nouns or -ing forms.",
+              "Interests can be different for different people."
+            ]
+          },
+          {
+            "title": "Like, love and enjoy",
+            "content": "Like and love can be followed by a noun or an -ing form. Enjoy is normally followed by an -ing form, not an infinitive with to.",
+            "examples": [
+              "I like music.",
+              "She loves drawing.",
+              "They enjoy playing chess."
+            ],
+            "keyPoints": [
+              "Enjoy + verb-ing.",
+              "Like/love + noun or verb-ing.",
+              "Use a form that fits the verb pattern."
+            ]
+          },
+          {
+            "title": "Frequency adverbs",
+            "content": "Always, usually, often, sometimes and never describe how frequently an activity happens. They usually come before the main verb but after the verb be.",
+            "examples": [
+              "I often read at night.",
+              "She is always kind."
+            ],
+            "keyPoints": [
+              "Frequency adverbs express how often.",
+              "Before most main verbs; after be.",
+              "Never already has a negative meaning."
+            ]
+          },
+          {
+            "title": "Writing about a hobby",
+            "content": "A short paragraph about a hobby can explain what it is, when you do it, who you do it with and why you enjoy it.",
+            "examples": [
+              "I enjoy cycling. I do it with my family at weekends. It is fun and helps me explore new places."
+            ],
+            "keyPoints": [
+              "Use present simple for regular hobbies.",
+              "Give specific supporting details.",
+              "Use a clear topic sentence."
+            ]
           }
         ]
       }
