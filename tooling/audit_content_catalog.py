@@ -144,6 +144,39 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
                 if not isinstance(question.get("explanation"), str) or not question["explanation"].strip():
                     errors.append(f"{qlabel}: explanation is missing")
 
+            raw_challenge = chapter.get("challengeQuestions", [])
+            if not isinstance(raw_challenge, list):
+                errors.append(f"{label}: challengeQuestions must be a list")
+                raw_challenge = []
+            for challenge_index, question in enumerate(raw_challenge):
+                questions += 1
+                qlabel = f"{label}/challenge-{challenge_index + 1}"
+                if not isinstance(question, dict):
+                    errors.append(f"{qlabel}: challenge question must be an object")
+                    continue
+                if question.get("difficulty") != "advanced":
+                    errors.append(f"{qlabel}: challenge difficulty must be advanced")
+                if question.get("contentOrigin") != "fahmino_authored_practice":
+                    errors.append(f"{qlabel}: challenge origin must be labeled as Fahmino-authored practice")
+                if question.get("verificationStatus") != "not_verified_against_official_textbook":
+                    errors.append(f"{qlabel}: challenge must not be presented as textbook-verified")
+                prompt = question.get("question")
+                if not isinstance(prompt, str) or not prompt.strip():
+                    errors.append(f"{qlabel}: question text is empty")
+                options = question.get("options")
+                if not isinstance(options, list) or len(options) < 4:
+                    errors.append(f"{qlabel}: at least four options are required")
+                    continue
+                if any(not isinstance(option, str) or not option.strip() for option in options):
+                    errors.append(f"{qlabel}: every option must be non-empty text")
+                if len(set(options)) != len(options):
+                    errors.append(f"{qlabel}: duplicate options")
+                answer = question.get("answer")
+                if type(answer) is not int or answer < 0 or answer >= len(options):
+                    errors.append(f"{qlabel}: answer index is outside the options")
+                if not isinstance(question.get("explanation"), str) or not question["explanation"].strip():
+                    errors.append(f"{qlabel}: explanation is missing")
+
     stats = {
         "subjects": subjects,
         "chapters": chapters,
