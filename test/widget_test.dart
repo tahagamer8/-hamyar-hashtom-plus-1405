@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hamyar_hashtom_plus/app.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_constants.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/screens/content_library_screen.dart';
@@ -45,17 +46,21 @@ class _MemoryAssetBundle extends CachingAssetBundle {
   }
 }
 
-Widget _contentApp(String featureId) => MaterialApp(
-      home: DefaultAssetBundle(
-        bundle: _MemoryAssetBundle(_testCatalog),
-        child: ContentLibraryScreen(
-          subjectId: 'math',
-          featureId: featureId,
+Widget _contentApp(String featureId) => ProviderScope(
+      child: MaterialApp(
+        home: DefaultAssetBundle(
+          bundle: _MemoryAssetBundle(_testCatalog),
+          child: ContentLibraryScreen(
+            subjectId: 'math',
+            featureId: featureId,
+          ),
         ),
       ),
     );
 
 void main() {
+  setUpAll(() => SharedPreferences.setMockInitialValues({}));
+
   test('bundled catalog is valid and has content for each subject', () async {
     final file = File('assets/content/catalog_fa.json');
     expect(await file.exists(), isTrue);
