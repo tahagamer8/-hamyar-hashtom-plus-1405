@@ -28,6 +28,9 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   String? _selectedStudyKey;
   bool _loading = false;
   bool _ready = false;
+  bool _checkingConnection = false;
+  bool? _connectionHealthy;
+  String? _connectionStatus;
   String? _error;
 
   @override
@@ -233,6 +236,34 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
     }
   }
 
+  Future<void> _checkConnection() async {
+    if (_checkingConnection) return;
+    setState(() {
+      _checkingConnection = true;
+      _connectionStatus = null;
+    });
+    try {
+      final health = await _service.checkHealth(workerUrl: _urlInput.text);
+      if (!mounted) return;
+      final configured = health['geminiSecretConfigured'] == true &&
+          health['rateLimiterConfigured'] == true;
+      setState(() {
+        _connectionHealthy = configured;
+        _connectionStatus = configured
+            ? 'سرور پاسخ می‌دهد و تنظیمات لازم روی Cloudflare وجود دارد.'
+            : 'سرور پاسخ می‌دهد، اما بخشی از تنظیمات آن کامل نیست.';
+      });
+    } on GeminiApiException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _connectionHealthy = false;
+        _connectionStatus = e.message;
+      });
+    } finally {
+      if (mounted) setState(() => _checkingConnection = false);
+    }
+  }
+
   Future<void> _send() async {
     final text = _input.text.trim();
     if (text.isEmpty || _loading) return;
@@ -433,16 +464,59 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
               ),
             ),
             const SizedBox(height: 8),
-            Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: FilledButton.tonalIcon(
-                onPressed: _saveUrl,
-                icon: const Icon(Icons.save_outlined),
-                label: const Text('ذخیرهٔ آدرس'),
-              ),
+            Wrap(
+              alignment: WrapAlignment.end,
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                OutlinedButton.icon(
+                  onPressed: _checkingConnection ? null : _checkConnection,
+                  icon: _checkingConnection
+                      ? const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.wifi_tethering_rounded),
+                  label: Text(_checkingConnection ? 'در حال بررسی' : 'بررسی سرور'),
+                ),
+                FilledButton.tonalIcon(
+                  onPressed: _saveUrl,
+                  icon: const Icon(Icons.save_outlined),
+                  label: const Text('ذخیرهٔ آدرس'),
+                ),
+              ],
             ),
+            if (_connectionStatus != null) ...[
+              const SizedBox(height: 8),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    _connectionHealthy == true
+                        ? Icons.check_circle_outline_rounded
+                        : Icons.info_outline_rounded,
+                    size: 18,
+                    color: _connectionHealthy == true
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.error,
+                  ),
+                  const SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      _connectionStatus!,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: _connectionHealthy == true
+                            ? theme.colorScheme.primary
+                            : theme.colorScheme.error,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
             Text(
-              'پیام پرسش برای پاسخ‌گویی به Gemini از سرور Cloudflare فهمینو عبور می‌کند. کلید API روی سرور نگهداری می‌شود؛ آن را در برنامه وارد نکن. دربارهٔ سهمیه و هزینه با والد یا سرپرست هماهنگ کن.',
+              'این بررسی فقط دسترسی به Worker و وجود تنظیمات سرور را می‌سنجد؛ اعتبار کلید یا پاسخ واقعی Gemini را آزمایش نمی‌کند. پیام‌ها برای پاسخ‌گویی به Gemini فرستاده می‌شوند. کلید API را در برنامه وارد نکن و دربارهٔ سهمیه و هزینه با والد یا سرپرست هماهنگ کن.',
               style: theme.textTheme.bodySmall,
             ),
           ],
