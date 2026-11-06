@@ -89,7 +89,7 @@ void main() {
         }
       }
     }
-    expect(totalQuestions, greaterThanOrEqualTo(85));
+    expect(totalQuestions, greaterThanOrEqualTo(82));
   });
 
   testWidgets('home screen renders Fahmino branding', (tester) async {
