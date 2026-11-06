@@ -94,6 +94,31 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
 
           final safeIndex = _selectedChapterIndex.clamp(0, chapters.length - 1).toInt();
           final selectedChapter = chapters[safeIndex];
+          final studyContext = <String, dynamic>{
+            'subjectTitle': subject['title'] as String? ?? 'درس',
+            'chapterTitle': selectedChapter['title'] as String? ?? 'فصل',
+            'bookChapterTitle': selectedChapter['bookChapterTitle'] as String? ?? '',
+            'bookScope': selectedChapter['bookScope'] as String? ?? '',
+            'alignmentStatus': selectedChapter['alignmentStatus'] as String? ??
+                'not_verified_against_1405_1406_pdf',
+            'summary': selectedChapter['summary'] as String? ?? '',
+            'points': (selectedChapter['points'] as List<dynamic>? ?? [])
+                .whereType<String>()
+                .take(8)
+                .toList(),
+            'example': selectedChapter['example'] as String? ?? '',
+            'solutionSteps':
+                (selectedChapter['solutionSteps'] as List<dynamic>? ?? [])
+                    .whereType<String>()
+                    .take(8)
+                    .toList(),
+            'learningSections':
+                (selectedChapter['learningSections'] as List<dynamic>? ?? [])
+                    .whereType<Map<String, dynamic>>()
+                    .take(8)
+                    .toList(),
+            'sourceLabel': 'محتوای اولیهٔ فهمینو؛ نیازمند تطبیق با کتاب رسمی',
+          };
 
           if (_feature == AppFeature.quiz) {
             final examChapters = _wholeSubjectExam ? chapters : [selectedChapter];
@@ -173,29 +198,23 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                 OutlinedButton.icon(
                   onPressed: () => context.push(
                     AppRoutes.aiAssistant,
-                    extra: <String, dynamic>{
-                      'subjectTitle': subject['title'] as String? ?? 'درس',
-                      'chapterTitle': selectedChapter['title'] as String? ?? 'فصل',
-                      'bookChapterTitle': selectedChapter['bookChapterTitle'] as String? ?? '',
-                      'bookScope': selectedChapter['bookScope'] as String? ?? '',
-                      'alignmentStatus': selectedChapter['alignmentStatus'] as String? ??
-                          'not_verified_against_1405_1406_pdf',
-                      'summary': selectedChapter['summary'] as String? ?? '',
-                      'points': (selectedChapter['points'] as List<dynamic>? ?? [])
-                          .whereType<String>()
-                          .take(8)
-                          .toList(),
-                      'example': selectedChapter['example'] as String? ?? '',
-                      'solutionSteps':
-                          (selectedChapter['solutionSteps'] as List<dynamic>? ?? [])
-                              .whereType<String>()
-                              .take(8)
-                              .toList(),
-                      'sourceLabel': 'محتوای اولیهٔ فهمینو؛ نیازمند تطبیق با کتاب رسمی',
-                    },
+                    extra: studyContext,
                   ),
                   icon: const Icon(Icons.auto_awesome_rounded),
                   label: const Text('پرسش از دستیار دربارهٔ این فصل'),
+                ),
+                const SizedBox(height: 6),
+                FilledButton.icon(
+                  onPressed: () => context.push(
+                    AppRoutes.aiAssistant,
+                    extra: <String, dynamic>{
+                      'studyContext': studyContext,
+                      'initialPrompt':
+                          'برای درس ${studyContext['subjectTitle']} و فصل ${studyContext['chapterTitle']} یک درسنامهٔ کامل، دقیق و مرحله‌به‌مرحله آماده کن. هدف‌های یادگیری، پیش‌نیازها، بخش‌بندی مفهومی، مثال‌های مستقل و حل‌شده، اشتباه‌های رایج، پنج تمرین تألیفی از متوسط تا دشوار و پاسخ تشریحی آن‌ها را بیاور. فقط مطالب درست و متناسب با پایه هشتم را بنویس. اگر دادهٔ کتاب کافی نیست، بخش تکمیلی را با عنوان «آموزش تکمیلی تألیفی فهمینو» مشخص کن و هیچ شماره صفحه یا پاسخ رسمی حدس نزن.',
+                    },
+                  ),
+                  icon: const Icon(Icons.menu_book_rounded),
+                  label: const Text('ساخت درسنامهٔ کامل با Gemini'),
                 ),
                 const SizedBox(height: 8),
                 _DraftContentNotice(feature: _feature),
