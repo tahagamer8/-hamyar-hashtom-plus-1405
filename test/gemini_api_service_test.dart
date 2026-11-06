@@ -41,7 +41,7 @@ void main() {
         return http.Response(
           jsonEncode({
             'ok': true,
-            'service': 'fahmino-api',
+            'service': 'fahmino-api-2',
             'geminiSecretConfigured': true,
             'rateLimiterConfigured': true,
           }),
@@ -56,8 +56,31 @@ void main() {
     );
 
     expect(requestedUri.toString(), 'https://fahmino.example.workers.dev/health');
+    expect(health['service'], GeminiApiService.expectedWorkerService);
     expect(health['geminiSecretConfigured'], true);
     expect(health['rateLimiterConfigured'], true);
+    service.dispose();
+  });
+
+
+  test('rejects a different Worker even when its health endpoint is healthy', () async {
+    final service = GeminiApiService(
+      client: MockClient((_) async => http.Response(
+            jsonEncode({
+              'ok': true,
+              'service': 'fahmino-api',
+              'geminiSecretConfigured': true,
+              'rateLimiterConfigured': true,
+            }),
+            200,
+            headers: {'content-type': 'application/json'},
+          )),
+    );
+
+    expect(
+      () => service.checkHealth(workerUrl: 'https://old-worker.example.workers.dev'),
+      throwsA(isA<GeminiApiException>()),
+    );
     service.dispose();
   });
 
