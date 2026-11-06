@@ -106,6 +106,11 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('امکانات'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('باز کردن جزوه'),
+      250,
+      scrollable: find.byType(Scrollable).first,
+    );
     expect(find.text('باز کردن جزوه'), findsOneWidget);
     expect(find.text('باز کردن نمونه‌سؤال'), findsOneWidget);
   });
