@@ -6,6 +6,33 @@ import 'package:http/testing.dart';
 import 'package:hamyar_hashtom_plus/features/ai_assistant/data/gemini_api_service.dart';
 
 void main() {
+  test('keeps Gemini history user-first when the 12-message window is odd', () {
+    final messages = <Map<String, String>>[];
+    for (var i = 0; i < 6; i++) {
+      messages.add({'role': 'user', 'text': 'پرسش $i'});
+      messages.add({'role': 'model', 'text': 'پاسخ $i'});
+    }
+    messages.add({'role': 'user', 'text': 'پرسش تازه'});
+
+    final history = prepareGeminiHistory(messages);
+
+    expect(history, hasLength(11));
+    expect(history.first['role'], 'user');
+    expect(history.last['role'], 'user');
+    expect(history[0]['text'], 'پرسش 1');
+  });
+
+  test('retains a valid recent user-first history when no prefix is needed', () {
+    final history = prepareGeminiHistory([
+      {'role': 'user', 'text': 'سلام'},
+      {'role': 'model', 'text': 'سلام!'},
+      {'role': 'user', 'text': 'سؤال دوم'},
+    ]);
+
+    expect(history.map((message) => message['role']).toList(),
+        ['user', 'model', 'user']);
+  });
+
   test('sends chat history to the Worker endpoint and returns the answer', () async {
     Uri? requestedUri;
     Map<String, dynamic>? requestedBody;
