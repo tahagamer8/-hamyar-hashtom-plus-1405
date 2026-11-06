@@ -128,6 +128,28 @@ void main() {
       }
     }
 
+    // Remaining subjects must expose both a concept section and an application section.
+    const remainingSubjectChapterCounts = <String, int>{
+      'persian': 6, 'writing': 8, 'social': 24, 'religion': 16, 'quran': 12,
+      'thinking': 8, 'work': 8, 'english_workbook': 7, 'culture_art': 9, 'from_me_to_god': 11,
+    };
+    for (final entry in remainingSubjectChapterCounts.entries) {
+      final subject = catalog[entry.key] as Map<String, dynamic>;
+      final chapters = subject['chapters'] as List<dynamic>;
+      expect(chapters.length, entry.value, reason: entry.key);
+      for (final chapterValue in chapters) {
+        final chapter = chapterValue as Map<String, dynamic>;
+        final sections = chapter['learningSections'] as List<dynamic>;
+        expect(sections.length, greaterThanOrEqualTo(2), reason: entry.key + ': ' + chapter['title'] as String);
+        for (final sectionValue in sections) {
+          final section = sectionValue as Map<String, dynamic>;
+          expect((section['title'] as String).trim(), isNotEmpty);
+          expect((section['content'] as String).trim().length, greaterThan(80));
+          expect((section['examples'] as List<dynamic>), isNotEmpty);
+          expect((section['keyPoints'] as List<dynamic>), isNotEmpty);
+        }
+      }
+    }
     expect(totalAdvancedQuestions, greaterThanOrEqualTo(224));
     expect(
       ((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
