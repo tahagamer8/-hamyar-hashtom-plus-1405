@@ -71,6 +71,7 @@ void main() {
     expect((catalog['science'] as Map<String, dynamic>)['chapters'], hasLength(15));
     expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(12));
     var totalQuestions = 0;
+    final uniqueQuestionTexts = <String>{};
     for (final entry in catalog.entries) {
       final subject = entry.value as Map<String, dynamic>;
       expect(subject['title'], isA<String>(), reason: entry.key);
@@ -83,11 +84,15 @@ void main() {
         expect(chapter['points'], isA<List<dynamic>>(), reason: entry.key);
         expect(chapter['solutionSteps'], isA<List<dynamic>>(), reason: entry.key);
         final questions = chapter['questions'] as List<dynamic>;
+        expect(questions.length, greaterThanOrEqualTo(2), reason: '${entry.key}/${chapter['title']}');
         totalQuestions += questions.length;
         for (final rawQuestion in questions) {
           final question = rawQuestion as Map<String, dynamic>;
           final options = question['options'] as List<dynamic>;
           final answer = question['answer'] as int;
+          final normalizedText = (question['question'] as String).toLowerCase().trim();
+          expect(uniqueQuestionTexts.add(normalizedText), isTrue,
+              reason: 'پرسش تکراری: ${question['question']}');
           expect(options, isNotEmpty, reason: question['question'] as String);
           expect(answer, inInclusiveRange(0, options.length - 1),
               reason: question['question'] as String);
@@ -95,7 +100,7 @@ void main() {
         }
       }
     }
-    expect(totalQuestions, greaterThanOrEqualTo(240));
+    expect(totalQuestions, greaterThanOrEqualTo(245));
     expect((catalog['english'] as Map<String, dynamic>)['chapters'], hasLength(7));
     expect((catalog['english_workbook'] as Map<String, dynamic>)['chapters'], hasLength(7));
     for (final id in ['persian', 'writing', 'arabic', 'english', 'english_workbook', 'religion', 'quran', 'thinking', 'work']) {
