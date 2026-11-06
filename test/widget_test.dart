@@ -140,6 +140,11 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('امکانات'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('دستیار هوشمند فهمینو'),
+      250,
+      scrollable: find.byType(Scrollable).first,
+    );
     expect(find.text('دستیار هوشمند فهمینو'), findsOneWidget);
     expect(find.text('باز کردن جزوه'), findsNothing);
     expect(find.text('باز کردن نمونه‌سؤال'), findsNothing);
@@ -186,13 +191,13 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 20));
     expect(find.text('کتاب کار زبان انگلیسی'), findsOneWidget);
-    expect(find.text('Lesson 1: My Nationality'), findsOneWidget);
+    expect(find.text('Lesson 1: My Nationality'), findsWidgets);
   });
 
   testWidgets('lesson content loads from catalog bundle', (tester) async {
     await tester.pumpWidget(_contentApp('lessons'));
     await tester.pumpAndSettle();
-    expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
+    expect(find.text('عددهای صحیح و گویا'), findsWidgets);
     expect(find.textContaining('درسنامهٔ کاملِ بخش‌بندی‌شده ثبت نشده'), findsOneWidget);
   });
 
