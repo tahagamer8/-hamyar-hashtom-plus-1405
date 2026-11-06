@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
 
 class ContentLibraryScreen extends ConsumerStatefulWidget {
   const ContentLibraryScreen({
@@ -47,7 +48,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_feature.title)),
+      appBar: _feature == AppFeature.quiz ? null : AppBar(title: Text(_feature.title)),
       body: FutureBuilder<Map<String, dynamic>>(
         future: _contentFuture,
         builder: (context, snapshot) {
@@ -69,6 +70,12 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
           final subject = snapshot.data!;
           final chapters = (subject['chapters'] as List<dynamic>? ?? [])
               .cast<Map<String, dynamic>>();
+          if (_feature == AppFeature.quiz) {
+            return TimedCombinedExamScreen(
+              subjectTitle: subject['title'] as String? ?? 'درس',
+              chapters: chapters,
+            );
+          }
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
