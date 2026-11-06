@@ -113,7 +113,11 @@ test("forwards valid chat and returns Gemini text", async () => {
   assert.equal((await response.json()).answer, "عدد گویا را می‌توان به شکل کسر نوشت.");
   assert.equal(capturedUrl, "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent");
   assert.equal(capturedInit.headers["x-goog-api-key"], "test-key");
-  assert.equal(JSON.parse(capturedInit.body).contents[0].role, "user");
+  const payload = JSON.parse(capturedInit.body);
+  assert.equal(payload.contents[0].role, "user");
+  assert.equal(payload.generationConfig.thinkingConfig.thinkingLevel, "MEDIUM");
+  assert.equal(payload.generationConfig.maxOutputTokens, 1600);
+  assert.equal("temperature" in payload.generationConfig, false);
 });
 
 test("forwards selected study context as untrusted educational reference", async () => {
