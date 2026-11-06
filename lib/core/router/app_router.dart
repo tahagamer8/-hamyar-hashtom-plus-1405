@@ -45,6 +45,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                         builder: (context, state) => ContentLibraryScreen(
                           subjectId: state.pathParameters['subjectId']!,
                           featureId: state.pathParameters['featureId']!,
+                          initialChapterIndex:
+                              int.tryParse(state.uri.queryParameters['chapter'] ?? '') ?? 0,
                         ),
                       ),
                     ],
