@@ -57,6 +57,44 @@ void main() {
         }
       }
     }
+    // Structured lesson coverage is checked separately from question coverage.
+    final mathChapters =
+        (catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>;
+    final scienceChapters =
+        (catalog['science'] as Map<String, dynamic>)['chapters'] as List<dynamic>;
+    expect(mathChapters.length, 9);
+    expect(scienceChapters.length, 15);
+    expect(
+      mathChapters.fold<int>(
+        0,
+        (sum, chapter) =>
+            sum + ((chapter as Map<String, dynamic>)['learningSections'] as List<dynamic>).length,
+      ),
+      36,
+    );
+    expect(
+      scienceChapters.fold<int>(
+        0,
+        (sum, chapter) =>
+            sum + ((chapter as Map<String, dynamic>)['learningSections'] as List<dynamic>).length,
+      ),
+      60,
+    );
+    for (final chapter in [...mathChapters, ...scienceChapters]) {
+      final sections =
+          (chapter as Map<String, dynamic>)['learningSections'] as List<dynamic>;
+      expect(sections.length, 4);
+      for (final sectionValue in sections) {
+        final section = sectionValue as Map<String, dynamic>;
+        expect((section['title'] as String).trim(), isNotEmpty);
+        expect((section['content'] as String).trim().length, greaterThan(80));
+        expect(section['examples'], isA<List<dynamic>>());
+        expect((section['examples'] as List<dynamic>), isNotEmpty);
+        expect(section['keyPoints'], isA<List<dynamic>>());
+        expect((section['keyPoints'] as List<dynamic>), isNotEmpty);
+      }
+    }
+
     expect(totalAdvancedQuestions, greaterThanOrEqualTo(224));
     expect(
       ((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
