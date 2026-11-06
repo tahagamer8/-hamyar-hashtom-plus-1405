@@ -14,6 +14,7 @@ class SubjectsRepositoryImpl implements SubjectsRepository {
     Subject(id: 'arabic', title: 'عربی', description: 'واژگان و قواعد'),
     Subject(id: 'social', title: 'مطالعات اجتماعی', description: 'تاریخ، جغرافیا و مدنی'),
     Subject(id: 'english', title: 'زبان انگلیسی', description: 'گرامر و واژگان'),
+    Subject(id: 'english_workbook', title: 'کتاب کار زبان انگلیسی', description: 'تمرین‌های هفت درس Prospect 2'),
     Subject(id: 'religion', title: 'پیام‌های آسمان', description: 'تعلیمات دینی'),
     Subject(id: 'quran', title: 'قرآن', description: 'روخوانی و مفاهیم'),
     Subject(id: 'thinking', title: 'تفکر و سبک زندگی', description: 'مهارت‌های زندگی'),
