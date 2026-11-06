@@ -69,7 +69,7 @@ void main() {
     expect(catalog.values.fold<int>(0, (sum, item) => sum + ((item as Map<String, dynamic>)['chapters'] as List<dynamic>).length), greaterThanOrEqualTo(100));
     expect((catalog['math'] as Map<String, dynamic>)['chapters'], hasLength(9));
     expect((catalog['science'] as Map<String, dynamic>)['chapters'], hasLength(15));
-    expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(12));
+    expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(24));
     var totalQuestions = 0;
     final uniqueQuestionTexts = <String>{};
     for (final entry in catalog.entries) {
