@@ -267,7 +267,11 @@ class _ChapterContent extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final title = chapter['title'] as String? ?? 'درس';
-    final summary = chapter['summary'] as String? ?? '';\n    final example = chapter['example'] as String? ?? '';\n    final solutionSteps = (chapter['solutionSteps'] as List<dynamic>? ?? [])\n        .whereType<String>()\n        .toList();
+    final summary = chapter['summary'] as String? ?? '';
+    final example = chapter['example'] as String? ?? '';
+    final solutionSteps = (chapter['solutionSteps'] as List<dynamic>? ?? [])
+        .whereType<String>()
+        .toList();
     final lessonSections = (chapter['learningSections'] as List<dynamic>? ?? [])
         .cast<Map<String, dynamic>>();
     final points = (chapter['points'] as List<dynamic>? ?? []).cast<String>();
