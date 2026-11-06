@@ -40,7 +40,7 @@ test("health endpoint reports configured bindings without calling Gemini", async
   assert.equal(response.status, 200);
   const body = await response.json();
   assert.equal(body.ok, true);
-  assert.equal(body.service, "fahmino-api");
+  assert.equal(body.service, "fahmino-api-2");
   assert.equal(body.model, "gemini-3.8-flash");
   assert.equal(body.geminiSecretConfigured, true);
   assert.equal(body.rateLimiterConfigured, true);
@@ -310,4 +310,39 @@ test("returns a controlled error when Gemini responds with non-JSON content", as
   });
   assert.equal(response.status, 502);
   assert.match((await response.json()).error, /قابل خواندن نیست/);
+});
+
+
+test("uses subject-aware teaching guidance for selected subjects", async () => {
+  const cases = [
+    ["ریاضی", /مسئلهٔ چندمرحله‌ای/],
+    ["علوم تجربی", /علت‌ومعلول/],
+    ["فارسی", /شاهد متنی/],
+    ["عربی", /صرفی\/نحوی/],
+    ["زبان انگلیسی", /چهار مهارت/],
+    ["مطالعات اجتماعی", /خط زمان/],
+    ["قرآن", /روخوانی، واژگان/],
+    ["پیام‌های آسمان", /آیه\/حدیث/],
+  ];
+  for (const [subjectTitle, expected] of cases) {
+    let instruction = "";
+    globalThis.fetch = async (_url, init) => {
+      instruction = JSON.parse(init.body).systemInstruction.parts[0].text;
+      return new Response(JSON.stringify({
+        candidates: [{ content: { parts: [{ text: "پاسخ آزمایشی" }] } }],
+      }), { status: 200, headers: { "content-type": "application/json" } });
+    };
+    const response = await worker.fetch(makeRequest({
+      body: {
+        ...validBody,
+        studyContext: {
+          subjectTitle,
+          chapterTitle: "درس آزمایشی",
+          alignmentStatus: "not_verified_against_1405_1406_pdf",
+        },
+      },
+    }), { GEMINI_API_KEY: "test-key", CHAT_LIMITER: allowLimiter });
+    assert.equal(response.status, 200, subjectTitle);
+    assert.match(instruction, expected, subjectTitle);
+  }
 });
