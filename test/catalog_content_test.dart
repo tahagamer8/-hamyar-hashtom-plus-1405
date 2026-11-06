@@ -9,6 +9,16 @@ void main() {
   test('English workbook questions match their prompts and explanations', () async {
     final raw = await rootBundle.loadString('assets/content/catalog_fa.json');
     final catalog = jsonDecode(raw) as Map<String, dynamic>;
+    final english = catalog['english'] as Map<String, dynamic>;
+    final firstEnglishLesson = (english['chapters'] as List<dynamic>)[0];
+    final nationalityQuestion = (firstEnglishLesson['questions'] as List<dynamic>)[0];
+    expect(nationalityQuestion['question'], contains('Which nationality describes'));
+    expect(nationalityQuestion['options'][nationalityQuestion['answer']], 'Canadian');
+    final abilitiesLesson = (english['chapters'] as List<dynamic>)[2];
+    final can'tQuestion = (abilitiesLesson['questions'] as List<dynamic>)[1];
+    expect(cantQuestion['question'], contains("can't"));
+    expect(cantQuestion['options'][cantQuestion['answer']], 'نمی‌تواند');
+
     final workbook = catalog['english_workbook'] as Map<String, dynamic>;
     final lessons = workbook['chapters'] as List<dynamic>;
 
