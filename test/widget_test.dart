@@ -153,7 +153,16 @@ void main() {
     expect(find.textContaining('آفرین، پاسخ درست است.'), findsOneWidget);
   });
 
-  testWidgets('search filters the learning catalog', (tester) async {
+  testWidgets('chapter can be added to favorites', (tester) async {
+    await tester.pumpWidget(_contentApp('lessons'));
+    await tester.pumpAndSettle();
+    expect(find.byTooltip('افزودن به علاقه‌مندی‌ها'), findsOneWidget);
+    await tester.tap(find.byTooltip('افزودن به علاقه‌مندی‌ها'));
+    await tester.pump();
+    expect(find.byTooltip('حذف از علاقه‌مندی‌ها'), findsOneWidget);
+  });
+
+  testWidgets('search finds text inside a question', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: DefaultAssetBundle(
@@ -164,7 +173,7 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.byType(TextField), findsOneWidget);
-    await tester.enterText(find.byType(TextField), 'عددهای صحیح');
+    await tester.enterText(find.byType(TextField), 'حاصل ۱/۲ + ۱/۴');
     await tester.pump();
     expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
   });
