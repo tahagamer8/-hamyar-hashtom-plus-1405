@@ -164,7 +164,7 @@ def audit_known_question_regressions(data: dict, errors: list[str]) -> None:
         ("english", 4, 1, ("next to",), "کنار"),
         ("english", 6, 0, ("hobby",), "سرگرمی"),
         ("english_workbook", 0, 0, ("she", "be"), "is"),
-        ("english_workbook", 0, 1, ("kuwait",), "Kuwaiti"),
+        ("english_workbook", 0, 1, ("اهل کویت",), "Kuwaiti"),
         ("english_workbook", 2, 0, ("can",), "play"),
         ("english_workbook", 2, 1, ("cannot",), "نمی‌تواند"),
         ("english_workbook", 4, 0, ("three shops",), "are"),
