@@ -148,6 +148,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('آزمون جامع ریاضی'), findsOneWidget);
     expect(find.text('10:00'), findsOneWidget);
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('09:59'), findsOneWidget);
     await tester.tap(find.text('۳/۴').first);
     await tester.pump();
     expect(find.textContaining('پاسخ درست:'), findsNothing);
