@@ -49,6 +49,15 @@ jobs:
           test -s assets/fonts/Vazirmatn/Vazirmatn-SemiBold.ttf
           test -s assets/fonts/Vazirmatn/Vazirmatn-Bold.ttf
 
+      - name: Install PDF generation dependencies
+        run: python -m pip install --disable-pip-version-check 'reportlab>=4.2,<5' 'arabic-reshaper>=3,<4' 'python-bidi>=0.6,<1'
+
+      - name: Generate Persian PDF assets
+        run: |
+          python tooling/generate_learning_pdfs.py --output-dir assets/generated_pdfs
+          test -s assets/generated_pdfs/Fahmino-Grade8-Notes-FA.pdf
+          test -s assets/generated_pdfs/Fahmino-Grade8-Sample-Questions-FA.pdf
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -57,13 +66,6 @@ jobs:
 
       - name: Run widget and unit tests (three passes)
         run: flutter test --reporter expanded && flutter test --reporter expanded && flutter test --reporter expanded
-
-      - name: Generate Persian notes and sample-question PDFs
-        run: |
-          python -m pip install --disable-pip-version-check 'reportlab>=4.2,<5' 'arabic-reshaper>=3,<4' 'python-bidi>=0.6,<1'
-          python tooling/generate_learning_pdfs.py --output-dir build/learning-pdfs
-          test -s build/learning-pdfs/Fahmino-Grade8-Notes-FA.pdf
-          test -s build/learning-pdfs/Fahmino-Grade8-Sample-Questions-FA.pdf
 
       - name: Build release APKs
         run: flutter build apk --release --split-per-abi
@@ -77,5 +79,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: fahmino-learning-pdfs
-          path: build/learning-pdfs/*.pdf
+          path: assets/generated_pdfs/*.pdf
           if-no-files-found: error
