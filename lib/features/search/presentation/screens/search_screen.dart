@@ -12,6 +12,12 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  String _normalize(String value) => value
+      .toLowerCase()
+      .replaceAll('ي', 'ی')
+      .replaceAll('ك', 'ک')
+      .replaceAll(RegExp(r'[\u064B-\u065F\u0670]'), '')
+      .replaceAll(RegExp(r'\s+'), ' ');
   final _controller = TextEditingController();
   Future<Map<String, dynamic>>? _catalogFuture;
   String _query = '';
@@ -61,9 +67,14 @@ class _SearchScreenState extends State<SearchScreen> {
             for (final chapter in chapters) {
               final chapterTitle = chapter['title'] as String? ?? '';
               final summary = chapter['summary'] as String? ?? '';
-              final searchable = '$subjectTitle $chapterTitle $summary'
-                  .toLowerCase();
-              if (_query.isEmpty || searchable.contains(_query.toLowerCase())) {
+              final points = (chapter['points'] as List<dynamic>? ?? []).join(' ');
+              final steps = (chapter['solutionSteps'] as List<dynamic>? ?? []).join(' ');
+              final example = chapter['example'] as String? ?? '';
+              final questions = (chapter['questions'] as List<dynamic>? ?? [])
+                  .map((item) => (item as Map<String, dynamic>)['question'] ?? '')
+                  .join(' ');
+              final searchable = _normalize('$subjectTitle $chapterTitle $summary $points $steps $example $questions');
+              if (_query.isEmpty || searchable.contains(_normalize(_query))) {
                 entries.add({
                   'subjectId': subjectId,
                   'subjectTitle': subjectTitle,
