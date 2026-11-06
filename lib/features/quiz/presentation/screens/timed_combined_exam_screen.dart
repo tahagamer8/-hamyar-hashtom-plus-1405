@@ -24,7 +24,11 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
     super.initState();
     questions = [];
     for (final chapter in widget.chapters) {
-      final items = chapter['questions'];
+      final advancedItems = chapter['challengeQuestions'];
+      final standardItems = chapter['questions'];
+      final items = advancedItems is List && advancedItems.isNotEmpty
+          ? advancedItems
+          : standardItems;
       if (items is! List) continue;
       for (final item in items) {
         if (item is! Map) continue;
@@ -36,6 +40,7 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
             answer >= 0 && answer < options.length) {
           questions.add({
             'chapter': chapter['title'] ?? 'درس',
+            'difficulty': q['difficulty'] ?? 'standard',
             'question': q['question'],
             'options': options,
             'answer': answer,
@@ -118,6 +123,18 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
         Card(child: Padding(padding: const EdgeInsets.all(16), child: Column(
           crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(q['chapter'].toString(), style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.primary)),
+            if (q['difficulty'] == 'advanced')
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Chip(
+                    avatar: const Icon(Icons.psychology_alt_rounded, size: 17),
+                    label: const Text('سطح دشوار و ترکیبی'),
+                    visualDensity: VisualDensity.compact,
+                  ),
+                ),
+              ),
             const SizedBox(height: 12),
             Text(q['question'].toString(), style: theme.textTheme.titleMedium),
             const SizedBox(height: 12),
