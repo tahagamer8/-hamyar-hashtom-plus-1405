@@ -236,8 +236,6 @@ class _ChapterContent extends ConsumerWidget {
     final lessonSections = (chapter['learningSections'] as List<dynamic>? ?? [])
         .cast<Map<String, dynamic>>();
     final points = (chapter['points'] as List<dynamic>? ?? []).cast<String>();
-    final example = chapter['example'] as String? ?? '';
-    final steps = (chapter['solutionSteps'] as List<dynamic>? ?? []).cast<String>();
     final questions =
         (chapter['questions'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
     final bookSolutions =
