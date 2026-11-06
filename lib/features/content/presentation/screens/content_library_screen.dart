@@ -32,6 +32,7 @@ class ContentLibraryScreen extends ConsumerStatefulWidget {
 class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   Future<Map<String, dynamic>>? _contentFuture;
   int _selectedChapterIndex = 0;
+  bool _wholeSubjectExam = false;
   bool _initialChapterApplied = false;
 
   @override
@@ -95,20 +96,61 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
           final selectedChapter = chapters[safeIndex];
 
           if (_feature == AppFeature.quiz) {
+            final examChapters = _wholeSubjectExam ? chapters : [selectedChapter];
+            final examTitle = _wholeSubjectExam
+                ? '${subject['title'] as String? ?? 'درس'} — آزمون جامع'
+                : selectedChapter['title'] as String? ?? 'فصل انتخابی';
             return Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
-                  child: _ChapterPicker(
-                    chapters: chapters,
-                    selectedIndex: safeIndex,
-                    onChanged: (index) => setState(() => _selectedChapterIndex = index),
+                  child: Column(
+                    children: [
+                      SegmentedButton<bool>(
+                        segments: const [
+                          ButtonSegment(
+                            value: false,
+                            icon: Icon(Icons.filter_1_rounded),
+                            label: Text('فصل انتخابی'),
+                          ),
+                          ButtonSegment(
+                            value: true,
+                            icon: Icon(Icons.library_books_rounded),
+                            label: Text('کل درس'),
+                          ),
+                        ],
+                        selected: {_wholeSubjectExam},
+                        onSelectionChanged: (selection) => setState(
+                          () => _wholeSubjectExam = selection.first,
+                        ),
+                      ),
+                      if (!_wholeSubjectExam) ...[
+                        const SizedBox(height: 8),
+                        _ChapterPicker(
+                          chapters: chapters,
+                          selectedIndex: safeIndex,
+                          onChanged: (index) => setState(
+                            () => _selectedChapterIndex = index,
+                          ),
+                        ),
+                      ],
+                      const SizedBox(height: 6),
+                      Text(
+                        'در فصل‌هایی که سؤال چالشی دارند، آزمون آن‌ها را در اولویت قرار می‌دهد.',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
                   child: TimedCombinedExamScreen(
-                    subjectTitle: subject['title'] as String? ?? 'درس',
-                    chapters: [selectedChapter],
+                    key: ValueKey(
+                      _wholeSubjectExam
+                          ? 'whole-${widget.subjectId}'
+                          : '${widget.subjectId}-${selectedChapter['title']}',
+                    ),
+                    subjectTitle: examTitle,
+                    chapters: examChapters,
                   ),
                 ),
               ],
