@@ -443,33 +443,63 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
                 SafeArea(
                   top: false,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: _input,
-                            minLines: 1,
-                            maxLines: 4,
-                            maxLength: 3000,
-                            textInputAction: TextInputAction.send,
-                            onSubmitted: (_) => _send(),
-                            decoration: const InputDecoration(
-                              hintText: 'سؤالت را درباره درس‌ها بپرس…',
-                              border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 12),
-                            ),
+                    padding: const EdgeInsets.fromLTRB(12, 6, 12, 10),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.surfaceContainerLow,
+                        borderRadius: BorderRadius.circular(26),
+                        border: Border.all(
+                          color: theme.colorScheme.outlineVariant.withAlpha(110),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: theme.colorScheme.shadow.withAlpha(12),
+                            blurRadius: 14,
+                            offset: const Offset(0, -3),
                           ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(12, 6, 8, 6),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: _input,
+                                minLines: 1,
+                                maxLines: 4,
+                                maxLength: 3000,
+                                textInputAction: TextInputAction.send,
+                                onSubmitted: (_) => _send(),
+                                decoration: const InputDecoration(
+                                  hintText: 'سؤالت را اینجا بنویس…',
+                                  border: InputBorder.none,
+                                  counterText: '',
+                                  filled: true,
+                                  fillColor: Colors.transparent,
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 12,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            IconButton.filled(
+                              onPressed: _loading ? null : _send,
+                              tooltip: 'ارسال پیام',
+                              icon: const Icon(Icons.arrow_upward_rounded),
+                              style: IconButton.styleFrom(
+                                minimumSize: const Size(48, 48),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(17),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 8),
-                        IconButton.filled(
-                          onPressed: _loading ? null : _send,
-                          icon: const Icon(Icons.send_rounded),
-                          tooltip: 'ارسال پیام',
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
@@ -771,28 +801,88 @@ class _Bubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final color = isUser
-        ? theme.colorScheme.primaryContainer
-        : theme.colorScheme.surfaceContainerHighest;
-    return Align(
-      alignment:
-          isUser ? AlignmentDirectional.centerEnd : AlignmentDirectional.centerStart,
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 340),
-        margin: const EdgeInsets.symmetric(vertical: 6),
-        padding: const EdgeInsets.all(13),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(17),
-        ),
-        child: SelectableText(
-          text,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: isUser
-                ? theme.colorScheme.onPrimaryContainer
-                : theme.colorScheme.onSurface,
+    final colors = theme.colorScheme;
+    final bubbleColor = isUser
+        ? colors.primaryContainer
+        : colors.surfaceContainerHighest;
+    final bubbleTextColor =
+        isUser ? colors.onPrimaryContainer : colors.onSurface;
+
+    final message = Flexible(
+      child: Column(
+        crossAxisAlignment:
+            isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsetsDirectional.only(start: 4, end: 4, bottom: 4),
+            child: Text(
+              isUser ? 'شما' : 'فهمینو',
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: colors.onSurfaceVariant,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
-        ),
+          Container(
+            constraints: const BoxConstraints(maxWidth: 300),
+            margin: const EdgeInsets.symmetric(vertical: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+            decoration: BoxDecoration(
+              color: bubbleColor,
+              borderRadius: BorderRadiusDirectional.only(
+                topStart: const Radius.circular(19),
+                topEnd: const Radius.circular(19),
+                bottomStart: Radius.circular(isUser ? 19 : 5),
+                bottomEnd: Radius.circular(isUser ? 5 : 19),
+              ),
+            ),
+            child: pending
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        width: 15,
+                        height: 15,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: bubbleTextColor,
+                        ),
+                      ),
+                      const SizedBox(width: 9),
+                      Text(text, style: theme.textTheme.bodyMedium),
+                    ],
+                  )
+                : SelectableText(
+                    text,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: bubbleTextColor,
+                      height: 1.7,
+                    ),
+                  ),
+          ),
+        ],
+      ),
+    );
+
+    final avatar = CircleAvatar(
+      radius: 15,
+      backgroundColor: isUser ? colors.tertiaryContainer : colors.primaryContainer,
+      child: Icon(
+        isUser ? Icons.person_outline_rounded : Icons.auto_awesome_rounded,
+        size: 17,
+        color: isUser ? colors.onTertiaryContainer : colors.primary,
+      ),
+    );
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 7),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment:
+            isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: isUser
+            ? [message, const SizedBox(width: 8), avatar]
+            : [avatar, const SizedBox(width: 8), message],
       ),
     );
   }
