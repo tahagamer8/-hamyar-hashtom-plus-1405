@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 
 class ContentLibraryScreen extends StatefulWidget {
@@ -20,11 +19,6 @@ class ContentLibraryScreen extends StatefulWidget {
 
 class _ContentLibraryScreenState extends State<ContentLibraryScreen> {
   Future<Map<String, dynamic>>? _contentFuture;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void didChangeDependencies() {
@@ -58,9 +52,9 @@ class _ContentLibraryScreenState extends State<ContentLibraryScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError || !snapshot.hasData) {
-            return Center(
+            return const Center(
               child: Padding(
-                padding: const EdgeInsets.all(24),
+                padding: EdgeInsets.all(24),
                 child: Text(
                   'محتوای این بخش هنوز آماده نشده است.\n'
                   'می‌توانی بعداً دوباره بررسی کنی.',
@@ -78,7 +72,7 @@ class _ContentLibraryScreenState extends State<ContentLibraryScreen> {
               Text(subject['title'] as String? ?? 'درس',
                   style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 6),
-              Text('محتوای آموزشی تألیفی فهمینو',
+              const Text('محتوای آموزشی تألیفی فهمینو',
                   style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 16),
               for (final chapter in chapters)
@@ -235,7 +229,7 @@ class _QuizChapterState extends State<_QuizChapter> {
           children: [
             Text(widget.title, style: theme.textTheme.titleMedium),
             const SizedBox(height: 8),
-            Text('پاسخ‌ها را انتخاب کن و نتیجه را بررسی کن.'),
+            const Text('پاسخ‌ها را انتخاب کن و نتیجه را بررسی کن.'),
             for (var q = 0; q < widget.questions.length; q++)
               _buildQuestion(context, q, widget.questions[q]),
             if (widget.questions.isNotEmpty)
@@ -269,17 +263,27 @@ class _QuizChapterState extends State<_QuizChapter> {
         children: [
           Text('${index + 1}. ${question['question']}',
               style: Theme.of(context).textTheme.titleSmall),
-          for (var option = 0; option < options.length; option++)
-            RadioListTile<int>(
-              dense: true,
-              contentPadding: EdgeInsets.zero,
-              value: option,
-              groupValue: _answers[index],
-              onChanged: checked
-                  ? null
-                  : (value) => setState(() => _answers[index] = value!),
-              title: Text(options[option]),
+          RadioGroup<int>(
+            groupValue: _answers[index],
+            onChanged: checked
+                ? null
+                : (value) {
+                    if (value != null) {
+                      setState(() => _answers[index] = value);
+                    }
+                  },
+            child: Column(
+              children: [
+                for (var option = 0; option < options.length; option++)
+                  RadioListTile<int>(
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                    value: option,
+                    title: Text(options[option]),
+                  ),
+              ],
             ),
+          ),
           if (!checked)
             Align(
               alignment: Alignment.centerLeft,
