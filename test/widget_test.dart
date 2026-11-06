@@ -39,10 +39,13 @@ class _MemoryAssetBundle extends CachingAssetBundle {
 
   @override
   Future<ByteData> load(String key) async {
-    if (key != 'assets/content/catalog_fa.json') {
-      throw FlutterError('Unexpected test asset: $key');
+    if (key == 'assets/content/catalog_fa.json') {
+      return ByteData.sublistView(Uint8List.fromList(utf8.encode(catalog)));
     }
-    return ByteData.sublistView(Uint8List.fromList(utf8.encode(catalog)));
+    if (key == 'assets/generated_pdfs/manifest.json') {
+      return ByteData.sublistView(Uint8List.fromList(utf8.encode('[]')));
+    }
+    throw FlutterError('Unexpected test asset: $key');
   }
 }
 
@@ -137,13 +140,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('امکانات'), findsOneWidget);
-    await tester.scrollUntilVisible(
-      find.text('باز کردن جزوه'),
-      250,
-      scrollable: find.byType(Scrollable).first,
-    );
-    expect(find.text('باز کردن جزوه'), findsOneWidget);
-    expect(find.text('باز کردن نمونه‌سؤال'), findsOneWidget);
+    expect(find.text('دستیار هوشمند فهمینو'), findsOneWidget);
+    expect(find.text('باز کردن جزوه'), findsNothing);
+    expect(find.text('باز کردن نمونه‌سؤال'), findsNothing);
   });
 
   testWidgets('navigates to subjects tab', (tester) async {
@@ -194,7 +193,7 @@ void main() {
     await tester.pumpWidget(_contentApp('lessons'));
     await tester.pumpAndSettle();
     expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
-    expect(find.textContaining('عددهای گویا را می‌توان'), findsOneWidget);
+    expect(find.textContaining('درسنامهٔ کاملِ بخش‌بندی‌شده ثبت نشده'), findsOneWidget);
   });
 
   testWidgets('notes content loads from catalog bundle', (tester) async {
@@ -206,7 +205,7 @@ void main() {
   testWidgets('step-by-step solution loads from catalog bundle', (tester) async {
     await tester.pumpWidget(_contentApp('solutions'));
     await tester.pumpAndSettle();
-    expect(find.text('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
+    expect(find.textContaining('پاسخ‌های فعالیت‌ها و تمرین‌های خودِ کتاب هنوز'), findsOneWidget);
   });
 
   testWidgets('sample questions reveal answer key on demand', (tester) async {
