@@ -60,6 +60,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
         if ((subject['title']?.toString() ?? '') == context['subjectTitle'] &&
             (chapter['title']?.toString() ?? '') == context['chapterTitle']) {
           _selectedStudyKey = '${subjectEntry.key}::$index';
+          _activeStudyContext = _makeStudyContext(subject, chapter);
           return;
         }
       }
@@ -67,16 +68,31 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   }
 
   Map<String, dynamic> _makeStudyContext(
-    String subjectId,
     Map<String, dynamic> subject,
     Map<String, dynamic> chapter,
   ) {
+    final studyPoints = <String>[
+      ...(chapter['points'] as List<dynamic>? ?? []).whereType<String>(),
+    ];
+    final sections = (chapter['learningSections'] as List<dynamic>? ?? [])
+        .whereType<Map<String, dynamic>>();
+    for (final section in sections) {
+      final title = section['title']?.toString() ?? '';
+      final content = section['content']?.toString() ?? '';
+      if (title.isNotEmpty) studyPoints.add('بخش آموزشی: $title');
+      if (content.isNotEmpty) {
+        studyPoints.add(content.length > 400 ? content.substring(0, 400) : content);
+      }
+      studyPoints.addAll(
+        (section['keyPoints'] as List<dynamic>? ?? []).whereType<String>(),
+      );
+    }
     return {
       'subjectTitle': subject['title']?.toString() ?? 'درس',
       'chapterTitle': chapter['title']?.toString() ?? 'فصل',
       'summary': chapter['summary']?.toString() ?? '',
-      'points': (chapter['points'] as List<dynamic>? ?? [])
-          .whereType<String>().take(8).toList(),
+      'points': studyPoints.take(8).map((point) =>
+          point.length > 400 ? point.substring(0, 400) : point).toList(),
       'example': chapter['example']?.toString() ?? '',
       'solutionSteps': (chapter['solutionSteps'] as List<dynamic>? ?? [])
           .whereType<String>().take(8).toList(),
@@ -142,7 +158,6 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
                     setState(() {
                       _selectedStudyKey = key;
                       _activeStudyContext = _makeStudyContext(
-                        selectedData['subjectId'] as String,
                         selectedData['subject'] as Map<String, dynamic>,
                         selectedData['chapter'] as Map<String, dynamic>,
                       );
