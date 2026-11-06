@@ -31,6 +31,8 @@ List<Map<String, String>> prepareGeminiHistory(
 }
 
 class GeminiApiService {
+  static const expectedWorkerService = 'fahmino-api-2';
+
   GeminiApiService({http.Client? client}) : _client = client ?? http.Client();
 
   final http.Client _client;
@@ -51,6 +53,11 @@ class GeminiApiService {
       if (response.statusCode == 200 &&
           decoded is Map<String, dynamic> &&
           decoded['ok'] == true) {
+        if (decoded['service'] != expectedWorkerService) {
+          throw const GeminiApiException(
+            'این آدرس به Worker اصلی فهمینو متصل نیست؛ آدرس سرور را بررسی کن.',
+          );
+        }
         return decoded;
       }
       if (decoded is Map<String, dynamic> && decoded['error'] is String) {
