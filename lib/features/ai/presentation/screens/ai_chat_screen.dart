@@ -50,7 +50,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
       .replaceAll('ي', 'ی')
       .replaceAll('ك', 'ک')
       .replaceAll(RegExp('[ًٌٍَُِّْٰ]'), '')
-      .replaceAll(RegExp('[^0-9a-zA-Zء-ي]+'), ' ')
+      .replaceAll(RegExp('[^0-9a-zA-Zء-ی]+'), ' ')
       .trim();
 
   Set<String> _tokens(String value) {
