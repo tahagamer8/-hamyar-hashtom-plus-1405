@@ -17,7 +17,9 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
     errors: list[str] = []
     subjects = chapters = questions = 0
     sourced_chapters = verified_chapters = learning_sections = book_solutions = 0
+    chapters_with_learning_sections = chapters_without_learning_sections = 0
     chapters_with_alignment_status = subjects_with_review_metadata = 0
+    sections_by_subject: dict[str, int] = {}
     seen_questions: dict[str, str] = {}
 
     if not isinstance(data, dict) or not data:
@@ -81,6 +83,12 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
                 errors.append(f"{label}: learningSections must be a list")
                 raw_sections = []
             learning_sections += len(raw_sections)
+            sections_by_subject[subject_id] = sections_by_subject.get(subject_id, 0) + len(raw_sections)
+            if len(raw_sections) >= 2:
+                chapters_with_learning_sections += 1
+            else:
+                chapters_without_learning_sections += 1
+                errors.append(f"{label}: at least two structured learning sections are required")
             for section_index, section in enumerate(raw_sections):
                 section_label = f"{label}/section-{section_index + 1}"
                 if not isinstance(section, dict):
@@ -88,11 +96,12 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
                     continue
                 if not isinstance(section.get("title"), str) or not section["title"].strip():
                     errors.append(f"{section_label}: title is missing")
-                if not isinstance(section.get("content"), str) or not section["content"].strip():
-                    errors.append(f"{section_label}: content is missing")
+                content = section.get("content")
+                if not isinstance(content, str) or len(content.strip()) < 50:
+                    errors.append(f"{section_label}: content must contain at least 50 characters")
                 for list_key in ("keyPoints", "examples"):
                     values = section.get(list_key, [])
-                    if not isinstance(values, list) or any(
+                    if not isinstance(values, list) or not values or any(
                         not isinstance(value, str) or not value.strip() for value in values
                     ):
                         errors.append(f"{section_label}: {list_key} must contain non-empty text items")
@@ -186,6 +195,8 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
         "chapters_with_source": sourced_chapters,
         "chapters_verified_against_edition": verified_chapters,
         "learning_sections": learning_sections,
+        "chapters_with_learning_sections": chapters_with_learning_sections,
+        "chapters_without_learning_sections": chapters_without_learning_sections,
         "book_solutions": book_solutions,
         "subjects_with_review_metadata": subjects_with_review_metadata,
         "chapters_with_alignment_status": chapters_with_alignment_status,
@@ -246,6 +257,9 @@ def main() -> int:
     audit_known_question_regressions(data, errors)
     for key, value in stats.items():
         print(f"{key}: {value}")
+    print("learning_sections_by_subject:")
+    for subject_id, count in sorted(sections_by_subject.items()):
+        print(f"  {subject_id}: {count}")
     if stats and stats["chapters"]:
         print(
             "source_coverage: "
