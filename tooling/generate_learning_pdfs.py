@@ -130,6 +130,14 @@ def build_notes(catalog, output: Path, styles_map):
                 story.append(Paragraph(rtl("نکته‌های کلیدی"), styles_map["question"]))
                 for point in chapter["points"]:
                     story.append(Paragraph(rtl("• " + point), styles_map["body"]))
+            for section in chapter.get("learningSections", []):
+                story.append(Paragraph(rtl(section.get("title", "بخش آموزشی")), styles_map["question"]))
+                if section.get("content"):
+                    story.append(Paragraph(rtl(section["content"]), styles_map["body"]))
+                for point in section.get("keyPoints", []):
+                    story.append(Paragraph(rtl("• " + point), styles_map["body"]))
+                for example_text in section.get("examples", []):
+                    story.append(Paragraph(rtl("مثال: " + example_text), styles_map["body"]))
             if chapter.get("example"):
                 story.append(Paragraph(rtl("مثال آموزشی: " + chapter["example"]), styles_map["question"]))
             if chapter["solutionSteps"]:
