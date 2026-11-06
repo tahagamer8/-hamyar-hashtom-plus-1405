@@ -1,7 +1,7 @@
 const MODEL = "gemini-3.8-flash";
 const MAX_MESSAGES = 12;
 const MAX_MESSAGE_LENGTH = 3000;
-const MAX_OUTPUT_TOKENS = 900;
+const MAX_OUTPUT_TOKENS = 1600;
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -169,8 +169,10 @@ export default {
       },
       contents,
       generationConfig: {
-        temperature: 0.45,
         maxOutputTokens: MAX_OUTPUT_TOKENS,
+        thinkingConfig: {
+          thinkingLevel: "MEDIUM",
+        },
       },
     };
 
