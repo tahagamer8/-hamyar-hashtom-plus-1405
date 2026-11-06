@@ -277,6 +277,8 @@ class _ChapterContent extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final title = chapter['title'] as String? ?? 'درس';
+    final bookChapterTitle = chapter['bookChapterTitle'] as String? ?? '';
+    final bookScope = chapter['bookScope'] as String? ?? '';
     final summary = chapter['summary'] as String? ?? '';
     final example = chapter['example'] as String? ?? '';
     final solutionSteps = (chapter['solutionSteps'] as List<dynamic>? ?? [])
@@ -315,6 +317,30 @@ class _ChapterContent extends ConsumerWidget {
               ],
             ),
             const Divider(),
+            if (bookChapterTitle.isNotEmpty || bookScope.isNotEmpty) ...[
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (bookChapterTitle.isNotEmpty)
+                      Text('فصل کتاب: $bookChapterTitle',
+                          style: theme.textTheme.bodyMedium),
+                    if (bookScope.isNotEmpty) ...[
+                      if (bookChapterTitle.isNotEmpty) const SizedBox(height: 4),
+                      Text('محدودهٔ درس در کتاب: $bookScope',
+                          style: theme.textTheme.bodySmall),
+                    ],
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+            ],
             if (feature == AppFeature.lessons) ...[
               Text(
                 lessonSections.isEmpty
