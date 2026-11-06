@@ -151,7 +151,7 @@ def build_notes(catalog, output: Path, styles_map):
 
 def build_questions(catalog, output: Path, styles_map):
     topic_count = sum(len(subject['chapters']) for subject in catalog.values())
-    question_count = sum(len(chapter['questions']) for subject in catalog.values() for chapter in subject['chapters'])
+    question_count = sum(len(chapter['questions']) + len(chapter.get('challengeQuestions', [])) for subject in catalog.values() for chapter in subject['chapters'])
     story = [
         Spacer(1, 28*mm),
         Paragraph(rtl("نمونه‌سؤال و آزمونک‌های آموزشی"), styles_map["title"]),
@@ -223,6 +223,7 @@ def main():
             manifest.extend([
                 {
                     "subjectId": subject_id,
+                    "subjectTitle": subject["title"],
                     "chapterIndex": chapter_index,
                     "chapterTitle": chapter["title"],
                     "type": "notes",
@@ -238,10 +239,39 @@ def main():
                     "fileName": questions_name,
                 },
             ])
+    # Aggregate files back the home-screen shortcuts; chapter files remain available
+    # from each lesson's PDF resources section.
+    aggregate_notes = "Fahmino-Grade8-Notes-FA.pdf"
+    aggregate_questions = "Fahmino-Grade8-Sample-Questions-FA.pdf"
+    build_notes(catalog, out / aggregate_notes, style_map)
+    build_questions(catalog, out / aggregate_questions, style_map)
+    manifest.extend([
+        {
+            "subjectId": "all",
+            "subjectTitle": "همهٔ درس‌ها",
+            "chapterIndex": -1,
+            "chapterTitle": "همهٔ فصل‌ها",
+            "type": "notes",
+            "title": "جزوهٔ همهٔ درس‌ها",
+            "fileName": aggregate_notes,
+        },
+        {
+            "subjectId": "all",
+            "subjectTitle": "همهٔ درس‌ها",
+            "chapterIndex": -1,
+            "chapterTitle": "همهٔ فصل‌ها",
+            "type": "sampleExams",
+            "title": "بانک نمونه‌سؤال همهٔ درس‌ها",
+            "fileName": aggregate_questions,
+        },
+    ])
     (out / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    print(f"Generated {len(manifest)} chapter PDFs for {len(catalog)} subjects.")
+    print(
+        f"Generated {len(manifest) - 2} chapter PDFs and 2 aggregate PDFs "
+        f"for {len(catalog)} subjects."
+    )
 
 if __name__ == "__main__":
     main()
