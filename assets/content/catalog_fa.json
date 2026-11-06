@@ -2720,7 +2720,7 @@
         ],
         "questions": [
           {
-            "question": "Which sentence correctly introduces a girl's nationality?",
+            "question": "Which nationality describes a person from Canada?",
             "options": [
               "Canadian",
               "Iranian",
@@ -2809,7 +2809,7 @@
             "explanation": "بعد از can فعل به شکل ساده می‌آید."
           },
           {
-            "question": "What does “cannot” mean?",
+            "question": "What does “can't” mean?",
             "options": [
               "می‌تواند",
               "نمی‌تواند",
@@ -2817,7 +2817,7 @@
               "می‌خواهد"
             ],
             "answer": 1,
-            "explanation": "Cannot یا can't به معنی نمی‌تواند است."
+            "explanation": "Can't شکل کوتاه cannot و به معنی نمی‌تواند است."
           }
         ]
       },
