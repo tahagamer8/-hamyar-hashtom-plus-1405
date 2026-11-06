@@ -10,6 +10,7 @@ import 'package:hamyar_hashtom_plus/app.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_constants.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/screens/content_library_screen.dart';
 import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
 
 const _testCatalog = r'''
 {
@@ -26,6 +27,27 @@ const _testCatalog = r'''
         "options": ["۱/۶", "۲/۶", "۳/۴", "۱"],
         "answer": 2,
         "explanation": "۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ = ۳/۴."
+      }],
+      "challengeQuestions": [{
+        "question": "حاصل (−۳/۴ + ۵/۶) ÷ (−۱/۱۲) کدام است؟",
+        "options": ["−۱", "۱", "−۱۲", "۱۲"],
+        "answer": 0,
+        "explanation": "ابتدا مجموع برابر ۱/۱۲ و سپس خارج‌قسمت برابر −۱ می‌شود.",
+        "difficulty": "advanced",
+        "contentOrigin": "fahmino_authored_practice",
+        "verificationStatus": "not_verified_against_official_textbook"
+      }]
+    }, {
+      "title": "عددهای اول",
+      "summary": "عدد اول فقط دو شمارندهٔ مثبت دارد.",
+      "points": ["عدد ۱ اول نیست."],
+      "example": "عدد ۷ اول است.",
+      "solutionSteps": ["شمارنده‌ها را بررسی می‌کنیم."],
+      "questions": [{
+        "question": "کدام عدد اول است؟",
+        "options": ["۴", "۶", "۷", "۹"],
+        "answer": 2,
+        "explanation": "۷ فقط بر ۱ و خودش بخش‌پذیر است."
       }]
     }]
   }
@@ -244,6 +266,8 @@ void main() {
     await tester.pumpWidget(_contentApp('sampleExams'));
     await tester.pumpAndSettle();
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
+    expect(find.text('سؤال‌های دشوار و ترکیبی'), findsOneWidget);
+    expect(find.textContaining('حاصل (−۳/۴ + ۵/۶)'), findsOneWidget);
     expect(find.text('پاسخ: ۳/۴'), findsNothing);
     await tester.tap(find.text('نمایش پاسخ و توضیح'));
     await tester.pump();
@@ -258,7 +282,8 @@ void main() {
     expect(find.text('10:00'), findsOneWidget);
     await tester.pump(const Duration(seconds: 1));
     expect(find.text('09:59'), findsOneWidget);
-    await tester.tap(find.text('۳/۴').first);
+    expect(find.textContaining('سطح دشوار و ترکیبی'), findsOneWidget);
+    await tester.tap(find.text('−۱').first);
     await tester.pump();
     expect(find.textContaining('پاسخ درست:'), findsNothing);
     await tester.tap(find.text('ثبت و پایان آزمون'));
@@ -266,7 +291,31 @@ void main() {
     await tester.tap(find.text('ثبت آزمون'));
     await tester.pumpAndSettle();
     expect(find.textContaining('نمره:'), findsOneWidget);
-    expect(find.textContaining('پاسخ درست: ۳/۴'), findsOneWidget);
+    expect(find.textContaining('پاسخ درست: −۱'), findsOneWidget);
+  });
+
+  testWidgets('quiz switches between selected chapter and whole subject', (tester) async {
+    await tester.pumpWidget(_contentApp('quiz'));
+    await tester.pumpAndSettle();
+
+    var exam = tester.widget<TimedCombinedExamScreen>(
+      find.byType(TimedCombinedExamScreen),
+    );
+    expect(exam.chapters, hasLength(1));
+
+    await tester.tap(find.text('کل درس'));
+    await tester.pumpAndSettle();
+    exam = tester.widget<TimedCombinedExamScreen>(
+      find.byType(TimedCombinedExamScreen),
+    );
+    expect(exam.chapters, hasLength(2));
+
+    await tester.tap(find.text('فصل انتخابی'));
+    await tester.pumpAndSettle();
+    exam = tester.widget<TimedCombinedExamScreen>(
+      find.byType(TimedCombinedExamScreen),
+    );
+    expect(exam.chapters, hasLength(1));
   });
 
   testWidgets('chapter can be added to favorites', (tester) async {
