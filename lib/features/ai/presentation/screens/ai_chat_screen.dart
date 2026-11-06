@@ -70,8 +70,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
   }
 
   int _score(String text, Set<String> tokens) {
-    final normalized = _normalise(text);
-    return tokens.where(normalized.contains).length;
+    final textTokens = _tokens(text);
+    return tokens.intersection(textTokens).length;
   }
 
   String _answerLocally(String question) {
@@ -110,14 +110,17 @@ class _AiChatScreenState extends State<AiChatScreen> {
     final fallbackIndex = _selectedChapterIndex >= scored.length
         ? scored.length - 1
         : _selectedChapterIndex;
-    final best = scored.first.score > 0
-        ? scored.take(2).toList()
-        : [scored[fallbackIndex]];
+    if (tokens.isNotEmpty && scored.first.score == 0) {
+      return 'در محتوای ذخیره‌شدهٔ این درس، مطلب مرتبطی پیدا نکردم. نام فصل را انتخاب کن یا پرسشت را با واژه‌های کتاب دوباره بنویس. نمی‌خواهم پاسخ نامرتبط حدس بزنم.';
+    }
+    final best = tokens.isEmpty
+        ? [scored[fallbackIndex]]
+        : scored.where((item) => item.score > 0).take(2).toList();
 
     final asksForExample = RegExp('مثال|حل|مرحله|گام|محاسبه|تمرین').hasMatch(question);
     final asksForQuestions = RegExp('سوال|سؤال|آزمون|تست|تمرین').hasMatch(question);
     final out = StringBuffer()
-      ..writeln('راهنمای آفلاین فهمینو — ' + (subject['title'] as String? ?? 'درس'))
+      ..writeln('راهنمای هوشمند فهمینو — ' + (subject['title'] as String? ?? 'درس'))
       ..writeln('این پاسخ از محتوای ذخیره‌شده در برنامه پیدا شده است؛ مدل هوش مصنوعی مولد نیست.')
       ..writeln();
 
@@ -211,7 +214,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('دستیار آفلاین فهمینو'),
+        title: const Text('راهنمای هوشمند آفلاین فهمینو'),
         actions: [
           IconButton(
             tooltip: 'گفت‌وگوی تازه',
@@ -230,7 +233,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
               child: Column(
                 children: [
                   const Text(
-                    'این بخش بدون اینترنت کار می‌کند و فقط محتوای ذخیره‌شده در فهمینو را جست‌وجو می‌کند. پیام‌ها از دستگاه خارج نمی‌شوند؛ پاسخ‌ها تولید هوش مصنوعی نیستند.',
+                    'این راهنمای آفلاین، پاسخ‌ها را از درس‌های ذخیره‌شده پیدا می‌کند؛ مدل مولد یا چت‌بات آنلاین نیست. پیام‌ها از دستگاه خارج نمی‌شوند.',
                     textAlign: TextAlign.center,
                   ),
                   if (_catalog.isNotEmpty) ...[
