@@ -63,16 +63,17 @@ export default {
       return json({ error: "پیام‌ها نامعتبرند؛ گفت‌وگو باید از پرسش شروع شود و نوبت‌ها یکی‌درمیان باشند." }, 400);
     }
 
-    if (env.CHAT_LIMITER) {
-      try {
-        const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
-        const { success } = await env.CHAT_LIMITER.limit({ key: clientIp });
-        if (!success) {
-          return json({ error: "تعداد درخواست‌ها زیاد است؛ یک دقیقه بعد دوباره امتحان کن." }, 429);
-        }
-      } catch {
-        return json({ error: "محدودکنندهٔ درخواست موقتاً در دسترس نیست." }, 503);
+    if (!env.CHAT_LIMITER) {
+      return json({ error: "محدودکنندهٔ درخواست روی سرور تنظیم نشده است." }, 503);
+    }
+    try {
+      const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
+      const { success } = await env.CHAT_LIMITER.limit({ key: clientIp });
+      if (!success) {
+        return json({ error: "تعداد درخواست‌ها زیاد است؛ یک دقیقه بعد دوباره امتحان کن." }, 429);
       }
+    } catch {
+      return json({ error: "محدودکنندهٔ درخواست موقتاً در دسترس نیست." }, 503);
     }
 
     const contents = body.messages.map((message) => ({
