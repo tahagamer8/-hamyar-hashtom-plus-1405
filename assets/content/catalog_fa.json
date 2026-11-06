@@ -3204,7 +3204,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در خاطره‌نویسی، چرا ترتیب زمانی رویدادها اهمیت دارد؟",
+            "options": [
+              "خواننده می‌تواند مسیر تجربه را دنبال کند",
+              "متن را به فهرست واژه‌ها تبدیل می‌کند",
+              "احساس نویسنده را حذف می‌کند",
+              "نیازی به راوی باقی نمی‌گذارد"
+            ],
+            "answer": 0,
+            "explanation": "ترتیب منطقی، پیگیری رویداد و رابطهٔ علت و معلول را آسان می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۲: توصیف",
@@ -3261,7 +3277,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "برای توصیف یک مکان، کدام انتخاب متن را دقیق‌تر می‌کند؟",
+            "options": [
+              "جزئیات مرتبط از یک زاویهٔ مشخص",
+              "صفت‌های کلی و تکراری",
+              "اطلاعات نامرتبط",
+              "قضاوت بدون مشاهده"
+            ],
+            "answer": 0,
+            "explanation": "زاویهٔ روشن و جزئیات مرتبط، توصیف را منسجم می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۳: گزارش‌نویسی",
@@ -3318,7 +3350,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "گزارشی شامل نظرهای شخصی فراوان است اما زمان و روند فعالیت را روشن نمی‌کند. کدام ویژگی گزارش ضعیف شده است؟",
+            "options": [
+              "بی‌طرفی و نظم اطلاعات",
+              "تعداد شخصیت‌ها",
+              "آرایه‌های ادبی",
+              "گفت‌وگوی داستانی"
+            ],
+            "answer": 0,
+            "explanation": "گزارش باید واقعیت و نظر را جدا و اطلاعات را منظم ثبت کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۴: سفرنامه",
@@ -3375,7 +3423,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در سفرنامه، نویسنده مطلبی را از راهنما شنیده اما خودش ندیده است. برای دقت بیشتر چه کند؟",
+            "options": [
+              "آن را به‌عنوان شنیده یا نقل‌قول مشخص کند",
+              "آن را مشاهدهٔ مستقیم معرفی کند",
+              "زمان و مکان را حذف کند",
+              "آن را به واقعیت قطعی تبدیل کند"
+            ],
+            "answer": 0,
+            "explanation": "تفکیک مشاهده از شنیده‌ها از خطای گزارش جلوگیری می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۵: داستان‌نویسی",
@@ -3432,7 +3496,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "داستانی شخصیت جذاب دارد اما مسئله و کشمکش مشخصی ندارد. چه چیزی بیش از همه می‌تواند روایت را پیش ببرد؟",
+            "options": [
+              "ساختن مسئله‌ای معنادار و هدف برای شخصیت",
+              "افزودن صفت‌های بیشتر",
+              "حذف زمان و مکان",
+              "تکرار پایان داستان"
+            ],
+            "answer": 0,
+            "explanation": "کشمکش و هدف شخصیت حرکت داستان را شکل می‌دهد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۶: بازنویسی",
@@ -3489,7 +3569,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در بازنویسی، نویسنده پیام متن اصلی را تغییر می‌دهد اما جمله‌ها را ساده‌تر می‌کند. آیا بازنویسی موفق است؟",
+            "options": [
+              "خیر؛ پیام اصلی باید حفظ شود",
+              "بله؛ فقط سادگی مهم است",
+              "بله؛ تغییر پیام الزامی است",
+              "خیر؛ هیچ واژه‌ای نباید عوض شود"
+            ],
+            "answer": 0,
+            "explanation": "بازنویسی جمله‌بندی را تغییر می‌دهد اما مفهوم اصلی را نگه می‌دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۷: حکایت‌نگاری",
@@ -3546,7 +3642,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "حکایتی کوتاه با چند رویداد فرعی طولانی شده است. برای تقویت ایجاز چه باید کرد؟",
+            "options": [
+              "حذف رویدادهای غیرضروری و حفظ مسیر پیام",
+              "افزودن شخصیت‌های بیشتر",
+              "تکرار پیام در هر جمله",
+              "حذف نتیجهٔ معنادار"
+            ],
+            "answer": 0,
+            "explanation": "ایجاز یعنی نگه‌داشتن عناصر ضروری و کنارگذاشتن جزئیات بی‌اثر.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۸: نامه‌نگاری و ویرایش",
@@ -3603,7 +3715,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "نامه‌ای رسمی برای درخواست از مدیر نوشته شده اما لحن آن بسیار خودمانی است. کدام اصلاح مناسب‌تر است؟",
+            "options": [
+              "هماهنگ‌کردن خطاب و لحن با مخاطب و هدف",
+              "حذف سلام و پایان‌بندی",
+              "افزودن شوخی‌های دوستانه",
+              "نوشتن بدون موضوع"
+            ],
+            "answer": 0,
+            "explanation": "لحن نامه باید با مخاطب و هدف ارتباط سازگار باشد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ],
     "alignmentReview": {
@@ -6593,7 +6721,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کدام نتیجه از مشاهدهٔ نظم طبیعت، از نظر منطقی محتاطانه‌تر است؟",
+            "options": [
+              "مشاهده می‌تواند زمینهٔ اندیشه دربارهٔ آفریننده را فراهم کند",
+              "هر مشاهده به‌تنهایی همهٔ پرسش‌ها را پاسخ می‌دهد",
+              "مشاهده جای اندیشه را می‌گیرد",
+              "هر پدیده فقط یک توضیح ظاهری دارد"
+            ],
+            "answer": 0,
+            "explanation": "مشاهده آغاز تفکر است و باید با اندیشه و بررسی همراه شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۲: عفو و گذشت",
@@ -6637,7 +6781,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "فردی می‌گوید بخشیده‌ام، اما همچنان برای جلوگیری از تکرار آسیب مرز روشنی تعیین می‌کند. این رفتار با کدام برداشت سازگارتر است؟",
+            "options": [
+              "گذشت همراه با حفظ حق و امنیت",
+              "کینه‌ورزی",
+              "تأیید خطا",
+              "بی‌تفاوتی"
+            ],
+            "answer": 0,
+            "explanation": "گذشت به معنی تأیید خطا یا کنارگذاشتن امنیت و حقوق نیست.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۳: همه چیز در دست تو",
@@ -6681,7 +6841,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اگر فردی انتخابی آگاهانه انجام دهد اما پیامد آن را نادیده بگیرد، کدام پیوند را ناقص فهمیده است؟",
+            "options": [
+              "اختیار و مسئولیت",
+              "اختیار و سرگرمی",
+              "مشورت و اجبار",
+              "آگاهی و تصادف"
+            ],
+            "answer": 0,
+            "explanation": "اختیار انسان با مسئولیت نسبت به پیامد انتخاب همراه است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۴: پیوند جاودان",
@@ -6725,7 +6901,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کدام شیوه استفاده از قرآن و سیره اهل‌بیت با هدف هدایت سازگارتر است؟",
+            "options": [
+              "فهم پیام و تلاش برای عمل به آن",
+              "حفظ واژه‌ها بدون توجه به معنا",
+              "انتخاب گزینشی بدون منبع",
+              "جایگزین‌کردن برداشت شخصی به‌جای متن"
+            ],
+            "answer": 0,
+            "explanation": "شناخت منابع هدایت با فهم و عمل به آموزه‌ها کامل‌تر می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۵: روزی که اسلام کامل شد",
@@ -6769,7 +6961,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "چرا برای فهم رویداد غدیر باید زمینهٔ تاریخی آن نیز بررسی شود؟",
+            "options": [
+              "تا جایگاه رویداد و پیام آن در بستر زمان روشن شود",
+              "تا تاریخ رویداد بی‌اهمیت شود",
+              "تا فقط نام اشخاص حفظ شود",
+              "تا منابع مختلف کنار گذاشته شوند"
+            ],
+            "answer": 0,
+            "explanation": "زمینهٔ تاریخی به فهم دقیق‌تر رویداد کمک می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۶: نردبان آسمان",
@@ -6813,7 +7021,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "دانش‌آموزی نماز را به‌موقع می‌خواند اما در طول آن به معنای عبارت‌ها توجه نمی‌کند. کدام جنبه نیازمند تقویت است؟",
+            "options": [
+              "حضور قلب و توجه به معنا",
+              "فقط سرعت خواندن",
+              "تعداد واژه‌ها",
+              "بلندی صدا"
+            ],
+            "answer": 0,
+            "explanation": "کیفیت نماز با توجه و حضور قلب نیز ارتباط دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۷: یک فرصت طلایی",
@@ -6857,7 +7081,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "برای استفاده بهتر از یک روز شلوغ، کدام برنامه منطقی‌تر است؟",
+            "options": [
+              "اولویت‌بندی کارهای مهم و زمان‌بندی واقع‌بینانه",
+              "انجام کارها بدون ترتیب",
+              "اختصاص همه زمان به کار آسان",
+              "به تعویق‌انداختن همه کارها"
+            ],
+            "answer": 0,
+            "explanation": "اولویت‌بندی و برنامهٔ واقع‌بینانه از اتلاف زمان جلوگیری می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۸: نشان ارزشمندی",
@@ -6901,7 +7141,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کدام رفتار بیش از همه نشان‌دهنده احترام به کرامت دیگران است؟",
+            "options": [
+              "رعایت حریم خصوصی حتی هنگام شوخی",
+              "انتشار تصویر دیگران بدون اجازه",
+              "قضاوت بر اساس ظاهر",
+              "تمسخر اشتباه دیگران"
+            ],
+            "answer": 0,
+            "explanation": "رعایت حریم و احترام متقابل از کرامت افراد محافظت می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۹: تدبیر زندگانی",
@@ -6945,7 +7201,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در تصمیمی مهم، فردی هدف و امکانات خود را بررسی می‌کند، مشورت می‌گیرد و سپس اقدام می‌کند. این روش نمونهٔ چیست؟",
+            "options": [
+              "تدبیر همراه با تلاش و توکل",
+              "تصمیم‌گیری عجولانه",
+              "واگذاری مسئولیت به دیگران",
+              "بی‌توجهی به پیامد"
+            ],
+            "answer": 0,
+            "explanation": "تدبیر با بررسی هدف، امکانات، مشورت و اقدام سنجیده همراه است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۱۰: دو سرمایهٔ گران‌بها",
@@ -6989,7 +7261,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اگر زمان و اندیشه دو سرمایه باشند، کدام رفتار از هر دو بهتر استفاده می‌کند؟",
+            "options": [
+              "برنامه‌ریزی و سنجش دلیل‌ها پیش از انتخاب",
+              "انجام فوری هر خواسته",
+              "تکرار نظر دیگران",
+              "نادیده‌گرفتن پیامدها"
+            ],
+            "answer": 0,
+            "explanation": "برنامه‌ریزی زمان را حفظ می‌کند و اندیشه کیفیت انتخاب را بالا می‌برد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۱۱: آفت‌های زبان",
@@ -7033,7 +7321,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "شخصی عیب پنهان فردی را در غیاب او برای سرگرمی دیگران بازگو می‌کند. این رفتار به کدام آفت زبان نزدیک‌تر است؟",
+            "options": [
+              "غیبت",
+              "گفت‌وگوی علمی",
+              "نصیحت خصوصی",
+              "گزارش بی‌طرفانه"
+            ],
+            "answer": 0,
+            "explanation": "بازگویی عیب پنهان فرد در غیاب او از مصادیق غیبت است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۱۲: ارزش کار",
@@ -7077,7 +7381,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "دو کارگر محصولی یکسان تولید می‌کنند، اما یکی با دقت و رعایت حقوق مشتری کار می‌کند. کدام عامل ارزش کار او را افزایش می‌دهد؟",
+            "options": [
+              "کیفیت و امانت‌داری",
+              "سرعت بدون دقت",
+              "پنهان‌کردن نقص",
+              "نادیده‌گرفتن حق مشتری"
+            ],
+            "answer": 0,
+            "explanation": "کیفیت، دقت و رعایت حقوق دیگران به ارزش کار می‌افزاید.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۱۳: کلید گنج‌ها",
@@ -7121,7 +7441,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کدام برداشت از دعا با مسئولیت‌پذیری سازگارتر است؟",
+            "options": [
+              "درخواست خیر همراه با تلاش و انجام وظیفه",
+              "جایگزین‌کردن دعا به‌جای هر کوشش",
+              "درخواست موفقیت بدون رعایت حق دیگران",
+              "استفاده از دعا برای فرار از مسئولیت"
+            ],
+            "answer": 0,
+            "explanation": "دعا با امید و تلاش همراه است و مسئولیت را حذف نمی‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۱۴: ما مسلمانان",
@@ -7165,7 +7501,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در گروهی با اختلاف‌نظر، کدام رفتار به همبستگی کمک می‌کند؟",
+            "options": [
+              "گفت‌وگوی محترمانه دربارهٔ موضوع مشترک",
+              "توهین به دیدگاه مخالف",
+              "حذف کامل اعضای متفاوت",
+              "پخش شایعه"
+            ],
+            "answer": 0,
+            "explanation": "احترام و همکاری اجازه می‌دهد اختلاف به دشمنی تبدیل نشود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ۱۵: حق‌الناس",
@@ -7209,7 +7561,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "فردی از وسیلهٔ عمومی مدرسه بی‌احتیاط استفاده می‌کند و آن را خراب می‌کند. کدام اصل را نقض کرده است؟",
+            "options": [
+              "حق‌الناس و مسئولیت نسبت به اموال عمومی",
+              "حق انتخاب پوشش",
+              "آداب سفر",
+              "صرفه‌جویی در زمان"
+            ],
+            "answer": 0,
+            "explanation": "اموال عمومی متعلق به همه است و حفظ آن بخشی از رعایت حقوق مردم است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "مرور تکمیلی: اخلاق و بندگی",
@@ -7253,7 +7621,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اگر نیت فردی خیر باشد اما روش انجام کار به دیگران آسیب بزند، کدام نتیجه دقیق‌تر است؟",
+            "options": [
+              "نیت خوب به‌تنهایی کافی نیست و رفتار باید اصلاح شود",
+              "نیت خوب هر آسیبی را بی‌اهمیت می‌کند",
+              "پیامد رفتار اهمیتی ندارد",
+              "مسئولیت فقط با دیگران است"
+            ],
+            "answer": 0,
+            "explanation": "نیت درست باید با عمل شایسته و رعایت حقوق همراه شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ],
     "alignmentReview": {
@@ -7325,7 +7709,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ مؤمنون و سورهٔ نور؛ همراه با آموزش مفاهیم و نامه‌ای از یک پدر به فرزند"
+        "bookScope": "سورهٔ مؤمنون و سورهٔ نور؛ همراه با آموزش مفاهیم و نامه‌ای از یک پدر به فرزند",
+        "challengeQuestions": [
+          {
+            "question": "برای ترجمهٔ دقیق یک واژهٔ قرآنی که چند معنی دارد، کدام روش مناسب‌تر است؟",
+            "options": [
+              "بررسی جمله و سیاق آیه",
+              "انتخاب نخستین معنی فرهنگ لغت",
+              "نادیده‌گرفتن واژه‌های اطراف",
+              "ترجمه بر اساس شباهت ظاهری"
+            ],
+            "answer": 0,
+            "explanation": "معنای واژه با توجه به بافت و ارتباط جمله روشن‌تر می‌شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 2: باد و خاک و آب و آتش بنده‌اند",
@@ -7383,7 +7783,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ فرقان؛ همراه با آموزش مفاهیم و رسانه‌های قرآنی"
+        "bookScope": "سورهٔ فرقان؛ همراه با آموزش مفاهیم و رسانه‌های قرآنی",
+        "challengeQuestions": [
+          {
+            "question": "دانش‌آموز آیه را درست می‌خواند اما پیام آن را فقط از روی یک واژه حدس می‌زند. کدام مهارت را باید تقویت کند؟",
+            "options": [
+              "پیوند دادن واژه‌ها و جمله‌ها برای فهم پیام کلی",
+              "افزایش سرعت قرائت بدون فهم",
+              "حفظ ترتیب صفحه‌ها",
+              "توجه فقط به قافیه"
+            ],
+            "answer": 0,
+            "explanation": "فهم پیام به ارتباط واژه‌ها و ساختار جمله نیاز دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 3: همه عالم جمال طلعت اوست؛ تا که را چشم این نظر باشد",
@@ -7441,7 +7857,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ شعرا؛ همراه با آموزش مفاهیم و دعای آمرزش برای خود و پدر و مادر"
+        "bookScope": "سورهٔ شعرا؛ همراه با آموزش مفاهیم و دعای آمرزش برای خود و پدر و مادر",
+        "challengeQuestions": [
+          {
+            "question": "اگر پیام یک آیه دربارهٔ دوری از رفتار بیهوده باشد، کدام نتیجهٔ عملی مناسب‌تر است؟",
+            "options": [
+              "انتخاب فعالیت‌های سودمند و مسئولانه",
+              "حذف همهٔ تفریح‌ها",
+              "قضاوت دربارهٔ دیگران",
+              "بی‌توجهی به زمان"
+            ],
+            "answer": 0,
+            "explanation": "دوری از لغو به انتخاب آگاهانه و سودمند در رفتار مربوط است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 4: چون سلیمان از خدا حاجت بخواه؛ والدینت را دعا کن هر پگاه",
@@ -7499,7 +7931,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ نمل؛ همراه با آموزش مفاهیم و انس با قرآن کریم"
+        "bookScope": "سورهٔ نمل؛ همراه با آموزش مفاهیم و انس با قرآن کریم",
+        "challengeQuestions": [
+          {
+            "question": "چرا هنگام ترجمهٔ یک ترکیب قرآنی نباید واژه‌ها را جدا از هم معنا کرد؟",
+            "options": [
+              "زیرا رابطهٔ واژه‌ها معنای کامل ترکیب را می‌سازد",
+              "زیرا هر واژه همیشه فقط یک معنی دارد",
+              "زیرا ترتیب واژه‌ها بی‌اهمیت است",
+              "زیرا فعل‌ها در ترجمه نقشی ندارند"
+            ],
+            "answer": 0,
+            "explanation": "معنای ترکیب از رابطهٔ دستوری و معنایی اجزای آن پدید می‌آید.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 5: ای وارث پیمبر و قرآن و دین بیا",
@@ -7557,7 +8005,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ قصص؛ همراه با آموزش مفاهیم و روایت فضیل"
+        "bookScope": "سورهٔ قصص؛ همراه با آموزش مفاهیم و روایت فضیل",
+        "challengeQuestions": [
+          {
+            "question": "برای تشخیص پیام توحیدی یک آیه، کدام روش دقیق‌تر است؟",
+            "options": [
+              "توجه به واژه‌های کلیدی و ارتباط آن‌ها با جمله‌های آیه",
+              "تکیه بر یک برداشت بدون متن",
+              "نادیده‌گرفتن موضوع سوره",
+              "جایگزین‌کردن متن با حدس"
+            ],
+            "answer": 0,
+            "explanation": "پیام باید از متن و سیاق آیه پشتیبانی شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 6: معبودهای باطل چون تار عنکبوت‌اند؛ با نسیم ایمان، معدوم و بی‌ثبات‌اند",
@@ -7616,7 +8080,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ عنکبوت؛ همراه با آموزش مفاهیم و موضوع جایگاه زن در قرآن"
+        "bookScope": "سورهٔ عنکبوت؛ همراه با آموزش مفاهیم و موضوع جایگاه زن در قرآن",
+        "challengeQuestions": [
+          {
+            "question": "اگر ترجمهٔ دو جمله از یک آیه با هم ناسازگار به نظر برسد، نخستین کار چیست؟",
+            "options": [
+              "بررسی نقش واژه‌ها و پیوند نحوی جمله‌ها",
+              "حذف یکی از جمله‌ها",
+              "انتخاب ترجمهٔ کوتاه‌تر",
+              "نادیده‌گرفتن فعل"
+            ],
+            "answer": 0,
+            "explanation": "ساختار جمله و نقش واژه‌ها می‌تواند علت ناسازگاری ظاهری را روشن کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 7: هر روز عمر مشق کن این شعر ناب را؛ فردای مرگ، اول صبح قیامت است",
@@ -7674,7 +8154,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ روم و سورهٔ لقمان؛ همراه با آموزش مفاهیم و روایت چگونه مسلمان شدم؟"
+        "bookScope": "سورهٔ روم و سورهٔ لقمان؛ همراه با آموزش مفاهیم و روایت چگونه مسلمان شدم؟",
+        "challengeQuestions": [
+          {
+            "question": "در تمرین قرائت، دانش‌آموز حرکت پایانی واژه را تغییر می‌دهد و معنی جمله عوض می‌شود. چه چیزی را باید دقیق‌تر رعایت کند؟",
+            "options": [
+              "حرکت‌ها و نشانه‌های خواندن",
+              "فقط بلندی صدا",
+              "سرعت بیشتر",
+              "فاصلهٔ خطوط"
+            ],
+            "answer": 0,
+            "explanation": "حرکت‌ها در خواندن درست و گاهی در نقش و معنای واژه اثر دارند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 8: راهرو گر صد هنر دارد، توکل بایدش",
@@ -7732,7 +8228,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ احزاب؛ همراه با آموزش مفاهیم و معرفی شهریار پرهیزگار"
+        "bookScope": "سورهٔ احزاب؛ همراه با آموزش مفاهیم و معرفی شهریار پرهیزگار",
+        "challengeQuestions": [
+          {
+            "question": "کدام روش برای پیوند دادن پیام اخلاقی آیه با زندگی روزانه مناسب‌تر است؟",
+            "options": [
+              "توضیح یک رفتار مشخص که با پیام آیه سازگار باشد",
+              "تکرار عنوان سوره بدون مثال",
+              "تعمیم بی‌دلیل به همه افراد",
+              "جداکردن پیام از رفتار"
+            ],
+            "answer": 0,
+            "explanation": "مثال رفتاری روشن، پیوند میان پیام و زندگی را نشان می‌دهد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 9: کدام دانه فرو رفت در زمین که نرست؟ چرا به دانه انسانت این گمان باشد؟",
@@ -7790,7 +8302,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ سبأ و سورهٔ فاطر؛ همراه با آموزش مفاهیم و موضوع قرآن بخوان"
+        "bookScope": "سورهٔ سبأ و سورهٔ فاطر؛ همراه با آموزش مفاهیم و موضوع قرآن بخوان",
+        "challengeQuestions": [
+          {
+            "question": "چرا شناخت سوره‌ای که آیه از آن آمده می‌تواند در فهم کمک‌کننده باشد؟",
+            "options": [
+              "موضوع و سیاق کلی سوره را روشن‌تر می‌کند",
+              "همهٔ آیات سوره یک معنی دارند",
+              "جایگزین ترجمه می‌شود",
+              "نیازی به قرائت باقی نمی‌گذارد"
+            ],
+            "answer": 0,
+            "explanation": "موضوع کلی سوره می‌تواند زمینهٔ فهم آیه را بهتر کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 10: دستور خدا، سلام بر توست؛ ذکر تو و احترام بر توست",
@@ -7848,7 +8376,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ یس و سورهٔ صافات؛ همراه با آموزش مفاهیم و تفسیر نمونه"
+        "bookScope": "سورهٔ یس و سورهٔ صافات؛ همراه با آموزش مفاهیم و تفسیر نمونه",
+        "challengeQuestions": [
+          {
+            "question": "اگر در ترجمه، زمان فعل درست تشخیص داده نشود، چه خطایی رخ می‌دهد؟",
+            "options": [
+              "زمان و توالی رویدادها نادرست منتقل می‌شود",
+              "معنی اسم‌ها همیشه حذف می‌شود",
+              "قافیهٔ متن تغییر می‌کند",
+              "هیچ تغییری رخ نمی‌دهد"
+            ],
+            "answer": 0,
+            "explanation": "زمان فعل در انتقال درست رویداد و پیام جمله اهمیت دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 11: همنشین تو از تو به باشد؛ تا تو را عقل و دین بیفزاید",
@@ -7906,7 +8450,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ ص و سورهٔ زمر؛ همراه با آموزش مفاهیم و پرواز به سوی آسمان"
+        "bookScope": "سورهٔ ص و سورهٔ زمر؛ همراه با آموزش مفاهیم و پرواز به سوی آسمان",
+        "challengeQuestions": [
+          {
+            "question": "برای بررسی یک برداشت از آیه، کدام شاهد معتبرتر است؟",
+            "options": [
+              "واژه‌ها و ساختار خود آیه در کنار سیاق آن",
+              "سلیقهٔ شخصی بدون استدلال",
+              "تعداد بازدید یک توضیح",
+              "شباهت یک واژه به فارسی"
+            ],
+            "answer": 0,
+            "explanation": "برداشت معتبر باید به متن و سیاق تکیه کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس 12: یا غافر الخطایا! دریاب بی‌نوا را؛ یا واهب العطایا! تغییر ده قضا را",
@@ -7964,7 +8524,23 @@
           }
         ],
         "alignmentStatus": "not_verified_against_1405_1406_pdf",
-        "bookScope": "سورهٔ غافر؛ همراه با آموزش مفاهیم و موضوع راز سرانگشتان"
+        "bookScope": "سورهٔ غافر؛ همراه با آموزش مفاهیم و موضوع راز سرانگشتان",
+        "challengeQuestions": [
+          {
+            "question": "در پایان درس نیایش، کدام برداشت با امید و درخواست خیر سازگارتر است؟",
+            "options": [
+              "درخواست خیر همراه با مسئولیت و تلاش",
+              "انتظار نتیجه بدون اقدام",
+              "نادیده‌گرفتن حقوق دیگران",
+              "ناامیدی از هر تغییر"
+            ],
+            "answer": 0,
+            "explanation": "نیایش با امید همراه است و مسئولیت و تلاش را کنار نمی‌گذارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ],
     "alignmentReview": {
@@ -8036,7 +8612,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "دو دانش‌آموز از یک منظره برداشت متفاوت دارند. کدام روش به گفت‌وگوی دقیق‌تر کمک می‌کند؟",
+            "options": [
+              "توضیح شواهد مشاهده‌شده و جداکردن آن از سلیقه",
+              "اصرار بر اینکه فقط یک برداشت ممکن است",
+              "نادیده‌گرفتن جزئیات",
+              "تبدیل نظر به واقعیت قطعی"
+            ],
+            "answer": 0,
+            "explanation": "مشاهده و برداشت شخصی باید از هم جدا شوند و با دلیل بیان شوند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فعالیت: پروژه و پژوهش",
@@ -8094,7 +8686,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "پژوهشی فقط از یک وب‌سایت ناشناس استفاده کرده است. برای افزایش اعتبار آن چه باید کرد؟",
+            "options": [
+              "مقایسهٔ چند منبع معتبر و ثبت روش گردآوری اطلاعات",
+              "افزودن تصویرهای بیشتر",
+              "حذف پرسش پژوهش",
+              "تغییر نتیجه برای جذابیت"
+            ],
+            "answer": 0,
+            "explanation": "منابع متعدد و روش روشن امکان ارزیابی نتیجه را فراهم می‌کنند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فعالیت: آداب معاشرت و گفت‌وگو",
@@ -8152,7 +8760,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در گفت‌وگو، فردی حرف طرف مقابل را قطع می‌کند و پاسخ می‌دهد. کدام مهارت کم‌رنگ شده است؟",
+            "options": [
+              "گوش‌دادن فعال و رعایت نوبت",
+              "سرعت صحبت",
+              "حافظهٔ دیداری",
+              "نوشتن گزارش"
+            ],
+            "answer": 0,
+            "explanation": "گوش‌دادن فعال و رعایت نوبت پایهٔ گفت‌وگوی مؤثرند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فعالیت: رسانه‌ها و زندگی ما",
@@ -8210,7 +8834,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "یک پیام تبلیغاتی ادعای بزرگی دارد اما شواهدی ارائه نمی‌کند. کدام پرسش سواد رسانه‌ای مناسب‌تر است؟",
+            "options": [
+              "چه کسی پیام را با چه هدف و شواهدی منتشر کرده است؟",
+              "چند رنگ در تصویر وجود دارد؟",
+              "آیا تیتر طولانی است؟",
+              "آیا پیام زیاد بازنشر شده است؟"
+            ],
+            "answer": 0,
+            "explanation": "منبع، هدف و شواهد برای ارزیابی پیام مهم‌اند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فعالیت: مهار نفس و خویشتن‌داری",
@@ -8268,7 +8908,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "دانش‌آموز هنگام عصبانیت مکث می‌کند و سپس پاسخ می‌دهد. این کار چه فایده‌ای دارد؟",
+            "options": [
+              "فرصت سنجش پیامد و انتخاب پاسخ مناسب‌تر",
+              "حذف کامل احساس",
+              "تضمین درست‌بودن هر پاسخ",
+              "جلوگیری از هر گفت‌وگو"
+            ],
+            "answer": 0,
+            "explanation": "مکث می‌تواند از واکنش عجولانه بکاهد و فرصت انتخاب بدهد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فعالیت: تصمیم‌گیری مسئولانه",
@@ -8326,7 +8982,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "برای تصمیم‌گیری دربارهٔ یک فعالیت گروهی، کدام روند کامل‌تر است؟",
+            "options": [
+              "تعریف مسئله، بررسی گزینه‌ها، سنجش پیامدها و انتخاب",
+              "انتخاب سریع اولین پیشنهاد",
+              "توجه فقط به سود یک نفر",
+              "نادیده‌گرفتن ارزش‌ها"
+            ],
+            "answer": 0,
+            "explanation": "تصمیم مسئولانه چند مرحلهٔ روشن دارد و پیامدها را می‌سنجد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فعالیت: مدیریت فشار روانی و خشم",
@@ -8384,7 +9056,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اگر برنامهٔ روزانه بیش از توان فرد باشد، کدام اصلاح منطقی‌تر است؟",
+            "options": [
+              "واقع‌بینانه‌کردن برنامه و حفظ زمان استراحت",
+              "افزایش کارها",
+              "حذف خواب و استراحت",
+              "سرزنش خود به‌جای اصلاح برنامه"
+            ],
+            "answer": 0,
+            "explanation": "برنامهٔ واقع‌بینانه باید با امکانات و نیازهای فرد سازگار باشد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "فعالیت: آداب سفر و بازدید علمی",
@@ -8442,7 +9130,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در بازدید علمی، دانش‌آموز از مسیر تعیین‌شده خارج می‌شود تا عکس بهتری بگیرد. کدام اصل را نادیده گرفته است؟",
+            "options": [
+              "رعایت مقررات و راهنمای مسئول",
+              "ثبت مشاهده",
+              "پرسشگری",
+              "یادداشت‌برداری"
+            ],
+            "answer": 0,
+            "explanation": "ایمنی و رعایت مقررات محل بر گرفتن تصویر مقدم است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ],
     "alignmentReview": {
@@ -8514,7 +9218,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "برای ساخت محصولی سبک و مقاوم، انتخاب ماده باید بر چه اساسی انجام شود؟",
+            "options": [
+              "ترکیب کارکرد، استحکام، وزن، هزینه و بازیافت‌پذیری",
+              "فقط رنگ ماده",
+              "فقط ارزان‌ترین قیمت",
+              "فقط سنگین‌بودن"
+            ],
+            "answer": 0,
+            "explanation": "انتخاب ماده باید با نیاز محصول و معیارهای چندگانه هماهنگ باشد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "پودمان ۲: الکترونیک",
@@ -8572,7 +9292,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در یک مدار آموزشی، اگر مصرف‌کننده روشن نشود، کدام بررسی مفهومی نخست مناسب است؟",
+            "options": [
+              "کامل‌بودن مسیر مدار و نقش منبع و مصرف‌کننده",
+              "تغییر رنگ بدنه",
+              "افزایش اندازهٔ کاغذ",
+              "حذف همهٔ قطعه‌ها"
+            ],
+            "answer": 0,
+            "explanation": "مدار برای کارکرد به منبع، مسیر پیوسته و مصرف‌کننده نیاز دارد؛ فعالیت عملی باید با نظارت دبیر باشد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "پودمان ۳: شهروند الکترونیکی (۱) و پست الکترونیکی",
@@ -8630,7 +9366,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "ایمیلی با پیوست ناشناس از فرستندهٔ نامطمئن دریافت شده است. رفتار مسئولانه چیست؟",
+            "options": [
+              "باز نکردن پیوست و بررسی فرستنده از راه امن",
+              "بازکردن فوری فایل",
+              "فرستادن آن برای همه",
+              "ارسال گذرواژه در پاسخ"
+            ],
+            "answer": 0,
+            "explanation": "پیوست ناشناس می‌تواند خطر امنیتی داشته باشد و باید پیش از بازکردن بررسی شود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "پودمان ۴: صنایع دستی (بافت)",
@@ -8688,7 +9440,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در یک بافت، تکرار واحدها نامنظم است و نقش نهایی به‌هم‌ریخته دیده می‌شود. کدام عامل باید اصلاح شود؟",
+            "options": [
+              "فاصله و نظم تکرار الگو",
+              "نام محصول",
+              "رنگ میز",
+              "اندازهٔ بسته‌بندی"
+            ],
+            "answer": 0,
+            "explanation": "تکرار منظم واحدها به هماهنگی نقش کمک می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "پودمان ۵: شهروند الکترونیکی (۲)",
@@ -8746,7 +9514,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "چرا استفاده از گذرواژهٔ تکراری برای چند حساب خطرناک است؟",
+            "options": [
+              "افشای یک حساب می‌تواند دسترسی به حساب‌های دیگر را آسان کند",
+              "چون نوشتن آن سخت‌تر است",
+              "چون اینترنت را کند می‌کند",
+              "چون نام کاربری حذف می‌شود"
+            ],
+            "answer": 0,
+            "explanation": "اگر یک گذرواژه افشا شود، حساب‌های دیگر نیز در معرض خطر قرار می‌گیرند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "پودمان ۶: پرورش و نگهداری از حیوانات",
@@ -8804,7 +9588,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "پیش از نگهداری یک جانور، کدام تصمیم مسئولانه‌تر است؟",
+            "options": [
+              "بررسی نیازهای گونه و امکان تأمین بلندمدت آن",
+              "انتخاب فقط بر اساس ظاهر",
+              "خرید بدون شناخت نیازها",
+              "نادیده‌گرفتن هزینه و مراقبت"
+            ],
+            "answer": 0,
+            "explanation": "نگهداری جانور تعهد بلندمدت به خوراک، محیط و مراقبت مناسب دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "پودمان ۷: امور اداری و مالی",
@@ -8862,7 +9662,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در ثبت یک هزینه، رسید وجود دارد اما مبلغ در دفتر اشتباه وارد شده است. بهترین اقدام چیست؟",
+            "options": [
+              "اصلاح ثبت با ارجاع به رسید و حفظ سابقهٔ تغییر",
+              "حذف رسید",
+              "پنهان‌کردن اختلاف",
+              "تغییر مبلغ برای هماهنگی ظاهری"
+            ],
+            "answer": 0,
+            "explanation": "ثبت مالی باید دقیق، قابل پیگیری و مستند به رسید باشد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "پودمان ۸: معماری و سازه (ماکت‌سازی)",
@@ -8920,7 +9736,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در ماکت، دیوارها درست اندازه‌گیری شده‌اند اما سازه ناپایدار است. کدام عامل باید بیشتر بررسی شود؟",
+            "options": [
+              "تکیه‌گاه‌ها و توزیع بار",
+              "رنگ دیوارها",
+              "نام ماکت",
+              "تعداد برچسب‌ها"
+            ],
+            "answer": 0,
+            "explanation": "پایداری به شکل سازه، تکیه‌گاه و توزیع بار وابسته است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ],
     "alignmentReview": {
@@ -8991,7 +9823,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "Choose the correct sentence.",
+            "options": [
+              "They is from Iran.",
+              "They are Iranian.",
+              "They am Iranian.",
+              "They be Iran."
+            ],
+            "answer": 1,
+            "explanation": "برای فاعل جمع they از are استفاده می‌شود و Iranian ملیت است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Lesson 2: My Week",
@@ -9048,7 +9896,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "Which sentence describes a weekly routine correctly?",
+            "options": [
+              "She go to school on Mondays.",
+              "She goes to school on Mondays.",
+              "She going to school on Mondays.",
+              "She does goes to school on Mondays."
+            ],
+            "answer": 1,
+            "explanation": "برای سوم‌شخص مفرد در زمان حال ساده، فعل معمولاً s می‌گیرد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Lesson 3: My Abilities",
@@ -9105,7 +9969,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "Choose the correct question about ability.",
+            "options": [
+              "Can your sister speak English?",
+              "Does your sister can speak English?",
+              "Can your sister speaks English?",
+              "Can to your sister speak English?"
+            ],
+            "answer": 0,
+            "explanation": "در پرسش با can، خود can پیش از فاعل می‌آید و فعل پس از فاعل ساده است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Lesson 4: My Health",
@@ -9162,7 +10042,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "Which response is the most suitable for “What's wrong?” — “I have a headache.”",
+            "options": [
+              "You should rest.",
+              "I am from Canada.",
+              "There are two parks.",
+              "I can swim."
+            ],
+            "answer": 0,
+            "explanation": "برای بیان مشکل سلامتی، توصیهٔ استراحت پاسخ مرتبطی است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Lesson 5: My City",
@@ -9219,7 +10115,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "There ___ two museums opposite the park.",
+            "options": [
+              "is",
+              "are",
+              "am",
+              "be"
+            ],
+            "answer": 1,
+            "explanation": "دو موزه اسم جمع است؛ بنابراین there are به کار می‌رود.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Lesson 6: My Village",
@@ -9276,7 +10188,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "Choose the sentence that best describes weather and nature.",
+            "options": [
+              "There is a river near the village, and it is rainy today.",
+              "There are a river and it rainy.",
+              "The river are next the village.",
+              "It rain yesterday every day."
+            ],
+            "answer": 0,
+            "explanation": "ساختار there is برای river مفرد و it is rainy برای توصیف هوا درست است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "Lesson 7: My Hobbies",
@@ -9333,7 +10261,23 @@
             "verificationStatus": "not_verified_against_official_textbook"
           }
         ],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "Choose the correct question and answer about hobbies.",
+            "options": [
+              "What do you like doing? — I like reading.",
+              "What you like do? — I reading.",
+              "What does you like? — I likes read.",
+              "What are your hobby? — I like reads."
+            ],
+            "answer": 0,
+            "explanation": "پرسش با What do you like doing? و پاسخ I like reading از نظر ساختار درست‌اند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ],
     "alignmentReview": {
@@ -9403,7 +10347,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در طراحی، اگر اندازهٔ اجزای یک شیء نسبت به یکدیگر درست نباشد، کدام معیار باید پیش از پرداخت جزئیات اصلاح شود؟",
+            "options": [
+              "تناسبات",
+              "بافت نهایی",
+              "امضای اثر",
+              "رنگ پس‌زمینه"
+            ],
+            "answer": 0,
+            "explanation": "تناسبات پایهٔ ساخت شکل قابل‌باورند و باید پیش از جزئیات اصلاح شوند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "تصویرسازی",
@@ -9450,7 +10410,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اگر تصویرسازی باید حس شتاب را منتقل کند، کدام انتخاب هدفمندتر است؟",
+            "options": [
+              "خطوط جهت‌دار و ترکیب‌بندی پویا",
+              "همهٔ خطوط افقی و ایستا",
+              "حذف رابطهٔ عناصر",
+              "تکرار بی‌هدف رنگ"
+            ],
+            "answer": 0,
+            "explanation": "خطوط جهت‌دار و چیدمان پویا می‌توانند حرکت را القا کنند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "عکاسی",
@@ -9497,7 +10473,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "برای ثبت جزئیات سطح زبر یک برگ، کدام ترکیب مناسب‌تر است؟",
+            "options": [
+              "نمای نزدیک و نور مایل",
+              "نمای دور و نور کاملاً تخت",
+              "کاهش وضوح و حذف بافت",
+              "قرار دادن برگ خارج از کادر"
+            ],
+            "answer": 0,
+            "explanation": "نمای نزدیک و نور مایل جزئیات بافت را آشکار می‌کنند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "خوشنویسی",
@@ -9544,7 +10536,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اگر ضخامت خطوط خوشنویسی ناخواسته تغییر کند، کدام عامل را باید بررسی کرد؟",
+            "options": [
+              "زاویه و فشار قلم",
+              "رنگ میز",
+              "اندازهٔ پنجره",
+              "فاصلهٔ صندلی"
+            ],
+            "answer": 0,
+            "explanation": "زاویه و فشار قلم بر ضخامت حرکت اثر می‌گذارند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "طراحی سنتی نقوش",
@@ -9591,7 +10599,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در طراحی نقوش متقارن، چرا شبکه و محور تقارن مفیدند؟",
+            "options": [
+              "جای‌گذاری و تکرار هماهنگ واحدها را ممکن می‌کنند",
+              "همهٔ نقش‌ها را نامتقارن می‌کنند",
+              "نیاز به اندازه‌گیری را حذف می‌کنند",
+              "رنگ را ثابت می‌کنند"
+            ],
+            "answer": 0,
+            "explanation": "شبکه و محور، مرجع منظم برای تکرار و تقارن فراهم می‌کنند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "بافت سنتی پارچه",
@@ -9638,7 +10662,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در بافت تاری‌ـ‌پودی، اگر تارها موازی نباشند چه مشکلی محتمل‌تر است؟",
+            "options": [
+              "ناهمواری و بی‌نظمی بافت",
+              "افزایش خودکار استحکام",
+              "تبدیل تار به پود",
+              "تغییر رنگ طبیعی نخ"
+            ],
+            "answer": 0,
+            "explanation": "تارهای ناموازی نظم و یکنواختی بافت را کاهش می‌دهند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "چاپ دستی",
@@ -9685,7 +10725,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در چاپ استنسیل، کدام بخش رنگ می‌گیرد؟",
+            "options": [
+              "قسمت‌های باز شابلون",
+              "قسمت‌های کاملاً پوشیده",
+              "پشت میز",
+              "تمام سطح بدون محدودیت"
+            ],
+            "answer": 0,
+            "explanation": "رنگ از بخش‌های باز شابلون عبور می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "هنرهای آوایی",
@@ -9732,7 +10788,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "دو ساز یک نت را با بلندی برابر می‌نوازند اما صدایشان متفاوت شنیده می‌شود. عامل اصلی چیست؟",
+            "options": [
+              "رنگ صوتی",
+              "تعداد ضرب‌ها",
+              "سرعت حرکت دست",
+              "مدت سکوت"
+            ],
+            "answer": 0,
+            "explanation": "رنگ صوتی ویژگی جنس صدای ساز را مشخص می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "هنرهای نمایشی",
@@ -9779,7 +10851,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "بازیگری جمله‌ای را با لحن شاد می‌گوید اما چهره و حرکت بدنش غمگین است. کدام بخش اجرا ناسازگار است؟",
+            "options": [
+              "هماهنگی لحن و بیان بدنی",
+              "اندازهٔ صحنه",
+              "تعداد تماشاگران",
+              "رنگ لباس"
+            ],
+            "answer": 0,
+            "explanation": "بیان بدنی، چهره و لحن باید با احساس شخصیت هماهنگ باشند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ]
   },
@@ -9839,7 +10927,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کدام رفتار شادابی را به مسئولیت اجتماعی پیوند می‌دهد؟",
+            "options": [
+              "استفاده از توانایی برای کمک و ساختن رابطه‌های سالم",
+              "نادیده‌گرفتن دیگران",
+              "وابستگی به تحسین دائمی",
+              "فرار از مسئولیت"
+            ],
+            "answer": 0,
+            "explanation": "شادابی سازنده می‌تواند در رفتار مسئولانه و کمک به دیگران نمود پیدا کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس دوم: خروج از بن‌بست‌ها",
@@ -9884,7 +10988,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "برای حل اختلافی که گروه را متوقف کرده، کدام اقدام از همه سنجیده‌تر است؟",
+            "options": [
+              "تعریف مسئله و بررسی راه‌حل‌ها با شنیدن نظر اعضا",
+              "سرزنش یک نفر",
+              "ترک فوری گروه",
+              "انتخاب راه‌حل بدون دلیل"
+            ],
+            "answer": 0,
+            "explanation": "شناخت مسئله و بررسی گزینه‌ها راه خروج از بن‌بست را روشن می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس سوم: تحولی بزرگ",
@@ -9929,7 +11049,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "اگر فردی می‌خواهد عادت تازه‌ای بسازد، کدام برنامه احتمال پایداری بیشتری دارد؟",
+            "options": [
+              "گام کوچک و پیگیری منظم",
+              "تغییر همه عادت‌ها در یک روز",
+              "انتظار برای انگیزهٔ همیشگی",
+              "رهاکردن برنامه پس از نخستین خطا"
+            ],
+            "answer": 0,
+            "explanation": "تغییر پایدار معمولاً با هدف کوچک و استمرار شکل می‌گیرد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس چهارم: شجاعت در همراهی",
@@ -9974,7 +11110,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "مخالفت محترمانه با تصمیم نادرست گروه، نمونهٔ کدام ویژگی است؟",
+            "options": [
+              "شجاعت اخلاقی",
+              "بی‌احترامی",
+              "بی‌تفاوتی",
+              "خودنمایی"
+            ],
+            "answer": 0,
+            "explanation": "شجاعت اخلاقی یعنی انتخاب درست همراه با احترام و دلیل.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس پنجم: در مسیر هدایت و اعتماد به خدا",
@@ -10019,7 +11171,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کدام برداشت از اعتماد به خدا دقیق‌تر است؟",
+            "options": [
+              "اعتماد همراه با تلاش و انجام وظیفه",
+              "کنارگذاشتن برنامه و کوشش",
+              "انتظار نتیجه بدون اقدام",
+              "واگذاری همه مسئولیت‌ها به دیگران"
+            ],
+            "answer": 0,
+            "explanation": "توکل جای تلاش و مسئولیت را نمی‌گیرد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس ششم: نگهبان همیشه بیدار",
@@ -10064,7 +11232,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کدام رفتار نشان می‌دهد فرد پیش از اقدام، خود را ارزیابی می‌کند؟",
+            "options": [
+              "سنجش نیت و پیامد تصمیم",
+              "تکرار رفتار بدون فکر",
+              "سرزنش دیگران",
+              "پنهان‌کردن خطا"
+            ],
+            "answer": 0,
+            "explanation": "خودارزیابی به شناخت پیامد و اصلاح رفتار کمک می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس هفتم: تا ابد زندگی",
@@ -10109,7 +11293,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "توجه به زندگی پس از مرگ چه اثری بر انتخاب اخلاقی می‌تواند داشته باشد؟",
+            "options": [
+              "توجه به پیامد اعمال و رعایت حقوق دیگران",
+              "بی‌اهمیت‌شدن رفتار امروز",
+              "حذف مسئولیت اجتماعی",
+              "نادیده‌گرفتن آثار تصمیم"
+            ],
+            "answer": 0,
+            "explanation": "باور به مسئولیت، توجه به پیامد رفتار را تقویت می‌کند.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس هشتم: میوهٔ شیرین ایمان",
@@ -10154,7 +11354,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "کدام رفتار ایمان را در عمل نشان می‌دهد؟",
+            "options": [
+              "امانت‌داری حتی بدون نظارت",
+              "ادعای صداقت بدون عمل",
+              "کمک فقط برای جایزه",
+              "نادیده‌گرفتن قول"
+            ],
+            "answer": 0,
+            "explanation": "امانت‌داری در عمل نمونه‌ای از هماهنگی باور و رفتار است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس نهم: حضور در ظهور",
@@ -10199,7 +11415,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "انتظار سازنده برای آینده با کدام رفتار همراه است؟",
+            "options": [
+              "آمادگی و اصلاح رفتار در زمان حال",
+              "بی‌عملی کامل",
+              "نادیده‌گرفتن عدالت",
+              "فقط بیان آرزو"
+            ],
+            "answer": 0,
+            "explanation": "انتظار سازنده با آمادگی و اقدام مسئولانه همراه است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس دهم: یقین در مسیر حق",
@@ -10244,7 +11476,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "برای رسیدن به یقین آگاهانه دربارهٔ یک ادعا چه باید کرد؟",
+            "options": [
+              "دلیل و شواهد را بررسی کرد",
+              "فقط نظر مشهور را تکرار کرد",
+              "احساس لحظه‌ای را معیار دانست",
+              "منبع را نادیده گرفت"
+            ],
+            "answer": 0,
+            "explanation": "یقین سنجیده بر دلیل و بررسی شواهد تکیه دارد.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       },
       {
         "title": "درس یازدهم: تنهاترین پیروز",
@@ -10289,7 +11537,23 @@
         ],
         "learningSections": [],
         "bookSolutions": [],
-        "alignmentStatus": "not_verified_against_1405_1406_pdf"
+        "alignmentStatus": "not_verified_against_1405_1406_pdf",
+        "challengeQuestions": [
+          {
+            "question": "در برابر فشار همسالان برای انتخاب نادرست، کدام واکنش پایداری مسئولانه است؟",
+            "options": [
+              "حفظ انتخاب درست و گفت‌وگوی محترمانه",
+              "همراهی برای محبوبیت",
+              "توهین به همه",
+              "نادیده‌گرفتن پیامدها"
+            ],
+            "answer": 0,
+            "explanation": "پایداری مسئولانه با احترام و توجه به پیامدها همراه است.",
+            "difficulty": "advanced",
+            "contentOrigin": "fahmino_authored_practice",
+            "verificationStatus": "not_verified_against_official_textbook"
+          }
+        ]
       }
     ]
   }
