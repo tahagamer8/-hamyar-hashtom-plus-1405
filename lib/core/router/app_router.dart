@@ -79,8 +79,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
         ],
       ),
-    ],
-    routes: [
       GoRoute(
         path: AppRoutes.aiAssistant,
         builder: (context, state) => const AiAssistantScreen(),
