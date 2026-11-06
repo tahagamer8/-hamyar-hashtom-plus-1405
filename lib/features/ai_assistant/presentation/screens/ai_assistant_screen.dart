@@ -6,9 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hamyar_hashtom_plus/features/ai_assistant/data/gemini_api_service.dart';
 
 class AiAssistantScreen extends StatefulWidget {
-  const AiAssistantScreen({super.key, this.studyContext});
+  const AiAssistantScreen({super.key, this.studyContext, this.initialPrompt});
 
   final Map<String, dynamic>? studyContext;
+  final String? initialPrompt;
 
   @override
   State<AiAssistantScreen> createState() => _AiAssistantScreenState();
@@ -282,7 +283,15 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
       _urlInput.text = _defaultWorkerUrl;
       _error = 'تنظیمات اتصال بارگذاری نشد؛ آدرس پیش‌فرض نمایش داده شد.';
     } finally {
-      if (mounted) setState(() => _ready = true);
+      if (mounted) {
+        setState(() => _ready = true);
+        final prompt = widget.initialPrompt?.trim();
+        if (prompt != null && prompt.isNotEmpty) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted && _messages.isEmpty) _askSuggested(prompt);
+          });
+        }
+      }
     }
   }
 
