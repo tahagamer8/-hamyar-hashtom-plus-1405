@@ -117,6 +117,8 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                 selectedIndex: safeIndex,
                 onChanged: (index) => setState(() => _selectedChapterIndex = index),
               ),
+              const SizedBox(height: 8),
+              _DraftContentNotice(feature: _feature),
               const SizedBox(height: 12),
               _ChapterContent(
                 chapter: selectedChapter,
@@ -129,6 +131,33 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class _DraftContentNotice extends StatelessWidget {
+  const _DraftContentNotice({required this.feature});
+  final AppFeature feature;
+
+  @override
+  Widget build(BuildContext context) {
+    final text = feature == AppFeature.solutions
+        ? 'در گام‌به‌گام فقط پاسخ‌هایی نمایش داده می‌شوند که با صفحهٔ کتاب تطبیق داده شده باشند.'
+        : 'محتوای آموزشی و پرسش‌های فعلی نسخهٔ اولیهٔ تألیفی‌اند و هنوز با چاپ رسمی ۱۴۰۵–۱۴۰۶ به‌طور کامل تطبیق نشده‌اند.';
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(Icons.info_outline_rounded, size: 18),
+          const SizedBox(width: 8),
+          Expanded(child: Text(text, style: Theme.of(context).textTheme.bodySmall)),
+        ],
       ),
     );
   }
