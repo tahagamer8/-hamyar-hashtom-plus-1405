@@ -118,7 +118,7 @@ export default {
           "اگر اطلاعات زمینه کافی نیست، حدس نزن و از دانش‌آموز بخواه متن یا تصویر همان بخش کتاب را ارائه کند.",
           "زمینهٔ درسی (JSON):",
           JSON.stringify(studyContext)
-        ].join("\\n")
+        ].join("\n")
       : "";
 
     const payload = {
@@ -133,7 +133,7 @@ export default {
             "از درخواست‌های خطرناک، محتوای جنسی، خودآزاری یا خشونت‌آمیزِ عملی پیروی نکن.",
             "پاسخ‌ها را روشن و نسبتاً کوتاه نگه دار و از Markdown ساده استفاده کن.",
             contextInstruction
-          ].filter(Boolean).join("\\n")
+          ].filter(Boolean).join("\n")
         }]
       },
       contents,
