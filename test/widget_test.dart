@@ -65,7 +65,7 @@ void main() {
     final file = File('assets/content/catalog_fa.json');
     expect(await file.exists(), isTrue);
     final catalog = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
-    expect(catalog.length, greaterThanOrEqualTo(11));
+    expect(catalog.length, greaterThanOrEqualTo(12));
     expect(catalog.values.fold<int>(0, (sum, item) => sum + ((item as Map<String, dynamic>)['chapters'] as List<dynamic>).length), greaterThanOrEqualTo(100));
     expect((catalog['math'] as Map<String, dynamic>)['chapters'], hasLength(9));
     expect((catalog['science'] as Map<String, dynamic>)['chapters'], hasLength(15));
@@ -95,8 +95,10 @@ void main() {
         }
       }
     }
-    expect(totalQuestions, greaterThanOrEqualTo(200));
-    for (final id in ['persian', 'writing', 'arabic', 'english', 'religion', 'quran', 'thinking', 'work']) {
+    expect(totalQuestions, greaterThanOrEqualTo(240));
+    expect((catalog['english'] as Map<String, dynamic>)['chapters'], hasLength(7));
+    expect((catalog['english_workbook'] as Map<String, dynamic>)['chapters'], hasLength(7));
+    for (final id in ['persian', 'writing', 'arabic', 'english', 'english_workbook', 'religion', 'quran', 'thinking', 'work']) {
       expect(((catalog[id] as Map<String, dynamic>)['chapters'] as List<dynamic>).length, greaterThanOrEqualTo(5), reason: id);
     }
   });
