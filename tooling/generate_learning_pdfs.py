@@ -198,9 +198,37 @@ def main():
     out = Path(args.output_dir)
     out.mkdir(parents=True, exist_ok=True)
     style_map = styles()
-    build_notes(catalog, out / "Fahmino-Grade8-Notes-FA.pdf", style_map)
-    build_questions(catalog, out / "Fahmino-Grade8-Sample-Questions-FA.pdf", style_map)
-    print(f"Generated 2 PDFs for {len(catalog)} subjects.")
+    manifest = []
+    for subject_id, subject in catalog.items():
+        for chapter_index, chapter in enumerate(subject["chapters"]):
+            single_chapter = {subject_id: {**subject, "chapters": [chapter]}}
+            prefix = f"{subject_id}-chapter-{chapter_index + 1:02d}"
+            notes_name = prefix + "-notes-fa.pdf"
+            questions_name = prefix + "-sample-questions-fa.pdf"
+            build_notes(single_chapter, out / notes_name, style_map)
+            build_questions(single_chapter, out / questions_name, style_map)
+            manifest.extend([
+                {
+                    "subjectId": subject_id,
+                    "chapterIndex": chapter_index,
+                    "chapterTitle": chapter["title"],
+                    "type": "notes",
+                    "title": "جزوه مرور فصل",
+                    "fileName": notes_name,
+                },
+                {
+                    "subjectId": subject_id,
+                    "chapterIndex": chapter_index,
+                    "chapterTitle": chapter["title"],
+                    "type": "sampleExams",
+                    "title": "نمونه‌سؤال فصل",
+                    "fileName": questions_name,
+                },
+            ])
+    (out / "manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(f"Generated {len(manifest)} chapter PDFs for {len(catalog)} subjects.")
 
 if __name__ == "__main__":
     main()
