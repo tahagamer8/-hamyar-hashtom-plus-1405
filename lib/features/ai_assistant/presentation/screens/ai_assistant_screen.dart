@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hamyar_hashtom_plus/features/ai_assistant/data/gemini_api_service.dart';
 
@@ -67,7 +66,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
     _scrollToBottom();
 
     final history = _messages
-        .takeLast(12)
+        .takeLast(11)
         .map((m) => {
               'role': m.isUser ? 'user' : 'model',
               'text': m.text,
@@ -82,7 +81,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
       if (!mounted) return;
       setState(() => _messages.add(_ChatMessage(text: answer, isUser: false)));
     } on GeminiApiException catch (e) {
-      if (mounted) setState(() => _error = e.message);
+      if (mounted) setState(() {\n        if (_messages.isNotEmpty && _messages.last.isUser) _messages.removeLast();\n        _error = e.message;\n      });
     } finally {
       if (mounted) {
         setState(() => _loading = false);
@@ -178,7 +177,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
                           child: TextField(
                             controller: _input,
                             minLines: 1,
-                            maxLines: 4,
+                            maxLines: 4,\n                            maxLength: 3000,
                             textInputAction: TextInputAction.send,
                             onSubmitted: (_) => _send(),
                             decoration: const InputDecoration(
