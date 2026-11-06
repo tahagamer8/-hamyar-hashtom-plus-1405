@@ -198,7 +198,11 @@ void main() {
     await tester.pumpWidget(_contentApp('lessons'));
     await tester.pumpAndSettle();
     expect(find.text('عددهای صحیح و گویا'), findsWidgets);
-    expect(find.textContaining('درسنامهٔ کاملِ بخش‌بندی‌شده ثبت نشده'), findsOneWidget);
+    expect(find.text('خلاصهٔ آموزشی فصل'), findsOneWidget);
+    expect(find.textContaining('عددهای گویا را می‌توان به صورت کسر نوشت.'), findsOneWidget);
+    expect(find.text('مثال آموزشی'), findsOneWidget);
+    expect(find.text('راه‌حل مرحله‌به‌مرحله'), findsOneWidget);
+    expect(find.textContaining('خلاصهٔ اولیه است'), findsOneWidget);
   });
 
   testWidgets('notes content loads from catalog bundle', (tester) async {
@@ -262,6 +266,7 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.byType(TextField), findsOneWidget);
+    expect(find.textContaining('بخشی از سؤال را جست‌وجو کن'), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'حاصل ۱/۲ + ۱/۴');
     await tester.pump();
     expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
