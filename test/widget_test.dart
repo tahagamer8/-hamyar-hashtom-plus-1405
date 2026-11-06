@@ -143,14 +143,18 @@ void main() {
     expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
   });
 
-  testWidgets('quiz checks a correct answer', (tester) async {
+  testWidgets('combined quiz has a timer and reveals answers after submission', (tester) async {
     await tester.pumpWidget(_contentApp('quiz'));
     await tester.pumpAndSettle();
+    expect(find.text('آزمون جامع ریاضی'), findsOneWidget);
+    expect(find.text('10:00'), findsOneWidget);
     await tester.tap(find.text('۳/۴').first);
     await tester.pump();
-    await tester.tap(find.text('بررسی پاسخ').first);
-    await tester.pump();
-    expect(find.textContaining('آفرین، پاسخ درست است.'), findsOneWidget);
+    expect(find.textContaining('پاسخ درست:'), findsNothing);
+    await tester.tap(find.text('ثبت و پایان آزمون'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('نمره:'), findsOneWidget);
+    expect(find.textContaining('پاسخ درست: ۳/۴'), findsOneWidget);
   });
 
   testWidgets('chapter can be added to favorites', (tester) async {
