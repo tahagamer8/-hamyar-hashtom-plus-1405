@@ -17,16 +17,20 @@ class _AiChatScreenState extends State<AiChatScreen> {
   Map<String, dynamic> _catalog = {};
   String? _selectedSubjectId;
   int _selectedChapterIndex = 0;
+  bool _catalogRequested = false;
 
   @override
-  void initState() {
-    super.initState();
-    _loadCatalog();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_catalogRequested) {
+      _catalogRequested = true;
+      _loadCatalog(DefaultAssetBundle.of(context));
+    }
   }
 
-  Future<void> _loadCatalog() async {
+  Future<void> _loadCatalog(AssetBundle bundle) async {
     try {
-      final raw = await rootBundle.loadString('assets/content/catalog_fa.json');
+      final raw = await bundle.loadString('assets/content/catalog_fa.json');
       final decoded = jsonDecode(raw);
       if (decoded is! Map<String, dynamic> || !mounted) return;
       setState(() {
