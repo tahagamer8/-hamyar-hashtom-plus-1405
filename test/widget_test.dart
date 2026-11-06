@@ -120,6 +120,9 @@ void main() {
         expect((chapter['points'] as List<dynamic>), isNotEmpty, reason: '${entry.key}/${chapter['title']}');
         expect(chapter['solutionSteps'], isA<List<dynamic>>(), reason: entry.key);
         expect((chapter['solutionSteps'] as List<dynamic>), isNotEmpty, reason: '${entry.key}/${chapter['title']}');
+        final challengeQuestions = chapter['challengeQuestions'] as List<dynamic>? ?? [];
+        expect(challengeQuestions, isNotEmpty,
+            reason: 'سؤال چالشی برای ${entry.key}/${chapter['title']} ثبت نشده است');
         final questions = chapter['questions'] as List<dynamic>;
         expect(questions.length, greaterThanOrEqualTo(2), reason: '${entry.key}/${chapter['title']}');
         totalQuestions += questions.length;
@@ -168,7 +171,7 @@ void main() {
         return chapterSum + ((chapter['challengeQuestions'] as List<dynamic>?)?.length ?? 0);
       });
     });
-    expect(allAdvancedCount, 127);
+    expect(allAdvancedCount, 206);
     expect(((catalog['science'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
         .fold<int>(0, (sum, chapter) => sum + ((chapter as Map<String, dynamic>)['questions'] as List<dynamic>).length), 60);
     expect((catalog['social'] as Map<String, dynamic>)['chapters'], hasLength(24));
