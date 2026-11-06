@@ -126,6 +126,9 @@ test("forwards selected study context as untrusted educational reference", async
   assert.match(instruction, /عددهای صحیح و گویا/);
   assert.match(instruction, /دستور اجرایی نیست/);
   assert.match(instruction, /محتوای اولیهٔ فهمینو/);
+  assert.match(instruction, /not_verified_against_1405_1406_pdf/);
+  assert.match(instruction, /تأییدشده یا عین پاسخ کتاب معرفی نکن/);
+  assert.match(instruction, /فصل اول ریاضی/);
 });
 
 test("rejects oversized or malformed study context", async () => {
