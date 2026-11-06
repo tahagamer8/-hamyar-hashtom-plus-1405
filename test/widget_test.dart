@@ -149,6 +149,24 @@ void main() {
       }
     }
     expect(totalQuestions, 409);
+    final answerPositionCounts = List<int>.filled(4, 0);
+    for (final subjectValue in catalog.values) {
+      final subject = subjectValue as Map<String, dynamic>;
+      for (final rawChapter in subject['chapters'] as List<dynamic>) {
+        final chapter = rawChapter as Map<String, dynamic>;
+        for (final group in [
+          chapter['questions'] as List<dynamic>,
+          chapter['challengeQuestions'] as List<dynamic>,
+        ]) {
+          for (final rawQuestion in group) {
+            final question = rawQuestion as Map<String, dynamic>;
+            answerPositionCounts[question['answer'] as int]++;
+          }
+        }
+      }
+    }
+    expect(answerPositionCounts.reduce((a, b) => a > b ? a : b) -
+        answerPositionCounts.reduce((a, b) => a < b ? a : b), lessThanOrEqualTo(1));
     expect(((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
         .fold<int>(0, (sum, chapter) => sum + ((chapter as Map<String, dynamic>)['questions'] as List<dynamic>).length), 36);
     final mathChapters = (catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>;
