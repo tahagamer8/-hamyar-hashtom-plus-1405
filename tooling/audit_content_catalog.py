@@ -148,6 +148,8 @@ def audit(path: Path) -> tuple[list[str], dict[str, int]]:
             if not isinstance(raw_challenge, list):
                 errors.append(f"{label}: challengeQuestions must be a list")
                 raw_challenge = []
+            if not raw_challenge:
+                errors.append(f"{label}: at least one advanced challenge question is required")
             for challenge_index, question in enumerate(raw_challenge):
                 questions += 1
                 qlabel = f"{label}/challenge-{challenge_index + 1}"
