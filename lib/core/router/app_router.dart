@@ -11,6 +11,7 @@ import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_
 import 'package:hamyar_hashtom_plus/features/settings/presentation/screens/settings_screen.dart';
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/subject_detail_screen.dart';
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/subjects_screen.dart';
+import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/feature_subjects_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -30,6 +31,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
           StatefulShellBranch(
             routes: [
+              GoRoute(
+                path: '${AppRoutes.featureSelection}/:featureId',
+                builder: (context, state) => FeatureSubjectsScreen(
+                  featureId: state.pathParameters['featureId']!,
+                ),
+              ),
               GoRoute(
                 path: AppRoutes.subjects,
                 builder: (context, state) => const SubjectsScreen(),
