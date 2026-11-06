@@ -191,21 +191,29 @@ class _Bullet extends StatelessWidget {
       );
 }
 
-class _ReadOnlyQuestion extends StatelessWidget {
+class _ReadOnlyQuestion extends StatefulWidget {
   const _ReadOnlyQuestion({required this.question, required this.number});
   final Map<String, dynamic> question;
   final int number;
 
   @override
+  State<_ReadOnlyQuestion> createState() => _ReadOnlyQuestionState();
+}
+
+class _ReadOnlyQuestionState extends State<_ReadOnlyQuestion> {
+  bool _showAnswer = false;
+
+  @override
   Widget build(BuildContext context) {
-    final options = (question['options'] as List<dynamic>? ?? []).cast<String>();
-    final answer = question['answer'] as int? ?? -1;
+    final options = (widget.question['options'] as List<dynamic>? ?? []).cast<String>();
+    final answer = widget.question['answer'] as int? ?? -1;
+    final hasAnswer = answer >= 0 && answer < options.length;
     return Padding(
       padding: const EdgeInsets.only(top: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('$number. ${question['question']}',
+          Text('${widget.number}. ${widget.question['question']}',
               style: Theme.of(context).textTheme.titleSmall),
           for (var i = 0; i < options.length; i++)
             Padding(
@@ -213,10 +221,19 @@ class _ReadOnlyQuestion extends StatelessWidget {
               child: Text('${String.fromCharCode(65 + i)}) ${options[i]}'),
             ),
           const SizedBox(height: 5),
-          Text('پاسخ: ${answer >= 0 && answer < options.length ? options[answer] : 'ثبت نشده'}',
-              style: TextStyle(color: Theme.of(context).colorScheme.primary)),
-          if (question['explanation'] is String)
-            Text(question['explanation'] as String),
+          TextButton.icon(
+            onPressed: () => setState(() => _showAnswer = !_showAnswer),
+            icon: Icon(_showAnswer ? Icons.visibility_off_outlined : Icons.visibility_outlined),
+            label: Text(_showAnswer ? 'پنهان کردن پاسخ' : 'نمایش پاسخ و توضیح'),
+          ),
+          if (_showAnswer) ...[
+            Text(
+              'پاسخ: ${hasAnswer ? options[answer] : 'ثبت نشده'}',
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            ),
+            if (widget.question['explanation'] is String)
+              Text(widget.question['explanation'] as String),
+          ],
           const Divider(height: 24),
         ],
       ),
