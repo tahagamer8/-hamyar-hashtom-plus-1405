@@ -1,4 +1,4 @@
-const MODEL = "gemini-2.5-flash";
+const MODEL = "gemini-3.8-flash";
 const MAX_MESSAGES = 12;
 const MAX_MESSAGE_LENGTH = 3000;
 const MAX_OUTPUT_TOKENS = 900;
@@ -33,6 +33,12 @@ export default {
       return json({ error: "مسیر درخواست پیدا نشد." }, 404);
     }
     if (!env.GEMINI_API_KEY) return json({ error: "کلید سرویس روی سرور تنظیم نشده است." }, 503);
+
+    if (env.CHAT_LIMITER) {
+      const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
+      const { success } = await env.CHAT_LIMITER.limit({ key: clientIp });
+      if (!success) return json({ error: "تعداد درخواست‌ها زیاد است؛ یک دقیقه بعد دوباره امتحان کن." }, 429);
+    }
 
     let body;
     try { body = await request.json(); } catch { return json({ error: "درخواست نامعتبر است." }, 400); }
