@@ -134,9 +134,16 @@ class _AiChatScreenState extends State<AiChatScreen> {
     if (tokens.isNotEmpty && scored.first.score == 0) {
       return 'در محتوای ذخیره‌شدهٔ این درس، مطلب مرتبطی پیدا نکردم. نام فصل را انتخاب کن یا پرسشت را با واژه‌های کتاب دوباره بنویس. نمی‌خواهم پاسخ نامرتبط حدس بزنم.';
     }
+
+    // Respect the learner's explicit chapter selection. Previously the
+    // dropdown only affected empty queries, so a question could be answered
+    // from a different chapter even while a chapter was selected.
+    final selectedChapter = scored[fallbackIndex];
     final best = tokens.isEmpty
-        ? [scored[fallbackIndex]]
-        : scored.where((item) => item.score > 0).take(2).toList();
+        ? [selectedChapter]
+        : selectedChapter.score > 0
+            ? [selectedChapter]
+            : scored.where((item) => item.score > 0).take(2).toList();
 
     final asksForExample = RegExp('مثال|حل|مرحله|گام|محاسبه|تمرین').hasMatch(question);
     final asksForQuestions = RegExp('سوال|سؤال|آزمون|تست|تمرین').hasMatch(question);
