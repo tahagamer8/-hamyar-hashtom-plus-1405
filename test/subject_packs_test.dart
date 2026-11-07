@@ -12,6 +12,28 @@ void main() {
     'english_workbook', 'art',
   ];
 
+  test('math pack maps all nine chapters to the official 1405 textbook pages', () async {
+    final raw = await rootBundle.loadString('assets/content/subjects/math.json');
+    final pack = jsonDecode(raw) as Map<String, dynamic>;
+    final chapters = pack['chapters'] as List<dynamic>;
+
+    expect(pack['textbookEdition'], 'چاپ سیزدهم، ۱۴۰۵');
+    expect(chapters, hasLength(9));
+    for (final value in chapters) {
+      final chapter = value as Map<String, dynamic>;
+      final start = chapter['pageStart'] as int;
+      final end = chapter['pageEnd'] as int;
+      final lessons = chapter['textbookLessons'] as List<dynamic>;
+      expect(start, lessThanOrEqualTo(end));
+      expect(lessons, isNotEmpty);
+      for (final lessonValue in lessons) {
+        final lesson = lessonValue as Map<String, dynamic>;
+        expect(lesson['title'], isA<String>());
+        expect(lesson['pageStart'], inInclusiveRange(start, end));
+      }
+    }
+  });
+
   test('every subject has an independently loadable, valid content pack', () async {
     for (final id in subjects) {
       final raw = await rootBundle.loadString('assets/content/subjects/$id.json');
