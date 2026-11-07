@@ -273,8 +273,35 @@ class _ChapterContent extends ConsumerWidget {
             ),
             if (chapter['pageStart'] is int) ...[
               const SizedBox(height: 4),
-              Text('شروع این بخش در کتاب: صفحه ${chapter['pageStart']}',
-                  style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.primary)),
+              Text(
+                chapter['pageEnd'] is int
+                    ? 'محدودهٔ کتاب درسی: صفحه ${chapter['pageStart']} تا ${chapter['pageEnd']}'
+                    : 'شروع این بخش در کتاب: صفحه ${chapter['pageStart']}',
+                style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.primary),
+              ),
+            ],
+            if (chapter['textbookLessons'] is List &&
+                (chapter['textbookLessons'] as List).isNotEmpty) ...[
+              const SizedBox(height: 8),
+              ExpansionTile(
+                tilePadding: EdgeInsets.zero,
+                childrenPadding: const EdgeInsetsDirectional.only(start: 8, bottom: 8),
+                leading: const Icon(Icons.menu_book_outlined),
+                title: const Text('درس‌های این فصل در کتاب'),
+                subtitle: Text('${(chapter['textbookLessons'] as List).length} درس'),
+                children: [
+                  for (final item in (chapter['textbookLessons'] as List)
+                      .whereType<Map<String, dynamic>>())
+                    ListTile(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(item['title'] as String? ?? 'درس'),
+                      trailing: item['pageStart'] is int
+                          ? Text('صفحه ${item['pageStart']}')
+                          : null,
+                    ),
+                ],
+              ),
             ],
             const SizedBox(height: 10),
             if (feature == AppFeature.notes ||
