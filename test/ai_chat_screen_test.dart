@@ -47,27 +47,24 @@ Widget _testApp() => MaterialApp(
     );
 
 void main() {
-  testWidgets('offline helper shows lesson selectors and input', (tester) async {
+  testWidgets('Gemini assistant shows lesson selectors and message input', (tester) async {
     await tester.pumpWidget(_testApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('راهنمای هوشمند آفلاین فهمینو'), findsOneWidget);
+    expect(find.text('هوش مصنوعی فهمینو'), findsOneWidget);
     expect(find.text('از کجا شروع کنیم؟'), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
     expect(find.byType(DropdownButtonFormField<String>), findsOneWidget);
     expect(find.byType(DropdownButtonFormField<int>), findsOneWidget);
+    expect(find.byTooltip('ارسال به هوش مصنوعی'), findsOneWidget);
   });
 
-  testWidgets('offline helper searches the selected local chapter', (tester) async {
+  testWidgets('assistant identifies its online Gemini mode honestly', (tester) async {
     await tester.pumpWidget(_testApp());
     await tester.pumpAndSettle();
 
-    await tester.enterText(find.byType(TextField), 'عددهای گویا چیست؟');
-    await tester.tap(find.byTooltip('جست‌وجوی محلی'));
-    await tester.pumpAndSettle();
-
-    expect(find.textContaining('راهنمای هوشمند فهمینو'), findsOneWidget);
-    expect(find.textContaining('عددهای صحیح و گویا'), findsWidgets);
-    expect(find.textContaining('مدل هوش مصنوعی مولد نیست'), findsOneWidget);
+    expect(find.textContaining('متصل به Gemini'), findsOneWidget);
+    expect(find.textContaining('مدل مولد نیست'), findsNothing);
+    expect(find.textContaining('از دستگاه خارج نمی‌شوند'), findsNothing);
   });
 }
