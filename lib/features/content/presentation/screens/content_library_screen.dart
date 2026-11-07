@@ -67,7 +67,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
           !points.every((item) => item is String) ||
           example is! String || steps is! List ||
           !steps.every((item) => item is String) ||
-          questions is! List || questions.isEmpty) return false;
+          questions is! List) return false;
       return questions.every((item) {
         if (item is! Map<String, dynamic>) return false;
         final options = item['options'];
