@@ -285,8 +285,10 @@ void main() {
         ),
       ),
     );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    });
     await tester.pump();
-    await tester.pump(const Duration(milliseconds: 50));
     expect(
       find.text('پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی'),
       findsOneWidget,
@@ -307,8 +309,10 @@ void main() {
         ),
       ),
     );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    });
     await tester.pump();
-    await tester.pump(const Duration(milliseconds: 50));
     await tester.enterText(find.byType(TextField), 'پست الکترونیکی');
     await tester.tap(find.byTooltip('جست‌وجوی محلی'));
     await tester.pump();
