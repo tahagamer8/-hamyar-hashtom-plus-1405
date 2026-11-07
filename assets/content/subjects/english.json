@@ -1,18 +1,19 @@
 {
   "schemaVersion": 1,
-  "contentVersion": "1405.08",
+  "contentVersion": "1405.11",
   "subjectId": "english",
   "title": "زبان انگلیسی",
   "chapters": [
     {
       "title": "Unit 1: My Nationality",
-      "summary": "در این درس نام کشورها و ملیت‌ها و معرفی افراد تمرین می‌شود. برای معرفی ملیت از ساختار I am ... و برای پرسیدن از Where are you from? استفاده می‌کنیم.",
+      "summary": "Theme: My Nationality. Students practice introducing themselves and other people, asking where someone is from, naming countries and nationalities, and spelling familiar words. Learning should combine listening, speaking, reading and writing.",
       "points": [
-        "Iran → Iranian; Canada → Canadian.",
-        "Where are you from? برای پرسیدن کشور مبدأ.",
-        "He و She برای سوم‌شخص مفرد به کار می‌روند."
+        "Communication: asking and answering about country and nationality.",
+        "Vocabulary: country names and nationality words such as Iran/Iranian and Canada/Canadian.",
+        "Listening and speaking: understanding short introductions and introducing a classmate.",
+        "Reading and writing: recognizing and spelling familiar words; practicing common letter combinations."
       ],
-      "example": "Answer: Where are you from? — I am from Iran. I am Iranian.",
+      "example": "Pair practice: introduce a classmate to a visitor and ask where the visitor is from.",
       "solutionSteps": [
         "کشور را مشخص می‌کنیم.",
         "صفت ملیت را انتخاب می‌کنیم.",
@@ -20,38 +21,50 @@
       ],
       "questions": [
         {
-          "question": "Which nationality describes a person from Canada?",
+          "question": "What is the nationality of a person from Canada?",
           "options": [
             "Canadian",
-            "Iranian",
-            "Omani",
-            "Qatari"
+            "Chinese",
+            "Brazilian",
+            "Iranian"
           ],
           "answer": 0,
           "explanation": "A person from Canada is Canadian."
         },
         {
-          "question": "Which form of be agrees with she in this sentence?",
+          "question": "Which question asks about a person's country?",
           "options": [
-            "She are Iranian.",
-            "She is Iranian.",
-            "She am Iranian.",
-            "She be Iranian."
+            "Where are you from?",
+            "How old are you?",
+            "What time is it?",
+            "How are you today?"
           ],
-          "answer": 1,
-          "explanation": "با She از فعل is استفاده می‌کنیم."
+          "answer": 0,
+          "explanation": "Where are you from? asks about a person's country or place of origin."
+        },
+        {
+          "question": "Which spelling is correct for the nationality of a person from Iran?",
+          "options": [
+            "Iranian",
+            "Iranean",
+            "Iranish",
+            "Iraner"
+          ],
+          "answer": 0,
+          "explanation": "The correct word is Iranian."
         }
       ]
     },
     {
       "title": "Unit 2: My Week",
-      "summary": "برای صحبت درباره برنامه هفتگی از روزهای هفته و زمان حال ساده استفاده می‌شود. قیدهای تکرار مانند always و usually دفعات انجام کار را نشان می‌دهند.",
+      "summary": "Theme: My Week. Students talk about daily routines and weekly activities, ask when and on which days activities happen, and understand short conversations about helping and planning.",
       "points": [
-        "Monday تا Sunday روزهای هفته‌اند.",
-        "I play؛ اما He plays.",
-        "usually یعنی معمولاً و never یعنی هرگز."
+        "Communication: talking about daily activities and weekly routines.",
+        "Vocabulary: days of the week and common activities.",
+        "Listening and speaking: asking about a person's schedule and responding clearly.",
+        "Reading and writing: completing simple weekly schedules and writing about familiar routines."
       ],
-      "example": "Describe your weekly routine in three sentences.",
+      "example": "Ask a partner what they do on two different days, then write a short weekly schedule.",
       "solutionSteps": [
         "روزهای فعالیت را مشخص می‌کنیم.",
         "فاعل و فعل مناسب را انتخاب می‌کنیم.",
@@ -59,38 +72,50 @@
       ],
       "questions": [
         {
-          "question": "Choose the correct form: He ___ football on Fridays.",
+          "question": "Which expression asks about the day of an activity?",
           "options": [
-            "play",
-            "plays",
-            "playing",
-            "played"
+            "What days do you ...?",
+            "Where are you from?",
+            "What is your hobby?",
+            "What's the matter?"
           ],
-          "answer": 1,
-          "explanation": "در حال ساده برای he به فعل معمولاً s اضافه می‌شود."
+          "answer": 0,
+          "explanation": "What days do you ...? asks on which days an activity happens."
         },
         {
-          "question": "Which word means «معمولاً»?",
+          "question": "Which word names the day after Tuesday?",
           "options": [
-            "never",
-            "usually",
-            "sometimes",
-            "yesterday"
+            "Wednesday",
+            "Monday",
+            "Friday",
+            "Sunday"
           ],
-          "answer": 1,
-          "explanation": "Usually به معنی معمولاً است."
+          "answer": 0,
+          "explanation": "Wednesday comes after Tuesday."
+        },
+        {
+          "question": "Which answer is suitable for “When do you study English?”",
+          "options": [
+            "On Monday mornings.",
+            "I am Iranian.",
+            "I have a headache.",
+            "I can swim."
+          ],
+          "answer": 0,
+          "explanation": "The question asks about time, so a day/time answer is appropriate."
         }
       ]
     },
     {
       "title": "Unit 3: My Abilities",
-      "summary": "برای بیان توانایی از can و برای ناتوانی از cannot یا can't استفاده می‌شود. پس از can شکل ساده فعل می‌آید.",
+      "summary": "Theme: My Abilities. Students describe what they can do, ask about other people's abilities, and understand short conversations about skills and activities.",
       "points": [
-        "I can swim.",
-        "She can speak English.",
-        "پس از can از فعل بدون s و to استفاده کن."
+        "Communication: asking and answering about abilities.",
+        "Vocabulary: activities and skills such as swimming, drawing and speaking.",
+        "Listening and speaking: asking a classmate what they are good at.",
+        "Reading and writing: understanding short descriptions of abilities and writing about one's own skills."
       ],
-      "example": "Write two things you can do and one thing you cannot do.",
+      "example": "Ask a classmate about two activities and introduce one ability they have to the group.",
       "solutionSteps": [
         "توانایی را مشخص می‌کنیم.",
         "فاعل را می‌آوریم.",
@@ -98,38 +123,50 @@
       ],
       "questions": [
         {
-          "question": "Which sentence correctly tells what he is able to do?",
+          "question": "Which question asks about someone's ability?",
           "options": [
-            "He can swims.",
-            "He cans swim.",
-            "He can swim.",
-            "He can to swim."
+            "Can you swim?",
+            "Where do you live?",
+            "What is the date?",
+            "How is the weather?"
           ],
-          "answer": 2,
-          "explanation": "بعد از can فعل به شکل ساده می‌آید."
+          "answer": 0,
+          "explanation": "Can you swim? asks whether someone has the ability to swim."
         },
         {
-          "question": "What does “can't” mean?",
+          "question": "What does “I am good at drawing” mean?",
           "options": [
-            "می‌تواند",
-            "نمی‌تواند",
-            "باید",
-            "می‌خواهد"
+            "I draw well.",
+            "I do not like drawing.",
+            "I am from Draw.",
+            "I draw every morning."
           ],
-          "answer": 1,
-          "explanation": "Can't شکل کوتاه cannot و به معنی نمی‌تواند است."
+          "answer": 0,
+          "explanation": "The sentence says that the speaker is skilled at drawing."
+        },
+        {
+          "question": "Which answer is suitable for “Can you ride a bicycle?”",
+          "options": [
+            "Yes, I can.",
+            "I am from Iran.",
+            "It is Wednesday.",
+            "I have a cold."
+          ],
+          "answer": 0,
+          "explanation": "The question asks about ability, so yes/no with can is suitable."
         }
       ]
     },
     {
       "title": "Unit 4: My Health",
-      "summary": "در گفت‌وگو درباره سلامت، نام بخش‌های بدن و عبارت‌های ساده برای بیان مشکل و توصیه به کار می‌روند.",
+      "summary": "Theme: My Health. Students name common health problems, ask how someone feels, and give simple health advice. Role-play supports listening and speaking in everyday situations.",
       "points": [
-        "I have a headache یعنی سردرد دارم.",
-        "You should rest برای توصیه.",
-        "برای پرسیدن مشکل می‌توان گفت What's the matter?"
+        "Communication: talking about health problems and giving advice.",
+        "Vocabulary: common problems such as headache and toothache.",
+        "Listening and speaking: asking what is wrong and suggesting suitable help.",
+        "Reading and writing: understanding short health messages and writing simple advice."
       ],
-      "example": "Make a short dialogue about feeling tired.",
+      "example": "Role-play: one student describes a simple health problem; the other gives a suitable, safe suggestion.",
       "solutionSteps": [
         "مشکل را بیان می‌کنیم.",
         "پرسش مناسب می‌پرسیم.",
@@ -137,38 +174,50 @@
       ],
       "questions": [
         {
-          "question": "Choose the correct meaning of «headache».",
+          "question": "What does “headache” mean?",
           "options": [
             "سردرد",
-            "کمردرد",
             "گلودرد",
-            "دندان"
+            "دندان‌درد",
+            "کمردرد"
           ],
           "answer": 0,
-          "explanation": "Headache یعنی سردرد."
+          "explanation": "Headache means سردرد."
         },
         {
-          "question": "Which sentence gives advice?",
+          "question": "Which expression gives advice?",
           "options": [
-            "I am twelve.",
-            "You should rest.",
-            "Where are you?",
-            "I play football."
+            "You should get some rest.",
+            "Where are you from?",
+            "What is your hobby?",
+            "I am from Canada."
           ],
-          "answer": 1,
-          "explanation": "Should برای پیشنهاد و توصیه به کار می‌رود."
+          "answer": 0,
+          "explanation": "You should ... is used to give advice."
+        },
+        {
+          "question": "Which question asks about a health problem?",
+          "options": [
+            "What's the matter?",
+            "What days do you study?",
+            "Where is the park?",
+            "Can you draw?"
+          ],
+          "answer": 0,
+          "explanation": "What's the matter? asks what problem someone has."
         }
       ]
     },
     {
       "title": "Unit 5: My City",
-      "summary": "برای معرفی شهر از مکان‌ها، جهت‌ها و ساختار there is/there are استفاده می‌شود. There is برای مفرد و there are برای جمع است.",
+      "summary": "Theme: My City. Students describe places in a city, ask about locations and understand simple information about familiar places.",
       "points": [
-        "There is a park near my house.",
-        "There are two schools in my town.",
-        "next to یعنی کنار؛ opposite یعنی روبه‌رو."
+        "Communication: describing a city and asking about places.",
+        "Vocabulary: common city places and location words.",
+        "Listening and speaking: asking for and giving simple information about places.",
+        "Reading and writing: understanding a short description or map-based text and writing about a familiar city."
       ],
-      "example": "Describe three places in your city.",
+      "example": "Describe three places in your city and explain where one of them is in relation to another.",
       "solutionSteps": [
         "مکان‌های مهم را انتخاب می‌کنیم.",
         "مفرد یا جمع بودن را می‌سنجیم.",
@@ -176,39 +225,50 @@
       ],
       "questions": [
         {
-          "question": "Which sentence correctly tells that a park exists nearby?",
+          "question": "Which word means «بیمارستان»?",
           "options": [
-            "There are a park.",
-            "There is a park.",
-            "There be a park.",
-            "There am a park."
+            "hospital",
+            "library",
+            "park",
+            "museum"
           ],
-          "answer": 1,
-          "explanation": "برای اسم مفرد از there is استفاده می‌شود."
+          "answer": 0,
+          "explanation": "Hospital means بیمارستان."
         },
         {
-          "question": "Complete the sentence: There ___ a park near my school.",
+          "question": "Which place is usually used to borrow books?",
           "options": [
-            "are",
-            "is",
-            "am",
-            "be"
+            "library",
+            "stadium",
+            "airport",
+            "restaurant"
           ],
-          "answer": 1,
-          "explanation": "Park مفرد است؛ بنابراین از There is استفاده می‌کنیم."
+          "answer": 0,
+          "explanation": "A library is a place where people can read or borrow books."
+        },
+        {
+          "question": "Which question is useful when asking about a place?",
+          "options": [
+            "Where is the museum?",
+            "How old are you?",
+            "Can you swim?",
+            "What is your nationality?"
+          ],
+          "answer": 0,
+          "explanation": "Where is the museum? asks for the location of a place."
         }
       ]
     },
     {
       "title": "Unit 6: My Village",
-      "summary": "در این درس درباره روستا، موقعیت مکانی، طبیعت و آب‌وهوا صحبت می‌کنیم. برای توصیف مکان از صفت‌ها و عبارت‌های مکانی و برای پرسیدن درباره وضعیت هوا از پرسش‌های ساده استفاده می‌شود.",
+      "summary": "Theme: My Village. Students describe village life, natural places and familiar activities, and compare features of places using simple spoken and written language.",
       "points": [
-        "village یعنی روستا و field یعنی مزرعه.",
-        "mountain یعنی کوه و river یعنی رودخانه.",
-        "برای پرسیدن مکان می‌توان گفت Where is it?",
-        "برای توصیف هوا از واژه‌هایی مانند sunny، rainy و cloudy استفاده می‌کنیم."
+        "Communication: describing a village and its surroundings.",
+        "Vocabulary: nature and village words such as river, field and mountain.",
+        "Listening and speaking: talking about familiar places and daily life.",
+        "Reading and writing: understanding and producing short descriptions of a village."
       ],
-      "example": "Where is your village? — It is near a river. The weather is usually cold in winter.",
+      "example": "Write a short description of a village or rural place, including two natural features and one activity.",
       "solutionSteps": [
         "موضوع پرسش را مشخص می‌کنیم: مکان یا آب‌وهوا.",
         "واژه‌های مناسب مکان و فصل را انتخاب می‌کنیم.",
@@ -216,50 +276,50 @@
       ],
       "questions": [
         {
-          "question": "What is the meaning of “village”?",
+          "question": "What does “village” mean?",
           "options": [
-            "شهر",
             "روستا",
+            "شهر",
             "کشور",
             "خیابان"
           ],
-          "answer": 1,
-          "explanation": "Village به معنی روستا است."
+          "answer": 0,
+          "explanation": "Village means روستا."
         },
         {
-          "question": "Choose the correct word: A place with many trees and flowers can be _____.",
+          "question": "Which word means «رودخانه»?",
           "options": [
-            "beautiful",
-            "hungry",
-            "late",
-            "sick"
+            "river",
+            "mountain",
+            "field",
+            "forest"
           ],
           "answer": 0,
-          "explanation": "Beautiful برای توصیف زیبایی یک مکان به کار می‌رود."
+          "explanation": "River means رودخانه."
         },
         {
-          "question": "Which word is about weather?",
+          "question": "Which sentence best describes a natural place?",
           "options": [
-            "tractor",
-            "cloudy",
-            "village",
-            "field"
+            "There is a river near the village.",
+            "I am from Canada.",
+            "I have a headache.",
+            "I can play chess."
           ],
-          "answer": 1,
-          "explanation": "Cloudy به معنی ابری است و وضعیت آب‌وهوا را توصیف می‌کند."
+          "answer": 0,
+          "explanation": "The sentence describes a natural feature near a village."
         }
       ]
     },
     {
       "title": "Unit 7: My Hobbies",
-      "summary": "در این درس درباره سرگرمی‌ها و فعالیت‌های اوقات فراغت صحبت می‌کنیم. می‌توانیم علاقه خود و دیگران را بیان کنیم و درباره کارهایی که در زمان آزاد انجام می‌دهیم سؤال بپرسیم.",
+      "summary": "Theme: My Hobbies. Students talk about hobbies and free-time activities, ask others about their interests, and understand short descriptions of what people enjoy doing.",
       "points": [
-        "hobby یعنی سرگرمی و free time یعنی وقت آزاد.",
-        "برای پرسیدن درباره سرگرمی می‌توان گفت What is your hobby?",
-        "عبارت How about you? برای پرسیدن نظر یا وضعیت طرف مقابل است.",
-        "پسوند ing در نام بسیاری از فعالیت‌ها دیده می‌شود؛ مانند reading و swimming."
+        "Communication: asking and answering about hobbies and free time.",
+        "Vocabulary: common activities such as reading, swimming and playing games.",
+        "Listening and speaking: asking a partner about favourite activities.",
+        "Reading and writing: describing a hobby and writing a few sentences about free time."
       ],
-      "example": "What is your hobby? — I like reading books.",
+      "example": "Ask a partner about a favourite hobby and write three original sentences about when and why they enjoy it.",
       "solutionSteps": [
         "فعالیت یا سرگرمی مورد نظر را انتخاب می‌کنیم.",
         "از واژه مناسب برای علاقه یا پرسش استفاده می‌کنیم.",
@@ -269,35 +329,35 @@
         {
           "question": "What does “hobby” mean?",
           "options": [
-            "تکلیف",
             "سرگرمی",
-            "آب‌وهوا",
-            "مسافرت"
-          ],
-          "answer": 1,
-          "explanation": "Hobby به معنی سرگرمی یا فعالیت دلخواه در اوقات فراغت است."
-        },
-        {
-          "question": "Which question asks about a person's favourite free-time activity?",
-          "options": [
-            "What are your hobby?",
-            "What is your hobby?",
-            "Where hobby you?",
-            "How hobby is?"
-          ],
-          "answer": 1,
-          "explanation": "برای پرسیدن سرگرمی یک نفر، ساختار What is your hobby? درست است."
-        },
-        {
-          "question": "Which word means “مطالعه کردن”؟",
-          "options": [
-            "reading",
-            "driving",
-            "swimming",
-            "cooking"
+            "ملیت",
+            "بیماری",
+            "برنامه هفتگی"
           ],
           "answer": 0,
-          "explanation": "Reading به معنی خواندن یا مطالعه کردن است."
+          "explanation": "Hobby means سرگرمی."
+        },
+        {
+          "question": "Which question asks about a person's hobby?",
+          "options": [
+            "What is your hobby?",
+            "Where are you from?",
+            "What's the matter?",
+            "What time is it?"
+          ],
+          "answer": 0,
+          "explanation": "What is your hobby? asks about a favourite free-time activity."
+        },
+        {
+          "question": "Which word means «مطالعه کردن»?",
+          "options": [
+            "reading",
+            "swimming",
+            "running",
+            "drawing"
+          ],
+          "answer": 0,
+          "explanation": "Reading means مطالعه کردن or خواندن."
         }
       ]
     }

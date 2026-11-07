@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/widgets/subject_pdf_card.dart';
 
 class ContentLibraryScreen extends ConsumerStatefulWidget {
   const ContentLibraryScreen({
@@ -166,6 +167,10 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               Text('ابتدا فصل یا درس موردنظرت را انتخاب کن.',
                   style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 14),
+              SubjectPdfCard(
+                subjectId: widget.subjectId,
+                subjectTitle: subject['title'] as String? ?? 'درس',
+              ),
               DropdownButtonFormField<int>(
                 value: selectedIndex,
                 isExpanded: true,

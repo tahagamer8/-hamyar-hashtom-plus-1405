@@ -10,6 +10,8 @@ import 'package:hamyar_hashtom_plus/app.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_constants.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/screens/content_library_screen.dart';
 import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_screen.dart';
+import 'package:hamyar_hashtom_plus/features/favorites/presentation/screens/favorites_screen.dart';
+import 'package:hamyar_hashtom_plus/features/ai/presentation/screens/ai_chat_screen.dart';
 
 const _testCatalog = r'''
 {
@@ -43,6 +45,19 @@ class _MemoryAssetBundle extends CachingAssetBundle {
       throw FlutterError('Unexpected test asset: $key');
     }
     return ByteData.sublistView(Uint8List.fromList(utf8.encode(catalog)));
+  }
+}
+
+class _MapAssetBundle extends CachingAssetBundle {
+  _MapAssetBundle(this.assets);
+
+  final Map<String, String> assets;
+
+  @override
+  Future<ByteData> load(String key) async {
+    final value = assets[key];
+    if (value == null) throw FlutterError('Unexpected test asset: $key');
+    return ByteData.sublistView(Uint8List.fromList(utf8.encode(value)));
   }
 }
 
@@ -134,6 +149,62 @@ void main() {
     }
   });
 
+  test('current independent subject packs pass full structural validation', () async {
+    const subjectIds = [
+      'math', 'science', 'persian', 'writing', 'arabic', 'english',
+      'social', 'religion', 'quran', 'thinking', 'work',
+      'english_workbook', 'art',
+    ];
+    var totalSections = 0;
+    var totalQuestions = 0;
+    final uniqueQuestions = <String>{};
+
+    for (final id in subjectIds) {
+      final file = File('assets/content/subjects/$id.json');
+      expect(await file.exists(), isTrue, reason: id);
+      final pack = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
+      expect(pack['subjectId'], id);
+      expect(pack['title'], isA<String>());
+      final chapters = pack['chapters'] as List<dynamic>;
+      expect(chapters, isNotEmpty, reason: id);
+      totalSections += chapters.length;
+
+      for (final rawChapter in chapters) {
+        final chapter = rawChapter as Map<String, dynamic>;
+        expect((chapter['title'] as String?)?.trim(), isNotEmpty, reason: id);
+        expect((chapter['summary'] as String?)?.trim().length, greaterThanOrEqualTo(30), reason: id + '/' + chapter['title']);
+        expect((chapter['points'] as List<dynamic>), isNotEmpty, reason: id);
+        expect((chapter['solutionSteps'] as List<dynamic>), isNotEmpty, reason: id);
+        final questions = chapter['questions'] as List<dynamic>;
+        expect(questions.length, greaterThanOrEqualTo(2), reason: id + '/' + chapter['title']);
+        totalQuestions += questions.length;
+        for (final rawQuestion in questions) {
+          final question = rawQuestion as Map<String, dynamic>;
+          final text = (question['question'] as String).trim();
+          final normalized = text.toLowerCase()
+              .replaceAll(RegExp(r'[\s\u200c\u0640؟،.!؛:]', unicode: true), '')
+              .replaceAll('ي', 'ی')
+              .replaceAll('ك', 'ک');
+          expect(text, isNotEmpty, reason: id);
+          expect(uniqueQuestions.add(normalized), isTrue, reason: 'پرسش تکراری در بسته‌های مستقل: ' + text);
+          final options = question['options'] as List<dynamic>;
+          expect(options.length, greaterThanOrEqualTo(4), reason: text);
+          expect(options.toSet().length, options.length, reason: text);
+          final answer = question['answer'] as int;
+          expect(answer, inInclusiveRange(0, options.length - 1), reason: text);
+          expect((question['explanation'] as String?)?.trim(), isNotEmpty, reason: text);
+        }
+      }
+    }
+
+    expect(totalSections, 145);
+    expect(totalQuestions, 430);
+    final religion = jsonDecode(
+      await File('assets/content/subjects/religion.json').readAsString(),
+    ) as Map<String, dynamic>;
+    expect(religion['chapters'], hasLength(15));
+  });
+
   testWidgets('home screen renders Fahmino branding', (tester) async {
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
     await tester.pumpAndSettle();
@@ -216,6 +287,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
     expect(find.text('پاسخ: ۳/۴'), findsNothing);
+    await tester.scrollUntilVisible(find.text('نمایش پاسخ و توضیح'), 250);
+    await tester.pumpAndSettle();
     await tester.tap(find.text('نمایش پاسخ و توضیح'));
     await tester.pump();
     expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
@@ -247,6 +320,61 @@ void main() {
     await tester.tap(find.byTooltip('افزودن به علاقه‌مندی‌ها'));
     await tester.pump();
     expect(find.byTooltip('حذف از علاقه‌مندی‌ها'), findsOneWidget);
+  });
+
+  testWidgets('favorites resolve titles from the current subject packs', (tester) async {
+    SharedPreferences.setMockInitialValues({
+      'fahmino_favorites_v1': [
+        'work::پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی',
+      ],
+    });
+    const catalog = r'{"work":{"title":"کار و فناوری","chapters":[]}}';
+    const workPack = r'{"schemaVersion":1,"subjectId":"work","title":"کار و فناوری","chapters":[{"title":"پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی","summary":"پست الکترونیکی برای ارسال پیام و سند به یک یا چند گیرنده استفاده می‌شود.","points":["صندوق دریافت و پیوست را مدیریت کن."],"example":"یک ایمیل تمرینی بنویس.","solutionSteps":["گیرنده را وارد کن."],"questions":[]}]}';
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: DefaultAssetBundle(
+            bundle: _MapAssetBundle({
+              'assets/content/catalog_fa.json': catalog,
+              'assets/content/subjects/work.json': workPack,
+            }),
+            child: const FavoritesScreen(),
+          ),
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    });
+    await tester.pump();
+    expect(
+      find.text('پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('offline study helper reads current subject packs', (tester) async {
+    const catalog = r'{"work":{"title":"کار و فناوری","chapters":[{"title":"عنوان قدیمی","summary":"نسخه قدیمی","points":[],"example":"","solutionSteps":[],"questions":[]} ]}}';
+    const workPack = r'{"schemaVersion":1,"subjectId":"work","title":"کار و فناوری","chapters":[{"title":"پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی","summary":"پست الکترونیکی برای ارسال پیام و سند به یک یا چند گیرنده استفاده می‌شود.","points":["صندوق دریافت و پیوست را مدیریت کن."],"example":"یک ایمیل تمرینی بنویس.","solutionSteps":["گیرنده را وارد کن."],"questions":[]}]}';
+    await tester.pumpWidget(
+      MaterialApp(
+        home: DefaultAssetBundle(
+          bundle: _MapAssetBundle({
+            'assets/content/catalog_fa.json': catalog,
+            'assets/content/subjects/work.json': workPack,
+          }),
+          child: const AiChatScreen(),
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    });
+    await tester.pump();
+    await tester.enterText(find.byType(TextField), 'پست الکترونیکی');
+    await tester.tap(find.byTooltip('جست‌وجوی محلی'));
+    await tester.pump();
+    expect(find.textContaining('پست الکترونیکی برای ارسال پیام'), findsOneWidget);
   });
 
   testWidgets('search finds text inside a question', (tester) async {
