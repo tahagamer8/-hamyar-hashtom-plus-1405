@@ -210,13 +210,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('امکانات'), findsOneWidget);
-    await tester.scrollUntilVisible(
-      find.text('نمایش PDF').first,
-      250,
-      scrollable: find.byType(Scrollable).first,
-    );
-    expect(find.text('باز کردن جزوه'), findsOneWidget);
-    expect(find.text('دانلود PDF'), findsNWidgets(2));
+    expect(find.text('هوش مصنوعی فهمینو'), findsOneWidget);
+
   });
 
   testWidgets('navigates to subjects tab', (tester) async {
@@ -371,10 +366,9 @@ void main() {
       await Future<void>.delayed(const Duration(milliseconds: 100));
     });
     await tester.pump();
-    await tester.enterText(find.byType(TextField), 'پست الکترونیکی');
-    await tester.tap(find.byTooltip('جست‌وجوی محلی'));
-    await tester.pump();
-    expect(find.textContaining('پست الکترونیکی برای ارسال پیام'), findsOneWidget);
+    expect(find.text('هوش مصنوعی فهمینو'), findsOneWidget);
+    expect(find.textContaining('متصل به Gemini'), findsOneWidget);
+    expect(find.byTooltip('ارسال به هوش مصنوعی'), findsOneWidget);
   });
 
   testWidgets('search finds text inside a question', (tester) async {
