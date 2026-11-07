@@ -68,14 +68,19 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
     if (_busy) return;
     setState(() => _busy = true);
     try {
-      final f = await _file();
-      if (!await f.exists() || await f.length() == 0) {
-        if (mounted) ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('ابتدا PDF را دانلود کن تا آفلاین در دسترس باشد.')),
+      // Display works independently from the explicit offline-download action.
+      final saved = await _file();
+      File fileToOpen = saved;
+      if (!await saved.exists() || await saved.length() == 0) {
+        final data = await rootBundle.load('assets/generated_pdfs/$_fileName');
+        final cache = await getTemporaryDirectory();
+        fileToOpen = File('${cache.path}/$_fileName');
+        await fileToOpen.writeAsBytes(
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+          flush: true,
         );
-        return;
       }
-      final result = await OpenFilex.open(f.path, type: 'application/pdf');
+      final result = await OpenFilex.open(fileToOpen.path, type: 'application/pdf');
       if (mounted && result.type != ResultType.done) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('نمایش PDF ممکن نشد: ${result.message}')),
@@ -83,7 +88,7 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
       }
     } catch (_) {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('برای نمایش فایل، یک نمایشگر PDF لازم است.')),
+        const SnackBar(content: Text('فایل PDF این بخش در این نسخه موجود نیست یا نمایشگر PDF نصب نشده است.')),
       );
     } finally {
       if (mounted) setState(() => _busy = false);
@@ -105,7 +110,7 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
             if (_downloaded) const Icon(Icons.offline_pin_rounded, color: Colors.green, size: 20),
           ]),
           const SizedBox(height: 5),
-          Text('خلاصهٔ درس‌ها، نکته‌ها، مثال‌ها و نمونه‌سؤال‌ها؛ پس از ذخیره بدون اینترنت باز می‌شود.',
+          Text('برای مشاهده، نمایش PDF را بزن؛ برای نگهداری و استفادهٔ آفلاین، دانلود را انتخاب کن.',
               style: theme.textTheme.bodySmall),
           const SizedBox(height: 10),
           Wrap(spacing: 8, runSpacing: 8, children: [
@@ -117,7 +122,7 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
               label: Text(_downloaded ? 'دانلود شده' : 'دانلود PDF'),
             ),
             OutlinedButton.icon(
-              onPressed: _busy || !_downloaded ? null : _open,
+              onPressed: _busy ? null : _open,
               icon: const Icon(Icons.picture_as_pdf_outlined),
               label: const Text('نمایش PDF'),
             ),
