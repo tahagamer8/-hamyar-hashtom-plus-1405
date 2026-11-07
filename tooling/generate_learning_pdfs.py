@@ -21,7 +21,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, 
 
 _MATH_SPAN = re.compile(
     r"(?<![A-Za-z0-9۰-۹])(?:"
-    r"\\([۰-۹0-9A-Za-z]+(?: *[-+−×÷=<>≤≥] *[۰-۹0-9A-Za-z]+)+\\)"
+    r"[(][۰-۹0-9A-Za-z]+(?: *[-+−×÷=<>≤≥] *[۰-۹0-9A-Za-z]+)+[)]"
     r"(?: *[×÷] *[۰-۹0-9A-Za-z]+)?"
     r"|[۰-۹0-9A-Za-z]+(?: */ *[۰-۹0-9A-Za-z]+)?"
     r"(?: *[-+−×÷=<>≤≥] *[۰-۹0-9A-Za-z]+(?: */ *[۰-۹0-9A-Za-z]+)?)+"
