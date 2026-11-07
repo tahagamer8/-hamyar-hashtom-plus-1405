@@ -33,6 +33,27 @@ class _AiChatScreenState extends State<AiChatScreen> {
       final raw = await bundle.loadString('assets/content/catalog_fa.json');
       final decoded = jsonDecode(raw);
       if (decoded is! Map<String, dynamic> || !mounted) return;
+      // Load the independently versioned subject packs first, matching the
+      // lesson and search screens so the offline helper sees current content.
+      for (final id in decoded.keys.toList()) {
+        try {
+          final packRaw = await bundle.loadString('assets/content/subjects/$id.json');
+          final pack = jsonDecode(packRaw);
+          if (pack is Map<String, dynamic> &&
+              pack['subjectId'] == id &&
+              pack['title'] is String &&
+              pack['chapters'] is List &&
+              (pack['chapters'] as List).isNotEmpty) {
+            decoded[id] = pack;
+          }
+        } on FlutterError {
+          // Retain the legacy catalog entry when no separate pack exists.
+        } on FormatException {
+          // Retain the legacy catalog entry when a pack is malformed.
+        } on TypeError {
+          // Reject invalid pack shapes without breaking the offline helper.
+        }
+      }
       setState(() {
         _catalog = decoded;
         _selectedSubjectId = decoded.isEmpty ? null : decoded.keys.first;
