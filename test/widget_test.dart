@@ -118,7 +118,9 @@ void main() {
         }
       }
     }
-    expect(totalQuestions, 369);
+    expect(totalQuestions, 379);
+    expect(catalog['art'], isA<Map<String, dynamic>>());
+    expect((catalog['art'] as Map<String, dynamic>)['chapters'], hasLength(5));
     expect(((catalog['math'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
         .fold<int>(0, (sum, chapter) => sum + ((chapter as Map<String, dynamic>)['questions'] as List<dynamic>).length), 36);
     expect(((catalog['science'] as Map<String, dynamic>)['chapters'] as List<dynamic>)
