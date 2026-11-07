@@ -10,6 +10,7 @@ import 'package:hamyar_hashtom_plus/app.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_constants.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/screens/content_library_screen.dart';
 import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_screen.dart';
+import 'package:hamyar_hashtom_plus/features/favorites/presentation/screens/favorites_screen.dart';
 
 const _testCatalog = r'''
 {
@@ -247,6 +248,22 @@ void main() {
     await tester.tap(find.byTooltip('افزودن به علاقه‌مندی‌ها'));
     await tester.pump();
     expect(find.byTooltip('حذف از علاقه‌مندی‌ها'), findsOneWidget);
+  });
+
+  testWidgets('favorites resolve titles from the current subject packs', (tester) async {
+    SharedPreferences.setMockInitialValues({
+      'fahmino_favorites_v1': [
+        'work::پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی',
+      ],
+    });
+    await tester.pumpWidget(
+      const ProviderScope(child: MaterialApp(home: FavoritesScreen())),
+    );
+    await tester.pumpAndSettle();
+    expect(
+      find.text('پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('search finds text inside a question', (tester) async {
