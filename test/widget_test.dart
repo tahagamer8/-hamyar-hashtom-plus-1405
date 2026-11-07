@@ -198,7 +198,7 @@ void main() {
     }
 
     expect(totalSections, 145);
-    expect(totalQuestions, 430);
+    expect(totalQuestions, 448);
     final religion = jsonDecode(
       await File('assets/content/subjects/religion.json').readAsString(),
     ) as Map<String, dynamic>;
