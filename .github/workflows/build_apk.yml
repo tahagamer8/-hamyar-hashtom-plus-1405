@@ -57,9 +57,13 @@ jobs:
 
       - name: Generate Persian PDF assets
         run: |
-          python tooling/generate_learning_pdfs.py --output-dir assets/generated_pdfs
+          python tooling/generate_learning_pdfs.py --subjects-dir assets/content/subjects --output-dir assets/generated_pdfs
           test -s assets/generated_pdfs/Fahmino-Grade8-Notes-FA.pdf
           test -s assets/generated_pdfs/Fahmino-Grade8-Sample-Questions-FA.pdf
+          test "$(find assets/generated_pdfs -maxdepth 1 -name 'Fahmino-*-FA.pdf' | wc -l)" -eq 15
+          for subject in arabic art english english_workbook math persian quran religion science social thinking work writing; do
+            test -s "assets/generated_pdfs/Fahmino-$subject-FA.pdf"
+          done
 
       - name: Install dependencies
         run: flutter pub get
