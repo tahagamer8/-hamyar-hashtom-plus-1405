@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hamyar_hashtom_plus/core/router/app_routes.dart';
 
@@ -88,7 +89,8 @@ class _SearchScreenState extends State<SearchScreen> {
             final subjectTitle = subject['title'] as String? ?? subjectId;
             final chapters = (subject['chapters'] as List<dynamic>? ?? [])
                 .cast<Map<String, dynamic>>();
-            for (var chapterIndex = 0; chapterIndex < chapters.length; chapterIndex++) {\n              final chapter = chapters[chapterIndex];
+            for (var chapterIndex = 0; chapterIndex < chapters.length; chapterIndex++) {
+              final chapter = chapters[chapterIndex];
               final chapterTitle = chapter['title'] as String? ?? '';
               final summary = chapter['summary'] as String? ?? '';
               final points = (chapter['points'] as List<dynamic>? ?? []).join(' ');
@@ -103,7 +105,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   'subjectId': subjectId,
                   'subjectTitle': subjectTitle,
                   'chapterTitle': chapterTitle,
-                  'summary': summary,\n                  'chapterIndex': '$chapterIndex',
+                  'summary': summary,
+                  'chapterIndex': '$chapterIndex',
                 });
               }
             }
@@ -154,7 +157,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               isThreeLine: true,
                               trailing: const Icon(Icons.chevron_left_rounded),
                               onTap: () => context.go(
-                                AppRoutes.subjectDetail(entry['subjectId']!),
+                                '${AppRoutes.subjectDetail(entry['subjectId']!)}/lessons?chapter=${entry['chapterIndex']}',
                               ),
                             ),
                           );
