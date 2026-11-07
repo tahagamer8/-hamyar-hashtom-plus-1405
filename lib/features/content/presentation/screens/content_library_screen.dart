@@ -22,7 +22,7 @@ class ContentLibraryScreen extends ConsumerStatefulWidget {
 
 class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   Future<Map<String, dynamic>>? _contentFuture;
-  int _selectedChapterIndex = 0;
+  int _selectedChapterIndex = 0;\n\n  @override\n  void initState() {\n    super.initState();\n    _selectedChapterIndex = widget.initialChapterIndex < 0 ? 0 : widget.initialChapterIndex;\n  }
 
   @override
   void didChangeDependencies() {
