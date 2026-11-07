@@ -22,6 +22,7 @@ class ContentLibraryScreen extends ConsumerStatefulWidget {
 
 class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   Future<Map<String, dynamic>>? _contentFuture;
+  int _selectedChapterIndex = 0;
 
   @override
   void didChangeDependencies() {
@@ -75,20 +76,70 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               chapters: chapters,
             );
           }
+          if (chapters.isEmpty) {
+            return const Center(child: Text('برای این درس هنوز فصلی ثبت نشده است.'));
+          }
+          final selectedIndex = _selectedChapterIndex < 0
+              ? 0
+              : (_selectedChapterIndex >= chapters.length ? chapters.length - 1 : _selectedChapterIndex);
+          final selectedChapter = chapters[selectedIndex];
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
               Text(subject['title'] as String? ?? 'درس',
                   style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 6),
-              Text('محتوای آموزشی تألیفی فهمینو',
+              Text('ابتدا فصل یا درس موردنظرت را انتخاب کن.',
                   style: Theme.of(context).textTheme.bodySmall),
-              const SizedBox(height: 16),
-              for (final chapter in chapters)
-                _ChapterContent(
-                  chapter: chapter,
-                  feature: _feature,
-                  favoriteKey: '${widget.subjectId}::${chapter['title']}',
+              const SizedBox(height: 14),
+              DropdownButtonFormField<int>(
+                value: selectedIndex,
+                isExpanded: true,
+                decoration: const InputDecoration(
+                  labelText: 'انتخاب فصل یا درس',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.menu_book_rounded),
+                ),
+                items: [
+                  for (var i = 0; i < chapters.length; i++)
+                    DropdownMenuItem<int>(
+                      value: i,
+                      child: Text(
+                        '${i + 1}. ${chapters[i]['title'] as String? ?? 'درس'}'
+                        '${chapters[i]['pageStart'] is int ? '  •  صفحه ${chapters[i]['pageStart']}' : ''}',
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                ],
+                onChanged: (value) => setState(() {
+                  _selectedChapterIndex = value ?? 0;
+                }),
+              ),
+              const SizedBox(height: 14),
+              _ChapterContent(
+                chapter: selectedChapter,
+                feature: _feature,
+                favoriteKey: '${widget.subjectId}::${selectedChapter['title']}',
+              ),
+              if (chapters.length > 1)
+                Row(
+                  children: [
+                    TextButton.icon(
+                      onPressed: selectedIndex > 0
+                          ? () => setState(() => _selectedChapterIndex = selectedIndex - 1)
+                          : null,
+                      icon: const Icon(Icons.chevron_right_rounded),
+                      label: const Text('درس قبلی'),
+                    ),
+                    const Spacer(),
+                    TextButton.icon(
+                      onPressed: selectedIndex < chapters.length - 1
+                          ? () => setState(() => _selectedChapterIndex = selectedIndex + 1)
+                          : null,
+                      icon: const Icon(Icons.chevron_left_rounded),
+                      label: const Text('درس بعدی'),
+                    ),
+                  ],
                 ),
             ],
           );
@@ -136,6 +187,11 @@ class _ChapterContent extends ConsumerWidget {
                 ),
               ],
             ),
+            if (chapter['pageStart'] is int) ...[
+              const SizedBox(height: 4),
+              Text('شروع این بخش در کتاب: صفحه ${chapter['pageStart']}',
+                  style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.primary)),
+            ],
             const SizedBox(height: 10),
             if (feature == AppFeature.lessons) ...[
               Text(summary, style: theme.textTheme.bodyMedium),
