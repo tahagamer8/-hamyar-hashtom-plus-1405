@@ -65,6 +65,26 @@
           "answer": 0,
           "explanation": "۳/۵ برابر ۶/۱۰ است؛ پس ۶/۱۰−۱/۱۰=۵/۱۰=۱/۲."
         }
+      ],
+      "pageStart": 1,
+      "pageEnd": 18,
+      "textbookLessons": [
+        {
+          "title": "یادآوری عددهای صحیح",
+          "pageStart": 2
+        },
+        {
+          "title": "معرفی عددهای گویا",
+          "pageStart": 6
+        },
+        {
+          "title": "جمع و تفریق عددهای گویا",
+          "pageStart": 10
+        },
+        {
+          "title": "ضرب و تقسیم عددهای گویا",
+          "pageStart": 14
+        }
       ]
     },
     {
@@ -128,6 +148,18 @@
           "answer": 0,
           "explanation": "۳۰ را می‌توان به صورت حاصل‌ضرب اعداد اول ۲، ۳ و ۵ نوشت."
         }
+      ],
+      "pageStart": 19,
+      "pageEnd": 28,
+      "textbookLessons": [
+        {
+          "title": "یادآوری عددهای اول",
+          "pageStart": 20
+        },
+        {
+          "title": "تعیین عددهای اول",
+          "pageStart": 24
+        }
       ]
     },
     {
@@ -189,6 +221,30 @@
           ],
           "answer": 1,
           "explanation": "(۷−۲)×۱۸۰=۹۰۰ درجه."
+        }
+      ],
+      "pageStart": 29,
+      "pageEnd": 50,
+      "textbookLessons": [
+        {
+          "title": "چندضلعی‌ها و تقارن",
+          "pageStart": 30
+        },
+        {
+          "title": "توازی و تعامد",
+          "pageStart": 34
+        },
+        {
+          "title": "چهارضلعی‌ها",
+          "pageStart": 38
+        },
+        {
+          "title": "زاویه‌های داخلی",
+          "pageStart": 42
+        },
+        {
+          "title": "زاویه‌های خارجی",
+          "pageStart": 46
         }
       ]
     },
@@ -252,6 +308,26 @@
           "answer": 0,
           "explanation": "۵x−۲x=۳x و عدد ثابت ۴ باقی می‌ماند."
         }
+      ],
+      "pageStart": 51,
+      "pageEnd": 68,
+      "textbookLessons": [
+        {
+          "title": "ساده کردن عبارت‌های جبری",
+          "pageStart": 52
+        },
+        {
+          "title": "پیدا کردن مقدار یک عبارت جبری",
+          "pageStart": 56
+        },
+        {
+          "title": "تجزیه عبارت‌های جبری",
+          "pageStart": 60
+        },
+        {
+          "title": "معادله",
+          "pageStart": 64
+        }
       ]
     },
     {
@@ -313,6 +389,22 @@
           ],
           "answer": 0,
           "explanation": "برای جمع بردارها، مؤلفه‌های متناظر را جمع می‌کنیم: (۲+۳،۱+۴)=(۵،۵)."
+        }
+      ],
+      "pageStart": 69,
+      "pageEnd": 82,
+      "textbookLessons": [
+        {
+          "title": "جمع بردارها",
+          "pageStart": 70
+        },
+        {
+          "title": "ضرب عدد در بردار",
+          "pageStart": 74
+        },
+        {
+          "title": "بردارهای واحد مختصات",
+          "pageStart": 78
         }
       ]
     },
@@ -376,6 +468,26 @@
           "answer": 0,
           "explanation": "طبق رابطه فیثاغورس، مربع وتر برابر ۳²+۴²=۲۵ است؛ پس وتر ۵ سانتی‌متر می‌شود."
         }
+      ],
+      "pageStart": 83,
+      "pageEnd": 100,
+      "textbookLessons": [
+        {
+          "title": "رابطهٔ فیثاغورس",
+          "pageStart": 84
+        },
+        {
+          "title": "شکل‌های هم‌نهشت",
+          "pageStart": 88
+        },
+        {
+          "title": "مثلث‌های هم‌نهشت",
+          "pageStart": 92
+        },
+        {
+          "title": "هم‌نهشتی مثلث‌های قائم‌الزاویه",
+          "pageStart": 96
+        }
       ]
     },
     {
@@ -437,6 +549,30 @@
           ],
           "answer": 0,
           "explanation": "با خاصیت رادیکال‌ها، √۲×√۸=√۱۶=۴."
+        }
+      ],
+      "pageStart": 101,
+      "pageEnd": 118,
+      "textbookLessons": [
+        {
+          "title": "توان",
+          "pageStart": 102
+        },
+        {
+          "title": "تقسیم اعداد توان‌دار",
+          "pageStart": 106
+        },
+        {
+          "title": "جذر تقریبی",
+          "pageStart": 110
+        },
+        {
+          "title": "نمایش اعداد رادیکالی روی محور اعداد",
+          "pageStart": 114
+        },
+        {
+          "title": "خواص ضرب و تقسیم رادیکال‌ها",
+          "pageStart": 115
         }
       ]
     },
@@ -500,6 +636,26 @@
           "answer": 0,
           "explanation": "سکه ۲ حالت و تاس ۶ حالت دارد؛ پس ۲×۶=۱۲ حالت ممکن وجود دارد."
         }
+      ],
+      "pageStart": 119,
+      "pageEnd": 136,
+      "textbookLessons": [
+        {
+          "title": "دسته‌بندی داده‌ها",
+          "pageStart": 120
+        },
+        {
+          "title": "میانگین داده‌ها",
+          "pageStart": 124
+        },
+        {
+          "title": "احتمال یا اندازه‌گیری شانس",
+          "pageStart": 128
+        },
+        {
+          "title": "بررسی حالت‌های ممکن",
+          "pageStart": 132
+        }
       ]
     },
     {
@@ -562,7 +718,25 @@
           "answer": 0,
           "explanation": "اندازه زاویه محاطی نصف اندازه کمان روبه‌روی آن است؛ پس ۵۰ درجه می‌شود."
         }
+      ],
+      "pageStart": 137,
+      "pageEnd": 150,
+      "textbookLessons": [
+        {
+          "title": "خط و دایره",
+          "pageStart": 138
+        },
+        {
+          "title": "زاویه‌های مرکزی",
+          "pageStart": 142
+        },
+        {
+          "title": "زاویه‌های محاطی",
+          "pageStart": 146
+        }
       ]
     }
-  ]
+  ],
+  "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+  "textbookSource": "کتاب ریاضی پایه هشتم، سازمان پژوهش و برنامه‌ریزی آموزشی"
 }
