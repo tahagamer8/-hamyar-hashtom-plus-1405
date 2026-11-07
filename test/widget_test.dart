@@ -210,7 +210,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('امکانات'), findsOneWidget);
-    expect(find.text('هوش مصنوعی فهمینو'), findsOneWidget);
+    expect(find.text('هوش مصنوعی فهمینو', skipOffstage: false), findsOneWidget);
 
   });
 
