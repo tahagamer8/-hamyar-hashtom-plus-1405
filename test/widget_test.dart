@@ -12,6 +12,7 @@ import 'package:hamyar_hashtom_plus/features/content/presentation/screens/conten
 import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_screen.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:hamyar_hashtom_plus/features/ai/presentation/screens/ai_chat_screen.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/widgets/learning_pdfs_card.dart';
 
 const _testCatalog = r'''
 {
@@ -203,6 +204,15 @@ void main() {
       await File('assets/content/subjects/religion.json').readAsString(),
     ) as Map<String, dynamic>;
     expect(religion['chapters'], hasLength(15));
+  });
+
+  testWidgets('PDF card exposes separate preview and download actions', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: LearningPdfsCard())),
+    );
+
+    expect(find.text('نمایش PDF'), findsNWidgets(2));
+    expect(find.text('دانلود PDF'), findsNWidgets(2));
   });
 
   testWidgets('home screen renders Fahmino branding', (tester) async {
