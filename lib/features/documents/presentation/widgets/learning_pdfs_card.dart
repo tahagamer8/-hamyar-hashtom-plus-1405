@@ -13,31 +13,111 @@ class LearningPdfsCard extends StatefulWidget {
 }
 
 class _LearningPdfsCardState extends State<LearningPdfsCard> {
-  String? _opening;\n  String? _downloading;
+  String? _opening;
+  String? _downloading;
+
+  Future<File> _copyAssetTo(String fileName, Directory directory) async {
+    if (!await directory.exists()) {
+      await directory.create(recursive: true);
+    }
+    final target = File('${directory.path}/$fileName');
+    if (!await target.exists() || await target.length() == 0) {
+      final data = await rootBundle.load('assets/generated_pdfs/$fileName');
+      await target.writeAsBytes(
+        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+        flush: true,
+      );
+    }
+    return target;
+  }
 
   Future<void> _openPdf(String fileName, String label) async {
     if (_opening != null) return;
     setState(() => _opening = fileName);
     try {
-      final data = await rootBundle.load('assets/generated_pdfs/$fileName');
-      final directory = await getApplicationSupportDirectory();
-      final file = File('${directory.path}/$fileName');
-      await file.writeAsBytes(data.buffer.asUint8List(), flush: true);
+      final directory = await getTemporaryDirectory();
+      final file = await _copyAssetTo(fileName, directory);
       final result = await OpenFilex.open(file.path, type: 'application/pdf');
       if (!mounted) return;
       if (result.type != ResultType.done) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('باز کردن فایل ممکن نشد: ${result.message}')),
+          SnackBar(content: Text('باز کردن فایل $label ممکن نشد: ${result.message}')),
         );
       }
-    } catch (error) {
+    } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('فایل $label آمادهٔ باز شدن نیست. دوباره نسخهٔ برنامه را بررسی کن.')),
+        SnackBar(content: Text('فایل $label در این نسخه موجود نیست.')),
       );
     } finally {
       if (mounted) setState(() => _opening = null);
     }
+  }
+
+  Future<void> _downloadPdf(String fileName, String label) async {
+    if (_downloading != null) return;
+    setState(() => _downloading = fileName);
+    try {
+      final root = await getApplicationDocumentsDirectory();
+      final directory = Directory('${root.path}/Fahmino-PDFs');
+      final file = await _copyAssetTo(fileName, directory);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('PDF $label ذخیره شد: ${file.path}')),
+      );
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('دانلود PDF $label انجام نشد؛ فایل در این نسخه موجود نیست.')),
+      );
+    } finally {
+      if (mounted) setState(() => _downloading = null);
+    }
+  }
+
+  Widget _pdfActions({
+    required String fileName,
+    required String label,
+    required IconData icon,
+  }) {
+    final opening = _opening == fileName;
+    final downloading = _downloading == fileName;
+    final busy = opening || downloading;
+    return Row(
+      children: [
+        Expanded(
+          child: OutlinedButton.icon(
+            onPressed: busy || _opening != null || _downloading != null
+                ? null
+                : () => _openPdf(fileName, label),
+            icon: opening
+                ? const SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : Icon(icon),
+            label: const Text('نمایش PDF'),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: FilledButton.tonalIcon(
+            onPressed: busy || _opening != null || _downloading != null
+                ? null
+                : () => _downloadPdf(fileName, label),
+            icon: downloading
+                ? const SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.download_rounded),
+            label: const Text('دانلود PDF'),
+          ),
+        ),
+      ],
+    );
   }
 
   @override
@@ -50,15 +130,19 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(children: [
-              Icon(Icons.picture_as_pdf_rounded, color: theme.colorScheme.primary),
-              const SizedBox(width: 8),
-              Text('جزوه و نمونه‌سؤال PDF', style: theme.textTheme.titleMedium),
-            ]),
+            Row(
+              children: [
+                Icon(Icons.picture_as_pdf_rounded, color: theme.colorScheme.primary),
+                const SizedBox(width: 8),
+                Text('جزوه و نمونه‌سؤال PDF', style: theme.textTheme.titleMedium),
+              ],
+            ),
             const SizedBox(height: 6),
-            Text('فایل‌ها داخل برنامه قرار دارند و برای باز شدن به نمایشگر PDF نیاز است.',
-                style: theme.textTheme.bodySmall),
-            const SizedBox(height: 10),
+            Text(
+              'نمایش فایل و ذخیره برای استفادهٔ آفلاین دو گزینهٔ جدا هستند.',
+              style: theme.textTheme.bodySmall,
+            ),
+            const SizedBox(height: 12),
             _pdfActions(
               fileName: 'Fahmino-Grade8-Notes-FA.pdf',
               label: 'جزوه',
