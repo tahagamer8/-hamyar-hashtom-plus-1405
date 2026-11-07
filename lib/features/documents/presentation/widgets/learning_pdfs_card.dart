@@ -13,7 +13,7 @@ class LearningPdfsCard extends StatefulWidget {
 }
 
 class _LearningPdfsCardState extends State<LearningPdfsCard> {
-  String? _opening;
+  String? _opening;\n  String? _downloading;
 
   Future<void> _openPdf(String fileName, String label) async {
     if (_opening != null) return;
@@ -59,22 +59,17 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
             Text('فایل‌ها داخل برنامه قرار دارند و برای باز شدن به نمایشگر PDF نیاز است.',
                 style: theme.textTheme.bodySmall),
             const SizedBox(height: 10),
-            Wrap(spacing: 8, runSpacing: 8, children: [
-              OutlinedButton.icon(
-                onPressed: _opening == null ? () => _openPdf('Fahmino-Grade8-Notes-FA.pdf', 'جزوه') : null,
-                icon: _opening == 'Fahmino-Grade8-Notes-FA.pdf'
-                    ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
-                    : const Icon(Icons.menu_book_rounded),
-                label: const Text('باز کردن جزوه'),
-              ),
-              OutlinedButton.icon(
-                onPressed: _opening == null ? () => _openPdf('Fahmino-Grade8-Sample-Questions-FA.pdf', 'نمونه‌سؤال') : null,
-                icon: _opening == 'Fahmino-Grade8-Sample-Questions-FA.pdf'
-                    ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
-                    : const Icon(Icons.assignment_rounded),
-                label: const Text('باز کردن نمونه‌سؤال'),
-              ),
-            ]),
+            _pdfActions(
+              fileName: 'Fahmino-Grade8-Notes-FA.pdf',
+              label: 'جزوه',
+              icon: Icons.menu_book_rounded,
+            ),
+            const SizedBox(height: 8),
+            _pdfActions(
+              fileName: 'Fahmino-Grade8-Sample-Questions-FA.pdf',
+              label: 'نمونه‌سؤال',
+              icon: Icons.assignment_rounded,
+            ),
           ],
         ),
       ),
