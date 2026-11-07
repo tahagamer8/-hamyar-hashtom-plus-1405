@@ -111,6 +111,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   'chapterTitle': chapterTitle,
                   'summary': summary,
                   'chapterIndex': '$chapterIndex',
+                  'pageStart': chapter['pageStart']?.toString() ?? '',
                 });
               }
             }
