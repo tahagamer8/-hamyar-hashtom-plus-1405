@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1405.08",
+  "subjectId": "english",
+  "title": "زبان انگلیسی",
+  "chapters": [
+    {
+      "title": "Unit 1: My Nationality",
+      "summary": "در این درس نام کشورها و ملیت‌ها و معرفی افراد تمرین می‌شود. برای معرفی ملیت از ساختار I am ... و برای پرسیدن از Where are you from? استفاده می‌کنیم.",
+      "points": [
+        "Iran → Iranian; Canada → Canadian.",
+        "Where are you from? برای پرسیدن کشور مبدأ.",
+        "He و She برای سوم‌شخص مفرد به کار می‌روند."
+      ],
+      "example": "Answer: Where are you from? — I am from Iran. I am Iranian.",
+      "solutionSteps": [
+        "کشور را مشخص می‌کنیم.",
+        "صفت ملیت را انتخاب می‌کنیم.",
+        "جمله را با فاعل و فعل مناسب می‌سازیم."
+      ],
+      "questions": [
+        {
+          "question": "Which nationality describes a person from Canada?",
+          "options": [
+            "Canadian",
+            "Iranian",
+            "Omani",
+            "Qatari"
+          ],
+          "answer": 0,
+          "explanation": "A person from Canada is Canadian."
+        },
+        {
+          "question": "Which form of be agrees with she in this sentence?",
+          "options": [
+            "She are Iranian.",
+            "She is Iranian.",
+            "She am Iranian.",
+            "She be Iranian."
+          ],
+          "answer": 1,
+          "explanation": "با She از فعل is استفاده می‌کنیم."
+        }
+      ]
+    },
+    {
+      "title": "Unit 2: My Week",
+      "summary": "برای صحبت درباره برنامه هفتگی از روزهای هفته و زمان حال ساده استفاده می‌شود. قیدهای تکرار مانند always و usually دفعات انجام کار را نشان می‌دهند.",
+      "points": [
+        "Monday تا Sunday روزهای هفته‌اند.",
+        "I play؛ اما He plays.",
+        "usually یعنی معمولاً و never یعنی هرگز."
+      ],
+      "example": "Describe your weekly routine in three sentences.",
+      "solutionSteps": [
+        "روزهای فعالیت را مشخص می‌کنیم.",
+        "فاعل و فعل مناسب را انتخاب می‌کنیم.",
+        "قید تکرار را در جای مناسب می‌گذاریم."
+      ],
+      "questions": [
+        {
+          "question": "Choose the correct form: He ___ football on Fridays.",
+          "options": [
+            "play",
+            "plays",
+            "playing",
+            "played"
+          ],
+          "answer": 1,
+          "explanation": "در حال ساده برای he به فعل معمولاً s اضافه می‌شود."
+        },
+        {
+          "question": "Which word means «معمولاً»?",
+          "options": [
+            "never",
+            "usually",
+            "sometimes",
+            "yesterday"
+          ],
+          "answer": 1,
+          "explanation": "Usually به معنی معمولاً است."
+        }
+      ]
+    },
+    {
+      "title": "Unit 3: My Abilities",
+      "summary": "برای بیان توانایی از can و برای ناتوانی از cannot یا can't استفاده می‌شود. پس از can شکل ساده فعل می‌آید.",
+      "points": [
+        "I can swim.",
+        "She can speak English.",
+        "پس از can از فعل بدون s و to استفاده کن."
+      ],
+      "example": "Write two things you can do and one thing you cannot do.",
+      "solutionSteps": [
+        "توانایی را مشخص می‌کنیم.",
+        "فاعل را می‌آوریم.",
+        "can یا can't و شکل ساده فعل را می‌نویسیم."
+      ],
+      "questions": [
+        {
+          "question": "Which sentence correctly tells what he is able to do?",
+          "options": [
+            "He can swims.",
+            "He cans swim.",
+            "He can swim.",
+            "He can to swim."
+          ],
+          "answer": 2,
+          "explanation": "بعد از can فعل به شکل ساده می‌آید."
+        },
+        {
+          "question": "What does “can't” mean?",
+          "options": [
+            "می‌تواند",
+            "نمی‌تواند",
+            "باید",
+            "می‌خواهد"
+          ],
+          "answer": 1,
+          "explanation": "Can't شکل کوتاه cannot و به معنی نمی‌تواند است."
+        }
+      ]
+    },
+    {
+      "title": "Unit 4: My Health",
+      "summary": "در گفت‌وگو درباره سلامت، نام بخش‌های بدن و عبارت‌های ساده برای بیان مشکل و توصیه به کار می‌روند.",
+      "points": [
+        "I have a headache یعنی سردرد دارم.",
+        "You should rest برای توصیه.",
+        "برای پرسیدن مشکل می‌توان گفت What's the matter?"
+      ],
+      "example": "Make a short dialogue about feeling tired.",
+      "solutionSteps": [
+        "مشکل را بیان می‌کنیم.",
+        "پرسش مناسب می‌پرسیم.",
+        "پاسخ و توصیه ساده می‌دهیم."
+      ],
+      "questions": [
+        {
+          "question": "Choose the correct meaning of «headache».",
+          "options": [
+            "سردرد",
+            "کمردرد",
+            "گلودرد",
+            "دندان"
+          ],
+          "answer": 0,
+          "explanation": "Headache یعنی سردرد."
+        },
+        {
+          "question": "Which sentence gives advice?",
+          "options": [
+            "I am twelve.",
+            "You should rest.",
+            "Where are you?",
+            "I play football."
+          ],
+          "answer": 1,
+          "explanation": "Should برای پیشنهاد و توصیه به کار می‌رود."
+        }
+      ]
+    },
+    {
+      "title": "Unit 5: My City",
+      "summary": "برای معرفی شهر از مکان‌ها، جهت‌ها و ساختار there is/there are استفاده می‌شود. There is برای مفرد و there are برای جمع است.",
+      "points": [
+        "There is a park near my house.",
+        "There are two schools in my town.",
+        "next to یعنی کنار؛ opposite یعنی روبه‌رو."
+      ],
+      "example": "Describe three places in your city.",
+      "solutionSteps": [
+        "مکان‌های مهم را انتخاب می‌کنیم.",
+        "مفرد یا جمع بودن را می‌سنجیم.",
+        "از there is یا there are استفاده می‌کنیم."
+      ],
+      "questions": [
+        {
+          "question": "Which sentence correctly tells that a park exists nearby?",
+          "options": [
+            "There are a park.",
+            "There is a park.",
+            "There be a park.",
+            "There am a park."
+          ],
+          "answer": 1,
+          "explanation": "برای اسم مفرد از there is استفاده می‌شود."
+        },
+        {
+          "question": "Complete the sentence: There ___ a park near my school.",
+          "options": [
+            "are",
+            "is",
+            "am",
+            "be"
+          ],
+          "answer": 1,
+          "explanation": "Park مفرد است؛ بنابراین از There is استفاده می‌کنیم."
+        }
+      ]
+    },
+    {
+      "title": "Unit 6: My Village",
+      "summary": "در این درس درباره روستا، موقعیت مکانی، طبیعت و آب‌وهوا صحبت می‌کنیم. برای توصیف مکان از صفت‌ها و عبارت‌های مکانی و برای پرسیدن درباره وضعیت هوا از پرسش‌های ساده استفاده می‌شود.",
+      "points": [
+        "village یعنی روستا و field یعنی مزرعه.",
+        "mountain یعنی کوه و river یعنی رودخانه.",
+        "برای پرسیدن مکان می‌توان گفت Where is it?",
+        "برای توصیف هوا از واژه‌هایی مانند sunny، rainy و cloudy استفاده می‌کنیم."
+      ],
+      "example": "Where is your village? — It is near a river. The weather is usually cold in winter.",
+      "solutionSteps": [
+        "موضوع پرسش را مشخص می‌کنیم: مکان یا آب‌وهوا.",
+        "واژه‌های مناسب مکان و فصل را انتخاب می‌کنیم.",
+        "جمله را با فاعل و فعل درست می‌سازیم."
+      ],
+      "questions": [
+        {
+          "question": "What is the meaning of “village”?",
+          "options": [
+            "شهر",
+            "روستا",
+            "کشور",
+            "خیابان"
+          ],
+          "answer": 1,
+          "explanation": "Village به معنی روستا است."
+        },
+        {
+          "question": "Choose the correct word: A place with many trees and flowers can be _____.",
+          "options": [
+            "beautiful",
+            "hungry",
+            "late",
+            "sick"
+          ],
+          "answer": 0,
+          "explanation": "Beautiful برای توصیف زیبایی یک مکان به کار می‌رود."
+        },
+        {
+          "question": "Which word is about weather?",
+          "options": [
+            "tractor",
+            "cloudy",
+            "village",
+            "field"
+          ],
+          "answer": 1,
+          "explanation": "Cloudy به معنی ابری است و وضعیت آب‌وهوا را توصیف می‌کند."
+        }
+      ]
+    },
+    {
+      "title": "Unit 7: My Hobbies",
+      "summary": "در این درس درباره سرگرمی‌ها و فعالیت‌های اوقات فراغت صحبت می‌کنیم. می‌توانیم علاقه خود و دیگران را بیان کنیم و درباره کارهایی که در زمان آزاد انجام می‌دهیم سؤال بپرسیم.",
+      "points": [
+        "hobby یعنی سرگرمی و free time یعنی وقت آزاد.",
+        "برای پرسیدن درباره سرگرمی می‌توان گفت What is your hobby?",
+        "عبارت How about you? برای پرسیدن نظر یا وضعیت طرف مقابل است.",
+        "پسوند ing در نام بسیاری از فعالیت‌ها دیده می‌شود؛ مانند reading و swimming."
+      ],
+      "example": "What is your hobby? — I like reading books.",
+      "solutionSteps": [
+        "فعالیت یا سرگرمی مورد نظر را انتخاب می‌کنیم.",
+        "از واژه مناسب برای علاقه یا پرسش استفاده می‌کنیم.",
+        "جمله را با ترتیب درست می‌نویسیم."
+      ],
+      "questions": [
+        {
+          "question": "What does “hobby” mean?",
+          "options": [
+            "تکلیف",
+            "سرگرمی",
+            "آب‌وهوا",
+            "مسافرت"
+          ],
+          "answer": 1,
+          "explanation": "Hobby به معنی سرگرمی یا فعالیت دلخواه در اوقات فراغت است."
+        },
+        {
+          "question": "Which question asks about a person's favourite free-time activity?",
+          "options": [
+            "What are your hobby?",
+            "What is your hobby?",
+            "Where hobby you?",
+            "How hobby is?"
+          ],
+          "answer": 1,
+          "explanation": "برای پرسیدن سرگرمی یک نفر، ساختار What is your hobby? درست است."
+        },
+        {
+          "question": "Which word means “مطالعه کردن”؟",
+          "options": [
+            "reading",
+            "driving",
+            "swimming",
+            "cooking"
+          ],
+          "answer": 0,
+          "explanation": "Reading به معنی خواندن یا مطالعه کردن است."
+        }
+      ]
+    }
+  ]
+}

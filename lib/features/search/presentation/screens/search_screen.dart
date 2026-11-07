@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hamyar_hashtom_plus/core/router/app_routes.dart';
 
@@ -33,9 +34,33 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _catalogFuture ??= DefaultAssetBundle.of(context)
-        .loadString('assets/content/catalog_fa.json')
-        .then((raw) => jsonDecode(raw) as Map<String, dynamic>);
+    _catalogFuture ??= _loadSearchCatalog(DefaultAssetBundle.of(context));
+  }
+
+  Future<Map<String, dynamic>> _loadSearchCatalog(AssetBundle bundle) async {
+    final raw = await bundle.loadString('assets/content/catalog_fa.json');
+    final catalog = jsonDecode(raw) as Map<String, dynamic>;
+    // Independently versioned packs are the source of truth when available.
+    for (final id in catalog.keys.toList()) {
+      try {
+        final packRaw = await bundle.loadString('assets/content/subjects/$id.json');
+        final value = jsonDecode(packRaw);
+        if (value is Map<String, dynamic> &&
+            value['subjectId'] == id &&
+            value['title'] is String &&
+            value['chapters'] is List &&
+            (value['chapters'] as List).isNotEmpty) {
+          catalog[id] = value;
+        }
+      } on FlutterError {
+        // Keep the legacy catalog for subjects not yet migrated.
+      } on FormatException {
+        // Ignore malformed optional packs; the catalog remains available.
+      } on TypeError {
+        // Ignore invalid JSON shape rather than crashing search.
+      }
+    }
+    return catalog;
   }
 
   @override
@@ -64,7 +89,8 @@ class _SearchScreenState extends State<SearchScreen> {
             final subjectTitle = subject['title'] as String? ?? subjectId;
             final chapters = (subject['chapters'] as List<dynamic>? ?? [])
                 .cast<Map<String, dynamic>>();
-            for (final chapter in chapters) {
+            for (var chapterIndex = 0; chapterIndex < chapters.length; chapterIndex++) {
+              final chapter = chapters[chapterIndex];
               final chapterTitle = chapter['title'] as String? ?? '';
               final summary = chapter['summary'] as String? ?? '';
               final points = (chapter['points'] as List<dynamic>? ?? []).join(' ');
@@ -80,6 +106,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   'subjectTitle': subjectTitle,
                   'chapterTitle': chapterTitle,
                   'summary': summary,
+                  'chapterIndex': '$chapterIndex',
                 });
               }
             }
@@ -130,7 +157,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               isThreeLine: true,
                               trailing: const Icon(Icons.chevron_left_rounded),
                               onTap: () => context.go(
-                                AppRoutes.subjectDetail(entry['subjectId']!),
+                                '${AppRoutes.subjectDetail(entry['subjectId']!)}/lessons?chapter=${entry['chapterIndex']}',
                               ),
                             ),
                           );

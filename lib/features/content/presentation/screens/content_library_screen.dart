@@ -11,10 +11,12 @@ class ContentLibraryScreen extends ConsumerStatefulWidget {
     super.key,
     required this.subjectId,
     required this.featureId,
+    this.initialChapterIndex = 0,
   });
 
   final String subjectId;
   final String featureId;
+  final int initialChapterIndex;
 
   @override
   ConsumerState<ContentLibraryScreen> createState() => _ContentLibraryScreenState();
@@ -25,17 +27,89 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   int _selectedChapterIndex = 0;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _contentFuture ??= _loadContent(DefaultAssetBundle.of(context));
+  void initState() {
+    super.initState();
+    _selectedChapterIndex = widget.initialChapterIndex < 0 ? 0 : widget.initialChapterIndex;
   }
 
-  Future<Map<String, dynamic>> _loadContent(AssetBundle bundle) async {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _contentFuture ??= _loadContent(DefaultAssetBundle.of(context), widget.subjectId);
+  }
+
+  @override
+  void didUpdateWidget(covariant ContentLibraryScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.subjectId != widget.subjectId ||
+        oldWidget.initialChapterIndex != widget.initialChapterIndex) {
+      _selectedChapterIndex = widget.initialChapterIndex < 0 ? 0 : widget.initialChapterIndex;
+      _contentFuture = _loadContent(DefaultAssetBundle.of(context), widget.subjectId);
+    }
+  }
+
+  bool _isValidSubjectPack(Map<String, dynamic> subject) {
+    if (subject['title'] is! String || (subject['title'] as String).trim().isEmpty) {
+      return false;
+    }
+    final chapters = subject['chapters'];
+    if (chapters is! List || chapters.isEmpty) return false;
+    return chapters.every((value) {
+      if (value is! Map<String, dynamic>) return false;
+      final title = value['title'];
+      final summary = value['summary'];
+      final points = value['points'];
+      final example = value['example'];
+      final steps = value['solutionSteps'];
+      final questions = value['questions'];
+      if (title is! String || title.trim().isEmpty ||
+          summary is! String || points is! List ||
+          !points.every((item) => item is String) ||
+          example is! String || steps is! List ||
+          !steps.every((item) => item is String) ||
+          questions is! List) return false;
+      return questions.every((item) {
+        if (item is! Map<String, dynamic>) return false;
+        final options = item['options'];
+        final answer = item['answer'];
+        return item['question'] is String &&
+            (item['question'] as String).trim().isNotEmpty &&
+            options is List && options.length >= 2 &&
+            options.every((option) => option is String) &&
+            answer is int && answer >= 0 && answer < options.length &&
+            item['explanation'] is String;
+      });
+    });
+  }
+
+  Future<Map<String, dynamic>> _loadContent(
+      AssetBundle bundle, String subjectId) async {
+    // Prefer a separately versioned pack, but reject malformed data before UI casts.
+    try {
+      final raw = await bundle.loadString('assets/content/subjects/$subjectId.json');
+      final decoded = jsonDecode(raw);
+      if (decoded is Map<String, dynamic> &&
+          decoded['subjectId'] == subjectId &&
+          _isValidSubjectPack(decoded)) {
+        return decoded;
+      }
+    } on FlutterError {
+      // Use the legacy catalog for older installations.
+    } on FormatException {
+      // Use the legacy catalog if a pack is malformed JSON.
+    } on TypeError {
+      // Reject malformed pack shape and try the legacy catalog.
+    }
+
     final raw = await bundle.loadString('assets/content/catalog_fa.json');
-    final decoded = jsonDecode(raw) as Map<String, dynamic>;
-    final subject = decoded[widget.subjectId];
-    if (subject is! Map<String, dynamic>) {
-      throw StateError('محتوای این درس هنوز ثبت نشده است.');
+    final decoded = jsonDecode(raw);
+    if (decoded is! Map<String, dynamic>) {
+      throw StateError('ساختار فهرست محتوای برنامه معتبر نیست.');
+    }
+    final subject = decoded[subjectId];
+    if (subject is! Map<String, dynamic> ||
+        !_isValidSubjectPack(subject)) {
+      throw StateError('محتوای این درس ناقص یا نامعتبر است.');
     }
     return subject;
   }

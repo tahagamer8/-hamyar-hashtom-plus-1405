@@ -1,0 +1,358 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "1405.08",
+  "subjectId": "english_workbook",
+  "title": "کتاب کار زبان انگلیسی",
+  "chapters": [
+    {
+      "title": "Lesson 1: My Nationality",
+      "summary": "در این بخش تمرین می‌کنیم کشورها و ملیت‌ها را تشخیص دهیم و با فعل be خود و دیگران را معرفی کنیم.",
+      "points": [
+        "Iran — Iranian؛ Canada — Canadian.",
+        "پرسش Where are you from? درباره کشور مبدأ است.",
+        "I am، You are و He/She is را درست به کار ببر."
+      ],
+      "example": "I am from Iran. I am Iranian.",
+      "solutionSteps": [
+        "فاعل را مشخص می‌کنیم.",
+        "شکل درست am، is یا are را انتخاب می‌کنیم.",
+        "نام کشور یا ملیت را در جای مناسب می‌گذاریم."
+      ],
+      "questions": [
+        {
+          "question": "Which question asks someone about their country of origin?",
+          "options": [
+            "Where are you from?",
+            "How old are you?",
+            "What is your name?",
+            "What time is it?"
+          ],
+          "answer": 0,
+          "explanation": "پرسش Where are you from? درباره کشور مبدأ فرد است."
+        },
+        {
+          "question": "Choose the correct nationality for a person from Kuwait.",
+          "options": [
+            "Kuwaiti",
+            "Qatari",
+            "Canadian",
+            "Iranian"
+          ],
+          "answer": 0,
+          "explanation": "شخص اهل کویت، Kuwaiti نامیده می‌شود."
+        },
+        {
+          "question": "Which question is correctly formed with are?",
+          "options": [
+            "Where are you from?",
+            "Where you from are?",
+            "What from you?",
+            "Are where from?"
+          ],
+          "answer": 0,
+          "explanation": "ترتیب درست پرسش Where are you from? است."
+        }
+      ]
+    },
+    {
+      "title": "Lesson 2: My Week",
+      "summary": "تمرین این درس درباره روزهای هفته، کارهای روزانه، ساعت و زمان حال ساده است.",
+      "points": [
+        "روزهای هفته با حرف بزرگ آغاز می‌شوند.",
+        "برای he و she در حال ساده معمولاً s به فعل اضافه می‌شود.",
+        "on Monday و every week عبارت‌های زمانی‌اند."
+      ],
+      "example": "He studies English on Monday.",
+      "solutionSteps": [
+        "فاعل را پیدا می‌کنیم.",
+        "برای سوم‌شخص مفرد شکل درست فعل را می‌نویسیم.",
+        "عبارت زمان را در جای مناسب قرار می‌دهیم."
+      ],
+      "questions": [
+        {
+          "question": "He ___ to school every day.",
+          "options": [
+            "go",
+            "goes",
+            "going",
+            "went"
+          ],
+          "answer": 1,
+          "explanation": "در حال ساده برای He از goes استفاده می‌شود."
+        },
+        {
+          "question": "Which is a day of the week?",
+          "options": [
+            "January",
+            "Monday",
+            "Summer",
+            "Morning"
+          ],
+          "answer": 1,
+          "explanation": "Monday یکی از روزهای هفته است."
+        },
+        {
+          "question": "What does “every week” mean?",
+          "options": [
+            "هر روز",
+            "هر هفته",
+            "هفته گذشته",
+            "فردا"
+          ],
+          "answer": 1,
+          "explanation": "Every week یعنی هر هفته."
+        }
+      ]
+    },
+    {
+      "title": "Lesson 3: My Abilities",
+      "summary": "تمرین این درس درباره توانایی‌ها و استفاده درست از can و can’t است.",
+      "points": [
+        "can برای بیان توانایی به کار می‌رود.",
+        "پس از can فعل ساده می‌آید.",
+        "can برای همه فاعل‌ها شکل یکسان دارد."
+      ],
+      "example": "My sister can swim, but I can't.",
+      "solutionSteps": [
+        "توانایی یا ناتوانی را مشخص می‌کنیم.",
+        "can یا can't را پس از فاعل می‌آوریم.",
+        "فعل را بدون s و to می‌نویسیم."
+      ],
+      "questions": [
+        {
+          "question": "Which verb form follows “can”?",
+          "options": [
+            "plays",
+            "playing",
+            "play",
+            "to play"
+          ],
+          "answer": 2,
+          "explanation": "پس از can از شکل ساده فعل بدون to استفاده می‌کنیم."
+        },
+        {
+          "question": "Which Persian phrase is closest in meaning to “cannot”?",
+          "options": [
+            "می‌تواند",
+            "نمی‌تواند",
+            "باید",
+            "دوست دارد"
+          ],
+          "answer": 1,
+          "explanation": "Cannot یا can't به معنی نمی‌تواند است."
+        },
+        {
+          "question": "Which option completes the sentence after can?",
+          "options": [
+            "Ali can rides a bike.",
+            "Ali cans ride a bike.",
+            "Ali can ride a bike.",
+            "Ali can to ride a bike."
+          ],
+          "answer": 2,
+          "explanation": "ساختار درست فاعل + can + فعل ساده است."
+        }
+      ]
+    },
+    {
+      "title": "Lesson 4: My Health",
+      "summary": "تمرین این درس درباره بیان مشکل‌های سلامتی و پیشنهاد راه‌حل ساده است.",
+      "points": [
+        "headache یعنی سردرد و toothache یعنی دندان‌درد.",
+        "What's wrong? برای پرسیدن مشکل به کار می‌رود.",
+        "should برای توصیه و پیشنهاد استفاده می‌شود."
+      ],
+      "example": "You should rest when you feel tired.",
+      "solutionSteps": [
+        "مشکل را با واژه مناسب بیان می‌کنیم.",
+        "پرسش متناسب را انتخاب می‌کنیم.",
+        "برای توصیه از should و فعل ساده استفاده می‌کنیم."
+      ],
+      "questions": [
+        {
+          "question": "What does “toothache” mean?",
+          "options": [
+            "سردرد",
+            "دندان‌درد",
+            "کمردرد",
+            "تب"
+          ],
+          "answer": 1,
+          "explanation": "Toothache یعنی دندان‌درد."
+        },
+        {
+          "question": "You should ___ some water.",
+          "options": [
+            "drinks",
+            "drinking",
+            "drink",
+            "drank"
+          ],
+          "answer": 2,
+          "explanation": "بعد از should فعل ساده می‌آید."
+        },
+        {
+          "question": "Which question asks about a problem?",
+          "options": [
+            "What's wrong?",
+            "Where are you from?",
+            "What time is it?",
+            "How old are you?"
+          ],
+          "answer": 0,
+          "explanation": "What's wrong? یعنی چه مشکلی پیش آمده؟"
+        }
+      ]
+    },
+    {
+      "title": "Lesson 5: My City",
+      "summary": "تمرین این درس درباره معرفی شهر، مکان‌های عمومی و پرسیدن نشانی است.",
+      "points": [
+        "There is برای اسم مفرد و There are برای اسم جمع است.",
+        "next to یعنی کنار و opposite یعنی روبه‌رو.",
+        "برای پرسیدن مکان از Where is ...? استفاده می‌کنیم."
+      ],
+      "example": "There are two parks in my city.",
+      "solutionSteps": [
+        "اسم را از نظر مفرد یا جمع بررسی می‌کنیم.",
+        "There is یا There are را انتخاب می‌کنیم.",
+        "مکان یا نشانی را با عبارت مناسب کامل می‌کنیم."
+      ],
+      "questions": [
+        {
+          "question": "Complete the sentence: There ___ a museum in my town.",
+          "options": [
+            "are",
+            "is",
+            "am",
+            "be"
+          ],
+          "answer": 1,
+          "explanation": "Museum مفرد است؛ بنابراین There is درست است."
+        },
+        {
+          "question": "What does “opposite” mean?",
+          "options": [
+            "کنار",
+            "داخل",
+            "روبه‌رو",
+            "پشت"
+          ],
+          "answer": 2,
+          "explanation": "Opposite به معنی روبه‌رو یا مقابل است."
+        },
+        {
+          "question": "Which sentence uses there are with a plural place noun?",
+          "options": [
+            "There are a school.",
+            "There is two parks.",
+            "There are three shops.",
+            "There be a bank."
+          ],
+          "answer": 2,
+          "explanation": "برای اسم جمع shops از There are استفاده می‌کنیم."
+        }
+      ]
+    },
+    {
+      "title": "Lesson 6: My Village",
+      "summary": "تمرین این درس درباره توصیف روستا، طبیعت، فصل‌ها و آب‌وهواست.",
+      "points": [
+        "mountain یعنی کوه و river یعنی رودخانه.",
+        "sunny یعنی آفتابی و rainy یعنی بارانی.",
+        "برای توصیف مکان از صفت‌ها استفاده می‌کنیم."
+      ],
+      "example": "My village is near a river. It is sunny today.",
+      "solutionSteps": [
+        "واژه‌های مربوط به طبیعت یا آب‌وهوا را انتخاب می‌کنیم.",
+        "مکان یا وضعیت هوا را مشخص می‌کنیم.",
+        "جمله کامل با فعل مناسب می‌سازیم."
+      ],
+      "questions": [
+        {
+          "question": "What does “river” mean?",
+          "options": [
+            "جنگل",
+            "رودخانه",
+            "مزرعه",
+            "کوه"
+          ],
+          "answer": 1,
+          "explanation": "River یعنی رودخانه."
+        },
+        {
+          "question": "Which word means “آفتابی”؟",
+          "options": [
+            "rainy",
+            "cloudy",
+            "sunny",
+            "windy"
+          ],
+          "answer": 2,
+          "explanation": "Sunny به معنی آفتابی است."
+        },
+        {
+          "question": "A mountain village is a village near _____.",
+          "options": [
+            "mountains",
+            "oceans only",
+            "airports",
+            "factories"
+          ],
+          "answer": 0,
+          "explanation": "Mountain village یعنی روستایی در ناحیه کوهستانی."
+        }
+      ]
+    },
+    {
+      "title": "Lesson 7: My Hobbies",
+      "summary": "تمرین این درس درباره سرگرمی‌ها و فعالیت‌های اوقات فراغت است.",
+      "points": [
+        "hobby یعنی سرگرمی و free time یعنی وقت آزاد.",
+        "reading، swimming و watching از نام فعالیت‌ها هستند.",
+        "How about you? برای پرسیدن نظر طرف مقابل به کار می‌رود."
+      ],
+      "example": "I enjoy reading in my free time.",
+      "solutionSteps": [
+        "فعالیت مورد نظر را انتخاب می‌کنیم.",
+        "واژه یا عبارت پرسشی مناسب را می‌نویسیم.",
+        "جمله را از نظر معنی و ترتیب بررسی می‌کنیم."
+      ],
+      "questions": [
+        {
+          "question": "What does “free time” mean?",
+          "options": [
+            "وقت آزاد",
+            "وقت مدرسه",
+            "زنگ تفریح",
+            "هفته آینده"
+          ],
+          "answer": 0,
+          "explanation": "Free time یعنی وقت آزاد."
+        },
+        {
+          "question": "Which is a hobby?",
+          "options": [
+            "reading",
+            "Monday",
+            "headache",
+            "mountain"
+          ],
+          "answer": 0,
+          "explanation": "Reading می‌تواند یک سرگرمی باشد."
+        },
+        {
+          "question": "Choose the suitable question.",
+          "options": [
+            "How about you?",
+            "How old a hobby?",
+            "Where hobby is?",
+            "What time hobby?"
+          ],
+          "answer": 0,
+          "explanation": "How about you? برای پرسیدن نظر یا وضعیت طرف مقابل مناسب است."
+        }
+      ]
+    }
+  ]
+}
