@@ -48,6 +48,19 @@ class _MemoryAssetBundle extends CachingAssetBundle {
   }
 }
 
+class _MapAssetBundle extends CachingAssetBundle {
+  _MapAssetBundle(this.assets);
+
+  final Map<String, String> assets;
+
+  @override
+  Future<ByteData> load(String key) async {
+    final value = assets[key];
+    if (value == null) throw FlutterError('Unexpected test asset: $key');
+    return ByteData.sublistView(Uint8List.fromList(utf8.encode(value)));
+  }
+}
+
 Widget _contentApp(String featureId) => ProviderScope(
       child: MaterialApp(
         home: DefaultAssetBundle(
@@ -257,10 +270,23 @@ void main() {
         'work::پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی',
       ],
     });
+    const catalog = r'{"work":{"title":"کار و فناوری","chapters":[]}}';
+    const workPack = r'{"schemaVersion":1,"subjectId":"work","title":"کار و فناوری","chapters":[{"title":"پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی","summary":"پست الکترونیکی برای ارسال پیام و سند به یک یا چند گیرنده استفاده می‌شود.","points":["صندوق دریافت و پیوست را مدیریت کن."],"example":"یک ایمیل تمرینی بنویس.","solutionSteps":["گیرنده را وارد کن."],"questions":[]}]}';
     await tester.pumpWidget(
-      const ProviderScope(child: MaterialApp(home: FavoritesScreen())),
+      ProviderScope(
+        child: MaterialApp(
+          home: DefaultAssetBundle(
+            bundle: _MapAssetBundle({
+              'assets/content/catalog_fa.json': catalog,
+              'assets/content/subjects/work.json': workPack,
+            }),
+            child: const FavoritesScreen(),
+          ),
+        ),
+      ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 50));
     expect(
       find.text('پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی'),
       findsOneWidget,
@@ -268,17 +294,24 @@ void main() {
   });
 
   testWidgets('offline study helper reads current subject packs', (tester) async {
+    const catalog = r'{"work":{"title":"کار و فناوری","chapters":[{"title":"عنوان قدیمی","summary":"نسخه قدیمی","points":[],"example":"","solutionSteps":[],"questions":[]} ]}}';
+    const workPack = r'{"schemaVersion":1,"subjectId":"work","title":"کار و فناوری","chapters":[{"title":"پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی","summary":"پست الکترونیکی برای ارسال پیام و سند به یک یا چند گیرنده استفاده می‌شود.","points":["صندوق دریافت و پیوست را مدیریت کن."],"example":"یک ایمیل تمرینی بنویس.","solutionSteps":["گیرنده را وارد کن."],"questions":[]}]}';
     await tester.pumpWidget(
-      const MaterialApp(home: AiChatScreen()),
+      MaterialApp(
+        home: DefaultAssetBundle(
+          bundle: _MapAssetBundle({
+            'assets/content/catalog_fa.json': catalog,
+            'assets/content/subjects/work.json': workPack,
+          }),
+          child: const AiChatScreen(),
+        ),
+      ),
     );
-    await tester.pumpAndSettle();
-    await tester.tap(find.byType(DropdownButtonFormField<String>).first);
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('کار و فناوری').last);
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 50));
     await tester.enterText(find.byType(TextField), 'پست الکترونیکی');
     await tester.tap(find.byTooltip('جست‌وجوی محلی'));
-    await tester.pumpAndSettle();
+    await tester.pump();
     expect(find.textContaining('پست الکترونیکی برای ارسال پیام'), findsOneWidget);
   });
 
