@@ -20,8 +20,12 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, KeepTogether, HRFlowable
 
 _MATH_SPAN = re.compile(
-    r"(?<![A-Za-z0-9۰-۹])(?:[۰-۹0-9A-Za-z]+(?: */ *[۰-۹0-9A-Za-z]+)?"
-    r"(?: *[-+−×÷=<>≤≥] *[۰-۹0-9A-Za-z]+(?: */ *[۰-۹0-9A-Za-z]+)?)+)(?![A-Za-z0-9۰-۹])"
+    r"(?<![A-Za-z0-9۰-۹])(?:"
+    r"\\([۰-۹0-9A-Za-z]+(?: *[-+−×÷=<>≤≥] *[۰-۹0-9A-Za-z]+)+\\)"
+    r"(?: *[×÷] *[۰-۹0-9A-Za-z]+)?"
+    r"|[۰-۹0-9A-Za-z]+(?: */ *[۰-۹0-9A-Za-z]+)?"
+    r"(?: *[-+−×÷=<>≤≥] *[۰-۹0-9A-Za-z]+(?: */ *[۰-۹0-9A-Za-z]+)?)+"
+    r")(?![A-Za-z0-9۰-۹])"
 )
 
 def rtl(value: object) -> str:
