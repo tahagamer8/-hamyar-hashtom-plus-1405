@@ -22,6 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final _controller = TextEditingController();
   Future<Map<String, dynamic>>? _catalogFuture;
   String _query = '';
+  String _selectedSubjectId = 'all';
 
   @override
   void initState() {
@@ -85,6 +86,9 @@ class _SearchScreenState extends State<SearchScreen> {
           final entries = <Map<String, String>>[];
           for (final item in snapshot.data!.entries) {
             final subjectId = item.key;
+            if (_selectedSubjectId != 'all' && subjectId != _selectedSubjectId) {
+              continue;
+            }
             final subject = item.value as Map<String, dynamic>;
             final subjectTitle = subject['title'] as String? ?? subjectId;
             final chapters = (subject['chapters'] as List<dynamic>? ?? [])
@@ -114,7 +118,7 @@ class _SearchScreenState extends State<SearchScreen> {
           return Column(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                 child: TextField(
                   controller: _controller,
                   textInputAction: TextInputAction.search,
@@ -132,6 +136,27 @@ class _SearchScreenState extends State<SearchScreen> {
                       borderRadius: BorderRadius.circular(16),
                     ),
                   ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+                child: DropdownButtonFormField<String>(
+                  value: _selectedSubjectId,
+                  isExpanded: true,
+                  decoration: const InputDecoration(
+                    labelText: 'فیلتر بر اساس درس',
+                    prefixIcon: Icon(Icons.filter_list_rounded),
+                    border: OutlineInputBorder(),
+                  ),
+                  items: [
+                    const DropdownMenuItem(value: 'all', child: Text('همهٔ درس‌ها')),
+                    for (final item in snapshot.data!.entries)
+                      DropdownMenuItem<String>(
+                        value: item.key,
+                        child: Text((item.value as Map<String, dynamic>)['title'] as String? ?? item.key),
+                      ),
+                  ],
+                  onChanged: (value) => setState(() => _selectedSubjectId = value ?? 'all'),
                 ),
               ),
               Expanded(
