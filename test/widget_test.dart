@@ -11,6 +11,7 @@ import 'package:hamyar_hashtom_plus/core/constants/app_constants.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/screens/content_library_screen.dart';
 import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_screen.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/screens/favorites_screen.dart';
+import 'package:hamyar_hashtom_plus/features/ai/presentation/screens/ai_chat_screen.dart';
 
 const _testCatalog = r'''
 {
@@ -264,6 +265,21 @@ void main() {
       find.text('پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی'),
       findsOneWidget,
     );
+  });
+
+  testWidgets('offline study helper reads current subject packs', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: AiChatScreen()),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.byType(DropdownButtonFormField<String>).first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('کار و فناوری').last);
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'پست الکترونیکی');
+    await tester.tap(find.byTooltip('جست‌وجوی محلی'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('پست الکترونیکی برای ارسال پیام'), findsOneWidget);
   });
 
   testWidgets('search finds text inside a question', (tester) async {
