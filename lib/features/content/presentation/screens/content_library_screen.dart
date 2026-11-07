@@ -6,6 +6,7 @@ import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/fa
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
 import 'package:hamyar_hashtom_plus/features/documents/presentation/widgets/subject_pdf_card.dart';
+import 'package:hamyar_hashtom_plus/features/content/presentation/widgets/book_page_gallery.dart';
 
 class ContentLibraryScreen extends ConsumerStatefulWidget {
   const ContentLibraryScreen({
