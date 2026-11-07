@@ -10,7 +10,7 @@ class HomeFeatureGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
       child: GridView.builder(
         itemCount: AppFeature.values.length,
         shrinkWrap: true,
@@ -19,7 +19,7 @@ class HomeFeatureGrid extends StatelessWidget {
           crossAxisCount: 2,
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          childAspectRatio: 1.18,
+          childAspectRatio: 1.28,
         ),
         itemBuilder: (context, index) =>
             _FeatureTile(feature: AppFeature.values[index]),
@@ -33,13 +33,13 @@ class _FeatureTile extends StatelessWidget {
   final AppFeature feature;
 
   String get _description => switch (feature) {
-        AppFeature.lessons => 'یادگیری درس‌ها به‌ترتیب فصل‌ها',
-        AppFeature.notes => 'خلاصه‌ها و نکته‌های مهم هر درس',
-        AppFeature.solutions => 'حل تشریحی تمرین‌ها، مرحله‌به‌مرحله',
-        AppFeature.sampleExams => 'سؤال‌های متنوع همراه پاسخ تشریحی',
-        AppFeature.quiz => 'آزمون زمان‌دار و مشاهده کارنامه',
-        AppFeature.favorites => 'مطالب ذخیره‌شده و منتخب تو',
-      };
+    AppFeature.lessons => 'فصل‌ها را درس‌به‌درس یاد بگیر',
+    AppFeature.notes => 'خلاصه‌ها و نکته‌های امتحانی',
+    AppFeature.solutions => 'پاسخ تمرین‌ها با راه‌حل مرحله‌ای',
+    AppFeature.sampleExams => 'سؤال‌های طبقه‌بندی‌شده با پاسخ',
+    AppFeature.quiz => 'خودت را با آزمون بسنج',
+    AppFeature.favorites => 'مطالب مهمت را یک‌جا ببین',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +49,7 @@ class _FeatureTile extends StatelessWidget {
       color: AppColors.card(context),
       shape: RoundedRectangleBorder(
         borderRadius: radius,
-        side: BorderSide(
-          color: feature.color.withAlpha(75),
-          width: 1.2,
-        ),
+        side: BorderSide(color: feature.color.withAlpha(70)),
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -64,63 +61,66 @@ class _FeatureTile extends StatelessWidget {
             context.push(AppRoutes.featureSubjects(feature.name));
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [
-                          feature.color.withAlpha(45),
-                          feature.color.withAlpha(15),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Icon(feature.icon, color: feature.color, size: 27),
-                  ),
-                  const Spacer(),
-                  Icon(
-                    Icons.arrow_outward_rounded,
-                    size: 18,
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ],
+        child: Stack(
+          children: [
+            Positioned(
+              left: -18,
+              top: -24,
+              child: Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: feature.color.withAlpha(14),
+                ),
               ),
-              Column(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(14),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    feature.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                  Row(
+                    children: [
+                      Container(
+                        width: 43,
+                        height: 43,
+                        decoration: BoxDecoration(
+                          color: feature.color.withAlpha(25),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: Icon(feature.icon,
+                            color: feature.color, size: 25),
+                      ),
+                      const Spacer(),
+                      Icon(Icons.north_west_rounded,
+                          size: 17, color: theme.colorScheme.onSurfaceVariant),
+                    ],
                   ),
-                  const SizedBox(height: 5),
-                  Text(
-                    _description,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      height: 1.35,
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(feature.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.w900,
+                          )),
+                      const SizedBox(height: 4),
+                      Text(_description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            height: 1.35,
+                            color: theme.colorScheme.onSurfaceVariant,
+                          )),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
