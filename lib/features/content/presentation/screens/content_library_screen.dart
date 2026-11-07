@@ -48,7 +48,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
     }
   }
 
-  bool _isValidSubjectPack(Map<String, dynamic> subject, String subjectId) {
+  bool _isValidSubjectPack(Map<String, dynamic> subject) {
     if (subject['title'] is! String || (subject['title'] as String).trim().isEmpty) {
       return false;
     }
@@ -90,7 +90,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
       final decoded = jsonDecode(raw);
       if (decoded is Map<String, dynamic> &&
           decoded['subjectId'] == subjectId &&
-          _isValidSubjectPack(decoded, subjectId)) {
+          _isValidSubjectPack(decoded)) {
         return decoded;
       }
     } on FlutterError {
@@ -108,7 +108,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
     }
     final subject = decoded[subjectId];
     if (subject is! Map<String, dynamic> ||
-        !_isValidSubjectPack(subject, subjectId)) {
+        !_isValidSubjectPack(subject)) {
       throw StateError('محتوای این درس ناقص یا نامعتبر است.');
     }
     return subject;
