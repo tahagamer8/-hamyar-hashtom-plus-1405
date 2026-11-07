@@ -168,10 +168,11 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               Text('ابتدا فصل یا درس موردنظرت را انتخاب کن.',
                   style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 14),
-              SubjectPdfCard(
-                subjectId: widget.subjectId,
-                subjectTitle: subject['title'] as String? ?? 'درس',
-              ),
+              if (_feature == AppFeature.lessons)
+                SubjectPdfCard(
+                  subjectId: widget.subjectId,
+                  subjectTitle: subject['title'] as String? ?? 'درس',
+                ),
               DropdownButtonFormField<int>(
                 value: selectedIndex,
                 isExpanded: true,
