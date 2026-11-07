@@ -287,7 +287,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
     expect(find.text('پاسخ: ۳/۴'), findsNothing);
-    await tester.ensureVisible(find.text('نمایش پاسخ و توضیح'));
+    await tester.scrollUntilVisible(find.text('نمایش پاسخ و توضیح'), 250);
+    await tester.pumpAndSettle();
     await tester.tap(find.text('نمایش پاسخ و توضیح'));
     await tester.pump();
     expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
