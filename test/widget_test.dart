@@ -220,7 +220,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('دسترسی سریع'), findsOneWidget);
-    expect(find.text('هوش مصنوعی فهمینو', skipOffstage: false), findsOneWidget);
+    expect(find.text('همراه هوشمند فهمینو', skipOffstage: false), findsOneWidget);
 
   });
 
