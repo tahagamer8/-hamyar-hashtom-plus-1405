@@ -246,6 +246,9 @@ class _ChapterContent extends ConsumerWidget {
         .cast<String>();
     final questions =
         (chapter['questions'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
+    final pageAssets = (chapter['bookPageImages'] as List<dynamic>? ?? [])
+        .whereType<String>()
+        .toList(growable: false);
 
     if (feature == AppFeature.quiz) {
       return _QuizChapter(title: title, questions: questions);
@@ -274,6 +277,12 @@ class _ChapterContent extends ConsumerWidget {
                   style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.primary)),
             ],
             const SizedBox(height: 10),
+            if (feature == AppFeature.notes ||
+                feature == AppFeature.solutions ||
+                feature == AppFeature.sampleExams) ...[
+              BookPageGallery(pageAssets: pageAssets),
+              const SizedBox(height: 12),
+            ],
             if (feature == AppFeature.lessons) ...[
               Text(summary, style: theme.textTheme.bodyMedium),
               if (points.isNotEmpty) ...[
