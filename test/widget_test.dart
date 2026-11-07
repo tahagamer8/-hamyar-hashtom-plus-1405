@@ -149,6 +149,62 @@ void main() {
     }
   });
 
+  test('current independent subject packs pass full structural validation', () async {
+    const subjectIds = [
+      'math', 'science', 'persian', 'writing', 'arabic', 'english',
+      'social', 'religion', 'quran', 'thinking', 'work',
+      'english_workbook', 'art',
+    ];
+    var totalSections = 0;
+    var totalQuestions = 0;
+    final uniqueQuestions = <String>{};
+
+    for (final id in subjectIds) {
+      final file = File('assets/content/subjects/$id.json');
+      expect(await file.exists(), isTrue, reason: id);
+      final pack = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
+      expect(pack['subjectId'], id);
+      expect(pack['title'], isA<String>());
+      final chapters = pack['chapters'] as List<dynamic>;
+      expect(chapters, isNotEmpty, reason: id);
+      totalSections += chapters.length;
+
+      for (final rawChapter in chapters) {
+        final chapter = rawChapter as Map<String, dynamic>;
+        expect((chapter['title'] as String?)?.trim(), isNotEmpty, reason: id);
+        expect((chapter['summary'] as String?)?.trim().length, greaterThanOrEqualTo(30), reason: id + '/' + chapter['title']);
+        expect((chapter['points'] as List<dynamic>), isNotEmpty, reason: id);
+        expect((chapter['solutionSteps'] as List<dynamic>), isNotEmpty, reason: id);
+        final questions = chapter['questions'] as List<dynamic>;
+        expect(questions.length, greaterThanOrEqualTo(2), reason: id + '/' + chapter['title']);
+        totalQuestions += questions.length;
+        for (final rawQuestion in questions) {
+          final question = rawQuestion as Map<String, dynamic>;
+          final text = (question['question'] as String).trim();
+          final normalized = text.toLowerCase()
+              .replaceAll(RegExp(r'[\s\u200c\u0640؟،.!؛:]', unicode: true), '')
+              .replaceAll('ي', 'ی')
+              .replaceAll('ك', 'ک');
+          expect(text, isNotEmpty, reason: id);
+          expect(uniqueQuestions.add(normalized), isTrue, reason: 'پرسش تکراری در بسته‌های مستقل: ' + text);
+          final options = question['options'] as List<dynamic>;
+          expect(options.length, greaterThanOrEqualTo(4), reason: text);
+          expect(options.toSet().length, options.length, reason: text);
+          final answer = question['answer'] as int;
+          expect(answer, inInclusiveRange(0, options.length - 1), reason: text);
+          expect((question['explanation'] as String?)?.trim(), isNotEmpty, reason: text);
+        }
+      }
+    }
+
+    expect(totalSections, 145);
+    expect(totalQuestions, 391);
+    final religion = jsonDecode(
+      await File('assets/content/subjects/religion.json').readAsString(),
+    ) as Map<String, dynamic>;
+    expect(religion['chapters'], hasLength(15));
+  });
+
   testWidgets('home screen renders Fahmino branding', (tester) async {
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
     await tester.pumpAndSettle();
