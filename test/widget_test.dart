@@ -211,12 +211,12 @@ void main() {
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('امکانات'), findsOneWidget);
     await tester.scrollUntilVisible(
-      find.text('باز کردن جزوه'),
+      find.text('نمایش PDF').first,
       250,
       scrollable: find.byType(Scrollable).first,
     );
     expect(find.text('باز کردن جزوه'), findsOneWidget);
-    expect(find.text('باز کردن نمونه‌سؤال'), findsOneWidget);
+    expect(find.text('دانلود PDF').first, findsOneWidget);
   });
 
   testWidgets('navigates to subjects tab', (tester) async {
