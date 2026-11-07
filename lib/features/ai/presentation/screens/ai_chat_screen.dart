@@ -277,7 +277,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
             : 'پاسخ از سرویس دریافت نشد. کمی بعد دوباره تلاش کن.';
       }
     } on SocketException {
-      answer = 'اتصال اینترنت برقرار نیست. اتصال را بررسی کن و دوباره بفرست.';
+      answer = 'اتصال اینترنت برقرار نیست؛ این پاسخ جایگزین از محتوای آفلاین برنامه پیدا شده است.\\n\\n' +
+          _answerLocally(question);
     } on HttpException {
       answer = 'ارتباط با سرویس فهمینو برقرار نشد. کمی بعد دوباره تلاش کن.';
     } on FormatException {
