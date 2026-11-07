@@ -15,6 +15,7 @@ class FavoritesScreen extends ConsumerStatefulWidget {
 
 class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
   Future<Map<String, dynamic>>? _catalogFuture;
+  Map<String, dynamic> _legacyCatalog = {};
 
   @override
   void didChangeDependencies() {
@@ -25,6 +26,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
   Future<Map<String, dynamic>> _loadCatalog(AssetBundle bundle) async {
     final raw = await bundle.loadString('assets/content/catalog_fa.json');
     final catalog = jsonDecode(raw) as Map<String, dynamic>;
+    _legacyCatalog = Map<String, dynamic>.from(catalog);
     // Resolve current favorites against the same independently versioned packs
     // used by the lesson and search screens.
     for (final id in catalog.keys.toList()) {
@@ -89,28 +91,16 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
             // Keep older saved bookmarks visible if their chapter title was
             // renamed in the new pack. Open the subject so the student can
             // choose the corresponding current chapter rather than guessing.
-            try {
-              final legacyRaw = jsonDecode(
-                // catalog_fa is only used as a fallback for old bookmark names.
-                // Current favorites resolve above against the new subject pack.
-                '',
-              );
-              if (legacyRaw is Map<String, dynamic>) {
-                final legacy = legacyRaw[subjectId] as Map<String, dynamic>?;
-                final legacyChapters = legacy?['chapters'] as List<dynamic>? ?? [];
-                if (legacyChapters.any((item) =>
-                    item is Map<String, dynamic> && item['title'] == title)) {
-                  entries.add((
-                    subjectId: subjectId,
-                    subjectTitle: subject['title'] as String? ?? subjectId,
-                    title: title,
-                    chapterIndex: null,
-                  ));
-                }
-              }
-            } catch (_) {
-              // A renamed legacy bookmark is safely omitted if it cannot
-              // be resolved; never route it to a guessed chapter.
+            final legacy = _legacyCatalog[subjectId] as Map<String, dynamic>?;
+            final legacyChapters = legacy?['chapters'] as List<dynamic>? ?? [];
+            if (legacyChapters.any((item) =>
+                item is Map<String, dynamic> && item['title'] == title)) {
+              entries.add((
+                subjectId: subjectId,
+                subjectTitle: subject['title'] as String? ?? subjectId,
+                title: title,
+                chapterIndex: null,
+              ));
             }
           }
           if (entries.isEmpty) {
