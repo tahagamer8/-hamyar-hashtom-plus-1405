@@ -12,12 +12,12 @@ class HomeFeatureGrid extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GridView.count(
-        crossAxisCount: 3,
+        crossAxisCount: 2,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 12,
-        childAspectRatio: 0.8,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.48,
         children: [
           for (final feature in AppFeature.values)
             _FeatureTile(feature: feature),
@@ -47,7 +47,7 @@ class _FeatureTile extends StatelessWidget {
             ? context.go(AppRoutes.favorites)
             : context.push(AppRoutes.featureSubjects(feature.name),),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
