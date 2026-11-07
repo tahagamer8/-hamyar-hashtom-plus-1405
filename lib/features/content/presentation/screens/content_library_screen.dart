@@ -79,7 +79,9 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
           if (chapters.isEmpty) {
             return const Center(child: Text('برای این درس هنوز فصلی ثبت نشده است.'));
           }
-          final selectedIndex = _selectedChapterIndex.clamp(0, chapters.length - 1);
+          final selectedIndex = _selectedChapterIndex < 0
+              ? 0
+              : (_selectedChapterIndex >= chapters.length ? chapters.length - 1 : _selectedChapterIndex);
           final selectedChapter = chapters[selectedIndex];
           return ListView(
             padding: const EdgeInsets.all(16),
