@@ -219,7 +219,7 @@ void main() {
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
     await tester.pumpAndSettle();
     expect(find.text(AppConstants.appName), findsWidgets);
-    expect(find.text('امکانات'), findsOneWidget);
+    expect(find.text('دسترسی سریع'), findsOneWidget);
     expect(find.text('هوش مصنوعی فهمینو', skipOffstage: false), findsOneWidget);
 
   });
