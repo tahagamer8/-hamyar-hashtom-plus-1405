@@ -216,7 +216,7 @@ void main() {
       scrollable: find.byType(Scrollable).first,
     );
     expect(find.text('باز کردن جزوه'), findsOneWidget);
-    expect(find.text('دانلود PDF').first, findsOneWidget);
+    expect(find.text('دانلود PDF'), findsNWidgets(2));
   });
 
   testWidgets('navigates to subjects tab', (tester) async {
