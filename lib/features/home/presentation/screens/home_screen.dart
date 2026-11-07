@@ -45,10 +45,10 @@ class HomeScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('راهنمای هوشمند فهمینو',
+                              Text('هوش مصنوعی فهمینو',
                                   style: TextStyle(fontWeight: FontWeight.w700)),
                               SizedBox(height: 3),
-                              Text('پیدا کردن نکته و مثال از محتوای ذخیره‌شده'),
+                              Text('پاسخ‌گویی آموزشی با Gemini و محتوای آفلاین'),
                             ],
                           ),
                         ),
