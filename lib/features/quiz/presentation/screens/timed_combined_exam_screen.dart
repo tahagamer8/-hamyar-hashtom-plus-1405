@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 class TimedCombinedExamScreen extends StatefulWidget {
@@ -69,6 +71,64 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
     if (submitted) return;
     timer?.cancel();
     setState(() => submitted = true);
+    _saveResult();
+  }
+
+  Future<void> _saveResult() async {
+    try {
+      final preferences = await SharedPreferences.getInstance();
+      final key = 'fahmino_exam_history_${widget.subjectTitle}';
+      final previous = preferences.getStringList(key) ?? <String>[];
+      final percent = (score * 100 / questions.length).round();
+      previous.insert(0, jsonEncode({
+        'date': DateTime.now().toIso8601String(),
+        'score': score,
+        'total': questions.length,
+        'percent': percent,
+      }));
+      await preferences.setStringList(key, previous.take(20).toList());
+    } catch (_) {
+      // A failed local history write must not block the exam result.
+    }
+  }
+
+  Future<void> _showHistory() async {
+    final preferences = await SharedPreferences.getInstance();
+    final records = preferences.getStringList('fahmino_exam_history_${widget.subjectTitle}') ?? <String>[];
+    if (!mounted) return;
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (context) => SafeArea(
+        child: records.isEmpty
+            ? const Padding(
+                padding: EdgeInsets.all(24),
+                child: Text('هنوز سابقه‌ای برای این درس ثبت نشده است.'),
+              )
+            : ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(16),
+                children: [
+                  Text('سوابق آزمون ${widget.subjectTitle}',
+                      style: Theme.of(context).textTheme.titleLarge),
+                  const SizedBox(height: 8),
+                  for (final record in records)
+                    Builder(builder: (context) {
+                      final item = jsonDecode(record) as Map<String, dynamic>;
+                      final date = DateTime.tryParse(item['date'] as String? ?? '');
+                      final dateText = date == null
+                          ? 'تاریخ نامشخص'
+                          : '${date.year}/${date.month.toString().padLeft(2, '0')}/${date.day.toString().padLeft(2, '0')}';
+                      return ListTile(
+                        leading: const Icon(Icons.history_rounded),
+                        title: Text('نمره ${item['percent']}٪'),
+                        subtitle: Text('${item['score']} از ${item['total']} پاسخ درست • $dateText'),
+                      );
+                    }),
+                ],
+              ),
+      ),
+    );
   }
 
   Future<void> confirmFinish() async {
@@ -158,6 +218,12 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
         Text('$score پاسخ درست از ${questions.length} سؤال'),
         Text('${answers.length} پاسخ ثبت‌شده'),
       ]))),
+      const SizedBox(height: 12),
+      OutlinedButton.icon(
+        onPressed: _showHistory,
+        icon: const Icon(Icons.history_rounded),
+        label: const Text('مشاهدهٔ سوابق آزمون این درس'),
+      ),
       const SizedBox(height: 12),
       Text('پاسخ‌نامه و توضیحات', style: theme.textTheme.titleLarge),
       for (var i = 0; i < questions.length; i++) _reviewCard(theme, i),
