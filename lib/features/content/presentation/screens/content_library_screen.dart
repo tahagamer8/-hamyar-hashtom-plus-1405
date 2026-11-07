@@ -31,6 +31,19 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
   }
 
   Future<Map<String, dynamic>> _loadContent(AssetBundle bundle) async {
+    // Prefer the independently versioned subject pack; retain the legacy catalog
+    // as a safe fallback while older installations migrate.
+    try {
+      final raw = await bundle.loadString('assets/content/subjects/${widget.subjectId}.json');
+      final decoded = jsonDecode(raw) as Map<String, dynamic>;
+      if (decoded['subjectId'] == widget.subjectId && decoded['chapters'] is List) {
+        return decoded;
+      }
+    } on FlutterError {
+      // Older builds or not-yet-migrated subjects can still use the legacy catalog.
+    } on FormatException {
+      // Fall through to the validated legacy catalog.
+    }
     final raw = await bundle.loadString('assets/content/catalog_fa.json');
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
     final subject = decoded[widget.subjectId];
