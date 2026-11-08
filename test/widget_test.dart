@@ -24,6 +24,9 @@ const _testCatalog = r'''
       "points": ["قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید."],
       "example": "مثال: ۱/۲ + ۱/۳ را حساب کن.",
       "solutionSteps": ["مخرج مشترک ۶ انتخاب می‌کنیم.", "۱/۲ = ۳/۶ و ۱/۳ = ۲/۶.", "۳/۶ + ۲/۶ = ۵/۶."],
+      "commonMistakes": ["در جمع کسرها ابتدا مخرج مشترک بگیر."],
+      "pageStart": 10,
+      "pageEnd": 18,
       "questions": [{
         "question": "حاصل ۱/۲ + ۱/۴ کدام است؟",
         "options": ["۱/۶", "۲/۶", "۳/۴", "۱"],
@@ -540,5 +543,45 @@ void main() {
     await tester.enterText(find.byType(TextField), 'حاصل ۱/۲ + ۱/۴');
     await tester.pump();
     expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
+  });
+
+  testWidgets('search matches words in any order and includes common mistakes', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: DefaultAssetBundle(
+          bundle: _MemoryAssetBundle(_testCatalog),
+          child: const SearchScreen(),
+        ),
+      ),
+    );
+    await _pumpUiFrames(tester);
+
+    await tester.enterText(find.byType(TextField), 'کسر گویا');
+    await tester.pump();
+    expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'مخرج مشترک');
+    await tester.pump();
+    expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
+  });
+
+  testWidgets('search accepts Persian page numbers and checks verified page ranges', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: DefaultAssetBundle(
+          bundle: _MemoryAssetBundle(_testCatalog),
+          child: const SearchScreen(),
+        ),
+      ),
+    );
+    await _pumpUiFrames(tester);
+
+    await tester.enterText(find.byType(TextField), 'صفحهٔ ۱۲');
+    await tester.pump();
+    expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'صفحه ۲۰');
+    await tester.pump();
+    expect(find.text('عددهای صحیح و گویا'), findsNothing);
   });
 }
