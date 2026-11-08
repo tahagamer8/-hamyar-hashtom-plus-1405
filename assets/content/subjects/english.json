@@ -53,7 +53,10 @@
           "answer": 0,
           "explanation": "The correct word is Iranian."
         }
-      ]
+      ],
+      "pageStart": 12,
+      "pageEnd": 17,
+      "sourceLesson": "My Nationality"
     },
     {
       "title": "Unit 2: My Week",
@@ -104,7 +107,10 @@
           "answer": 0,
           "explanation": "The question asks about time, so a day/time answer is appropriate."
         }
-      ]
+      ],
+      "pageStart": 18,
+      "pageEnd": 22,
+      "sourceLesson": "My Week"
     },
     {
       "title": "Unit 3: My Abilities",
@@ -155,7 +161,10 @@
           "answer": 0,
           "explanation": "The question asks about ability, so yes/no with can is suitable."
         }
-      ]
+      ],
+      "pageStart": 26,
+      "pageEnd": 33,
+      "sourceLesson": "My Abilities"
     },
     {
       "title": "Unit 4: My Health",
@@ -206,7 +215,10 @@
           "answer": 0,
           "explanation": "What's the matter? asks what problem someone has."
         }
-      ]
+      ],
+      "pageStart": 34,
+      "pageEnd": 39,
+      "sourceLesson": "My Health"
     },
     {
       "title": "Unit 5: My City",
@@ -257,7 +269,10 @@
           "answer": 0,
           "explanation": "Where is the museum? asks for the location of a place."
         }
-      ]
+      ],
+      "pageStart": 42,
+      "pageEnd": 47,
+      "sourceLesson": "My City"
     },
     {
       "title": "Unit 6: My Village",
@@ -308,7 +323,10 @@
           "answer": 0,
           "explanation": "The sentence describes a natural feature near a village."
         }
-      ]
+      ],
+      "pageStart": 48,
+      "pageEnd": 53,
+      "sourceLesson": "My Village"
     },
     {
       "title": "Unit 7: My Hobbies",
@@ -359,7 +377,14 @@
           "answer": 0,
           "explanation": "Reading means مطالعه کردن or خواندن."
         }
-      ]
+      ],
+      "pageStart": 54,
+      "pageEnd": 59,
+      "sourceLesson": "My Hobbies"
     }
-  ]
+  ],
+  "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+  "textbookSource": "کتاب رسمی پایه هشتم، سازمان پژوهش و برنامه‌ریزی آموزشی؛ مرجع انتشار رسمی: https://chap.sch.ir/",
+  "textbookSourceFile": "English-8_Daneshchi.iR.pdf",
+  "textbookContentsVerified": true
 }
