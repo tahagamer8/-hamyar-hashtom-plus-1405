@@ -54,7 +54,9 @@
           "answer": 0,
           "explanation": "Brazilian is the nationality word for a person from Brazil."
         }
-      ]
+      ],
+      "pageStart": 2,
+      "sourceLesson": "My Nationality"
     },
     {
       "title": "Lesson 2: My Week",
@@ -106,7 +108,9 @@
           "answer": 0,
           "explanation": "Every afternoon means هر بعدازظهر."
         }
-      ]
+      ],
+      "pageStart": 8,
+      "sourceLesson": "My Week"
     },
     {
       "title": "Lesson 3: My Abilities",
@@ -158,7 +162,9 @@
           "answer": 0,
           "explanation": "I can take photos describes something the speaker is able to do."
         }
-      ]
+      ],
+      "pageStart": 12,
+      "sourceLesson": "My Abilities"
     },
     {
       "title": "Lesson 4: My Health",
@@ -210,7 +216,9 @@
           "answer": 0,
           "explanation": "Cold means سرماخوردگی."
         }
-      ]
+      ],
+      "pageStart": 19,
+      "sourceLesson": "My Health"
     },
     {
       "title": "Lesson 5: My City",
@@ -262,7 +270,9 @@
           "answer": 0,
           "explanation": "Brazil is in South America."
         }
-      ]
+      ],
+      "pageStart": 25,
+      "sourceLesson": "My City"
     },
     {
       "title": "Lesson 6: My Village",
@@ -314,7 +324,9 @@
           "answer": 0,
           "explanation": "South is opposite to north."
         }
-      ]
+      ],
+      "pageStart": 31,
+      "sourceLesson": "My Village"
     },
     {
       "title": "Lesson 7: My Hobbies",
@@ -367,7 +379,13 @@
           "answer": 0,
           "explanation": "A registration form is used to sign up for a program."
         }
-      ]
+      ],
+      "pageStart": 41,
+      "sourceLesson": "My Hobbies"
     }
-  ]
+  ],
+  "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+  "textbookSource": "کتاب رسمی پایه هشتم، سازمان پژوهش و برنامه‌ریزی آموزشی؛ مرجع انتشار رسمی: https://chap.sch.ir/",
+  "textbookSourceFile": "Workbook-8_Daneshchi.iR.pdf",
+  "textbookContentsVerified": true
 }
