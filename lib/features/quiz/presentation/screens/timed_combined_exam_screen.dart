@@ -5,9 +5,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 class TimedCombinedExamScreen extends StatefulWidget {
-  const TimedCombinedExamScreen({super.key, required this.subjectTitle, required this.chapters});
+  const TimedCombinedExamScreen({
+    super.key,
+    required this.subjectTitle,
+    required this.chapters,
+    this.examTitle,
+    this.questionLimit,
+  });
   final String subjectTitle;
   final List<Map<String, dynamic>> chapters;
+  final String? examTitle;
+  final int? questionLimit;
+
+  String get historyKey => 'fahmino_exam_history_${subjectTitle}_${examTitle ?? 'general'}';
 
   @override
   State<TimedCombinedExamScreen> createState() => _TimedCombinedExamScreenState();
@@ -26,8 +36,10 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
     super.initState();
     questions = [];
     for (final chapter in widget.chapters) {
-      final items = chapter['questions'];
-      if (items is! List) continue;
+      final items = <dynamic>[
+        ...(chapter['questions'] as List<dynamic>? ?? const []),
+        ...(chapter['advancedQuestions'] as List<dynamic>? ?? const []),
+      ];
       for (final item in items) {
         if (item is! Map) continue;
         final q = Map<String, dynamic>.from(item);
@@ -47,6 +59,10 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
       }
     }
     questions.shuffle(Random());
+    final limit = widget.questionLimit;
+    if (limit != null && limit > 0 && questions.length > limit) {
+      questions.removeRange(limit, questions.length);
+    }
     secondsLeft = max(600, questions.length * 60);
     if (questions.isNotEmpty) {
       timer = Timer.periodic(const Duration(seconds: 1), (t) {
@@ -77,7 +93,7 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
   Future<void> _saveResult() async {
     try {
       final preferences = await SharedPreferences.getInstance();
-      final key = 'fahmino_exam_history_${widget.subjectTitle}';
+      final key = widget.examTitle == null ? 'fahmino_exam_history_${widget.subjectTitle}' : widget.historyKey;
       final previous = preferences.getStringList(key) ?? <String>[];
       final percent = (score * 100 / questions.length).round();
       previous.insert(0, jsonEncode({
@@ -94,7 +110,8 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
 
   Future<void> _showHistory() async {
     final preferences = await SharedPreferences.getInstance();
-    final records = preferences.getStringList('fahmino_exam_history_${widget.subjectTitle}') ?? <String>[];
+    final key = widget.examTitle == null ? 'fahmino_exam_history_${widget.subjectTitle}' : widget.historyKey;
+    final records = preferences.getStringList(key) ?? <String>[];
     if (!mounted) return;
     await showModalBottomSheet<void>(
       context: context,
@@ -109,7 +126,7 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(16),
                 children: [
-                  Text('سوابق آزمون ${widget.subjectTitle}',
+                  Text('سوابق آزمون ${widget.examTitle ?? widget.subjectTitle}',
                       style: Theme.of(context).textTheme.titleLarge),
                   const SizedBox(height: 8),
                   for (final record in records)
@@ -160,7 +177,7 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
         body: const Center(child: Text('برای این درس هنوز سؤال ثبت نشده است.')));
     }
     return Scaffold(
-      appBar: AppBar(title: Text(submitted ? 'نتیجه آزمون' : 'آزمون جامع ${widget.subjectTitle}'),
+      appBar: AppBar(title: Text(submitted ? 'نتیجه آزمون' : (widget.examTitle ?? 'آزمون جامع ${widget.subjectTitle}'),
         actions: [if (!submitted) Padding(padding: const EdgeInsetsDirectional.only(end: 12),
           child: Center(child: Chip(avatar: const Icon(Icons.timer_outlined, size: 18), label: Text(clock))))]),
       body: submitted ? _result(theme) : _exam(theme),
