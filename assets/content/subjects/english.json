@@ -60,6 +60,23 @@
       "commonMistakes": [
         "نام کشور با ملیت یکی نیست؛ country نام کشور و nationality صفت یا نام ملیت است.",
         "نام کشورها و ملیت‌ها در انگلیسی با حرف بزرگ آغاز می‌شوند؛ مثل Iran و Iranian."
+      ],
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which question asks about a person's country?» پاسخ «Where are you from?» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "What days do you ...? asks on which days an activity happens.",
+            "Where are you from? asks about a person's country or place of origin.",
+            "Wednesday comes after Tuesday.",
+            "The question asks about time, so a day/time answer is appropriate."
+          ],
+          "answer": 1,
+          "explanation": "استدلال درست: Where are you from? asks about a person's country or place of origin.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
       ]
     },
     {
@@ -118,6 +135,23 @@
       "commonMistakes": [
         "برای روزهای هفته معمولاً از on استفاده می‌کنیم؛ روز را با ساعت یا بخش روز اشتباه نگیر.",
         "در برنامهٔ هفتگی، فعالیت و روز آن را با فاعل و فعل درست بنویس؛ فقط فهرست واژه‌ها کافی نیست."
+      ],
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which answer is suitable for “When do you study English?”» پاسخ «On Monday mornings.» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "A person from Canada is Canadian.",
+            "Where are you from? asks about a person's country or place of origin.",
+            "The question asks about time, so a day/time answer is appropriate.",
+            "The correct word is Iranian."
+          ],
+          "answer": 2,
+          "explanation": "استدلال درست: The question asks about time, so a day/time answer is appropriate.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
       ]
     },
     {
@@ -176,6 +210,23 @@
       "commonMistakes": [
         "بعد از can و can't فعل به شکل ساده می‌آید؛ به آن s یا to اضافه نکن.",
         "can و can't خودشان توانایی یا ناتوانی را نشان می‌دهند؛ برای پرسش از ترتیب Can + subject استفاده کن."
+      ],
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which answer is suitable for “Can you ride a bicycle?”» پاسخ «Yes, I can.» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "A person from Canada is Canadian.",
+            "Where are you from? asks about a person's country or place of origin.",
+            "The correct word is Iranian.",
+            "The question asks about ability, so yes/no with can is suitable."
+          ],
+          "answer": 3,
+          "explanation": "استدلال درست: The question asks about ability, so yes/no with can is suitable.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
       ]
     },
     {
@@ -234,6 +285,23 @@
       "commonMistakes": [
         "برای بیان مشکل معمولاً از ساختار مناسب مانند have a headache یا have a toothache استفاده می‌شود؛ واژهٔ نشانه را با خود بیماری اشتباه نگیر.",
         "در توصیهٔ ساده، بعد از should فعل ساده می‌آید؛ به should شکل گذشته یا s اضافه نکن."
+      ],
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which question asks about a health problem?» پاسخ «What's the matter?» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "What's the matter? asks what problem someone has.",
+            "A person from Canada is Canadian.",
+            "Where are you from? asks about a person's country or place of origin.",
+            "The correct word is Iranian."
+          ],
+          "answer": 0,
+          "explanation": "استدلال درست: What's the matter? asks what problem someone has.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
       ]
     },
     {
@@ -292,6 +360,23 @@
       "commonMistakes": [
         "there is برای اسم مفرد و there are برای اسم جمع به کار می‌رود؛ انتخاب را بر اساس اسم بعد از آن انجام بده.",
         "نام مکان را با جایگاه آن اشتباه نگیر؛ توصیف یک شهر باید مکان‌ها و رابطهٔ مکانی را روشن کند."
+      ],
+      "examTerm": "second",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which place is usually used to borrow books?» پاسخ «library» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "A person from Canada is Canadian.",
+            "A library is a place where people can read or borrow books.",
+            "Where are you from? asks about a person's country or place of origin.",
+            "The correct word is Iranian."
+          ],
+          "answer": 1,
+          "explanation": "استدلال درست: A library is a place where people can read or borrow books.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
       ]
     },
     {
@@ -350,6 +435,23 @@
       "commonMistakes": [
         "نام فصل‌ها و ویژگی‌های آب‌وهوا را با هم اشتباه نگیر؛ برای مثال season با weather یکسان نیست.",
         "برای توصیف مکان، از واژهٔ دقیق مانند river، field یا mountain استفاده کن؛ واژه‌های طبیعی را جابه‌جا نکن."
+      ],
+      "examTerm": "second",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which sentence best describes a natural place?» پاسخ «There is a river near the village.» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "A person from Canada is Canadian.",
+            "Where are you from? asks about a person's country or place of origin.",
+            "The sentence describes a natural feature near a village.",
+            "The correct word is Iranian."
+          ],
+          "answer": 2,
+          "explanation": "استدلال درست: The sentence describes a natural feature near a village.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
       ]
     },
     {
@@ -408,11 +510,29 @@
       "commonMistakes": [
         "برای بیان علاقه به فعالیت، ساختارهایی مانند like + verb-ing یا enjoy + verb-ing را با شکل سادهٔ فعل اشتباه نگیر.",
         "پرسش دربارهٔ سرگرمی با پاسخ دربارهٔ توانایی یکسان نیست؛ hobby و ability را از هم جدا کن."
+      ],
+      "examTerm": "second",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which question asks about a person's hobby?» پاسخ «What is your hobby?» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "A person from Canada is Canadian.",
+            "Where are you from? asks about a person's country or place of origin.",
+            "The correct word is Iranian.",
+            "What is your hobby? asks about a favourite free-time activity."
+          ],
+          "answer": 3,
+          "explanation": "استدلال درست: What is your hobby? asks about a favourite free-time activity.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
       ]
     }
   ],
   "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
   "textbookSource": "کتاب رسمی پایه هشتم، سازمان پژوهش و برنامه‌ریزی آموزشی؛ مرجع انتشار رسمی: https://chap.sch.ir/",
   "textbookSourceFile": "English-8_Daneshchi.iR.pdf",
-  "textbookContentsVerified": true
+  "textbookContentsVerified": true,
+  "sampleQuestionBankVersion": 1
 }
