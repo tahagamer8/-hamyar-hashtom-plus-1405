@@ -67,7 +67,8 @@ void main() {
 
     await tester.enterText(find.byType(TextField), 'عددهای گویا چیست؟');
     await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.textContaining('عددهای گویا را می‌توان به صورت کسر نوشت.'), findsOneWidget);
     expect(find.textContaining('پاسخ‌ساز اینترنتی نیست'), findsOneWidget);
@@ -79,7 +80,8 @@ void main() {
 
     await tester.enterText(find.byType(TextField), 'اشتباهات رایج کسرها چیست؟');
     await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.textContaining('در جمع کسرها ابتدا مخرج مشترک بگیر.'), findsOneWidget);
   });
