@@ -49,7 +49,11 @@ class _SampleQuestionLibraryScreenState extends State<SampleQuestionLibraryScree
 
   @override
   Widget build(BuildContext context) {
-    final safeIndex = _chapterIndex.clamp(0, widget.chapters.isEmpty ? 0 : widget.chapters.length - 1);
+    final safeIndex = _chapterIndex < 0
+        ? 0
+        : (_chapterIndex >= widget.chapters.length
+            ? (widget.chapters.isEmpty ? 0 : widget.chapters.length - 1)
+            : _chapterIndex);
     final chapter = widget.chapters.isEmpty ? null : widget.chapters[safeIndex];
     return ListView(
       padding: const EdgeInsets.all(16),
