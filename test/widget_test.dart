@@ -336,6 +336,10 @@ void main() {
   });
 
   testWidgets('math lesson displays chapter-specific common mistakes', (tester) async {
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
     final mathPack = (await tester.runAsync(
       () => File('assets/content/subjects/math.json').readAsString(),
     ))!;
@@ -354,19 +358,20 @@ void main() {
         ),
       ),
     );
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 500));
-    await tester.ensureVisible(find.text('اشتباهات رایج'));
-    await tester.pump(const Duration(milliseconds: 300));
+    await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
-    await tester.tap(find.text('اشتباهات رایج'), warnIfMissed: false);
+    await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('برای جمع یا تفریق کسرها'), findsOneWidget);
   });
 
   testWidgets('science lesson displays chapter-specific common misconceptions', (tester) async {
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
     final sciencePack = (await tester.runAsync(
       () => File('assets/content/subjects/science.json').readAsString(),
     ))!;
@@ -385,19 +390,20 @@ void main() {
         ),
       ),
     );
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 500));
-    await tester.ensureVisible(find.text('اشتباهات رایج'));
-    await tester.pump(const Duration(milliseconds: 300));
+    await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
-    await tester.tap(find.text('اشتباهات رایج'), warnIfMissed: false);
+    await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('صاف‌کردن فقط جامد نامحلول'), findsOneWidget);
   });
 
   testWidgets('social studies lesson displays lesson-specific common misconceptions', (tester) async {
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
     final socialPack = (await tester.runAsync(
       () => File('assets/content/subjects/social.json').readAsString(),
     ))!;
@@ -416,19 +422,20 @@ void main() {
         ),
       ),
     );
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 500));
-    await tester.ensureVisible(find.text('اشتباهات رایج'));
-    await tester.pump(const Duration(milliseconds: 300));
+    await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
-    await tester.tap(find.text('اشتباهات رایج'), warnIfMissed: false);
+    await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('تعاون فقط تقسیم کردن'), findsOneWidget);
   });
 
   testWidgets('Arabic lesson displays lesson-specific common misconceptions', (tester) async {
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
     final arabicPack = (await tester.runAsync(
       () => File('assets/content/subjects/arabic.json').readAsString(),
     ))!;
@@ -447,13 +454,10 @@ void main() {
         ),
       ),
     );
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 500));
-    await tester.ensureVisible(find.text('اشتباهات رایج'));
-    await tester.pump(const Duration(milliseconds: 300));
+    await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
-    await tester.tap(find.text('اشتباهات رایج'), warnIfMissed: false);
+    await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('هذانِ برای مثنای مذکر'), findsOneWidget);
