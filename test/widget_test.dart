@@ -336,7 +336,9 @@ void main() {
   });
 
   testWidgets('math lesson displays chapter-specific common mistakes', (tester) async {
-    final mathPack = await File('assets/content/subjects/math.json').readAsString();
+    final mathPack = (await tester.runAsync(
+      () => File('assets/content/subjects/math.json').readAsString(),
+    ))!;
     await tester.pumpWidget(
       ProviderScope(
         child: MaterialApp(
@@ -362,7 +364,9 @@ void main() {
   });
 
   testWidgets('science lesson displays chapter-specific common misconceptions', (tester) async {
-    final sciencePack = await File('assets/content/subjects/science.json').readAsString();
+    final sciencePack = (await tester.runAsync(
+      () => File('assets/content/subjects/science.json').readAsString(),
+    ))!;
     await tester.pumpWidget(
       ProviderScope(
         child: MaterialApp(
@@ -388,7 +392,9 @@ void main() {
   });
 
   testWidgets('social studies lesson displays lesson-specific common misconceptions', (tester) async {
-    final socialPack = await File('assets/content/subjects/social.json').readAsString();
+    final socialPack = (await tester.runAsync(
+      () => File('assets/content/subjects/social.json').readAsString(),
+    ))!;
     await tester.pumpWidget(
       ProviderScope(
         child: MaterialApp(
@@ -414,7 +420,9 @@ void main() {
   });
 
   testWidgets('Arabic lesson displays lesson-specific common misconceptions', (tester) async {
-    final arabicPack = await File('assets/content/subjects/arabic.json').readAsString();
+    final arabicPack = (await tester.runAsync(
+      () => File('assets/content/subjects/arabic.json').readAsString(),
+    ))!;
     await tester.pumpWidget(
       ProviderScope(
         child: MaterialApp(
