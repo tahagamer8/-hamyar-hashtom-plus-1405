@@ -305,6 +305,19 @@ void main() {
     expect(find.text('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
   });
 
+  testWidgets('sample question library offers chapter and term modes', (tester) async {
+    await tester.pumpWidget(_contentApp('sampleExams'));
+    await _pumpUiFrames(tester);
+
+    expect(find.text('فصل‌به‌فصل'), findsOneWidget);
+    expect(find.text('نوبت اول و دوم'), findsOneWidget);
+
+    await tester.tap(find.text('نوبت اول و دوم'));
+    await _pumpUiFrames(tester);
+    expect(find.text('نوبت اول'), findsOneWidget);
+    expect(find.text('نوبت دوم'), findsOneWidget);
+  });
+
   testWidgets('sample questions reveal answer key on demand', (tester) async {
     await tester.pumpWidget(_contentApp('sampleExams'));
     await _pumpUiFrames(tester);
