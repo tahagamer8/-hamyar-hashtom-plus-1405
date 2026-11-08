@@ -402,6 +402,31 @@ void main() {
     expect(find.textContaining('تعاون'), findsWidgets);
   });
 
+  testWidgets('Arabic lesson displays lesson-specific common misconceptions', (tester) async {
+    final arabicPack = await File('assets/content/subjects/arabic.json').readAsString();
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: DefaultAssetBundle(
+            bundle: _MapAssetBundle({
+              'assets/content/subjects/arabic.json': arabicPack,
+            }),
+            child: const ContentLibraryScreen(
+              subjectId: 'arabic',
+              featureId: 'lessons',
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.tap(find.text('اشتباهات رایج'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('هذا'), findsWidgets);
+  });
+
   testWidgets('favorites resolve titles from the current subject packs', (tester) async {
     SharedPreferences.setMockInitialValues({
       'fahmino_favorites_v1': [
