@@ -316,6 +316,11 @@ void main() {
     await _pumpUiFrames(tester);
     expect(find.text('نوبت اول'), findsOneWidget);
     expect(find.text('نوبت دوم'), findsOneWidget);
+
+    await tester.tap(find.text('شروع آزمون تیزهوشان نوبت اول'));
+    await _pumpUiFrames(tester);
+    expect(find.text('آزمون تألیفی تیزهوشان نوبت اول'), findsOneWidget);
+    expect(find.text('ثبت و پایان آزمون'), findsOneWidget);
   });
 
   testWidgets('sample questions reveal answer key on demand', (tester) async {
