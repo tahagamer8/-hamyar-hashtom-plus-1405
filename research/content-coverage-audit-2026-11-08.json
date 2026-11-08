@@ -1,0 +1,3966 @@
+{
+  "auditDate": "2026-11-08",
+  "branch": "audit/textbook-alignment-1405",
+  "auditedCommit": "581d347ebf2d7a51bdf117811de0ae9d83ffa0f8",
+  "scope": "۱۳ بسته JSON فعلی پایه هشتم؛ این گزارش ممیزی ساختاری و وضعیت ارجاع منبع است، نه تأیید علمی همه پاسخ‌ها.",
+  "totals": {
+    "chapters": 145,
+    "questions": 448,
+    "validAnswers": 448,
+    "explainedQuestions": 448,
+    "withSummary": 145,
+    "withPoints": 145,
+    "withExample": 145,
+    "withThreeSteps": 145,
+    "pageStart": 105,
+    "pageEnd": 16,
+    "sourceLesson": 84,
+    "onlyMcq": 448,
+    "duplicateQuestions": 0,
+    "duplicateQuestionGroups": 0,
+    "repeatedSolutionStepGroups": 1,
+    "chaptersWithCompletePageRangeAndSource": 7,
+    "chaptersDeclaredComplete": 0
+  },
+  "pdfCoverage": {
+    "available": 8,
+    "totalPacks": 13,
+    "missing": [
+      "math",
+      "persian",
+      "writing",
+      "quran",
+      "religion"
+    ],
+    "availableBooks": [
+      {
+        "id": "arabic",
+        "file": "Arabi-8_Daneshchi.iR.pdf",
+        "edition": "چاپ اول ۱۴۰۵",
+        "pages": 136,
+        "toc": "PDF ص. ۴؛ شناسنامه ص. ۲",
+        "rights": "نسخهٔ بررسی‌شده دارای اعلام حقوق نشر سازمان پژوهش است؛ برای نمایش در اپ از لینک رسمی استفاده شود و PDF بدون مجوز بازنشر/بسته‌بندی نشود."
+      },
+      {
+        "id": "art",
+        "file": "Honar-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 144,
+        "toc": "PDF ص. ۴؛ شناسنامه ص. ۲",
+        "rights": "نسخهٔ بررسی‌شده دارای اعلام حقوق نشر سازمان پژوهش است؛ برای نمایش در اپ از لینک رسمی استفاده شود و PDF بدون مجوز بازنشر/بسته‌بندی نشود."
+      },
+      {
+        "id": "english",
+        "file": "English-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 96,
+        "toc": "PDF ص. ۸ تا ۱۰؛ شناسنامه ص. ۳",
+        "rights": "نسخهٔ بررسی‌شده دارای اعلام حقوق نشر سازمان پژوهش است؛ برای نمایش در اپ از لینک رسمی استفاده شود و PDF بدون مجوز بازنشر/بسته‌بندی نشود."
+      },
+      {
+        "id": "english_workbook",
+        "file": "Workbook-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 56,
+        "toc": "شروع درس‌ها با جست‌وجوی عنوان درس در PDF؛ شناسنامه ص. ۵",
+        "rights": "نسخهٔ بررسی‌شده دارای اعلام حقوق نشر سازمان پژوهش است؛ برای نمایش در اپ از لینک رسمی استفاده شود و PDF بدون مجوز بازنشر/بسته‌بندی نشود."
+      },
+      {
+        "id": "science",
+        "file": "Oloom-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 152,
+        "toc": "PDF ص. ۶؛ شناسنامه ص. ۲",
+        "rights": "نسخهٔ بررسی‌شده دارای اعلام حقوق نشر سازمان پژوهش است؛ برای نمایش در اپ از لینک رسمی استفاده شود و PDF بدون مجوز بازنشر/بسته‌بندی نشود."
+      },
+      {
+        "id": "social",
+        "file": "Motaleat-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 200,
+        "toc": "PDF ص. ۴ و ۵؛ شناسنامه ص. ۲",
+        "rights": "نسخهٔ بررسی‌شده دارای اعلام حقوق نشر سازمان پژوهش است؛ برای نمایش در اپ از لینک رسمی استفاده شود و PDF بدون مجوز بازنشر/بسته‌بندی نشود."
+      },
+      {
+        "id": "thinking",
+        "file": "Tafakkor-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 176,
+        "toc": "PDF ص. ۵ و ۶؛ شناسنامه ص. ۲",
+        "rights": "نسخهٔ بررسی‌شده دارای اعلام حقوق نشر سازمان پژوهش است؛ برای نمایش در اپ از لینک رسمی استفاده شود و PDF بدون مجوز بازنشر/بسته‌بندی نشود."
+      },
+      {
+        "id": "work",
+        "file": "Fanavari-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 175,
+        "toc": "PDF ص. ۵؛ شناسنامه ص. ۲",
+        "rights": "نسخهٔ بررسی‌شده دارای اعلام حقوق نشر سازمان پژوهش است؛ برای نمایش در اپ از لینک رسمی استفاده شود و PDF بدون مجوز بازنشر/بسته‌بندی نشود."
+      }
+    ]
+  },
+  "structuralValidation": {
+    "allJsonParsed": true,
+    "allAnswersValid": true,
+    "allQuestionsHaveExplanations": true,
+    "exactDuplicateQuestionGroups": 0,
+    "questionTypes": "تمام ۴۴۸ سؤال فعلی چهارگزینه‌ای هستند؛ سؤال تشریحی/جای‌خالی/شنیداری/عملی در مدل داده ثبت نشده است.",
+    "repeatedSolutionSteps": [
+      {
+        "chapters": [
+          "persian:1",
+          "persian:2",
+          "persian:3",
+          "persian:4",
+          "persian:5",
+          "persian:6",
+          "persian:7",
+          "persian:8",
+          "persian:9",
+          "persian:10",
+          "persian:11",
+          "persian:12",
+          "persian:13",
+          "persian:14",
+          "persian:15",
+          "persian:16",
+          "persian:17"
+        ],
+        "steps": "متن یا شعر درس را با دقت بخوان و واژه‌ها و عبارت‌های کلیدی را مشخص کن.|پرسش را با توجه به موضوع، نکته‌های زبانی و شاهدهای متن بررسی کن.|پاسخ را با متن درس یا نمونه‌ای که خودت نوشته‌ای بازبینی کن."
+      }
+    ]
+  },
+  "completionRule": "یک فصل فقط وقتی کامل اعلام شود که همه زیرموضوع‌ها و فعالیت‌های همان نسخه رسمی با صفحه و شناسه ثبت شده، درسنامه کافی، مثال، تمرین چندنوعی و سطح‌بندی‌شده، پاسخ تشریحی معتبر، آزمون و بازبینی انسانی داشته باشد. صرف وجود خلاصه و چند تست کافی نیست.",
+  "subjects": [
+    {
+      "id": "arabic",
+      "title": "عربی",
+      "chapterCount": 10,
+      "questionCount": 30,
+      "counts": {
+        "pageStart": 10,
+        "pageEnd": 0,
+        "sourceLesson": 10,
+        "qLt3": 0,
+        "qAtLeast5": 0,
+        "allQuestionsExplained": 10,
+        "summaryAtLeast100": 10,
+        "pointsAtLeast3": 10,
+        "examples": 10,
+        "stepsAtLeast3": 10
+      },
+      "textbookEdition": "چاپ اول، ۱۴۰۵",
+      "textbookSourceFile": "Arabi-8_Daneshchi.iR.pdf",
+      "pdfInLibrary": true,
+      "pdf": {
+        "file": "Arabi-8_Daneshchi.iR.pdf",
+        "edition": "چاپ اول ۱۴۰۵",
+        "pages": 136,
+        "toc": "PDF ص. ۴؛ شناسنامه ص. ۲"
+      },
+      "chapters": [
+        {
+          "index": 1,
+          "title": "الدرس الأول: مُراجَعَةُ دُروسِ الصَّفِّ السّابِعِ",
+          "pageStart": 11,
+          "pageEnd": null,
+          "sourceLesson": "الدرس الأول: مُراجَعَةُ دُروسِ الصَّفِّ السّابِعِ",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 135,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین متن‌خوانی و واژگان به هر عبارت/صفحه متصل نشده"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "الدرس الثاني: أَهَمِّيَّةُ اللُّغَةِ الْعَرَبِيَّةِ",
+          "pageStart": 23,
+          "pageEnd": null,
+          "sourceLesson": "الدرس الثاني: أَهَمِّيَّةُ اللُّغَةِ الْعَرَبِيَّةِ",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 134,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین متن‌خوانی و واژگان به هر عبارت/صفحه متصل نشده"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "الدرس الثالث: مِهْنَتُكَ فِي الْمُسْتَقْبَلِ",
+          "pageStart": 35,
+          "pageEnd": null,
+          "sourceLesson": "الدرس الثالث: مِهْنَتُكَ فِي الْمُسْتَقْبَلِ",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 114,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین متن‌خوانی و واژگان به هر عبارت/صفحه متصل نشده"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "الدرس الرابع: التَّجْرِبَةُ الْجَديدَةُ",
+          "pageStart": 47,
+          "pageEnd": null,
+          "sourceLesson": "الدرس الرابع: التَّجْرِبَةُ الْجَديدَةُ",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 125,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین متن‌خوانی و واژگان به هر عبارت/صفحه متصل نشده"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "الدرس الخامس: الصَّداقَةُ",
+          "pageStart": 61,
+          "pageEnd": null,
+          "sourceLesson": "الدرس الخامس: الصَّداقَةُ",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 142,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین متن‌خوانی و واژگان به هر عبارت/صفحه متصل نشده"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "الدرس السادس: فِي السَّفَرِ",
+          "pageStart": 71,
+          "pageEnd": null,
+          "sourceLesson": "الدرس السادس: فِي السَّفَرِ",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 122,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین متن‌خوانی و واژگان به هر عبارت/صفحه متصل نشده"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "الدرس السابع: أَرْضُ اللّهِ واسِعَةٌ",
+          "pageStart": 85,
+          "pageEnd": null,
+          "sourceLesson": "الدرس السابع: أَرْضُ اللّهِ واسِعَةٌ",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 130,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین متن‌خوانی و واژگان به هر عبارت/صفحه متصل نشده"
+          ]
+        },
+        {
+          "index": 8,
+          "title": "الدرس الثامن: الِاعْتِمادُ عَلَى النَّفْسِ",
+          "pageStart": 97,
+          "pageEnd": null,
+          "sourceLesson": "الدرس الثامن: الِاعْتِمادُ عَلَى النَّفْسِ",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 129,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین متن‌خوانی و واژگان به هر عبارت/صفحه متصل نشده"
+          ]
+        },
+        {
+          "index": 9,
+          "title": "الدرس التاسع: السَّفْرَةُ الْعِلْمِيَّةُ",
+          "pageStart": 109,
+          "pageEnd": null,
+          "sourceLesson": "الدرس التاسع: السَّفْرَةُ الْعِلْمِيَّةُ",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 123,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین متن‌خوانی و واژگان به هر عبارت/صفحه متصل نشده"
+          ]
+        },
+        {
+          "index": 10,
+          "title": "الدرس العاشر: الْمَراقِدُ الدِّينِيَّةُ",
+          "pageStart": 127,
+          "pageEnd": null,
+          "sourceLesson": "الدرس العاشر: الْمَراقِدُ الدِّينِيَّةُ",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 140,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین متن‌خوانی و واژگان به هر عبارت/صفحه متصل نشده"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "art",
+      "title": "فرهنگ و هنر",
+      "chapterCount": 5,
+      "questionCount": 15,
+      "counts": {
+        "pageStart": 5,
+        "pageEnd": 0,
+        "sourceLesson": 5,
+        "qLt3": 0,
+        "qAtLeast5": 0,
+        "allQuestionsExplained": 5,
+        "summaryAtLeast100": 5,
+        "pointsAtLeast3": 5,
+        "examples": 5,
+        "stepsAtLeast3": 5
+      },
+      "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+      "textbookSourceFile": "Honar-8_Daneshchi.iR.pdf",
+      "pdfInLibrary": true,
+      "pdf": {
+        "file": "Honar-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 144,
+        "toc": "PDF ص. ۴؛ شناسنامه ص. ۲"
+      },
+      "chapters": [
+        {
+          "index": 1,
+          "title": "هنرهای تجسمی",
+          "pageStart": 2,
+          "pageEnd": null,
+          "sourceLesson": "هنرهای تجسمی",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 165,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده",
+            "ریزدرس‌های داخل هر یک از پنج بخش به شناسه مستقل تبدیل نشده"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "خوشنویسی",
+          "pageStart": 53,
+          "pageEnd": null,
+          "sourceLesson": "خوشنویسی",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 160,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده",
+            "ریزدرس‌های داخل هر یک از پنج بخش به شناسه مستقل تبدیل نشده"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "هنرهای سنتی",
+          "pageStart": 80,
+          "pageEnd": null,
+          "sourceLesson": "هنرهای سنتی",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 151,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده",
+            "ریزدرس‌های داخل هر یک از پنج بخش به شناسه مستقل تبدیل نشده"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "هنرهای آوایی",
+          "pageStart": 112,
+          "pageEnd": null,
+          "sourceLesson": "هنرهای آوایی",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 160,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده",
+            "ریزدرس‌های داخل هر یک از پنج بخش به شناسه مستقل تبدیل نشده"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "هنرهای نمایشی",
+          "pageStart": 128,
+          "pageEnd": null,
+          "sourceLesson": "هنرهای نمایشی",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 150,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده",
+            "ریزدرس‌های داخل هر یک از پنج بخش به شناسه مستقل تبدیل نشده"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "english",
+      "title": "زبان انگلیسی",
+      "chapterCount": 7,
+      "questionCount": 21,
+      "counts": {
+        "pageStart": 7,
+        "pageEnd": 7,
+        "sourceLesson": 7,
+        "qLt3": 0,
+        "qAtLeast5": 0,
+        "allQuestionsExplained": 7,
+        "summaryAtLeast100": 7,
+        "pointsAtLeast3": 7,
+        "examples": 7,
+        "stepsAtLeast3": 7
+      },
+      "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+      "textbookSourceFile": "English-8_Daneshchi.iR.pdf",
+      "pdfInLibrary": true,
+      "pdf": {
+        "file": "English-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 96,
+        "toc": "PDF ص. ۸ تا ۱۰؛ شناسنامه ص. ۳"
+      },
+      "chapters": [
+        {
+          "index": 1,
+          "title": "Unit 1: My Nationality",
+          "pageStart": 12,
+          "pageEnd": 17,
+          "sourceLesson": "My Nationality",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 242,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "Unit 2: My Week",
+          "pageStart": 18,
+          "pageEnd": 22,
+          "sourceLesson": "My Week",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 182,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "Unit 3: My Abilities",
+          "pageStart": 26,
+          "pageEnd": 33,
+          "sourceLesson": "My Abilities",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 156,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "Unit 4: My Health",
+          "pageStart": 34,
+          "pageEnd": 39,
+          "sourceLesson": "My Health",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 175,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "Unit 5: My City",
+          "pageStart": 42,
+          "pageEnd": 47,
+          "sourceLesson": "My City",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 128,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "Unit 6: My Village",
+          "pageStart": 48,
+          "pageEnd": 53,
+          "sourceLesson": "My Village",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 163,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "Unit 7: My Hobbies",
+          "pageStart": 54,
+          "pageEnd": 59,
+          "sourceLesson": "My Hobbies",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 168,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "english_workbook",
+      "title": "کتاب کار زبان انگلیسی",
+      "chapterCount": 7,
+      "questionCount": 21,
+      "counts": {
+        "pageStart": 7,
+        "pageEnd": 0,
+        "sourceLesson": 7,
+        "qLt3": 0,
+        "qAtLeast5": 0,
+        "allQuestionsExplained": 7,
+        "summaryAtLeast100": 7,
+        "pointsAtLeast3": 7,
+        "examples": 7,
+        "stepsAtLeast3": 7
+      },
+      "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+      "textbookSourceFile": "Workbook-8_Daneshchi.iR.pdf",
+      "pdfInLibrary": true,
+      "pdf": {
+        "file": "Workbook-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 56,
+        "toc": "شروع درس‌ها با جست‌وجوی عنوان درس در PDF؛ شناسنامه ص. ۵"
+      },
+      "chapters": [
+        {
+          "index": 1,
+          "title": "Lesson 1: My Nationality",
+          "pageStart": 2,
+          "pageEnd": null,
+          "sourceLesson": "My Nationality",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 233,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "Lesson 2: My Week",
+          "pageStart": 8,
+          "pageEnd": null,
+          "sourceLesson": "My Week",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 199,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "Lesson 3: My Abilities",
+          "pageStart": 12,
+          "pageEnd": null,
+          "sourceLesson": "My Abilities",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 201,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "Lesson 4: My Health",
+          "pageStart": 19,
+          "pageEnd": null,
+          "sourceLesson": "My Health",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 210,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "Lesson 5: My City",
+          "pageStart": 25,
+          "pageEnd": null,
+          "sourceLesson": "My City",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 181,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "Lesson 6: My Village",
+          "pageStart": 31,
+          "pageEnd": null,
+          "sourceLesson": "My Village",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 210,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "Lesson 7: My Hobbies",
+          "pageStart": 41,
+          "pageEnd": null,
+          "sourceLesson": "My Hobbies",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 172,
+          "pointCount": 6,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین شنیداری/گفتاری و صوت در این بسته ثبت نشده"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "math",
+      "title": "ریاضی",
+      "chapterCount": 9,
+      "questionCount": 54,
+      "counts": {
+        "pageStart": 9,
+        "pageEnd": 9,
+        "sourceLesson": 0,
+        "qLt3": 0,
+        "qAtLeast5": 9,
+        "allQuestionsExplained": 9,
+        "summaryAtLeast100": 9,
+        "pointsAtLeast3": 9,
+        "examples": 9,
+        "stepsAtLeast3": 9
+      },
+      "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+      "textbookSourceFile": null,
+      "pdfInLibrary": false,
+      "pdf": null,
+      "chapters": [
+        {
+          "index": 1,
+          "title": "عددهای صحیح و گویا",
+          "pageStart": 1,
+          "pageEnd": 18,
+          "sourceLesson": null,
+          "questionCount": 6,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 158,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین تشریحی چندمرحله‌ای/شکل و پاسخ فعالیت کتاب جداگانه ثبت نشده"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "عددهای اول",
+          "pageStart": 19,
+          "pageEnd": 28,
+          "sourceLesson": null,
+          "questionCount": 6,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 200,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین تشریحی چندمرحله‌ای/شکل و پاسخ فعالیت کتاب جداگانه ثبت نشده"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "چندضلعی‌ها",
+          "pageStart": 29,
+          "pageEnd": 50,
+          "sourceLesson": null,
+          "questionCount": 6,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 160,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین تشریحی چندمرحله‌ای/شکل و پاسخ فعالیت کتاب جداگانه ثبت نشده"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "جبر و معادله",
+          "pageStart": 51,
+          "pageEnd": 68,
+          "sourceLesson": null,
+          "questionCount": 6,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 178,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین تشریحی چندمرحله‌ای/شکل و پاسخ فعالیت کتاب جداگانه ثبت نشده"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "بردار و مختصات",
+          "pageStart": 69,
+          "pageEnd": 82,
+          "sourceLesson": null,
+          "questionCount": 6,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 137,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین تشریحی چندمرحله‌ای/شکل و پاسخ فعالیت کتاب جداگانه ثبت نشده"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "مثلث",
+          "pageStart": 83,
+          "pageEnd": 100,
+          "sourceLesson": null,
+          "questionCount": 6,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 155,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین تشریحی چندمرحله‌ای/شکل و پاسخ فعالیت کتاب جداگانه ثبت نشده"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "توان و جذر",
+          "pageStart": 101,
+          "pageEnd": 118,
+          "sourceLesson": null,
+          "questionCount": 6,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 129,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین تشریحی چندمرحله‌ای/شکل و پاسخ فعالیت کتاب جداگانه ثبت نشده"
+          ]
+        },
+        {
+          "index": 8,
+          "title": "آمار و احتمال",
+          "pageStart": 119,
+          "pageEnd": 136,
+          "sourceLesson": null,
+          "questionCount": 6,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 174,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین تشریحی چندمرحله‌ای/شکل و پاسخ فعالیت کتاب جداگانه ثبت نشده"
+          ]
+        },
+        {
+          "index": 9,
+          "title": "دایره",
+          "pageStart": 137,
+          "pageEnd": 150,
+          "sourceLesson": null,
+          "questionCount": 6,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 161,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین تشریحی چندمرحله‌ای/شکل و پاسخ فعالیت کتاب جداگانه ثبت نشده"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "persian",
+      "title": "فارسی",
+      "chapterCount": 17,
+      "questionCount": 34,
+      "counts": {
+        "pageStart": 0,
+        "pageEnd": 0,
+        "sourceLesson": 0,
+        "qLt3": 17,
+        "qAtLeast5": 0,
+        "allQuestionsExplained": 17,
+        "summaryAtLeast100": 17,
+        "pointsAtLeast3": 17,
+        "examples": 17,
+        "stepsAtLeast3": 17
+      },
+      "textbookEdition": null,
+      "textbookSourceFile": null,
+      "pdfInLibrary": false,
+      "pdf": null,
+      "chapters": [
+        {
+          "index": 1,
+          "title": "درس ۱: پیش از اینها",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 161,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "درس ۲: خوب جهان را ببین / صورتگر ماهر",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 144,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "درس ۳: ارمغان ایران",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 154,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "درس ۴: سفر شکفتن",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 153,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "درس ۵: درس آزاد ـ ادبیات بومی (۱)",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 153,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "درس ۶: راه نیک‌بختی",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 156,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "درس ۷: آداب نیکان / انسان، فناوری، اخلاق",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 179,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 8,
+          "title": "درس ۸: آزادگی",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 171,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 9,
+          "title": "درس ۹: نوجوان باهوش / آشپززاده وزیر / گریه امیر",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 127,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 10,
+          "title": "درس ۱۰: قلم سحرآمیز / دو نامه",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 183,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 11,
+          "title": "درس ۱۱: پرچمداران",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 141,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 12,
+          "title": "درس ۱۲: شیر حق",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 157,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 13,
+          "title": "درس ۱۳: ادبیات انقلاب / ادبیات انقلاب، انقلاب ادبیات",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 165,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 14,
+          "title": "درس ۱۴: یاد حسین",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 133,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 15,
+          "title": "درس ۱۵: درس آزاد ـ ادبیات بومی (۲)",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 145,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 16,
+          "title": "درس ۱۶: پرنده آزادی / کودکان سنگ",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 177,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        },
+        {
+          "index": 17,
+          "title": "درس ۱۷: راه خوشبختی",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 171,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "سه گام راهنمای حل با تمام درس‌های فارسی یکسان است"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quran",
+      "title": "قرآن",
+      "chapterCount": 12,
+      "questionCount": 36,
+      "counts": {
+        "pageStart": 12,
+        "pageEnd": 0,
+        "sourceLesson": 0,
+        "qLt3": 0,
+        "qAtLeast5": 0,
+        "allQuestionsExplained": 12,
+        "summaryAtLeast100": 12,
+        "pointsAtLeast3": 12,
+        "examples": 12,
+        "stepsAtLeast3": 12
+      },
+      "textbookEdition": null,
+      "textbookSourceFile": null,
+      "pdfInLibrary": false,
+      "pdf": null,
+      "chapters": [
+        {
+          "index": 1,
+          "title": "درس 1: رستگاری در صلاه است و زکات؛ اجتناب از لغو و ترک سیئات",
+          "pageStart": 12,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 207,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "درس 2: باد و خاک و آب و آتش بنده‌اند",
+          "pageStart": 21,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 177,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "درس 3: همه عالم جمال طلعت اوست؛ تا که را چشم این نظر باشد",
+          "pageStart": 30,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 142,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "درس 4: چون سلیمان از خدا حاجت بخواه؛ والدینت را دعا کن هر پگاه",
+          "pageStart": 39,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 144,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "درس 5: ای وارث پیمبر و قرآن و دین بیا",
+          "pageStart": 49,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 151,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "درس 6: معبودهای باطل چون تار عنکبوت‌اند؛ با نسیم ایمان، معدوم و بی‌ثبات‌اند",
+          "pageStart": 57,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 134,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "درس 7: هر روز عمر مشق کن این شعر ناب را؛ فردای مرگ، اول صبح قیامت است",
+          "pageStart": 66,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 176,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        },
+        {
+          "index": 8,
+          "title": "درس 8: راهرو گر صد هنر دارد، توکل بایدش",
+          "pageStart": 76,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 172,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        },
+        {
+          "index": 9,
+          "title": "درس 9: کدام دانه فرو رفت در زمین که نرست؟ چرا به دانه انسانت این گمان باشد؟",
+          "pageStart": 84,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 158,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        },
+        {
+          "index": 10,
+          "title": "درس 10: دستور خدا، سلام بر توست؛ ذکر تو و احترام بر توست",
+          "pageStart": 92,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 177,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        },
+        {
+          "index": 11,
+          "title": "درس 11: همنشین تو از تو به باشد؛ تا تو را عقل و دین بیفزاید",
+          "pageStart": 101,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 177,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        },
+        {
+          "index": 12,
+          "title": "درس 12: یا غافر الخطایا! دریاب بی‌نوا را؛ یا واهب العطایا! تغییر ده قضا را",
+          "pageStart": 109,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 137,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "تمرین قرائت/شنیداری و واژگان/ترجمه فعالیت‌محور ثبت نشده"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "religion",
+      "title": "پیام‌های آسمان",
+      "chapterCount": 15,
+      "questionCount": 33,
+      "counts": {
+        "pageStart": 0,
+        "pageEnd": 0,
+        "sourceLesson": 0,
+        "qLt3": 12,
+        "qAtLeast5": 0,
+        "allQuestionsExplained": 15,
+        "summaryAtLeast100": 15,
+        "pointsAtLeast3": 15,
+        "examples": 15,
+        "stepsAtLeast3": 15
+      },
+      "textbookEdition": null,
+      "textbookSourceFile": null,
+      "pdfInLibrary": false,
+      "pdf": null,
+      "chapters": [
+        {
+          "index": 1,
+          "title": "درس ۱: آفرینش شگفت‌انگیز",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 245,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "درس ۲: عفو و گذشت",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 235,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "درس ۳: همه چیز در دست تو",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 136,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "درس ۴: پیوند جاودان",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 132,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "درس ۵: روزی که اسلام کامل شد",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 159,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "درس ۶: نردبان آسمان",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 171,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "درس ۷: یک فرصت طلایی",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 174,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 8,
+          "title": "درس ۸: نشان ارزشمندی",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 229,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 9,
+          "title": "درس ۹: تدبیر زندگانی",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 226,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 10,
+          "title": "درس ۱۰: دو سرمایهٔ گران‌بها",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 200,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 11,
+          "title": "درس ۱۱: آفت‌های زبان",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 199,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 12,
+          "title": "درس ۱۲: ارزش کار",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 236,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 13,
+          "title": "درس ۱۳: کلید گنج‌ها",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 261,
+          "pointCount": 6,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 14,
+          "title": "درس ۱۴: ما مسلمانان",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 270,
+          "pointCount": 6,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        },
+        {
+          "index": 15,
+          "title": "درس ۱۵: حق‌الناس",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 264,
+          "pointCount": 6,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌های کتاب به صفحه و شماره فعالیت متصل نیست"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "science",
+      "title": "علوم تجربی",
+      "chapterCount": 15,
+      "questionCount": 75,
+      "counts": {
+        "pageStart": 15,
+        "pageEnd": 0,
+        "sourceLesson": 15,
+        "qLt3": 0,
+        "qAtLeast5": 15,
+        "allQuestionsExplained": 15,
+        "summaryAtLeast100": 15,
+        "pointsAtLeast3": 15,
+        "examples": 15,
+        "stepsAtLeast3": 15
+      },
+      "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+      "textbookSourceFile": "Oloom-8_Daneshchi.iR.pdf",
+      "pdfInLibrary": true,
+      "pdf": {
+        "file": "Oloom-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 152,
+        "toc": "PDF ص. ۶؛ شناسنامه ص. ۲"
+      },
+      "chapters": [
+        {
+          "index": 1,
+          "title": "مخلوط و جداسازی مواد",
+          "pageStart": 1,
+          "pageEnd": null,
+          "sourceLesson": "مخلوط و جداسازی مواد",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 132,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "تغییرهای شیمیایی در خدمت زندگی",
+          "pageStart": 9,
+          "pageEnd": null,
+          "sourceLesson": "تغییرهای شیمیایی در خدمت زندگی",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 142,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "از درون اتم چه خبر",
+          "pageStart": 21,
+          "pageEnd": null,
+          "sourceLesson": "از درون اتم چه خبر",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 158,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "تنظیم عصبی",
+          "pageStart": 28,
+          "pageEnd": null,
+          "sourceLesson": "تنظیم عصبی",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 154,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "حس و حرکت",
+          "pageStart": 35,
+          "pageEnd": null,
+          "sourceLesson": "حس و حرکت",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 148,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "تنظیم هورمونی",
+          "pageStart": 47,
+          "pageEnd": null,
+          "sourceLesson": "تنظیم هورمونی",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 119,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "الفبای زیست‌فناوری",
+          "pageStart": 55,
+          "pageEnd": null,
+          "sourceLesson": "الفبای زیست‌فناوری",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 163,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 8,
+          "title": "تولیدمثل در جانداران",
+          "pageStart": 65,
+          "pageEnd": null,
+          "sourceLesson": "تولیدمثل در جانداران",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 168,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 9,
+          "title": "الکتریسیته",
+          "pageStart": 76,
+          "pageEnd": null,
+          "sourceLesson": "الکتریسیته",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 160,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 10,
+          "title": "مغناطیس",
+          "pageStart": 89,
+          "pageEnd": null,
+          "sourceLesson": "مغناطیس",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 119,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 11,
+          "title": "کانی‌ها",
+          "pageStart": 97,
+          "pageEnd": null,
+          "sourceLesson": "کانی‌ها",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 170,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 12,
+          "title": "سنگ‌ها",
+          "pageStart": 104,
+          "pageEnd": null,
+          "sourceLesson": "سنگ‌ها",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 110,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 13,
+          "title": "هوازدگی",
+          "pageStart": 114,
+          "pageEnd": null,
+          "sourceLesson": "هوازدگی",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 136,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 14,
+          "title": "نور و ویژگی‌های آن",
+          "pageStart": 122,
+          "pageEnd": null,
+          "sourceLesson": "نور و ویژگی‌های آن",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 143,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 15,
+          "title": "شکست نور",
+          "pageStart": 136,
+          "pageEnd": null,
+          "sourceLesson": "شکست نور",
+          "questionCount": 5,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 128,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "آزمایش، مشاهده، داده/نمودار و نتیجه‌گیری فعالیت‌محور مستقل ثبت نشده"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "title": "مطالعات اجتماعی",
+      "chapterCount": 24,
+      "questionCount": 48,
+      "counts": {
+        "pageStart": 24,
+        "pageEnd": 0,
+        "sourceLesson": 24,
+        "qLt3": 24,
+        "qAtLeast5": 0,
+        "allQuestionsExplained": 24,
+        "summaryAtLeast100": 24,
+        "pointsAtLeast3": 24,
+        "examples": 24,
+        "stepsAtLeast3": 24
+      },
+      "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+      "textbookSourceFile": "Motaleat-8_Daneshchi.iR.pdf",
+      "pdfInLibrary": true,
+      "pdf": {
+        "file": "Motaleat-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 200,
+        "toc": "PDF ص. ۴ و ۵؛ شناسنامه ص. ۲"
+      },
+      "chapters": [
+        {
+          "index": 1,
+          "title": "درس 1: تعاون (۱)",
+          "pageStart": 2,
+          "pageEnd": null,
+          "sourceLesson": "درس 1: تعاون (۱)",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 160,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "درس 2: تعاون (۲)",
+          "pageStart": 7,
+          "pageEnd": null,
+          "sourceLesson": "درس 2: تعاون (۲)",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 132,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "درس 3: ساختار و تشکیلات دولت",
+          "pageStart": 14,
+          "pageEnd": null,
+          "sourceLesson": "درس 3: ساختار و تشکیلات دولت",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 153,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "درس 4: وظایف دولت",
+          "pageStart": 18,
+          "pageEnd": null,
+          "sourceLesson": "درس 4: وظایف دولت",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 162,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "درس 5: آسیب‌های اجتماعی و پیشگیری از آن‌ها",
+          "pageStart": 24,
+          "pageEnd": null,
+          "sourceLesson": "درس 5: آسیب‌های اجتماعی و پیشگیری از آن‌ها",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 160,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "درس 6: قوهٔ قضائیه",
+          "pageStart": 30,
+          "pageEnd": null,
+          "sourceLesson": "درس 6: قوهٔ قضائیه",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 133,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "درس 7: ارتباط و رسانه",
+          "pageStart": 36,
+          "pageEnd": null,
+          "sourceLesson": "درس 7: ارتباط و رسانه",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 157,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 8,
+          "title": "درس 8: رسانه‌ها در زندگی ما",
+          "pageStart": 41,
+          "pageEnd": null,
+          "sourceLesson": "درس 8: رسانه‌ها در زندگی ما",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 139,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 9,
+          "title": "درس 9: ظهور اسلام در شبه‌جزیرهٔ عربستان",
+          "pageStart": 48,
+          "pageEnd": null,
+          "sourceLesson": "درس 9: ظهور اسلام در شبه‌جزیرهٔ عربستان",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 177,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 10,
+          "title": "درس 10: از رحلت پیامبر تا قیام کربلا (نینوا)",
+          "pageStart": 55,
+          "pageEnd": null,
+          "sourceLesson": "درس 10: از رحلت پیامبر تا قیام کربلا (نینوا)",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 149,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 11,
+          "title": "درس 11: ورود اسلام به ایران",
+          "pageStart": 64,
+          "pageEnd": null,
+          "sourceLesson": "درس 11: ورود اسلام به ایران",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 176,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 12,
+          "title": "درس 12: عصر طلایی فرهنگ و تمدن ایرانی ـ اسلامی",
+          "pageStart": 70,
+          "pageEnd": null,
+          "sourceLesson": "درس 12: عصر طلایی فرهنگ و تمدن ایرانی ـ اسلامی",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 161,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 13,
+          "title": "درس 13: غزنویان، سلجوقیان و خوارزمشاهیان",
+          "pageStart": 80,
+          "pageEnd": null,
+          "sourceLesson": "درس 13: غزنویان، سلجوقیان و خوارزمشاهیان",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 167,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 14,
+          "title": "درس 14: میراث فرهنگی ایران در عصر سلجوقی",
+          "pageStart": 86,
+          "pageEnd": null,
+          "sourceLesson": "درس 14: میراث فرهنگی ایران در عصر سلجوقی",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 149,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 15,
+          "title": "درس 15: حملهٔ چنگیز و تیمور به ایران",
+          "pageStart": 94,
+          "pageEnd": null,
+          "sourceLesson": "درس 15: حملهٔ چنگیز و تیمور به ایران",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 175,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 16,
+          "title": "درس 16: پیروزی فرهنگ بر شمشیر",
+          "pageStart": 100,
+          "pageEnd": null,
+          "sourceLesson": "درس 16: پیروزی فرهنگ بر شمشیر",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 150,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 17,
+          "title": "درس 17: ویژگی‌های طبیعی آسیا",
+          "pageStart": 108,
+          "pageEnd": null,
+          "sourceLesson": "درس 17: ویژگی‌های طبیعی آسیا",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 150,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 18,
+          "title": "درس 18: ویژگی‌های انسانی و اقتصادی آسیا",
+          "pageStart": 115,
+          "pageEnd": null,
+          "sourceLesson": "درس 18: ویژگی‌های انسانی و اقتصادی آسیا",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 151,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 19,
+          "title": "درس 19: ویژگی‌های منطقهٔ جنوب‌غربی آسیا",
+          "pageStart": 124,
+          "pageEnd": null,
+          "sourceLesson": "درس 19: ویژگی‌های منطقهٔ جنوب‌غربی آسیا",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 173,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 20,
+          "title": "درس 20: ایران و منطقهٔ جنوب‌غربی آسیا",
+          "pageStart": 129,
+          "pageEnd": null,
+          "sourceLesson": "درس 20: ایران و منطقهٔ جنوب‌غربی آسیا",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 174,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 21,
+          "title": "درس 21: ویژگی‌های طبیعی و انسانی اروپا",
+          "pageStart": 138,
+          "pageEnd": null,
+          "sourceLesson": "درس 21: ویژگی‌های طبیعی و انسانی اروپا",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 154,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 22,
+          "title": "درس 22: ویژگی‌های طبیعی و انسانی آفریقا",
+          "pageStart": 144,
+          "pageEnd": null,
+          "sourceLesson": "درس 22: ویژگی‌های طبیعی و انسانی آفریقا",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 148,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 23,
+          "title": "درس 23: قارهٔ آمریکا",
+          "pageStart": 154,
+          "pageEnd": null,
+          "sourceLesson": "درس 23: قارهٔ آمریکا",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 188,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        },
+        {
+          "index": 24,
+          "title": "درس 24: قارهٔ استرالیا و اقیانوسیه",
+          "pageStart": 162,
+          "pageEnd": null,
+          "sourceLesson": "درس 24: قارهٔ استرالیا و اقیانوسیه",
+          "questionCount": 2,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 159,
+          "pointCount": 3,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "فقط 2 سؤال چهارگزینه‌ای دارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "پاسخ فعالیت‌ها و کاربرگه‌ها به شناسه و صفحه متصل نیست"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thinking",
+      "title": "تفکر و سبک زندگی",
+      "chapterCount": 7,
+      "questionCount": 21,
+      "counts": {
+        "pageStart": 7,
+        "pageEnd": 0,
+        "sourceLesson": 7,
+        "qLt3": 0,
+        "qAtLeast5": 0,
+        "allQuestionsExplained": 7,
+        "summaryAtLeast100": 7,
+        "pointsAtLeast3": 7,
+        "examples": 7,
+        "stepsAtLeast3": 7
+      },
+      "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+      "textbookSourceFile": "Tafakkor-8_Daneshchi.iR.pdf",
+      "pdfInLibrary": true,
+      "pdf": {
+        "file": "Tafakkor-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 176,
+        "toc": "PDF ص. ۵ و ۶؛ شناسنامه ص. ۲"
+      },
+      "chapters": [
+        {
+          "index": 1,
+          "title": "بخش ۱: فعالیت‌های الزامی تفکّر و پژوهش ـ نوبت اول",
+          "pageStart": 10,
+          "pageEnd": null,
+          "sourceLesson": "بخش ۱: فعالیت‌های الزامی تفکّر و پژوهش ـ نوبت اول",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 159,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "بخش ۲: فعالیت‌های الزامی آداب و مهارت‌های زندگی ـ نوبت اول",
+          "pageStart": 33,
+          "pageEnd": null,
+          "sourceLesson": "بخش ۲: فعالیت‌های الزامی آداب و مهارت‌های زندگی ـ نوبت اول",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 158,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "بخش ۳: فعالیت‌های الزامی تفکّر و پژوهش ـ نوبت دوم",
+          "pageStart": 64,
+          "pageEnd": null,
+          "sourceLesson": "بخش ۳: فعالیت‌های الزامی تفکّر و پژوهش ـ نوبت دوم",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 170,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "بخش ۴: فعالیت‌های الزامی آداب و مهارت‌های زندگی ـ نوبت دوم",
+          "pageStart": 82,
+          "pageEnd": null,
+          "sourceLesson": "بخش ۴: فعالیت‌های الزامی آداب و مهارت‌های زندگی ـ نوبت دوم",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 118,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "بخش ۵: فعالیت‌های انتخابی تفکّر و پژوهش",
+          "pageStart": 118,
+          "pageEnd": null,
+          "sourceLesson": "بخش ۵: فعالیت‌های انتخابی تفکّر و پژوهش",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 192,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "بخش ۶: فعالیت‌های انتخابی آداب و مهارت‌های زندگی",
+          "pageStart": 140,
+          "pageEnd": null,
+          "sourceLesson": "بخش ۶: فعالیت‌های انتخابی آداب و مهارت‌های زندگی",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 156,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "بخش ۷: فعالیت‌های اختیاری و خودارزیابی",
+          "pageStart": 166,
+          "pageEnd": null,
+          "sourceLesson": "بخش ۷: فعالیت‌های اختیاری و خودارزیابی",
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 170,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 4,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "title": "کار و فناوری",
+      "chapterCount": 9,
+      "questionCount": 36,
+      "counts": {
+        "pageStart": 9,
+        "pageEnd": 0,
+        "sourceLesson": 9,
+        "qLt3": 0,
+        "qAtLeast5": 0,
+        "allQuestionsExplained": 9,
+        "summaryAtLeast100": 9,
+        "pointsAtLeast3": 9,
+        "examples": 9,
+        "stepsAtLeast3": 9
+      },
+      "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+      "textbookSourceFile": "Fanavari-8_Daneshchi.iR.pdf",
+      "pdfInLibrary": true,
+      "pdf": {
+        "file": "Fanavari-8_Daneshchi.iR.pdf",
+        "edition": "چاپ سیزدهم ۱۴۰۵",
+        "pages": 175,
+        "toc": "PDF ص. ۵؛ شناسنامه ص. ۲"
+      },
+      "chapters": [
+        {
+          "index": 1,
+          "title": "پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی",
+          "pageStart": 1,
+          "pageEnd": null,
+          "sourceLesson": "پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی",
+          "questionCount": 4,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 284,
+          "pointCount": 7,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "پودمان ۲: شهروند الکترونیکی (۲)",
+          "pageStart": 13,
+          "pageEnd": null,
+          "sourceLesson": "پودمان ۲: شهروند الکترونیکی (۲)",
+          "questionCount": 4,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 189,
+          "pointCount": 6,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "پودمان ۳: برنامه‌نویسی پایتون (۲)",
+          "pageStart": 25,
+          "pageEnd": null,
+          "sourceLesson": "پودمان ۳: برنامه‌نویسی پایتون (۲)",
+          "questionCount": 4,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 175,
+          "pointCount": 7,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "پودمان ۴: الکترونیک",
+          "pageStart": 41,
+          "pageEnd": null,
+          "sourceLesson": "پودمان ۴: الکترونیک",
+          "questionCount": 4,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 352,
+          "pointCount": 7,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "پودمان ۵: کار با فلز (نیمه‌تجویزی)",
+          "pageStart": 61,
+          "pageEnd": null,
+          "sourceLesson": "پودمان ۵: کار با فلز (نیمه‌تجویزی)",
+          "questionCount": 4,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 320,
+          "pointCount": 6,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "پودمان ۶: صنایع دستی (بافت؛ نیمه‌تجویزی)",
+          "pageStart": 81,
+          "pageEnd": null,
+          "sourceLesson": "پودمان ۶: صنایع دستی (بافت؛ نیمه‌تجویزی)",
+          "questionCount": 4,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 269,
+          "pointCount": 5,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "پودمان ۷: پرورش و نگهداری از حیوانات (نیمه‌تجویزی)",
+          "pageStart": 99,
+          "pageEnd": null,
+          "sourceLesson": "پودمان ۷: پرورش و نگهداری از حیوانات (نیمه‌تجویزی)",
+          "questionCount": 4,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 376,
+          "pointCount": 6,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 8,
+          "title": "پودمان ۸: امور اداری و مالی (نیمه‌تجویزی)",
+          "pageStart": 119,
+          "pageEnd": null,
+          "sourceLesson": "پودمان ۸: امور اداری و مالی (نیمه‌تجویزی)",
+          "questionCount": 4,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 249,
+          "pointCount": 6,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        },
+        {
+          "index": 9,
+          "title": "پودمان ۹: معماری و سازه (ماکت‌سازی؛ نیمه‌تجویزی)",
+          "pageStart": 141,
+          "pageEnd": null,
+          "sourceLesson": "پودمان ۹: معماری و سازه (ماکت‌سازی؛ نیمه‌تجویزی)",
+          "questionCount": 4,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 326,
+          "pointCount": 6,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "فعالیت عملی/پروژه و معیار ارزیابی هر فعالیت به‌صورت مستقل ثبت نشده"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "title": "نگارش",
+      "chapterCount": 8,
+      "questionCount": 24,
+      "counts": {
+        "pageStart": 0,
+        "pageEnd": 0,
+        "sourceLesson": 0,
+        "qLt3": 0,
+        "qAtLeast5": 0,
+        "allQuestionsExplained": 8,
+        "summaryAtLeast100": 8,
+        "pointsAtLeast3": 8,
+        "examples": 8,
+        "stepsAtLeast3": 8
+      },
+      "textbookEdition": null,
+      "textbookSourceFile": null,
+      "pdfInLibrary": false,
+      "pdf": null,
+      "chapters": [
+        {
+          "index": 1,
+          "title": "درس ۱: پس از تفکر و طراحی نقشهٔ ذهنی، بنویسیم",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 182,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "نمونه متن، پیش‌نویس، بازنویسی و rubric ارزیابی ثبت نشده"
+          ]
+        },
+        {
+          "index": 2,
+          "title": "درس ۲: افکار و گفتارمان را بنویسیم",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 184,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "نمونه متن، پیش‌نویس، بازنویسی و rubric ارزیابی ثبت نشده"
+          ]
+        },
+        {
+          "index": 3,
+          "title": "درس ۳: ببینیم و بنویسیم",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 201,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "نمونه متن، پیش‌نویس، بازنویسی و rubric ارزیابی ثبت نشده"
+          ]
+        },
+        {
+          "index": 4,
+          "title": "درس ۴: گوش بدهیم و بنویسیم",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 172,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "نمونه متن، پیش‌نویس، بازنویسی و rubric ارزیابی ثبت نشده"
+          ]
+        },
+        {
+          "index": 5,
+          "title": "درس ۵: لمس کنیم، ببوییم، بچشیم و بنویسیم",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 171,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "نمونه متن، پیش‌نویس، بازنویسی و rubric ارزیابی ثبت نشده"
+          ]
+        },
+        {
+          "index": 6,
+          "title": "درس ۶: با سنجش و مقایسه، آسان‌تر بنویسیم",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 156,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "نمونه متن، پیش‌نویس، بازنویسی و rubric ارزیابی ثبت نشده"
+          ]
+        },
+        {
+          "index": 7,
+          "title": "درس ۷: با جانشین‌سازی، راحت‌تر بنویسیم",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 182,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "نمونه متن، پیش‌نویس، بازنویسی و rubric ارزیابی ثبت نشده"
+          ]
+        },
+        {
+          "index": 8,
+          "title": "درس ۸: دگرگونه ببینیم و گونه‌گون بنویسیم",
+          "pageStart": null,
+          "pageEnd": null,
+          "sourceLesson": null,
+          "questionCount": 3,
+          "questionTypes": [
+            "multiple_choice"
+          ],
+          "summaryCharacters": 192,
+          "pointCount": 4,
+          "examplePresent": true,
+          "solutionStepCount": 3,
+          "allAnswersValid": true,
+          "allQuestionsExplained": true,
+          "status": "incomplete",
+          "gaps": [
+            "شماره صفحه آغازینِ تأییدشده ندارد",
+            "شماره صفحه پایانی/دامنه صفحات ندارد",
+            "ارجاع صریح به عنوان مرجع کتاب ثبت نشده",
+            "شناسه/فهرست فعالیت‌های کتاب در داده ثبت نشده",
+            "نمونه متن، پیش‌نویس، بازنویسی و rubric ارزیابی ثبت نشده"
+          ]
+        }
+      ]
+    }
+  ]
+}
