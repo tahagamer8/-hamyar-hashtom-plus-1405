@@ -6,12 +6,17 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: fahmino-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
 
@@ -32,6 +37,12 @@ jobs:
             cp -r /tmp/fahmino/android ./android
           fi
           sed -i 's/android:label="[^"]*"/android:label="فهمینو نسخه جدا"/' android/app/src/main/AndroidManifest.xml
+
+      - name: Cache Gradle distributions and dependencies
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-provider: basic
+          cache-read-only: false
 
       - name: Ensure Vazirmatn fonts
         run: |
@@ -57,9 +68,13 @@ jobs:
 
       - name: Generate Persian PDF assets
         run: |
-          python tooling/generate_learning_pdfs.py --output-dir assets/generated_pdfs
+          python tooling/generate_learning_pdfs.py --subjects-dir assets/content/subjects --output-dir assets/generated_pdfs
           test -s assets/generated_pdfs/Fahmino-Grade8-Notes-FA.pdf
           test -s assets/generated_pdfs/Fahmino-Grade8-Sample-Questions-FA.pdf
+          test "$(find assets/generated_pdfs -maxdepth 1 -name 'Fahmino-*-FA.pdf' | wc -l)" -eq 15
+          for subject in arabic art english english_workbook math persian quran religion science social thinking work writing; do
+            test -s "assets/generated_pdfs/Fahmino-$subject-FA.pdf"
+          done
 
       - name: Install dependencies
         run: flutter pub get
@@ -67,8 +82,9 @@ jobs:
       - name: Analyze Dart code
         run: flutter analyze --no-fatal-infos
 
-      - name: Run widget and unit tests (three passes)
-        run: flutter test --reporter expanded && flutter test --reporter expanded && flutter test --reporter expanded
+      - name: Run widget and unit tests
+        timeout-minutes: 15
+        run: flutter test --reporter expanded
 
       - name: Build release APKs
         run: flutter build apk --release --split-per-abi

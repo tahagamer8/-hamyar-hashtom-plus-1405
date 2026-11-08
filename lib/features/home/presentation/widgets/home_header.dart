@@ -10,7 +10,6 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -26,7 +25,7 @@ class HomeHeader extends StatelessWidget {
       child: SafeArea(
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -37,45 +36,119 @@ class HomeHeader extends StatelessWidget {
                     height: 46,
                     decoration: BoxDecoration(
                       color: Colors.white.withAlpha(40),
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    child: const Icon(
-                      Icons.school_rounded,
-                      color: Colors.white,
-                      size: 26,
-                    ),
+                    child: const Icon(Icons.auto_stories_rounded,
+                        color: Colors.white, size: 27),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'سلام، خوش آمدی',
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withAlpha(210),
-                          ),
-                        ),
-                        Text(
-                          AppConstants.appName,
-                          style: theme.textTheme.titleLarge?.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
+                        Text('فضای یادگیری پایه هشتم',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: Colors.white.withAlpha(210),
+                            )),
+                        Text(AppConstants.appName,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                            )),
                       ],
+                    ),
+                  ),
+                  IconButton(
+                    tooltip: 'جست‌وجو',
+                    onPressed: () => context.go(AppRoutes.search),
+                    icon: const Icon(Icons.search_rounded, color: Colors.white),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              Text('یادگیری رو از همین‌جا شروع کن',
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                  )),
+              const SizedBox(height: 7),
+              Text('درس بخوان، تمرین کن و پیشرفتت را بسنج.',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: Colors.white.withAlpha(220),
+                  )),
+              const SizedBox(height: 18),
+              _SearchBox(onTap: () => context.go(AppRoutes.search)),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: _HeaderAction(
+                      icon: Icons.menu_book_rounded,
+                      label: 'انتخاب درس',
+                      onTap: () => context.go(AppRoutes.subjects),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: _HeaderAction(
+                      icon: Icons.timer_rounded,
+                      label: 'شروع آزمون',
+                      onTap: () => context.push(
+                        AppRoutes.featureSubjects('quiz'),
+                      ),
+                      outlined: true,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 22),
-              Text(
-                'امروز چه چیزی یاد بگیریم؟',
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 16),
-              _SearchBox(onTap: () => context.go(AppRoutes.search)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _HeaderAction extends StatelessWidget {
+  const _HeaderAction({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+    this.outlined = false,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+  final bool outlined;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: outlined ? Colors.white.withAlpha(18) : Colors.white,
+      borderRadius: BorderRadius.circular(15),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(15),
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            border: outlined
+                ? Border.all(color: Colors.white.withAlpha(90))
+                : null,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 19,
+                  color: outlined ? Colors.white : AppColors.primary),
+              const SizedBox(width: 8),
+              Text(label,
+                  style: TextStyle(
+                    color: outlined ? Colors.white : AppColors.primary,
+                    fontWeight: FontWeight.w800,
+                  )),
             ],
           ),
         ),
@@ -86,13 +159,11 @@ class HomeHeader extends StatelessWidget {
 
 class _SearchBox extends StatelessWidget {
   const _SearchBox({required this.onTap});
-
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final radius = BorderRadius.circular(16);
-
     return Material(
       color: Colors.white,
       borderRadius: radius,
@@ -111,10 +182,12 @@ class _SearchBox extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.black54,
-                      ),
+                    color: Colors.black54,
+                  ),
                 ),
               ),
+              const Icon(Icons.arrow_back_ios_new_rounded,
+                  size: 14, color: AppColors.primary),
             ],
           ),
         ),

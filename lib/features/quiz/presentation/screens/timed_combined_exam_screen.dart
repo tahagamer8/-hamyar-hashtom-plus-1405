@@ -1,11 +1,23 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 class TimedCombinedExamScreen extends StatefulWidget {
-  const TimedCombinedExamScreen({super.key, required this.subjectTitle, required this.chapters});
+  const TimedCombinedExamScreen({
+    super.key,
+    required this.subjectTitle,
+    required this.chapters,
+    this.examTitle,
+    this.questionLimit,
+  });
   final String subjectTitle;
   final List<Map<String, dynamic>> chapters;
+  final String? examTitle;
+  final int? questionLimit;
+
+  String get historyKey => 'fahmino_exam_history_${subjectTitle}_${examTitle ?? 'general'}';
 
   @override
   State<TimedCombinedExamScreen> createState() => _TimedCombinedExamScreenState();
@@ -24,8 +36,10 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
     super.initState();
     questions = [];
     for (final chapter in widget.chapters) {
-      final items = chapter['questions'];
-      if (items is! List) continue;
+      final items = <dynamic>[
+        ...(chapter['questions'] as List<dynamic>? ?? const []),
+        ...(chapter['advancedQuestions'] as List<dynamic>? ?? const []),
+      ];
       for (final item in items) {
         if (item is! Map) continue;
         final q = Map<String, dynamic>.from(item);
@@ -45,6 +59,10 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
       }
     }
     questions.shuffle(Random());
+    final limit = widget.questionLimit;
+    if (limit != null && limit > 0 && questions.length > limit) {
+      questions.removeRange(limit, questions.length);
+    }
     secondsLeft = max(600, questions.length * 60);
     if (questions.isNotEmpty) {
       timer = Timer.periodic(const Duration(seconds: 1), (t) {
@@ -69,6 +87,65 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
     if (submitted) return;
     timer?.cancel();
     setState(() => submitted = true);
+    _saveResult();
+  }
+
+  Future<void> _saveResult() async {
+    try {
+      final preferences = await SharedPreferences.getInstance();
+      final key = widget.examTitle == null ? 'fahmino_exam_history_${widget.subjectTitle}' : widget.historyKey;
+      final previous = preferences.getStringList(key) ?? <String>[];
+      final percent = (score * 100 / questions.length).round();
+      previous.insert(0, jsonEncode({
+        'date': DateTime.now().toIso8601String(),
+        'score': score,
+        'total': questions.length,
+        'percent': percent,
+      }));
+      await preferences.setStringList(key, previous.take(20).toList());
+    } catch (_) {
+      // A failed local history write must not block the exam result.
+    }
+  }
+
+  Future<void> _showHistory() async {
+    final preferences = await SharedPreferences.getInstance();
+    final key = widget.examTitle == null ? 'fahmino_exam_history_${widget.subjectTitle}' : widget.historyKey;
+    final records = preferences.getStringList(key) ?? <String>[];
+    if (!mounted) return;
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (context) => SafeArea(
+        child: records.isEmpty
+            ? const Padding(
+                padding: EdgeInsets.all(24),
+                child: Text('هنوز سابقه‌ای برای این درس ثبت نشده است.'),
+              )
+            : ListView(
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(16),
+                children: [
+                  Text('سوابق آزمون ${widget.examTitle ?? widget.subjectTitle}',
+                      style: Theme.of(context).textTheme.titleLarge),
+                  const SizedBox(height: 8),
+                  for (final record in records)
+                    Builder(builder: (context) {
+                      final item = jsonDecode(record) as Map<String, dynamic>;
+                      final date = DateTime.tryParse(item['date'] as String? ?? '');
+                      final dateText = date == null
+                          ? 'تاریخ نامشخص'
+                          : '${date.year}/${date.month.toString().padLeft(2, '0')}/${date.day.toString().padLeft(2, '0')}';
+                      return ListTile(
+                        leading: const Icon(Icons.history_rounded),
+                        title: Text('نمره ${item['percent']}٪'),
+                        subtitle: Text('${item['score']} از ${item['total']} پاسخ درست • $dateText'),
+                      );
+                    }),
+                ],
+              ),
+      ),
+    );
   }
 
   Future<void> confirmFinish() async {
@@ -100,7 +177,7 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
         body: const Center(child: Text('برای این درس هنوز سؤال ثبت نشده است.')));
     }
     return Scaffold(
-      appBar: AppBar(title: Text(submitted ? 'نتیجه آزمون' : 'آزمون جامع ${widget.subjectTitle}'),
+      appBar: AppBar(title: Text(submitted ? 'نتیجه آزمون' : (widget.examTitle ?? 'آزمون جامع ${widget.subjectTitle}')),
         actions: [if (!submitted) Padding(padding: const EdgeInsetsDirectional.only(end: 12),
           child: Center(child: Chip(avatar: const Icon(Icons.timer_outlined, size: 18), label: Text(clock))))]),
       body: submitted ? _result(theme) : _exam(theme),
@@ -158,6 +235,12 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
         Text('$score پاسخ درست از ${questions.length} سؤال'),
         Text('${answers.length} پاسخ ثبت‌شده'),
       ]))),
+      const SizedBox(height: 12),
+      OutlinedButton.icon(
+        onPressed: _showHistory,
+        icon: const Icon(Icons.history_rounded),
+        label: const Text('مشاهدهٔ سوابق آزمون این درس'),
+      ),
       const SizedBox(height: 12),
       Text('پاسخ‌نامه و توضیحات', style: theme.textTheme.titleLarge),
       for (var i = 0; i < questions.length; i++) _reviewCard(theme, i),

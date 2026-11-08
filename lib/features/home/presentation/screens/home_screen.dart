@@ -17,11 +17,25 @@ class HomeScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           const SliverToBoxAdapter(child: HomeHeader()),
-          const SliverToBoxAdapter(child: SectionHeader(title: 'امکانات')),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 22, 20, 4),
+              child: Row(
+                children: [
+                  Icon(Icons.bolt_rounded, color: colors.primary),
+                  const SizedBox(width: 7),
+                  Text('دسترسی سریع',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      )),
+                ],
+              ),
+            ),
+          ),
           const SliverToBoxAdapter(child: HomeFeatureGrid()),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 14, 20, 4),
+              padding: const EdgeInsets.fromLTRB(20, 18, 20, 4),
               child: Card(
                 clipBehavior: Clip.antiAlias,
                 child: InkWell(
@@ -31,28 +45,36 @@ class HomeScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Container(
-                          width: 48,
-                          height: 48,
+                          width: 50,
+                          height: 50,
                           decoration: BoxDecoration(
-                            color: colors.primaryContainer,
-                            borderRadius: BorderRadius.circular(15),
+                            gradient: LinearGradient(
+                              colors: [
+                                colors.primaryContainer,
+                                colors.secondaryContainer,
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(16),
                           ),
                           child: Icon(Icons.auto_awesome_rounded,
-                              color: colors.onPrimaryContainer),
+                              color: colors.onPrimaryContainer, size: 27),
                         ),
                         const SizedBox(width: 14),
-                        const Expanded(
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('راهنمای هوشمند فهمینو',
-                                  style: TextStyle(fontWeight: FontWeight.w700)),
-                              SizedBox(height: 3),
-                              Text('پیدا کردن نکته و مثال از محتوای ذخیره‌شده'),
+                              Text('راهنمای درسی فهمینو',
+                                  style: Theme.of(context).textTheme.titleMedium
+                                      ?.copyWith(fontWeight: FontWeight.w800)),
+                              const SizedBox(height: 3),
+                              Text('از محتوای درس‌ها پاسخ پیدا کن',
+                                  style: Theme.of(context).textTheme.bodySmall
+                                      ?.copyWith(color: colors.onSurfaceVariant)),
                             ],
                           ),
                         ),
-                        const Icon(Icons.chevron_left_rounded),
+                        const Icon(Icons.arrow_back_ios_new_rounded, size: 16),
                       ],
                     ),
                   ),
@@ -63,8 +85,8 @@ class HomeScreen extends StatelessWidget {
           const SliverToBoxAdapter(child: LearningPdfsCard()),
           SliverToBoxAdapter(
             child: SectionHeader(
-              title: 'دروس پایه هشتم',
-              actionLabel: 'همه دروس',
+              title: 'درس‌های پایه هشتم',
+              actionLabel: 'همه درس‌ها',
               onAction: () => context.go(AppRoutes.subjects),
             ),
           ),

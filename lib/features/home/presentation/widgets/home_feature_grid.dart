@@ -10,18 +10,19 @@ class HomeFeatureGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: GridView.count(
-        crossAxisCount: 3,
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
+      child: GridView.builder(
+        itemCount: AppFeature.values.length,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 12,
-        childAspectRatio: 0.8,
-        children: [
-          for (final feature in AppFeature.values)
-            _FeatureTile(feature: feature),
-        ],
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
+          childAspectRatio: 1.28,
+        ),
+        itemBuilder: (context, index) =>
+            _FeatureTile(feature: AppFeature.values[index]),
       ),
     );
   }
@@ -31,42 +32,95 @@ class _FeatureTile extends StatelessWidget {
   const _FeatureTile({required this.feature});
   final AppFeature feature;
 
+  String get _description => switch (feature) {
+    AppFeature.lessons => 'فصل‌ها را درس‌به‌درس یاد بگیر',
+    AppFeature.notes => 'خلاصه‌ها و نکته‌های امتحانی',
+    AppFeature.solutions => 'پاسخ تمرین‌ها با راه‌حل مرحله‌ای',
+    AppFeature.sampleExams => 'سؤال‌های طبقه‌بندی‌شده با پاسخ',
+    AppFeature.quiz => 'خودت را با آزمون بسنج',
+    AppFeature.favorites => 'مطالب مهمت را یک‌جا ببین',
+  };
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final radius = BorderRadius.circular(20);
+    final radius = BorderRadius.circular(22);
     return Material(
       color: AppColors.card(context),
       shape: RoundedRectangleBorder(
         borderRadius: radius,
-        side: BorderSide(color: theme.colorScheme.outlineVariant.withAlpha(90)),
+        side: BorderSide(color: feature.color.withAlpha(70)),
       ),
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
         borderRadius: radius,
-        onTap: () => feature == AppFeature.favorites
-            ? context.go(AppRoutes.favorites)
-            : context.push(AppRoutes.featureSubjects(feature.name),),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 44,
-                height: 44,
+        onTap: () {
+          if (feature == AppFeature.favorites) {
+            context.go(AppRoutes.favorites);
+          } else {
+            context.push(AppRoutes.featureSubjects(feature.name));
+          }
+        },
+        child: Stack(
+          children: [
+            Positioned(
+              left: -18,
+              top: -24,
+              child: Container(
+                width: 100,
+                height: 100,
                 decoration: BoxDecoration(
-                  color: feature.color.withAlpha(30),
-                  borderRadius: BorderRadius.circular(14),
+                  shape: BoxShape.circle,
+                  color: feature.color.withAlpha(14),
                 ),
-                child: Icon(feature.icon, color: feature.color, size: 24),
               ),
-              const SizedBox(height: 8),
-              Text(feature.title, maxLines: 2, textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.labelMedium
-                      ?.copyWith(fontWeight: FontWeight.w600)),
-            ],
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: 43,
+                        height: 43,
+                        decoration: BoxDecoration(
+                          color: feature.color.withAlpha(25),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: Icon(feature.icon,
+                            color: feature.color, size: 25),
+                      ),
+                      const Spacer(),
+                      Icon(Icons.north_west_rounded,
+                          size: 17, color: theme.colorScheme.onSurfaceVariant),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(feature.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.w900,
+                          )),
+                      const SizedBox(height: 4),
+                      Text(_description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            height: 1.35,
+                            color: theme.colorScheme.onSurfaceVariant,
+                          )),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

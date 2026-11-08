@@ -5,6 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/sample_question_library_screen.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/widgets/subject_pdf_card.dart';
+import 'package:hamyar_hashtom_plus/features/content/presentation/widgets/book_page_gallery.dart';
 
 class ContentLibraryScreen extends ConsumerStatefulWidget {
   const ContentLibraryScreen({
@@ -62,13 +65,21 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
       final example = value['example'];
       final steps = value['solutionSteps'];
       final questions = value['questions'];
+      final advancedQuestions = value['advancedQuestions'];
       if (title is! String || title.trim().isEmpty ||
           summary is! String || points is! List ||
           !points.every((item) => item is String) ||
           example is! String || steps is! List ||
           !steps.every((item) => item is String) ||
-          questions is! List) return false;
-      return questions.every((item) {
+          questions is! List ||
+          (advancedQuestions != null && advancedQuestions is! List)) {
+        return false;
+      }
+      final allQuestions = [
+        ...questions,
+        ...(advancedQuestions as List<dynamic>? ?? const []),
+      ];
+      return allQuestions.every((item) {
         if (item is! Map<String, dynamic>) return false;
         final options = item['options'];
         final answer = item['answer'];
@@ -150,6 +161,13 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               chapters: chapters,
             );
           }
+          if (_feature == AppFeature.sampleExams) {
+            return SampleQuestionLibraryScreen(
+              subjectId: widget.subjectId,
+              subjectTitle: subject['title'] as String? ?? 'درس',
+              chapters: chapters,
+            );
+          }
           if (chapters.isEmpty) {
             return const Center(child: Text('برای این درس هنوز فصلی ثبت نشده است.'));
           }
@@ -166,6 +184,11 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               Text('ابتدا فصل یا درس موردنظرت را انتخاب کن.',
                   style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 14),
+              if (_feature == AppFeature.lessons)
+                SubjectPdfCard(
+                  subjectId: widget.subjectId,
+                  subjectTitle: subject['title'] as String? ?? 'درس',
+                ),
               DropdownButtonFormField<int>(
                 value: selectedIndex,
                 isExpanded: true,
@@ -237,8 +260,14 @@ class _ChapterContent extends ConsumerWidget {
     final points = (chapter['points'] as List<dynamic>? ?? []).cast<String>();
     final steps = (chapter['solutionSteps'] as List<dynamic>? ?? [])
         .cast<String>();
+    final mistakes = (chapter['commonMistakes'] as List<dynamic>? ?? [])
+        .whereType<String>()
+        .toList(growable: false);
     final questions =
         (chapter['questions'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
+    final pageAssets = (chapter['bookPageImages'] as List<dynamic>? ?? [])
+        .whereType<String>()
+        .toList(growable: false);
 
     if (feature == AppFeature.quiz) {
       return _QuizChapter(title: title, questions: questions);
@@ -263,10 +292,71 @@ class _ChapterContent extends ConsumerWidget {
             ),
             if (chapter['pageStart'] is int) ...[
               const SizedBox(height: 4),
-              Text('شروع این بخش در کتاب: صفحه ${chapter['pageStart']}',
-                  style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.primary)),
+              Text(
+                chapter['pageEnd'] is int
+                    ? 'محدودهٔ کتاب درسی: صفحه ${chapter['pageStart']} تا ${chapter['pageEnd']}'
+                    : 'شروع این بخش در کتاب: صفحه ${chapter['pageStart']}',
+                style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.primary),
+              ),
+            ],
+            if (chapter['curriculumInstruction'] is String &&
+                (chapter['curriculumInstruction'] as String).trim().isNotEmpty) ...[
+              const SizedBox(height: 10),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.secondaryContainer.withAlpha(110),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.info_outline_rounded,
+                        color: theme.colorScheme.onSecondaryContainer, size: 19),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        chapter['curriculumInstruction'] as String,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSecondaryContainer,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            if (chapter['textbookLessons'] is List &&
+                (chapter['textbookLessons'] as List).isNotEmpty) ...[
+              const SizedBox(height: 8),
+              ExpansionTile(
+                tilePadding: EdgeInsets.zero,
+                childrenPadding: const EdgeInsetsDirectional.only(start: 8, bottom: 8),
+                leading: const Icon(Icons.menu_book_outlined),
+                title: const Text('درس‌های این فصل در کتاب'),
+                subtitle: Text('${(chapter['textbookLessons'] as List).length} درس'),
+                children: [
+                  for (final item in (chapter['textbookLessons'] as List)
+                      .whereType<Map<String, dynamic>>())
+                    ListTile(
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(item['title'] as String? ?? 'درس'),
+                      trailing: item['pageStart'] is int
+                          ? Text('صفحه ${item['pageStart']}')
+                          : null,
+                    ),
+                ],
+              ),
             ],
             const SizedBox(height: 10),
+            if (feature == AppFeature.notes ||
+                feature == AppFeature.solutions ||
+                feature == AppFeature.sampleExams) ...[
+              BookPageGallery(pageAssets: pageAssets),
+              const SizedBox(height: 12),
+            ],
             if (feature == AppFeature.lessons) ...[
               Text(summary, style: theme.textTheme.bodyMedium),
               if (points.isNotEmpty) ...[
@@ -274,6 +364,17 @@ class _ChapterContent extends ConsumerWidget {
                 Text('نکته‌های کلیدی', style: theme.textTheme.titleSmall),
                 for (final point in points)
                   _Bullet(text: point),
+              ],
+              if (mistakes.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                ExpansionTile(
+                  tilePadding: EdgeInsets.zero,
+                  leading: Icon(Icons.lightbulb_outline_rounded,
+                      color: theme.colorScheme.tertiary),
+                  title: const Text('اشتباهات رایج'),
+                  subtitle: Text('${mistakes.length} نکته برای بررسی پاسخ‌ها'),
+                  children: [for (final mistake in mistakes) _Bullet(text: mistake)],
+                ),
               ],
             ] else if (feature == AppFeature.notes) ...[
               for (final point in points) _Bullet(text: point),

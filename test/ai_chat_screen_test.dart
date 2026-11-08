@@ -16,12 +16,21 @@ const _testCatalog = r'''
       "points": ["قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید."],
       "example": "مثال: ۱/۲ + ۱/۳ را حساب کن.",
       "solutionSteps": ["مخرج مشترک ۶ انتخاب می‌کنیم.", "۱/۲ = ۳/۶ و ۱/۳ = ۲/۶.", "۳/۶ + ۲/۶ = ۵/۶."],
+      "commonMistakes": ["در جمع کسرها ابتدا مخرج مشترک بگیر."],
       "questions": [{
         "question": "حاصل ۱/۲ + ۱/۴ کدام است؟",
         "options": ["۱/۶", "۲/۶", "۳/۴", "۱"],
         "answer": 2,
         "explanation": "۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ = ۳/۴."
       }]
+    }, {
+      "title": "زاویه‌ها",
+      "summary": "زاویه از دو نیم‌خط با مبدأ مشترک تشکیل می‌شود.",
+      "points": ["مبدأ دو نیم‌خط رأس زاویه است."],
+      "example": "اندازه زاویه را با نقاله می‌سنجیم.",
+      "solutionSteps": ["مرکز نقاله را روی رأس قرار بده."],
+      "commonMistakes": ["واحد اندازه‌گیری زاویه درجه است."],
+      "questions": []
     }]
   }
 }
@@ -46,28 +55,67 @@ Widget _testApp() => MaterialApp(
       ),
     );
 
-void main() {
-  testWidgets('offline helper shows lesson selectors and input', (tester) async {
-    await tester.pumpWidget(_testApp());
-    await tester.pumpAndSettle();
+Future<void> _pumpUiFrames(WidgetTester tester) async {
+  // Bounded frame pumping avoids hanging forever on repeating animations.
+  await tester.pump();
+  for (var i = 0; i < 7; i++) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+}
 
-    expect(find.text('راهنمای هوشمند آفلاین فهمینو'), findsOneWidget);
+void main() {
+  testWidgets('offline study guide shows lesson selectors and message input', (tester) async {
+    await tester.pumpWidget(_testApp());
+    await _pumpUiFrames(tester);
+
+    expect(find.text('راهنمای درسی فهمینو'), findsOneWidget);
     expect(find.text('از کجا شروع کنیم؟'), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
     expect(find.byType(DropdownButtonFormField<String>), findsOneWidget);
     expect(find.byType(DropdownButtonFormField<int>), findsOneWidget);
+    expect(find.byTooltip('پاسخ از محتوای فهمینو'), findsOneWidget);
+    expect(find.textContaining('پرسش‌ها از دستگاه خارج نمی‌شوند'), findsOneWidget);
   });
 
-  testWidgets('offline helper searches the selected local chapter', (tester) async {
+  testWidgets('offline guide answers from the selected chapter without a network call', (tester) async {
     await tester.pumpWidget(_testApp());
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
 
     await tester.enterText(find.byType(TextField), 'عددهای گویا چیست؟');
-    await tester.tap(find.byTooltip('جست‌وجوی محلی'));
-    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.textContaining('راهنمای هوشمند فهمینو'), findsOneWidget);
-    expect(find.textContaining('عددهای صحیح و گویا'), findsWidgets);
-    expect(find.textContaining('مدل هوش مصنوعی مولد نیست'), findsOneWidget);
+    expect(find.textContaining('عددهای گویا را می‌توان به صورت کسر نوشت.'), findsOneWidget);
+    expect(find.textContaining('پاسخ‌ساز اینترنتی نیست'), findsOneWidget);
+  });
+
+  testWidgets('offline guide can show chapter-specific common mistakes', (tester) async {
+    await tester.pumpWidget(_testApp());
+    await _pumpUiFrames(tester);
+
+    await tester.enterText(find.byType(TextField), 'اشتباهات رایج کسرها چیست؟');
+    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.textContaining('در جمع کسرها ابتدا مخرج مشترک بگیر.'), findsOneWidget);
+  });
+
+  testWidgets('offline guide can answer from a later selected chapter', (tester) async {
+    await tester.pumpWidget(_testApp());
+    await _pumpUiFrames(tester);
+
+    await tester.tap(find.byType(DropdownButtonFormField<int>));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('زاویه‌ها').last);
+    await tester.pump();
+
+    await tester.enterText(find.byType(TextField), 'زاویه چیست؟');
+    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.textContaining('زاویه از دو نیم‌خط با مبدأ مشترک تشکیل می‌شود.'), findsOneWidget);
   });
 }

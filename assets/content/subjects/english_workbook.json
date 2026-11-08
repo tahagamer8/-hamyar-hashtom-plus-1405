@@ -1,358 +1,545 @@
 {
   "schemaVersion": 1,
-  "contentVersion": "1405.08",
+  "contentVersion": "1405.11.1",
   "subjectId": "english_workbook",
   "title": "کتاب کار زبان انگلیسی",
   "chapters": [
     {
       "title": "Lesson 1: My Nationality",
-      "summary": "در این بخش تمرین می‌کنیم کشورها و ملیت‌ها را تشخیص دهیم و با فعل be خود و دیگران را معرفی کنیم.",
+      "summary": "این درس تمرین‌های کاربردی واژگان ملیت‌ها و کشورها را با نقشه‌خوانی و خواندن یک زندگی‌نامه پیوند می‌دهد. دانش‌آموز نام کشورها و ملیت‌ها را تشخیص می‌دهد، شهرها را به کشورها نسبت می‌دهد و اطلاعات جغرافیایی را به زبان انگلیسی ثبت می‌کند.",
       "points": [
-        "Iran — Iranian؛ Canada — Canadian.",
-        "پرسش Where are you from? درباره کشور مبدأ است.",
-        "I am، You are و He/She is را درست به کار ببر."
+        "روی نقشه، نام کشورهای همسایه ایران را به انگلیسی پیدا و مشخص کن.",
+        "حروف ترکیبی ch و sh را در نام شهرها تشخیص بده.",
+        "نام کشورها و ملیت‌ها را از متن زندگی‌نامه استخراج کن.",
+        "شهرها را با کشور مربوط تطبیق بده و مسیر یک سفر را با نام شهرها بنویس.",
+        "ملیت افراد شناخته‌شده را با استفاده از اطلاعات معتبر مشخص کن."
       ],
-      "example": "I am from Iran. I am Iranian.",
+      "example": "تمرین: کشور و ملیتِ پنج شهر یا کشور را در یک جدول بنویس و سپس یک مسیر سفر فرضی را با نام شهرها به انگلیسی ثبت کن.",
       "solutionSteps": [
-        "فاعل را مشخص می‌کنیم.",
-        "شکل درست am، is یا are را انتخاب می‌کنیم.",
-        "نام کشور یا ملیت را در جای مناسب می‌گذاریم."
+        "نام کشورها و شهرها را از متن و نقشه استخراج کن.",
+        "املای انگلیسی و ملیت مربوط را بررسی کن.",
+        "جدول یا مسیر را کامل کن و املای واژه‌ها را بازبینی کن."
       ],
       "questions": [
         {
-          "question": "Which question asks someone about their country of origin?",
+          "question": "A person from Oman is …",
           "options": [
-            "Where are you from?",
-            "How old are you?",
-            "What is your name?",
-            "What time is it?"
+            "Omani",
+            "Omanish",
+            "Omanian",
+            "Omaner"
           ],
           "answer": 0,
-          "explanation": "پرسش Where are you from? درباره کشور مبدأ فرد است."
+          "explanation": "The nationality word for a person from Oman is Omani."
         },
         {
-          "question": "Choose the correct nationality for a person from Kuwait.",
+          "question": "Which country is Baghdad in?",
           "options": [
-            "Kuwaiti",
-            "Qatari",
-            "Canadian",
-            "Iranian"
+            "Iraq",
+            "Iran",
+            "Oman",
+            "Turkey"
           ],
           "answer": 0,
-          "explanation": "شخص اهل کویت، Kuwaiti نامیده می‌شود."
+          "explanation": "Baghdad is the capital city of Iraq."
         },
         {
-          "question": "Which question is correctly formed with are?",
+          "question": "Which pair is correct?",
           "options": [
-            "Where are you from?",
-            "Where you from are?",
-            "What from you?",
-            "Are where from?"
+            "Brazil – Brazilian",
+            "China – Chinian",
+            "France – Frenchman for every person",
+            "Iran – Irani"
           ],
           "answer": 0,
-          "explanation": "ترتیب درست پرسش Where are you from? است."
+          "explanation": "Brazilian is the nationality word for a person from Brazil."
+        }
+      ],
+      "pageStart": 2,
+      "sourceLesson": "My Nationality",
+      "commonMistakes": [
+        "کشور، شهر و ملیت سه نوع اطلاعات متفاوت‌اند؛ هر شهر را با کشور و ملیت درست پیوند بده.",
+        "نام کشور، شهر و ملیت با حرف بزرگ آغاز می‌شود؛ ch و sh را هم در املای واژه‌ها جابه‌جا نکن."
+      ],
+      "pageEnd": 7,
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which pair is correct?» پاسخ «Brazil – Brazilian» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "On the weekend means در آخر هفته.",
+            "Thursday is the day before Friday.",
+            "Brazilian is the nationality word for a person from Brazil.",
+            "Every afternoon means هر بعدازظهر."
+          ],
+          "answer": 2,
+          "explanation": "استدلال درست: Brazilian is the nationality word for a person from Brazil.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
         }
       ]
     },
     {
       "title": "Lesson 2: My Week",
-      "summary": "تمرین این درس درباره روزهای هفته، کارهای روزانه، ساعت و زمان حال ساده است.",
+      "summary": "این درس کاربرگ‌های برنامه‌ریزی هفتگی را تمرین می‌دهد: نام روزها، فعالیت‌های روزمره، زمان انجام کارها و تبدیل عبارت‌های مربوط به برنامه هفتگی. هدف، استفاده از واژگان در یک برنامه واقعی و قابل فهم است.",
       "points": [
-        "روزهای هفته با حرف بزرگ آغاز می‌شوند.",
-        "برای he و she در حال ساده معمولاً s به فعل اضافه می‌شود.",
-        "on Monday و every week عبارت‌های زمانی‌اند."
+        "روزهای هفته را به ترتیب بنویس و روزهای فعالیت‌های مدرسه را مشخص کن.",
+        "فعالیت‌های روزهای هفته و آخر هفته را در جدول دسته‌بندی کن.",
+        "عبارت‌های زمانی مانند in the morning، in the afternoon و on the weekend را تشخیص بده.",
+        "برنامه شخصی را با روز و ساعت تکمیل کن.",
+        "برای یک مناسبت یا روز مهم، نام روز هفته را با تقویم بررسی کن."
       ],
-      "example": "He studies English on Monday.",
+      "example": "تمرین: یک جدول هفتگی بساز و دست‌کم پنج فعالیت را همراه با روز و زمان آن‌ها به انگلیسی بنویس.",
       "solutionSteps": [
-        "فاعل را پیدا می‌کنیم.",
-        "برای سوم‌شخص مفرد شکل درست فعل را می‌نویسیم.",
-        "عبارت زمان را در جای مناسب قرار می‌دهیم."
+        "روزهای هفته را در جدول وارد کن.",
+        "برای هر روز فعالیت و زمان مناسب را ثبت کن.",
+        "جمله‌ها را با واژه‌های زمان بازبینی کن."
       ],
       "questions": [
         {
-          "question": "He ___ to school every day.",
+          "question": "Which phrase means «آخر هفته»?",
           "options": [
-            "go",
-            "goes",
-            "going",
-            "went"
+            "on the weekend",
+            "on weekdays",
+            "every morning",
+            "at noon"
           ],
-          "answer": 1,
-          "explanation": "در حال ساده برای He از goes استفاده می‌شود."
+          "answer": 0,
+          "explanation": "On the weekend means در آخر هفته."
         },
         {
-          "question": "Which is a day of the week?",
+          "question": "Which day comes before Friday?",
           "options": [
-            "January",
-            "Monday",
-            "Summer",
-            "Morning"
+            "Thursday",
+            "Saturday",
+            "Wednesday",
+            "Sunday"
           ],
-          "answer": 1,
-          "explanation": "Monday یکی از روزهای هفته است."
+          "answer": 0,
+          "explanation": "Thursday is the day before Friday."
         },
         {
-          "question": "What does “every week” mean?",
+          "question": "Which phrase means «هر بعدازظهر»?",
           "options": [
-            "هر روز",
-            "هر هفته",
-            "هفته گذشته",
-            "فردا"
+            "every afternoon",
+            "on Friday morning",
+            "at night",
+            "on weekdays"
           ],
-          "answer": 1,
-          "explanation": "Every week یعنی هر هفته."
+          "answer": 0,
+          "explanation": "Every afternoon means هر بعدازظهر."
+        }
+      ],
+      "pageStart": 8,
+      "sourceLesson": "My Week",
+      "commonMistakes": [
+        "نام روزهای هفته با حرف بزرگ نوشته می‌شود؛ روز را با زمانِ روز مانند morning اشتباه نگیر.",
+        "on Monday برای روز و عبارت‌هایی مانند in the morning برای بخش روز را درست به کار ببر."
+      ],
+      "pageEnd": 11,
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which day comes before Friday?» پاسخ «Thursday» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "The nationality word for a person from Oman is Omani.",
+            "Baghdad is the capital city of Iraq.",
+            "Brazilian is the nationality word for a person from Brazil.",
+            "Thursday is the day before Friday."
+          ],
+          "answer": 3,
+          "explanation": "استدلال درست: Thursday is the day before Friday.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
         }
       ]
     },
     {
       "title": "Lesson 3: My Abilities",
-      "summary": "تمرین این درس درباره توانایی‌ها و استفاده درست از can و can’t است.",
+      "summary": "تمرین‌های این درس توانایی‌ها را در زندگی واقعی به کار می‌گیرند: معرفی مهارت‌های خود و دیگران، شناسایی توانمندی افراد، تکمیل پرسش‌نامه خودارزیابی و نوشتن کارهایی که می‌توان در یک فعالیت گروهی انجام داد.",
       "points": [
-        "can برای بیان توانایی به کار می‌رود.",
-        "پس از can فعل ساده می‌آید.",
-        "can برای همه فاعل‌ها شکل یکسان دارد."
+        "توانایی‌های فردی مانند نوشتن، عکاسی، طراحی، تایپ و جست‌وجوی وب را مشخص کن.",
+        "افراد مناسب برای مهارت‌های گوناگون را معرفی کن.",
+        "یک پرسش‌نامه خودارزیابی را با صداقت تکمیل کن.",
+        "برای یک گردش علمی یا فعالیت گروهی، مسئولیت‌هایی را که می‌توانی انجام دهی بنویس.",
+        "مهارت‌های رایانه‌ای را با جمله‌های کوتاه معرفی کن."
       ],
-      "example": "My sister can swim, but I can't.",
+      "example": "تمرین: سه کاری را که می‌توانی انجام دهی انتخاب کن و برای هرکدام یک جمله انگلیسی بنویس؛ سپس یک مسئولیت برای کار گروهی پیشنهاد بده.",
       "solutionSteps": [
-        "توانایی یا ناتوانی را مشخص می‌کنیم.",
-        "can یا can't را پس از فاعل می‌آوریم.",
-        "فعل را بدون s و to می‌نویسیم."
+        "مهارت‌های واقعی خود را فهرست کن.",
+        "برای هر مهارت یک جمله کوتاه بساز.",
+        "جمله‌ها را از نظر معنی و املای واژه‌ها بررسی کن."
       ],
       "questions": [
         {
-          "question": "Which verb form follows “can”?",
+          "question": "Which activity is a computer skill?",
           "options": [
-            "plays",
-            "playing",
-            "play",
-            "to play"
+            "typing a text",
+            "riding a horse",
+            "watering a garden",
+            "playing football"
           ],
-          "answer": 2,
-          "explanation": "پس از can از شکل ساده فعل بدون to استفاده می‌کنیم."
+          "answer": 0,
+          "explanation": "Typing a text is a computer-related skill."
         },
         {
-          "question": "Which Persian phrase is closest in meaning to “cannot”?",
+          "question": "Which question asks about ability?",
           "options": [
-            "می‌تواند",
-            "نمی‌تواند",
-            "باید",
-            "دوست دارد"
+            "What can you do?",
+            "Where are you from?",
+            "What day is it?",
+            "What's the matter?"
           ],
-          "answer": 1,
-          "explanation": "Cannot یا can't به معنی نمی‌تواند است."
+          "answer": 0,
+          "explanation": "What can you do? asks about someone's abilities."
         },
         {
-          "question": "Which option completes the sentence after can?",
+          "question": "Which sentence describes an ability?",
           "options": [
-            "Ali can rides a bike.",
-            "Ali cans ride a bike.",
-            "Ali can ride a bike.",
-            "Ali can to ride a bike."
+            "I can take photos.",
+            "I am from Iran.",
+            "It is Friday.",
+            "I have a toothache."
           ],
-          "answer": 2,
-          "explanation": "ساختار درست فاعل + can + فعل ساده است."
+          "answer": 0,
+          "explanation": "I can take photos describes something the speaker is able to do."
+        }
+      ],
+      "pageStart": 12,
+      "sourceLesson": "My Abilities",
+      "commonMistakes": [
+        "پرسش‌نامهٔ توانایی باید بر پایهٔ مهارت واقعی فرد تکمیل شود؛ علاقه داشتن به یک کار به معنی توانایی انجام آن نیست.",
+        "در جملهٔ مربوط به can، فعل پس از آن ساده می‌آید؛ شکل سوم‌شخص یا to را پس از can قرار نده."
+      ],
+      "pageEnd": 18,
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which sentence describes an ability?» پاسخ «I can take photos.» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "I can take photos describes something the speaker is able to do.",
+            "The nationality word for a person from Oman is Omani.",
+            "Baghdad is the capital city of Iraq.",
+            "Brazilian is the nationality word for a person from Brazil."
+          ],
+          "answer": 0,
+          "explanation": "استدلال درست: I can take photos describes something the speaker is able to do.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
         }
       ]
     },
     {
       "title": "Lesson 4: My Health",
-      "summary": "تمرین این درس درباره بیان مشکل‌های سلامتی و پیشنهاد راه‌حل ساده است.",
+      "summary": "این درس واژگان بیماری‌های رایج و توصیه‌های سلامت را در قالب کاربرگ، متن کوتاه، پوستر و نمایش کلاسی تمرین می‌کند. دانش‌آموز نام مشکل را تشخیص می‌دهد، توصیه مناسب را انتخاب می‌کند و پاسخ ساده و مسئولانه می‌نویسد.",
       "points": [
-        "headache یعنی سردرد و toothache یعنی دندان‌درد.",
-        "What's wrong? برای پرسیدن مشکل به کار می‌رود.",
-        "should برای توصیه و پیشنهاد استفاده می‌شود."
+        "واژه‌های مربوط به headache، backache، toothache، sore throat و flu را تشخیص بده.",
+        "برای هر مشکل، رفتارهای مراقبتی عمومی و ایمن را بررسی کن.",
+        "واژه‌های کلیدی متن سلامت را به فارسی معنی کن.",
+        "شعارهای ساده سلامت را ترجمه و برای پوستر دسته‌بندی کن.",
+        "در گفت‌وگوی کلاسی، برای مشکل ساده توصیه مناسب بنویس و در صورت نیاز مراجعه به پزشک را پیشنهاد کن."
       ],
-      "example": "You should rest when you feel tired.",
+      "example": "تمرین: برای سه مشکل ساده، یک توصیه کوتاه و ایمن بنویس؛ اگر مشکل شدید یا ادامه‌دار است، مراجعه به پزشک را پیشنهاد بده.",
       "solutionSteps": [
-        "مشکل را با واژه مناسب بیان می‌کنیم.",
-        "پرسش متناسب را انتخاب می‌کنیم.",
-        "برای توصیه از should و فعل ساده استفاده می‌کنیم."
+        "نام بیماری یا نشانه را از متن تشخیص بده.",
+        "واژه‌های مرتبط و توصیه‌های عمومی را انتخاب کن.",
+        "پاسخ را با جمله‌ای روشن و محترمانه بنویس."
       ],
       "questions": [
         {
-          "question": "What does “toothache” mean?",
+          "question": "What does “sore throat” mean?",
           "options": [
+            "گلودرد",
             "سردرد",
-            "دندان‌درد",
             "کمردرد",
-            "تب"
-          ],
-          "answer": 1,
-          "explanation": "Toothache یعنی دندان‌درد."
-        },
-        {
-          "question": "You should ___ some water.",
-          "options": [
-            "drinks",
-            "drinking",
-            "drink",
-            "drank"
-          ],
-          "answer": 2,
-          "explanation": "بعد از should فعل ساده می‌آید."
-        },
-        {
-          "question": "Which question asks about a problem?",
-          "options": [
-            "What's wrong?",
-            "Where are you from?",
-            "What time is it?",
-            "How old are you?"
+            "دندان‌درد"
           ],
           "answer": 0,
-          "explanation": "What's wrong? یعنی چه مشکلی پیش آمده؟"
+          "explanation": "Sore throat means گلودرد."
+        },
+        {
+          "question": "Which phrase gives advice?",
+          "options": [
+            "You should get some rest.",
+            "Where is the museum?",
+            "I can take photos.",
+            "What day is it?"
+          ],
+          "answer": 0,
+          "explanation": "You should ... is used to give advice."
+        },
+        {
+          "question": "Which word means «سرماخوردگی»?",
+          "options": [
+            "cold",
+            "flu",
+            "toothache",
+            "backache"
+          ],
+          "answer": 0,
+          "explanation": "Cold means سرماخوردگی."
+        }
+      ],
+      "pageStart": 19,
+      "sourceLesson": "My Health",
+      "commonMistakes": [
+        "نام مشکل سلامت را دقیق از متن انتخاب کن؛ headache، toothache و sore throat یک معنی ندارند.",
+        "توصیهٔ عمومی را با تشخیص بیماری اشتباه نگیر؛ در صورت مشکل جدی یا ادامه‌دار، کمک بزرگسال و پزشک لازم است."
+      ],
+      "pageEnd": 24,
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which phrase gives advice?» پاسخ «You should get some rest.» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "The nationality word for a person from Oman is Omani.",
+            "You should ... is used to give advice.",
+            "Baghdad is the capital city of Iraq.",
+            "Brazilian is the nationality word for a person from Brazil."
+          ],
+          "answer": 1,
+          "explanation": "استدلال درست: You should ... is used to give advice.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
         }
       ]
     },
     {
       "title": "Lesson 5: My City",
-      "summary": "تمرین این درس درباره معرفی شهر، مکان‌های عمومی و پرسیدن نشانی است.",
+      "summary": "تمرین‌های این درس معرفی شهر و مکان‌های دیدنی را با نقشه، بروشور، دسته‌بندی مکان‌ها، شناخت کشور و قاره و نوشتن توصیف کوتاه ترکیب می‌کند. هدف، گردآوری اطلاعات و معرفی روشن یک شهر است.",
       "points": [
-        "There is برای اسم مفرد و There are برای اسم جمع است.",
-        "next to یعنی کنار و opposite یعنی روبه‌رو.",
-        "برای پرسیدن مکان از Where is ...? استفاده می‌کنیم."
+        "مکان‌های شهری مانند museum، zoo، stadium، park و library را بشناس.",
+        "برای بازدید از مکان‌های مختلف، اطلاعات بروشورها را دسته‌بندی کن.",
+        "نام شهرها و ایالت‌ها را به کشور و قاره مربوط وصل کن.",
+        "سه شهر ایران و مکان‌های دیدنی آن‌ها را برای معرفی انتخاب کن.",
+        "یک توصیف کوتاه درباره محل زندگی یا شهر مورد علاقه بنویس."
       ],
-      "example": "There are two parks in my city.",
+      "example": "تمرین: یک شهر را انتخاب کن و نام کشور، قاره، سه مکان دیدنی و یک ویژگی آن را در یک کارت معرفی بنویس.",
       "solutionSteps": [
-        "اسم را از نظر مفرد یا جمع بررسی می‌کنیم.",
-        "There is یا There are را انتخاب می‌کنیم.",
-        "مکان یا نشانی را با عبارت مناسب کامل می‌کنیم."
+        "شهر و مکان‌های دیدنی آن را انتخاب کن.",
+        "اطلاعات جغرافیایی را با نقشه یا منبع معتبر بررسی کن.",
+        "کارت معرفی را با جمله‌های کوتاه و درست کامل کن."
       ],
       "questions": [
         {
-          "question": "Complete the sentence: There ___ a museum in my town.",
+          "question": "Which place is used to see old objects and exhibitions?",
           "options": [
-            "are",
-            "is",
-            "am",
-            "be"
+            "museum",
+            "stadium",
+            "boulevard",
+            "airport"
           ],
-          "answer": 1,
-          "explanation": "Museum مفرد است؛ بنابراین There is درست است."
+          "answer": 0,
+          "explanation": "A museum displays objects and exhibitions."
         },
         {
-          "question": "What does “opposite” mean?",
+          "question": "Which word means «پل»?",
           "options": [
-            "کنار",
-            "داخل",
-            "روبه‌رو",
-            "پشت"
+            "bridge",
+            "palace",
+            "shrine",
+            "library"
           ],
-          "answer": 2,
-          "explanation": "Opposite به معنی روبه‌رو یا مقابل است."
+          "answer": 0,
+          "explanation": "Bridge means پل."
         },
         {
-          "question": "Which sentence uses there are with a plural place noun?",
+          "question": "Which continent is Brazil in?",
           "options": [
-            "There are a school.",
-            "There is two parks.",
-            "There are three shops.",
-            "There be a bank."
+            "South America",
+            "Europe",
+            "Asia",
+            "Africa"
+          ],
+          "answer": 0,
+          "explanation": "Brazil is in South America."
+        }
+      ],
+      "pageStart": 25,
+      "sourceLesson": "My City",
+      "commonMistakes": [
+        "شهر، کشور و قاره را در یک سطح جغرافیایی قرار نده؛ هر کدام جایگاه متفاوتی دارند.",
+        "اطلاعات بروشور و نقشه را با حدس جایگزین نکن؛ نام مکان و کشور را پیش از نوشتن بررسی کن."
+      ],
+      "pageEnd": 30,
+      "examTerm": "second",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which place is used to see old objects and exhibitions?» پاسخ «museum» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "The nationality word for a person from Oman is Omani.",
+            "Baghdad is the capital city of Iraq.",
+            "A museum displays objects and exhibitions.",
+            "Brazilian is the nationality word for a person from Brazil."
           ],
           "answer": 2,
-          "explanation": "برای اسم جمع shops از There are استفاده می‌کنیم."
+          "explanation": "استدلال درست: A museum displays objects and exhibitions.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
         }
       ]
     },
     {
       "title": "Lesson 6: My Village",
-      "summary": "تمرین این درس درباره توصیف روستا، طبیعت، فصل‌ها و آب‌وهواست.",
+      "summary": "این درس زندگی شهری و روستایی را مقایسه می‌کند و واژگان آب‌وهوا، فصل‌ها، طبیعت، فعالیت‌های کشاورزی و موقعیت جغرافیایی را به کار می‌گیرد. دانش‌آموز می‌تواند روستا یا شهر محل زندگی خود را برای یک گردشگر معرفی کند.",
       "points": [
-        "mountain یعنی کوه و river یعنی رودخانه.",
-        "sunny یعنی آفتابی و rainy یعنی بارانی.",
-        "برای توصیف مکان از صفت‌ها استفاده می‌کنیم."
+        "ویژگی‌های زندگی شهری، روستایی و مشترک را دسته‌بندی کن.",
+        "واژگان مربوط به آب‌وهوا و فصل‌ها را با تصویرها تطبیق بده.",
+        "موقعیت روستاها را با جهت‌های جغرافیایی و استان‌ها مشخص کن.",
+        "به پرسش‌های گردشگر درباره روستا، آب‌وهوا و جاذبه‌های اطراف پاسخ بده.",
+        "یک صفحه معرفی برای شهر یا روستا با موقعیت، محصولات، جمعیت، سوغات و آب‌وهوا طراحی کن."
       ],
-      "example": "My village is near a river. It is sunny today.",
+      "example": "تمرین: یک روستا را معرفی کن؛ موقعیت جغرافیایی، آب‌وهوا در دو فصل، یک محصول و یک جاذبه طبیعی را بنویس.",
       "solutionSteps": [
-        "واژه‌های مربوط به طبیعت یا آب‌وهوا را انتخاب می‌کنیم.",
-        "مکان یا وضعیت هوا را مشخص می‌کنیم.",
-        "جمله کامل با فعل مناسب می‌سازیم."
+        "ویژگی‌های طبیعی و انسانی محل را جمع‌آوری کن.",
+        "اطلاعات را در بخش‌های موقعیت، آب‌وهوا، محصولات و جاذبه‌ها دسته‌بندی کن.",
+        "معرفی کوتاه را با جمله‌های ساده انگلیسی بنویس."
       ],
       "questions": [
         {
-          "question": "What does “river” mean?",
+          "question": "Which activity is often connected with village life?",
           "options": [
-            "جنگل",
-            "رودخانه",
-            "مزرعه",
-            "کوه"
-          ],
-          "answer": 1,
-          "explanation": "River یعنی رودخانه."
-        },
-        {
-          "question": "Which word means “آفتابی”؟",
-          "options": [
-            "rainy",
-            "cloudy",
-            "sunny",
-            "windy"
-          ],
-          "answer": 2,
-          "explanation": "Sunny به معنی آفتابی است."
-        },
-        {
-          "question": "A mountain village is a village near _____.",
-          "options": [
-            "mountains",
-            "oceans only",
-            "airports",
-            "factories"
+            "working on farms",
+            "using a subway",
+            "visiting a large shopping mall",
+            "going to an airport"
           ],
           "answer": 0,
-          "explanation": "Mountain village یعنی روستایی در ناحیه کوهستانی."
+          "explanation": "Working on farms is often associated with village life."
+        },
+        {
+          "question": "What does “weather” mean?",
+          "options": [
+            "آب‌وهوا",
+            "جمعیت",
+            "سوغات",
+            "محصول"
+          ],
+          "answer": 0,
+          "explanation": "Weather means آب‌وهوا."
+        },
+        {
+          "question": "Which direction is opposite to north?",
+          "options": [
+            "south",
+            "east",
+            "west",
+            "center"
+          ],
+          "answer": 0,
+          "explanation": "South is opposite to north."
+        }
+      ],
+      "pageStart": 31,
+      "sourceLesson": "My Village",
+      "commonMistakes": [
+        "ویژگی طبیعی مثل رود یا کوه را با ویژگی انسانی مثل شغل یا جمعیت اشتباه نگیر.",
+        "برای توصیف محل، موقعیت و آب‌وهوا را از هم جدا کن و فصل را در جملهٔ مناسب به کار ببر."
+      ],
+      "pageEnd": 40,
+      "examTerm": "second",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which activity is often connected with village life?» پاسخ «working on farms» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "The nationality word for a person from Oman is Omani.",
+            "Baghdad is the capital city of Iraq.",
+            "Brazilian is the nationality word for a person from Brazil.",
+            "Working on farms is often associated with village life."
+          ],
+          "answer": 3,
+          "explanation": "استدلال درست: Working on farms is often associated with village life.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
         }
       ]
     },
     {
       "title": "Lesson 7: My Hobbies",
-      "summary": "تمرین این درس درباره سرگرمی‌ها و فعالیت‌های اوقات فراغت است.",
+      "summary": "تمرین‌های این درس سرگرمی‌ها و فعالیت‌های اوقات فراغت را از راه فلش‌کارت، پرسش‌نامه علاقه‌مندی، مقایسه فعالیت‌های شهری و روستایی، فرم ثبت‌نام و نوشتن متن کوتاه تمرین می‌کند.",
       "points": [
-        "hobby یعنی سرگرمی و free time یعنی وقت آزاد.",
-        "reading، swimming و watching از نام فعالیت‌ها هستند.",
-        "How about you? برای پرسیدن نظر طرف مقابل به کار می‌رود."
+        "نام سرگرمی‌ها مانند walking in the park، horse riding، fishing و playing ping-pong را با تصویر تطبیق بده.",
+        "علاقه‌مندی‌های خود را در پرسش‌نامه مشخص کن.",
+        "میزان علاقه به فعالیت‌های اوقات فراغت را در مقیاس عددی ثبت کن.",
+        "فعالیت‌های مشترک شهری و روستایی را دسته‌بندی کن.",
+        "فرم ثبت‌نام و اطلاعات شخصی موردنیاز را با رعایت حریم خصوصی تمرین کن.",
+        "برای نوشتن متن کوتاه درباره اوقات فراغت، ابتدا ایده‌ها را فهرست کن."
       ],
-      "example": "I enjoy reading in my free time.",
+      "example": "تمرین: پنج سرگرمی را رتبه‌بندی کن و سپس در سه جمله بنویس در اوقات فراغت چه کارهایی را دوست داری انجام دهی.",
       "solutionSteps": [
-        "فعالیت مورد نظر را انتخاب می‌کنیم.",
-        "واژه یا عبارت پرسشی مناسب را می‌نویسیم.",
-        "جمله را از نظر معنی و ترتیب بررسی می‌کنیم."
+        "سرگرمی‌ها را از روی تصویر و واژگان شناسایی کن.",
+        "علاقه‌مندی‌ها و فعالیت‌های خود را در جدول ثبت کن.",
+        "با استفاده از فهرست ایده‌ها، یک بند کوتاه بنویس و بازبینی کن."
       ],
       "questions": [
         {
-          "question": "What does “free time” mean?",
+          "question": "Which activity means «اسب‌سواری»?",
           "options": [
-            "وقت آزاد",
-            "وقت مدرسه",
-            "زنگ تفریح",
-            "هفته آینده"
+            "horse riding",
+            "going shopping",
+            "walking in the park",
+            "fishing"
           ],
           "answer": 0,
-          "explanation": "Free time یعنی وقت آزاد."
+          "explanation": "Horse riding means اسب‌سواری."
         },
         {
-          "question": "Which is a hobby?",
+          "question": "Which activity can be common in both cities and villages?",
           "options": [
-            "reading",
-            "Monday",
-            "headache",
-            "mountain"
+            "visiting relatives",
+            "using a subway",
+            "working in a large airport",
+            "shopping in a city mall only"
           ],
           "answer": 0,
-          "explanation": "Reading می‌تواند یک سرگرمی باشد."
+          "explanation": "Visiting relatives can be a free-time activity in both urban and rural areas."
         },
         {
-          "question": "Choose the suitable question.",
+          "question": "Which form is used to sign up for a program?",
           "options": [
-            "How about you?",
-            "How old a hobby?",
-            "Where hobby is?",
-            "What time hobby?"
+            "registration form",
+            "weather map",
+            "city brochure",
+            "weekly timetable"
           ],
           "answer": 0,
-          "explanation": "How about you? برای پرسیدن نظر یا وضعیت طرف مقابل مناسب است."
+          "explanation": "A registration form is used to sign up for a program."
+        }
+      ],
+      "pageStart": 41,
+      "sourceLesson": "My Hobbies",
+      "commonMistakes": [
+        "رتبهٔ علاقه‌مندی با توانایی یا میزان تمرین یکی نیست؛ پاسخ پرسش‌نامه باید معنی همان پرسش را حفظ کند.",
+        "در نوشتن بند کوتاه، جمله‌ها را بدون پیوند رها نکن؛ ایده‌ها را مرتب کن و سپس بازبینی کن."
+      ],
+      "examTerm": "second",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which activity can be common in both cities and villages?» پاسخ «visiting relatives» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "Visiting relatives can be a free-time activity in both urban and rural areas.",
+            "The nationality word for a person from Oman is Omani.",
+            "Baghdad is the capital city of Iraq.",
+            "Brazilian is the nationality word for a person from Brazil."
+          ],
+          "answer": 0,
+          "explanation": "استدلال درست: Visiting relatives can be a free-time activity in both urban and rural areas.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
         }
       ]
     }
-  ]
+  ],
+  "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
+  "textbookSource": "کتاب رسمی پایه هشتم، سازمان پژوهش و برنامه‌ریزی آموزشی؛ مرجع انتشار رسمی: https://chap.sch.ir/",
+  "textbookSourceFile": "Workbook-8_Daneshchi.iR.pdf",
+  "textbookContentsVerified": true,
+  "sampleQuestionBankVersion": 1
 }

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class AiChatScreen extends StatefulWidget {
   const AiChatScreen({super.key});
@@ -33,6 +32,27 @@ class _AiChatScreenState extends State<AiChatScreen> {
       final raw = await bundle.loadString('assets/content/catalog_fa.json');
       final decoded = jsonDecode(raw);
       if (decoded is! Map<String, dynamic> || !mounted) return;
+      // Load the independently versioned subject packs first, matching the
+      // lesson and search screens so the offline helper sees current content.
+      for (final id in decoded.keys.toList()) {
+        try {
+          final packRaw = await bundle.loadString('assets/content/subjects/$id.json');
+          final pack = jsonDecode(packRaw);
+          if (pack is Map<String, dynamic> &&
+              pack['subjectId'] == id &&
+              pack['title'] is String &&
+              pack['chapters'] is List &&
+              (pack['chapters'] as List).isNotEmpty) {
+            decoded[id] = pack;
+          }
+        } on FlutterError {
+          // Retain the legacy catalog entry when no separate pack exists.
+        } on FormatException {
+          // Retain the legacy catalog entry when a pack is malformed.
+        } on TypeError {
+          // Reject invalid pack shapes without breaking the offline helper.
+        }
+      }
       setState(() {
         _catalog = decoded;
         _selectedSubjectId = decoded.isEmpty ? null : decoded.keys.first;
@@ -102,23 +122,28 @@ class _AiChatScreenState extends State<AiChatScreen> {
         chapter['example'] as String? ?? '',
         ...points,
         ...questions,
+        ...((chapter['solutionSteps'] as List<dynamic>? ?? []).whereType<String>()),
+        ...((chapter['commonMistakes'] as List<dynamic>? ?? []).whereType<String>()),
       ].join(' ');
       scored.add((chapter: chapter, index: i, score: _score(searchable, tokens)));
     }
 
-    scored.sort((a, b) => b.score.compareTo(a.score));
+    // Keep catalog order so the selected chapter index remains stable.
     final fallbackIndex = _selectedChapterIndex >= scored.length
         ? scored.length - 1
         : _selectedChapterIndex;
-    if (tokens.isNotEmpty && scored.first.score == 0) {
-      return 'در محتوای ذخیره‌شدهٔ این درس، مطلب مرتبطی پیدا نکردم. نام فصل را انتخاب کن یا پرسشت را با واژه‌های کتاب دوباره بنویس. نمی‌خواهم پاسخ نامرتبط حدس بزنم.';
+    // Search only within the chapter explicitly selected by the learner.
+    // Do not reject a match merely because the first chapter in the catalog
+    // does not contain the query; the selected chapter may be a later one.
+    final selectedChapter = scored[fallbackIndex];
+    if (tokens.isNotEmpty && selectedChapter.score == 0) {
+      return 'در فصل انتخاب‌شده مطلبی با این واژه‌ها پیدا نکردم. فصل دیگری را انتخاب کن یا پرسشت را با واژه‌های همان درس بازنویسی کن.';
     }
-    final best = tokens.isEmpty
-        ? [scored[fallbackIndex]]
-        : scored.where((item) => item.score > 0).take(2).toList();
+    final best = [selectedChapter];
 
     final asksForExample = RegExp('مثال|حل|مرحله|گام|محاسبه|تمرین').hasMatch(question);
     final asksForQuestions = RegExp('سوال|سؤال|آزمون|تست|تمرین').hasMatch(question);
+    final asksForMistakes = RegExp('اشتباه|خطا|غلط|نکته|نکات').hasMatch(question);
     final out = StringBuffer()
       ..writeln('راهنمای هوشمند فهمینو — ' + (subject['title'] as String? ?? 'درس'))
       ..writeln('این پاسخ از محتوای ذخیره‌شده در برنامه پیدا شده است؛ مدل هوش مصنوعی مولد نیست.')
@@ -178,21 +203,36 @@ class _AiChatScreenState extends State<AiChatScreen> {
         }
         out.writeln();
       }
+
+      if (asksForMistakes) {
+        final mistakes = (chapter['commonMistakes'] as List<dynamic>? ?? [])
+            .whereType<String>()
+            .toList();
+        if (mistakes.isNotEmpty) {
+          out.writeln('اشتباهات رایج این درس:');
+          for (final mistake in mistakes) {
+            out.writeln('• ' + mistake);
+          }
+          out.writeln();
+        } else {
+          out.writeln('برای این فصل هنوز نکتهٔ اشتباهات رایج ثبت نشده است.');
+        }
+      }
     }
 
-    out.write('یادآوری: محتوای فعلی هنوز با نسخه رسمی کتاب‌های ۱۴۰۵–۱۴۰۶ صفحه‌به‌صفحه تأیید نشده است؛ برای پاسخ قطعی کتابی، متن کتاب را هم بررسی کن.');
+    out.write('این راهنما فقط محتوای ذخیره‌شدهٔ فهمینو را جست‌وجو می‌کند و پاسخ‌ساز اینترنتی نیست. محتوای درس‌ها را با کتاب رسمی مدرسه تطبیق بده.');
     return out.toString();
   }
 
   void _send() {
-    final text = _controller.text.trim();
-    if (text.isEmpty) return;
+    final question = _controller.text.trim();
+    if (question.isEmpty) return;
+
     _controller.clear();
-    final answer = _answerLocally(text);
+    final answer = _answerLocally(question);
     setState(() {
-      _visibleMessages
-        ..add(_ChatMessage(text: text, isUser: true))
-        ..add(_ChatMessage(text: answer, isUser: false));
+      _visibleMessages.add(_ChatMessage(text: question, isUser: true));
+      _visibleMessages.add(_ChatMessage(text: answer, isUser: false));
     });
     _scrollToBottom();
   }
@@ -214,7 +254,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('راهنمای هوشمند آفلاین فهمینو'),
+        title: const Text('راهنمای درسی فهمینو'),
         actions: [
           IconButton(
             tooltip: 'گفت‌وگوی تازه',
@@ -233,7 +273,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
               child: Column(
                 children: [
                   const Text(
-                    'این راهنمای آفلاین، پاسخ‌ها را از درس‌های ذخیره‌شده پیدا می‌کند؛ مدل مولد یا چت‌بات آنلاین نیست. پیام‌ها از دستگاه خارج نمی‌شوند.',
+                    'راهنمای آفلاین بر پایهٔ محتوای همین برنامه؛ پرسش‌ها از دستگاه خارج نمی‌شوند.',
                     textAlign: TextAlign.center,
                   ),
                   if (_catalog.isNotEmpty) ...[
@@ -326,7 +366,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                       textInputAction: TextInputAction.send,
                       onSubmitted: (_) => _send(),
                       decoration: InputDecoration(
-                        hintText: 'درباره درس انتخاب‌شده بپرس...',
+                        hintText: 'سؤالت را بنویس...',
                         counterText: '',
                         filled: true,
                         border: OutlineInputBorder(
@@ -342,7 +382,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                   ),
                   const SizedBox(width: 8),
                   IconButton.filled(
-                    tooltip: 'جست‌وجوی محلی',
+                    tooltip: 'پاسخ از محتوای فهمینو',
                     onPressed: _send,
                     icon: const Icon(Icons.search_rounded),
                   ),
@@ -412,7 +452,7 @@ class _EmptyChat extends StatelessWidget {
             Text('از کجا شروع کنیم؟', style: theme.textTheme.titleLarge),
             const SizedBox(height: 8),
             const Text(
-              'مثلاً بپرس: «عددهای گویا چیست؟» یا «مراحل حل مثال این فصل را نشان بده.»',
+              'مثلاً بپرس: «عددهای گویا چیست؟» یا «این تمرین را مرحله‌به‌مرحله توضیح بده.»',
               textAlign: TextAlign.center,
             ),
           ],
