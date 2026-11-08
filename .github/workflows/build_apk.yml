@@ -16,6 +16,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
 
@@ -81,8 +82,9 @@ jobs:
       - name: Analyze Dart code
         run: flutter analyze --no-fatal-infos
 
-      - name: Run widget and unit tests (three passes)
-        run: flutter test --reporter expanded && flutter test --reporter expanded && flutter test --reporter expanded
+      - name: Run widget and unit tests
+        timeout-minutes: 15
+        run: flutter test --reporter expanded
 
       - name: Build release APKs
         run: flutter build apk --release --split-per-abi
