@@ -244,6 +244,9 @@ class _ChapterContent extends ConsumerWidget {
     final points = (chapter['points'] as List<dynamic>? ?? []).cast<String>();
     final steps = (chapter['solutionSteps'] as List<dynamic>? ?? [])
         .cast<String>();
+    final mistakes = (chapter['commonMistakes'] as List<dynamic>? ?? [])
+        .whereType<String>()
+        .toList(growable: false);
     final questions =
         (chapter['questions'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
     final pageAssets = (chapter['bookPageImages'] as List<dynamic>? ?? [])
@@ -317,6 +320,17 @@ class _ChapterContent extends ConsumerWidget {
                 Text('نکته‌های کلیدی', style: theme.textTheme.titleSmall),
                 for (final point in points)
                   _Bullet(text: point),
+              ],
+              if (mistakes.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                ExpansionTile(
+                  tilePadding: EdgeInsets.zero,
+                  leading: Icon(Icons.lightbulb_outline_rounded,
+                      color: theme.colorScheme.tertiary),
+                  title: const Text('اشتباهات رایج'),
+                  subtitle: Text('${mistakes.length} نکته برای بررسی پاسخ‌ها'),
+                  children: [for (final mistake in mistakes) _Bullet(text: mistake)],
+                ),
               ],
             ] else if (feature == AppFeature.notes) ...[
               for (final point in points) _Bullet(text: point),
