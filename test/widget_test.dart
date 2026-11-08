@@ -356,10 +356,12 @@ void main() {
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
-    await tester.scrollUntilVisible(find.text('اشتباهات رایج'), 250);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
-    await tester.tap(find.text('اشتباهات رایج'));
+    await tester.tap(find.text('اشتباهات رایج'), warnIfMissed: false);
+    await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('برای جمع یا تفریق کسرها'), findsOneWidget);
   });
@@ -385,10 +387,12 @@ void main() {
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
-    await tester.scrollUntilVisible(find.text('اشتباهات رایج'), 250);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
-    await tester.tap(find.text('اشتباهات رایج'));
+    await tester.tap(find.text('اشتباهات رایج'), warnIfMissed: false);
+    await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('صاف‌کردن فقط جامد نامحلول'), findsOneWidget);
   });
@@ -414,10 +418,12 @@ void main() {
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
-    await tester.scrollUntilVisible(find.text('اشتباهات رایج'), 250);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
-    await tester.tap(find.text('اشتباهات رایج'));
+    await tester.tap(find.text('اشتباهات رایج'), warnIfMissed: false);
+    await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('تعاون فقط تقسیم کردن'), findsOneWidget);
   });
@@ -443,10 +449,12 @@ void main() {
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
-    await tester.scrollUntilVisible(find.text('اشتباهات رایج'), 250);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
-    await tester.tap(find.text('اشتباهات رایج'));
+    await tester.tap(find.text('اشتباهات رایج'), warnIfMissed: false);
+    await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('هذانِ برای مثنای مذکر'), findsOneWidget);
   });
