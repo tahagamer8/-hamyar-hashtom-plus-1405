@@ -32,7 +32,14 @@ class _SearchScreenState extends State<SearchScreen> {
       .replaceAll('\u200c', ' ')
       .replaceAll('\u0640', '')
       .replaceAll(RegExp(r'[\u064B-\u065F\u0670]'), '')
-      .replaceAll(RegExp(r'[؟?!،,؛;:()\\[\\]{}]+'), ' ')
+      .replaceAll('؟', ' ')
+      .replaceAll('?', ' ')
+      .replaceAll('!', ' ')
+      .replaceAll('،', ' ')
+      .replaceAll(',', ' ')
+      .replaceAll('؛', ' ')
+      .replaceAll(';', ' ')
+      .replaceAll(':', ' ')
       .replaceAll(RegExp(r'\s+'), ' ')
       .trim();
 
@@ -40,9 +47,22 @@ class _SearchScreenState extends State<SearchScreen> {
     final query = _normalize(_query);
     if (query.isEmpty) return true;
 
-    // An explicit page query searches verified chapter ranges instead of
-    // relying on a page number appearing in lesson prose.
-    final pageMatch = RegExp(r'^(?:صفحه|ص)\\s+(\\d+)  final _controller = TextEditingController();
+    final parts = query.split(' ');
+    if (parts.length == 2 && (parts[0] == 'صفحه' || parts[0] == 'ص')) {
+      final page = int.tryParse(parts[1]);
+      final start = chapter['pageStart'];
+      final end = chapter['pageEnd'];
+      if (page == null || start is! int) return false;
+      return page >= start && page <= (end is int ? end : start);
+    }
+
+    final terms = parts.where((term) => term.isNotEmpty);
+    final normalizedText = _normalize(searchable);
+    // All query terms must exist, but they need not be adjacent or ordered.
+    return terms.isNotEmpty && terms.every((term) => normalizedText.contains(term));
+  }
+
+  final _controller = TextEditingController();
   Future<Map<String, dynamic>>? _catalogFuture;
   String _query = '';
   String _selectedSubjectId = 'all';
