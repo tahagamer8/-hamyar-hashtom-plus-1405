@@ -65,13 +65,21 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
       final example = value['example'];
       final steps = value['solutionSteps'];
       final questions = value['questions'];
+      final advancedQuestions = value['advancedQuestions'];
       if (title is! String || title.trim().isEmpty ||
           summary is! String || points is! List ||
           !points.every((item) => item is String) ||
           example is! String || steps is! List ||
           !steps.every((item) => item is String) ||
-          questions is! List) return false;
-      return questions.every((item) {
+          questions is! List ||
+          (advancedQuestions != null && advancedQuestions is! List)) {
+        return false;
+      }
+      final allQuestions = [
+        ...questions,
+        ...(advancedQuestions as List<dynamic>? ?? const []),
+      ];
+      return allQuestions.every((item) {
         if (item is! Map<String, dynamic>) return false;
         final options = item['options'];
         final answer = item['answer'];
