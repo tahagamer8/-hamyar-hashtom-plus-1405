@@ -16,6 +16,7 @@ const _testCatalog = r'''
       "points": ["قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید."],
       "example": "مثال: ۱/۲ + ۱/۳ را حساب کن.",
       "solutionSteps": ["مخرج مشترک ۶ انتخاب می‌کنیم.", "۱/۲ = ۳/۶ و ۱/۳ = ۲/۶.", "۳/۶ + ۲/۶ = ۵/۶."],
+      "commonMistakes": ["در جمع کسرها ابتدا مخرج مشترک بگیر."],
       "questions": [{
         "question": "حاصل ۱/۲ + ۱/۴ کدام است؟",
         "options": ["۱/۶", "۲/۶", "۳/۴", "۱"],
@@ -47,24 +48,39 @@ Widget _testApp() => MaterialApp(
     );
 
 void main() {
-  testWidgets('Gemini assistant shows lesson selectors and message input', (tester) async {
+  testWidgets('offline study guide shows lesson selectors and message input', (tester) async {
     await tester.pumpWidget(_testApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('هوش مصنوعی فهمینو'), findsOneWidget);
+    expect(find.text('راهنمای درسی فهمینو'), findsOneWidget);
     expect(find.text('از کجا شروع کنیم؟'), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
     expect(find.byType(DropdownButtonFormField<String>), findsOneWidget);
     expect(find.byType(DropdownButtonFormField<int>), findsOneWidget);
-    expect(find.byTooltip('ارسال به هوش مصنوعی'), findsOneWidget);
+    expect(find.byTooltip('پاسخ از محتوای فهمینو'), findsOneWidget);
+    expect(find.textContaining('پرسش‌ها از دستگاه خارج نمی‌شوند'), findsOneWidget);
   });
 
-  testWidgets('assistant identifies its online Gemini mode honestly', (tester) async {
+  testWidgets('offline guide answers from the selected chapter without a network call', (tester) async {
     await tester.pumpWidget(_testApp());
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('متصل به Gemini'), findsOneWidget);
-    expect(find.textContaining('مدل مولد نیست'), findsNothing);
-    expect(find.textContaining('از دستگاه خارج نمی‌شوند'), findsNothing);
+    await tester.enterText(find.byType(TextField), 'عددهای گویا چیست؟');
+    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('عددهای گویا را می‌توان به صورت کسر نوشت.'), findsOneWidget);
+    expect(find.textContaining('پاسخ‌ساز اینترنتی نیست'), findsOneWidget);
+  });
+
+  testWidgets('offline guide can show chapter-specific common mistakes', (tester) async {
+    await tester.pumpWidget(_testApp());
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'اشتباهات رایج کسرها چیست؟');
+    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('در جمع کسرها ابتدا مخرج مشترک بگیر.'), findsOneWidget);
   });
 }
