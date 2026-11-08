@@ -13,102 +13,119 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  String _normalizeDigits(String value) {
+  final TextEditingController _controller = TextEditingController();
+  Future<Map<String, dynamic>>? _catalogFuture;
+  String _query = '';
+  String _selectedSubjectId = 'all';
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(_handleQueryChange);
+  }
+
+  void _handleQueryChange() {
+    if (mounted) {
+      setState(() => _query = _controller.text.trim());
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _catalogFuture ??= _loadSearchCatalog(DefaultAssetBundle.of(context));
+  }
+
+  Future<Map<String, dynamic>> _loadSearchCatalog(AssetBundle bundle) async {
+    final raw = await bundle.loadString('assets/content/catalog_fa.json');
+    final decoded = jsonDecode(raw);
+    if (decoded is! Map<String, dynamic>) {
+      throw const FormatException('ساختار فهرست محتوای فهمینو معتبر نیست.');
+    }
+
+    final catalog = Map<String, dynamic>.from(decoded);
+    for (final id in catalog.keys.toList()) {
+      try {
+        final packRaw = await bundle.loadString('assets/content/subjects/$id.json');
+        final pack = jsonDecode(packRaw);
+        if (pack is Map<String, dynamic> &&
+            pack['subjectId'] == id &&
+            pack['title'] is String &&
+            pack['chapters'] is List &&
+            (pack['chapters'] as List).isNotEmpty) {
+          catalog[id] = pack;
+        }
+      } on FlutterError {
+        // Keep the legacy catalog entry for older installations.
+      } on FormatException {
+        // Ignore malformed optional packs and keep the legacy catalog.
+      } on TypeError {
+        // Ignore a malformed optional pack without breaking search.
+      }
+    }
+    return catalog;
+  }
+
+  String _normaliseDigits(String value) {
     const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
     const arabicDigits = '٠١٢٣٤٥٦٧٨٩';
     var result = value;
-    for (var i = 0; i < 10; i++) {
+    for (var index = 0; index < 10; index++) {
       result = result
-          .replaceAll(persianDigits[i], '$i')
-          .replaceAll(arabicDigits[i], '$i');
+          .replaceAll(persianDigits[index], '$index')
+          .replaceAll(arabicDigits[index], '$index');
     }
     return result;
   }
 
-  String _normalize(String value) => _normalizeDigits(value)
-      .toLowerCase()
-      .replaceAll('ي', 'ی')
-      .replaceAll('ك', 'ک')
-      .replaceAll('\u200c', ' ')
-      .replaceAll('\u0640', '')
-      .replaceAll(RegExp(r'[\u064B-\u065F\u0670]'), '')
-      .replaceAll('؟', ' ')
-      .replaceAll('?', ' ')
-      .replaceAll('!', ' ')
-      .replaceAll('،', ' ')
-      .replaceAll(',', ' ')
-      .replaceAll('؛', ' ')
-      .replaceAll(';', ' ')
-      .replaceAll(':', ' ')
-      .replaceAll(RegExp(r'\s+'), ' ')
-      .trim();
+  String _normalise(String value) {
+    var result = _normaliseDigits(value)
+        .toLowerCase()
+        .replaceAll('ي', 'ی')
+        .replaceAll('ك', 'ک')
+        .replaceAll('\u200c', ' ')
+        .replaceAll('\u0640', '')
+        .replaceAll(RegExp(r'[\u064B-\u065F\u0670]'), '');
+
+    for (final punctuation in const [
+      '؟', '?', '!', '،', ',', '؛', ';', ':', '(', ')', '[', ']', '{', '}',
+      '٫', '٬',
+    ]) {
+      result = result.replaceAll(punctuation, ' ');
+    }
+    return result.replaceAll(RegExp(r'\s+'), ' ').trim();
+  }
 
   bool _matchesQuery(Map<String, dynamic> chapter, String searchable) {
-    final query = _normalize(_query);
+    final query = _normalise(_query);
     if (query.isEmpty) return true;
 
-    final parts = query.split(' ');
-    if (parts.length == 2 && (parts[0] == 'صفحه' || parts[0] == 'ص')) {
-      final page = int.tryParse(parts[1]);
+    final terms = query.split(' ').where((term) => term.isNotEmpty).toList();
+    if (terms.length == 2 && (terms[0] == 'صفحه' || terms[0] == 'ص')) {
+      final page = int.tryParse(terms[1]);
       final start = chapter['pageStart'];
       final end = chapter['pageEnd'];
       if (page == null || start is! int) return false;
       return page >= start && page <= (end is int ? end : start);
     }
 
-    final terms = parts.where((term) => term.isNotEmpty);
-    final normalizedText = _normalize(searchable);
-    // All query terms must exist, but they need not be adjacent or ordered.
-    return terms.isNotEmpty && terms.every((term) => normalizedText.contains(term));
+    final normalizedText = _normalise(searchable);
+    // Terms may be in any order, but all must match the same lesson.
+    return terms.isNotEmpty &&
+        terms.every((term) => normalizedText.contains(term));
   }
 
-  final _controller = TextEditingController();
-  Future<Map<String, dynamic>>? _catalogFuture;
-  String _query = '';
-  String _selectedSubjectId = 'all';
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.addListener(() {
-      if (mounted) setState(() => _query = _controller.text.trim());
-    });
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _catalogFuture ??= _loadSearchCatalog(DefaultAssetBundle.of(context));
-  }
-
-  Future<Map<String, dynamic>> _loadSearchCatalog(AssetBundle bundle) async {
-    final raw = await bundle.loadString('assets/content/catalog_fa.json');
-    final catalog = jsonDecode(raw) as Map<String, dynamic>;
-    // Independently versioned packs are the source of truth when available.
-    for (final id in catalog.keys.toList()) {
-      try {
-        final packRaw = await bundle.loadString('assets/content/subjects/$id.json');
-        final value = jsonDecode(packRaw);
-        if (value is Map<String, dynamic> &&
-            value['subjectId'] == id &&
-            value['title'] is String &&
-            value['chapters'] is List &&
-            (value['chapters'] as List).isNotEmpty) {
-          catalog[id] = value;
-        }
-      } on FlutterError {
-        // Keep the legacy catalog for subjects not yet migrated.
-      } on FormatException {
-        // Ignore malformed optional packs; the catalog remains available.
-      } on TypeError {
-        // Ignore invalid JSON shape rather than crashing search.
-      }
-    }
-    return catalog;
+  String _pageLabel(Map<String, dynamic> chapter) {
+    final start = chapter['pageStart'];
+    final end = chapter['pageEnd'];
+    if (start is! int) return '';
+    if (end is int && end >= start) return 'صفحه $start تا $end';
+    return 'از صفحه $start';
   }
 
   @override
   void dispose() {
+    _controller.removeListener(_handleQueryChange);
     _controller.dispose();
     super.dispose();
   }
@@ -122,67 +139,76 @@ class _SearchScreenState extends State<SearchScreen> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             if (snapshot.hasError) {
-              return const Center(child: Text('بارگذاری جست‌وجو ناموفق بود.'));
+              return const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(24),
+                  child: Text(
+                    'بارگذاری جست‌وجو ناموفق بود. محتوای درس‌ها را دوباره بررسی کن.',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              );
             }
             return const Center(child: CircularProgressIndicator());
           }
-          final entries = <Map<String, String>>[];
+
+          final entries = <Map<String, dynamic>>[];
           for (final item in snapshot.data!.entries) {
             final subjectId = item.key;
-            if (_selectedSubjectId != 'all' && subjectId != _selectedSubjectId) {
+            if (_selectedSubjectId != 'all' &&
+                subjectId != _selectedSubjectId) {
               continue;
             }
-            final subject = item.value as Map<String, dynamic>;
+
+            final subject = item.value;
+            if (subject is! Map<String, dynamic>) continue;
             final subjectTitle = subject['title'] as String? ?? subjectId;
-            final chapters = (subject['chapters'] as List<dynamic>? ?? [])
-                .cast<Map<String, dynamic>>();
-            for (var chapterIndex = 0; chapterIndex < chapters.length; chapterIndex++) {
-              final chapter = chapters[chapterIndex];
-              final chapterTitle = chapter['title'] as String? ?? '';
-              final summary = chapter['summary'] as String? ?? '';
-              final points = (chapter['points'] as List<dynamic>? ?? []).join(' ');
-              final steps = (chapter['solutionSteps'] as List<dynamic>? ?? []).join(' ');
-              final example = chapter['example'] as String? ?? '';
+            final rawChapters = subject['chapters'];
+            if (rawChapters is! List) continue;
+
+            for (var index = 0; index < rawChapters.length; index++) {
+              final chapter = rawChapters[index];
+              if (chapter is! Map<String, dynamic>) continue;
+
               final questions = (chapter['questions'] as List<dynamic>? ?? [])
                   .whereType<Map<String, dynamic>>()
-                  .map((item) => item['question'] ?? '')
+                  .map((question) => question['question'] ?? '')
                   .join(' ');
-              final mistakes = (chapter['commonMistakes'] as List<dynamic>? ?? [])
-                  .whereType<String>()
-                  .join(' ');
-              final sourceLesson = chapter['sourceLesson'] as String? ?? '';
-              final curriculumInstruction =
-                  chapter['curriculumInstruction'] as String? ?? '';
               final textbookLessons =
                   (chapter['textbookLessons'] as List<dynamic>? ?? [])
                       .whereType<Map<String, dynamic>>()
-                      .map((item) => item['title'] ?? '')
+                      .map((lesson) => lesson['title'] ?? '')
                       .join(' ');
+
               final searchable = [
                 subjectTitle,
-                chapterTitle,
-                summary,
-                points,
-                steps,
-                example,
+                chapter['title'] ?? '',
+                chapter['summary'] ?? '',
+                (chapter['points'] as List<dynamic>? ?? []).join(' '),
+                (chapter['solutionSteps'] as List<dynamic>? ?? []).join(' '),
+                chapter['example'] ?? '',
                 questions,
-                mistakes,
-                sourceLesson,
-                curriculumInstruction,
+                (chapter['commonMistakes'] as List<dynamic>? ?? [])
+                    .whereType<String>()
+                    .join(' '),
+                chapter['sourceLesson'] ?? '',
+                chapter['curriculumInstruction'] ?? '',
                 textbookLessons,
               ].join(' ');
+
               if (_matchesQuery(chapter, searchable)) {
                 entries.add({
                   'subjectId': subjectId,
                   'subjectTitle': subjectTitle,
-                  'chapterTitle': chapterTitle,
-                  'summary': summary,
-                  'chapterIndex': '$chapterIndex',
-                  'pageStart': chapter['pageStart']?.toString() ?? '',
+                  'chapterTitle': chapter['title'] as String? ?? 'بخش آموزشی',
+                  'summary': chapter['summary'] as String? ?? '',
+                  'chapterIndex': index,
+                  'pageLabel': _pageLabel(chapter),
                 });
               }
             }
           }
+
           return Column(
             children: [
               Padding(
@@ -190,8 +216,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: TextField(
                   controller: _controller,
                   textInputAction: TextInputAction.search,
+                  textDirection: TextDirection.rtl,
                   decoration: InputDecoration(
-                    hintText: 'نام درس یا موضوع را بنویس...',
+                    hintText: 'نام درس، موضوع، سؤال یا شماره صفحه را بنویس...',
                     prefixIcon: const Icon(Icons.search_rounded),
                     suffixIcon: _query.isEmpty
                         ? null
@@ -217,233 +244,64 @@ class _SearchScreenState extends State<SearchScreen> {
                     border: OutlineInputBorder(),
                   ),
                   items: [
-                    const DropdownMenuItem(value: 'all', child: Text('همهٔ درس‌ها')),
-                    for (final item in snapshot.data!.entries)
-                      DropdownMenuItem<String>(
-                        value: item.key,
-                        child: Text((item.value as Map<String, dynamic>)['title'] as String? ?? item.key),
-                      ),
-                  ],
-                  onChanged: (value) => setState(() => _selectedSubjectId = value ?? 'all'),
-                ),
-              ),
-              Expanded(
-                child: entries.isEmpty
-                    ? const Center(child: Text('مطلبی پیدا نشد. عبارت دیگری را امتحان کن.'))
-                    : ListView.separated(
-                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
-                        itemCount: entries.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 8),
-                        itemBuilder: (context, index) {
-                          final entry = entries[index];
-                          return Card(
-                            child: ListTile(
-                              leading: const CircleAvatar(
-                                child: Icon(Icons.menu_book_rounded),
-                              ),
-                              title: Text(entry['chapterTitle']!),
-                              subtitle: Text(
-                                '${entry['subjectTitle']}\n${entry['summary']}',
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              isThreeLine: true,
-                              trailing: const Icon(Icons.chevron_left_rounded),
-                              onTap: () => context.go(
-                                '${AppRoutes.subjectDetail(entry['subjectId']!)}/lessons?chapter=${entry['chapterIndex']}',
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-}
-).firstMatch(query);
-    if (pageMatch != null) {
-      final page = int.tryParse(pageMatch.group(1)!);
-      final start = chapter['pageStart'];
-      final end = chapter['pageEnd'];
-      if (page == null || start is! int) return false;
-      return page >= start && page <= (end is int ? end : start);
-    }
-
-    final terms = query.split(' ').where((term) => term.isNotEmpty);
-    final normalizedText = _normalize(searchable);
-    // All query terms must be present, but they do not need to be adjacent
-    // or typed in the same order as the source text.
-    return terms.isNotEmpty && terms.every(normalizedText.contains);
-  }
-  final _controller = TextEditingController();
-  Future<Map<String, dynamic>>? _catalogFuture;
-  String _query = '';
-  String _selectedSubjectId = 'all';
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.addListener(() {
-      if (mounted) setState(() => _query = _controller.text.trim());
-    });
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _catalogFuture ??= _loadSearchCatalog(DefaultAssetBundle.of(context));
-  }
-
-  Future<Map<String, dynamic>> _loadSearchCatalog(AssetBundle bundle) async {
-    final raw = await bundle.loadString('assets/content/catalog_fa.json');
-    final catalog = jsonDecode(raw) as Map<String, dynamic>;
-    // Independently versioned packs are the source of truth when available.
-    for (final id in catalog.keys.toList()) {
-      try {
-        final packRaw = await bundle.loadString('assets/content/subjects/$id.json');
-        final value = jsonDecode(packRaw);
-        if (value is Map<String, dynamic> &&
-            value['subjectId'] == id &&
-            value['title'] is String &&
-            value['chapters'] is List &&
-            (value['chapters'] as List).isNotEmpty) {
-          catalog[id] = value;
-        }
-      } on FlutterError {
-        // Keep the legacy catalog for subjects not yet migrated.
-      } on FormatException {
-        // Ignore malformed optional packs; the catalog remains available.
-      } on TypeError {
-        // Ignore invalid JSON shape rather than crashing search.
-      }
-    }
-    return catalog;
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('جست‌وجو در فهمینو')),
-      body: FutureBuilder<Map<String, dynamic>>(
-        future: _catalogFuture,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            if (snapshot.hasError) {
-              return const Center(child: Text('بارگذاری جست‌وجو ناموفق بود.'));
-            }
-            return const Center(child: CircularProgressIndicator());
-          }
-          final entries = <Map<String, String>>[];
-          for (final item in snapshot.data!.entries) {
-            final subjectId = item.key;
-            if (_selectedSubjectId != 'all' && subjectId != _selectedSubjectId) {
-              continue;
-            }
-            final subject = item.value as Map<String, dynamic>;
-            final subjectTitle = subject['title'] as String? ?? subjectId;
-            final chapters = (subject['chapters'] as List<dynamic>? ?? [])
-                .cast<Map<String, dynamic>>();
-            for (var chapterIndex = 0; chapterIndex < chapters.length; chapterIndex++) {
-              final chapter = chapters[chapterIndex];
-              final chapterTitle = chapter['title'] as String? ?? '';
-              final summary = chapter['summary'] as String? ?? '';
-              final points = (chapter['points'] as List<dynamic>? ?? []).join(' ');
-              final steps = (chapter['solutionSteps'] as List<dynamic>? ?? []).join(' ');
-              final example = chapter['example'] as String? ?? '';
-              final questions = (chapter['questions'] as List<dynamic>? ?? [])
-                  .map((item) => (item as Map<String, dynamic>)['question'] ?? '')
-                  .join(' ');
-              final searchable = _normalize('$subjectTitle $chapterTitle $summary $points $steps $example $questions');
-              if (_query.isEmpty || searchable.contains(_normalize(_query))) {
-                entries.add({
-                  'subjectId': subjectId,
-                  'subjectTitle': subjectTitle,
-                  'chapterTitle': chapterTitle,
-                  'summary': summary,
-                  'chapterIndex': '$chapterIndex',
-                  'pageStart': chapter['pageStart']?.toString() ?? '',
-                });
-              }
-            }
-          }
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                child: TextField(
-                  controller: _controller,
-                  textInputAction: TextInputAction.search,
-                  decoration: InputDecoration(
-                    hintText: 'نام درس یا موضوع را بنویس...',
-                    prefixIcon: const Icon(Icons.search_rounded),
-                    suffixIcon: _query.isEmpty
-                        ? null
-                        : IconButton(
-                            tooltip: 'پاک کردن',
-                            onPressed: _controller.clear,
-                            icon: const Icon(Icons.close_rounded),
-                          ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
+                    const DropdownMenuItem(
+                      value: 'all',
+                      child: Text('همهٔ درس‌ها'),
                     ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-                child: DropdownButtonFormField<String>(
-                  value: _selectedSubjectId,
-                  isExpanded: true,
-                  decoration: const InputDecoration(
-                    labelText: 'فیلتر بر اساس درس',
-                    prefixIcon: Icon(Icons.filter_list_rounded),
-                    border: OutlineInputBorder(),
-                  ),
-                  items: [
-                    const DropdownMenuItem(value: 'all', child: Text('همهٔ درس‌ها')),
                     for (final item in snapshot.data!.entries)
                       DropdownMenuItem<String>(
                         value: item.key,
-                        child: Text((item.value as Map<String, dynamic>)['title'] as String? ?? item.key),
+                        child: Text(
+                          (item.value as Map<String, dynamic>)['title']
+                                  as String? ??
+                              item.key,
+                        ),
                       ),
                   ],
-                  onChanged: (value) => setState(() => _selectedSubjectId = value ?? 'all'),
+                  onChanged: (value) => setState(
+                    () => _selectedSubjectId = value ?? 'all',
+                  ),
                 ),
               ),
               Expanded(
                 child: entries.isEmpty
-                    ? const Center(child: Text('مطلبی پیدا نشد. عبارت دیگری را امتحان کن.'))
+                    ? const Center(
+                        child: Text(
+                          'مطلبی پیدا نشد. عبارت دیگری را امتحان کن.',
+                        ),
+                      )
                     : ListView.separated(
                         padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
                         itemCount: entries.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 8),
+                        separatorBuilder: (_, __) =>
+                            const SizedBox(height: 8),
                         itemBuilder: (context, index) {
                           final entry = entries[index];
+                          final pageLabel = entry['pageLabel'] as String;
+                          final subtitle = [
+                            entry['subjectTitle'] as String,
+                            if (pageLabel.isNotEmpty) pageLabel,
+                            entry['summary'] as String,
+                          ].where((part) => part.isNotEmpty).join('\n');
+                          final subjectId = entry['subjectId'] as String;
+                          final chapterIndex = entry['chapterIndex'] as int;
                           return Card(
                             child: ListTile(
                               leading: const CircleAvatar(
                                 child: Icon(Icons.menu_book_rounded),
                               ),
-                              title: Text(entry['chapterTitle']!),
+                              title: Text(entry['chapterTitle'] as String),
                               subtitle: Text(
-                                '${entry['subjectTitle']}\n${entry['summary']}',
-                                maxLines: 3,
+                                subtitle,
+                                maxLines: 4,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               isThreeLine: true,
                               trailing: const Icon(Icons.chevron_left_rounded),
                               onTap: () => context.go(
-                                '${AppRoutes.subjectDetail(entry['subjectId']!)}/lessons?chapter=${entry['chapterIndex']}',
+                                AppRoutes.subjectDetail(subjectId) +
+                                    '/lessons?chapter=' +
+                                    chapterIndex.toString(),
                               ),
                             ),
                           );
