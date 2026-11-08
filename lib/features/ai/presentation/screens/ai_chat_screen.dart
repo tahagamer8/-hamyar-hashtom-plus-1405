@@ -132,11 +132,9 @@ class _AiChatScreenState extends State<AiChatScreen> {
     final fallbackIndex = _selectedChapterIndex >= scored.length
         ? scored.length - 1
         : _selectedChapterIndex;
-    if (tokens.isNotEmpty && scored.first.score == 0) {
-      return 'در محتوای ذخیره‌شدهٔ این درس، مطلب مرتبطی پیدا نکردم. نام فصل را انتخاب کن یا پرسشت را با واژه‌های کتاب دوباره بنویس. نمی‌خواهم پاسخ نامرتبط حدس بزنم.';
-    }
-
-    // Always use the chapter explicitly selected by the learner.
+    // Search only within the chapter explicitly selected by the learner.
+    // Do not reject a match merely because the first chapter in the catalog
+    // does not contain the query; the selected chapter may be a later one.
     final selectedChapter = scored[fallbackIndex];
     if (tokens.isNotEmpty && selectedChapter.score == 0) {
       return 'در فصل انتخاب‌شده مطلبی با این واژه‌ها پیدا نکردم. فصل دیگری را انتخاب کن یا پرسشت را با واژه‌های همان درس بازنویسی کن.';
