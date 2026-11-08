@@ -128,7 +128,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
       scored.add((chapter: chapter, index: i, score: _score(searchable, tokens)));
     }
 
-    scored.sort((a, b) => b.score.compareTo(a.score));
+    // Keep catalog order so the selected chapter index remains stable.
     final fallbackIndex = _selectedChapterIndex >= scored.length
         ? scored.length - 1
         : _selectedChapterIndex;
