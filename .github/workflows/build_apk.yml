@@ -20,6 +20,11 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Cache Gradle distributions and dependencies
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-provider: basic
+
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
