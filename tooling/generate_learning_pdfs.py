@@ -46,7 +46,7 @@ def load_subjects(directory: Path) -> dict:
             for key in ("title", "summary", "points", "example", "solutionSteps", "questions"):
                 if key not in chapter:
                     raise ValueError(f"Missing {key}: {sid}/{chapter.get('title')}")
-            for q in chapter["questions"]:
+            for q in [*chapter["questions"], *chapter.get("advancedQuestions", [])]:
                 opts, answer = q.get("options"), q.get("answer")
                 if not isinstance(opts, list) or len(opts) < 2 or not isinstance(answer, int) or not 0 <= answer < len(opts):
                     raise ValueError(f"Invalid question: {sid}/{q.get('question')}")
@@ -104,7 +104,7 @@ def add_chapter_notes(story, chapter, st):
             story.append(Paragraph(rtl(f"{i}. {step}"), st["body"]))
 
 def build_subject_pdf(sid, subject, output, st):
-    questions = [(chapter["title"], q) for chapter in subject["chapters"] for q in chapter["questions"]]
+    questions = [(chapter["title"], q) for chapter in subject["chapters"] for q in [*chapter["questions"], *chapter.get("advancedQuestions", [])]]
     story = [
         Spacer(1, 18*mm),
         Paragraph(rtl(subject["title"]), st["title"]),
@@ -153,7 +153,7 @@ def build_combined(subjects, output, st, questions_only=False):
                 add_chapter_notes(story, chapter, st)
             else:
                 story.append(Paragraph(rtl(chapter["title"]), st["chapter"]))
-            for q in chapter["questions"]:
+            for q in [*chapter["questions"], *chapter.get("advancedQuestions", [])]:
                 number += 1
                 if questions_only:
                     story.append(Paragraph(rtl(f"{number}. {q['question']}"), st["question"]))
