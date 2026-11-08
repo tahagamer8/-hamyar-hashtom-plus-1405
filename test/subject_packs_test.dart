@@ -123,6 +123,63 @@ void main() {
     expect(noteCount, 290);
   });
 
+  test('verified 1405 textbook pages and curriculum choices match source contents', () async {
+    Future<Map<String, dynamic>> load(String id) async {
+      final raw = await rootBundle.loadString('assets/content/subjects/$id.json');
+      return jsonDecode(raw) as Map<String, dynamic>;
+    }
+
+    final science = await load('science');
+    final scienceChapters = science['chapters'] as List<dynamic>;
+    expect(scienceChapters.map((c) => (c as Map<String, dynamic>)['pageEnd']).toList(),
+        [8, 20, 27, 34, 46, 54, 64, 75, 88, 96, 103, 113, 121, 135, null]);
+
+    final social = await load('social');
+    final socialChapters = social['chapters'] as List<dynamic>;
+    expect((socialChapters.first as Map<String, dynamic>)['pageEnd'], 6);
+    expect((socialChapters.last as Map<String, dynamic>)['pageStart'], 162);
+    expect((socialChapters.last as Map<String, dynamic>).containsKey('pageEnd'), isFalse);
+
+    final arabic = await load('arabic');
+    final arabicChapters = arabic['chapters'] as List<dynamic>;
+    expect((arabicChapters.first as Map<String, dynamic>)['pageEnd'], 22);
+    expect((arabicChapters.last as Map<String, dynamic>)['pageStart'], 127);
+    expect((arabicChapters.last as Map<String, dynamic>).containsKey('pageEnd'), isFalse);
+
+    final workbook = await load('english_workbook');
+    final workbookChapters = workbook['chapters'] as List<dynamic>;
+    expect((workbookChapters.first as Map<String, dynamic>)['pageEnd'], 7);
+    expect((workbookChapters.last as Map<String, dynamic>)['pageStart'], 41);
+
+    final work = await load('work');
+    final workChapters = work['chapters'] as List<dynamic>;
+    expect((workChapters.first as Map<String, dynamic>)['pageStart'], 3);
+    for (var i = 0; i < 4; i++) {
+      expect((workChapters[i] as Map<String, dynamic>)['curriculumStatus'], 'required');
+    }
+    for (var i = 4; i < 9; i++) {
+      final chapter = workChapters[i] as Map<String, dynamic>;
+      expect(chapter['curriculumStatus'], 'choice');
+      expect(chapter['choiceRequiredCount'], 4);
+      expect(chapter['choiceTotalCount'], 5);
+    }
+
+    final thinking = await load('thinking');
+    final thinkingChapters = thinking['chapters'] as List<dynamic>;
+    expect(thinkingChapters.where((c) =>
+        (c as Map<String, dynamic>)['curriculumStatus'] == 'required'), hasLength(4));
+    expect(thinkingChapters.where((c) =>
+        (c as Map<String, dynamic>)['curriculumStatus'] == 'choice'), hasLength(2));
+    expect(thinkingChapters.where((c) =>
+        (c as Map<String, dynamic>)['curriculumStatus'] == 'optional'), hasLength(1));
+
+    final art = await load('art');
+    final artChapters = art['chapters'] as List<dynamic>;
+    expect((artChapters[0] as Map<String, dynamic>)['requiredTopics'], ['طراحی']);
+    expect((artChapters[0] as Map<String, dynamic>)['choiceTopics'], ['عکاسی', 'تصویرسازی']);
+    expect((artChapters[2] as Map<String, dynamic>)['choiceTopics'], ['بافت', 'چاپ دستی']);
+  });
+
   test('every subject has an independently loadable, valid content pack', () async {
     for (final id in subjects) {
       final raw = await rootBundle.loadString('assets/content/subjects/$id.json');
