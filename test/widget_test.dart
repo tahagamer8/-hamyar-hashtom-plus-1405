@@ -336,6 +336,24 @@ void main() {
     expect(find.textContaining('پاسخ درست: ۳/۴'), findsOneWidget);
   });
 
+  testWidgets('completed timed exam saves a result to local history', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(_contentApp('quiz'));
+    await _pumpUiFrames(tester);
+
+    await tester.tap(find.text('ثبت و پایان آزمون'));
+    await _pumpUiFrames(tester);
+    await tester.tap(find.text('ثبت آزمون'));
+    await _pumpUiFrames(tester);
+
+    expect(find.textContaining('نمره:'), findsOneWidget);
+    await tester.tap(find.text('مشاهدهٔ سوابق آزمون این درس'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('نمره ۰٪'), findsOneWidget);
+    expect(find.textContaining('۰ از ۱ پاسخ درست'), findsOneWidget);
+  });
+
   testWidgets('chapter can be added to favorites', (tester) async {
     await tester.pumpWidget(_contentApp('lessons'));
     await _pumpUiFrames(tester);
