@@ -47,10 +47,18 @@ Widget _testApp() => MaterialApp(
       ),
     );
 
+Future<void> _pumpUiFrames(WidgetTester tester) async {
+  // Bounded frame pumping avoids hanging forever on repeating animations.
+  await tester.pump();
+  for (var i = 0; i < 7; i++) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+}
+
 void main() {
   testWidgets('offline study guide shows lesson selectors and message input', (tester) async {
     await tester.pumpWidget(_testApp());
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
 
     expect(find.text('راهنمای درسی فهمینو'), findsOneWidget);
     expect(find.text('از کجا شروع کنیم؟'), findsOneWidget);
@@ -63,7 +71,7 @@ void main() {
 
   testWidgets('offline guide answers from the selected chapter without a network call', (tester) async {
     await tester.pumpWidget(_testApp());
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
 
     await tester.enterText(find.byType(TextField), 'عددهای گویا چیست؟');
     await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
@@ -76,7 +84,7 @@ void main() {
 
   testWidgets('offline guide can show chapter-specific common mistakes', (tester) async {
     await tester.pumpWidget(_testApp());
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
 
     await tester.enterText(find.byType(TextField), 'اشتباهات رایج کسرها چیست؟');
     await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
