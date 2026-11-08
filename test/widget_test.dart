@@ -327,6 +327,31 @@ void main() {
     expect(find.byTooltip('حذف از علاقه‌مندی‌ها'), findsOneWidget);
   });
 
+  testWidgets('math lesson displays chapter-specific common mistakes', (tester) async {
+    final mathPack = await File('assets/content/subjects/math.json').readAsString();
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: DefaultAssetBundle(
+            bundle: _MapAssetBundle({
+              'assets/content/subjects/math.json': mathPack,
+            }),
+            child: const ContentLibraryScreen(
+              subjectId: 'math',
+              featureId: 'lessons',
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.tap(find.text('اشتباهات رایج'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('مخرج مشترک'), findsOneWidget);
+  });
+
   testWidgets('favorites resolve titles from the current subject packs', (tester) async {
     SharedPreferences.setMockInitialValues({
       'fahmino_favorites_v1': [
