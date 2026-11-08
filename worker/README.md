@@ -1,11 +1,16 @@
 # Fahmino Worker
 
-The deployed Worker is intentionally in offline-only mode.
+## Deployment policy
 
-- `GET /health` reports that external AI is disabled.
-- `POST /api/chat` returns HTTP 410 and never calls a model provider.
-- No model API key or paid service is used by this Worker.
+The grade-eight Fahmino app uses an on-device study guide and does not send student questions or chat history to a remote model provider.
 
-Fahmino is a grade-eight learning app and its intended audience includes people under 18. The current Gemini API Additional Terms require API users to be 18+ and prohibit using the API in apps directed to or likely accessed by under-18 users. Therefore this Worker must remain disabled for external Gemini calls. See Google's current terms: https://ai.google.dev/gemini-api/terms
+- `GET /health` reports `mode: offline` and `externalAiEnabled: false`.
+- `POST /api/chat` returns HTTP 410; no external model request is made.
+- No model API key is needed by this Worker.
+- The Flutter app searches its bundled subject packs locally, including lesson summaries, key points, examples, worked steps, questions and `commonMistakes`.
 
-The app uses a local, on-device content helper instead. It searches the authored Fahmino catalog and does not send lesson questions or personal information to a remote AI provider.
+## Why this Worker does not call Gemini
+
+Google's Gemini API Additional Terms, effective March 23, 2026, say API users must be 18+ and prohibit using the API in applications directed to or likely to be accessed by people under 18. Fahmino is a grade-eight learning app, so it must not send student content to Gemini API.
+
+Official terms: https://ai.google.dev/gemini-api/terms
