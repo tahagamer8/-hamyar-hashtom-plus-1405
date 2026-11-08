@@ -352,6 +352,31 @@ void main() {
     expect(find.textContaining('مخرج مشترک'), findsOneWidget);
   });
 
+  testWidgets('science lesson displays chapter-specific common misconceptions', (tester) async {
+    final sciencePack = await File('assets/content/subjects/science.json').readAsString();
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: DefaultAssetBundle(
+            bundle: _MapAssetBundle({
+              'assets/content/subjects/science.json': sciencePack,
+            }),
+            child: const ContentLibraryScreen(
+              subjectId: 'science',
+              featureId: 'lessons',
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.tap(find.text('اشتباهات رایج'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('مخلوط'), findsWidgets);
+  });
+
   testWidgets('favorites resolve titles from the current subject packs', (tester) async {
     SharedPreferences.setMockInitialValues({
       'fahmino_favorites_v1': [
