@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": "1405.11",
+  "contentVersion": "1405.11.1",
   "subjectId": "english",
   "title": "زبان انگلیسی",
   "chapters": [
@@ -56,7 +56,11 @@
       ],
       "pageStart": 12,
       "pageEnd": 17,
-      "sourceLesson": "My Nationality"
+      "sourceLesson": "My Nationality",
+      "commonMistakes": [
+        "نام کشور با ملیت یکی نیست؛ country نام کشور و nationality صفت یا نام ملیت است.",
+        "نام کشورها و ملیت‌ها در انگلیسی با حرف بزرگ آغاز می‌شوند؛ مثل Iran و Iranian."
+      ]
     },
     {
       "title": "Unit 2: My Week",
@@ -110,7 +114,11 @@
       ],
       "pageStart": 18,
       "pageEnd": 22,
-      "sourceLesson": "My Week"
+      "sourceLesson": "My Week",
+      "commonMistakes": [
+        "برای روزهای هفته معمولاً از on استفاده می‌کنیم؛ روز را با ساعت یا بخش روز اشتباه نگیر.",
+        "در برنامهٔ هفتگی، فعالیت و روز آن را با فاعل و فعل درست بنویس؛ فقط فهرست واژه‌ها کافی نیست."
+      ]
     },
     {
       "title": "Unit 3: My Abilities",
@@ -164,7 +172,11 @@
       ],
       "pageStart": 26,
       "pageEnd": 33,
-      "sourceLesson": "My Abilities"
+      "sourceLesson": "My Abilities",
+      "commonMistakes": [
+        "بعد از can و can't فعل به شکل ساده می‌آید؛ به آن s یا to اضافه نکن.",
+        "can و can't خودشان توانایی یا ناتوانی را نشان می‌دهند؛ برای پرسش از ترتیب Can + subject استفاده کن."
+      ]
     },
     {
       "title": "Unit 4: My Health",
@@ -218,7 +230,11 @@
       ],
       "pageStart": 34,
       "pageEnd": 39,
-      "sourceLesson": "My Health"
+      "sourceLesson": "My Health",
+      "commonMistakes": [
+        "برای بیان مشکل معمولاً از ساختار مناسب مانند have a headache یا have a toothache استفاده می‌شود؛ واژهٔ نشانه را با خود بیماری اشتباه نگیر.",
+        "در توصیهٔ ساده، بعد از should فعل ساده می‌آید؛ به should شکل گذشته یا s اضافه نکن."
+      ]
     },
     {
       "title": "Unit 5: My City",
@@ -272,7 +288,11 @@
       ],
       "pageStart": 42,
       "pageEnd": 47,
-      "sourceLesson": "My City"
+      "sourceLesson": "My City",
+      "commonMistakes": [
+        "there is برای اسم مفرد و there are برای اسم جمع به کار می‌رود؛ انتخاب را بر اساس اسم بعد از آن انجام بده.",
+        "نام مکان را با جایگاه آن اشتباه نگیر؛ توصیف یک شهر باید مکان‌ها و رابطهٔ مکانی را روشن کند."
+      ]
     },
     {
       "title": "Unit 6: My Village",
@@ -326,7 +346,11 @@
       ],
       "pageStart": 48,
       "pageEnd": 53,
-      "sourceLesson": "My Village"
+      "sourceLesson": "My Village",
+      "commonMistakes": [
+        "نام فصل‌ها و ویژگی‌های آب‌وهوا را با هم اشتباه نگیر؛ برای مثال season با weather یکسان نیست.",
+        "برای توصیف مکان، از واژهٔ دقیق مانند river، field یا mountain استفاده کن؛ واژه‌های طبیعی را جابه‌جا نکن."
+      ]
     },
     {
       "title": "Unit 7: My Hobbies",
@@ -380,7 +404,11 @@
       ],
       "pageStart": 54,
       "pageEnd": 59,
-      "sourceLesson": "My Hobbies"
+      "sourceLesson": "My Hobbies",
+      "commonMistakes": [
+        "برای بیان علاقه به فعالیت، ساختارهایی مانند like + verb-ing یا enjoy + verb-ing را با شکل سادهٔ فعل اشتباه نگیر.",
+        "پرسش دربارهٔ سرگرمی با پاسخ دربارهٔ توانایی یکسان نیست؛ hobby و ability را از هم جدا کن."
+      ]
     }
   ],
   "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
