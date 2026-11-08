@@ -74,6 +74,14 @@ Widget _contentApp(String featureId) => ProviderScope(
       ),
     );
 
+Future<void> _pumpUiFrames(WidgetTester tester) async {
+  // Bounded frame pumping avoids hanging forever on repeating animations.
+  await tester.pump();
+  for (var i = 0; i < 7; i++) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+}
+
 void main() {
   setUpAll(() => SharedPreferences.setMockInitialValues({}));
 
@@ -217,7 +225,7 @@ void main() {
 
   testWidgets('home screen renders Fahmino branding', (tester) async {
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('دسترسی سریع'), findsOneWidget);
     expect(find.text('راهنمای درسی فهمینو', skipOffstage: false), findsOneWidget);
@@ -226,9 +234,9 @@ void main() {
 
   testWidgets('navigates to subjects tab', (tester) async {
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     await tester.tap(find.text('دروس'));
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     expect(find.text('دروس پایه هشتم'), findsOneWidget);
     expect(find.text('ریاضی'), findsWidgets);
   });
@@ -270,30 +278,30 @@ void main() {
 
   testWidgets('lesson content loads from catalog bundle', (tester) async {
     await tester.pumpWidget(_contentApp('lessons'));
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     expect(find.text('عددهای صحیح و گویا'), findsOneWidget);
     expect(find.textContaining('عددهای گویا را می‌توان'), findsOneWidget);
   });
 
   testWidgets('notes content loads from catalog bundle', (tester) async {
     await tester.pumpWidget(_contentApp('notes'));
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     expect(find.text('قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید.'), findsOneWidget);
   });
 
   testWidgets('step-by-step solution loads from catalog bundle', (tester) async {
     await tester.pumpWidget(_contentApp('solutions'));
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     expect(find.text('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
   });
 
   testWidgets('sample questions reveal answer key on demand', (tester) async {
     await tester.pumpWidget(_contentApp('sampleExams'));
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
     expect(find.text('پاسخ: ۳/۴'), findsNothing);
     await tester.scrollUntilVisible(find.text('نمایش پاسخ و توضیح'), 250);
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     await tester.tap(find.text('نمایش پاسخ و توضیح'));
     await tester.pump();
     expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
@@ -302,7 +310,7 @@ void main() {
 
   testWidgets('combined quiz has a timer and reveals answers after submission', (tester) async {
     await tester.pumpWidget(_contentApp('quiz'));
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     expect(find.text('آزمون جامع ریاضی'), findsOneWidget);
     expect(find.text('10:00'), findsOneWidget);
     await tester.pump(const Duration(seconds: 1));
@@ -311,16 +319,16 @@ void main() {
     await tester.pump();
     expect(find.textContaining('پاسخ درست:'), findsNothing);
     await tester.tap(find.text('ثبت و پایان آزمون'));
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     await tester.tap(find.text('ثبت آزمون'));
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     expect(find.textContaining('نمره:'), findsOneWidget);
     expect(find.textContaining('پاسخ درست: ۳/۴'), findsOneWidget);
   });
 
   testWidgets('chapter can be added to favorites', (tester) async {
     await tester.pumpWidget(_contentApp('lessons'));
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     expect(find.byTooltip('افزودن به علاقه‌مندی‌ها'), findsOneWidget);
     await tester.tap(find.byTooltip('افزودن به علاقه‌مندی‌ها'));
     await tester.pump();
@@ -494,7 +502,7 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await _pumpUiFrames(tester);
     expect(find.byType(TextField), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'حاصل ۱/۲ + ۱/۴');
     await tester.pump();
