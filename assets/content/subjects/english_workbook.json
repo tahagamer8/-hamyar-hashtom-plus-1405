@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": "1405.11.3",
+  "contentVersion": "1405.11.1",
   "subjectId": "english_workbook",
   "title": "کتاب کار زبان انگلیسی",
   "chapters": [
@@ -56,7 +56,11 @@
         }
       ],
       "pageStart": 2,
-      "sourceLesson": "My Nationality"
+      "sourceLesson": "My Nationality",
+      "commonMistakes": [
+        "کشور، شهر و ملیت سه نوع اطلاعات متفاوت‌اند؛ هر شهر را با کشور و ملیت درست پیوند بده.",
+        "نام کشور، شهر و ملیت با حرف بزرگ آغاز می‌شود؛ ch و sh را هم در املای واژه‌ها جابه‌جا نکن."
+      ]
     },
     {
       "title": "Lesson 2: My Week",
@@ -110,7 +114,11 @@
         }
       ],
       "pageStart": 8,
-      "sourceLesson": "My Week"
+      "sourceLesson": "My Week",
+      "commonMistakes": [
+        "نام روزهای هفته با حرف بزرگ نوشته می‌شود؛ روز را با زمانِ روز مانند morning اشتباه نگیر.",
+        "on Monday برای روز و عبارت‌هایی مانند in the morning برای بخش روز را درست به کار ببر."
+      ]
     },
     {
       "title": "Lesson 3: My Abilities",
@@ -164,7 +172,11 @@
         }
       ],
       "pageStart": 12,
-      "sourceLesson": "My Abilities"
+      "sourceLesson": "My Abilities",
+      "commonMistakes": [
+        "پرسش‌نامهٔ توانایی باید بر پایهٔ مهارت واقعی فرد تکمیل شود؛ علاقه داشتن به یک کار به معنی توانایی انجام آن نیست.",
+        "در جملهٔ مربوط به can، فعل پس از آن ساده می‌آید؛ شکل سوم‌شخص یا to را پس از can قرار نده."
+      ]
     },
     {
       "title": "Lesson 4: My Health",
@@ -218,7 +230,11 @@
         }
       ],
       "pageStart": 19,
-      "sourceLesson": "My Health"
+      "sourceLesson": "My Health",
+      "commonMistakes": [
+        "نام مشکل سلامت را دقیق از متن انتخاب کن؛ headache، toothache و sore throat یک معنی ندارند.",
+        "توصیهٔ عمومی را با تشخیص بیماری اشتباه نگیر؛ در صورت مشکل جدی یا ادامه‌دار، کمک بزرگسال و پزشک لازم است."
+      ]
     },
     {
       "title": "Lesson 5: My City",
@@ -272,7 +288,11 @@
         }
       ],
       "pageStart": 25,
-      "sourceLesson": "My City"
+      "sourceLesson": "My City",
+      "commonMistakes": [
+        "شهر، کشور و قاره را در یک سطح جغرافیایی قرار نده؛ هر کدام جایگاه متفاوتی دارند.",
+        "اطلاعات بروشور و نقشه را با حدس جایگزین نکن؛ نام مکان و کشور را پیش از نوشتن بررسی کن."
+      ]
     },
     {
       "title": "Lesson 6: My Village",
@@ -326,7 +346,11 @@
         }
       ],
       "pageStart": 31,
-      "sourceLesson": "My Village"
+      "sourceLesson": "My Village",
+      "commonMistakes": [
+        "ویژگی طبیعی مثل رود یا کوه را با ویژگی انسانی مثل شغل یا جمعیت اشتباه نگیر.",
+        "برای توصیف محل، موقعیت و آب‌وهوا را از هم جدا کن و فصل را در جملهٔ مناسب به کار ببر."
+      ]
     },
     {
       "title": "Lesson 7: My Hobbies",
@@ -381,7 +405,11 @@
         }
       ],
       "pageStart": 41,
-      "sourceLesson": "My Hobbies"
+      "sourceLesson": "My Hobbies",
+      "commonMistakes": [
+        "رتبهٔ علاقه‌مندی با توانایی یا میزان تمرین یکی نیست؛ پاسخ پرسش‌نامه باید معنی همان پرسش را حفظ کند.",
+        "در نوشتن بند کوتاه، جمله‌ها را بدون پیوند رها نکن؛ ایده‌ها را مرتب کن و سپس بازبینی کن."
+      ]
     }
   ],
   "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
