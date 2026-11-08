@@ -344,11 +344,12 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
     await tester.tap(find.text('اشتباهات رایج'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('مخرج مشترک'), findsOneWidget);
   });
 
@@ -369,11 +370,12 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
     await tester.tap(find.text('اشتباهات رایج'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('مخلوط'), findsWidgets);
   });
 
@@ -394,11 +396,12 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
     await tester.tap(find.text('اشتباهات رایج'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('تعاون'), findsWidgets);
   });
 
@@ -419,11 +422,12 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
     await tester.tap(find.text('اشتباهات رایج'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 400));
     expect(find.textContaining('هذا'), findsWidgets);
   });
 
