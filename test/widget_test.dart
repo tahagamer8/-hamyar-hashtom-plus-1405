@@ -390,7 +390,7 @@ void main() {
     expect(find.text('اشتباهات رایج'), findsOneWidget);
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 400));
-    expect(find.textContaining('صاف‌کردن فقط جامدِ نامحلول'), findsOneWidget);
+    expect(find.textContaining('صاف‌کردن فقط جامد نامحلول'), findsOneWidget);
   });
 
   testWidgets('social studies lesson displays lesson-specific common misconceptions', (tester) async {
