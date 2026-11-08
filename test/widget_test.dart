@@ -488,9 +488,11 @@ void main() {
       await Future<void>.delayed(const Duration(milliseconds: 100));
     });
     await tester.pump();
-    expect(find.text('هوش مصنوعی فهمینو'), findsOneWidget);
-    expect(find.textContaining('متصل به Gemini'), findsOneWidget);
-    expect(find.byTooltip('ارسال به هوش مصنوعی'), findsOneWidget);
+    await _pumpUiFrames(tester);
+    expect(find.text('راهنمای درسی فهمینو'), findsOneWidget);
+    expect(find.textContaining('پرسش‌ها از دستگاه خارج نمی‌شوند'), findsOneWidget);
+    expect(find.text('پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی'), findsOneWidget);
+    expect(find.byTooltip('پاسخ از محتوای فهمینو'), findsOneWidget);
   });
 
   testWidgets('search finds text inside a question', (tester) async {
