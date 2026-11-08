@@ -180,6 +180,51 @@ void main() {
     expect((artChapters[2] as Map<String, dynamic>)['choiceTopics'], ['بافت', 'چاپ دستی']);
   });
 
+  test('all 145 sections include an authored reasoning question and a term assignment', () async {
+    const ids = <String>[
+      'math', 'science', 'persian', 'writing', 'arabic', 'english',
+      'social', 'religion', 'quran', 'thinking', 'work',
+      'english_workbook', 'art',
+    ];
+    var sections = 0;
+    var advancedQuestions = 0;
+    for (final id in ids) {
+      final raw = await rootBundle.loadString('assets/content/subjects/$id.json');
+      final pack = jsonDecode(raw) as Map<String, dynamic>;
+      expect(pack['sampleQuestionBankVersion'], 1, reason: id);
+      final chapters = pack['chapters'] as List<dynamic>;
+      final firstTerm = <Map<String, dynamic>>[];
+      final secondTerm = <Map<String, dynamic>>[];
+      for (final value in chapters) {
+        final chapter = value as Map<String, dynamic>;
+        sections++;
+        final term = chapter['examTerm'];
+        expect(term, anyOf('first', 'second'), reason: chapter['title'] as String);
+        if (term == 'first') firstTerm.add(chapter);
+        if (term == 'second') secondTerm.add(chapter);
+
+        final questions = chapter['advancedQuestions'] as List<dynamic>;
+        expect(questions, hasLength(1), reason: chapter['title'] as String);
+        final question = questions.single as Map<String, dynamic>;
+        final options = question['options'] as List<dynamic>;
+        final answer = question['answer'] as int;
+        expect(question['questionType'], 'reasoning');
+        expect(question['difficulty'], 'استدلالی');
+        expect(question['source'], 'تألیفی فهمینو');
+        expect((question['question'] as String).trim(), isNotEmpty);
+        expect(options, hasLength(4));
+        expect(options.toSet().length, 4);
+        expect(answer, inInclusiveRange(0, 3));
+        expect((question['explanation'] as String).trim(), isNotEmpty);
+        advancedQuestions += questions.length;
+      }
+      expect(firstTerm, isNotEmpty, reason: id);
+      expect(secondTerm, isNotEmpty, reason: id);
+    }
+    expect(sections, 145);
+    expect(advancedQuestions, 145);
+  });
+
   test('every subject has an independently loadable, valid content pack', () async {
     for (final id in subjects) {
       final raw = await rootBundle.loadString('assets/content/subjects/$id.json');
