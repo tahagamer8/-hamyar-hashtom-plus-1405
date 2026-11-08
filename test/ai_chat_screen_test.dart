@@ -100,4 +100,21 @@ void main() {
 
     expect(find.textContaining('در جمع کسرها ابتدا مخرج مشترک بگیر.'), findsOneWidget);
   });
+
+  testWidgets('offline guide can answer from a later selected chapter', (tester) async {
+    await tester.pumpWidget(_testApp());
+    await _pumpUiFrames(tester);
+
+    await tester.tap(find.byType(DropdownButtonFormField<int>));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('زاویه‌ها').last);
+    await tester.pump();
+
+    await tester.enterText(find.byType(TextField), 'زاویه چیست؟');
+    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.textContaining('زاویه از دو نیم‌خط با مبدأ مشترک تشکیل می‌شود.'), findsOneWidget);
+  });
 }
