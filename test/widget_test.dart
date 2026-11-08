@@ -356,11 +356,12 @@ void main() {
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
+    await tester.scrollUntilVisible(find.text('اشتباهات رایج'), 250);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 400));
-    expect(find.textContaining('مخرج مشترک'), findsOneWidget);
+    expect(find.textContaining('برای جمع یا تفریق کسرها'), findsOneWidget);
   });
 
   testWidgets('science lesson displays chapter-specific common misconceptions', (tester) async {
@@ -384,11 +385,12 @@ void main() {
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
+    await tester.scrollUntilVisible(find.text('اشتباهات رایج'), 250);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 400));
-    expect(find.textContaining('مخلوط'), findsWidgets);
+    expect(find.textContaining('صاف‌کردن فقط جامدِ نامحلول'), findsOneWidget);
   });
 
   testWidgets('social studies lesson displays lesson-specific common misconceptions', (tester) async {
@@ -412,11 +414,12 @@ void main() {
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
+    await tester.scrollUntilVisible(find.text('اشتباهات رایج'), 250);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 400));
-    expect(find.textContaining('تعاون'), findsWidgets);
+    expect(find.textContaining('تعاون فقط تقسیم کردن'), findsOneWidget);
   });
 
   testWidgets('Arabic lesson displays lesson-specific common misconceptions', (tester) async {
@@ -440,11 +443,12 @@ void main() {
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
+    await tester.scrollUntilVisible(find.text('اشتباهات رایج'), 250);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 400));
-    expect(find.textContaining('هذا'), findsWidgets);
+    expect(find.textContaining('هذانِ برای مثنای مذکر'), findsOneWidget);
   });
 
   testWidgets('favorites resolve titles from the current subject packs', (tester) async {
