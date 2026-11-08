@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/sample_question_library_screen.dart';
 import 'package:hamyar_hashtom_plus/features/documents/presentation/widgets/subject_pdf_card.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/widgets/book_page_gallery.dart';
 
@@ -148,6 +149,13 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               .cast<Map<String, dynamic>>();
           if (_feature == AppFeature.quiz) {
             return TimedCombinedExamScreen(
+              subjectTitle: subject['title'] as String? ?? 'درس',
+              chapters: chapters,
+            );
+          }
+          if (_feature == AppFeature.sampleExams) {
+            return SampleQuestionLibraryScreen(
+              subjectId: widget.subjectId,
               subjectTitle: subject['title'] as String? ?? 'درس',
               chapters: chapters,
             );
