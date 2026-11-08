@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class AiChatScreen extends StatefulWidget {
   const AiChatScreen({super.key});
@@ -12,8 +10,6 @@ class AiChatScreen extends StatefulWidget {
 }
 
 class _AiChatScreenState extends State<AiChatScreen> {
-  static const _apiEndpoint = 'https://fahmino-api-2.tahamrh2.workers.dev/api/chat';
-  bool _sending = false;
   final _controller = TextEditingController();
   final _scrollController = ScrollController();
   final _visibleMessages = <_ChatMessage>[];
@@ -126,6 +122,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
         chapter['example'] as String? ?? '',
         ...points,
         ...questions,
+        ...((chapter['solutionSteps'] as List<dynamic>? ?? []).whereType<String>()),
+        ...((chapter['commonMistakes'] as List<dynamic>? ?? []).whereType<String>()),
       ].join(' ');
       scored.add((chapter: chapter, index: i, score: _score(searchable, tokens)));
     }
@@ -138,18 +136,16 @@ class _AiChatScreenState extends State<AiChatScreen> {
       return 'در محتوای ذخیره‌شدهٔ این درس، مطلب مرتبطی پیدا نکردم. نام فصل را انتخاب کن یا پرسشت را با واژه‌های کتاب دوباره بنویس. نمی‌خواهم پاسخ نامرتبط حدس بزنم.';
     }
 
-    // Respect the learner's explicit chapter selection. Previously the
-    // dropdown only affected empty queries, so a question could be answered
-    // from a different chapter even while a chapter was selected.
+    // Always use the chapter explicitly selected by the learner.
     final selectedChapter = scored[fallbackIndex];
-    final best = tokens.isEmpty
-        ? [selectedChapter]
-        : selectedChapter.score > 0
-            ? [selectedChapter]
-            : scored.where((item) => item.score > 0).take(2).toList();
+    if (tokens.isNotEmpty && selectedChapter.score == 0) {
+      return 'در فصل انتخاب‌شده مطلبی با این واژه‌ها پیدا نکردم. فصل دیگری را انتخاب کن یا پرسشت را با واژه‌های همان درس بازنویسی کن.';
+    }
+    final best = [selectedChapter];
 
     final asksForExample = RegExp('مثال|حل|مرحله|گام|محاسبه|تمرین').hasMatch(question);
     final asksForQuestions = RegExp('سوال|سؤال|آزمون|تست|تمرین').hasMatch(question);
+    final asksForMistakes = RegExp('اشتباه|خطا|غلط|نکته|نکات').hasMatch(question);
     final out = StringBuffer()
       ..writeln('راهنمای هوشمند فهمینو — ' + (subject['title'] as String? ?? 'درس'))
       ..writeln('این پاسخ از محتوای ذخیره‌شده در برنامه پیدا شده است؛ مدل هوش مصنوعی مولد نیست.')
@@ -209,89 +205,35 @@ class _AiChatScreenState extends State<AiChatScreen> {
         }
         out.writeln();
       }
+
+      if (asksForMistakes) {
+        final mistakes = (chapter['commonMistakes'] as List<dynamic>? ?? [])
+            .whereType<String>()
+            .toList();
+        if (mistakes.isNotEmpty) {
+          out.writeln('اشتباهات رایج این درس:');
+          for (final mistake in mistakes) {
+            out.writeln('• ' + mistake);
+          }
+          out.writeln();
+        } else {
+          out.writeln('برای این فصل هنوز نکتهٔ اشتباهات رایج ثبت نشده است.');
+        }
+      }
     }
 
-    out.write('یادآوری: محتوای فعلی هنوز با نسخه رسمی کتاب‌های ۱۴۰۵–۱۴۰۶ صفحه‌به‌صفحه تأیید نشده است؛ برای پاسخ قطعی کتابی، متن کتاب را هم بررسی کن.');
+    out.write('این راهنما فقط محتوای ذخیره‌شدهٔ فهمینو را جست‌وجو می‌کند و پاسخ‌ساز اینترنتی نیست. محتوای درس‌ها را با کتاب رسمی مدرسه تطبیق بده.');
     return out.toString();
   }
 
-  Future<void> _send() async {
+  void _send() {
     final question = _controller.text.trim();
-    if (question.isEmpty || _sending) return;
-
-    final subject = _selectedSubjectId == null ? null : _catalog[_selectedSubjectId];
-    final subjectTitle = subject is Map<String, dynamic>
-        ? (subject['title'] as String? ?? 'پایه هشتم')
-        : 'پایه هشتم';
-    final chapters = subject is Map<String, dynamic>
-        ? (subject['chapters'] as List<dynamic>? ?? [])
-            .whereType<Map<String, dynamic>>()
-            .toList()
-        : <Map<String, dynamic>>[];
-    final chapterTitle = chapters.isNotEmpty &&
-            _selectedChapterIndex >= 0 &&
-            _selectedChapterIndex < chapters.length
-        ? (chapters[_selectedChapterIndex]['title'] as String? ?? '')
-        : '';
-
-    final history = _visibleMessages
-        .take(10)
-        .map((item) => {
-              'role': item.isUser ? 'user' : 'model',
-              'text': item.text,
-            })
-        .toList(growable: false);
+    if (question.isEmpty) return;
 
     _controller.clear();
+    final answer = _answerLocally(question);
     setState(() {
-      _sending = true;
       _visibleMessages.add(_ChatMessage(text: question, isUser: true));
-    });
-    _scrollToBottom();
-
-    final prompt = 'درس انتخاب‌شده: $subjectTitle\\n'
-        'فصل یا درس انتخاب‌شده: $chapterTitle\\n'
-        'پرسش دانش‌آموز: $question';
-
-    HttpClient? client;
-    String answer;
-    try {
-      client = HttpClient()..connectionTimeout = const Duration(seconds: 12);
-      final request = await client
-          .postUrl(Uri.parse(_apiEndpoint))
-          .timeout(const Duration(seconds: 15));
-      request.headers.contentType = ContentType.json;
-      request.add(utf8.encode(jsonEncode({
-        'message': prompt,
-        'history': history,
-      })));
-      final response = await request.close().timeout(const Duration(seconds: 45));
-      final responseText = await response.transform(utf8.decoder).join();
-      final decoded = jsonDecode(responseText);
-      if (decoded is Map<String, dynamic> && response.statusCode >= 200 &&
-          response.statusCode < 300 && decoded['answer'] is String) {
-        answer = decoded['answer'] as String;
-      } else {
-        answer = decoded is Map<String, dynamic> && decoded['error'] is String
-            ? decoded['error'] as String
-            : 'پاسخ از سرویس دریافت نشد. کمی بعد دوباره تلاش کن.';
-      }
-    } on SocketException {
-      answer = 'اتصال اینترنت برقرار نیست؛ این پاسخ جایگزین از محتوای آفلاین برنامه پیدا شده است.\\n\\n' +
-          _answerLocally(question);
-    } on HttpException {
-      answer = 'ارتباط با سرویس فهمینو برقرار نشد. کمی بعد دوباره تلاش کن.';
-    } on FormatException {
-      answer = 'پاسخ سرویس قابل‌خواندن نبود. دوباره تلاش کن.';
-    } catch (_) {
-      answer = 'فعلاً امکان دریافت پاسخ وجود ندارد. دوباره تلاش کن.';
-    } finally {
-      client?.close(force: true);
-    }
-
-    if (!mounted) return;
-    setState(() {
-      _sending = false;
       _visibleMessages.add(_ChatMessage(text: answer, isUser: false));
     });
     _scrollToBottom();
@@ -314,7 +256,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('هوش مصنوعی فهمینو'),
+        title: const Text('راهنمای درسی فهمینو'),
         actions: [
           IconButton(
             tooltip: 'گفت‌وگوی تازه',
@@ -333,7 +275,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
               child: Column(
                 children: [
                   const Text(
-                    'دستیار هوشمند آموزشی متصل به Gemini؛ برای پاسخ دقیق‌تر، درس و فصل را انتخاب کن.',
+                    'راهنمای آفلاین بر پایهٔ محتوای همین برنامه؛ پرسش‌ها از دستگاه خارج نمی‌شوند.',
                     textAlign: TextAlign.center,
                   ),
                   if (_catalog.isNotEmpty) ...[
@@ -442,11 +384,9 @@ class _AiChatScreenState extends State<AiChatScreen> {
                   ),
                   const SizedBox(width: 8),
                   IconButton.filled(
-                    tooltip: 'ارسال به هوش مصنوعی',
-                    onPressed: _sending ? null : _send,
-                    icon: _sending
-                        ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                        : const Icon(Icons.send_rounded),
+                    tooltip: 'پاسخ از محتوای فهمینو',
+                    onPressed: _send,
+                    icon: const Icon(Icons.search_rounded),
                   ),
                 ],
               ),
