@@ -61,7 +61,24 @@
         "کشور، شهر و ملیت سه نوع اطلاعات متفاوت‌اند؛ هر شهر را با کشور و ملیت درست پیوند بده.",
         "نام کشور، شهر و ملیت با حرف بزرگ آغاز می‌شود؛ ch و sh را هم در املای واژه‌ها جابه‌جا نکن."
       ],
-      "pageEnd": 7
+      "pageEnd": 7,
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which pair is correct?» پاسخ «Brazil – Brazilian» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "On the weekend means در آخر هفته.",
+            "Thursday is the day before Friday.",
+            "Brazilian is the nationality word for a person from Brazil.",
+            "Every afternoon means هر بعدازظهر."
+          ],
+          "answer": 2,
+          "explanation": "استدلال درست: Brazilian is the nationality word for a person from Brazil.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
+      ]
     },
     {
       "title": "Lesson 2: My Week",
@@ -120,7 +137,24 @@
         "نام روزهای هفته با حرف بزرگ نوشته می‌شود؛ روز را با زمانِ روز مانند morning اشتباه نگیر.",
         "on Monday برای روز و عبارت‌هایی مانند in the morning برای بخش روز را درست به کار ببر."
       ],
-      "pageEnd": 11
+      "pageEnd": 11,
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which day comes before Friday?» پاسخ «Thursday» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "The nationality word for a person from Oman is Omani.",
+            "Baghdad is the capital city of Iraq.",
+            "Brazilian is the nationality word for a person from Brazil.",
+            "Thursday is the day before Friday."
+          ],
+          "answer": 3,
+          "explanation": "استدلال درست: Thursday is the day before Friday.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
+      ]
     },
     {
       "title": "Lesson 3: My Abilities",
@@ -179,7 +213,24 @@
         "پرسش‌نامهٔ توانایی باید بر پایهٔ مهارت واقعی فرد تکمیل شود؛ علاقه داشتن به یک کار به معنی توانایی انجام آن نیست.",
         "در جملهٔ مربوط به can، فعل پس از آن ساده می‌آید؛ شکل سوم‌شخص یا to را پس از can قرار نده."
       ],
-      "pageEnd": 18
+      "pageEnd": 18,
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which sentence describes an ability?» پاسخ «I can take photos.» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "I can take photos describes something the speaker is able to do.",
+            "The nationality word for a person from Oman is Omani.",
+            "Baghdad is the capital city of Iraq.",
+            "Brazilian is the nationality word for a person from Brazil."
+          ],
+          "answer": 0,
+          "explanation": "استدلال درست: I can take photos describes something the speaker is able to do.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
+      ]
     },
     {
       "title": "Lesson 4: My Health",
@@ -238,7 +289,24 @@
         "نام مشکل سلامت را دقیق از متن انتخاب کن؛ headache، toothache و sore throat یک معنی ندارند.",
         "توصیهٔ عمومی را با تشخیص بیماری اشتباه نگیر؛ در صورت مشکل جدی یا ادامه‌دار، کمک بزرگسال و پزشک لازم است."
       ],
-      "pageEnd": 24
+      "pageEnd": 24,
+      "examTerm": "first",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which phrase gives advice?» پاسخ «You should get some rest.» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "The nationality word for a person from Oman is Omani.",
+            "You should ... is used to give advice.",
+            "Baghdad is the capital city of Iraq.",
+            "Brazilian is the nationality word for a person from Brazil."
+          ],
+          "answer": 1,
+          "explanation": "استدلال درست: You should ... is used to give advice.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
+      ]
     },
     {
       "title": "Lesson 5: My City",
@@ -297,7 +365,24 @@
         "شهر، کشور و قاره را در یک سطح جغرافیایی قرار نده؛ هر کدام جایگاه متفاوتی دارند.",
         "اطلاعات بروشور و نقشه را با حدس جایگزین نکن؛ نام مکان و کشور را پیش از نوشتن بررسی کن."
       ],
-      "pageEnd": 30
+      "pageEnd": 30,
+      "examTerm": "second",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which place is used to see old objects and exhibitions?» پاسخ «museum» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "The nationality word for a person from Oman is Omani.",
+            "Baghdad is the capital city of Iraq.",
+            "A museum displays objects and exhibitions.",
+            "Brazilian is the nationality word for a person from Brazil."
+          ],
+          "answer": 2,
+          "explanation": "استدلال درست: A museum displays objects and exhibitions.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
+      ]
     },
     {
       "title": "Lesson 6: My Village",
@@ -356,7 +441,24 @@
         "ویژگی طبیعی مثل رود یا کوه را با ویژگی انسانی مثل شغل یا جمعیت اشتباه نگیر.",
         "برای توصیف محل، موقعیت و آب‌وهوا را از هم جدا کن و فصل را در جملهٔ مناسب به کار ببر."
       ],
-      "pageEnd": 40
+      "pageEnd": 40,
+      "examTerm": "second",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which activity is often connected with village life?» پاسخ «working on farms» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "The nationality word for a person from Oman is Omani.",
+            "Baghdad is the capital city of Iraq.",
+            "Brazilian is the nationality word for a person from Brazil.",
+            "Working on farms is often associated with village life."
+          ],
+          "answer": 3,
+          "explanation": "استدلال درست: Working on farms is often associated with village life.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
+      ]
     },
     {
       "title": "Lesson 7: My Hobbies",
@@ -415,11 +517,29 @@
       "commonMistakes": [
         "رتبهٔ علاقه‌مندی با توانایی یا میزان تمرین یکی نیست؛ پاسخ پرسش‌نامه باید معنی همان پرسش را حفظ کند.",
         "در نوشتن بند کوتاه، جمله‌ها را بدون پیوند رها نکن؛ ایده‌ها را مرتب کن و سپس بازبینی کن."
+      ],
+      "examTerm": "second",
+      "advancedQuestions": [
+        {
+          "question": "برای پرسش «Which activity can be common in both cities and villages?» پاسخ «visiting relatives» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "options": [
+            "Visiting relatives can be a free-time activity in both urban and rural areas.",
+            "The nationality word for a person from Oman is Omani.",
+            "Baghdad is the capital city of Iraq.",
+            "Brazilian is the nationality word for a person from Brazil."
+          ],
+          "answer": 0,
+          "explanation": "استدلال درست: Visiting relatives can be a free-time activity in both urban and rural areas.",
+          "difficulty": "استدلالی",
+          "questionType": "reasoning",
+          "source": "تألیفی فهمینو"
+        }
       ]
     }
   ],
   "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
   "textbookSource": "کتاب رسمی پایه هشتم، سازمان پژوهش و برنامه‌ریزی آموزشی؛ مرجع انتشار رسمی: https://chap.sch.ir/",
   "textbookSourceFile": "Workbook-8_Daneshchi.iR.pdf",
-  "textbookContentsVerified": true
+  "textbookContentsVerified": true,
+  "sampleQuestionBankVersion": 1
 }
