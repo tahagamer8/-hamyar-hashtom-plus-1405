@@ -76,6 +76,27 @@ void main() {
     }
   });
 
+  test('language packs include lesson-specific common misconceptions', () async {
+    const packs = <String, int>{
+      'english': 7,
+      'english_workbook': 7,
+      'arabic': 10,
+    };
+    for (final entry in packs.entries) {
+      final raw = await rootBundle.loadString('assets/content/subjects/${entry.key}.json');
+      final pack = jsonDecode(raw) as Map<String, dynamic>;
+      final chapters = pack['chapters'] as List<dynamic>;
+      expect(chapters, hasLength(entry.value), reason: entry.key);
+      for (final value in chapters) {
+        final chapter = value as Map<String, dynamic>;
+        final mistakes = chapter['commonMistakes'] as List<dynamic>;
+        expect(mistakes, hasLength(2), reason: '${entry.key}/${chapter['title']}');
+        expect(mistakes.every((item) => item is String && item.trim().isNotEmpty), isTrue,
+            reason: '${entry.key}/${chapter['title']}');
+      }
+    }
+  });
+
   test('every subject has an independently loadable, valid content pack', () async {
     for (final id in subjects) {
       final raw = await rootBundle.loadString('assets/content/subjects/$id.json');
