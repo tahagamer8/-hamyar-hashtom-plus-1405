@@ -177,7 +177,7 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
         body: const Center(child: Text('برای این درس هنوز سؤال ثبت نشده است.')));
     }
     return Scaffold(
-      appBar: AppBar(title: Text(submitted ? 'نتیجه آزمون' : (widget.examTitle ?? 'آزمون جامع ${widget.subjectTitle}'),
+      appBar: AppBar(title: Text(submitted ? 'نتیجه آزمون' : (widget.examTitle ?? 'آزمون جامع ${widget.subjectTitle}')),
         actions: [if (!submitted) Padding(padding: const EdgeInsetsDirectional.only(end: 12),
           child: Center(child: Chip(avatar: const Icon(Icons.timer_outlined, size: 18), label: Text(clock))))]),
       body: submitted ? _result(theme) : _exam(theme),
