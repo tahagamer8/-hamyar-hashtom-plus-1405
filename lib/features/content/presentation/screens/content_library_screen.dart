@@ -283,6 +283,34 @@ class _ChapterContent extends ConsumerWidget {
                 style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.primary),
               ),
             ],
+            if (chapter['curriculumInstruction'] is String &&
+                (chapter['curriculumInstruction'] as String).trim().isNotEmpty) ...[
+              const SizedBox(height: 10),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.secondaryContainer.withAlpha(110),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.info_outline_rounded,
+                        color: theme.colorScheme.onSecondaryContainer, size: 19),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        chapter['curriculumInstruction'] as String,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSecondaryContainer,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
             if (chapter['textbookLessons'] is List &&
                 (chapter['textbookLessons'] as List).isNotEmpty) ...[
               const SizedBox(height: 8),
