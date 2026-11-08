@@ -377,6 +377,31 @@ void main() {
     expect(find.textContaining('مخلوط'), findsWidgets);
   });
 
+  testWidgets('social studies lesson displays lesson-specific common misconceptions', (tester) async {
+    final socialPack = await File('assets/content/subjects/social.json').readAsString();
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: DefaultAssetBundle(
+            bundle: _MapAssetBundle({
+              'assets/content/subjects/social.json': socialPack,
+            }),
+            child: const ContentLibraryScreen(
+              subjectId: 'social',
+              featureId: 'lessons',
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.tap(find.text('اشتباهات رایج'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('تعاون'), findsWidgets);
+  });
+
   testWidgets('favorites resolve titles from the current subject packs', (tester) async {
     SharedPreferences.setMockInitialValues({
       'fahmino_favorites_v1': [
