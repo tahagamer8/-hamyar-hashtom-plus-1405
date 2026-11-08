@@ -350,8 +350,8 @@ void main() {
     await tester.tap(find.text('مشاهدهٔ سوابق آزمون این درس'));
     await tester.pumpAndSettle();
 
-    expect(find.text('نمره ۰٪'), findsOneWidget);
-    expect(find.textContaining('۰ از ۱ پاسخ درست'), findsOneWidget);
+    expect(find.text('نمره 0٪'), findsOneWidget);
+    expect(find.textContaining('0 از 1 پاسخ درست'), findsOneWidget);
   });
 
   testWidgets('chapter can be added to favorites', (tester) async {
