@@ -20,11 +20,6 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Cache Gradle distributions and dependencies
-        uses: gradle/actions/setup-gradle@v6
-        with:
-          cache-provider: basic
-
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
@@ -37,6 +32,12 @@ jobs:
             cp -r /tmp/fahmino/android ./android
           fi
           sed -i 's/android:label="[^"]*"/android:label="فهمینو نسخه جدا"/' android/app/src/main/AndroidManifest.xml
+
+      - name: Cache Gradle distributions and dependencies
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-provider: basic
+          cache-read-only: false
 
       - name: Ensure Vazirmatn fonts
         run: |
