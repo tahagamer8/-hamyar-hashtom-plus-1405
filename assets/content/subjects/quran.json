@@ -882,5 +882,15 @@
       ]
     }
   ],
-  "sampleQuestionBankVersion": 1
+  "sampleQuestionBankVersion": 1,
+  "textbookSource": {
+    "portalUrl": "http://chap.sch.ir/books/14210",
+    "pdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C801.pdf",
+    "schoolYear": "1405-1406",
+    "bookCode": "801",
+    "fileName": "C801.pdf",
+    "fileSizeMB": "12.4",
+    "verificationStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+    "verifiedAt": "2026-11-09"
+  }
 }

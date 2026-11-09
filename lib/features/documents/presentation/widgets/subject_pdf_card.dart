@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_viewer_screen.dart';
 
 class SubjectPdfCard extends StatefulWidget {
   const SubjectPdfCard({super.key, required this.subjectId, required this.subjectTitle});
@@ -68,7 +68,7 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
     if (_busy) return;
     setState(() => _busy = true);
     try {
-      // Display works independently from the explicit offline-download action.
+      // Open the downloaded copy when available; otherwise use a temporary copy.
       final saved = await _file();
       File fileToOpen = saved;
       if (!await saved.exists() || await saved.length() == 0) {
@@ -80,16 +80,21 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
           flush: true,
         );
       }
-      final result = await OpenFilex.open(fileToOpen.path, type: 'application/pdf');
-      if (mounted && result.type != ResultType.done) {
+      if (!mounted) return;
+      await Navigator.of(context).push<void>(
+        MaterialPageRoute<void>(
+          builder: (_) => PdfViewerScreen(
+            filePath: fileToOpen.path,
+            title: 'جزوهٔ PDF ${widget.subjectTitle}',
+          ),
+        ),
+      );
+    } catch (_) {
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('نمایش PDF ممکن نشد: ${result.message}')),
+          const SnackBar(content: Text('فایل PDF این بخش موجود نیست یا درون برنامه باز نشد.')),
         );
       }
-    } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('فایل PDF این بخش در این نسخه موجود نیست یا نمایشگر PDF نصب نشده است.')),
-      );
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -110,7 +115,7 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
             if (_downloaded) const Icon(Icons.offline_pin_rounded, color: Colors.green, size: 20),
           ]),
           const SizedBox(height: 5),
-          Text('برای مشاهده، نمایش PDF را بزن؛ برای نگهداری و استفادهٔ آفلاین، دانلود را انتخاب کن.',
+          Text('برای مشاهده، PDF را داخل فهمینو باز کن؛ برای نگهداری و استفادهٔ آفلاین، دانلود را انتخاب کن.',
               style: theme.textTheme.bodySmall),
           const SizedBox(height: 10),
           Wrap(spacing: 8, runSpacing: 8, children: [

@@ -88,6 +88,26 @@ class _SubjectBody extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 10),
             child: _SectionTile(feature: feature, subjectId: subject.id),
           ),
+        const SizedBox(height: 6),
+        _ExtraSectionTile(
+          subjectId: subject.id,
+          subjectTitle: subject.title,
+          title: 'ویدئوهای آموزشی',
+          description: 'فیلم‌های درس‌به‌درس از آرشیوهای قابل‌استناد',
+          icon: Icons.ondemand_video_rounded,
+          color: const Color(0xFFDC4C64),
+          route: 'videos',
+        ),
+        const SizedBox(height: 10),
+        _ExtraSectionTile(
+          subjectId: subject.id,
+          subjectTitle: subject.title,
+          title: 'تحلیل عملکرد',
+          description: 'میانگین، بهترین نتیجه و سوابق آزمون همین درس',
+          icon: Icons.query_stats_rounded,
+          color: const Color(0xFF0D9488),
+          route: 'analytics',
+        ),
       ],
     );
   }
@@ -125,8 +145,109 @@ class _SectionTile extends StatelessWidget {
                 child: Icon(feature.icon, color: feature.color, size: 22),
               ),
               const SizedBox(width: 12),
-              Expanded(child: Text(feature.title,
-                  style: theme.textTheme.titleSmall)),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      feature.title,
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      feature.description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_left_rounded,
+                  color: theme.colorScheme.onSurfaceVariant),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ExtraSectionTile extends StatelessWidget {
+  const _ExtraSectionTile({
+    required this.subjectId,
+    required this.subjectTitle,
+    required this.title,
+    required this.description,
+    required this.icon,
+    required this.color,
+    required this.route,
+  });
+
+  final String subjectId;
+  final String subjectTitle;
+  final String title;
+  final String description;
+  final IconData icon;
+  final Color color;
+  final String route;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final radius = BorderRadius.circular(18);
+    return Material(
+      color: AppColors.card(context),
+      shape: RoundedRectangleBorder(
+        borderRadius: radius,
+        side: BorderSide(color: theme.colorScheme.outlineVariant.withAlpha(90)),
+      ),
+      child: InkWell(
+        borderRadius: radius,
+        onTap: () => context.push(
+          '/subjects/$subjectId/$route',
+          extra: subjectTitle,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+          child: Row(
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: color.withAlpha(26),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(icon, color: color, size: 22),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Icon(Icons.chevron_left_rounded,
                   color: theme.colorScheme.onSurfaceVariant),
             ],

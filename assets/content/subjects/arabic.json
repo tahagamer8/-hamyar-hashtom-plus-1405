@@ -755,7 +755,16 @@
     }
   ],
   "textbookEdition": "چاپ اول، ۱۴۰۵",
-  "textbookSource": "کتاب رسمی پایه هشتم، سازمان پژوهش و برنامه‌ریزی آموزشی؛ مرجع انتشار رسمی: https://chap.sch.ir/",
+  "textbookSource": {
+    "portalUrl": "http://chap.sch.ir/books/14224",
+    "pdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C809.pdf",
+    "schoolYear": "1405-1406",
+    "bookCode": "809",
+    "fileName": "C809.pdf",
+    "fileSizeMB": "8.92",
+    "verificationStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+    "verifiedAt": "2026-11-09"
+  },
   "textbookSourceFile": "Arabi-8_Daneshchi.iR.pdf",
   "textbookContentsVerified": true,
   "sampleQuestionBankVersion": 1

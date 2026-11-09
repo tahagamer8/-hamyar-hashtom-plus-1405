@@ -552,7 +552,16 @@
     }
   ],
   "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
-  "textbookSource": "کتاب رسمی پایه هشتم، سازمان پژوهش و برنامه‌ریزی آموزشی؛ مرجع انتشار رسمی: https://chap.sch.ir/",
+  "textbookSource": {
+    "portalUrl": "http://chap.sch.ir/books/14227",
+    "pdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C812.pdf",
+    "schoolYear": "1405-1406",
+    "bookCode": "812",
+    "fileName": "C812.pdf",
+    "fileSizeMB": "6.98",
+    "verificationStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+    "verifiedAt": "2026-11-09"
+  },
   "textbookSourceFile": "Tafakkor-8_Daneshchi.iR.pdf",
   "textbookContentsVerified": true,
   "sampleQuestionBankVersion": 1

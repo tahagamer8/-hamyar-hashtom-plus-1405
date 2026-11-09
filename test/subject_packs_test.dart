@@ -225,6 +225,36 @@ void main() {
     expect(advancedQuestions, 145);
   });
 
+  test('all 13 subject packs reference official 1405-1406 textbook PDFs', () async {
+    const expected = <String, Map<String, String>>{
+      'arabic': {'code': '809', 'portalId': '14224', 'file': 'C809.pdf'},
+      'art': {'code': '808', 'portalId': '14223', 'file': 'C808.pdf'},
+      'english': {'code': '810', 'portalId': '14225', 'file': 'C810.pdf'},
+      'english_workbook': {'code': '811', 'portalId': '14226', 'file': 'C811.pdf'},
+      'math': {'code': '805', 'portalId': '14220', 'file': 'C805.pdf'},
+      'persian': {'code': '803', 'portalId': '14218', 'file': 'C803.pdf'},
+      'quran': {'code': '801', 'portalId': '14210', 'file': 'C801.pdf'},
+      'religion': {'code': '802', 'portalId': '14217', 'file': 'C802.pdf'},
+      'science': {'code': '806', 'portalId': '14221', 'file': 'C806.pdf'},
+      'social': {'code': '807', 'portalId': '14222', 'file': 'C807.pdf'},
+      'thinking': {'code': '812', 'portalId': '14227', 'file': 'C812.pdf'},
+      'work': {'code': '817', 'portalId': '14229', 'file': 'C817.pdf'},
+      'writing': {'code': '804', 'portalId': '14219', 'file': 'C804.pdf'},
+    };
+    for (final entry in expected.entries) {
+      final raw = await rootBundle.loadString('assets/content/subjects/${entry.key}.json');
+      final pack = jsonDecode(raw) as Map<String, dynamic>;
+      final source = pack['textbookSource'] as Map<String, dynamic>;
+      expect(source['schoolYear'], '1405-1406', reason: entry.key);
+      expect(source['bookCode'], entry.value['code'], reason: entry.key);
+      expect(source['portalUrl'], contains('/books/${entry.value['portalId']}'), reason: entry.key);
+      expect(source['pdfUrl'], contains(entry.value['file']), reason: entry.key);
+      expect(source['verificationStatus'],
+          'official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed',
+          reason: entry.key);
+    }
+  });
+
   test('every subject has an independently loadable, valid content pack', () async {
     for (final id in subjects) {
       final raw = await rootBundle.loadString('assets/content/subjects/$id.json');

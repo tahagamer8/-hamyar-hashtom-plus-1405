@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_viewer_screen.dart';
 
 class LearningPdfsCard extends StatefulWidget {
   const LearningPdfsCard({super.key});
@@ -37,17 +37,19 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
     try {
       final directory = await getTemporaryDirectory();
       final file = await _copyAssetTo(fileName, directory);
-      final result = await OpenFilex.open(file.path, type: 'application/pdf');
       if (!mounted) return;
-      if (result.type != ResultType.done) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('باز کردن فایل $label ممکن نشد: ${result.message}')),
-        );
-      }
+      await Navigator.of(context).push<void>(
+        MaterialPageRoute<void>(
+          builder: (_) => PdfViewerScreen(
+            filePath: file.path,
+            title: '$label PDF فهمینو',
+          ),
+        ),
+      );
     } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('فایل $label در این نسخه موجود نیست.')),
+        SnackBar(content: Text('فایل $label در این نسخه موجود نیست یا باز نشد.')),
       );
     } finally {
       if (mounted) setState(() => _opening = null);
@@ -68,7 +70,7 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
     } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('دانلود PDF $label انجام نشد؛ فایل در این نسخه موجود نیست.')),
+        SnackBar(content: Text('ذخیرهٔ PDF $label انجام نشد؛ فایل در این نسخه موجود نیست.')),
       );
     } finally {
       if (mounted) setState(() => _downloading = null);
@@ -139,7 +141,7 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
             ),
             const SizedBox(height: 6),
             Text(
-              'نمایش فایل و ذخیره برای استفادهٔ آفلاین دو گزینهٔ جدا هستند.',
+              'نمایش PDF داخل فهمینو و ذخیره برای استفادهٔ آفلاین دو گزینهٔ جدا هستند.',
               style: theme.textTheme.bodySmall,
             ),
             const SizedBox(height: 12),

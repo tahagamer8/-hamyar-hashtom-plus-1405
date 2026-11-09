@@ -237,8 +237,9 @@ void main() {
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
     await _pumpUiFrames(tester);
     expect(find.text(AppConstants.appName), findsWidgets);
+    expect(find.text('VIII'), findsOneWidget);
     expect(find.text('دسترسی سریع'), findsOneWidget);
-    expect(find.text('راهنمای درسی فهمینو', skipOffstage: false), findsOneWidget);
+    expect(find.text('راهنمای آفلاین فهمینو', skipOffstage: false), findsOneWidget);
 
   });
 
@@ -293,6 +294,20 @@ void main() {
     expect(find.textContaining('عددهای گویا را می‌توان'), findsOneWidget);
   });
 
+  testWidgets('lesson page expands its example and learning steps', (tester) async {
+    await tester.pumpWidget(_contentApp('lessons'));
+    await _pumpUiFrames(tester);
+
+    expect(find.text('نمونهٔ آموزشی و مراحل یادگیری'), findsOneWidget);
+    await tester.ensureVisible(find.text('نمونهٔ آموزشی و مراحل یادگیری'));
+    await tester.pump();
+    await tester.tap(find.text('نمونهٔ آموزشی و مراحل یادگیری'));
+    await _pumpUiFrames(tester);
+
+    expect(find.textContaining('مثال: ۱/۲ + ۱/۳ را حساب کن.'), findsOneWidget);
+    expect(find.textContaining('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
+  });
+
   testWidgets('notes content loads from catalog bundle', (tester) async {
     await tester.pumpWidget(_contentApp('notes'));
     await _pumpUiFrames(tester);
@@ -303,6 +318,30 @@ void main() {
     await tester.pumpWidget(_contentApp('solutions'));
     await _pumpUiFrames(tester);
     expect(find.text('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
+  });
+
+  testWidgets('flashcards reveal chapter notes and question explanations', (tester) async {
+    await tester.pumpWidget(_contentApp('flashcards'));
+    await _pumpUiFrames(tester);
+
+    expect(find.text('کارت‌های مرور این بخش'), findsOneWidget);
+    expect(find.text('نکتهٔ 1'), findsOneWidget);
+    await tester.ensureVisible(find.text('نمایش پاسخ'));
+    await tester.pump();
+    await tester.tap(find.text('نمایش پاسخ'));
+    await tester.pump();
+    expect(find.text('قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید.'), findsOneWidget);
+
+    await tester.ensureVisible(find.text('بعدی'));
+    await tester.pump();
+    await tester.tap(find.text('بعدی'));
+    await tester.pump();
+    expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
+    await tester.ensureVisible(find.text('نمایش پاسخ'));
+    await tester.pump();
+    await tester.tap(find.text('نمایش پاسخ'));
+    await tester.pump();
+    expect(find.textContaining('پاسخ: ۳/۴'), findsOneWidget);
   });
 
   testWidgets('sample question library offers chapter and term modes', (tester) async {
@@ -372,10 +411,30 @@ void main() {
     expect(find.textContaining('0 از 1 پاسخ درست'), findsOneWidget);
   });
 
+  testWidgets('lesson completion is saved locally and updates subject progress', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(_contentApp('lessons'));
+    await _pumpUiFrames(tester);
+
+    expect(find.text('0 از 1'), findsOneWidget);
+    await tester.ensureVisible(find.text('این بخش را مطالعه کردم'));
+    await tester.pump();
+    await tester.tap(find.text('این بخش را مطالعه کردم'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 30));
+
+    expect(find.text('مطالعه شد؛ برداشتن علامت'), findsOneWidget);
+    await tester.drag(find.byType(CustomScrollView), const Offset(0, 1200));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('1 از 1'), findsOneWidget);
+  });
+
   testWidgets('chapter can be added to favorites', (tester) async {
     await tester.pumpWidget(_contentApp('lessons'));
     await _pumpUiFrames(tester);
     expect(find.byTooltip('افزودن به علاقه‌مندی‌ها'), findsOneWidget);
+    await tester.ensureVisible(find.byTooltip('افزودن به علاقه‌مندی‌ها'));
+    await tester.pump();
     await tester.tap(find.byTooltip('افزودن به علاقه‌مندی‌ها'));
     await tester.pump();
     expect(find.byTooltip('حذف از علاقه‌مندی‌ها'), findsOneWidget);
@@ -407,6 +466,8 @@ void main() {
     await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump();
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
@@ -559,10 +620,19 @@ void main() {
     });
     await tester.pump();
     await _pumpUiFrames(tester);
-    expect(find.text('راهنمای درسی فهمینو'), findsOneWidget);
+    expect(find.text('راهنمای آفلاین فهمینو'), findsOneWidget);
     expect(find.textContaining('پرسش‌ها از دستگاه خارج نمی‌شوند'), findsOneWidget);
-    expect(find.text('پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی'), findsOneWidget);
+    expect(find.text('همهٔ فصل‌های این درس'), findsOneWidget);
     expect(find.byTooltip('پاسخ از محتوای فهمینو'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'پست الکترونیکی چیست؟');
+    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(
+      find.textContaining('پست الکترونیکی برای ارسال پیام و سند به یک یا چند گیرنده استفاده می‌شود.'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('search finds text inside a question', (tester) async {
