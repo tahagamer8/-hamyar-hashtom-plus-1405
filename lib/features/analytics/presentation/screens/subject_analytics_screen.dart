@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,10 +36,9 @@ class _SubjectAnalyticsScreenState extends State<SubjectAnalyticsScreen> {
       final values = preferences.getStringList(key) ?? const <String>[];
       for (final raw in values) {
         try {
-          final decoded = Map<String, dynamic>.from(
-            (Uri.decodeComponent(raw) == raw ? _decodeJson(raw) : _decodeJson(raw))
-                as Map,
-          );
+          final decodedValue = jsonDecode(raw);
+          if (decodedValue is! Map) continue;
+          final decoded = Map<String, dynamic>.from(decodedValue);
           final percent = decoded['percent'];
           final score = decoded['score'];
           final total = decoded['total'];
@@ -63,10 +64,6 @@ class _SubjectAnalyticsScreenState extends State<SubjectAnalyticsScreen> {
       return right.compareTo(left);
     });
     return records;
-  }
-
-  dynamic _decodeJson(String value) {
-    return _jsonDecode(value);
   }
 
   @override
@@ -170,7 +167,7 @@ class _SubjectAnalyticsScreenState extends State<SubjectAnalyticsScreen> {
                         average >= 85
                             ? 'عملکردت در این درس خوب بوده است. برای تثبیت یادگیری، آزمون‌های ترکیبی و مرور فاصله‌دار را ادامه بده.'
                             : average >= 70
-                                ? 'بهتر است فصل‌هایی را که در آن‌ها اشتباه داشتی دوباره مرور کنی و سپس یک آزمون زمان‌دار دیگر بدهی.'
+                                ? 'نکته‌ها و پاسخ‌های توضیح‌دار سؤال‌هایی را که اشتباه زده‌ای دوباره مرور کن و سپس یک آزمون زمان‌دار دیگر بده.'
                                 : 'از فصل‌های پایه شروع کن، مثال‌های حل‌شده را مرور کن و بعد از هر فصل یک آزمون کوتاه انجام بده.',
                         style: theme.textTheme.bodyMedium?.copyWith(height: 1.7),
                       ),
@@ -309,12 +306,12 @@ class _EmptyReport extends StatelessWidget {
             const Icon(Icons.query_stats_rounded, size: 48),
             const SizedBox(height: 12),
             Text(
-              'هنوز نتیجه‌ای برای ${subjectTitle} ثبت نشده است.',
+              'هنوز نتیجه‌ای برای $subjectTitle ثبت نشده است.',
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             FilledButton.icon(
-              onPressed: () => context.go('/subjects/${subjectId}/quiz'),
+              onPressed: () => context.go('/subjects/$subjectId/quiz'),
               icon: const Icon(Icons.play_arrow_rounded),
               label: const Text('شروع اولین آزمون'),
             ),
@@ -337,9 +334,4 @@ class _ExamRecord {
   final int score;
   final int total;
   final DateTime? date;
-}
-
-// Kept local to avoid requiring a separate JSON utility for this small report.
-dynamic _jsonDecode(String value) {
-  return jsonDecode(value);
 }
