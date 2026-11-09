@@ -345,7 +345,7 @@ void main() {
 
     expect(find.text('نمونه‌سؤال فصل اول ریاضی هشتم'), findsOneWidget);
     expect(find.text('فایل تمرینی PDF فصل اول.'), findsOneWidget);
-    expect(find.text('باز کردن فایل PDF'), findsOneWidget);
+    expect(find.text('مشاهده PDF'), findsNWidgets(2));
     expect(find.text('فصل‌به‌فصل'), findsNothing);
     expect(find.text('ثبت و پایان آزمون'), findsNothing);
   });
