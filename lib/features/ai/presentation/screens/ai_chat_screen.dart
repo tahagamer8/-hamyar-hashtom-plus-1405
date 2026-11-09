@@ -15,7 +15,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
   final _visibleMessages = <_ChatMessage>[];
   Map<String, dynamic> _catalog = {};
   String? _selectedSubjectId;
-  int _selectedChapterIndex = 0;
+  int _selectedChapterIndex = -1;
   bool _catalogRequested = false;
 
   @override
@@ -128,18 +128,25 @@ class _AiChatScreenState extends State<AiChatScreen> {
       scored.add((chapter: chapter, index: i, score: _score(searchable, tokens)));
     }
 
-    // Keep catalog order so the selected chapter index remains stable.
-    final fallbackIndex = _selectedChapterIndex >= scored.length
+    // A learner can search the selected chapter or all chapters in the
+    // current subject. The default is subject-wide retrieval so a relevant
+    // chapter is not missed simply because another chapter was first.
+    final selectedOnly = _selectedChapterIndex >= 0;
+    final selectedIndex = _selectedChapterIndex >= scored.length
         ? scored.length - 1
-        : _selectedChapterIndex;
-    // Search only within the chapter explicitly selected by the learner.
-    // Do not reject a match merely because the first chapter in the catalog
-    // does not contain the query; the selected chapter may be a later one.
-    final selectedChapter = scored[fallbackIndex];
-    if (tokens.isNotEmpty && selectedChapter.score == 0) {
-      return 'در فصل انتخاب‌شده مطلبی با این واژه‌ها پیدا نکردم. فصل دیگری را انتخاب کن یا پرسشت را با واژه‌های همان درس بازنویسی کن.';
+        : (_selectedChapterIndex < 0 ? 0 : _selectedChapterIndex);
+    final candidates = selectedOnly ? [scored[selectedIndex]] : scored;
+    final best = tokens.isEmpty
+        ? [candidates.first]
+        : (candidates.where((item) => item.score > 0).toList()
+          ..sort((a, b) => b.score.compareTo(a.score)))
+            .take(selectedOnly ? 1 : 3)
+            .toList();
+    if (best.isEmpty) {
+      return selectedOnly
+          ? 'در فصل انتخاب‌شده مطلبی با این واژه‌ها پیدا نکردم. فصل دیگری را انتخاب کن یا جست‌وجوی همهٔ فصل‌ها را فعال کن.'
+          : 'در محتوای ثبت‌شدهٔ این درس مطلبی با این واژه‌ها پیدا نکردم. عبارت دیگری را امتحان کن یا فصل مرتبط را باز کن.';
     }
-    final best = [selectedChapter];
 
     final asksForExample = RegExp('مثال|حل|مرحله|گام|محاسبه|تمرین').hasMatch(question);
     final asksForQuestions = RegExp('سوال|سؤال|آزمون|تست|تمرین').hasMatch(question);
