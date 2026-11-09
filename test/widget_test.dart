@@ -234,6 +234,8 @@ void main() {
   });
 
   testWidgets('home screen renders Fahmino branding', (tester) async {
+    final semantics = tester.ensureSemantics();
+    addTearDown(semantics.dispose);
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
     await _pumpUiFrames(tester);
     expect(find.text(AppConstants.appName), findsWidgets);
@@ -562,8 +564,17 @@ void main() {
     await _pumpUiFrames(tester);
     expect(find.text('راهنمای آفلاین فهمینو'), findsOneWidget);
     expect(find.textContaining('پرسش‌ها از دستگاه خارج نمی‌شوند'), findsOneWidget);
-    expect(find.text('پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی'), findsOneWidget);
+    expect(find.text('همهٔ فصل‌های این درس'), findsOneWidget);
     expect(find.byTooltip('پاسخ از محتوای فهمینو'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), 'پست الکترونیکی چیست؟');
+    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(
+      find.textContaining('پست الکترونیکی برای ارسال پیام و سند به یک یا چند گیرنده استفاده می‌شود.'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('search finds text inside a question', (tester) async {
