@@ -86,7 +86,16 @@ class ContentQualityAuditTests(unittest.TestCase):
         result = audit_chapter("sample", "نمونه", pack, chapter, 1)
         self.assertEqual(result["status"], "نیازمند منبع")
         self.assertFalse(result["sourceMapped"])
+        self.assertFalse(result["educationallyIncomplete"])
+
+    def test_missing_lesson_is_reported_separately_from_missing_source(self):
+        pack, chapter = complete_fixture()
+        chapter["lessonContent"] = ""
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["status"], "نیازمند منبع")
+        self.assertFalse(result["sourceMapped"])
         self.assertTrue(result["educationallyIncomplete"])
+        self.assertIn("درسنامهٔ مستقل و کافی ثبت نشده (خلاصه جای درسنامه نیست)", result["gaps"])
 
     def test_pdf_parsed_without_chapter_specific_mapping_is_not_source_mapped(self):
         pack, chapter = complete_fixture()
