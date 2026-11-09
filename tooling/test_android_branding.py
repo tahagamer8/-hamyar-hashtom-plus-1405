@@ -14,8 +14,8 @@ from tooling.configure_android_branding import (
 class AndroidBrandingTests(unittest.TestCase):
     def test_release_identity_is_separate_but_display_name_is_fahmino(self):
         self.assertEqual(APP_LABEL, "فهمینو")
-        self.assertEqual(APP_ID, "ir.fahmino.clone.fahminoseparate")
-        self.assertNotEqual(APP_ID, "com.example.hamyar_hashtom_plus")
+        self.assertEqual(APP_ID, "ir.fahmino.clone.fahminofull")
+        self.assertNotEqual(APP_ID, "ir.fahmino.clone.fahminoseparate")  # actual package ID in the installed 2.1.1 APK
 
     def test_sets_separate_application_id_label_and_launcher_icons(self):
         with tempfile.TemporaryDirectory() as temporary:
