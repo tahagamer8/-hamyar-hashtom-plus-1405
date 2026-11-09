@@ -1517,7 +1517,16 @@
     }
   ],
   "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
-  "textbookSource": "کتاب رسمی پایه هشتم، سازمان پژوهش و برنامه‌ریزی آموزشی؛ مرجع انتشار رسمی: https://chap.sch.ir/",
+  "textbookSource": {
+    "portalUrl": "http://chap.sch.ir/books/14222",
+    "pdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C807.pdf",
+    "schoolYear": "1405-1406",
+    "bookCode": "807",
+    "fileName": "C807.pdf",
+    "fileSizeMB": "20.3",
+    "verificationStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+    "verifiedAt": "2026-11-09"
+  },
   "textbookSourceFile": "Motaleat-8_Daneshchi.iR.pdf",
   "textbookContentsVerified": true,
   "sampleQuestionBankVersion": 1
