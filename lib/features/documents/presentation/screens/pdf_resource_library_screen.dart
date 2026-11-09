@@ -28,7 +28,7 @@ class PdfResourceLibraryScreen extends StatefulWidget {
 }
 
 class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
-  late Future<Map<String, dynamic>> _resourcesFuture;
+  Future<Map<String, dynamic>>? _resourcesFuture;
   late int _selectedChapterIndex;
 
   String get _resourceKey =>
@@ -42,7 +42,12 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
   void initState() {
     super.initState();
     _selectedChapterIndex = widget.initialChapterIndex;
-    _resourcesFuture = _loadResources();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _resourcesFuture ??= _loadResources(DefaultAssetBundle.of(context));
   }
 
   @override
@@ -50,13 +55,13 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.subjectId != widget.subjectId ||
         oldWidget.kind != widget.kind) {
-      _resourcesFuture = _loadResources();
+      _resourcesFuture = _loadResources(DefaultAssetBundle.of(context));
       _selectedChapterIndex = widget.initialChapterIndex;
     }
   }
 
-  Future<Map<String, dynamic>> _loadResources() async {
-    final raw = await rootBundle.loadString('assets/content/pdf_resources.json');
+  Future<Map<String, dynamic>> _loadResources(AssetBundle bundle) async {
+    final raw = await bundle.loadString('assets/content/pdf_resources.json');
     final decoded = jsonDecode(raw);
     if (decoded is! Map<String, dynamic>) {
       throw const FormatException('فهرست فایل‌های PDF معتبر نیست.');
