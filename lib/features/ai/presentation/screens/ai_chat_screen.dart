@@ -306,7 +306,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                       ],
                       onChanged: (value) => setState(() {
                         _selectedSubjectId = value;
-                        _selectedChapterIndex = 0;
+                        _selectedChapterIndex = -1;
                       }),
                     ),
                     const SizedBox(height: 8),
