@@ -34,10 +34,11 @@ class _FeatureTile extends StatelessWidget {
 
   String get _description => switch (feature) {
     AppFeature.lessons => 'فصل‌ها را درس‌به‌درس یاد بگیر',
-    AppFeature.notes => 'خلاصه‌ها و نکته‌های امتحانی',
+    AppFeature.notes => 'فایل جزوهٔ PDF و توضیح کوتاه',
     AppFeature.solutions => 'پاسخ تمرین‌ها با راه‌حل مرحله‌ای',
-    AppFeature.sampleExams => 'سؤال‌های طبقه‌بندی‌شده با پاسخ',
-    AppFeature.quiz => 'خودت را با آزمون بسنج',
+    AppFeature.sampleExams => 'فایل‌های PDF آزمون و نمونه‌سؤال',
+    AppFeature.lessonQuestions => 'به سؤال‌های همین درس پاسخ بده',
+    AppFeature.quiz => 'خودت را با آزمون جامع بسنج',
     AppFeature.favorites => 'مطالب مهمت را یک‌جا ببین',
   };
 
