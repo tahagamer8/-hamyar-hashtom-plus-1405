@@ -92,8 +92,8 @@ class ContentQualityAuditTests(unittest.TestCase):
         pack, chapter = complete_fixture()
         chapter["lessonContent"] = ""
         result = audit_chapter("sample", "نمونه", pack, chapter, 1)
-        self.assertEqual(result["status"], "نیازمند منبع")
-        self.assertFalse(result["sourceMapped"])
+        self.assertEqual(result["status"], "ناقص")
+        self.assertTrue(result["sourceMapped"])
         self.assertTrue(result["educationallyIncomplete"])
         self.assertIn("درسنامهٔ مستقل و کافی ثبت نشده (خلاصه جای درسنامه نیست)", result["gaps"])
 
