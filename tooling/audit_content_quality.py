@@ -374,6 +374,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         "## نتیجهٔ کلی",
         "",
         f"- بسته‌های درسی: **{totals['subjectCount']}**",
+        f"- پیوند رسمی PDF تأییدشده: **{totals['officialSourceLinkVerifiedSubjectCount']} از {totals['subjectCount']}**؛ PDF پردازش‌شده: **{totals['pdfContentParsedSubjectCount']}**",
         f"- بخش‌ها/درس‌ها/پودمان‌ها: **{totals['sectionCount']}**",
         f"- پرسش‌های پایه: **{totals['baseQuestionCount']}**",
         f"- پرسش‌های افزودهٔ موسوم به استدلالی: **{totals['advancedQuestionCount']}**",
