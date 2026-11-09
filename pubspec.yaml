@@ -17,6 +17,7 @@ dependencies:
   open_filex: ^5.0.0
   path_provider: ^2.1.5
   url_launcher: ^6.3.2
+  pdfx: ^2.11.0
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +29,7 @@ flutter:
   assets:
     - assets/content/catalog_fa.json
     - assets/content/subjects/
+    - assets/content/video_lessons_fa.json
     - assets/images/fahmino_app_icon.jpg
     - assets/generated_pdfs/
   fonts:
