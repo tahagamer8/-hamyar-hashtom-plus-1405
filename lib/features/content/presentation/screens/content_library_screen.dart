@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
+import 'package:hamyar_hashtom_plus/features/progress/presentation/providers/learning_progress_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/sample_question_library_screen.dart';
@@ -133,6 +134,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final completedKeys = ref.watch(learningProgressProvider);
     return Scaffold(
       appBar: _feature == AppFeature.quiz ? null : AppBar(title: Text(_feature.title)),
       body: FutureBuilder<Map<String, dynamic>>(
@@ -176,6 +178,8 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               ? 0
               : (_selectedChapterIndex >= chapters.length ? chapters.length - 1 : _selectedChapterIndex);
           final selectedChapter = chapters[selectedIndex];
+          final completedCount = chapters.where((chapter) =>
+              completedKeys.contains('${widget.subjectId}::${chapter['title']}')).length;
           final sourceValue = subject['textbookSource'];
           final sourceMap = sourceValue is Map<String, dynamic> ? sourceValue : null;
           final sourceUrl = sourceMap?['pdfUrl'];
@@ -186,71 +190,76 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                   sourceUri.host == 'chap.sch.ir'
               ? sourceUrl as String
               : null;
-          return ListView(
-            padding: const EdgeInsets.all(16),
-            children: [
-              Text(subject['title'] as String? ?? 'درس',
-                  style: Theme.of(context).textTheme.titleLarge),
-              const SizedBox(height: 6),
-              Text('ابتدا فصل یا درس موردنظرت را انتخاب کن.',
-                  style: Theme.of(context).textTheme.bodySmall),
-              const SizedBox(height: 14),
-              if (_feature == AppFeature.lessons)
-                SubjectPdfCard(
-                  subjectId: widget.subjectId,
-                  subjectTitle: subject['title'] as String? ?? 'درس',
-                ),
-              if (_feature == AppFeature.lessons && officialSourceUrl != null)
-                _OfficialTextbookSourceCard(url: officialSourceUrl),
-              DropdownButtonFormField<int>(
-                value: selectedIndex,
-                isExpanded: true,
-                decoration: const InputDecoration(
-                  labelText: 'انتخاب فصل یا درس',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.menu_book_rounded),
-                ),
-                items: [
-                  for (var i = 0; i < chapters.length; i++)
-                    DropdownMenuItem<int>(
-                      value: i,
-                      child: Text(
-                        '${i + 1}. ${chapters[i]['title'] as String? ?? 'درس'}'
-                        '${chapters[i]['pageStart'] is int ? '  •  صفحه ${chapters[i]['pageStart']}' : ''}',
-                        overflow: TextOverflow.ellipsis,
+          return CustomScrollView(
+            slivers: [
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate([
+                    _LearningPageHeader(
+                      subjectTitle: subject['title'] as String? ?? 'درس',
+                      feature: _feature,
+                      chapterCount: chapters.length,
+                    ),
+                    const SizedBox(height: 14),
+                    _LearningProgressCard(
+                      completed: completedCount,
+                      total: chapters.length,
+                    ),
+                    if (_feature == AppFeature.lessons) ...[
+                      const SizedBox(height: 12),
+                      SubjectPdfCard(
+                        subjectId: widget.subjectId,
+                        subjectTitle: subject['title'] as String? ?? 'درس',
                       ),
+                      if (officialSourceUrl != null)
+                        _OfficialTextbookSourceCard(url: officialSourceUrl),
+                    ],
+                    const SizedBox(height: 18),
+                    _ChapterIndexSelector(
+                      count: chapters.length,
+                      selectedIndex: selectedIndex,
+                      onSelected: (index) =>
+                          setState(() => _selectedChapterIndex = index),
                     ),
-                ],
-                onChanged: (value) => setState(() {
-                  _selectedChapterIndex = value ?? 0;
-                }),
-              ),
-              const SizedBox(height: 14),
-              _ChapterContent(
-                chapter: selectedChapter,
-                feature: _feature,
-                favoriteKey: '${widget.subjectId}::${selectedChapter['title']}',
-              ),
-              if (chapters.length > 1)
-                Row(
-                  children: [
-                    TextButton.icon(
-                      onPressed: selectedIndex > 0
-                          ? () => setState(() => _selectedChapterIndex = selectedIndex - 1)
-                          : null,
-                      icon: const Icon(Icons.chevron_right_rounded),
-                      label: const Text('درس قبلی'),
+                    const SizedBox(height: 12),
+                    _ChapterContent(
+                      chapter: selectedChapter,
+                      feature: _feature,
+                      favoriteKey: '${widget.subjectId}::${selectedChapter['title']}',
+                      progressKey: '${widget.subjectId}::${selectedChapter['title']}',
                     ),
-                    const Spacer(),
-                    TextButton.icon(
-                      onPressed: selectedIndex < chapters.length - 1
-                          ? () => setState(() => _selectedChapterIndex = selectedIndex + 1)
-                          : null,
-                      icon: const Icon(Icons.chevron_left_rounded),
-                      label: const Text('درس بعدی'),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: selectedIndex > 0
+                                ? () => setState(
+                                      () => _selectedChapterIndex = selectedIndex - 1,
+                                    )
+                                : null,
+                            icon: const Icon(Icons.chevron_right_rounded),
+                            label: const Text('بخش قبلی'),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: FilledButton.icon(
+                            onPressed: selectedIndex < chapters.length - 1
+                                ? () => setState(
+                                      () => _selectedChapterIndex = selectedIndex + 1,
+                                    )
+                                : null,
+                            icon: const Icon(Icons.chevron_left_rounded),
+                            label: const Text('بخش بعدی'),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ]),
                 ),
+              ),
             ],
           );
         },
@@ -260,10 +269,11 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
 }
 
 class _ChapterContent extends ConsumerWidget {
-  const _ChapterContent({required this.chapter, required this.feature, required this.favoriteKey});
+  const _ChapterContent({required this.chapter, required this.feature, required this.favoriteKey, required this.progressKey});
   final Map<String, dynamic> chapter;
   final AppFeature feature;
   final String favoriteKey;
+  final String progressKey;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -281,6 +291,7 @@ class _ChapterContent extends ConsumerWidget {
     final pageAssets = (chapter['bookPageImages'] as List<dynamic>? ?? [])
         .whereType<String>()
         .toList(growable: false);
+    final isCompleted = ref.watch(learningProgressProvider).contains(progressKey);
 
     if (feature == AppFeature.quiz) {
       return _QuizChapter(title: title, questions: questions);
@@ -340,6 +351,16 @@ class _ChapterContent extends ConsumerWidget {
                 ),
               ),
             ],
+            const SizedBox(height: 10),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.tonalIcon(
+                onPressed: () => ref.read(learningProgressProvider.notifier)
+                    .setCompleted(progressKey, !isCompleted),
+                icon: Icon(isCompleted ? Icons.check_circle_rounded : Icons.task_alt_rounded),
+                label: Text(isCompleted ? 'مطالعه شد؛ برداشتن علامت' : 'این بخش را مطالعه کردم'),
+              ),
+            ),
             if (chapter['textbookLessons'] is List &&
                 (chapter['textbookLessons'] as List).isNotEmpty) ...[
               const SizedBox(height: 8),
@@ -687,6 +708,136 @@ class _OfficialTextbookSourceCard extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+}
+
+
+class _LearningPageHeader extends StatelessWidget {
+  const _LearningPageHeader({required this.subjectTitle, required this.feature, required this.chapterCount});
+  final String subjectTitle;
+  final AppFeature feature;
+  final int chapterCount;
+
+  String get _description => switch (feature) {
+    AppFeature.lessons => 'مفهوم را یاد بگیر، مثال ببین و نکته‌ها را مرور کن.',
+    AppFeature.notes => 'خلاصه‌ها و نکته‌های مهم را سریع مرور کن.',
+    AppFeature.solutions => 'راه‌حل‌ها را مرحله‌به‌مرحله دنبال کن.',
+    AppFeature.sampleExams => 'سؤال‌ها را تمرین کن و پاسخ را بررسی کن.',
+    AppFeature.quiz => 'دانسته‌هایت را با آزمون بسنج.',
+    AppFeature.favorites => 'مطالب نشان‌شدهٔ خودت را ببین.',
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [feature.color, Color.lerp(feature.color, const Color(0xFF151B35), 0.22)!],
+        ),
+        borderRadius: BorderRadius.circular(22),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(color: Colors.white.withAlpha(38), borderRadius: BorderRadius.circular(16)),
+            child: Icon(feature.icon, color: Colors.white, size: 27),
+          ),
+          const SizedBox(width: 13),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(subjectTitle, style: theme.textTheme.titleLarge?.copyWith(color: Colors.white, fontWeight: FontWeight.w800)),
+                const SizedBox(height: 4),
+                Text(_description, style: theme.textTheme.bodySmall?.copyWith(color: Colors.white.withAlpha(230), height: 1.5)),
+                const SizedBox(height: 7),
+                Text('$chapterCount بخش آموزشی', style: theme.textTheme.labelMedium?.copyWith(color: Colors.white.withAlpha(220))),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LearningProgressCard extends StatelessWidget {
+  const _LearningProgressCard({required this.completed, required this.total});
+  final int completed;
+  final int total;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final value = total == 0 ? 0.0 : completed / total;
+    return Card(
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.trending_up_rounded, color: theme.colorScheme.primary),
+                const SizedBox(width: 8),
+                Expanded(child: Text('پیشرفت تو در این درس', style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800))),
+                Text('$completed از $total', style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.primary, fontWeight: FontWeight.w800)),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: LinearProgressIndicator(value: value, minHeight: 8, backgroundColor: theme.colorScheme.surfaceContainerHighest),
+            ),
+            const SizedBox(height: 7),
+            Text(completed == total ? 'همهٔ بخش‌ها را مطالعه کرده‌ای.' : 'بعد از مطالعهٔ هر بخش، آن را علامت بزن تا مسیرت ذخیره شود.', style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ChapterIndexSelector extends StatelessWidget {
+  const _ChapterIndexSelector({required this.count, required this.selectedIndex, required this.onSelected});
+  final int count;
+  final int selectedIndex;
+  final ValueChanged<int> onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('انتخاب فصل یا درس', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800)),
+        const SizedBox(height: 3),
+        Text('برای جابه‌جایی سریع، شمارهٔ بخش را انتخاب کن.', style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+        const SizedBox(height: 9),
+        SizedBox(
+          height: 44,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: count,
+            separatorBuilder: (_, __) => const SizedBox(width: 8),
+            itemBuilder: (context, index) => ChoiceChip(
+              selected: index == selectedIndex,
+              onSelected: (_) => onSelected(index),
+              label: Text('بخش ${index + 1}'),
+              showCheckmark: false,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
