@@ -9,7 +9,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 APP_ID = "ir.fahmino.clone.fahminoseparate"
-APP_LABEL = "فهمینو نسخه جدا"
+APP_LABEL = "فهمینو"
 DENSITIES = {
     "mdpi": 48,
     "hdpi": 72,
