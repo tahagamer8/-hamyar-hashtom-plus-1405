@@ -385,6 +385,20 @@ void main() {
     expect(find.textContaining('0 از 1 پاسخ درست'), findsOneWidget);
   });
 
+  testWidgets('lesson completion is saved locally and updates subject progress', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(_contentApp('lessons'));
+    await _pumpUiFrames(tester);
+
+    expect(find.text('0 از 1'), findsOneWidget);
+    await tester.tap(find.text('این بخش را مطالعه کردم'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 30));
+
+    expect(find.text('1 از 1'), findsOneWidget);
+    expect(find.text('مطالعه شد؛ برداشتن علامت'), findsOneWidget);
+  });
+
   testWidgets('chapter can be added to favorites', (tester) async {
     await tester.pumpWidget(_contentApp('lessons'));
     await _pumpUiFrames(tester);
