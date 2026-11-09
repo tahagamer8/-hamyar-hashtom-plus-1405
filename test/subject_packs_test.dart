@@ -226,20 +226,21 @@ void main() {
   });
 
   test('five recovered textbook sources point to official 1405-1406 portal PDFs', () async {
-    const expected = <String, String>{
-      'math': 'C805.pdf',
-      'persian': 'C803.pdf',
-      'writing': 'C804.pdf',
-      'quran': 'C801.pdf',
-      'religion': 'C802.pdf',
+    const expected = <String, Map<String, String>>{
+      'math': {'code': '805', 'portalId': '14220', 'file': 'C805.pdf'},
+      'persian': {'code': '803', 'portalId': '14218', 'file': 'C803.pdf'},
+      'writing': {'code': '804', 'portalId': '14219', 'file': 'C804.pdf'},
+      'quran': {'code': '801', 'portalId': '14210', 'file': 'C801.pdf'},
+      'religion': {'code': '802', 'portalId': '14217', 'file': 'C802.pdf'},
     };
     for (final entry in expected.entries) {
       final raw = await rootBundle.loadString('assets/content/subjects/${entry.key}.json');
       final pack = jsonDecode(raw) as Map<String, dynamic>;
       final source = pack['textbookSource'] as Map<String, dynamic>;
       expect(source['schoolYear'], '1405-1406', reason: entry.key);
-      expect(source['bookCode'], isA<String>(), reason: entry.key);
-      expect(source['pdfUrl'], contains(entry.value), reason: entry.key);
+      expect(source['bookCode'], entry.value['code'], reason: entry.key);
+      expect(source['portalUrl'], contains('/books/${entry.value['portalId']}'), reason: entry.key);
+      expect(source['pdfUrl'], contains(entry.value['file']), reason: entry.key);
       expect(source['verificationStatus'],
           'official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed',
           reason: entry.key);
