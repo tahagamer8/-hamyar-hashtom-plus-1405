@@ -296,6 +296,18 @@ void main() {
     expect(find.textContaining('عددهای گویا را می‌توان'), findsOneWidget);
   });
 
+  testWidgets('lesson page expands its example and learning steps', (tester) async {
+    await tester.pumpWidget(_contentApp('lessons'));
+    await _pumpUiFrames(tester);
+
+    expect(find.text('نمونهٔ آموزشی و مراحل یادگیری'), findsOneWidget);
+    await tester.tap(find.text('نمونهٔ آموزشی و مراحل یادگیری'));
+    await _pumpUiFrames(tester);
+
+    expect(find.textContaining('مثال: ۱/۲ + ۱/۳ را حساب کن.'), findsOneWidget);
+    expect(find.textContaining('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
+  });
+
   testWidgets('notes content loads from catalog bundle', (tester) async {
     await tester.pumpWidget(_contentApp('notes'));
     await _pumpUiFrames(tester);
