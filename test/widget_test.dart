@@ -299,6 +299,8 @@ void main() {
     await _pumpUiFrames(tester);
 
     expect(find.text('نمونهٔ آموزشی و مراحل یادگیری'), findsOneWidget);
+    await tester.ensureVisible(find.text('نمونهٔ آموزشی و مراحل یادگیری'));
+    await tester.pump();
     await tester.tap(find.text('نمونهٔ آموزشی و مراحل یادگیری'));
     await _pumpUiFrames(tester);
 
@@ -324,13 +326,19 @@ void main() {
 
     expect(find.text('کارت‌های مرور این بخش'), findsOneWidget);
     expect(find.text('نکتهٔ 1'), findsOneWidget);
+    await tester.ensureVisible(find.text('نمایش پاسخ'));
+    await tester.pump();
     await tester.tap(find.text('نمایش پاسخ'));
     await tester.pump();
     expect(find.text('قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید.'), findsOneWidget);
 
+    await tester.ensureVisible(find.text('بعدی'));
+    await tester.pump();
     await tester.tap(find.text('بعدی'));
     await tester.pump();
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
+    await tester.ensureVisible(find.text('نمایش پاسخ'));
+    await tester.pump();
     await tester.tap(find.text('نمایش پاسخ'));
     await tester.pump();
     expect(find.textContaining('پاسخ: ۳/۴'), findsOneWidget);
@@ -409,6 +417,8 @@ void main() {
     await _pumpUiFrames(tester);
 
     expect(find.text('0 از 1'), findsOneWidget);
+    await tester.ensureVisible(find.text('این بخش را مطالعه کردم'));
+    await tester.pump();
     await tester.tap(find.text('این بخش را مطالعه کردم'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 30));
@@ -421,6 +431,8 @@ void main() {
     await tester.pumpWidget(_contentApp('lessons'));
     await _pumpUiFrames(tester);
     expect(find.byTooltip('افزودن به علاقه‌مندی‌ها'), findsOneWidget);
+    await tester.ensureVisible(find.byTooltip('افزودن به علاقه‌مندی‌ها'));
+    await tester.pump();
     await tester.tap(find.byTooltip('افزودن به علاقه‌مندی‌ها'));
     await tester.pump();
     expect(find.byTooltip('حذف از علاقه‌مندی‌ها'), findsOneWidget);
