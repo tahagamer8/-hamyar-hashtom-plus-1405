@@ -445,6 +445,7 @@ def render_markdown(report: dict[str, Any]) -> str:
             "- نگارش، کد ۸۰۴: [صفحهٔ رسمی](http://chap.sch.ir/books/14219) — [PDF رسمی](http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C804.pdf) — ۳۱٫۲۷ مگابایت",
             "- ریاضی، کد ۸۰۵: [صفحهٔ رسمی](http://chap.sch.ir/books/14220) — [PDF رسمی](http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C805.pdf) — ۷٫۶۷ مگابایت",
             "",
+            "فهرست کامل ۱۳ عنوان، کدها و پیوندهای رسمی در research/official-textbook-links-1405-1406.md ثبت شده است.",
             "صفحهٔ رسمی پایه هشتم سال تحصیلی ۱۴۰۵–۱۴۰۶: http://chap.sch.ir/category/دوره/دوره-اول-متوسطه-جدید/پایه-هشتم",
             "",
             "## گام بعدی",
