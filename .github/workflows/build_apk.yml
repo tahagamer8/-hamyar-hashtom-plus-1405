@@ -66,6 +66,14 @@ jobs:
       - name: Test Persian PDF text direction
         run: python -m unittest tooling.test_pdf_bidi
 
+      - name: Audit chapter-by-chapter educational content quality
+        run: |
+          python -m unittest tooling.test_content_quality_audit
+          python tooling/audit_content_quality.py \
+            --subjects-dir assets/content/subjects \
+            --output-json build/content-quality-audit/content-quality-audit.json \
+            --output-markdown build/content-quality-audit/content-quality-audit.md
+
       - name: Generate Persian PDF assets
         run: |
           python tooling/generate_learning_pdfs.py --subjects-dir assets/content/subjects --output-dir assets/generated_pdfs
@@ -99,4 +107,10 @@ jobs:
         with:
           name: fahmino-learning-pdfs
           path: assets/generated_pdfs/*.pdf
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fahmino-content-quality-audit
+          path: build/content-quality-audit/*
           if-no-files-found: error
