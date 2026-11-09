@@ -1,4 +1,4 @@
-name: Build Fahmino Separate APK
+name: Build Fahmino Full Separate APK
 
 on:
   push:
@@ -38,6 +38,12 @@ jobs:
           fi
           sed -i 's/android:label="[^"]*"/android:label="فهمینو نسخه جدا"/' android/app/src/main/AndroidManifest.xml
 
+      - name: Install Pillow for launcher icon generation
+        run: python -m pip install --disable-pip-version-check 'Pillow>=10,<13'
+
+      - name: Configure separate Android identity and app branding
+        run: python tooling/configure_android_branding.py
+
       - name: Cache Gradle distributions and dependencies
         uses: gradle/actions/setup-gradle@v6
         with:
@@ -65,6 +71,9 @@ jobs:
 
       - name: Test Persian PDF text direction
         run: python -m unittest tooling.test_pdf_bidi
+
+      - name: Test Android branding configuration
+        run: python -m unittest tooling.test_android_branding
 
       - name: Audit chapter-by-chapter educational content quality
         run: |

@@ -31,15 +31,14 @@ class HomeHeader extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
-                    width: 46,
-                    height: 46,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withAlpha(40),
-                      borderRadius: BorderRadius.circular(15),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      'assets/images/fahmino_app_icon.jpg',
+                      width: 46,
+                      height: 46,
+                      fit: BoxFit.cover,
                     ),
-                    child: const Icon(Icons.auto_stories_rounded,
-                        color: Colors.white, size: 27),
                   ),
                   const SizedBox(width: 12),
                   Expanded(

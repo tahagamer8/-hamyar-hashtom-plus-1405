@@ -145,7 +145,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
     final asksForQuestions = RegExp('سوال|سؤال|آزمون|تست|تمرین').hasMatch(question);
     final asksForMistakes = RegExp('اشتباه|خطا|غلط|نکته|نکات').hasMatch(question);
     final out = StringBuffer()
-      ..writeln('راهنمای هوشمند فهمینو — ' + (subject['title'] as String? ?? 'درس'))
+      ..writeln('راهنمای آفلاین فهمینو — ' + (subject['title'] as String? ?? 'درس'))
       ..writeln('این پاسخ از محتوای ذخیره‌شده در برنامه پیدا شده است؛ مدل هوش مصنوعی مولد نیست.')
       ..writeln();
 
@@ -254,7 +254,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('راهنمای درسی فهمینو'),
+        title: const Text('راهنمای آفلاین فهمینو'),
         actions: [
           IconButton(
             tooltip: 'گفت‌وگوی تازه',
@@ -273,7 +273,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
               child: Column(
                 children: [
                   const Text(
-                    'راهنمای آفلاین بر پایهٔ محتوای همین برنامه؛ پرسش‌ها از دستگاه خارج نمی‌شوند.',
+                    'این راهنما به Gemini یا سرویس ابری وصل نیست؛ فقط محتوای آموزشی ذخیره‌شده در همین دستگاه را جست‌وجو می‌کند.',
                     textAlign: TextAlign.center,
                   ),
                   if (_catalog.isNotEmpty) ...[
@@ -382,7 +382,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                   ),
                   const SizedBox(width: 8),
                   IconButton.filled(
-                    tooltip: 'پاسخ از محتوای فهمینو',
+                    tooltip: 'جست‌وجو در محتوای فهمینو',
                     onPressed: _send,
                     icon: const Icon(Icons.search_rounded),
                   ),

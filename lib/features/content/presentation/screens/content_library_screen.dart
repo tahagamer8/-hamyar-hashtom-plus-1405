@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
@@ -175,6 +176,14 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               ? 0
               : (_selectedChapterIndex >= chapters.length ? chapters.length - 1 : _selectedChapterIndex);
           final selectedChapter = chapters[selectedIndex];
+          final sourceValue = subject['textbookSource'];
+          final sourceMap = sourceValue is Map<String, dynamic> ? sourceValue : null;
+          final sourceUrl = sourceMap?['pdfUrl'];
+          final officialSourceUrl = sourceUrl is String &&
+                  Uri.tryParse(sourceUrl)?.scheme == 'https' &&
+                  Uri.tryParse(sourceUrl)?.hasAuthority == true
+              ? sourceUrl
+              : null;
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
@@ -189,6 +198,8 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                   subjectId: widget.subjectId,
                   subjectTitle: subject['title'] as String? ?? 'درس',
                 ),
+              if (_feature == AppFeature.lessons && officialSourceUrl != null)
+                _OfficialTextbookSourceCard(url: officialSourceUrl),
               DropdownButtonFormField<int>(
                 value: selectedIndex,
                 isExpanded: true,
@@ -581,6 +592,40 @@ class _QuizChapterState extends State<_QuizChapter> {
             ),
           const Divider(height: 24),
         ],
+      ),
+    );
+  }
+}
+
+
+class _OfficialTextbookSourceCard extends StatelessWidget {
+  const _OfficialTextbookSourceCard({required this.url});
+
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      margin: const EdgeInsets.only(bottom: 14),
+      child: ListTile(
+        leading: Icon(Icons.menu_book_rounded, color: theme.colorScheme.primary),
+        title: const Text('کتاب درسی رسمی (PDF)'),
+        subtitle: const Text('دریافت از پایگاه رسمی کتاب‌های درسی'),
+        trailing: const Icon(Icons.open_in_new_rounded),
+        onTap: () async {
+          final uri = Uri.tryParse(url);
+          if (uri == null || uri.scheme != 'https' || !uri.hasAuthority) return;
+          final opened = await launchUrl(
+            uri,
+            mode: LaunchMode.externalApplication,
+          );
+          if (!opened && context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('باز کردن پیوند کتاب ممکن نشد.')),
+            );
+          }
+        },
       ),
     );
   }
