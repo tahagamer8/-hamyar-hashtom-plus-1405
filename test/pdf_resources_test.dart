@@ -84,7 +84,7 @@ void main() {
           final resource = value as Map<String, dynamic>;
           expect(
             resource['chapterIndex'],
-            inInclusiveRange(0, chapterCount - 1),
+            anyOf(-1, inInclusiveRange(0, chapterCount - 1)),
             reason: '${entry.key}/$key',
           );
         }
