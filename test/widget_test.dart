@@ -238,7 +238,7 @@ void main() {
     await _pumpUiFrames(tester);
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('دسترسی سریع'), findsOneWidget);
-    expect(find.text('راهنمای درسی فهمینو', skipOffstage: false), findsOneWidget);
+    expect(find.text('راهنمای آفلاین فهمینو', skipOffstage: false), findsOneWidget);
 
   });
 
@@ -559,7 +559,7 @@ void main() {
     });
     await tester.pump();
     await _pumpUiFrames(tester);
-    expect(find.text('راهنمای درسی فهمینو'), findsOneWidget);
+    expect(find.text('راهنمای آفلاین فهمینو'), findsOneWidget);
     expect(find.textContaining('پرسش‌ها از دستگاه خارج نمی‌شوند'), findsOneWidget);
     expect(find.text('پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی'), findsOneWidget);
     expect(find.byTooltip('پاسخ از محتوای فهمینو'), findsOneWidget);

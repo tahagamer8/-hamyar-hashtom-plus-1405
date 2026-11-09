@@ -273,7 +273,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
               child: Column(
                 children: [
                   const Text(
-                    'این راهنما به Gemini یا سرویس ابری وصل نیست؛ فقط محتوای آموزشی ذخیره‌شده در همین دستگاه را جست‌وجو می‌کند.',
+                    'راهنمای آفلاین بر پایهٔ محتوای همین برنامه؛ پرسش‌ها از دستگاه خارج نمی‌شوند. به Gemini یا سرویس ابری وصل نیست.',
                     textAlign: TextAlign.center,
                   ),
                   if (_catalog.isNotEmpty) ...[
@@ -382,7 +382,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                   ),
                   const SizedBox(width: 8),
                   IconButton.filled(
-                    tooltip: 'جست‌وجو در محتوای فهمینو',
+                    tooltip: 'پاسخ از محتوای فهمینو',
                     onPressed: _send,
                     icon: const Icon(Icons.search_rounded),
                   ),

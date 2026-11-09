@@ -68,7 +68,7 @@ void main() {
     await tester.pumpWidget(_testApp());
     await _pumpUiFrames(tester);
 
-    expect(find.text('راهنمای درسی فهمینو'), findsOneWidget);
+    expect(find.text('راهنمای آفلاین فهمینو'), findsOneWidget);
     expect(find.text('از کجا شروع کنیم؟'), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
     expect(find.byType(DropdownButtonFormField<String>), findsOneWidget);
