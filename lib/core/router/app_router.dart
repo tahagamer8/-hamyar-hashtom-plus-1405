@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hamyar_hashtom_plus/core/router/app_routes.dart';
 import 'package:hamyar_hashtom_plus/core/widgets/main_shell.dart';
 import 'package:hamyar_hashtom_plus/features/ai/presentation/screens/ai_chat_screen.dart';
+import 'package:hamyar_hashtom_plus/features/analytics/presentation/screens/subject_analytics_screen.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/screens/content_library_screen.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:hamyar_hashtom_plus/features/home/presentation/screens/home_screen.dart';
@@ -12,6 +13,7 @@ import 'package:hamyar_hashtom_plus/features/settings/presentation/screens/setti
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/subject_detail_screen.dart';
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/subjects_screen.dart';
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/feature_subjects_screen.dart';
+import 'package:hamyar_hashtom_plus/features/videos/presentation/screens/video_library_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -41,6 +43,24 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                       subjectId: state.pathParameters['subjectId']!,
                     ),
                     routes: [
+                      GoRoute(
+                        path: 'videos',
+                        builder: (context, state) => VideoLibraryScreen(
+                          subjectId: state.pathParameters['subjectId']!,
+                          subjectTitle: state.extra is String
+                              ? state.extra as String
+                              : 'درس',
+                        ),
+                      ),
+                      GoRoute(
+                        path: 'analytics',
+                        builder: (context, state) => SubjectAnalyticsScreen(
+                          subjectId: state.pathParameters['subjectId']!,
+                          subjectTitle: state.extra is String
+                              ? state.extra as String
+                              : 'درس',
+                        ),
+                      ),
                       GoRoute(
                         path: ':featureId',
                         builder: (context, state) => ContentLibraryScreen(
