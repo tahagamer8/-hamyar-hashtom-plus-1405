@@ -32,7 +32,8 @@ class AndroidBrandingTests(unittest.TestCase):
             )
             (app_dir / "build.gradle.kts").write_text(
                 'android {\n    namespace = "com.example.old"\n'
-                '    defaultConfig { applicationId = "com.example.old" }\n}\n',
+                '    defaultConfig {\n        applicationId = "com.example.old"\n'
+                '    }\n}\n',
                 encoding="utf-8",
             )
 
