@@ -77,7 +77,7 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
     };
   }
 
-  Future<void> _openPdf(String url, String title) async {
+  Future<void> _openPdf(String url) async {
     final uri = Uri.tryParse(url);
     if (uri == null || uri.scheme != 'https' || !url.toLowerCase().contains('.pdf')) {
       _showMessage('نشانی فایل PDF معتبر نیست.');
@@ -108,7 +108,9 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
       return const Center(child: Text('فهرست درس‌های این کتاب در دسترس نیست.'));
     }
 
-    final safeIndex = _selectedChapterIndex.clamp(0, widget.chapters.length - 1);
+    final safeIndex = _selectedChapterIndex
+        .clamp(0, widget.chapters.length - 1)
+        .toInt();
 
     return FutureBuilder<Map<String, dynamic>>(
       future: _resourcesFuture,
@@ -233,10 +235,7 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
                         Align(
                           alignment: AlignmentDirectional.centerStart,
                           child: FilledButton.tonalIcon(
-                            onPressed: () => _openPdf(
-                              item['url'] as String,
-                              item['title'] as String? ?? 'PDF',
-                            ),
+                            onPressed: () => _openPdf(item['url'] as String),
                             icon: const Icon(Icons.open_in_new_rounded),
                             label: const Text('باز کردن فایل PDF'),
                           ),
