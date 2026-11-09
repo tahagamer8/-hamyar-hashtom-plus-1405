@@ -1161,6 +1161,15 @@
     }
   ],
   "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
-  "textbookSource": "کتاب ریاضی پایه هشتم، سازمان پژوهش و برنامه‌ریزی آموزشی",
+  "textbookSource": {
+    "portalUrl": "http://chap.sch.ir/books/14220",
+    "pdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C805.pdf",
+    "schoolYear": "1405-1406",
+    "bookCode": "805",
+    "fileName": "C805.pdf",
+    "fileSizeMB": "7.67",
+    "verificationStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+    "verifiedAt": "2026-11-09"
+  },
   "sampleQuestionBankVersion": 1
 }
