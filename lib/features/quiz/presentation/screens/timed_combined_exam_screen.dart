@@ -4,6 +4,85 @@ import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
+/// Selects a broad, balanced set of exam questions across chapters.
+///
+/// Questions are shuffled inside each chapter, then selected in rounds so a
+/// term exam does not accidentally draw nearly all its questions from one
+/// chapter just because that chapter has a larger question bank.
+List<Map<String, dynamic>> buildBalancedExamQuestions({
+  required List<Map<String, dynamic>> chapters,
+  int? questionLimit,
+  Random? random,
+}) {
+  final rng = random ?? Random();
+  final pools = <List<Map<String, dynamic>>>[];
+
+  for (final chapter in chapters) {
+    final chapterTitle = chapter['title'] is String
+        ? chapter['title'] as String
+        : 'درس';
+    final rawItems = <dynamic>[
+      ...(chapter['questions'] as List<dynamic>? ?? const []),
+      ...(chapter['advancedQuestions'] as List<dynamic>? ?? const []),
+    ];
+    final pool = <Map<String, dynamic>>[];
+
+    for (final item in rawItems) {
+      if (item is! Map) continue;
+      final question = Map<String, dynamic>.from(item);
+      final options = question['options'];
+      final answer = question['answer'];
+      final prompt = question['question'];
+      if (prompt is! String ||
+          prompt.trim().isEmpty ||
+          options is! List ||
+          options.length < 2 ||
+          !options.every((option) => option is String) ||
+          answer is! int ||
+          answer < 0 ||
+          answer >= options.length) {
+        continue;
+      }
+      pool.add({
+        'chapter': chapterTitle,
+        'question': prompt,
+        'options': options,
+        'answer': answer,
+        'explanation': question['explanation'] is String
+            ? question['explanation']
+            : '',
+      });
+    }
+
+    if (pool.isNotEmpty) {
+      pool.shuffle(rng);
+      pools.add(pool);
+    }
+  }
+
+  final availableCount = pools.fold<int>(
+    0,
+    (total, pool) => total + pool.length,
+  );
+  final limit = questionLimit == null || questionLimit <= 0
+      ? availableCount
+      : (questionLimit < availableCount ? questionLimit : availableCount);
+  final selected = <Map<String, dynamic>>[];
+
+  for (var round = 0; selected.length < limit; round++) {
+    var addedQuestion = false;
+    for (final pool in pools) {
+      if (round < pool.length && selected.length < limit) {
+        selected.add(pool[round]);
+        addedQuestion = true;
+      }
+    }
+    if (!addedQuestion) break;
+  }
+
+  return selected;
+}
+
 class TimedCombinedExamScreen extends StatefulWidget {
   const TimedCombinedExamScreen({
     super.key,
@@ -34,35 +113,10 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
   @override
   void initState() {
     super.initState();
-    questions = [];
-    for (final chapter in widget.chapters) {
-      final items = <dynamic>[
-        ...(chapter['questions'] as List<dynamic>? ?? const []),
-        ...(chapter['advancedQuestions'] as List<dynamic>? ?? const []),
-      ];
-      for (final item in items) {
-        if (item is! Map) continue;
-        final q = Map<String, dynamic>.from(item);
-        final options = q['options'];
-        final answer = q['answer'];
-        if (q['question'] is String && options is List && options.length >= 2 &&
-            options.every((x) => x is String) && answer is int &&
-            answer >= 0 && answer < options.length) {
-          questions.add({
-            'chapter': chapter['title'] ?? 'درس',
-            'question': q['question'],
-            'options': options,
-            'answer': answer,
-            'explanation': q['explanation'] ?? '',
-          });
-        }
-      }
-    }
-    questions.shuffle(Random());
-    final limit = widget.questionLimit;
-    if (limit != null && limit > 0 && questions.length > limit) {
-      questions.removeRange(limit, questions.length);
-    }
+    questions = buildBalancedExamQuestions(
+      chapters: widget.chapters,
+      questionLimit: widget.questionLimit,
+    );
     secondsLeft = max(600, questions.length * 60);
     if (questions.isNotEmpty) {
       timer = Timer.periodic(const Duration(seconds: 1), (t) {
