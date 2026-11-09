@@ -1,6 +1,6 @@
 {
   "auditDate": "2026-11-09",
-  "contentSnapshotCommit": "31d0f8370ef2d861bfca081a8b8a98a852b08b18",
+  "contentSnapshotCommit": "299d65e4705d1ad7475e1560a144be49fb2bdfa3",
   "method": "ممیزی محافظه‌کارانهٔ ساختار، کفایت آموزشی و ردیابی منبع؛ نه گواهی صحت علمی.",
   "thresholdNotes": {
     "dedicatedLessonCharacters": 350,
@@ -14,6 +14,8 @@
   },
   "totals": {
     "subjectCount": 13,
+    "officialSourceLinkVerifiedSubjectCount": 13,
+    "pdfContentParsedSubjectCount": 0,
     "sectionCount": 145,
     "baseQuestionCount": 448,
     "advancedQuestionCount": 145,
@@ -53,8 +55,8 @@
       "shortExampleCount": 9,
       "shortSolutionStepCount": 1,
       "textbookEdition": "چاپ اول، ۱۴۰۵",
-      "textbookSourceUrl": "",
-      "textbookSourceStatus": "PDF metadata exists; source not reverified in this run"
+      "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C809.pdf",
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
     },
     {
       "id": "art",
@@ -74,8 +76,8 @@
       "shortExampleCount": 2,
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
-      "textbookSourceUrl": "",
-      "textbookSourceStatus": "PDF metadata exists; source not reverified in this run"
+      "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C808.pdf",
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
     },
     {
       "id": "english",
@@ -95,8 +97,8 @@
       "shortExampleCount": 0,
       "shortSolutionStepCount": 1,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
-      "textbookSourceUrl": "",
-      "textbookSourceStatus": "PDF metadata exists; source not reverified in this run"
+      "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C810.pdf",
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
     },
     {
       "id": "english_workbook",
@@ -116,8 +118,8 @@
       "shortExampleCount": 0,
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
-      "textbookSourceUrl": "",
-      "textbookSourceStatus": "PDF metadata exists; source not reverified in this run"
+      "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C811.pdf",
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
     },
     {
       "id": "math",
@@ -221,8 +223,8 @@
       "shortExampleCount": 15,
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
-      "textbookSourceUrl": "",
-      "textbookSourceStatus": "PDF metadata exists; source not reverified in this run"
+      "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C806.pdf",
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
     },
     {
       "id": "social",
@@ -242,8 +244,8 @@
       "shortExampleCount": 23,
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
-      "textbookSourceUrl": "",
-      "textbookSourceStatus": "PDF metadata exists; source not reverified in this run"
+      "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C807.pdf",
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
     },
     {
       "id": "thinking",
@@ -263,8 +265,8 @@
       "shortExampleCount": 0,
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
-      "textbookSourceUrl": "",
-      "textbookSourceStatus": "PDF metadata exists; source not reverified in this run"
+      "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C812.pdf",
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
     },
     {
       "id": "work",
@@ -284,8 +286,8 @@
       "shortExampleCount": 1,
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
-      "textbookSourceUrl": "",
-      "textbookSourceStatus": "PDF metadata exists; source not reverified in this run"
+      "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C817.pdf",
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
     },
     {
       "id": "writing",
