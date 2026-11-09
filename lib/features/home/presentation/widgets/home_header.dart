@@ -218,6 +218,7 @@ class _FahminoCoverArtwork extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
+      container: true,
       label: 'کاور گرافیکی فهمینو؛ کتاب باز و ستاره‌های یادگیری',
       image: true,
       child: SizedBox(
