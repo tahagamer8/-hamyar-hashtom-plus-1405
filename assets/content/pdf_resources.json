@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "sourcePolicy": "Only direct PDF URLs verified from Hamyar or Padars pages; no copied lesson text.",
+  "subjects": {
+    "math": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه فصل اول ریاضی هشتم (همیار)",
+          "description": "جزوهٔ آموزشی همراه با مثال و تمرین.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/jozve/riazi/1-zirkari/jozve-8-riazi-d1-zirkari-(hamyar.in).pdf"
+        },
+        {
+          "chapterIndex": 0,
+          "title": "جزوه فصل 1 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «عددهای صحیح و گویا».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1402/riazi8n-fasl1-1.pdf"
+        },
+        {
+          "chapterIndex": 1,
+          "title": "جزوه فصل 2 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «عددهای اول».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet2-8.pdf"
+        },
+        {
+          "chapterIndex": 2,
+          "title": "جزوه فصل 3 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «چندضلعی‌ها».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet3-7.pdf"
+        },
+        {
+          "chapterIndex": 3,
+          "title": "جزوه فصل 4 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «جبر و معادله».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet4-7.pdf"
+        },
+        {
+          "chapterIndex": 4,
+          "title": "جزوه فصل 5 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «بردار و مختصات».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet5-5.pdf"
+        },
+        {
+          "chapterIndex": 5,
+          "title": "جزوه فصل 6 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «مثلث».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet6-5.pdf"
+        },
+        {
+          "chapterIndex": 6,
+          "title": "جزوه فصل 7 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «توان و جذر».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet7-9.pdf"
+        },
+        {
+          "chapterIndex": 7,
+          "title": "جزوه فصل 8 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «آمار و احتمال».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet8-4.pdf"
+        },
+        {
+          "chapterIndex": 8,
+          "title": "جزوه فصل 9 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «دایره».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet9-4.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال فصل اول ریاضی هشتم (همیار)",
+          "description": "نمونه‌سؤال PDF فصل اول؛ فایل اول.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/riazi/f2f/1/Soal_R8_Fsl1%2BP%281%29-.pdf"
+        },
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال فصل 1 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «عددهای صحیح و گویا».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1405/riazi8-exam1-1.pdf"
+        },
+        {
+          "chapterIndex": 1,
+          "title": "نمونه‌سؤال فصل 2 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «عددهای اول».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/examnew/l8/riazi8-exam2-5N.pdf"
+        },
+        {
+          "chapterIndex": 2,
+          "title": "نمونه‌سؤال فصل 3 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «چندضلعی‌ها».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/examnew/l8/riazi8-exam3-3.pdf"
+        },
+        {
+          "chapterIndex": 3,
+          "title": "نمونه‌سؤال فصل 4 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «جبر و معادله».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/examnew/l8/riazi8-exam4-1.pdf"
+        },
+        {
+          "chapterIndex": 4,
+          "title": "نمونه‌سؤال فصل 5 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «بردار و مختصات».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit/exams/riazi8-exam5-3.pdf"
+        },
+        {
+          "chapterIndex": 5,
+          "title": "نمونه‌سؤال فصل 6 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «مثلث».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit/exams/riazi8-exam6-2.pdf"
+        },
+        {
+          "chapterIndex": 6,
+          "title": "نمونه‌سؤال فصل 7 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «توان و جذر».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit/exams/riazi8-exam7-1N.pdf"
+        },
+        {
+          "chapterIndex": 7,
+          "title": "نمونه‌سؤال فصل 8 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «آمار و احتمال».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit/exams/riazi8-exam8-2.pdf"
+        },
+        {
+          "chapterIndex": 8,
+          "title": "نمونه‌سؤال فصل 9 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «دایره».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1402/riazi8-exam-fasl9-2.pdf"
+        }
+      ]
+    },
+    "science": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه فصل اول علوم هشتم",
+          "description": "خلاصه و نکته‌های فصل «مخلوط و جدا‌سازی مواد».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1404/olom8-booklet1-1.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال فصل اول علوم هشتم",
+          "description": "فایل PDF تمرین فصل «مخلوط و جدا‌سازی مواد».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1404/olom8-soal1-2n.pdf"
+        }
+      ]
+    },
+    "arabic": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه درس اول عربی هشتم",
+          "description": "مرور نکته‌ها و مطالب درس اول عربی.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit99/jozve/arabi8-booklet1-6.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال درس اول عربی هشتم",
+          "description": "فایل PDF نمونه‌سؤال درس اول.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1402/arabi8n-dars2-3.pdf"
+        }
+      ]
+    },
+    "persian": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه درس اول فارسی هشتم",
+          "description": "مرور نکته‌ها و محتوای درس اول فارسی.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1404/farsi8-booklet1n-1n.pdf"
+        }
+      ],
+      "samples": []
+    },
+    "social": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه درس اول مطالعات اجتماعی هشتم",
+          "description": "خلاصه و نکته‌های درس «تعاون (۱)».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/ejtemae8-booklet1-12.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال درس اول مطالعات اجتماعی هشتم",
+          "description": "فایل PDF تمرین درس «تعاون (۱)».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/ejtemae8-exam1-5.pdf"
+        }
+      ]
+    },
+    "religion": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه درس اول پیام‌های آسمان هشتم",
+          "description": "مرور نکته‌ها و مطالب درس اول.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/payam8-booklet1-10.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال درس اول پیام‌های آسمان هشتم",
+          "description": "فایل PDF سؤال‌های درس اول.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/payam8-dars1-3.pdf"
+        }
+      ]
+    },
+    "writing": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه درس اول نگارش هشتم",
+          "description": "مرور نکته‌های آموزشی درس اول نگارش.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1404/negaresh8-booklet1n-1.pdf"
+        }
+      ],
+      "samples": []
+    },
+    "english": {
+      "notes": [],
+      "samples": []
+    },
+    "english_workbook": {
+      "notes": [],
+      "samples": []
+    },
+    "quran": {
+      "notes": [],
+      "samples": []
+    },
+    "thinking": {
+      "notes": [],
+      "samples": []
+    },
+    "work": {
+      "notes": [],
+      "samples": []
+    },
+    "art": {
+      "notes": [],
+      "samples": []
+    }
+  }
+}
