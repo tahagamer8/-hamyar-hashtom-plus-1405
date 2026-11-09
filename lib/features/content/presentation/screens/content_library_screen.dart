@@ -179,10 +179,12 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
           final sourceValue = subject['textbookSource'];
           final sourceMap = sourceValue is Map<String, dynamic> ? sourceValue : null;
           final sourceUrl = sourceMap?['pdfUrl'];
-          final officialSourceUrl = sourceUrl is String &&
-                  Uri.tryParse(sourceUrl)?.scheme == 'https' &&
-                  Uri.tryParse(sourceUrl)?.hasAuthority == true
-              ? sourceUrl
+          final sourceUri =
+              sourceUrl is String ? Uri.tryParse(sourceUrl) : null;
+          final officialSourceUrl = sourceUri != null &&
+                  const {'http', 'https'}.contains(sourceUri.scheme) &&
+                  sourceUri.host == 'chap.sch.ir'
+              ? sourceUrl as String
               : null;
           return ListView(
             padding: const EdgeInsets.all(16),
@@ -615,7 +617,11 @@ class _OfficialTextbookSourceCard extends StatelessWidget {
         trailing: const Icon(Icons.open_in_new_rounded),
         onTap: () async {
           final uri = Uri.tryParse(url);
-          if (uri == null || uri.scheme != 'https' || !uri.hasAuthority) return;
+          if (uri == null ||
+              !const {'http', 'https'}.contains(uri.scheme) ||
+              uri.host != 'chap.sch.ir') {
+            return;
+          }
           final opened = await launchUrl(
             uri,
             mode: LaunchMode.externalApplication,
