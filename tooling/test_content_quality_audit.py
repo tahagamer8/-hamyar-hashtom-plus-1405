@@ -45,7 +45,7 @@ def complete_fixture():
         "textbookEdition": "چاپ آزمایشی ۱۴۰۵",
         "textbookSourceFile": "sample.pdf",
         "textbookSource": {
-            "pdfUrl": "https://chap.example.invalid/C805.pdf",
+            "pdfUrl": "https://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C805.pdf",
             "schoolYear": "1405-1406",
             "bookCode": "805",
             "verificationStatus": "official_pdf_content_parsed",
@@ -62,6 +62,9 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertTrue(result["sourceMapped"])
         self.assertTrue(result["hasDedicatedLesson"])
         self.assertTrue(result["hasChapterExam"])
+        self.assertFalse(result["educationallyIncomplete"])
+        self.assertEqual(result["sourceStatus"], "verified")
+        self.assertEqual(result["officialPdfPageStart"], 4)
         self.assertEqual(result["questionFormats"], ["multiple_choice", "short_answer"])
         self.assertEqual(result["gaps"], [])
 
@@ -83,6 +86,7 @@ class ContentQualityAuditTests(unittest.TestCase):
         result = audit_chapter("sample", "نمونه", pack, chapter, 1)
         self.assertEqual(result["status"], "نیازمند منبع")
         self.assertFalse(result["sourceMapped"])
+        self.assertTrue(result["educationallyIncomplete"])
 
     def test_pdf_parsed_without_chapter_specific_mapping_is_not_source_mapped(self):
         pack, chapter = complete_fixture()
