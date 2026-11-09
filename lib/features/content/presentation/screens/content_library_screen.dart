@@ -533,33 +533,68 @@ class _QuizChapterState extends State<_QuizChapter> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Card(
-      margin: const EdgeInsets.only(bottom: 14),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(widget.title, style: theme.textTheme.titleMedium),
-            const SizedBox(height: 8),
-            const Text('پاسخ‌ها را انتخاب کن و نتیجه را بررسی کن.'),
-            for (var q = 0; q < widget.questions.length; q++)
-              _buildQuestion(context, q, widget.questions[q]),
-            if (widget.questions.isNotEmpty)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: TextButton.icon(
-                  onPressed: () => setState(() {
-                    _answers.clear();
-                    _checked.clear();
-                  }),
-                  icon: const Icon(Icons.refresh_rounded),
-                  label: const Text('شروع دوباره'),
+    final total = widget.questions.length;
+    final checkedCount = _checked.length;
+    final correctCount = _checked.where((index) {
+      return _answers[index] == widget.questions[index]['answer'];
+    }).length;
+    final progress = total == 0 ? 0.0 : checkedCount / total;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Card(
+          color: theme.colorScheme.primaryContainer.withAlpha(90),
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.title,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
-              ),
-          ],
+                const SizedBox(height: 5),
+                Text('پاسخ‌ها را انتخاب کن و بعد نتیجه و توضیح هر سؤال را ببین.'),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: LinearProgressIndicator(
+                        value: progress,
+                        minHeight: 7,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Text('$checkedCount از $total'),
+                  ],
+                ),
+                if (checkedCount > 0) ...[
+                  const SizedBox(height: 7),
+                  Text('پاسخ درست: $correctCount از $checkedCount'),
+                ],
+              ],
+            ),
+          ),
         ),
-      ),
+        for (var q = 0; q < total; q++)
+          _buildQuestion(context, q, widget.questions[q]),
+        if (total > 0)
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: TextButton.icon(
+              onPressed: () => setState(() {
+                _answers.clear();
+                _checked.clear();
+              }),
+              icon: const Icon(Icons.refresh_rounded),
+              label: const Text('شروع دوباره'),
+            ),
+          ),
+      ],
     );
   }
 
