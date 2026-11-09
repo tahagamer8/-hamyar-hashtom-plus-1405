@@ -312,6 +312,13 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
     )
     totals = {
         "subjectCount": len(subjects),
+        "officialSourceLinkVerifiedSubjectCount": sum(
+            subject["textbookSourceStatus"].startswith("official_portal_record_and_pdf_link_verified")
+            for subject in subjects
+        ),
+        "pdfContentParsedSubjectCount": sum(
+            "pdf_content_parsed" in subject["textbookSourceStatus"] for subject in subjects
+        ),
         "sectionCount": len(sections),
         "baseQuestionCount": sum(row["baseQuestionCount"] for row in sections),
         "advancedQuestionCount": sum(row["advancedQuestionCount"] for row in sections),
