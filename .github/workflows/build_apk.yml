@@ -1,4 +1,4 @@
-name: Build Fahmino Full Separate APK
+name: Build Fahmino Full APK
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
       - name: Create Android platform if missing
         run: |
           if [ ! -d android ]; then
-            flutter create --platforms=android --project-name fahminoseparate --org ir.fahmino.clone /tmp/fahmino
+            flutter create --platforms=android --project-name fahminofull --org ir.fahmino.clone /tmp/fahmino
             cp -r /tmp/fahmino/android ./android
           fi
           sed -i 's/android:label="[^"]*"/android:label="فهمینو"/' android/app/src/main/AndroidManifest.xml
@@ -108,7 +108,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: fahmino-separate-apk
+          name: fahmino-full-apk
           path: build/app/outputs/flutter-apk/*.apk
           if-no-files-found: error
 
