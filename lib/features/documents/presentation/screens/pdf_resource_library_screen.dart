@@ -50,7 +50,8 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
   void initState() {
     super.initState();
     _selectedChapterIndex = widget.initialChapterIndex
-        .clamp(0, widget.chapters.isEmpty ? 0 : widget.chapters.length - 1);
+        .clamp(0, widget.chapters.isEmpty ? 0 : widget.chapters.length - 1)
+        .toInt();
   }
 
   @override
