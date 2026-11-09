@@ -16,6 +16,8 @@ dependencies:
   shared_preferences: ^2.3.3
   open_filex: ^5.0.0
   path_provider: ^2.1.5
+  url_launcher: ^6.3.1
+  pdfrx: ^2.12.0
 
 dev_dependencies:
   flutter_test:
@@ -26,8 +28,10 @@ flutter:
   uses-material-design: true
   assets:
     - assets/content/catalog_fa.json
+    - assets/content/pdf_resources.json
     - assets/content/subjects/
     - assets/generated_pdfs/
+    - assets/generated_pdfs/chapters/
   fonts:
     - family: Vazirmatn
       fonts:

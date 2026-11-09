@@ -1,0 +1,433 @@
+{
+  "schemaVersion": 1,
+  "sourcePolicy": "Only direct PDF URLs verified from Hamyar or Padars pages; no copied lesson text.",
+  "subjects": {
+    "math": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه فصل اول ریاضی هشتم (همیار)",
+          "description": "جزوهٔ آموزشی همراه با مثال و تمرین.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/jozve/riazi/1-zirkari/jozve-8-riazi-d1-zirkari-(hamyar.in).pdf"
+        },
+        {
+          "chapterIndex": 0,
+          "title": "جزوه فصل 1 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «عددهای صحیح و گویا».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1402/riazi8n-fasl1-1.pdf"
+        },
+        {
+          "chapterIndex": 1,
+          "title": "جزوه فصل 2 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «عددهای اول».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet2-8.pdf"
+        },
+        {
+          "chapterIndex": 2,
+          "title": "جزوه فصل 3 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «چندضلعی‌ها».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet3-7.pdf"
+        },
+        {
+          "chapterIndex": 3,
+          "title": "جزوه فصل 4 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «جبر و معادله».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet4-7.pdf"
+        },
+        {
+          "chapterIndex": 4,
+          "title": "جزوه فصل 5 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «بردار و مختصات».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet5-5.pdf"
+        },
+        {
+          "chapterIndex": 5,
+          "title": "جزوه فصل 6 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «مثلث».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet6-5.pdf"
+        },
+        {
+          "chapterIndex": 6,
+          "title": "جزوه فصل 7 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «توان و جذر».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet7-9.pdf"
+        },
+        {
+          "chapterIndex": 7,
+          "title": "جزوه فصل 8 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «آمار و احتمال».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet8-4.pdf"
+        },
+        {
+          "chapterIndex": 8,
+          "title": "جزوه فصل 9 ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل «دایره».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/riazi8-booklet9-4.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال فصل اول ریاضی هشتم (همیار)",
+          "description": "نمونه‌سؤال PDF فصل اول؛ فایل اول.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/riazi/f2f/1/Soal_R8_Fsl1%2BP%281%29-.pdf"
+        },
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال فصل 1 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «عددهای صحیح و گویا».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1405/riazi8-exam1-1.pdf"
+        },
+        {
+          "chapterIndex": 1,
+          "title": "نمونه‌سؤال فصل 2 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «عددهای اول».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/examnew/l8/riazi8-exam2-5N.pdf"
+        },
+        {
+          "chapterIndex": 2,
+          "title": "نمونه‌سؤال فصل 3 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «چندضلعی‌ها».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/examnew/l8/riazi8-exam3-3.pdf"
+        },
+        {
+          "chapterIndex": 3,
+          "title": "نمونه‌سؤال فصل 4 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «جبر و معادله».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/examnew/l8/riazi8-exam4-1.pdf"
+        },
+        {
+          "chapterIndex": 4,
+          "title": "نمونه‌سؤال فصل 5 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «بردار و مختصات».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit/exams/riazi8-exam5-3.pdf"
+        },
+        {
+          "chapterIndex": 5,
+          "title": "نمونه‌سؤال فصل 6 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «مثلث».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit/exams/riazi8-exam6-2.pdf"
+        },
+        {
+          "chapterIndex": 6,
+          "title": "نمونه‌سؤال فصل 7 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «توان و جذر».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit/exams/riazi8-exam7-1N.pdf"
+        },
+        {
+          "chapterIndex": 7,
+          "title": "نمونه‌سؤال فصل 8 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «آمار و احتمال».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit/exams/riazi8-exam8-2.pdf"
+        },
+        {
+          "chapterIndex": 8,
+          "title": "نمونه‌سؤال فصل 9 ریاضی هشتم",
+          "description": "فایل تمرینی PDF برای فصل «دایره».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1402/riazi8-exam-fasl9-2.pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت اول ریاضی هشتم",
+          "description": "آزمون عمومی نیم‌سال اول؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/riazi/1/soal-8-riazi-n1-(1)1404-(hamyar.in).pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت دوم ریاضی هشتم",
+          "description": "آزمون عمومی نیم‌سال دوم؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/riazi/2/soal-8-riazi-n2-(1)1404-(hamyar.in).pdf"
+        }
+      ]
+    },
+    "science": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه فصل اول علوم هشتم",
+          "description": "خلاصه و نکته‌های فصل «مخلوط و جدا‌سازی مواد».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit05/olum8-booklet1-1.pdf"
+        },
+        {
+          "chapterIndex": 0,
+          "title": "جزوه فصل اول علوم هشتم (همیار)",
+          "description": "جزوه و نکته‌های تکمیلی فصل اول.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/jozve/olum/jozve/behfar/jozve-8-olum-behfar-dars1-(hamyar.in).pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال فصل اول علوم هشتم",
+          "description": "فایل PDF تمرین فصل «مخلوط و جدا‌سازی مواد».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1404/olom8-soal1-2n.pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت اول علوم هشتم",
+          "description": "آزمون عمومی نیم‌سال اول؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/olum/1/soal-8-olum-n1-(1)1403-(hamyar.in).pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت دوم علوم هشتم",
+          "description": "آزمون عمومی نیم‌سال دوم؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/olum/2/soal-8-olum-n2-(1)1404-(hamyar.in).pdf"
+        }
+      ]
+    },
+    "arabic": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه درس اول عربی هشتم",
+          "description": "مرور نکته‌ها و مطالب درس اول عربی.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit99/jozve/arabi8-booklet1-6.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال درس اول عربی هشتم",
+          "description": "فایل PDF نمونه‌سؤال درس اول.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/examnew/l8/arabic8-exam1-1.pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت اول عربی هشتم",
+          "description": "آزمون عمومی نیم‌سال اول؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/arabi/1/soal-8-arabi-n1-(18)1403-(hamyar.in).pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت دوم عربی هشتم",
+          "description": "آزمون عمومی نیم‌سال دوم؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/arabi/2/soal-8-arabi-n2-(1)1404-(hamyar.in).pdf"
+        }
+      ]
+    },
+    "persian": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه درس اول فارسی هشتم",
+          "description": "مرور نکته‌ها و محتوای درس اول فارسی.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1404/farsi8-booklet1n-1n.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت اول فارسی هشتم",
+          "description": "آزمون عمومی نیم‌سال اول؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/farsi/1/soal-8-farsi-n1-(1)1404-(hamyar.in).pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت دوم فارسی هشتم",
+          "description": "آزمون عمومی نیم‌سال دوم؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/farsi/2/soal-8-farsi-n2-(1)1404-(hamyar.in).pdf"
+        }
+      ]
+    },
+    "social": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه درس اول مطالعات اجتماعی هشتم",
+          "description": "خلاصه و نکته‌های درس «تعاون (۱)».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/ejtemae8-booklet1-12.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال درس اول مطالعات اجتماعی هشتم",
+          "description": "فایل PDF تمرین درس «تعاون (۱)».",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/ejtemae8-exam1-5.pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت اول مطالعات اجتماعی هشتم",
+          "description": "آزمون عمومی نیم‌سال اول؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/motaleat/1/soal-8-motaleat-n1-(1)1403-(hamyar.in).pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت دوم مطالعات اجتماعی هشتم",
+          "description": "آزمون عمومی نیم‌سال دوم؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/motaleat/2/soal-8-motaleat-n2-%281%291404-%28hamyar.in%29.pdf"
+        }
+      ]
+    },
+    "religion": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه درس اول پیام‌های آسمان هشتم",
+          "description": "مرور نکته‌ها و مطالب درس اول.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/payam8-booklet1-10.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال درس اول پیام‌های آسمان هشتم",
+          "description": "فایل PDF سؤال‌های درس اول.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/edit1400/payam8-dars1-3.pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت اول پیام‌های آسمان هشتم",
+          "description": "آزمون عمومی نیم‌سال اول؛ فایل PDF.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1404/payam8-term1n-4.pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت دوم پیام‌های آسمان هشتم",
+          "description": "آزمون عمومی نیم‌سال دوم؛ فایل PDF.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1402/payan8n-term2-1403-1.pdf"
+        }
+      ]
+    },
+    "writing": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه درس اول نگارش هشتم",
+          "description": "مرور نکته‌های آموزشی درس اول نگارش.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/e1404/negaresh8-booklet1n-1.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت اول نگارش و املا هشتم",
+          "description": "آزمون عمومی نیم‌سال اول؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1402/emla/nobat1/soal-emla-8-n1-(1)1402_(hamyar.in).pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت دوم نگارش و املا هشتم",
+          "description": "آزمون عمومی نیم‌سال دوم؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1402/emla/nobat2/soal-emla-8-n2-(1)1402_(hamyar.in).pdf"
+        }
+      ]
+    },
+    "english": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "درسنامه درس اول زبان انگلیسی هشتم (همیار)",
+          "description": "نکته‌های درس اول همراه با تمرین.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/jozve/zaban/amoozesh/jozve-8-zaban-amoozesh-dars1-(hamyar.in).pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت اول زبان انگلیسی هشتم",
+          "description": "آزمون عمومی نیم‌سال اول؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/zaban/1/soal-8-zaban-n1-(1)1403-(hamyar.in).pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت دوم زبان انگلیسی هشتم",
+          "description": "آزمون عمومی نیم‌سال دوم؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/zaban/2/soal-8-zaban-n2-(1)1404-(hamyar.in).pdf"
+        }
+      ]
+    },
+    "english_workbook": {
+      "notes": [],
+      "samples": []
+    },
+    "quran": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه درس اول قرآن هشتم (همیار)",
+          "description": "جزوه آموزشی و نکته‌های درس اول قرآن.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/jozve/quran/BLOGFA/jozve-8-quran-Gilan-1(hamyar.in).pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت اول قرآن هشتم",
+          "description": "آزمون عمومی نیم‌سال اول؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/quran/1/soal-8-quran-n1-(1)1403-(hamyar.in).pdf"
+        },
+        {
+          "chapterIndex": -1,
+          "title": "نمونه‌سؤال نوبت دوم قرآن هشتم",
+          "description": "آزمون عمومی نیم‌سال دوم؛ فایل PDF.",
+          "source": "همیار",
+          "url": "https://dl.hamyar.me/8/soal/1404/quran/2/soal-8-quran-n2-(1)1404-(hamyar.in).pdf"
+        }
+      ]
+    },
+    "thinking": {
+      "notes": [],
+      "samples": []
+    },
+    "work": {
+      "notes": [],
+      "samples": []
+    },
+    "art": {
+      "notes": [],
+      "samples": []
+    }
+  }
+}

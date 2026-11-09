@@ -5,7 +5,6 @@ import 'package:hamyar_hashtom_plus/core/widgets/section_header.dart';
 import 'package:hamyar_hashtom_plus/features/home/presentation/widgets/home_feature_grid.dart';
 import 'package:hamyar_hashtom_plus/features/home/presentation/widgets/home_header.dart';
 import 'package:hamyar_hashtom_plus/features/home/presentation/widgets/home_subjects_list.dart';
-import 'package:hamyar_hashtom_plus/features/documents/presentation/widgets/learning_pdfs_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -82,7 +81,6 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SliverToBoxAdapter(child: LearningPdfsCard()),
           SliverToBoxAdapter(
             child: SectionHeader(
               title: 'درس‌های پایه هشتم',

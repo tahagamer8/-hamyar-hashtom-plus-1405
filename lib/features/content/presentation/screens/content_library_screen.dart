@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
-import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/sample_question_library_screen.dart';
-import 'package:hamyar_hashtom_plus/features/documents/presentation/widgets/subject_pdf_card.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_resource_library_screen.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_viewer_screen.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/widgets/book_page_gallery.dart';
 
 class ContentLibraryScreen extends ConsumerStatefulWidget {
@@ -161,11 +161,16 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               chapters: chapters,
             );
           }
-          if (_feature == AppFeature.sampleExams) {
-            return SampleQuestionLibraryScreen(
+          if (_feature == AppFeature.notes ||
+              _feature == AppFeature.sampleExams) {
+            return PdfResourceLibraryScreen(
               subjectId: widget.subjectId,
               subjectTitle: subject['title'] as String? ?? 'درس',
               chapters: chapters,
+              kind: _feature == AppFeature.notes
+                  ? PdfResourceKind.notes
+                  : PdfResourceKind.samples,
+              initialChapterIndex: widget.initialChapterIndex,
             );
           }
           if (chapters.isEmpty) {
@@ -184,11 +189,6 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               Text('ابتدا فصل یا درس موردنظرت را انتخاب کن.',
                   style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 14),
-              if (_feature == AppFeature.lessons)
-                SubjectPdfCard(
-                  subjectId: widget.subjectId,
-                  subjectTitle: subject['title'] as String? ?? 'درس',
-                ),
               DropdownButtonFormField<int>(
                 value: selectedIndex,
                 isExpanded: true,
@@ -217,6 +217,8 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                 chapter: selectedChapter,
                 feature: _feature,
                 favoriteKey: '${widget.subjectId}::${selectedChapter['title']}',
+                subjectId: widget.subjectId,
+                chapterIndex: selectedIndex,
               ),
               if (chapters.length > 1)
                 Row(
@@ -247,10 +249,18 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
 }
 
 class _ChapterContent extends ConsumerWidget {
-  const _ChapterContent({required this.chapter, required this.feature, required this.favoriteKey});
+  const _ChapterContent({
+    required this.chapter,
+    required this.feature,
+    required this.favoriteKey,
+    required this.subjectId,
+    required this.chapterIndex,
+  });
   final Map<String, dynamic> chapter;
   final AppFeature feature;
   final String favoriteKey;
+  final String subjectId;
+  final int chapterIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -265,12 +275,39 @@ class _ChapterContent extends ConsumerWidget {
         .toList(growable: false);
     final questions =
         (chapter['questions'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
+    final advancedQuestions =
+        (chapter['advancedQuestions'] as List<dynamic>? ?? [])
+            .cast<Map<String, dynamic>>();
     final pageAssets = (chapter['bookPageImages'] as List<dynamic>? ?? [])
         .whereType<String>()
         .toList(growable: false);
 
     if (feature == AppFeature.quiz) {
       return _QuizChapter(title: title, questions: questions);
+    }
+    if (feature == AppFeature.lessonQuestions) {
+      final lessonQuestions = [...questions, ...advancedQuestions];
+      if (lessonQuestions.isEmpty) {
+        return Card(
+          child: Padding(
+            padding: const EdgeInsets.all(18),
+            child: Text('برای این درس هنوز پرسشی ثبت نشده است.',
+                style: theme.textTheme.bodyMedium),
+          ),
+        );
+      }
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _ChapterPdfQuickAccess(
+            subjectId: subjectId,
+            chapterIndex: chapterIndex,
+            chapterTitle: title,
+            showNotes: false,
+          ),
+          _QuizChapter(title: title, questions: lessonQuestions),
+        ],
+      );
     }
 
     return Card(
@@ -290,6 +327,14 @@ class _ChapterContent extends ConsumerWidget {
                 ),
               ],
             ),
+            if (feature == AppFeature.lessons) ...[
+              const SizedBox(height: 10),
+              _ChapterPdfQuickAccess(
+                subjectId: subjectId,
+                chapterIndex: chapterIndex,
+                chapterTitle: title,
+              ),
+            ],
             if (chapter['pageStart'] is int) ...[
               const SizedBox(height: 4),
               Text(
@@ -488,33 +533,68 @@ class _QuizChapterState extends State<_QuizChapter> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Card(
-      margin: const EdgeInsets.only(bottom: 14),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(widget.title, style: theme.textTheme.titleMedium),
-            const SizedBox(height: 8),
-            const Text('پاسخ‌ها را انتخاب کن و نتیجه را بررسی کن.'),
-            for (var q = 0; q < widget.questions.length; q++)
-              _buildQuestion(context, q, widget.questions[q]),
-            if (widget.questions.isNotEmpty)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: TextButton.icon(
-                  onPressed: () => setState(() {
-                    _answers.clear();
-                    _checked.clear();
-                  }),
-                  icon: const Icon(Icons.refresh_rounded),
-                  label: const Text('شروع دوباره'),
+    final total = widget.questions.length;
+    final checkedCount = _checked.length;
+    final correctCount = _checked.where((index) {
+      return _answers[index] == widget.questions[index]['answer'];
+    }).length;
+    final progress = total == 0 ? 0.0 : checkedCount / total;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Card(
+          color: theme.colorScheme.primaryContainer.withAlpha(90),
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.title,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
-              ),
-          ],
+                const SizedBox(height: 5),
+                Text('پاسخ‌ها را انتخاب کن و بعد نتیجه و توضیح هر سؤال را ببین.'),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: LinearProgressIndicator(
+                        value: progress,
+                        minHeight: 7,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Text('$checkedCount از $total'),
+                  ],
+                ),
+                if (checkedCount > 0) ...[
+                  const SizedBox(height: 7),
+                  Text('پاسخ درست: $correctCount از $checkedCount'),
+                ],
+              ],
+            ),
+          ),
         ),
-      ),
+        for (var q = 0; q < total; q++)
+          _buildQuestion(context, q, widget.questions[q]),
+        if (total > 0)
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: TextButton.icon(
+              onPressed: () => setState(() {
+                _answers.clear();
+                _checked.clear();
+              }),
+              icon: const Icon(Icons.refresh_rounded),
+              label: const Text('شروع دوباره'),
+            ),
+          ),
+      ],
     );
   }
 
@@ -581,6 +661,84 @@ class _QuizChapterState extends State<_QuizChapter> {
             ),
           const Divider(height: 24),
         ],
+      ),
+    );
+  }
+}
+
+class _ChapterPdfQuickAccess extends StatelessWidget {
+  const _ChapterPdfQuickAccess({
+    required this.subjectId,
+    required this.chapterIndex,
+    required this.chapterTitle,
+    this.showNotes = true,
+  });
+
+  final String subjectId;
+  final int chapterIndex;
+  final String chapterTitle;
+  final bool showNotes;
+
+  String _assetPath(String kind) =>
+      'assets/generated_pdfs/chapters/$subjectId/'
+      'Fahmino-$subjectId-Chapter-${chapterIndex + 1}-$kind-FA.pdf';
+
+  void _open(BuildContext context, String kind, String label) {
+    final path = _assetPath(kind);
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => PdfViewerScreen.asset(
+          title: '$label · $chapterTitle',
+          assetPath: path,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      color: theme.colorScheme.surfaceContainerLow,
+      margin: const EdgeInsets.only(bottom: 12),
+      child: Padding(
+        padding: const EdgeInsets.all(13),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'فایل‌های PDF همین درس',
+              style: theme.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'فایل‌ها داخل برنامه باز می‌شوند و برای مطالعهٔ آفلاین در دسترس‌اند.',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                if (showNotes)
+                  OutlinedButton.icon(
+                    onPressed: () => _open(context, 'Notes', 'جزوه PDF'),
+                    icon: const Icon(Icons.menu_book_rounded),
+                    label: const Text('جزوه PDF'),
+                  ),
+                FilledButton.tonalIcon(
+                  onPressed: () => _open(context, 'Questions', 'نمونه‌سؤال PDF'),
+                  icon: const Icon(Icons.quiz_outlined),
+                  label: const Text('نمونه‌سؤال PDF'),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

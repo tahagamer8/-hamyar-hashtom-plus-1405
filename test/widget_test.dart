@@ -72,10 +72,41 @@ class _MapAssetBundle extends CachingAssetBundle {
   }
 }
 
+const _testPdfResources = r'''
+{
+  "schemaVersion": 1,
+  "subjects": {
+    "math": {
+      "notes": [
+        {
+          "chapterIndex": 0,
+          "title": "جزوه فصل اول ریاضی هشتم",
+          "description": "مرور نکته‌ها و مثال‌های فصل اول.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/test-notes.pdf"
+        }
+      ],
+      "samples": [
+        {
+          "chapterIndex": 0,
+          "title": "نمونه‌سؤال فصل اول ریاضی هشتم",
+          "description": "فایل تمرینی PDF فصل اول.",
+          "source": "پادرس",
+          "url": "https://static.paadars.com/files/test-sample.pdf"
+        }
+      ]
+    }
+  }
+}
+''';
+
 Widget _contentApp(String featureId) => ProviderScope(
       child: MaterialApp(
         home: DefaultAssetBundle(
-          bundle: _MemoryAssetBundle(_testCatalog),
+          bundle: _MapAssetBundle({
+            'assets/content/catalog_fa.json': _testCatalog,
+            'assets/content/pdf_resources.json': _testPdfResources,
+          }),
           child: ContentLibraryScreen(
             subjectId: 'math',
             featureId: featureId,
@@ -293,10 +324,13 @@ void main() {
     expect(find.textContaining('عددهای گویا را می‌توان'), findsOneWidget);
   });
 
-  testWidgets('notes content loads from catalog bundle', (tester) async {
+  testWidgets('notes section shows only short PDF resource cards', (tester) async {
     await tester.pumpWidget(_contentApp('notes'));
     await _pumpUiFrames(tester);
-    expect(find.text('قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید.'), findsOneWidget);
+    expect(find.text('جزوه فصل اول ریاضی هشتم'), findsOneWidget);
+    expect(find.text('مرور نکته‌ها و مثال‌های فصل اول.'), findsOneWidget);
+    expect(find.text('مشاهده PDF'), findsNWidgets(2));
+    expect(find.text('قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید.'), findsNothing);
   });
 
   testWidgets('step-by-step solution loads from catalog bundle', (tester) async {
@@ -305,34 +339,33 @@ void main() {
     expect(find.text('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
   });
 
-  testWidgets('sample question library offers chapter and term modes', (tester) async {
+  testWidgets('sample exam section shows PDF files only', (tester) async {
     await tester.pumpWidget(_contentApp('sampleExams'));
     await _pumpUiFrames(tester);
 
-    expect(find.text('فصل‌به‌فصل'), findsOneWidget);
-    expect(find.text('نوبت اول و دوم'), findsOneWidget);
-
-    await tester.tap(find.text('نوبت اول و دوم'));
-    await _pumpUiFrames(tester);
-    expect(find.text('نوبت اول'), findsOneWidget);
-    expect(find.text('نوبت دوم'), findsOneWidget);
-
-    await tester.tap(find.text('شروع آزمون تیزهوشان نوبت اول'));
-    await _pumpUiFrames(tester);
-    expect(find.text('آزمون تألیفی تیزهوشان نوبت اول'), findsOneWidget);
-    expect(find.text('ثبت و پایان آزمون'), findsOneWidget);
+    expect(find.text('نمونه‌سؤال فصل اول ریاضی هشتم'), findsOneWidget);
+    expect(find.text('فایل تمرینی PDF فصل اول.'), findsOneWidget);
+    expect(find.text('مشاهده PDF'), findsNWidgets(2));
+    expect(find.text('فصل‌به‌فصل'), findsNothing);
+    expect(find.text('ثبت و پایان آزمون'), findsNothing);
   });
 
-  testWidgets('sample questions reveal answer key on demand', (tester) async {
-    await tester.pumpWidget(_contentApp('sampleExams'));
+  testWidgets('lesson questions check answers and show explanations', (tester) async {
+    await tester.pumpWidget(_contentApp('lessonQuestions'));
     await _pumpUiFrames(tester);
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
-    expect(find.text('پاسخ: ۳/۴'), findsNothing);
-    await tester.scrollUntilVisible(find.text('نمایش پاسخ و توضیح'), 250);
-    await _pumpUiFrames(tester);
-    await tester.tap(find.text('نمایش پاسخ و توضیح'));
+    expect(find.textContaining('آفرین، پاسخ درست است.'), findsNothing);
+
+    await tester.ensureVisible(find.text('۳/۴').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('۳/۴').first);
     await tester.pump();
-    expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
+    await tester.ensureVisible(find.text('بررسی پاسخ'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('بررسی پاسخ'));
+    await tester.pump();
+
+    expect(find.textContaining('آفرین، پاسخ درست است.'), findsOneWidget);
     expect(find.textContaining('۱/۲ برابر ۲/۴ است'), findsOneWidget);
   });
 
