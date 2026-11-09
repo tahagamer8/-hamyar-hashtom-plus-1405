@@ -423,8 +423,10 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 30));
 
-    expect(find.text('1 از 1'), findsOneWidget);
     expect(find.text('مطالعه شد؛ برداشتن علامت'), findsOneWidget);
+    await tester.drag(find.byType(CustomScrollView), const Offset(0, 1200));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('1 از 1'), findsOneWidget);
   });
 
   testWidgets('chapter can be added to favorites', (tester) async {
@@ -464,6 +466,8 @@ void main() {
     await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump();
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
