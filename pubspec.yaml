@@ -31,6 +31,7 @@ flutter:
     - assets/content/pdf_resources.json
     - assets/content/subjects/
     - assets/generated_pdfs/
+    - assets/generated_pdfs/chapters/
   fonts:
     - family: Vazirmatn
       fonts:
