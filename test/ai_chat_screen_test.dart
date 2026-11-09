@@ -118,4 +118,18 @@ void main() {
 
     expect(find.textContaining('زاویه از دو نیم‌خط با مبدأ مشترک تشکیل می‌شود.'), findsOneWidget);
   });
+
+  testWidgets('offline guide searches all chapters when the all-chapters filter is selected', (tester) async {
+    await tester.pumpWidget(_testApp());
+    await _pumpUiFrames(tester);
+
+    await tester.enterText(find.byType(TextField), 'زاویه چیست؟');
+    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(find.textContaining('زاویه از دو نیم‌خط با مبدأ مشترک تشکیل می‌شود.'), findsOneWidget);
+    expect(find.textContaining('عددهای گویا را می‌توان به صورت کسر نوشت.'), findsNothing);
+  });
+
 }
