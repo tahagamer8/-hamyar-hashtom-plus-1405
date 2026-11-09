@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_viewer_screen.dart';
 
 enum PdfResourceKind { notes, samples }
 
@@ -28,20 +28,29 @@ class PdfResourceLibraryScreen extends StatefulWidget {
 }
 
 class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
-  Future<Map<String, dynamic>>? _resourcesFuture;
+  Future<List<Map<String, dynamic>>>? _resourcesFuture;
   late int _selectedChapterIndex;
 
-  String get _resourceKey =>
-      widget.kind == PdfResourceKind.notes ? 'notes' : 'samples';
+  bool get _isNotes => widget.kind == PdfResourceKind.notes;
 
-  String get _emptyMessage => widget.kind == PdfResourceKind.notes
-      ? 'برای این فصل هنوز فایل جزوهٔ PDF تأییدشده‌ای ثبت نشده است.'
-      : 'برای این فصل هنوز فایل نمونه‌سؤال PDF تأییدشده‌ای ثبت نشده است.';
+  String get _resourceKey => _isNotes ? 'notes' : 'samples';
+
+  String get _localAssetPath {
+    final number = _selectedChapterIndex + 1;
+    final kind = _isNotes ? 'Notes' : 'Questions';
+    return 'assets/generated_pdfs/chapters/${widget.subjectId}/'
+        'Fahmino-${widget.subjectId}-Chapter-$number-$kind-FA.pdf';
+  }
+
+  String get _localTitle => _isNotes
+      ? 'جزوهٔ فصل ${_selectedChapterIndex + 1} - فهمینو'
+      : 'نمونه‌سؤال فصل ${_selectedChapterIndex + 1} - فهمینو';
 
   @override
   void initState() {
     super.initState();
-    _selectedChapterIndex = widget.initialChapterIndex;
+    _selectedChapterIndex = widget.initialChapterIndex
+        .clamp(0, widget.chapters.isEmpty ? 0 : widget.chapters.length - 1);
   }
 
   @override
@@ -56,47 +65,63 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
     if (oldWidget.subjectId != widget.subjectId ||
         oldWidget.kind != widget.kind) {
       _resourcesFuture = _loadResources(DefaultAssetBundle.of(context));
-      _selectedChapterIndex = widget.initialChapterIndex;
+      _selectedChapterIndex = widget.initialChapterIndex
+          .clamp(0, widget.chapters.isEmpty ? 0 : widget.chapters.length - 1);
     }
   }
 
-  Future<Map<String, dynamic>> _loadResources(AssetBundle bundle) async {
+  Future<List<Map<String, dynamic>>> _loadResources(AssetBundle bundle) async {
     final raw = await bundle.loadString('assets/content/pdf_resources.json');
     final decoded = jsonDecode(raw);
     if (decoded is! Map<String, dynamic>) {
       throw const FormatException('فهرست فایل‌های PDF معتبر نیست.');
     }
     final subjects = decoded['subjects'];
-    if (subjects is! Map<String, dynamic>) return const {};
+    if (subjects is! Map<String, dynamic>) return const [];
     final subject = subjects[widget.subjectId];
-    if (subject is! Map<String, dynamic>) return const {};
+    if (subject is! Map<String, dynamic>) return const [];
     final entries = subject[_resourceKey];
-    if (entries is! List) return const {};
-    return {
-      'items': entries.whereType<Map<String, dynamic>>().where((item) {
-        final url = item['url'];
-        return url is String &&
-            Uri.tryParse(url)?.scheme == 'https' &&
-            url.toLowerCase().contains('.pdf');
-      }).toList(growable: false),
-    };
+    if (entries is! List) return const [];
+
+    return entries.whereType<Map<String, dynamic>>().where((item) {
+      final value = item['url'];
+      final uri = value is String ? Uri.tryParse(value) : null;
+      return uri != null &&
+          uri.scheme == 'https' &&
+          uri.host.isNotEmpty &&
+          uri.path.toLowerCase().endsWith('.pdf');
+    }).toList(growable: false);
   }
 
-  Future<void> _openPdf(String url) async {
-    final uri = Uri.tryParse(url);
-    if (uri == null || uri.scheme != 'https' || !url.toLowerCase().contains('.pdf')) {
+  void _openLocalPdf() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => PdfViewerScreen.asset(
+          title: _localTitle,
+          assetPath: _localAssetPath,
+        ),
+      ),
+    );
+  }
+
+  void _openExternalPdf(Map<String, dynamic> item) {
+    final url = item['url'];
+    final uri = url is String ? Uri.tryParse(url) : null;
+    if (uri == null ||
+        uri.scheme != 'https' ||
+        uri.host.isEmpty ||
+        !uri.path.toLowerCase().endsWith('.pdf')) {
       _showMessage('نشانی فایل PDF معتبر نیست.');
       return;
     }
-    try {
-      final opened = await launchUrl(
-        uri,
-        mode: LaunchMode.externalApplication,
-      );
-      if (!opened) _showMessage('باز کردن فایل PDF ممکن نشد.');
-    } catch (_) {
-      _showMessage('ارتباط با فایل PDF برقرار نشد؛ اتصال اینترنت را بررسی کن.');
-    }
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => PdfViewerScreen.network(
+          title: item['title'] as String? ?? 'فایل PDF',
+          uri: uri,
+        ),
+      ),
+    );
   }
 
   void _showMessage(String message) {
@@ -116,8 +141,10 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
     final safeIndex = _selectedChapterIndex
         .clamp(0, widget.chapters.length - 1)
         .toInt();
+    final chapterTitle =
+        widget.chapters[safeIndex]['title'] as String? ?? 'درس';
 
-    return FutureBuilder<Map<String, dynamic>>(
+    return FutureBuilder<List<Map<String, dynamic>>>(
       future: _resourcesFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
@@ -127,31 +154,30 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
           return const Center(child: Text('فهرست فایل‌های PDF بارگذاری نشد.'));
         }
 
-        final allItems =
-            (snapshot.data?['items'] as List<dynamic>? ?? const []);
-        final items = allItems.where((item) {
-          return item is Map<String, dynamic> &&
-              (item['chapterIndex'] == safeIndex ||
-                  item['chapterIndex'] == -1);
-        }).cast<Map<String, dynamic>>().toList(growable: false);
+        final externalItems = (snapshot.data ?? const []).where((item) {
+          return item['chapterIndex'] == safeIndex ||
+              item['chapterIndex'] == -1;
+        }).toList(growable: false);
 
         return ListView(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           children: [
             Text(
               widget.subjectTitle,
-              style: theme.textTheme.titleLarge,
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w800,
+              ),
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 4),
             Text(
-              widget.kind == PdfResourceKind.notes
-                  ? 'جزوه‌های آموزشی فقط به‌صورت فایل PDF'
-                  : 'نمونه‌سؤال‌ها فقط به‌صورت فایل PDF',
+              _isNotes
+                  ? 'جزوه‌های آموزشی؛ فقط فایل PDF'
+                  : 'نمونه‌سؤال‌ها؛ فقط فایل PDF',
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 16),
             DropdownButtonFormField<int>(
               value: safeIndex,
               isExpanded: true,
@@ -176,83 +202,117 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
                 }
               },
             ),
-            const SizedBox(height: 16),
-            if (items.isEmpty)
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(18),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.picture_as_pdf_outlined,
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          _emptyMessage,
-                          style: theme.textTheme.bodyMedium,
-                        ),
-                      ),
-                    ],
-                  ),
+            const SizedBox(height: 10),
+            Text(
+              chapterTitle,
+              style: theme.textTheme.titleSmall?.copyWith(
+                color: theme.colorScheme.primary,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 10),
+            _PdfResourceTile(
+              title: _localTitle,
+              description: _isNotes
+                  ? 'مرور نکته‌ها، مثال و آموزش همین فصل؛ قابل مشاهده بدون اینترنت.'
+                  : 'سؤال‌های همین فصل همراه با پاسخ‌نامه و توضیح؛ قابل مشاهده بدون اینترنت.',
+              source: 'فهمینو · آفلاین',
+              onPressed: _openLocalPdf,
+              isLocal: true,
+            ),
+            if (externalItems.isNotEmpty) ...[
+              const SizedBox(height: 18),
+              Text(
+                'فایل‌های تکمیلی از منابع آموزشی',
+                style: theme.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w800,
                 ),
-              )
-            else
-              for (final item in items)
-                Card(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  child: Padding(
-                    padding: const EdgeInsets.all(14),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.picture_as_pdf_rounded,
-                              color: theme.colorScheme.primary,
-                            ),
-                            const SizedBox(width: 9),
-                            Expanded(
-                              child: Text(
-                                item['title'] as String? ?? 'فایل PDF',
-                                style: theme.textTheme.titleSmall,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          item['description'] as String? ?? 'فایل آموزشی PDF',
-                          style: theme.textTheme.bodySmall,
-                        ),
-                        if (item['source'] is String) ...[
-                          const SizedBox(height: 5),
-                          Text(
-                            'منبع: ${item['source']}',
-                            style: theme.textTheme.labelSmall?.copyWith(
-                              color: theme.colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ],
-                        const SizedBox(height: 10),
-                        Align(
-                          alignment: AlignmentDirectional.centerStart,
-                          child: FilledButton.tonalIcon(
-                            onPressed: () => _openPdf(item['url'] as String),
-                            icon: const Icon(Icons.open_in_new_rounded),
-                            label: const Text('باز کردن فایل PDF'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+              ),
+              const SizedBox(height: 8),
+              for (final item in externalItems)
+                _PdfResourceTile(
+                  title: item['title'] as String? ?? 'فایل PDF',
+                  description:
+                      item['description'] as String? ?? 'فایل آموزشی PDF',
+                  source: item['source'] as String? ?? 'منبع آموزشی',
+                  onPressed: () => _openExternalPdf(item),
                 ),
+            ],
           ],
         );
       },
+    );
+  }
+}
+
+class _PdfResourceTile extends StatelessWidget {
+  const _PdfResourceTile({
+    required this.title,
+    required this.description,
+    required this.source,
+    required this.onPressed,
+    this.isLocal = false,
+  });
+
+  final String title;
+  final String description;
+  final String source;
+  final VoidCallback onPressed;
+  final bool isLocal;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      margin: const EdgeInsets.only(bottom: 9),
+      clipBehavior: Clip.antiAlias,
+      child: Padding(
+        padding: const EdgeInsets.all(13),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.picture_as_pdf_rounded,
+                  color: theme.colorScheme.primary,
+                  size: 23,
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Text(description, style: theme.textTheme.bodySmall),
+            const SizedBox(height: 5),
+            Text(
+              'منبع: $source',
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 9),
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: FilledButton.tonalIcon(
+                onPressed: onPressed,
+                icon: Icon(
+                  isLocal ? Icons.offline_pin_rounded : Icons.open_in_new_rounded,
+                ),
+                label: const Text('مشاهده PDF'),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
