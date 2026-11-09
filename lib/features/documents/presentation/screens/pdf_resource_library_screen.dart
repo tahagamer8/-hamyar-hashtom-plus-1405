@@ -126,7 +126,8 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
             (snapshot.data?['items'] as List<dynamic>? ?? const []);
         final items = allItems.where((item) {
           return item is Map<String, dynamic> &&
-              item['chapterIndex'] == safeIndex;
+              (item['chapterIndex'] == safeIndex ||
+                  item['chapterIndex'] == -1);
         }).cast<Map<String, dynamic>>().toList(growable: false);
 
         return ListView(
