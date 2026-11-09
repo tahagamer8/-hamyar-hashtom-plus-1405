@@ -234,8 +234,6 @@ void main() {
   });
 
   testWidgets('home screen renders Fahmino branding', (tester) async {
-    final semantics = tester.ensureSemantics();
-    addTearDown(semantics.dispose);
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
     await _pumpUiFrames(tester);
     expect(find.text(AppConstants.appName), findsWidgets);
