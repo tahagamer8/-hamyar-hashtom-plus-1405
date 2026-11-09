@@ -125,8 +125,28 @@ class _SectionTile extends StatelessWidget {
                 child: Icon(feature.icon, color: feature.color, size: 22),
               ),
               const SizedBox(width: 12),
-              Expanded(child: Text(feature.title,
-                  style: theme.textTheme.titleSmall)),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      feature.title,
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      feature.description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Icon(Icons.chevron_left_rounded,
                   color: theme.colorScheme.onSurfaceVariant),
             ],
