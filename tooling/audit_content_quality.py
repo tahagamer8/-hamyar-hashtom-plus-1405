@@ -392,7 +392,19 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
     }
     return {
         "auditDate": "2026-11-09",
-        "method": "Conservative structural and traceability audit; not a certification of factual accuracy.",
+        "method": "Conservative pedagogical audit plus strict official-PDF and chapter-specific evidence validation; not a certification of factual accuracy.",
+        "sourceMappingRequirements": {
+            "officialHost": "chap.sch.ir",
+            "sourceVerificationStatus": "official_pdf_content_parsed",
+            "chapterMapping": [
+                "status=verified",
+                "officialTitle is non-empty",
+                "positive ordered physical PDF page range",
+                "verificationMethod is toc_and_page_heading or editorial_review",
+                "verifiedAt is a valid ISO date",
+            ],
+            "legacyFlagsAreNotEvidence": ["textbookContentsVerified", "sourceLesson", "textbookSourceFile"],
+        },
         "thresholdNotes": {
             "dedicatedLessonCharacters": 350,
             "exampleCharacters": 80,
@@ -447,14 +459,14 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         "## خلاصهٔ درس‌به‌درس",
         "",
-        "| بسته | بخش | سؤال پایه | سؤال افزوده | منبع‌نگاشت‌شده | ناقص | نیازمند منبع | درسنامه | آزمون فصل |",
+        "| بسته | بخش | سؤال پایه | سؤال افزوده | PDF و فصل تأییدشده | نقص آموزشی | وضعیت نهایی | درسنامه | آزمون فصل |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for subject in report["subjects"]:
         lines.append(
             f"| {subject['title']} ({subject['id']}) | {subject['chapterCount']} | "
             f"{subject['baseQuestionCount']} | {subject['advancedQuestionCount']} | "
-            f"{subject['sourceMappedCount']} | {subject['incompleteCount']} | "
+            f"{subject['sourceMappedCount']} | {subject['educationallyIncompleteCount']} | "
             f"{subject['needsSourceCount']} | {subject['dedicatedLessonCount']} | "
             f"{subject['chapterExamCount']} |"
         )
