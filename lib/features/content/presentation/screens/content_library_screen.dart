@@ -466,7 +466,35 @@ class _ChapterContent extends ConsumerWidget {
               ],
             ] else if (feature == AppFeature.notes) ...[
               for (final point in points) _Bullet(text: point),
-            ] else if (feature == AppFeature.solutions) ...[
+            ] else if (feature == AppFeature.flashcards) ...[
+          const SizedBox(height: 12),
+          _ContentPanel(
+            title: 'کارت‌های مرور این بخش',
+            icon: Icons.style_rounded,
+            child: _FlashcardDeck(
+              cards: [
+                for (var i = 0; i < points.length; i++)
+                  _StudyFlashcard(
+                    front: 'نکتهٔ ' + (i + 1).toString(),
+                    back: points[i],
+                  ),
+                ...questions.map((question) {
+                  final options =
+                      (question['options'] as List<dynamic>? ?? []).whereType<String>().toList();
+                  final answerIndex = question['answer'] as int? ?? -1;
+                  final answerText = answerIndex >= 0 && answerIndex < options.length
+                      ? options[answerIndex]
+                      : 'پاسخ در داده‌ها ثبت نشده است';
+                  final explanation = question['explanation'] as String? ?? '';
+                  return _StudyFlashcard(
+                    front: question['question'] as String? ?? 'پرسش مروری',
+                    back: 'پاسخ: ' + answerText + '\n' + explanation,
+                  );
+                }),
+              ],
+            ),
+          ),
+        ] else if (feature == AppFeature.solutions) ...[
               Text(chapter['example'] as String? ?? 'مثال آموزشی',
                   style: theme.textTheme.bodyMedium),
               const SizedBox(height: 10),
@@ -722,6 +750,7 @@ class _LearningPageHeader extends StatelessWidget {
   String get _description => switch (feature) {
     AppFeature.lessons => 'مفهوم را یاد بگیر، مثال ببین و نکته‌ها را مرور کن.',
     AppFeature.notes => 'خلاصه‌ها و نکته‌های مهم را سریع مرور کن.',
+    AppFeature.flashcards => 'با یادآوری فعال، نکته‌ها و پرسش‌ها را تمرین کن.',
     AppFeature.solutions => 'راه‌حل‌ها را مرحله‌به‌مرحله دنبال کن.',
     AppFeature.sampleExams => 'سؤال‌ها را تمرین کن و پاسخ را بررسی کن.',
     AppFeature.quiz => 'دانسته‌هایت را با آزمون بسنج.',
@@ -841,3 +870,141 @@ class _ChapterIndexSelector extends StatelessWidget {
     );
   }
 }
+
+
+class _StudyFlashcard {
+  const _StudyFlashcard({required this.front, required this.back});
+  final String front;
+  final String back;
+}
+
+class _FlashcardDeck extends StatefulWidget {
+  const _FlashcardDeck({required this.cards});
+  final List<_StudyFlashcard> cards;
+
+  @override
+  State<_FlashcardDeck> createState() => _FlashcardDeckState();
+}
+
+class _FlashcardDeckState extends State<_FlashcardDeck> {
+  int _index = 0;
+  bool _showBack = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    if (widget.cards.isEmpty) {
+      return const Text('برای این بخش هنوز کارت مرور ساخته نشده است.');
+    }
+    final card = widget.cards[_index];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                'کارت ' + (_index + 1).toString() + ' از ' + widget.cards.length.toString(),
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+            TextButton.icon(
+              onPressed: () => setState(() => _showBack = !_showBack),
+              icon: Icon(_showBack ? Icons.visibility_off_outlined : Icons.visibility_outlined),
+              label: Text(_showBack ? 'دیدن روی کارت' : 'نمایش پاسخ'),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Semantics(
+          button: true,
+          label: _showBack ? 'پاسخ کارت؛ برای برگشت لمس کن' : 'پرسش کارت؛ برای دیدن پاسخ لمس کن',
+          child: InkWell(
+            borderRadius: BorderRadius.circular(18),
+            onTap: () => setState(() => _showBack = !_showBack),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              constraints: const BoxConstraints(minHeight: 170),
+              width: double.infinity,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: _showBack
+                    ? theme.colorScheme.primaryContainer
+                    : theme.colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: theme.colorScheme.outlineVariant),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    _showBack ? Icons.lightbulb_rounded : Icons.touch_app_rounded,
+                    size: 28,
+                    color: _showBack
+                        ? theme.colorScheme.onPrimaryContainer
+                        : theme.colorScheme.primary,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    _showBack ? card.back : card.front,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      height: 1.7,
+                      fontWeight: FontWeight.w700,
+                      color: _showBack
+                          ? theme.colorScheme.onPrimaryContainer
+                          : theme.colorScheme.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    'برای برگرداندن کارت لمس کن',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: _showBack
+                          ? theme.colorScheme.onPrimaryContainer
+                          : theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton.icon(
+                onPressed: _index > 0
+                    ? () => setState(() {
+                          _index--;
+                          _showBack = false;
+                        })
+                    : null,
+                icon: const Icon(Icons.chevron_right_rounded),
+                label: const Text('قبلی'),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: FilledButton.icon(
+                onPressed: _index < widget.cards.length - 1
+                    ? () => setState(() {
+                          _index++;
+                          _showBack = false;
+                        })
+                    : null,
+                icon: const Icon(Icons.chevron_left_rounded),
+                label: const Text('بعدی'),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
