@@ -6,6 +6,7 @@ import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/fa
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
 import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_resource_library_screen.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_viewer_screen.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/widgets/book_page_gallery.dart';
 
 class ContentLibraryScreen extends ConsumerStatefulWidget {
@@ -216,6 +217,8 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                 chapter: selectedChapter,
                 feature: _feature,
                 favoriteKey: '${widget.subjectId}::${selectedChapter['title']}',
+                subjectId: widget.subjectId,
+                chapterIndex: selectedIndex,
               ),
               if (chapters.length > 1)
                 Row(
@@ -246,10 +249,18 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
 }
 
 class _ChapterContent extends ConsumerWidget {
-  const _ChapterContent({required this.chapter, required this.feature, required this.favoriteKey});
+  const _ChapterContent({
+    required this.chapter,
+    required this.feature,
+    required this.favoriteKey,
+    required this.subjectId,
+    required this.chapterIndex,
+  });
   final Map<String, dynamic> chapter;
   final AppFeature feature;
   final String favoriteKey;
+  final String subjectId;
+  final int chapterIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -285,7 +296,18 @@ class _ChapterContent extends ConsumerWidget {
           ),
         );
       }
-      return _QuizChapter(title: title, questions: lessonQuestions);
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _ChapterPdfQuickAccess(
+            subjectId: subjectId,
+            chapterIndex: chapterIndex,
+            chapterTitle: title,
+            showNotes: false,
+          ),
+          _QuizChapter(title: title, questions: lessonQuestions),
+        ],
+      );
     }
 
     return Card(
@@ -305,6 +327,14 @@ class _ChapterContent extends ConsumerWidget {
                 ),
               ],
             ),
+            if (feature == AppFeature.lessons) ...[
+              const SizedBox(height: 10),
+              _ChapterPdfQuickAccess(
+                subjectId: subjectId,
+                chapterIndex: chapterIndex,
+                chapterTitle: title,
+              ),
+            ],
             if (chapter['pageStart'] is int) ...[
               const SizedBox(height: 4),
               Text(
@@ -596,6 +626,84 @@ class _QuizChapterState extends State<_QuizChapter> {
             ),
           const Divider(height: 24),
         ],
+      ),
+    );
+  }
+}
+
+class _ChapterPdfQuickAccess extends StatelessWidget {
+  const _ChapterPdfQuickAccess({
+    required this.subjectId,
+    required this.chapterIndex,
+    required this.chapterTitle,
+    this.showNotes = true,
+  });
+
+  final String subjectId;
+  final int chapterIndex;
+  final String chapterTitle;
+  final bool showNotes;
+
+  String _assetPath(String kind) =>
+      'assets/generated_pdfs/chapters/$subjectId/'
+      'Fahmino-$subjectId-Chapter-${chapterIndex + 1}-$kind-FA.pdf';
+
+  void _open(BuildContext context, String kind, String label) {
+    final path = _assetPath(kind);
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => PdfViewerScreen.asset(
+          title: '$label · $chapterTitle',
+          assetPath: path,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      color: theme.colorScheme.surfaceContainerLow,
+      margin: const EdgeInsets.only(bottom: 12),
+      child: Padding(
+        padding: const EdgeInsets.all(13),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'فایل‌های PDF همین درس',
+              style: theme.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'فایل‌ها داخل برنامه باز می‌شوند و برای مطالعهٔ آفلاین در دسترس‌اند.',
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                if (showNotes)
+                  OutlinedButton.icon(
+                    onPressed: () => _open(context, 'Notes', 'جزوه PDF'),
+                    icon: const Icon(Icons.menu_book_rounded),
+                    label: const Text('جزوه PDF'),
+                  ),
+                FilledButton.tonalIcon(
+                  onPressed: () => _open(context, 'Questions', 'نمونه‌سؤال PDF'),
+                  icon: const Icon(Icons.quiz_outlined),
+                  label: const Text('نمونه‌سؤال PDF'),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
