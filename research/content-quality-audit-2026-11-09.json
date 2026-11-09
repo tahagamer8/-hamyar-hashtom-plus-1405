@@ -1,7 +1,7 @@
 {
   "auditDate": "2026-11-09",
   "contentSnapshotCommit": "299d65e4705d1ad7475e1560a144be49fb2bdfa3",
-  "method": "ممیزی محافظه‌کارانهٔ ساختار، کفایت آموزشی و ردیابی منبع؛ نه گواهی صحت علمی.",
+  "method": "Conservative pedagogical audit plus strict official-PDF and chapter-specific evidence validation; not a certification of factual accuracy.",
   "thresholdNotes": {
     "dedicatedLessonCharacters": 350,
     "exampleCharacters": 80,
@@ -25,16 +25,18 @@
     "multipleChoiceQuestionCount": 593,
     "nonMultipleChoiceQuestionCount": 0,
     "duplicateQuestionPromptCount": 0,
-    "sourceMappedCount": 86,
-    "needsSourceCount": 59,
-    "incompleteCount": 86,
+    "sourceMappedCount": 0,
+    "needsSourceCount": 145,
+    "incompleteCount": 0,
     "completeCount": 0,
     "dedicatedLessonCount": 0,
     "chapterExamCount": 0,
     "genericReasoningSectionCount": 145,
     "tautologicalReasoningSectionCount": 145,
     "shortExampleCount": 100,
-    "shortSolutionStepCount": 10
+    "shortSolutionStepCount": 10,
+    "sourceUnverifiedCount": 145,
+    "educationallyIncompleteCount": 145
   },
   "subjects": [
     {
@@ -44,9 +46,9 @@
       "baseQuestionCount": 30,
       "advancedQuestionCount": 10,
       "questionCount": 40,
-      "sourceMappedCount": 9,
-      "needsSourceCount": 1,
-      "incompleteCount": 9,
+      "sourceMappedCount": 0,
+      "needsSourceCount": 10,
+      "incompleteCount": 0,
       "completeCount": 0,
       "dedicatedLessonCount": 0,
       "chapterExamCount": 0,
@@ -56,7 +58,9 @@
       "shortSolutionStepCount": 1,
       "textbookEdition": "چاپ اول، ۱۴۰۵",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C809.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 10,
+      "educationallyIncompleteCount": 10
     },
     {
       "id": "art",
@@ -65,9 +69,9 @@
       "baseQuestionCount": 15,
       "advancedQuestionCount": 5,
       "questionCount": 20,
-      "sourceMappedCount": 4,
-      "needsSourceCount": 1,
-      "incompleteCount": 4,
+      "sourceMappedCount": 0,
+      "needsSourceCount": 5,
+      "incompleteCount": 0,
       "completeCount": 0,
       "dedicatedLessonCount": 0,
       "chapterExamCount": 0,
@@ -77,7 +81,9 @@
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C808.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 5,
+      "educationallyIncompleteCount": 5
     },
     {
       "id": "english",
@@ -86,9 +92,9 @@
       "baseQuestionCount": 21,
       "advancedQuestionCount": 7,
       "questionCount": 28,
-      "sourceMappedCount": 7,
-      "needsSourceCount": 0,
-      "incompleteCount": 7,
+      "sourceMappedCount": 0,
+      "needsSourceCount": 7,
+      "incompleteCount": 0,
       "completeCount": 0,
       "dedicatedLessonCount": 0,
       "chapterExamCount": 0,
@@ -98,7 +104,9 @@
       "shortSolutionStepCount": 1,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C810.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 7,
+      "educationallyIncompleteCount": 7
     },
     {
       "id": "english_workbook",
@@ -107,9 +115,9 @@
       "baseQuestionCount": 21,
       "advancedQuestionCount": 7,
       "questionCount": 28,
-      "sourceMappedCount": 6,
-      "needsSourceCount": 1,
-      "incompleteCount": 6,
+      "sourceMappedCount": 0,
+      "needsSourceCount": 7,
+      "incompleteCount": 0,
       "completeCount": 0,
       "dedicatedLessonCount": 0,
       "chapterExamCount": 0,
@@ -119,7 +127,9 @@
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C811.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 7,
+      "educationallyIncompleteCount": 7
     },
     {
       "id": "math",
@@ -128,9 +138,9 @@
       "baseQuestionCount": 54,
       "advancedQuestionCount": 9,
       "questionCount": 63,
-      "sourceMappedCount": 9,
-      "needsSourceCount": 0,
-      "incompleteCount": 9,
+      "sourceMappedCount": 0,
+      "needsSourceCount": 9,
+      "incompleteCount": 0,
       "completeCount": 0,
       "dedicatedLessonCount": 0,
       "chapterExamCount": 0,
@@ -140,7 +150,9 @@
       "shortSolutionStepCount": 6,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C805.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 9,
+      "educationallyIncompleteCount": 9
     },
     {
       "id": "persian",
@@ -161,7 +173,9 @@
       "shortSolutionStepCount": 0,
       "textbookEdition": "1405-1406",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C803.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 17,
+      "educationallyIncompleteCount": 17
     },
     {
       "id": "quran",
@@ -182,7 +196,9 @@
       "shortSolutionStepCount": 0,
       "textbookEdition": "1405-1406",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C801.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 12,
+      "educationallyIncompleteCount": 12
     },
     {
       "id": "religion",
@@ -203,7 +219,9 @@
       "shortSolutionStepCount": 2,
       "textbookEdition": "1405-1406",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C802.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 15,
+      "educationallyIncompleteCount": 15
     },
     {
       "id": "science",
@@ -212,9 +230,9 @@
       "baseQuestionCount": 75,
       "advancedQuestionCount": 15,
       "questionCount": 90,
-      "sourceMappedCount": 14,
-      "needsSourceCount": 1,
-      "incompleteCount": 14,
+      "sourceMappedCount": 0,
+      "needsSourceCount": 15,
+      "incompleteCount": 0,
       "completeCount": 0,
       "dedicatedLessonCount": 0,
       "chapterExamCount": 0,
@@ -224,7 +242,9 @@
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C806.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 15,
+      "educationallyIncompleteCount": 15
     },
     {
       "id": "social",
@@ -233,9 +253,9 @@
       "baseQuestionCount": 48,
       "advancedQuestionCount": 24,
       "questionCount": 72,
-      "sourceMappedCount": 23,
-      "needsSourceCount": 1,
-      "incompleteCount": 23,
+      "sourceMappedCount": 0,
+      "needsSourceCount": 24,
+      "incompleteCount": 0,
       "completeCount": 0,
       "dedicatedLessonCount": 0,
       "chapterExamCount": 0,
@@ -245,7 +265,9 @@
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C807.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 24,
+      "educationallyIncompleteCount": 24
     },
     {
       "id": "thinking",
@@ -254,9 +276,9 @@
       "baseQuestionCount": 21,
       "advancedQuestionCount": 7,
       "questionCount": 28,
-      "sourceMappedCount": 6,
-      "needsSourceCount": 1,
-      "incompleteCount": 6,
+      "sourceMappedCount": 0,
+      "needsSourceCount": 7,
+      "incompleteCount": 0,
       "completeCount": 0,
       "dedicatedLessonCount": 0,
       "chapterExamCount": 0,
@@ -266,7 +288,9 @@
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C812.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 7,
+      "educationallyIncompleteCount": 7
     },
     {
       "id": "work",
@@ -275,9 +299,9 @@
       "baseQuestionCount": 36,
       "advancedQuestionCount": 9,
       "questionCount": 45,
-      "sourceMappedCount": 8,
-      "needsSourceCount": 1,
-      "incompleteCount": 8,
+      "sourceMappedCount": 0,
+      "needsSourceCount": 9,
+      "incompleteCount": 0,
       "completeCount": 0,
       "dedicatedLessonCount": 0,
       "chapterExamCount": 0,
@@ -287,7 +311,9 @@
       "shortSolutionStepCount": 0,
       "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C817.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 9,
+      "educationallyIncompleteCount": 9
     },
     {
       "id": "writing",
@@ -308,7 +334,9 @@
       "shortSolutionStepCount": 0,
       "textbookEdition": "1405-1406",
       "textbookSourceUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C804.pdf",
-      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+      "textbookSourceStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+      "sourceUnverifiedCount": 8,
+      "educationallyIncompleteCount": 8
     }
   ],
   "sections": [
@@ -317,7 +345,7 @@
       "subjectId": "arabic",
       "subjectTitle": "عربی",
       "title": "الدرس الأول: مُراجَعَةُ دُروسِ الصَّفِّ السّابِعِ",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -335,7 +363,7 @@
       "solutionStepCharacters": 124,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 11,
       "pageEnd": 22,
       "sourceLesson": "الدرس الأول: مُراجَعَةُ دُروسِ الصَّفِّ السّابِعِ",
@@ -348,15 +376,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
       "subjectId": "arabic",
       "subjectTitle": "عربی",
       "title": "الدرس الثاني: أَهَمِّيَّةُ اللُّغَةِ الْعَرَبِيَّةِ",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -374,7 +410,7 @@
       "solutionStepCharacters": 116,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 23,
       "pageEnd": 34,
       "sourceLesson": "الدرس الثاني: أَهَمِّيَّةُ اللُّغَةِ الْعَرَبِيَّةِ",
@@ -387,15 +423,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
       "subjectId": "arabic",
       "subjectTitle": "عربی",
       "title": "الدرس الثالث: مِهْنَتُكَ فِي الْمُسْتَقْبَلِ",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -413,7 +457,7 @@
       "solutionStepCharacters": 77,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 35,
       "pageEnd": 46,
       "sourceLesson": "الدرس الثالث: مِهْنَتُكَ فِي الْمُسْتَقْبَلِ",
@@ -427,15 +471,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
       "subjectId": "arabic",
       "subjectTitle": "عربی",
       "title": "الدرس الرابع: التَّجْرِبَةُ الْجَديدَةُ",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -453,7 +505,7 @@
       "solutionStepCharacters": 106,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 47,
       "pageEnd": 60,
       "sourceLesson": "الدرس الرابع: التَّجْرِبَةُ الْجَديدَةُ",
@@ -466,15 +518,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
       "subjectId": "arabic",
       "subjectTitle": "عربی",
       "title": "الدرس الخامس: الصَّداقَةُ",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -492,7 +552,7 @@
       "solutionStepCharacters": 91,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 61,
       "pageEnd": 70,
       "sourceLesson": "الدرس الخامس: الصَّداقَةُ",
@@ -505,15 +565,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
       "subjectId": "arabic",
       "subjectTitle": "عربی",
       "title": "الدرس السادس: فِي السَّفَرِ",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -531,7 +599,7 @@
       "solutionStepCharacters": 97,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 71,
       "pageEnd": 84,
       "sourceLesson": "الدرس السادس: فِي السَّفَرِ",
@@ -544,15 +612,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
       "subjectId": "arabic",
       "subjectTitle": "عربی",
       "title": "الدرس السابع: أَرْضُ اللّهِ واسِعَةٌ",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -570,7 +646,7 @@
       "solutionStepCharacters": 100,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 85,
       "pageEnd": 96,
       "sourceLesson": "الدرس السابع: أَرْضُ اللّهِ واسِعَةٌ",
@@ -583,15 +659,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 8,
       "subjectId": "arabic",
       "subjectTitle": "عربی",
       "title": "الدرس الثامن: الِاعْتِمادُ عَلَى النَّفْسِ",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -609,7 +693,7 @@
       "solutionStepCharacters": 96,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 97,
       "pageEnd": 108,
       "sourceLesson": "الدرس الثامن: الِاعْتِمادُ عَلَى النَّفْسِ",
@@ -622,15 +706,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 9,
       "subjectId": "arabic",
       "subjectTitle": "عربی",
       "title": "الدرس التاسع: السَّفْرَةُ الْعِلْمِيَّةُ",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -648,7 +740,7 @@
       "solutionStepCharacters": 95,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 109,
       "pageEnd": 126,
       "sourceLesson": "الدرس التاسع: السَّفْرَةُ الْعِلْمِيَّةُ",
@@ -660,8 +752,16 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 10,
@@ -700,15 +800,22 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
       "subjectId": "art",
       "subjectTitle": "فرهنگ و هنر",
       "title": "هنرهای تجسمی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -726,7 +833,7 @@
       "solutionStepCharacters": 171,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 2,
       "pageEnd": 52,
       "sourceLesson": "هنرهای تجسمی",
@@ -738,15 +845,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
       "subjectId": "art",
       "subjectTitle": "فرهنگ و هنر",
       "title": "خوشنویسی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -764,7 +879,7 @@
       "solutionStepCharacters": 156,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 53,
       "pageEnd": 79,
       "sourceLesson": "خوشنویسی",
@@ -777,15 +892,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
       "subjectId": "art",
       "subjectTitle": "فرهنگ و هنر",
       "title": "هنرهای سنتی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -803,7 +926,7 @@
       "solutionStepCharacters": 142,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 80,
       "pageEnd": 111,
       "sourceLesson": "هنرهای سنتی",
@@ -815,15 +938,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
       "subjectId": "art",
       "subjectTitle": "فرهنگ و هنر",
       "title": "هنرهای آوایی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -841,7 +972,7 @@
       "solutionStepCharacters": 155,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 112,
       "pageEnd": 127,
       "sourceLesson": "هنرهای آوایی",
@@ -854,8 +985,16 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
@@ -893,15 +1032,22 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
       "subjectId": "english",
       "subjectTitle": "زبان انگلیسی",
       "title": "Unit 1: My Nationality",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -919,7 +1065,7 @@
       "solutionStepCharacters": 87,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 12,
       "pageEnd": 17,
       "sourceLesson": "My Nationality",
@@ -931,15 +1077,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
       "subjectId": "english",
       "subjectTitle": "زبان انگلیسی",
       "title": "Unit 2: My Week",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -957,7 +1111,7 @@
       "solutionStepCharacters": 103,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 18,
       "pageEnd": 22,
       "sourceLesson": "My Week",
@@ -969,15 +1123,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
       "subjectId": "english",
       "subjectTitle": "زبان انگلیسی",
       "title": "Unit 3: My Abilities",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -995,7 +1157,7 @@
       "solutionStepCharacters": 84,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 26,
       "pageEnd": 33,
       "sourceLesson": "My Abilities",
@@ -1007,15 +1169,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
       "subjectId": "english",
       "subjectTitle": "زبان انگلیسی",
       "title": "Unit 4: My Health",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -1033,7 +1203,7 @@
       "solutionStepCharacters": 69,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 34,
       "pageEnd": 39,
       "sourceLesson": "My Health",
@@ -1046,15 +1216,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
       "subjectId": "english",
       "subjectTitle": "زبان انگلیسی",
       "title": "Unit 5: My City",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -1072,7 +1250,7 @@
       "solutionStepCharacters": 103,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 42,
       "pageEnd": 47,
       "sourceLesson": "My City",
@@ -1084,15 +1262,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
       "subjectId": "english",
       "subjectTitle": "زبان انگلیسی",
       "title": "Unit 6: My Village",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -1110,7 +1296,7 @@
       "solutionStepCharacters": 126,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 48,
       "pageEnd": 53,
       "sourceLesson": "My Village",
@@ -1122,15 +1308,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
       "subjectId": "english",
       "subjectTitle": "زبان انگلیسی",
       "title": "Unit 7: My Hobbies",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -1148,7 +1342,7 @@
       "solutionStepCharacters": 127,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 54,
       "pageEnd": 59,
       "sourceLesson": "My Hobbies",
@@ -1160,15 +1354,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
       "subjectId": "english_workbook",
       "subjectTitle": "کتاب کار زبان انگلیسی",
       "title": "Lesson 1: My Nationality",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -1186,7 +1388,7 @@
       "solutionStepCharacters": 142,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 2,
       "pageEnd": 7,
       "sourceLesson": "My Nationality",
@@ -1198,15 +1400,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
       "subjectId": "english_workbook",
       "subjectTitle": "کتاب کار زبان انگلیسی",
       "title": "Lesson 2: My Week",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -1224,7 +1434,7 @@
       "solutionStepCharacters": 114,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 8,
       "pageEnd": 11,
       "sourceLesson": "My Week",
@@ -1236,15 +1446,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
       "subjectId": "english_workbook",
       "subjectTitle": "کتاب کار زبان انگلیسی",
       "title": "Lesson 3: My Abilities",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -1262,7 +1480,7 @@
       "solutionStepCharacters": 115,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 12,
       "pageEnd": 18,
       "sourceLesson": "My Abilities",
@@ -1274,15 +1492,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
       "subjectId": "english_workbook",
       "subjectTitle": "کتاب کار زبان انگلیسی",
       "title": "Lesson 4: My Health",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -1300,7 +1526,7 @@
       "solutionStepCharacters": 129,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 19,
       "pageEnd": 24,
       "sourceLesson": "My Health",
@@ -1312,15 +1538,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
       "subjectId": "english_workbook",
       "subjectTitle": "کتاب کار زبان انگلیسی",
       "title": "Lesson 5: My City",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -1338,7 +1572,7 @@
       "solutionStepCharacters": 138,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 25,
       "pageEnd": 30,
       "sourceLesson": "My City",
@@ -1350,15 +1584,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
       "subjectId": "english_workbook",
       "subjectTitle": "کتاب کار زبان انگلیسی",
       "title": "Lesson 6: My Village",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -1376,7 +1618,7 @@
       "solutionStepCharacters": 163,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 31,
       "pageEnd": 40,
       "sourceLesson": "My Village",
@@ -1388,8 +1630,16 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
@@ -1427,15 +1677,22 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
       "subjectId": "math",
       "subjectTitle": "ریاضی",
       "title": "عددهای صحیح و گویا",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 6,
       "advancedQuestionCount": 1,
       "questionCount": 7,
@@ -1453,7 +1710,7 @@
       "solutionStepCharacters": 68,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 1,
       "pageEnd": 18,
       "sourceLesson": "",
@@ -1466,15 +1723,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
       "subjectId": "math",
       "subjectTitle": "ریاضی",
       "title": "عددهای اول",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 6,
       "advancedQuestionCount": 1,
       "questionCount": 7,
@@ -1492,7 +1757,7 @@
       "solutionStepCharacters": 114,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 19,
       "pageEnd": 28,
       "sourceLesson": "",
@@ -1504,15 +1769,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
       "subjectId": "math",
       "subjectTitle": "ریاضی",
       "title": "چندضلعی‌ها",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 6,
       "advancedQuestionCount": 1,
       "questionCount": 7,
@@ -1530,7 +1803,7 @@
       "solutionStepCharacters": 81,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 29,
       "pageEnd": 50,
       "sourceLesson": "",
@@ -1542,15 +1815,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
       "subjectId": "math",
       "subjectTitle": "ریاضی",
       "title": "جبر و معادله",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 6,
       "advancedQuestionCount": 1,
       "questionCount": 7,
@@ -1568,7 +1849,7 @@
       "solutionStepCharacters": 97,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 51,
       "pageEnd": 68,
       "sourceLesson": "",
@@ -1580,15 +1861,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
       "subjectId": "math",
       "subjectTitle": "ریاضی",
       "title": "بردار و مختصات",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 6,
       "advancedQuestionCount": 1,
       "questionCount": 7,
@@ -1606,7 +1895,7 @@
       "solutionStepCharacters": 72,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 69,
       "pageEnd": 82,
       "sourceLesson": "",
@@ -1619,15 +1908,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
       "subjectId": "math",
       "subjectTitle": "ریاضی",
       "title": "مثلث",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 6,
       "advancedQuestionCount": 1,
       "questionCount": 7,
@@ -1645,7 +1942,7 @@
       "solutionStepCharacters": 77,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 83,
       "pageEnd": 100,
       "sourceLesson": "",
@@ -1658,15 +1955,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
       "subjectId": "math",
       "subjectTitle": "ریاضی",
       "title": "توان و جذر",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 6,
       "advancedQuestionCount": 1,
       "questionCount": 7,
@@ -1684,7 +1989,7 @@
       "solutionStepCharacters": 56,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 101,
       "pageEnd": 118,
       "sourceLesson": "",
@@ -1697,15 +2002,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 8,
       "subjectId": "math",
       "subjectTitle": "ریاضی",
       "title": "آمار و احتمال",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 6,
       "advancedQuestionCount": 1,
       "questionCount": 7,
@@ -1723,7 +2036,7 @@
       "solutionStepCharacters": 62,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 119,
       "pageEnd": 136,
       "sourceLesson": "",
@@ -1736,15 +2049,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 9,
       "subjectId": "math",
       "subjectTitle": "ریاضی",
       "title": "دایره",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 6,
       "advancedQuestionCount": 1,
       "questionCount": 7,
@@ -1762,7 +2083,7 @@
       "solutionStepCharacters": 52,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 137,
       "pageEnd": 150,
       "sourceLesson": "",
@@ -1775,8 +2096,16 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
@@ -1814,8 +2143,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
@@ -1854,8 +2190,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
@@ -1894,8 +2237,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
@@ -1934,8 +2284,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
@@ -1974,8 +2331,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
@@ -2013,8 +2377,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
@@ -2053,8 +2424,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 8,
@@ -2093,8 +2471,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 9,
@@ -2133,8 +2518,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 10,
@@ -2173,8 +2565,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 11,
@@ -2213,8 +2612,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 12,
@@ -2253,8 +2659,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 13,
@@ -2293,8 +2706,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 14,
@@ -2333,8 +2753,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 15,
@@ -2373,8 +2800,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 16,
@@ -2413,8 +2847,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 17,
@@ -2453,8 +2894,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
@@ -2493,8 +2941,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
@@ -2533,8 +2988,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
@@ -2573,8 +3035,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
@@ -2613,8 +3082,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
@@ -2653,8 +3129,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
@@ -2693,8 +3176,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
@@ -2733,8 +3223,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 8,
@@ -2773,8 +3270,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 9,
@@ -2813,8 +3317,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 10,
@@ -2853,8 +3364,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 11,
@@ -2893,8 +3411,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 12,
@@ -2933,8 +3458,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
@@ -2973,8 +3505,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
@@ -3013,8 +3552,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
@@ -3054,8 +3600,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
@@ -3094,8 +3647,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
@@ -3134,8 +3694,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
@@ -3175,8 +3742,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
@@ -3215,8 +3789,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 8,
@@ -3254,8 +3835,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 9,
@@ -3294,8 +3882,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 10,
@@ -3334,8 +3929,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 11,
@@ -3374,8 +3976,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 12,
@@ -3414,8 +4023,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 13,
@@ -3454,8 +4070,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 14,
@@ -3494,8 +4117,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 15,
@@ -3534,15 +4164,22 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "مخلوط و جداسازی مواد",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3560,7 +4197,7 @@
       "solutionStepCharacters": 118,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 1,
       "pageEnd": 8,
       "sourceLesson": "مخلوط و جداسازی مواد",
@@ -3572,15 +4209,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "تغییرهای شیمیایی در خدمت زندگی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3598,7 +4243,7 @@
       "solutionStepCharacters": 112,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 9,
       "pageEnd": 20,
       "sourceLesson": "تغییرهای شیمیایی در خدمت زندگی",
@@ -3610,15 +4255,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "از درون اتم چه خبر",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3636,7 +4289,7 @@
       "solutionStepCharacters": 89,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 21,
       "pageEnd": 27,
       "sourceLesson": "از درون اتم چه خبر",
@@ -3648,15 +4301,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "تنظیم عصبی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3674,7 +4335,7 @@
       "solutionStepCharacters": 149,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 28,
       "pageEnd": 34,
       "sourceLesson": "تنظیم عصبی",
@@ -3686,15 +4347,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "حس و حرکت",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3712,7 +4381,7 @@
       "solutionStepCharacters": 146,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 35,
       "pageEnd": 46,
       "sourceLesson": "حس و حرکت",
@@ -3724,15 +4393,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "تنظیم هورمونی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3750,7 +4427,7 @@
       "solutionStepCharacters": 118,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 47,
       "pageEnd": 54,
       "sourceLesson": "تنظیم هورمونی",
@@ -3762,15 +4439,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "الفبای زیست‌فناوری",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3788,7 +4473,7 @@
       "solutionStepCharacters": 107,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 55,
       "pageEnd": 64,
       "sourceLesson": "الفبای زیست‌فناوری",
@@ -3800,15 +4485,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 8,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "تولیدمثل در جانداران",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3826,7 +4519,7 @@
       "solutionStepCharacters": 126,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 65,
       "pageEnd": 75,
       "sourceLesson": "تولیدمثل در جانداران",
@@ -3838,15 +4531,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 9,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "الکتریسیته",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3864,7 +4565,7 @@
       "solutionStepCharacters": 97,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 76,
       "pageEnd": 88,
       "sourceLesson": "الکتریسیته",
@@ -3876,15 +4577,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 10,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "مغناطیس",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3902,7 +4611,7 @@
       "solutionStepCharacters": 88,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 89,
       "pageEnd": 96,
       "sourceLesson": "مغناطیس",
@@ -3914,15 +4623,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 11,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "کانی‌ها",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3940,7 +4657,7 @@
       "solutionStepCharacters": 123,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 97,
       "pageEnd": 103,
       "sourceLesson": "کانی‌ها",
@@ -3952,15 +4669,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 12,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "سنگ‌ها",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -3978,7 +4703,7 @@
       "solutionStepCharacters": 81,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 104,
       "pageEnd": 113,
       "sourceLesson": "سنگ‌ها",
@@ -3990,15 +4715,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 13,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "هوازدگی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -4016,7 +4749,7 @@
       "solutionStepCharacters": 110,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 114,
       "pageEnd": 121,
       "sourceLesson": "هوازدگی",
@@ -4028,15 +4761,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 14,
       "subjectId": "science",
       "subjectTitle": "علوم تجربی",
       "title": "نور و ویژگی‌های آن",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 5,
       "advancedQuestionCount": 1,
       "questionCount": 6,
@@ -4054,7 +4795,7 @@
       "solutionStepCharacters": 119,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 122,
       "pageEnd": 135,
       "sourceLesson": "نور و ویژگی‌های آن",
@@ -4066,8 +4807,16 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 15,
@@ -4105,15 +4854,22 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 1: تعاون (۱)",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4131,7 +4887,7 @@
       "solutionStepCharacters": 121,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 2,
       "pageEnd": 6,
       "sourceLesson": "درس 1: تعاون (۱)",
@@ -4144,15 +4900,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 2: تعاون (۲)",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4170,7 +4934,7 @@
       "solutionStepCharacters": 111,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 7,
       "pageEnd": 13,
       "sourceLesson": "درس 2: تعاون (۲)",
@@ -4183,15 +4947,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 3: ساختار و تشکیلات دولت",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4209,7 +4981,7 @@
       "solutionStepCharacters": 106,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 14,
       "pageEnd": 17,
       "sourceLesson": "درس 3: ساختار و تشکیلات دولت",
@@ -4222,15 +4994,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 4: وظایف دولت",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4248,7 +5028,7 @@
       "solutionStepCharacters": 122,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 18,
       "pageEnd": 23,
       "sourceLesson": "درس 4: وظایف دولت",
@@ -4261,15 +5041,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 5: آسیب‌های اجتماعی و پیشگیری از آن‌ها",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4287,7 +5075,7 @@
       "solutionStepCharacters": 149,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 24,
       "pageEnd": 29,
       "sourceLesson": "درس 5: آسیب‌های اجتماعی و پیشگیری از آن‌ها",
@@ -4300,15 +5088,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 6: قوهٔ قضائیه",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4326,7 +5122,7 @@
       "solutionStepCharacters": 97,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 30,
       "pageEnd": 35,
       "sourceLesson": "درس 6: قوهٔ قضائیه",
@@ -4339,15 +5135,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 7: ارتباط و رسانه",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4365,7 +5169,7 @@
       "solutionStepCharacters": 116,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 36,
       "pageEnd": 40,
       "sourceLesson": "درس 7: ارتباط و رسانه",
@@ -4378,15 +5182,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 8,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 8: رسانه‌ها در زندگی ما",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4404,7 +5216,7 @@
       "solutionStepCharacters": 113,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 41,
       "pageEnd": 47,
       "sourceLesson": "درس 8: رسانه‌ها در زندگی ما",
@@ -4417,15 +5229,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 9,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 9: ظهور اسلام در شبه‌جزیرهٔ عربستان",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4443,7 +5263,7 @@
       "solutionStepCharacters": 130,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 48,
       "pageEnd": 54,
       "sourceLesson": "درس 9: ظهور اسلام در شبه‌جزیرهٔ عربستان",
@@ -4456,15 +5276,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 10,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 10: از رحلت پیامبر تا قیام کربلا (نینوا)",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4482,7 +5310,7 @@
       "solutionStepCharacters": 128,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 55,
       "pageEnd": 63,
       "sourceLesson": "درس 10: از رحلت پیامبر تا قیام کربلا (نینوا)",
@@ -4495,15 +5323,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 11,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 11: ورود اسلام به ایران",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4521,7 +5357,7 @@
       "solutionStepCharacters": 123,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 64,
       "pageEnd": 69,
       "sourceLesson": "درس 11: ورود اسلام به ایران",
@@ -4533,15 +5369,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 12,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 12: عصر طلایی فرهنگ و تمدن ایرانی ـ اسلامی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4559,7 +5403,7 @@
       "solutionStepCharacters": 115,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 70,
       "pageEnd": 79,
       "sourceLesson": "درس 12: عصر طلایی فرهنگ و تمدن ایرانی ـ اسلامی",
@@ -4572,15 +5416,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 13,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 13: غزنویان، سلجوقیان و خوارزمشاهیان",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4598,7 +5450,7 @@
       "solutionStepCharacters": 104,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 80,
       "pageEnd": 85,
       "sourceLesson": "درس 13: غزنویان، سلجوقیان و خوارزمشاهیان",
@@ -4611,15 +5463,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 14,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 14: میراث فرهنگی ایران در عصر سلجوقی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4637,7 +5497,7 @@
       "solutionStepCharacters": 111,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 86,
       "pageEnd": 93,
       "sourceLesson": "درس 14: میراث فرهنگی ایران در عصر سلجوقی",
@@ -4650,15 +5510,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 15,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 15: حملهٔ چنگیز و تیمور به ایران",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4676,7 +5544,7 @@
       "solutionStepCharacters": 116,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 94,
       "pageEnd": 99,
       "sourceLesson": "درس 15: حملهٔ چنگیز و تیمور به ایران",
@@ -4689,15 +5557,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 16,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 16: پیروزی فرهنگ بر شمشیر",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4715,7 +5591,7 @@
       "solutionStepCharacters": 116,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 100,
       "pageEnd": 107,
       "sourceLesson": "درس 16: پیروزی فرهنگ بر شمشیر",
@@ -4728,15 +5604,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 17,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 17: ویژگی‌های طبیعی آسیا",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4754,7 +5638,7 @@
       "solutionStepCharacters": 118,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 108,
       "pageEnd": 114,
       "sourceLesson": "درس 17: ویژگی‌های طبیعی آسیا",
@@ -4767,15 +5651,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 18,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 18: ویژگی‌های انسانی و اقتصادی آسیا",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4793,7 +5685,7 @@
       "solutionStepCharacters": 134,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 115,
       "pageEnd": 123,
       "sourceLesson": "درس 18: ویژگی‌های انسانی و اقتصادی آسیا",
@@ -4806,15 +5698,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 19,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 19: ویژگی‌های منطقهٔ جنوب‌غربی آسیا",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4832,7 +5732,7 @@
       "solutionStepCharacters": 127,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 124,
       "pageEnd": 128,
       "sourceLesson": "درس 19: ویژگی‌های منطقهٔ جنوب‌غربی آسیا",
@@ -4845,15 +5745,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 20,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 20: ایران و منطقهٔ جنوب‌غربی آسیا",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4871,7 +5779,7 @@
       "solutionStepCharacters": 151,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 129,
       "pageEnd": 137,
       "sourceLesson": "درس 20: ایران و منطقهٔ جنوب‌غربی آسیا",
@@ -4884,15 +5792,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 21,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 21: ویژگی‌های طبیعی و انسانی اروپا",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4910,7 +5826,7 @@
       "solutionStepCharacters": 116,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 138,
       "pageEnd": 143,
       "sourceLesson": "درس 21: ویژگی‌های طبیعی و انسانی اروپا",
@@ -4923,15 +5839,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 22,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 22: ویژگی‌های طبیعی و انسانی آفریقا",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4949,7 +5873,7 @@
       "solutionStepCharacters": 144,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 144,
       "pageEnd": 153,
       "sourceLesson": "درس 22: ویژگی‌های طبیعی و انسانی آفریقا",
@@ -4962,15 +5886,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 23,
       "subjectId": "social",
       "subjectTitle": "مطالعات اجتماعی",
       "title": "درس 23: قارهٔ آمریکا",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 2,
       "advancedQuestionCount": 1,
       "questionCount": 3,
@@ -4988,7 +5920,7 @@
       "solutionStepCharacters": 131,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 154,
       "pageEnd": 161,
       "sourceLesson": "درس 23: قارهٔ آمریکا",
@@ -5001,8 +5933,16 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 24,
@@ -5041,15 +5981,22 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
       "subjectId": "thinking",
       "subjectTitle": "تفکر و سبک زندگی",
       "title": "بخش ۱: فعالیت‌های الزامی تفکّر و پژوهش ـ نوبت اول",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -5067,7 +6014,7 @@
       "solutionStepCharacters": 226,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 10,
       "pageEnd": 32,
       "sourceLesson": "بخش ۱: فعالیت‌های الزامی تفکّر و پژوهش ـ نوبت اول",
@@ -5079,15 +6026,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
       "subjectId": "thinking",
       "subjectTitle": "تفکر و سبک زندگی",
       "title": "بخش ۲: فعالیت‌های الزامی آداب و مهارت‌های زندگی ـ نوبت اول",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -5105,7 +6060,7 @@
       "solutionStepCharacters": 208,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 33,
       "pageEnd": 63,
       "sourceLesson": "بخش ۲: فعالیت‌های الزامی آداب و مهارت‌های زندگی ـ نوبت اول",
@@ -5117,15 +6072,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
       "subjectId": "thinking",
       "subjectTitle": "تفکر و سبک زندگی",
       "title": "بخش ۳: فعالیت‌های الزامی تفکّر و پژوهش ـ نوبت دوم",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -5143,7 +6106,7 @@
       "solutionStepCharacters": 194,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 64,
       "pageEnd": 81,
       "sourceLesson": "بخش ۳: فعالیت‌های الزامی تفکّر و پژوهش ـ نوبت دوم",
@@ -5155,15 +6118,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
       "subjectId": "thinking",
       "subjectTitle": "تفکر و سبک زندگی",
       "title": "بخش ۴: فعالیت‌های الزامی آداب و مهارت‌های زندگی ـ نوبت دوم",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -5181,7 +6152,7 @@
       "solutionStepCharacters": 218,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 82,
       "pageEnd": 117,
       "sourceLesson": "بخش ۴: فعالیت‌های الزامی آداب و مهارت‌های زندگی ـ نوبت دوم",
@@ -5193,15 +6164,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
       "subjectId": "thinking",
       "subjectTitle": "تفکر و سبک زندگی",
       "title": "بخش ۵: فعالیت‌های انتخابی تفکّر و پژوهش",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -5219,7 +6198,7 @@
       "solutionStepCharacters": 181,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 118,
       "pageEnd": 139,
       "sourceLesson": "بخش ۵: فعالیت‌های انتخابی تفکّر و پژوهش",
@@ -5231,15 +6210,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
       "subjectId": "thinking",
       "subjectTitle": "تفکر و سبک زندگی",
       "title": "بخش ۶: فعالیت‌های انتخابی آداب و مهارت‌های زندگی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 3,
       "advancedQuestionCount": 1,
       "questionCount": 4,
@@ -5257,7 +6244,7 @@
       "solutionStepCharacters": 196,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 140,
       "pageEnd": 165,
       "sourceLesson": "بخش ۶: فعالیت‌های انتخابی آداب و مهارت‌های زندگی",
@@ -5269,8 +6256,16 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
@@ -5308,15 +6303,22 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
       "subjectId": "work",
       "subjectTitle": "کار و فناوری",
       "title": "پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 4,
       "advancedQuestionCount": 1,
       "questionCount": 5,
@@ -5334,7 +6336,7 @@
       "solutionStepCharacters": 107,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 3,
       "pageEnd": 12,
       "sourceLesson": "پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی",
@@ -5346,15 +6348,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
       "subjectId": "work",
       "subjectTitle": "کار و فناوری",
       "title": "پودمان ۲: شهروند الکترونیکی (۲)",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 4,
       "advancedQuestionCount": 1,
       "questionCount": 5,
@@ -5372,7 +6382,7 @@
       "solutionStepCharacters": 214,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 13,
       "pageEnd": 24,
       "sourceLesson": "پودمان ۲: شهروند الکترونیکی (۲)",
@@ -5384,15 +6394,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
       "subjectId": "work",
       "subjectTitle": "کار و فناوری",
       "title": "پودمان ۳: برنامه‌نویسی پایتون (۲)",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 4,
       "advancedQuestionCount": 1,
       "questionCount": 5,
@@ -5410,7 +6428,7 @@
       "solutionStepCharacters": 128,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 25,
       "pageEnd": 40,
       "sourceLesson": "پودمان ۳: برنامه‌نویسی پایتون (۲)",
@@ -5423,15 +6441,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
       "subjectId": "work",
       "subjectTitle": "کار و فناوری",
       "title": "پودمان ۴: الکترونیک",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 4,
       "advancedQuestionCount": 1,
       "questionCount": 5,
@@ -5449,7 +6475,7 @@
       "solutionStepCharacters": 150,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 41,
       "pageEnd": 60,
       "sourceLesson": "پودمان ۴: الکترونیک",
@@ -5461,15 +6487,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
       "subjectId": "work",
       "subjectTitle": "کار و فناوری",
       "title": "پودمان ۵: کار با فلز (نیمه‌تجویزی)",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 4,
       "advancedQuestionCount": 1,
       "questionCount": 5,
@@ -5487,7 +6521,7 @@
       "solutionStepCharacters": 204,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 61,
       "pageEnd": 80,
       "sourceLesson": "پودمان ۵: کار با فلز (نیمه‌تجویزی)",
@@ -5499,15 +6533,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
       "subjectId": "work",
       "subjectTitle": "کار و فناوری",
       "title": "پودمان ۶: صنایع دستی (بافت؛ نیمه‌تجویزی)",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 4,
       "advancedQuestionCount": 1,
       "questionCount": 5,
@@ -5525,7 +6567,7 @@
       "solutionStepCharacters": 183,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 81,
       "pageEnd": 98,
       "sourceLesson": "پودمان ۶: صنایع دستی (بافت؛ نیمه‌تجویزی)",
@@ -5537,15 +6579,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
       "subjectId": "work",
       "subjectTitle": "کار و فناوری",
       "title": "پودمان ۷: پرورش و نگهداری از حیوانات (نیمه‌تجویزی)",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 4,
       "advancedQuestionCount": 1,
       "questionCount": 5,
@@ -5563,7 +6613,7 @@
       "solutionStepCharacters": 228,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 99,
       "pageEnd": 118,
       "sourceLesson": "پودمان ۷: پرورش و نگهداری از حیوانات (نیمه‌تجویزی)",
@@ -5575,15 +6625,23 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 8,
       "subjectId": "work",
       "subjectTitle": "کار و فناوری",
       "title": "پودمان ۸: امور اداری و مالی (نیمه‌تجویزی)",
-      "status": "ناقص",
+      "status": "نیازمند منبع",
       "baseQuestionCount": 4,
       "advancedQuestionCount": 1,
       "questionCount": 5,
@@ -5601,7 +6659,7 @@
       "solutionStepCharacters": 146,
       "commonMistakeCount": 2,
       "hasChapterExam": false,
-      "sourceMapped": true,
+      "sourceMapped": false,
       "pageStart": 119,
       "pageEnd": 140,
       "sourceLesson": "پودمان ۸: امور اداری و مالی (نیمه‌تجویزی)",
@@ -5613,8 +6671,16 @@
         "همهٔ پرسش‌ها چهارگزینه‌ای‌اند",
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
-        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند"
-      ]
+        "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 9,
@@ -5652,8 +6718,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 1,
@@ -5691,8 +6764,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 2,
@@ -5730,8 +6810,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 3,
@@ -5769,8 +6856,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 4,
@@ -5808,8 +6902,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 5,
@@ -5847,8 +6948,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 6,
@@ -5886,8 +6994,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 7,
@@ -5925,8 +7040,15 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     },
     {
       "index": 8,
@@ -5964,8 +7086,31 @@
         "آزمون مستقل فصل ثبت نشده",
         "پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند",
         "توضیح سؤال استدلالی عین گزینهٔ درست را تکرار می‌کند",
-        "منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست"
-      ]
+        "PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است"
+      ],
+      "sourceStatus": "needs_official_pdf_review",
+      "educationallyIncomplete": true,
+      "officialTextbookTitle": "",
+      "officialPdfPageStart": null,
+      "officialPdfPageEnd": null,
+      "officialMappingMethod": "",
+      "officialMappingVerifiedAt": ""
     }
-  ]
+  ],
+  "sourceMappingRequirements": {
+    "officialHost": "chap.sch.ir",
+    "sourceVerificationStatus": "official_pdf_content_parsed",
+    "chapterMapping": [
+      "status=verified",
+      "officialTitle is non-empty",
+      "positive ordered physical PDF page range",
+      "verificationMethod is toc_and_page_heading or editorial_review",
+      "verifiedAt is a valid ISO date"
+    ],
+    "legacyFlagsAreNotEvidence": [
+      "textbookContentsVerified",
+      "sourceLesson",
+      "textbookSourceFile"
+    ]
+  }
 }
