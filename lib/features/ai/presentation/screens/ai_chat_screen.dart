@@ -327,11 +327,15 @@ class _AiChatScreenState extends State<AiChatScreen> {
                         initialValue: selectedIndex,
                         isExpanded: true,
                         decoration: const InputDecoration(
-                          labelText: 'فصل یا درس',
+                          labelText: 'محدودهٔ جست‌وجو',
                           isDense: true,
                           border: OutlineInputBorder(),
                         ),
                         items: [
+                          const DropdownMenuItem(
+                            value: -1,
+                            child: Text('همهٔ فصل‌های این درس'),
+                          ),
                           for (var i = 0; i < chapters.length; i++)
                             DropdownMenuItem(
                               value: i,
@@ -339,7 +343,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                             ),
                         ],
                         onChanged: (value) => setState(() {
-                          _selectedChapterIndex = value ?? 0;
+                          _selectedChapterIndex = value ?? -1;
                         }),
                       );
                     }),
