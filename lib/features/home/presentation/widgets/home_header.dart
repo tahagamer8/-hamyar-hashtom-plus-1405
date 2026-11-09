@@ -65,16 +65,32 @@ class HomeHeader extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 24),
-              Text('یادگیری رو از همین‌جا شروع کن',
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                  )),
-              const SizedBox(height: 7),
-              Text('درس بخوان، تمرین کن و پیشرفتت را بسنج.',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: Colors.white.withAlpha(220),
-                  )),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const _FahminoCoverArtwork(),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('یادگیری رو از همین‌جا شروع کن',
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              height: 1.35,
+                            )),
+                        const SizedBox(height: 7),
+                        Text('درس بخوان، تمرین کن و پیشرفتت را بسنج.',
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: Colors.white.withAlpha(220),
+                              height: 1.5,
+                            )),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 18),
               _SearchBox(onTap: () => context.go(AppRoutes.search)),
               const SizedBox(height: 16),
@@ -189,6 +205,119 @@ class _SearchBox extends StatelessWidget {
                   size: 14, color: AppColors.primary),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class _FahminoCoverArtwork extends StatelessWidget {
+  const _FahminoCoverArtwork();
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: 'کاور گرافیکی فهمینو؛ کتاب باز و ستاره‌های یادگیری',
+      image: true,
+      child: SizedBox(
+        width: 112,
+        height: 112,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Colors.white.withAlpha(58),
+                    Colors.white.withAlpha(12),
+                  ],
+                ),
+                border: Border.all(color: Colors.white.withAlpha(72)),
+              ),
+            ),
+            Positioned(
+              top: 8,
+              right: 12,
+              child: Icon(
+                Icons.auto_awesome_rounded,
+                size: 21,
+                color: Colors.white.withAlpha(230),
+              ),
+            ),
+            Positioned(
+              bottom: 10,
+              left: 9,
+              child: Icon(
+                Icons.star_rounded,
+                size: 18,
+                color: Colors.amber.shade200,
+              ),
+            ),
+            Center(
+              child: Transform.rotate(
+                angle: -0.10,
+                child: Container(
+                  width: 70,
+                  height: 82,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFFEFC),
+                    borderRadius: BorderRadius.circular(13),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withAlpha(65),
+                        blurRadius: 14,
+                        offset: const Offset(0, 7),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.menu_book_rounded,
+                        color: AppColors.primary,
+                        size: 39,
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        'VIII',
+                        style: TextStyle(
+                          color: AppColors.primaryDark,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 1,
+              right: 4,
+              child: Container(
+                width: 31,
+                height: 31,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFB8F3E2),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.primaryDark, width: 2),
+                ),
+                child: const Icon(
+                  Icons.school_rounded,
+                  size: 17,
+                  color: AppColors.primaryDark,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
