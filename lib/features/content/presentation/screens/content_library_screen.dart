@@ -378,6 +378,60 @@ class _ChapterContent extends ConsumerWidget {
                 for (final point in points)
                   _Bullet(text: point),
               ],
+              if ((chapter['example'] as String? ?? '').trim().isNotEmpty ||
+                  steps.isNotEmpty) ...[
+                const SizedBox(height: 10),
+                ExpansionTile(
+                  tilePadding: EdgeInsets.zero,
+                  childrenPadding: const EdgeInsetsDirectional.only(
+                    start: 8,
+                    end: 8,
+                    bottom: 12,
+                  ),
+                  leading: Icon(
+                    Icons.psychology_alt_rounded,
+                    color: theme.colorScheme.primary,
+                  ),
+                  title: const Text('نمونهٔ آموزشی و مراحل یادگیری'),
+                  subtitle: Text('${steps.length} گام آموزشی'),
+                  children: [
+                    if ((chapter['example'] as String? ?? '').trim().isNotEmpty)
+                      Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            chapter['example'] as String,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                        ),
+                      ),
+                    for (var i = 0; i < steps.length; i++)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                              radius: 12,
+                              backgroundColor: theme.colorScheme.primaryContainer,
+                              child: Text(
+                                '${i + 1}',
+                                style: TextStyle(
+                                  color: theme.colorScheme.onPrimaryContainer,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(child: Text(steps[i])),
+                          ],
+                        ),
+                      ),
+                  ],
+                ),
+              ],
               if (mistakes.isNotEmpty) ...[
                 const SizedBox(height: 12),
                 ExpansionTile(
