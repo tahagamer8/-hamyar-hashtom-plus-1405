@@ -239,7 +239,7 @@ void main() {
     await tester.pumpWidget(const ProviderScope(child: HamyarApp()));
     await _pumpUiFrames(tester);
     expect(find.text(AppConstants.appName), findsWidgets);
-    expect(find.bySemanticsLabel('کاور گرافیکی فهمینو؛ کتاب باز و ستاره‌های یادگیری'), findsOneWidget);
+    expect(find.text('VIII'), findsOneWidget);
     expect(find.text('دسترسی سریع'), findsOneWidget);
     expect(find.text('راهنمای آفلاین فهمینو', skipOffstage: false), findsOneWidget);
 
