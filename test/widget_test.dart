@@ -350,16 +350,18 @@ void main() {
     expect(find.text('ثبت و پایان آزمون'), findsNothing);
   });
 
-  testWidgets('sample questions reveal answer key on demand', (tester) async {
+  testWidgets('lesson questions check answers and show explanations', (tester) async {
     await tester.pumpWidget(_contentApp('lessonQuestions'));
     await _pumpUiFrames(tester);
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
-    expect(find.text('پاسخ: ۳/۴'), findsNothing);
-    await tester.scrollUntilVisible(find.text('نمایش پاسخ و توضیح'), 250);
-    await _pumpUiFrames(tester);
-    await tester.tap(find.text('نمایش پاسخ و توضیح'));
+    expect(find.text('آفرین، پاسخ درست است.'), findsNothing);
+
+    await tester.tap(find.text('۳/۴').first);
     await tester.pump();
-    expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
+    await tester.tap(find.text('بررسی پاسخ'));
+    await tester.pump();
+
+    expect(find.text('آفرین، پاسخ درست است.'), findsOneWidget);
     expect(find.textContaining('۱/۲ برابر ۲/۴ است'), findsOneWidget);
   });
 
