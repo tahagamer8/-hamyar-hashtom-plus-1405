@@ -318,6 +318,24 @@ void main() {
     expect(find.text('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
   });
 
+  testWidgets('flashcards reveal chapter notes and question explanations', (tester) async {
+    await tester.pumpWidget(_contentApp('flashcards'));
+    await _pumpUiFrames(tester);
+
+    expect(find.text('کارت‌های مرور این بخش'), findsOneWidget);
+    expect(find.text('نکتهٔ 1'), findsOneWidget);
+    await tester.tap(find.text('نمایش پاسخ'));
+    await tester.pump();
+    expect(find.text('قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید.'), findsOneWidget);
+
+    await tester.tap(find.text('بعدی'));
+    await tester.pump();
+    expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
+    await tester.tap(find.text('نمایش پاسخ'));
+    await tester.pump();
+    expect(find.textContaining('پاسخ: ۳/۴'), findsOneWidget);
+  });
+
   testWidgets('sample question library offers chapter and term modes', (tester) async {
     await tester.pumpWidget(_contentApp('sampleExams'));
     await _pumpUiFrames(tester);
