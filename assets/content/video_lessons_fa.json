@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "grade": 8,
+  "schoolYear": "1405-1406",
+  "note": "فقط فراداده و پیوند به میزبان اصلی ذخیره می‌شود؛ فایل ویدئو دانلود یا بازنشر نمی‌شود.",
+  "videos": [
+    {
+      "id": "math-7-power-root-1405",
+      "subjectId": "math",
+      "title": "ریاضی هشتم — فصل هفتم (توان و جذر)",
+      "lesson": "توان و جذر",
+      "sourceName": "تلوبیون / مدرسه تلویزیونی ایران",
+      "published": "۲۳ فروردین ۱۴۰۵",
+      "url": "https://telewebion.net/episode/0x16be14a5"
+    },
+    {
+      "id": "math-9-circle-1405",
+      "subjectId": "math",
+      "title": "ریاضی هشتم — فصل نهم (دایره)",
+      "lesson": "دایره",
+      "sourceName": "تلوبیون / مدرسه تلویزیونی ایران",
+      "published": "۱ خرداد ۱۴۰۵",
+      "url": "https://telewebion.net/episode/0x16c2fd2e"
+    },
+    {
+      "id": "math-8-data-1405",
+      "subjectId": "math",
+      "title": "ریاضی هشتم — فصل هشتم (دسته‌بندی داده‌ها)",
+      "lesson": "دسته‌بندی داده‌ها",
+      "sourceName": "تلوبیون / مدرسه تلویزیونی ایران",
+      "published": "۵ اردیبهشت ۱۴۰۵",
+      "url": "https://telewebion.net/episode/0x16bfd46b"
+    },
+    {
+      "id": "science-minerals-1405",
+      "subjectId": "science",
+      "title": "علوم هشتم — کانی‌ها (بخش اول)",
+      "lesson": "کانی‌ها",
+      "sourceName": "تلوبیون / مدرسه تلویزیونی ایران",
+      "published": "۳ اسفند ۱۴۰۴",
+      "url": "https://telewebion.net/episode/0x16b9b19b"
+    },
+    {
+      "id": "science-light-1405",
+      "subjectId": "science",
+      "title": "علوم هشتم — نور و ویژگی‌های آن",
+      "lesson": "نور و ویژگی‌های آن",
+      "sourceName": "تلوبیون / مدرسه تلویزیونی ایران",
+      "published": "۱۳ اردیبهشت ۱۴۰۵",
+      "url": "https://telewebion.ir/episode/0x16c0f337"
+    },
+    {
+      "id": "english-lesson-7-1405",
+      "subjectId": "english",
+      "title": "زبان انگلیسی هشتم — درس هفتم",
+      "lesson": "درس هفتم",
+      "sourceName": "تلوبیون / مدرسه تلویزیونی ایران",
+      "published": "۱۲ اردیبهشت ۱۴۰۵",
+      "url": "https://telewebion.net/episode/0x16c0dc77"
+    },
+    {
+      "id": "english-lesson-6-1405",
+      "subjectId": "english",
+      "title": "زبان انگلیسی هشتم — درس ششم",
+      "lesson": "درس ششم",
+      "sourceName": "تلوبیون / مدرسه تلویزیونی ایران",
+      "published": "۱۷ فروردین ۱۴۰۵",
+      "url": "https://telewebion.net/episode/0x16bd99e3"
+    },
+    {
+      "id": "persian-lesson-14-1405",
+      "subjectId": "persian",
+      "title": "فارسی هشتم — درس چهاردهم",
+      "lesson": "درس چهاردهم",
+      "sourceName": "تلوبیون / مدرسه تلویزیونی ایران",
+      "published": "۱۸ فروردین ۱۴۰۵",
+      "url": "https://telewebion.net/episode/0x16bdae87"
+    },
+    {
+      "id": "persian-lesson-17-1405",
+      "subjectId": "persian",
+      "title": "ادبیات فارسی هشتم — درس هفدهم",
+      "lesson": "درس هفدهم",
+      "sourceName": "تلوبیون / مدرسه تلویزیونی ایران",
+      "published": "۷ اردیبهشت ۱۴۰۵",
+      "url": "https://telewebion.net/episode/0x16c04445"
+    },
+    {
+      "id": "arabic-lesson-9-1405",
+      "subjectId": "arabic",
+      "title": "عربی هشتم — درس نهم",
+      "lesson": "درس نهم",
+      "sourceName": "تلوبیون / مدرسه تلویزیونی ایران",
+      "published": "۲ اردیبهشت ۱۴۰۵",
+      "url": "https://telewebion.net/episode/0x16bf99f1"
+    },
+    {
+      "id": "arabic-lesson-9-cont-1405",
+      "subjectId": "arabic",
+      "title": "عربی هشتم — ادامهٔ درس نهم",
+      "lesson": "ادامهٔ درس نهم",
+      "sourceName": "تلوبیون / مدرسه تلویزیونی ایران",
+      "published": "۸ اردیبهشت ۱۴۰۵",
+      "url": "https://telewebion.net/episode/0x16c06a42"
+    }
+  ]
+}
