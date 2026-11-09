@@ -329,7 +329,7 @@ void main() {
     await _pumpUiFrames(tester);
     expect(find.text('جزوه فصل اول ریاضی هشتم'), findsOneWidget);
     expect(find.text('مرور نکته‌ها و مثال‌های فصل اول.'), findsOneWidget);
-    expect(find.text('باز کردن فایل PDF'), findsOneWidget);
+    expect(find.text('مشاهده PDF'), findsNWidgets(2));
     expect(find.text('قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید.'), findsNothing);
   });
 
