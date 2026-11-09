@@ -78,7 +78,7 @@ def source_is_mapped(pack: dict[str, Any], chapter: dict[str, Any]) -> bool:
         return False
     if not clean_text(source.get("bookCode")):
         return False
-    if not re.fullmatch(r"\\d{4}-\\d{4}", clean_text(source.get("schoolYear"))):
+    if not re.fullmatch(r"\d{4}-\d{4}", clean_text(source.get("schoolYear"))):
         return False
     if source.get("verificationStatus") != "official_pdf_content_parsed":
         return False
@@ -104,7 +104,7 @@ def source_is_mapped(pack: dict[str, Any], chapter: dict[str, Any]) -> bool:
     if mapping.get("verificationMethod") not in {"toc_and_page_heading", "editorial_review"}:
         return False
     verified_at = clean_text(mapping.get("verifiedAt"))
-    if not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", verified_at):
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", verified_at):
         return False
     try:
         date.fromisoformat(verified_at)
