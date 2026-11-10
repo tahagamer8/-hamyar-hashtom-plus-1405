@@ -64,7 +64,8 @@ class _PdfResourceLibraryScreenState extends State<PdfResourceLibraryScreen> {
   void didUpdateWidget(covariant PdfResourceLibraryScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.subjectId != widget.subjectId ||
-        oldWidget.kind != widget.kind) {
+        oldWidget.kind != widget.kind ||
+        oldWidget.initialChapterIndex != widget.initialChapterIndex) {
       _resourcesFuture = _loadResources(DefaultAssetBundle.of(context));
       _selectedChapterIndex = widget.initialChapterIndex
           .clamp(0, widget.chapters.isEmpty ? 0 : widget.chapters.length - 1)
