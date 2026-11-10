@@ -843,6 +843,7 @@ class _QuizChapterState extends State<_QuizChapter> {
           const SizedBox(height: 8),
           if (isShortAnswer)
             TextField(
+              key: ValueKey('short-answer-$index'),
               controller: controller,
               enabled: !checked,
               minLines: 1,
@@ -859,6 +860,7 @@ class _QuizChapterState extends State<_QuizChapter> {
             )
           else if (options.length >= 2 && correct != null)
             RadioGroup<int>(
+              key: ValueKey('question-options-$index'),
               groupValue: _answers[index],
               onChanged: (value) {
                 if (!checked && value != null) {
@@ -886,6 +888,7 @@ class _QuizChapterState extends State<_QuizChapter> {
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: FilledButton.tonal(
+                key: ValueKey('check-question-$index'),
                 onPressed: isShortAnswer
                     ? (controller!.text.trim().isNotEmpty
                         ? () => setState(() => _checked.add(index))
