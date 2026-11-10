@@ -274,6 +274,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                     const SizedBox(height: 12),
                     _ChapterContent(
                       chapter: selectedChapter,
+                      subjectTitle: subject['title'] as String? ?? 'درس',
                       feature: _feature,
                       favoriteKey: '${widget.subjectId}::${selectedChapter['title']}',
                       progressKey: '${widget.subjectId}::${selectedChapter['title']}',
@@ -318,8 +319,15 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
 }
 
 class _ChapterContent extends ConsumerWidget {
-  const _ChapterContent({required this.chapter, required this.feature, required this.favoriteKey, required this.progressKey});
+  const _ChapterContent({
+    required this.chapter,
+    required this.subjectTitle,
+    required this.feature,
+    required this.favoriteKey,
+    required this.progressKey,
+  });
   final Map<String, dynamic> chapter;
+  final String subjectTitle;
   final AppFeature feature;
   final String favoriteKey;
   final String progressKey;
@@ -353,6 +361,7 @@ class _ChapterContent extends ConsumerWidget {
       return _QuizChapter(
         key: ValueKey('$progressKey:${feature.name}'),
         title: title,
+        subjectTitle: subjectTitle,
         questions: questions,
       );
     }
@@ -360,6 +369,7 @@ class _ChapterContent extends ConsumerWidget {
       return _QuizChapter(
         key: ValueKey('$progressKey:${feature.name}'),
         title: title,
+        subjectTitle: subjectTitle,
         questions: [...questions, ...advancedQuestions],
       );
     }
@@ -787,8 +797,14 @@ class _ReadOnlyQuestionState extends State<_ReadOnlyQuestion> {
 }
 
 class _QuizChapter extends StatefulWidget {
-  const _QuizChapter({super.key, required this.title, required this.questions});
+  const _QuizChapter({
+    super.key,
+    required this.title,
+    required this.subjectTitle,
+    required this.questions,
+  });
   final String title;
+  final String subjectTitle;
   final List<Map<String, dynamic>> questions;
 
   @override
@@ -802,6 +818,37 @@ class _QuizChapterState extends State<_QuizChapter> {
 
   TextEditingController _controllerFor(int index) =>
       _textAnswers.putIfAbsent(index, TextEditingController.new);
+
+  Future<void> _saveWrongAnswer({
+    required Map<String, dynamic> question,
+    required List<String> options,
+    required int selected,
+    required int correct,
+  }) async {
+    if (selected < 0 || selected >= options.length ||
+        correct < 0 || correct >= options.length) {
+      return;
+    }
+    try {
+      final preferences = await SharedPreferences.getInstance();
+      const key = 'fahmino_wrong_answers_v1';
+      final stored = preferences.getStringList(key) ?? <String>[];
+      final record = {
+        'date': DateTime.now().toIso8601String(),
+        'subjectTitle': widget.subjectTitle,
+        'examTitle': 'تمرین فصل',
+        'chapter': widget.title,
+        'question': question['question'] as String? ?? '',
+        'selectedAnswer': options[selected],
+        'correctAnswer': options[correct],
+        'explanation': question['explanation'] as String? ?? '',
+      };
+      stored.insert(0, jsonEncode(record));
+      await preferences.setStringList(key, stored.take(300).toList());
+    } catch (_) {
+      // The lesson question remains available even if local history fails.
+    }
+  }
 
   int? _correctOption(Map<String, dynamic> question) {
     final answer = question['answer'];
@@ -938,7 +985,20 @@ class _QuizChapterState extends State<_QuizChapter> {
                         ? () => setState(() => _checked.add(index))
                         : null)
                     : (_answers.containsKey(index)
-                        ? () => setState(() => _checked.add(index))
+                        ? () async {
+                            setState(() => _checked.add(index));
+                            final selected = _answers[index];
+                            if (selected != null &&
+                                correct != null &&
+                                selected != correct) {
+                              await _saveWrongAnswer(
+                                question: question,
+                                options: options,
+                                selected: selected,
+                                correct: correct,
+                              );
+                            }
+                          }
                         : null),
                 child: const Text('بررسی پاسخ'),
               ),
