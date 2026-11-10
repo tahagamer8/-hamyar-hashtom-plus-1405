@@ -21,36 +21,60 @@ List<Map<String, dynamic>> buildBalancedExamQuestions({
     final chapterTitle = chapter['title'] is String
         ? chapter['title'] as String
         : 'درس';
-    final rawItems = <dynamic>[
-      ...(chapter['questions'] as List<dynamic>? ?? const []),
-      ...(chapter['advancedQuestions'] as List<dynamic>? ?? const []),
-    ];
+    final examBank = chapter['chapterExam'];
+    final rawItems = examBank is List
+        ? examBank
+        : <dynamic>[
+            ...(chapter['questions'] as List<dynamic>? ?? const []),
+            ...(chapter['advancedQuestions'] as List<dynamic>? ?? const []),
+          ];
     final pool = <Map<String, dynamic>>[];
+    final seenPrompts = <String>{};
 
     for (final item in rawItems) {
       if (item is! Map) continue;
       final question = Map<String, dynamic>.from(item);
-      final options = question['options'];
-      final answer = question['answer'];
       final prompt = question['question'];
+      final explanation = question['explanation'];
       if (prompt is! String ||
           prompt.trim().isEmpty ||
-          options is! List ||
-          options.length < 2 ||
-          !options.every((option) => option is String) ||
-          answer is! int ||
-          answer < 0 ||
-          answer >= options.length) {
+          explanation is! String ||
+          explanation.trim().isEmpty ||
+          !seenPrompts.add(prompt.trim())) {
         continue;
       }
+
+      final type = question['questionType'] as String? ?? 'multiple_choice';
+      final rawOptions = question['options'];
+      final rawAnswer = question['answer'];
+      List<String>? options;
+      int? answer;
+
+      if (rawOptions is List &&
+          rawOptions.length >= 2 &&
+          rawOptions.every((option) => option is String && option.trim().isNotEmpty) &&
+          rawAnswer is int &&
+          rawAnswer >= 0 &&
+          rawAnswer < rawOptions.length) {
+        options = rawOptions.cast<String>();
+        answer = rawAnswer;
+      } else if (type == 'true_false' &&
+          (rawAnswer == 'درست' || rawAnswer == 'نادرست')) {
+        options = const ['درست', 'نادرست'];
+        answer = rawAnswer == 'درست' ? 0 : 1;
+      } else {
+        // Open-answer items are practiced in the lesson-question section,
+        // where the learner can compare their written response to a rubric.
+        continue;
+      }
+
       pool.add({
         'chapter': chapterTitle,
         'question': prompt,
         'options': options,
         'answer': answer,
-        'explanation': question['explanation'] is String
-            ? question['explanation']
-            : '',
+        'explanation': explanation,
+        'questionType': type,
       });
     }
 
