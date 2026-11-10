@@ -34,7 +34,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('مرور فصل اول علوم'), findsOneWidget);
-    expect(find.text('علوم تجربی'), findsOneWidget);
+    expect(find.textContaining('علوم تجربی •'), findsOneWidget);
 
     await tester.tap(find.byType(Checkbox).first);
     await tester.pumpAndSettle();
@@ -68,7 +68,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('تمرین معادله'), findsOneWidget);
-    expect(find.text('ریاضی'), findsOneWidget);
+    expect(find.textContaining('ریاضی •'), findsOneWidget);
     expect(find.text('2026/11/20'), findsOneWidget);
   });
 }
