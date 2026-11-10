@@ -1082,6 +1082,8 @@ class _LearningPageHeader extends StatelessWidget {
     AppFeature.lessonQuestions => 'پرسش‌های این فصل را حل کن و پاسخ و توضیح را بررسی کن.',
     AppFeature.quiz => 'دانسته‌هایت را با آزمون بسنج.',
     AppFeature.favorites => 'مطالب نشان‌شدهٔ خودت را ببین.',
+    AppFeature.studyPlanner => 'زمان‌بندی مطالعه و امتحان‌ها.',
+    AppFeature.mistakes => 'مرور سؤال‌های اشتباه و بی‌پاسخ.',
   };
 
   @override
