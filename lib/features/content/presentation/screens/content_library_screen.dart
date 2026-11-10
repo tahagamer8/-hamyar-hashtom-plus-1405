@@ -629,8 +629,53 @@ class _ChapterContent extends ConsumerWidget {
             ),
           ),
         ] else if (feature == AppFeature.solutions) ...[
-              Text(chapter['example'] as String? ?? 'مثال آموزشی',
-                  style: theme.textTheme.bodyMedium),
+              if (workedExamples.isNotEmpty)
+                _ContentPanel(
+                  title: 'مثال‌های حل‌شده',
+                  icon: Icons.calculate_outlined,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (final item in workedExamples) ...[
+                        Text(
+                          item['title'] as String? ?? 'نمونهٔ آموزشی',
+                          style: theme.textTheme.titleSmall,
+                        ),
+                        const SizedBox(height: 6),
+                        Text(item['problem'] as String),
+                        const SizedBox(height: 8),
+                        for (var stepIndex = 0;
+                            stepIndex < (item['steps'] as List).length;
+                            stepIndex++)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 6),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('${stepIndex + 1}. '),
+                                Expanded(
+                                  child: Text((item['steps'] as List)[stepIndex] as String),
+                                ),
+                              ],
+                            ),
+                          ),
+                        Text(
+                          'پاسخ پیشنهادی: ${item['answer']}',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
+                        Text(item['explanation'] as String),
+                        if (item != workedExamples.last)
+                          const Divider(height: 24),
+                      ],
+                    ],
+                  ),
+                )
+              else
+                Text(chapter['example'] as String? ?? 'مثال آموزشی',
+                    style: theme.textTheme.bodyMedium),
               const SizedBox(height: 10),
               for (var i = 0; i < steps.length; i++)
                 Padding(
