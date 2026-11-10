@@ -37,7 +37,8 @@ class _FeatureTile extends StatelessWidget {
     AppFeature.notes => 'خلاصه‌ها و نکته‌های امتحانی',
     AppFeature.flashcards => 'مرور فعال نکته‌ها و پرسش‌ها با کارت',
     AppFeature.solutions => 'پاسخ تمرین‌ها با راه‌حل مرحله‌ای',
-    AppFeature.sampleExams => 'سؤال‌های طبقه‌بندی‌شده با پاسخ',
+    AppFeature.sampleExams => 'نمونه‌سؤال‌های PDF فصل و نیم‌سال',
+    AppFeature.lessonQuestions => 'تمرین تعاملی هر فصل با پاسخ تشریحی',
     AppFeature.quiz => 'خودت را با آزمون بسنج',
     AppFeature.favorites => 'مطالب مهمت را یک‌جا ببین',
   };
