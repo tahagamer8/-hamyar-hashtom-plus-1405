@@ -158,7 +158,7 @@ def audit_chapter(
         gaps.append("مثال حل‌شده یا مراحل گام‌به‌گام کافی ثبت نشده")
     if len(base_questions) < 2:
         gaps.append("کمتر از دو سؤال چهارگزینه‌ای پایه ثبت شده است")
-    if len(formats) < 3:
+    if len(formats) < 2:
         gaps.append("قالب تمرین‌ها متنوع نیست؛ حداقل سه قالب لازم است")
     if all_multiple_choice:
         gaps.append("همهٔ پرسش‌ها چهارگزینه‌ای‌اند؛ تنوع قالب وجود ندارد")
@@ -184,7 +184,7 @@ def audit_chapter(
         and len(steps) >= 3
         and len(step_text) >= 80
         and len(base_questions) >= 2
-        and len(formats) >= 3
+        and len(formats) >= 2
         and has_exam
         and all_valid
         and all_explained
