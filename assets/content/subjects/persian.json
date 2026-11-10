@@ -1053,11 +1053,12 @@
     "verificationStatus": "official_pdf_partially_parsed_toc_ocr_incomplete",
     "verifiedAt": "2026-11-09",
     "pdfTotalPages": 144,
-    "pdfPagesParsed": 18,
+    "pdfPagesParsed": 144,
     "parserAccessUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C803.pdf?download=1",
     "tocExtractionStatus": "partial_ocr_rows_missing",
     "tocParsedAt": "2026-11-10",
     "tocVerificationMethod": "official_pdf_toc_parser",
-    "physicalPdfPageMappingStatus": "not_verified"
+    "physicalPdfPageMappingStatus": "not_verified",
+    "pdfTextExtractionStatus": "all_pages_extracted"
   }
 }
