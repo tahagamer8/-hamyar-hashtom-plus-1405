@@ -32,6 +32,46 @@ def clean_text(value: Any) -> str:
     return value.strip() if isinstance(value, str) else ""
 
 
+OFFICIAL_LINK_STATUSES = {
+    "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+    "official_pdf_toc_parsed_printed_pages_only",
+    "official_pdf_partially_parsed_toc_ocr_incomplete",
+    "official_pdf_content_parsed",
+}
+
+
+def official_source_link_verified(source: Any) -> bool:
+    """Count official portal records independently from PDF parsing depth."""
+    if not isinstance(source, dict):
+        return False
+    portal = urlparse(clean_text(source.get("portalUrl")))
+    pdf = urlparse(clean_text(source.get("pdfUrl")))
+    return (
+        portal.scheme in {"http", "https"}
+        and portal.hostname == "chap.sch.ir"
+        and pdf.scheme in {"http", "https"}
+        and pdf.hostname == "chap.sch.ir"
+        and pdf.path.lower().endswith(".pdf")
+        and bool(clean_text(source.get("bookCode")))
+        and bool(re.fullmatch(r"\\d{4}-\\d{4}", clean_text(source.get("schoolYear"))))
+        and clean_text(source.get("verificationStatus")) in OFFICIAL_LINK_STATUSES
+    )
+
+
+def pdf_parse_level(source: Any) -> str:
+    """Describe parser coverage without confusing a TOC read with full PDF review."""
+    if not isinstance(source, dict):
+        return "none"
+    status = clean_text(source.get("verificationStatus"))
+    if status == "official_pdf_content_parsed":
+        return "full"
+    if status == "official_pdf_toc_parsed_printed_pages_only":
+        return "toc_complete"
+    if status == "official_pdf_partially_parsed_toc_ocr_incomplete":
+        return "partial"
+    return "none"
+
+
 def question_format(question: dict[str, Any]) -> str:
     options = question.get("options")
     if isinstance(options, list) and len(options) >= 2:
@@ -312,6 +352,8 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
                 if clean_text(pack.get("textbookSourceFile"))
                 else "official PDF source not recorded"
             )
+        source_link_verified = official_source_link_verified(source)
+        parse_level = pdf_parse_level(source)
         subjects.append(
             {
                 "id": subject_id,
@@ -340,6 +382,8 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
                 "textbookEdition": clean_text(pack.get("textbookEdition")) or clean_text(source.get("schoolYear")),
                 "textbookSourceUrl": clean_text(source.get("pdfUrl")),
                 "textbookSourceStatus": source_status,
+                "officialSourceLinkVerified": source_link_verified,
+                "pdfParseLevel": parse_level,
             }
         )
 
@@ -357,11 +401,22 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
     totals = {
         "subjectCount": len(subjects),
         "officialSourceLinkVerifiedSubjectCount": sum(
-            subject["textbookSourceStatus"].startswith("official_portal_record_and_pdf_link_verified")
-            for subject in subjects
+            subject["officialSourceLinkVerified"] for subject in subjects
         ),
         "pdfContentParsedSubjectCount": sum(
-            "pdf_content_parsed" in subject["textbookSourceStatus"] for subject in subjects
+            subject["pdfParseLevel"] != "none" for subject in subjects
+        ),
+        "pdfFullContentParsedSubjectCount": sum(
+            subject["pdfParseLevel"] == "full" for subject in subjects
+        ),
+        "pdfTocCompleteSubjectCount": sum(
+            subject["pdfParseLevel"] == "toc_complete" for subject in subjects
+        ),
+        "pdfTocPartialSubjectCount": sum(
+            subject["pdfParseLevel"] == "partial" for subject in subjects
+        ),
+        "pdfNotParsedSubjectCount": sum(
+            subject["pdfParseLevel"] == "none" for subject in subjects
         ),
         "sectionCount": len(sections),
         "baseQuestionCount": sum(row["baseQuestionCount"] for row in sections),
@@ -391,7 +446,7 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         ),
     }
     return {
-        "auditDate": "2026-11-09",
+        "auditDate": date.today().isoformat(),
         "method": "Conservative pedagogical audit plus strict official-PDF and chapter-specific evidence validation; not a certification of factual accuracy.",
         "sourceMappingRequirements": {
             "officialHost": "chap.sch.ir",
@@ -424,15 +479,15 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
 def render_markdown(report: dict[str, Any]) -> str:
     totals = report["totals"]
     lines = [
-        "# ممیزی کیفیت واقعی محتوای فهمینو — ۱۴۰۵/۰۸/۱۸",
+        "# ممیزی کیفیت واقعی محتوای فهمینو",
         "",
-        "**تاریخ:** ۹ نوامبر ۲۰۲۶  ",
+        f"**تاریخ:** {report['auditDate']}  ",
         "**روش:** ممیزی محافظه‌کارانهٔ ساختار، کفایت آموزشی و ردیابی منبع؛ این گزارش صحت علمی را تأیید نمی‌کند.",
         "",
         "## نتیجهٔ کلی",
         "",
         f"- بسته‌های درسی: **{totals['subjectCount']}**",
-        f"- پیوند رسمی PDF تأییدشده: **{totals['officialSourceLinkVerifiedSubjectCount']} از {totals['subjectCount']}**؛ PDF پردازش‌شده: **{totals['pdfContentParsedSubjectCount']}**",
+        f"- رکورد و پیوند رسمی معتبر: **{totals['officialSourceLinkVerifiedSubjectCount']} از {totals['subjectCount']}**؛ PDF دارای خروجی parser: **{totals['pdfContentParsedSubjectCount']}** (فهرست کامل: **{totals['pdfTocCompleteSubjectCount']}**، OCR ناقص: **{totals['pdfTocPartialSubjectCount']}**، پردازش کامل محتوا: **{totals['pdfFullContentParsedSubjectCount']}**، پردازش‌نشده: **{totals['pdfNotParsedSubjectCount']}**)",
         f"- بخش‌ها/درس‌ها/پودمان‌ها: **{totals['sectionCount']}**",
         f"- پرسش‌های پایه: **{totals['baseQuestionCount']}**",
         f"- پرسش‌های افزودهٔ موسوم به استدلالی: **{totals['advancedQuestionCount']}**",
@@ -512,7 +567,7 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             "## وضعیت منابع رسمیِ پنج کتابی که قبلاً غایب بودند",
             "",
-            "برای هر پنج کتاب، صفحهٔ رسمی پایگاه کتاب‌های درسی و پیوند مستقیم PDF سال ۱۴۰۵–۱۴۰۶ پیدا شد. پیوند و مشخصات در بستهٔ JSON همان درس ثبت شده است؛ خود PDF در این اجرا دانلود یا صفحه‌به‌صفحه تحلیل نشده و هیچ محتوای دارای حق نشر کپی نشده است.",
+            "برای هر پنج کتاب، صفحهٔ رسمی و پیوند PDF سال ۱۴۰۵–۱۴۰۶ ثبت شده است. در پردازش تکمیلی ۱۰ نوامبر ۲۰۲۶، فهرست ریاضی به‌طور کامل از نظر عنوان و شمارهٔ چاپی استخراج شد؛ PDF فارسی، قرآن و پیام‌های آسمان فقط به‌صورت ناقص OCR شدند؛ PDF نگارش با خطای داخلی parser خوانده نشد. این نتایج جایگزین نگاشت فصل به صفحهٔ فیزیکی PDF نیستند و هیچ متن درس یا تصویر کتاب کپی نشده است.",
             "",
             "- قرآن، کد ۸۰۱: [صفحهٔ رسمی](http://chap.sch.ir/books/14210) — [PDF رسمی](http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C801.pdf) — ۱۲٫۴ مگابایت",
             "- پیام‌های آسمان، کد ۸۰۲: [صفحهٔ رسمی](http://chap.sch.ir/books/14217) — [PDF رسمی](http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C802.pdf) — ۱۴٫۲۸ مگابایت",
@@ -525,7 +580,7 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             "## گام بعدی",
             "",
-            "ابتدا PDFهای رسمیِ دارای لینک را در محیط مجاز دریافت و از نظر نسخه، تعداد صفحات و فهرست مطالب بررسی کن؛ سپس برای ۵ کتاب تازه‌یافته، نگاشت فصل/درس/صفحه را تکمیل کن. بعد از آن باید درسنامه و نمونه‌های تألیفیِ هر فصل بازنویسی شوند و قالب‌های غیرچهارگزینه‌ای و آزمون فصل با پاسخ تشریحی اضافه شوند.",
+            "برای ریاضی، شمارهٔ فیزیکی PDF و صفحهٔ آغاز هر فصل را با مشاهدهٔ خود صفحات تأیید کن؛ OCR فارسی، قرآن و پیام‌های آسمان را با بازبینی صفحه‌ای کامل کن؛ برای PDF نگارش مسیر دریافت مجاز و قابل‌پردازش پیدا کن. پس از آن نگاشت رسمی فصل‌ها را ثبت کن و درسنامه، تمرین متنوع و آزمون فصلِ تألیفی را به‌ترتیب تکمیل کن.",
             "",
         ]
     )

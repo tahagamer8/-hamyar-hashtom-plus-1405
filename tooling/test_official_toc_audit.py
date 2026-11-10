@@ -2,7 +2,11 @@ import json
 import unittest
 from pathlib import Path
 
-from tooling.audit_content_quality import audit_chapter
+from tooling.audit_content_quality import (
+    audit_chapter,
+    official_source_link_verified,
+    pdf_parse_level,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,6 +55,35 @@ class OfficialTocEvidenceTests(unittest.TestCase):
         self.assertEqual(self.books["religion"]["tocStatus"], "partial_table_layout_ocr_incomplete")
         self.assertEqual(self.books["writing"]["tocStatus"], "not_parsed")
         self.assertEqual(self.books["writing"]["pdfPagesParsed"], 0)
+
+    def test_official_link_verification_is_separate_from_pdf_parse_depth(self):
+        statuses = {
+            "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed": "none",
+            "official_pdf_toc_parsed_printed_pages_only": "toc_complete",
+            "official_pdf_partially_parsed_toc_ocr_incomplete": "partial",
+            "official_pdf_content_parsed": "full",
+        }
+        for status, expected_level in statuses.items():
+            with self.subTest(status=status):
+                source = {
+                    "portalUrl": "https://chap.sch.ir/books/14220",
+                    "pdfUrl": "https://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C805.pdf",
+                    "bookCode": "805",
+                    "schoolYear": "1405-1406",
+                    "verificationStatus": status,
+                }
+                self.assertTrue(official_source_link_verified(source))
+                self.assertEqual(pdf_parse_level(source), expected_level)
+
+    def test_unofficial_or_incomplete_source_metadata_does_not_count_as_verified_link(self):
+        source = {
+            "portalUrl": "https://example.com/books/14220",
+            "pdfUrl": "https://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C805.pdf",
+            "bookCode": "805",
+            "schoolYear": "1405-1406",
+            "verificationStatus": "official_pdf_toc_parsed_printed_pages_only",
+        }
+        self.assertFalse(official_source_link_verified(source))
 
     def test_toc_only_parse_does_not_satisfy_strict_source_gate(self):
         statuses = (
