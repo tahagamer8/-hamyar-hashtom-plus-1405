@@ -89,7 +89,75 @@ class _BackupCardState extends State<_BackupCard> {
       key == 'fahmino_next_exam_date_v1' ||
       key == 'fahmino_study_tasks_v1' ||
       key == 'fahmino_wrong_answers_v1' ||
-      key.startsWith('fahmino_exam_history_');
+      (key.startsWith('fahmino_exam_history_') &&
+          key.length > 'fahmino_exam_history_'.length);
+
+  bool _validateBackupEntry(String key, Object? value) {
+    if (!_isAllowedKey(key)) return false;
+
+    if (key == 'fahmino_theme_mode') {
+      return value == 'light' || value == 'dark' || value == 'system';
+    }
+    if (key == 'fahmino_next_exam_date_v1') {
+      return value is String && DateTime.tryParse(value) != null;
+    }
+
+    final isStringListKey = key == 'fahmino_favorites_v1' ||
+        key == 'fahmino_learning_progress_v1' ||
+        key == 'fahmino_study_tasks_v1' ||
+        key == 'fahmino_wrong_answers_v1' ||
+        key.startsWith('fahmino_exam_history_');
+    if (!isStringListKey || value is! List || !value.every((item) => item is String)) {
+      return false;
+    }
+
+    if (value.length > 500) return false;
+    for (final row in value) {
+      if (row.length > 40000) return false;
+      if (key == 'fahmino_favorites_v1' ||
+          key == 'fahmino_learning_progress_v1') {
+        if (row.trim().isEmpty || row.length > 500) return false;
+        continue;
+      }
+
+      dynamic decoded;
+      try {
+        decoded = jsonDecode(row);
+      } on FormatException {
+        return false;
+      }
+      if (decoded is! Map<String, dynamic>) return false;
+
+      if (key == 'fahmino_study_tasks_v1') {
+        final title = decoded['title'];
+        final subject = decoded['subject'];
+        final date = decoded['date'];
+        final completed = decoded['completed'];
+        if (title is! String || title.trim().isEmpty ||
+            subject is! String || subject.trim().isEmpty ||
+            date is! String || DateTime.tryParse(date) == null ||
+            completed is! bool) {
+          return false;
+        }
+      } else if (key == 'fahmino_wrong_answers_v1') {
+        if (decoded['question'] is! String ||
+            decoded['correctAnswer'] is! String ||
+            decoded['subjectTitle'] is! String ||
+            decoded['explanation'] is! String) {
+          return false;
+        }
+      } else if (key.startsWith('fahmino_exam_history_')) {
+        if (decoded['date'] is! String ||
+            DateTime.tryParse(decoded['date'] as String) == null ||
+            decoded['score'] is! int ||
+            decoded['total'] is! int ||
+            decoded['percent'] is! int) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
   Future<void> _exportBackup() async {
     if (_busy) return;
@@ -224,14 +292,9 @@ class _BackupCardState extends State<_BackupCard> {
         throw const FormatException('Backup contains unsupported keys');
       }
       for (final entry in data.entries) {
-        final value = entry.value;
-        final safe = value == null ||
-            value is String ||
-            value is bool ||
-            value is int ||
-            value is double ||
-            (value is List && value.every((item) => item is String));
-        if (!safe) throw const FormatException('Unsupported value type');
+        if (!_validateBackupEntry(entry.key, entry.value)) {
+          throw const FormatException('Invalid backup entry');
+        }
       }
     } on FormatException {
       ScaffoldMessenger.of(context).showSnackBar(
