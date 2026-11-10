@@ -212,10 +212,19 @@ class _AiChatScreenState extends State<AiChatScreen> {
       final mistakes = (chapter['commonMistakes'] as List<dynamic>? ?? [])
           .whereType<String>()
           .toList();
+      final lessonContent = chapter['lessonContent'] as String? ?? '';
+      final workedExamples = (chapter['workedExamples'] as List<dynamic>? ?? [])
+          .whereType<Map<String, dynamic>>()
+          .toList(growable: false);
 
       out.writeln('### ' + title);
       if (wantsLesson) {
-        out.writeln('**آموزش مفهومی:**');
+        out.writeln('**درسنامهٔ کامل فهمینو:**');
+        if (lessonContent.trim().isNotEmpty) {
+          out.writeln(lessonContent);
+          out.writeln();
+        }
+        out.writeln('**آموزش مفهومی و مرور سریع:**');
         if (summary.isNotEmpty) out.writeln(summary);
         if (points.isNotEmpty) {
           out.writeln('**نکته‌های کلیدی:**');
@@ -257,7 +266,23 @@ class _AiChatScreenState extends State<AiChatScreen> {
         }
 
         if (wantsExample) {
-          if (example.isNotEmpty) out.writeln('**مثال آموزشی:** ' + example);
+          if (workedExamples.isNotEmpty) {
+            out.writeln('**مثال‌های حل‌شده:**');
+            for (final item in workedExamples.take(2)) {
+              out.writeln(item['title'] as String? ?? 'نمونهٔ آموزشی');
+              out.writeln('پرسش: ' + (item['problem'] as String? ?? ''));
+              final exampleSteps = (item['steps'] as List<dynamic>? ?? [])
+                  .whereType<String>();
+              var stepIndex = 1;
+              for (final step in exampleSteps) {
+                out.writeln((stepIndex++).toString() + '. ' + step);
+              }
+              out.writeln('پاسخ پیشنهادی: ' + (item['answer'] as String? ?? ''));
+              out.writeln('دلیل: ' + (item['explanation'] as String? ?? ''));
+            }
+          } else if (example.isNotEmpty) {
+            out.writeln('**مثال آموزشی:** ' + example);
+          }
           if (steps.isNotEmpty) {
             out.writeln('**مراحل حل:**');
             for (var i = 0; i < steps.length; i++) {
@@ -281,12 +306,15 @@ class _AiChatScreenState extends State<AiChatScreen> {
         }
 
         if (wantsPractice) {
-          final questions = [
-            ...((chapter['questions'] as List<dynamic>? ?? [])
-                .whereType<Map<String, dynamic>>()),
-            ...((chapter['advancedQuestions'] as List<dynamic>? ?? [])
-                .whereType<Map<String, dynamic>>()),
-          ];
+          final chapterExam = chapter['chapterExam'];
+          final questions = chapterExam is List
+              ? chapterExam.whereType<Map<String, dynamic>>().toList()
+              : [
+                  ...((chapter['questions'] as List<dynamic>? ?? [])
+                      .whereType<Map<String, dynamic>>()),
+                  ...((chapter['advancedQuestions'] as List<dynamic>? ?? [])
+                      .whereType<Map<String, dynamic>>()),
+                ];
           if (questions.isEmpty) {
             out.writeln('برای این فصل هنوز پرسش تمرینی ثبت نشده است.');
           } else {
@@ -313,31 +341,55 @@ class _AiChatScreenState extends State<AiChatScreen> {
     final questions = <Map<String, dynamic>>[];
 
     for (final chapter in chapters) {
-      for (final key in ['questions', 'advancedQuestions']) {
-        final values = chapter[key];
-        if (values is! List) continue;
-        for (final value in values.whereType<Map<String, dynamic>>()) {
-          final options = value['options'];
-          final answer = value['answer'];
-          if (value['question'] is String &&
-              options is List &&
-              options.length >= 2 &&
-              answer is int &&
-              answer >= 0 &&
-              answer < options.length &&
-              value['explanation'] is String) {
-            questions.add({
-              ...value,
-              '_chapterTitle': chapter['title'] as String? ?? 'فصل',
-            });
-          }
+      final bank = chapter['chapterExam'];
+      final values = bank is List
+          ? bank
+          : <dynamic>[
+              ...(chapter['questions'] as List<dynamic>? ?? []),
+              ...(chapter['advancedQuestions'] as List<dynamic>? ?? []),
+            ];
+      for (final value in values.whereType<Map<String, dynamic>>()) {
+        final prompt = value['question'];
+        final explanation = value['explanation'];
+        if (prompt is! String || prompt.trim().isEmpty ||
+            explanation is! String || explanation.trim().isEmpty) {
+          continue;
         }
+        final type = value['questionType'] as String? ?? 'multiple_choice';
+        final rawOptions = value['options'];
+        final rawAnswer = value['answer'];
+        List<String>? options;
+        int? answer;
+
+        if (rawOptions is List &&
+            rawOptions.length >= 2 &&
+            rawOptions.every((item) => item is String) &&
+            rawAnswer is int &&
+            rawAnswer >= 0 &&
+            rawAnswer < rawOptions.length) {
+          options = rawOptions.cast<String>();
+          answer = rawAnswer;
+        } else if (type == 'true_false' &&
+            (rawAnswer == 'درست' || rawAnswer == 'نادرست')) {
+          options = const ['درست', 'نادرست'];
+          answer = rawAnswer == 'درست' ? 0 : 1;
+        } else {
+          // Open-answer practice is available in the lesson-question section.
+          continue;
+        }
+
+        questions.add({
+          ...value,
+          'options': options,
+          'answer': answer,
+          '_chapterTitle': chapter['title'] as String? ?? 'فصل',
+        });
       }
     }
 
     if (questions.isEmpty) {
       _awaitingQuizAnswer = false;
-      return 'برای فصل انتخاب‌شده سؤال معتبر و پاسخ تشریحی ثبت نشده است.';
+      return 'برای فصل انتخاب‌شده هنوز پرسش چهارگزینه‌ای یا درست/نادرست معتبر ثبت نشده است.';
     }
 
     _quizQuestions = questions.take(5).toList(growable: false);
