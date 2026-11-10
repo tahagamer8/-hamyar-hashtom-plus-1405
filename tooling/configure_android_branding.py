@@ -39,16 +39,16 @@ def _set_manifest_attribute(xml: str, name: str, value: str) -> str:
 def _ensure_internet_permission(xml: str) -> str:
     """Put INTERNET permission in the main manifest used by release builds."""
     permission_pattern = re.compile(
-        r'<uses-permission\\b[^>]*android:name="android\\.permission\\.INTERNET"'
+        r'<uses-permission\b[^>]*android:name="android\.permission\.INTERNET"'
     )
     if permission_pattern.search(xml):
         return xml
 
     updated, count = re.subn(
-        r"(\\s*)(<application\\b)",
+        r"(\s*)(<application\b)",
         lambda match: (
             f'{match.group(1)}<uses-permission '
-            'android:name="android.permission.INTERNET" />\\n'
+            'android:name="android.permission.INTERNET" />\n'
             f"{match.group(1)}{match.group(2)}"
         ),
         xml,
@@ -163,7 +163,7 @@ def configure_android_branding(root: Path = ROOT) -> None:
     if APP_ID not in gradle or APP_LABEL not in manifest:
         raise RuntimeError("Fahmino Android identity/label verification failed.")
     if not re.search(
-        r'<uses-permission\\b[^>]*android:name="android\\.permission\\.INTERNET"',
+        r'<uses-permission\b[^>]*android:name="android\.permission\.INTERNET"',
         manifest,
     ):
         raise RuntimeError("Android INTERNET permission is missing from release manifest.")
