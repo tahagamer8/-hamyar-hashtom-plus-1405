@@ -53,7 +53,7 @@ void main() {
         ),
       ),
     ));
-    await tester.pumpAndSettle();
+    await pumpResourceScreen(tester);
 
     expect(find.text('نمونه‌سؤال‌ها؛ فقط فایل PDF'), findsOneWidget);
     expect(find.text('نمونه‌سؤال فصل 1 - فهمینو'), findsOneWidget);
