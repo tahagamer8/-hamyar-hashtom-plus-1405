@@ -93,6 +93,15 @@ jobs:
             test -s "assets/generated_pdfs/Fahmino-$subject-FA.pdf"
           done
 
+      - name: Generate per-chapter PDF packs
+        run: |
+          python tooling/generate_chapter_pdfs.py --subjects-dir assets/content/subjects --output-dir assets/generated_pdfs
+          test "$(find assets/generated_pdfs/chapters -type f -name '*.pdf' | wc -l)" -eq 290
+          for subject in arabic art english english_workbook math persian quran religion science social thinking work writing; do
+            test -s "assets/generated_pdfs/chapters/$subject/Fahmino-$subject-Chapter-1-Notes-FA.pdf"
+            test -s "assets/generated_pdfs/chapters/$subject/Fahmino-$subject-Chapter-1-Questions-FA.pdf"
+          done
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -115,7 +124,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: fahmino-learning-pdfs
-          path: assets/generated_pdfs/*.pdf
+          path: assets/generated_pdfs/
           if-no-files-found: error
 
       - uses: actions/upload-artifact@v4
