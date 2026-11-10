@@ -32,7 +32,30 @@ const _testCatalog = r'''
         "options": ["۱/۶", "۲/۶", "۳/۴", "۱"],
         "answer": 2,
         "explanation": "۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ = ۳/۴."
-      }]
+      }],
+      "advancedQuestions": [
+        {
+          "question": "پاسخ کوتاه: چرا برای جمع کسرها مخرج مشترک می‌گیریم؟",
+          "questionType": "short_answer",
+          "answer": "برای هم‌واحد کردن قسمت‌ها و جمع صورت‌ها.",
+          "explanation": "مخرج مشترک نشان می‌دهد قسمت‌های کسر هم‌اندازه شده‌اند.",
+          "difficulty": "مفهومی"
+        },
+        {
+          "question": "پاسخ کوتاه: ۱/۲ را با مخرج ۴ بنویس.",
+          "questionType": "short_answer",
+          "answer": "۲/۴",
+          "explanation": "صورت و مخرج را در ۲ ضرب می‌کنیم.",
+          "difficulty": "پایه"
+        },
+        {
+          "question": "درست یا نادرست: مخرج کسر می‌تواند صفر باشد.",
+          "questionType": "true_false",
+          "answer": "نادرست",
+          "explanation": "تقسیم بر صفر تعریف نشده است.",
+          "difficulty": "پایه"
+        }
+      ]
     }]
   }
 }
@@ -393,23 +416,23 @@ void main() {
     );
     await _pumpUiFrames(tester);
 
-    final shortAnswerField = find.byKey(const ValueKey('short-answer-6'));
+    final shortAnswerField = find.byKey(const ValueKey('short-answer-1'));
     await tester.ensureVisible(shortAnswerField);
     await tester.pump();
     await tester.enterText(shortAnswerField, '۳/۴');
-    await tester.tap(find.byKey(const ValueKey('check-question-6')));
+    await tester.tap(find.byKey(const ValueKey('check-question-1')));
     await tester.pump();
     expect(find.textContaining('پاسخ پیشنهادی: ۳/۴'), findsOneWidget);
 
     final trueOption = find.descendant(
-      of: find.byKey(const ValueKey('question-options-8')),
+      of: find.byKey(const ValueKey('question-options-3')),
       matching: find.text('درست'),
     );
     await tester.ensureVisible(trueOption);
     await tester.pump();
     await tester.tap(trueOption);
     await tester.pump();
-    await tester.tap(find.byKey(const ValueKey('check-question-8')));
+    await tester.tap(find.byKey(const ValueKey('check-question-3')));
     await tester.pump();
     expect(find.textContaining('آفرین، پاسخ درست است.'), findsOneWidget);
   });
@@ -597,6 +620,8 @@ void main() {
     await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump();
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
@@ -629,6 +654,8 @@ void main() {
     await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump();
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
@@ -661,6 +688,8 @@ void main() {
     await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump();
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
