@@ -68,7 +68,7 @@ jobs:
 
       - name: Audit chapter-by-chapter educational content quality
         run: |
-          python -m unittest tooling.test_content_quality_audit tooling.test_official_toc_audit
+          python -m unittest tooling.test_content_quality_audit tooling.test_official_toc_audit tooling.test_persian_official_pdf_coverage
           python tooling/audit_content_quality.py \
             --subjects-dir assets/content/subjects \
             --output-json build/content-quality-audit/content-quality-audit.json \
