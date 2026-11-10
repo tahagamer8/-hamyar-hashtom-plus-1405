@@ -9,6 +9,8 @@ import 'package:hamyar_hashtom_plus/features/content/presentation/screens/conten
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:hamyar_hashtom_plus/features/home/presentation/screens/home_screen.dart';
 import 'package:hamyar_hashtom_plus/features/search/presentation/screens/search_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/mistake_review_screen.dart';
+import 'package:hamyar_hashtom_plus/features/study_planner/presentation/screens/study_planner_screen.dart';
 import 'package:hamyar_hashtom_plus/features/settings/presentation/screens/settings_screen.dart';
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/subject_detail_screen.dart';
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/subjects_screen.dart';
@@ -112,6 +114,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.ai,
         builder: (context, state) => const AiChatScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.studyPlanner,
+        builder: (context, state) => const StudyPlannerScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.mistakes,
+        builder: (context, state) => const MistakeReviewScreen(),
       ),
     ],
     errorBuilder: (context, state) => const _NotFoundScreen(),
