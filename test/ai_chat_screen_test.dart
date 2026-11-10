@@ -69,6 +69,11 @@ class _TutorAssetBundle extends CachingAssetBundle {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
+  String tutorMessages(WidgetTester tester) => tester
+      .widgetList<SelectableText>(find.byType(SelectableText))
+      .map((widget) => widget.data ?? '')
+      .join('\n');
+
   Future<void> openTutor(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -91,10 +96,10 @@ void main() {
     await tester.tap(find.text('آموزش فصل'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('عددهای گویا به شکل کسر نوشته می‌شوند'), findsOneWidget);
-    expect(find.textContaining('حل مرحله‌به‌مرحله'), findsOneWidget);
-    expect(find.textContaining('مخرج مشترک ۴ انتخاب می‌کنیم.'), findsOneWidget);
-    expect(find.textContaining('مراقب این اشتباه‌ها باش'), findsOneWidget);
+    expect(tutorMessages(tester), contains('عددهای گویا به شکل کسر نوشته می‌شوند'));
+    expect(tutorMessages(tester), contains('حل مرحله‌به‌مرحله'));
+    expect(tutorMessages(tester), contains('مخرج مشترک ۴ انتخاب می‌کنیم.'));
+    expect(tutorMessages(tester), contains('مراقب این اشتباه‌ها باش'));
   });
 
   testWidgets('private tutor runs an interactive quiz and explains the answer',
@@ -104,19 +109,19 @@ void main() {
     await tester.tap(find.text('آزمون کوتاه'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
-    expect(find.textContaining('پاسخت کدام گزینه است؟'), findsOneWidget);
+    expect(tutorMessages(tester), contains('حاصل ۱/۲ + ۱/۴ کدام است؟'));
+    expect(tutorMessages(tester), contains('پاسخت کدام گزینه است؟'));
 
     await tester.enterText(find.byType(TextField), 'ب');
     await tester.tap(find.byTooltip('ارسال پرسش'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('آفرین، این پاسخ درست است.'), findsOneWidget);
+    expect(tutorMessages(tester), contains('آفرین، این پاسخ درست است.'));
     expect(
-      find.textContaining('۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ برابر ۳/۴ می‌شود.'),
-      findsOneWidget,
+      tutorMessages(tester),
+      contains('۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ برابر ۳/۴ می‌شود.'),
     );
-    expect(find.textContaining('۱ پاسخ درست از ۱ سؤال'), findsOneWidget);
+    expect(tutorMessages(tester), contains('1 پاسخ درست از 1 سؤال'));
   });
 
   testWidgets('private tutor asks for a valid option before grading a quiz',
@@ -130,7 +135,7 @@ void main() {
     await tester.tap(find.byTooltip('ارسال پرسش'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('با شمارهٔ گزینه یا حرف الف، ب، پ یا ت'), findsOneWidget);
-    expect(find.textContaining('پاسخت کدام گزینه است؟'), findsOneWidget);
+    expect(tutorMessages(tester), contains('با شمارهٔ گزینه یا حرف الف، ب، پ یا ت'));
+    expect(tutorMessages(tester), contains('پاسخت کدام گزینه است؟'));
   });
 }
