@@ -302,10 +302,15 @@ class _ChapterContent extends ConsumerWidget {
     final isCompleted = ref.watch(learningProgressProvider).contains(progressKey);
 
     if (feature == AppFeature.quiz) {
-      return _QuizChapter(title: title, questions: questions);
+      return _QuizChapter(
+        key: ValueKey('$progressKey:${feature.name}'),
+        title: title,
+        questions: questions,
+      );
     }
     if (feature == AppFeature.lessonQuestions) {
       return _QuizChapter(
+        key: ValueKey('$progressKey:${feature.name}'),
         title: title,
         questions: [...questions, ...advancedQuestions],
       );
@@ -486,6 +491,7 @@ class _ChapterContent extends ConsumerWidget {
             title: 'کارت‌های مرور این بخش',
             icon: Icons.style_rounded,
             child: _FlashcardDeck(
+              key: ValueKey(progressKey),
               cards: [
                 for (var i = 0; i < points.length; i++)
                   _StudyFlashcard(
@@ -603,7 +609,7 @@ class _ReadOnlyQuestionState extends State<_ReadOnlyQuestion> {
 }
 
 class _QuizChapter extends StatefulWidget {
-  const _QuizChapter({required this.title, required this.questions});
+  const _QuizChapter({super.key, required this.title, required this.questions});
   final String title;
   final List<Map<String, dynamic>> questions;
 
@@ -938,7 +944,7 @@ class _StudyFlashcard {
 }
 
 class _FlashcardDeck extends StatefulWidget {
-  const _FlashcardDeck({required this.cards});
+  const _FlashcardDeck({super.key, required this.cards});
   final List<_StudyFlashcard> cards;
 
   @override
