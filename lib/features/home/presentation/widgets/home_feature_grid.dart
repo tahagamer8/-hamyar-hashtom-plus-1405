@@ -41,6 +41,8 @@ class _FeatureTile extends StatelessWidget {
     AppFeature.lessonQuestions => 'تمرین تعاملی هر فصل با پاسخ تشریحی',
     AppFeature.quiz => 'خودت را با آزمون بسنج',
     AppFeature.favorites => 'مطالب مهمت را یک‌جا ببین',
+    AppFeature.studyPlanner => 'برای امتحان‌ها برنامه بساز و پیگیری کن',
+    AppFeature.mistakes => 'پاسخ‌های اشتباه را دوباره تمرین کن',
   };
 
   @override
