@@ -172,15 +172,46 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
     try {
       final preferences = await SharedPreferences.getInstance();
       final key = widget.examTitle == null ? 'fahmino_exam_history_${widget.subjectTitle}' : widget.historyKey;
+      final now = DateTime.now().toIso8601String();
       final previous = preferences.getStringList(key) ?? <String>[];
       final percent = (score * 100 / questions.length).round();
+      final wrongAnswers = <Map<String, dynamic>>[];
+      for (var index = 0; index < questions.length; index++) {
+        final question = questions[index];
+        final correct = question['answer'] as int;
+        final selected = answers[index];
+        if (selected == correct) continue;
+        final options = (question['options'] as List<dynamic>).whereType<String>().toList();
+        wrongAnswers.add({
+          'date': now,
+          'subjectTitle': widget.subjectTitle,
+          'examTitle': widget.examTitle ?? 'آزمون جامع',
+          'chapter': question['chapter'] as String? ?? 'درس',
+          'question': question['question'] as String? ?? '',
+          'selectedAnswer': selected != null && selected >= 0 && selected < options.length
+              ? options[selected]
+              : 'بی‌پاسخ',
+          'correctAnswer': correct >= 0 && correct < options.length
+              ? options[correct]
+              : 'ثبت نشده',
+          'explanation': question['explanation'] as String? ?? '',
+        });
+      }
       previous.insert(0, jsonEncode({
-        'date': DateTime.now().toIso8601String(),
+        'date': now,
         'score': score,
         'total': questions.length,
         'percent': percent,
+        'wrongAnswerCount': wrongAnswers.length,
       }));
       await preferences.setStringList(key, previous.take(20).toList());
+
+      if (wrongAnswers.isNotEmpty) {
+        const mistakeKey = 'fahmino_wrong_answers_v1';
+        final storedMistakes = preferences.getStringList(mistakeKey) ?? <String>[];
+        storedMistakes.insertAll(0, wrongAnswers.map(jsonEncode));
+        await preferences.setStringList(mistakeKey, storedMistakes.take(300).toList());
+      }
     } catch (_) {
       // A failed local history write must not block the exam result.
     }
@@ -313,6 +344,42 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
         Text('$score پاسخ درست از ${questions.length} سؤال'),
         Text('${answers.length} پاسخ ثبت‌شده'),
       ]))),
+      if (answers.length < questions.length || score < questions.length) ...[
+        const SizedBox(height: 12),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('مرور پاسخ‌های نیازمند تمرین',
+                    style: theme.textTheme.titleMedium),
+                const SizedBox(height: 8),
+                for (var i = 0; i < questions.length; i++)
+                  if (answers[i] != questions[i]['answer'])
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(questions[i]['question'] as String,
+                              style: theme.textTheme.titleSmall),
+                          Text('پاسخ تو: ${answers[i] == null ? 'بی‌پاسخ' : (questions[i]['options'] as List)[answers[i]!]}'),
+                          Text('پاسخ درست: ${(questions[i]['options'] as List)[questions[i]['answer'] as int]}',
+                              style: TextStyle(color: theme.colorScheme.primary,
+                                  fontWeight: FontWeight.w700)),
+                          Text(questions[i]['explanation'] as String? ?? ''),
+                        ],
+                      ),
+                    ),
+                const SizedBox(height: 4),
+                Text('این سؤال‌ها برای مرور آفلاین در بخش «مرور اشتباهات» ذخیره می‌شوند.',
+                    style: theme.textTheme.bodySmall),
+              ],
+            ),
+          ),
+        ),
+      ],
       const SizedBox(height: 12),
       OutlinedButton.icon(
         onPressed: _showHistory,
