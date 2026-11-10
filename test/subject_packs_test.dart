@@ -215,7 +215,7 @@ void main() {
         expect(chapter['learningObjectives'], isA<List<dynamic>>(), reason: title);
         expect(chapter['workedExamples'], isA<List<dynamic>>(), reason: title);
         final examples = chapter['workedExamples'] as List<dynamic>;
-        expect(examples, hasLength(greaterThanOrEqualTo(2)), reason: title);
+        expect(examples.length, greaterThanOrEqualTo(2), reason: title);
         for (final exampleValue in examples) {
           final example = exampleValue as Map<String, dynamic>;
           expect((example['problem'] as String).trim(), isNotEmpty, reason: title);
