@@ -628,7 +628,7 @@ void main() {
     expect(find.byTooltip('ارسال پرسش'), findsOneWidget);
 
     await tester.enterText(find.byType(TextField), 'پست الکترونیکی چیست؟');
-    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
+    await tester.tap(find.byTooltip('ارسال پرسش'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
     expect(
