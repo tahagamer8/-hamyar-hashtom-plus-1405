@@ -377,6 +377,43 @@ void main() {
     expect(find.textContaining('۱/۲ برابر ۲/۴ است'), findsOneWidget);
   });
 
+  testWidgets('lesson question bank supports written answers and true-false checks', (tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: DefaultAssetBundle(
+            bundle: rootBundle,
+            child: const ContentLibraryScreen(
+              subjectId: 'math',
+              featureId: 'lessonQuestions',
+            ),
+          ),
+        ),
+      ),
+    );
+    await _pumpUiFrames(tester);
+
+    final shortAnswerField = find.byKey(const ValueKey('short-answer-6'));
+    await tester.ensureVisible(shortAnswerField);
+    await tester.pump();
+    await tester.enterText(shortAnswerField, '۳/۴');
+    await tester.tap(find.byKey(const ValueKey('check-question-6')));
+    await tester.pump();
+    expect(find.textContaining('پاسخ پیشنهادی: ۳/۴'), findsOneWidget);
+
+    final trueOption = find.descendant(
+      of: find.byKey(const ValueKey('question-options-8')),
+      matching: find.text('درست'),
+    );
+    await tester.ensureVisible(trueOption);
+    await tester.pump();
+    await tester.tap(trueOption);
+    await tester.pump();
+    await tester.tap(find.byKey(const ValueKey('check-question-8')));
+    await tester.pump();
+    expect(find.textContaining('آفرین، پاسخ درست است.'), findsOneWidget);
+  });
+
   testWidgets('combined quiz has a timer and reveals answers after submission', (tester) async {
     await tester.pumpWidget(_contentApp('quiz'));
     await _pumpUiFrames(tester);
