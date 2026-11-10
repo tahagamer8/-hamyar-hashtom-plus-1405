@@ -890,7 +890,14 @@
     "bookCode": "801",
     "fileName": "C801.pdf",
     "fileSizeMB": "12.4",
-    "verificationStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
-    "verifiedAt": "2026-11-09"
+    "verificationStatus": "official_pdf_partially_parsed_toc_ocr_incomplete",
+    "verifiedAt": "2026-11-09",
+    "pdfTotalPages": 124,
+    "pdfPagesParsed": 18,
+    "parserAccessUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C801.pdf?download=1",
+    "tocExtractionStatus": "partial_ocr_missing_rows",
+    "tocParsedAt": "2026-11-10",
+    "tocVerificationMethod": "official_pdf_toc_parser",
+    "physicalPdfPageMappingStatus": "not_verified"
   }
 }

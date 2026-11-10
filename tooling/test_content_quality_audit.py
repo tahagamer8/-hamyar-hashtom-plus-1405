@@ -1,3 +1,4 @@
+import copy
 import unittest
 
 from tooling.audit_content_quality import audit_chapter, question_is_valid
@@ -24,6 +25,14 @@ def complete_fixture():
         "pageStart": 10,
         "pageEnd": 20,
         "sourceLesson": "فصل آزمایشی",
+        "officialTextbookMapping": {
+            "status": "verified",
+            "officialTitle": "فصل آزمایشی",
+            "pdfPageStart": 4,
+            "pdfPageEnd": 7,
+            "verificationMethod": "toc_and_page_heading",
+            "verifiedAt": "2026-11-09",
+        },
         "questions": [valid_mcq(i) for i in range(4)] + [{
             "question": "نتیجه را با یک جمله توضیح بده.",
             "questionType": "short_answer",
@@ -35,6 +44,12 @@ def complete_fixture():
     pack = {
         "textbookEdition": "چاپ آزمایشی ۱۴۰۵",
         "textbookSourceFile": "sample.pdf",
+        "textbookSource": {
+            "pdfUrl": "https://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C805.pdf",
+            "schoolYear": "1405-1406",
+            "bookCode": "805",
+            "verificationStatus": "official_pdf_content_parsed",
+        },
     }
     return pack, chapter
 
@@ -47,6 +62,9 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertTrue(result["sourceMapped"])
         self.assertTrue(result["hasDedicatedLesson"])
         self.assertTrue(result["hasChapterExam"])
+        self.assertFalse(result["educationallyIncomplete"])
+        self.assertEqual(result["sourceStatus"], "verified")
+        self.assertEqual(result["officialPdfPageStart"], 4)
         self.assertEqual(result["questionFormats"], ["multiple_choice", "short_answer"])
         self.assertEqual(result["gaps"], [])
 
@@ -54,9 +72,62 @@ class ContentQualityAuditTests(unittest.TestCase):
         pack, chapter = complete_fixture()
         pack.pop("textbookSourceFile")
         pack.pop("textbookEdition")
+        pack.pop("textbookSource")
         result = audit_chapter("sample", "نمونه", pack, chapter, 1)
         self.assertEqual(result["status"], "نیازمند منبع")
         self.assertFalse(result["sourceMapped"])
+
+    def test_portal_link_and_legacy_flag_do_not_prove_pdf_was_parsed(self):
+        pack, chapter = complete_fixture()
+        pack["textbookContentsVerified"] = True
+        pack["textbookSource"]["verificationStatus"] = (
+            "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+        )
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["status"], "نیازمند منبع")
+        self.assertFalse(result["sourceMapped"])
+        self.assertFalse(result["educationallyIncomplete"])
+
+    def test_missing_lesson_is_reported_separately_from_missing_source(self):
+        pack, chapter = complete_fixture()
+        chapter["lessonContent"] = ""
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["status"], "ناقص")
+        self.assertTrue(result["sourceMapped"])
+        self.assertTrue(result["educationallyIncomplete"])
+        self.assertIn("درسنامهٔ مستقل و کافی ثبت نشده (خلاصه جای درسنامه نیست)", result["gaps"])
+
+    def test_pdf_parsed_without_chapter_specific_mapping_is_not_source_mapped(self):
+        pack, chapter = complete_fixture()
+        chapter.pop("officialTextbookMapping")
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["status"], "نیازمند منبع")
+        self.assertFalse(result["sourceMapped"])
+
+    def test_malformed_chapter_mapping_is_not_source_mapped(self):
+        mutations = (
+            lambda mapping: mapping.pop("officialTitle"),
+            lambda mapping: mapping.update({"pdfPageStart": 0}),
+            lambda mapping: mapping.update({"pdfPageEnd": 3}),
+            lambda mapping: mapping.update({"verificationMethod": "file_name_only"}),
+            lambda mapping: mapping.update({"verifiedAt": "09/11/2026"}),
+        )
+        for mutate in mutations:
+            with self.subTest(mutate=mutate):
+                pack, chapter = complete_fixture()
+                mapping = copy.deepcopy(chapter["officialTextbookMapping"])
+                mutate(mapping)
+                chapter["officialTextbookMapping"] = mapping
+                result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+                self.assertFalse(result["sourceMapped"])
+
+    def test_official_mapping_requires_book_code_and_pdf_url(self):
+        for key in ("bookCode", "pdfUrl", "schoolYear"):
+            with self.subTest(key=key):
+                pack, chapter = complete_fixture()
+                pack["textbookSource"].pop(key)
+                result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+                self.assertFalse(result["sourceMapped"])
 
     def test_generic_reasoning_wrapper_and_tautology_are_flagged(self):
         pack, chapter = complete_fixture()

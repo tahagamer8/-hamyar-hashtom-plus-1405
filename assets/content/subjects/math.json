@@ -97,19 +97,23 @@
       "textbookLessons": [
         {
           "title": "یادآوری عددهای صحیح",
-          "pageStart": 2
+          "pageStart": 2,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "معرفی عددهای گویا",
-          "pageStart": 6
+          "pageStart": 6,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "جمع و تفریق عددهای گویا",
-          "pageStart": 10
+          "pageStart": 10,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "ضرب و تقسیم عددهای گویا",
-          "pageStart": 14
+          "pageStart": 14,
+          "verifiedAgainstOfficialToc": true
         }
       ],
       "commonMistakes": [
@@ -132,7 +136,24 @@
           "questionType": "reasoning",
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "officialTocEvidence": {
+        "status": "printed_toc_title_and_page_verified",
+        "officialTitle": "عددهای صحیح و گویا",
+        "printedPageStart": 1,
+        "printedPageEnd": 18,
+        "reviewPrintedPage": 18,
+        "lessonTitles": [
+          "یادآوری عددهای صحیح",
+          "معرفی عددهای گویا",
+          "جمع و تفریق عددهای گویا",
+          "ضرب و تقسیم عددهای گویا"
+        ],
+        "verifiedAt": "2026-11-10",
+        "verificationMethod": "official_pdf_toc_parser",
+        "physicalPdfPageStart": null,
+        "physicalPdfPageEnd": null
+      }
     },
     {
       "title": "عددهای اول",
@@ -227,11 +248,13 @@
       "textbookLessons": [
         {
           "title": "یادآوری عددهای اول",
-          "pageStart": 20
+          "pageStart": 20,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "تعیین عددهای اول",
-          "pageStart": 24
+          "pageStart": 24,
+          "verifiedAgainstOfficialToc": true
         }
       ],
       "commonMistakes": [
@@ -254,7 +277,22 @@
           "questionType": "reasoning",
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "officialTocEvidence": {
+        "status": "printed_toc_title_and_page_verified",
+        "officialTitle": "عددهای اول",
+        "printedPageStart": 19,
+        "printedPageEnd": 28,
+        "reviewPrintedPage": 28,
+        "lessonTitles": [
+          "یادآوری عددهای اول",
+          "تعیین عددهای اول"
+        ],
+        "verifiedAt": "2026-11-10",
+        "verificationMethod": "official_pdf_toc_parser",
+        "physicalPdfPageStart": null,
+        "physicalPdfPageEnd": null
+      }
     },
     {
       "title": "چندضلعی‌ها",
@@ -348,23 +386,28 @@
       "textbookLessons": [
         {
           "title": "چندضلعی‌ها و تقارن",
-          "pageStart": 30
+          "pageStart": 30,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "توازی و تعامد",
-          "pageStart": 34
+          "pageStart": 34,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "چهارضلعی‌ها",
-          "pageStart": 38
+          "pageStart": 38,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "زاویه‌های داخلی",
-          "pageStart": 42
+          "pageStart": 42,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "زاویه‌های خارجی",
-          "pageStart": 46
+          "pageStart": 46,
+          "verifiedAgainstOfficialToc": true
         }
       ],
       "commonMistakes": [
@@ -387,7 +430,25 @@
           "questionType": "reasoning",
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "officialTocEvidence": {
+        "status": "printed_toc_title_and_page_verified",
+        "officialTitle": "چندضلعی‌ها",
+        "printedPageStart": 29,
+        "printedPageEnd": 50,
+        "reviewPrintedPage": 50,
+        "lessonTitles": [
+          "چندضلعی‌ها و تقارن",
+          "توازی و تعامد",
+          "چهارضلعی‌ها",
+          "زاویه‌های داخلی",
+          "زاویه‌های خارجی"
+        ],
+        "verifiedAt": "2026-11-10",
+        "verificationMethod": "official_pdf_toc_parser",
+        "physicalPdfPageStart": null,
+        "physicalPdfPageEnd": null
+      }
     },
     {
       "title": "جبر و معادله",
@@ -481,19 +542,23 @@
       "textbookLessons": [
         {
           "title": "ساده کردن عبارت‌های جبری",
-          "pageStart": 52
+          "pageStart": 52,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "پیدا کردن مقدار یک عبارت جبری",
-          "pageStart": 56
+          "pageStart": 56,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "تجزیه عبارت‌های جبری",
-          "pageStart": 60
+          "pageStart": 60,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "معادله",
-          "pageStart": 64
+          "pageStart": 64,
+          "verifiedAgainstOfficialToc": true
         }
       ],
       "commonMistakes": [
@@ -516,7 +581,24 @@
           "questionType": "reasoning",
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "officialTocEvidence": {
+        "status": "printed_toc_title_and_page_verified",
+        "officialTitle": "جبر و معادله",
+        "printedPageStart": 51,
+        "printedPageEnd": 68,
+        "reviewPrintedPage": 68,
+        "lessonTitles": [
+          "ساده کردن عبارت‌های جبری",
+          "پیدا کردن مقدار یک عبارت جبری",
+          "تجزیه عبارت‌های جبری",
+          "معادله"
+        ],
+        "verifiedAt": "2026-11-10",
+        "verificationMethod": "official_pdf_toc_parser",
+        "physicalPdfPageStart": null,
+        "physicalPdfPageEnd": null
+      }
     },
     {
       "title": "بردار و مختصات",
@@ -610,15 +692,18 @@
       "textbookLessons": [
         {
           "title": "جمع بردارها",
-          "pageStart": 70
+          "pageStart": 70,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "ضرب عدد در بردار",
-          "pageStart": 74
+          "pageStart": 74,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "بردارهای واحد مختصات",
-          "pageStart": 78
+          "pageStart": 78,
+          "verifiedAgainstOfficialToc": true
         }
       ],
       "commonMistakes": [
@@ -641,7 +726,23 @@
           "questionType": "reasoning",
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "officialTocEvidence": {
+        "status": "printed_toc_title_and_page_verified",
+        "officialTitle": "بردار و مختصات",
+        "printedPageStart": 69,
+        "printedPageEnd": 82,
+        "reviewPrintedPage": 82,
+        "lessonTitles": [
+          "جمع بردارها",
+          "ضرب عدد در بردار",
+          "بردارهای واحد مختصات"
+        ],
+        "verifiedAt": "2026-11-10",
+        "verificationMethod": "official_pdf_toc_parser",
+        "physicalPdfPageStart": null,
+        "physicalPdfPageEnd": null
+      }
     },
     {
       "title": "مثلث",
@@ -735,19 +836,23 @@
       "textbookLessons": [
         {
           "title": "رابطهٔ فیثاغورس",
-          "pageStart": 84
+          "pageStart": 84,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "شکل‌های هم‌نهشت",
-          "pageStart": 88
+          "pageStart": 88,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "مثلث‌های هم‌نهشت",
-          "pageStart": 92
+          "pageStart": 92,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "هم‌نهشتی مثلث‌های قائم‌الزاویه",
-          "pageStart": 96
+          "pageStart": 96,
+          "verifiedAgainstOfficialToc": true
         }
       ],
       "commonMistakes": [
@@ -770,7 +875,24 @@
           "questionType": "reasoning",
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "officialTocEvidence": {
+        "status": "printed_toc_title_and_page_verified",
+        "officialTitle": "مثلث",
+        "printedPageStart": 83,
+        "printedPageEnd": 100,
+        "reviewPrintedPage": 100,
+        "lessonTitles": [
+          "رابطهٔ فیثاغورس",
+          "شکل‌های هم‌نهشت",
+          "مثلث‌های هم‌نهشت",
+          "هم‌نهشتی مثلث‌های قائم‌الزاویه"
+        ],
+        "verifiedAt": "2026-11-10",
+        "verificationMethod": "official_pdf_toc_parser",
+        "physicalPdfPageStart": null,
+        "physicalPdfPageEnd": null
+      }
     },
     {
       "title": "توان و جذر",
@@ -864,23 +986,28 @@
       "textbookLessons": [
         {
           "title": "توان",
-          "pageStart": 102
+          "pageStart": 102,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "تقسیم اعداد توان‌دار",
-          "pageStart": 106
+          "pageStart": 106,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "جذر تقریبی",
-          "pageStart": 110
+          "pageStart": 110,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "نمایش اعداد رادیکالی روی محور اعداد",
-          "pageStart": 114
+          "pageStart": 114,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "خواص ضرب و تقسیم رادیکال‌ها",
-          "pageStart": 115
+          "pageStart": 115,
+          "verifiedAgainstOfficialToc": true
         }
       ],
       "commonMistakes": [
@@ -903,7 +1030,25 @@
           "questionType": "reasoning",
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "officialTocEvidence": {
+        "status": "printed_toc_title_and_page_verified",
+        "officialTitle": "توان و جذر",
+        "printedPageStart": 101,
+        "printedPageEnd": 118,
+        "reviewPrintedPage": 118,
+        "lessonTitles": [
+          "توان",
+          "تقسیم اعداد توان‌دار",
+          "جذر تقریبی",
+          "نمایش اعداد رادیکالی روی محور اعداد",
+          "خواص ضرب و تقسیم رادیکال‌ها"
+        ],
+        "verifiedAt": "2026-11-10",
+        "verificationMethod": "official_pdf_toc_parser",
+        "physicalPdfPageStart": null,
+        "physicalPdfPageEnd": null
+      }
     },
     {
       "title": "آمار و احتمال",
@@ -997,19 +1142,23 @@
       "textbookLessons": [
         {
           "title": "دسته‌بندی داده‌ها",
-          "pageStart": 120
+          "pageStart": 120,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "میانگین داده‌ها",
-          "pageStart": 124
+          "pageStart": 124,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "احتمال یا اندازه‌گیری شانس",
-          "pageStart": 128
+          "pageStart": 128,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "بررسی حالت‌های ممکن",
-          "pageStart": 132
+          "pageStart": 132,
+          "verifiedAgainstOfficialToc": true
         }
       ],
       "commonMistakes": [
@@ -1032,7 +1181,24 @@
           "questionType": "reasoning",
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "officialTocEvidence": {
+        "status": "printed_toc_title_and_page_verified",
+        "officialTitle": "آمار و احتمال",
+        "printedPageStart": 119,
+        "printedPageEnd": 136,
+        "reviewPrintedPage": 136,
+        "lessonTitles": [
+          "دسته‌بندی داده‌ها",
+          "میانگین داده‌ها",
+          "احتمال یا اندازه‌گیری شانس",
+          "بررسی حالت‌های ممکن"
+        ],
+        "verifiedAt": "2026-11-10",
+        "verificationMethod": "official_pdf_toc_parser",
+        "physicalPdfPageStart": null,
+        "physicalPdfPageEnd": null
+      }
     },
     {
       "title": "دایره",
@@ -1126,15 +1292,18 @@
       "textbookLessons": [
         {
           "title": "خط و دایره",
-          "pageStart": 138
+          "pageStart": 138,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "زاویه‌های مرکزی",
-          "pageStart": 142
+          "pageStart": 142,
+          "verifiedAgainstOfficialToc": true
         },
         {
           "title": "زاویه‌های محاطی",
-          "pageStart": 146
+          "pageStart": 146,
+          "verifiedAgainstOfficialToc": true
         }
       ],
       "commonMistakes": [
@@ -1157,7 +1326,23 @@
           "questionType": "reasoning",
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "officialTocEvidence": {
+        "status": "printed_toc_title_and_page_verified",
+        "officialTitle": "دایره",
+        "printedPageStart": 137,
+        "printedPageEnd": 150,
+        "reviewPrintedPage": 150,
+        "lessonTitles": [
+          "خط و دایره",
+          "زاویه‌های مرکزی",
+          "زاویه‌های محاطی"
+        ],
+        "verifiedAt": "2026-11-10",
+        "verificationMethod": "official_pdf_toc_parser",
+        "physicalPdfPageStart": null,
+        "physicalPdfPageEnd": null
+      }
     }
   ],
   "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
@@ -1168,8 +1353,16 @@
     "bookCode": "805",
     "fileName": "C805.pdf",
     "fileSizeMB": "7.67",
-    "verificationStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
-    "verifiedAt": "2026-11-09"
+    "verificationStatus": "official_pdf_toc_parsed_printed_pages_only",
+    "verifiedAt": "2026-11-09",
+    "pdfTotalPages": 160,
+    "pdfPagesParsed": 24,
+    "parserAccessUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C805.pdf?download=1",
+    "tocExtractionStatus": "complete_toc_extracted",
+    "tocParsedAt": "2026-11-10",
+    "tocVerificationMethod": "official_pdf_toc_parser",
+    "editionEvidence": "چاپ سیزدهم ۱۴۰۵",
+    "physicalPdfPageMappingStatus": "not_verified"
   },
   "sampleQuestionBankVersion": 1
 }

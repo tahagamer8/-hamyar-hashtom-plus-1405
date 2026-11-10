@@ -249,9 +249,29 @@ void main() {
       expect(source['bookCode'], entry.value['code'], reason: entry.key);
       expect(source['portalUrl'], contains('/books/${entry.value['portalId']}'), reason: entry.key);
       expect(source['pdfUrl'], contains(entry.value['file']), reason: entry.key);
-      expect(source['verificationStatus'],
-          'official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed',
-          reason: entry.key);
+      final expectedStatus = switch (entry.key) {
+        'math' => 'official_pdf_toc_parsed_printed_pages_only',
+        'persian' || 'quran' || 'religion' =>
+          'official_pdf_partially_parsed_toc_ocr_incomplete',
+        _ => 'official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed',
+      };
+      expect(source['verificationStatus'], expectedStatus, reason: entry.key);
+      if (entry.key == 'math') {
+        expect(source['tocExtractionStatus'], 'complete_toc_extracted');
+        expect(source['pdfTotalPages'], 160);
+        expect(source['pdfPagesParsed'], 24);
+        expect(source['physicalPdfPageMappingStatus'], 'not_verified');
+      }
+      if (entry.key == 'persian') {
+        expect(source['pdfTotalPages'], 144);
+        expect(source['pdfPagesParsed'], 144);
+        expect(source['tocExtractionStatus'], 'partial_ocr_rows_missing');
+        expect(source['physicalPdfPageMappingStatus'], 'not_verified');
+      }
+      if (entry.key == 'quran' || entry.key == 'religion') {
+        expect(source['tocParsedAt'], '2026-11-10');
+        expect(source['physicalPdfPageMappingStatus'], 'not_verified');
+      }
     }
   });
 
