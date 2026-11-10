@@ -414,6 +414,64 @@ void main() {
     expect(find.textContaining('آفرین، پاسخ درست است.'), findsOneWidget);
   });
 
+  testWidgets('chapter practice stores an incorrect answer for offline review',
+      (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(_contentApp('lessonQuestions'));
+    await _pumpUiFrames(tester);
+
+    final wrongOption = find.text('۱/۶').first;
+    await tester.ensureVisible(wrongOption);
+    await tester.pump();
+    await tester.tap(wrongOption);
+    await tester.pump();
+
+    final check = find.byKey(const ValueKey('check-question-0'));
+    await tester.ensureVisible(check);
+    await tester.pump();
+    await tester.tap(check);
+    await tester.pumpAndSettle();
+
+    final preferences = await SharedPreferences.getInstance();
+    final rows = preferences.getStringList('fahmino_wrong_answers_v1');
+    expect(rows, isNotNull);
+    expect(rows, hasLength(1));
+    final record = jsonDecode(rows!.single) as Map<String, dynamic>;
+    expect(record['subjectTitle'], 'ریاضی');
+    expect(record['question'], 'حاصل ۱/۲ + ۱/۴ کدام است؟');
+    expect(record['selectedAnswer'], '۱/۶');
+    expect(record['correctAnswer'], '۳/۴');
+  });
+
+  testWidgets('timed exam stores wrong answers and answer explanations',
+      (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(_contentApp('quiz'));
+    await _pumpUiFrames(tester);
+
+    final wrongOption = find.text('۱/۶').first;
+    await tester.ensureVisible(wrongOption);
+    await tester.pump();
+    await tester.tap(wrongOption);
+    await tester.pump();
+
+    await tester.tap(find.text('ثبت و پایان آزمون'));
+    await _pumpUiFrames(tester);
+    await tester.tap(find.text('ثبت آزمون'));
+    await _pumpUiFrames(tester);
+
+    final preferences = await SharedPreferences.getInstance();
+    final rows = preferences.getStringList('fahmino_wrong_answers_v1');
+    expect(rows, isNotNull);
+    expect(rows, hasLength(1));
+    final record = jsonDecode(rows!.single) as Map<String, dynamic>;
+    expect(record['subjectTitle'], 'ریاضی');
+    expect(record['question'], 'حاصل ۱/۲ + ۱/۴ کدام است؟');
+    expect(record['selectedAnswer'], '۱/۶');
+    expect(record['correctAnswer'], '۳/۴');
+    expect(record['explanation'], contains('۱/۲ برابر ۲/۴ است'));
+  });
+
   testWidgets('combined quiz has a timer and reveals answers after submission', (tester) async {
     await tester.pumpWidget(_contentApp('quiz'));
     await _pumpUiFrames(tester);
