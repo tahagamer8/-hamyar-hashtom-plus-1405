@@ -122,5 +122,67 @@ class OfficialTocEvidenceTests(unittest.TestCase):
         self.assertFalse(copyright_record["officialPdfsBundled"])
 
 
+    def test_math_subject_pack_matches_the_official_toc_evidence(self):
+        math_pack_path = ROOT / "assets" / "content" / "subjects" / "math.json"
+        math_pack = json.loads(math_pack_path.read_text(encoding="utf-8"))
+        report_math = self.books["math"]
+        source = math_pack["textbookSource"]
+
+        self.assertEqual(math_pack["subjectId"], "math")
+        self.assertEqual(source["bookCode"], report_math["bookCode"])
+        self.assertEqual(source["schoolYear"], self.report["schoolYear"])
+        self.assertEqual(
+            source["verificationStatus"],
+            "official_pdf_toc_parsed_printed_pages_only",
+        )
+        self.assertEqual(source["tocExtractionStatus"], report_math["tocStatus"])
+        self.assertEqual(source["pdfTotalPages"], report_math["pdfTotalPages"])
+        self.assertEqual(source["pdfPagesParsed"], report_math["pdfPagesParsed"])
+        self.assertEqual(source["physicalPdfPageMappingStatus"], "not_verified")
+        self.assertEqual(report_math["chapterMappingsVerified"], 0)
+
+        pack_chapters = math_pack["chapters"]
+        report_chapters = report_math["chapters"]
+        self.assertEqual(len(pack_chapters), len(report_chapters))
+        self.assertEqual(len(pack_chapters), 9)
+
+        lesson_count = 0
+        for pack_chapter, report_chapter in zip(pack_chapters, report_chapters):
+            evidence = pack_chapter["officialTocEvidence"]
+            self.assertEqual(
+                evidence["status"],
+                "printed_toc_title_and_page_verified",
+            )
+            self.assertEqual(evidence["officialTitle"], report_chapter["title"])
+            self.assertEqual(
+                evidence["printedPageStart"],
+                report_chapter["printedPageStart"],
+            )
+            self.assertEqual(
+                evidence["printedPageEnd"],
+                report_chapter["printedPageEnd"],
+            )
+            self.assertEqual(pack_chapter["pageStart"], evidence["printedPageStart"])
+            self.assertEqual(pack_chapter["pageEnd"], evidence["printedPageEnd"])
+            self.assertIsNone(evidence.get("physicalPdfPageStart"))
+            self.assertIsNone(evidence.get("physicalPdfPageEnd"))
+
+            pack_lessons = pack_chapter["textbookLessons"]
+            report_lessons = report_chapter["lessons"]
+            self.assertEqual(len(pack_lessons), len(report_lessons))
+            for pack_lesson, report_lesson in zip(pack_lessons, report_lessons):
+                self.assertEqual(pack_lesson["title"], report_lesson["title"])
+                self.assertEqual(pack_lesson["pageStart"], report_lesson["printedPage"])
+                self.assertIs(pack_lesson["verifiedAgainstOfficialToc"], True)
+            lesson_count += len(pack_lessons)
+
+            self.assertEqual(
+                evidence["lessonTitles"],
+                [lesson["title"] for lesson in report_lessons],
+            )
+
+        self.assertEqual(lesson_count, 34)
+
+
 if __name__ == "__main__":
     unittest.main()
