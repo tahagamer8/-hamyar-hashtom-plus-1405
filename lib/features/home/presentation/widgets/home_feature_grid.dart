@@ -34,7 +34,7 @@ class _FeatureTile extends StatelessWidget {
 
   String get _description => switch (feature) {
     AppFeature.lessons => 'فصل‌ها را درس‌به‌درس یاد بگیر',
-    AppFeature.notes => 'خلاصه‌ها و نکته‌های امتحانی',
+    AppFeature.notes => 'جزوه‌های PDF آفلاین هر فصل',
     AppFeature.flashcards => 'مرور فعال نکته‌ها و پرسش‌ها با کارت',
     AppFeature.solutions => 'پاسخ تمرین‌ها با راه‌حل مرحله‌ای',
     AppFeature.sampleExams => 'نمونه‌سؤال‌های PDF فصل و نیم‌سال',
