@@ -7,7 +7,7 @@ import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/fa
 import 'package:hamyar_hashtom_plus/features/progress/presentation/providers/learning_progress_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
-import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/sample_question_library_screen.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_resource_library_screen.dart';
 import 'package:hamyar_hashtom_plus/features/documents/presentation/widgets/subject_pdf_card.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/widgets/book_page_gallery.dart';
 
@@ -164,11 +164,16 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               chapters: chapters,
             );
           }
-          if (_feature == AppFeature.sampleExams) {
-            return SampleQuestionLibraryScreen(
+          if (_feature == AppFeature.notes ||
+              _feature == AppFeature.sampleExams) {
+            return PdfResourceLibraryScreen(
               subjectId: widget.subjectId,
               subjectTitle: subject['title'] as String? ?? 'درس',
               chapters: chapters,
+              kind: _feature == AppFeature.notes
+                  ? PdfResourceKind.notes
+                  : PdfResourceKind.samples,
+              initialChapterIndex: widget.initialChapterIndex,
             );
           }
           if (chapters.isEmpty) {
@@ -288,6 +293,9 @@ class _ChapterContent extends ConsumerWidget {
         .toList(growable: false);
     final questions =
         (chapter['questions'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
+    final advancedQuestions =
+        (chapter['advancedQuestions'] as List<dynamic>? ?? [])
+            .cast<Map<String, dynamic>>();
     final pageAssets = (chapter['bookPageImages'] as List<dynamic>? ?? [])
         .whereType<String>()
         .toList(growable: false);
@@ -295,6 +303,12 @@ class _ChapterContent extends ConsumerWidget {
 
     if (feature == AppFeature.quiz) {
       return _QuizChapter(title: title, questions: questions);
+    }
+    if (feature == AppFeature.lessonQuestions) {
+      return _QuizChapter(
+        title: title,
+        questions: [...questions, ...advancedQuestions],
+      );
     }
 
     return Card(
