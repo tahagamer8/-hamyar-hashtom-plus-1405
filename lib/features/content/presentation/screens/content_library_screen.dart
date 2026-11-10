@@ -982,9 +982,7 @@ class _QuizChapterState extends State<_QuizChapter> {
               child: FilledButton.tonal(
                 key: ValueKey('check-question-$index'),
                 onPressed: isShortAnswer
-                    ? (controller!.text.trim().isNotEmpty
-                        ? () => setState(() => _checked.add(index))
-                        : null)
+                    ? () => setState(() => _checked.add(index))
                     : (_answers.containsKey(index)
                         ? () async {
                             setState(() => _checked.add(index));
