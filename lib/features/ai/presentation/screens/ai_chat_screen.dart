@@ -495,9 +495,14 @@ class _AiChatScreenState extends State<AiChatScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.sizeOf(context).height * 0.4,
+              ),
+              child: SingleChildScrollView(
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
               color: theme.colorScheme.surfaceContainerHighest.withAlpha(110),
               child: Column(
                 children: [
@@ -608,6 +613,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
                     ),
                   ],
                 ],
+                  ),
+                ),
               ),
             ),
             Expanded(
