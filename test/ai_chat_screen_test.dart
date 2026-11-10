@@ -93,6 +93,8 @@ void main() {
     expect(find.text('معلم خصوصی فهمینو'), findsOneWidget);
     expect(find.text('آموزش فصل'), findsOneWidget);
 
+    await tester.ensureVisible(find.text('آموزش فصل'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('آموزش فصل'));
     await tester.pumpAndSettle();
 
@@ -106,6 +108,8 @@ void main() {
       (tester) async {
     await openTutor(tester);
 
+    await tester.ensureVisible(find.text('آزمون کوتاه'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('آزمون کوتاه'));
     await tester.pumpAndSettle();
 
@@ -128,6 +132,8 @@ void main() {
       (tester) async {
     await openTutor(tester);
 
+    await tester.ensureVisible(find.text('آزمون کوتاه'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('آزمون کوتاه'));
     await tester.pumpAndSettle();
 
