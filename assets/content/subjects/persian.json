@@ -1050,7 +1050,14 @@
     "bookCode": "803",
     "fileName": "C803.pdf",
     "fileSizeMB": "10.73",
-    "verificationStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
-    "verifiedAt": "2026-11-09"
+    "verificationStatus": "official_pdf_partially_parsed_toc_ocr_incomplete",
+    "verifiedAt": "2026-11-09",
+    "pdfTotalPages": 144,
+    "pdfPagesParsed": 18,
+    "parserAccessUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C803.pdf?download=1",
+    "tocExtractionStatus": "partial_ocr_rows_missing",
+    "tocParsedAt": "2026-11-10",
+    "tocVerificationMethod": "official_pdf_toc_parser",
+    "physicalPdfPageMappingStatus": "not_verified"
   }
 }
