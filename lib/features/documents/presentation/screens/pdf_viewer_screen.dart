@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:hamyar_hashtom_plus/features/documents/data/pdf_bytes_loader.dart';
 import 'package:pdfx/pdfx.dart';
 
 /// In-app PDF reader for bundled files, generated assets and verified HTTPS PDFs.
@@ -35,12 +35,13 @@ class PdfViewerScreen extends StatefulWidget {
 }
 
 class _PdfViewerScreenState extends State<PdfViewerScreen> {
-  static const int _maxNetworkPdfBytes = 40 * 1024 * 1024;
   late final PdfControllerPinch _controller;
+  PdfBytesLoader? _bytesLoader;
 
   @override
   void initState() {
     super.initState();
+    if (widget.uri != null) _bytesLoader = PdfBytesLoader();
     _controller = PdfControllerPinch(document: _openDocument());
   }
 
@@ -53,35 +54,17 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
     }
 
     final uri = widget.uri;
-    if (uri == null || uri.scheme != 'https' || uri.host.isEmpty) {
+    if (uri == null) {
       throw const FormatException('نشانی امن PDF معتبر نیست.');
     }
-
-    final response = await http.get(uri).timeout(
-      const Duration(seconds: 35),
-      onTimeout: () => throw Exception('دریافت PDF بیش از حد طول کشید.'),
-    );
-
-    if (response.statusCode != 200) {
-      throw Exception('دریافت PDF ناموفق بود (کد ${response.statusCode}).');
-    }
-
-    final bytes = response.bodyBytes;
-    if (bytes.length > _maxNetworkPdfBytes) {
-      throw Exception('حجم این PDF بیشتر از حد مجاز ۴۰ مگابایت است.');
-    }
-    if (bytes.length < 5 || String.fromCharCodes(bytes.take(5)) != '%PDF-') {
-      throw const FormatException(
-        'نشانی انتخاب‌شده فایل PDF مستقیم برنگرداند؛ ممکن است صفحهٔ خطا یا پیوند منقضی شده باشد.',
-      );
-    }
-
+    final bytes = await _bytesLoader!.load(uri);
     return PdfDocument.openData(bytes);
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _bytesLoader?.dispose();
     super.dispose();
   }
 
