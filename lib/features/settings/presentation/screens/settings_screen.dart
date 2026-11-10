@@ -277,8 +277,8 @@ class _BackupCardState extends State<_BackupCard> {
           await preferences.setInt(entry.key, value);
         } else if (value is double) {
           await preferences.setDouble(entry.key, value);
-        } else if (value is List<String>) {
-          await preferences.setStringList(entry.key, value);
+        } else if (value is List && value.every((item) => item is String)) {
+          await preferences.setStringList(entry.key, value.cast<String>());
         }
       }
       widget.onRestored();
