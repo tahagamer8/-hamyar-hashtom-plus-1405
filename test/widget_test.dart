@@ -38,6 +38,51 @@ const _testCatalog = r'''
 }
 ''';
 
+const _mixedFormatCatalog = r'''
+{
+  "math": {
+    "title": "ریاضی",
+    "chapters": [{
+      "title": "عددهای صحیح و گویا",
+      "summary": "عددهای گویا را می‌توان به صورت کسر نوشت و مخرج نباید صفر باشد.",
+      "points": ["مخرج کسر نباید صفر باشد."],
+      "example": "۱/۲ + ۱/۴ = ۳/۴",
+      "solutionSteps": ["مخرج مشترک ۴ انتخاب می‌کنیم.", "۱/۲ را به ۲/۴ تبدیل می‌کنیم.", "۲/۴ + ۱/۴ = ۳/۴."],
+      "commonMistakes": ["در جمع کسرها ابتدا مخرج مشترک بگیر."],
+      "questions": [{
+        "question": "حاصل ۱/۲ + ۱/۴ کدام است؟",
+        "options": ["۱/۶", "۲/۶", "۳/۴", "۱"],
+        "answer": 2,
+        "explanation": "۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ = ۳/۴."
+      }],
+      "advancedQuestions": [
+        {
+          "question": "پاسخ کوتاه: چرا برای جمع کسرها مخرج مشترک می‌گیریم؟",
+          "questionType": "short_answer",
+          "answer": "برای هم‌اندازه کردن واحدها و جمع صورت‌ها.",
+          "explanation": "مخرج مشترک نشان می‌دهد قسمت‌های کسر هم‌اندازه شده‌اند.",
+          "difficulty": "مفهومی"
+        },
+        {
+          "question": "پاسخ کوتاه: ۱/۲ را با مخرج ۴ بنویس.",
+          "questionType": "short_answer",
+          "answer": "۲/۴",
+          "explanation": "صورت و مخرج را در ۲ ضرب می‌کنیم.",
+          "difficulty": "پایه"
+        },
+        {
+          "question": "درست یا نادرست: در پرسش «حاصل ۱/۲ + ۱/۴ کدام است؟»، پاسخ «۱/۶» درست است.",
+          "questionType": "true_false",
+          "answer": "نادرست",
+          "explanation": "۱/۶ درست نیست؛ ابتدا ۱/۲ را به ۲/۴ تبدیل می‌کنیم و پاسخ ۳/۴ می‌شود.",
+          "difficulty": "کاربردی"
+        }
+      ]
+    }]
+  }
+}
+''';
+
 class _MemoryAssetBundle extends CachingAssetBundle {
   _MemoryAssetBundle(this.catalog);
 
@@ -382,7 +427,7 @@ void main() {
       ProviderScope(
         child: MaterialApp(
           home: DefaultAssetBundle(
-            bundle: rootBundle,
+            bundle: _MemoryAssetBundle(_mixedFormatCatalog),
             child: const ContentLibraryScreen(
               subjectId: 'math',
               featureId: 'lessonQuestions',
@@ -393,23 +438,23 @@ void main() {
     );
     await _pumpUiFrames(tester);
 
-    final shortAnswerField = find.byKey(const ValueKey('short-answer-6'));
+    final shortAnswerField = find.byKey(const ValueKey('short-answer-1'));
     await tester.ensureVisible(shortAnswerField);
     await tester.pump();
     await tester.enterText(shortAnswerField, '۳/۴');
-    await tester.tap(find.byKey(const ValueKey('check-question-6')));
+    await tester.tap(find.byKey(const ValueKey('check-question-1')));
     await tester.pump();
     expect(find.textContaining('پاسخ پیشنهادی: ۳/۴'), findsOneWidget);
 
     final trueOption = find.descendant(
-      of: find.byKey(const ValueKey('question-options-8')),
+      of: find.byKey(const ValueKey('question-options-3')),
       matching: find.text('درست'),
     );
     await tester.ensureVisible(trueOption);
     await tester.pump();
     await tester.tap(trueOption);
     await tester.pump();
-    await tester.tap(find.byKey(const ValueKey('check-question-8')));
+    await tester.tap(find.byKey(const ValueKey('check-question-3')));
     await tester.pump();
     expect(find.textContaining('آفرین، پاسخ درست است.'), findsOneWidget);
   });
