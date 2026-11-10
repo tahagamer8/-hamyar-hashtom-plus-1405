@@ -3,9 +3,9 @@ import 'package:hamyar_hashtom_plus/core/constants/app_constants.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 
 void main() {
-  test('visible app version matches the 2.4.0 release', () {
+  test('visible app version matches the 2.4.1 release', () {
     expect(AppConstants.appName, 'فهمینو');
-    expect(AppConstants.appVersion, '2.4.0');
+    expect(AppConstants.appVersion, '2.4.1');
     expect(AppConstants.version, AppConstants.appVersion);
   });
 
