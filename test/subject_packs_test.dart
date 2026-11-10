@@ -26,10 +26,15 @@ void main() {
       final lessons = chapter['textbookLessons'] as List<dynamic>;
       expect(start, lessThanOrEqualTo(end));
       expect(lessons, isNotEmpty);
+      final tocEvidence = chapter['officialTocEvidence'] as Map<String, dynamic>;
+      expect(tocEvidence['status'], 'printed_toc_title_and_page_verified');
+      expect(tocEvidence['physicalPdfPageStart'], isNull);
+      expect(tocEvidence['physicalPdfPageEnd'], isNull);
       for (final lessonValue in lessons) {
         final lesson = lessonValue as Map<String, dynamic>;
         expect(lesson['title'], isA<String>());
         expect(lesson['pageStart'], inInclusiveRange(start, end));
+        expect(lesson['verifiedAgainstOfficialToc'], isTrue);
       }
     }
   });
@@ -249,9 +254,23 @@ void main() {
       expect(source['bookCode'], entry.value['code'], reason: entry.key);
       expect(source['portalUrl'], contains('/books/${entry.value['portalId']}'), reason: entry.key);
       expect(source['pdfUrl'], contains(entry.value['file']), reason: entry.key);
-      expect(source['verificationStatus'],
-          'official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed',
-          reason: entry.key);
+      final expectedStatus = switch (entry.key) {
+        'math' => 'official_pdf_toc_parsed_printed_pages_only',
+        'persian' || 'quran' || 'religion' =>
+          'official_pdf_partially_parsed_toc_ocr_incomplete',
+        _ => 'official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed',
+      };
+      expect(source['verificationStatus'], expectedStatus, reason: entry.key);
+      if (entry.key == 'math') {
+        expect(source['tocExtractionStatus'], 'complete_toc_extracted');
+        expect(source['pdfTotalPages'], 160);
+        expect(source['pdfPagesParsed'], 24);
+        expect(source['physicalPdfPageMappingStatus'], 'not_verified');
+      }
+      if (entry.key == 'persian' || entry.key == 'quran' || entry.key == 'religion') {
+        expect(source['tocParsedAt'], '2026-11-10');
+        expect(source['physicalPdfPageMappingStatus'], 'not_verified');
+      }
     }
   });
 
