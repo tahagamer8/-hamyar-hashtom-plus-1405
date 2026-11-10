@@ -224,55 +224,10 @@ class _BackupCardState extends State<_BackupCard> {
 
   Future<void> _importBackup() async {
     if (_busy) return;
-    final controller = TextEditingController();
     final raw = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('بازیابی پشتیبان'),
-        content: SizedBox(
-          width: 520,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('متن پشتیبانی را که قبلاً از فهمینو کپی کرده‌ای اینجا وارد کن.'),
-              const SizedBox(height: 12),
-              TextField(
-                controller: controller,
-                minLines: 4,
-                maxLines: 10,
-                textDirection: TextDirection.ltr,
-                decoration: const InputDecoration(
-                  hintText: 'متن JSON پشتیبان',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional.centerStart,
-                child: TextButton.icon(
-                  onPressed: () async {
-                    final clipboard = await Clipboard.getData('text/plain');
-                    controller.text = clipboard?.text ?? '';
-                  },
-                  icon: const Icon(Icons.content_paste_rounded),
-                  label: const Text('چسباندن از کلیپ‌بورد'),
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('انصراف'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(context, controller.text.trim()),
-            child: const Text('بررسی پشتیبان'),
-          ),
-        ],
-      ),
+      builder: (context) => const _BackupImportDialog(),
     );
-    controller.dispose();
     if (raw == null || raw.isEmpty || !mounted) return;
 
     Map<String, dynamic> data;
@@ -409,6 +364,72 @@ class _BackupCardState extends State<_BackupCard> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _BackupImportDialog extends StatefulWidget {
+  const _BackupImportDialog();
+
+  @override
+  State<_BackupImportDialog> createState() => _BackupImportDialogState();
+}
+
+class _BackupImportDialogState extends State<_BackupImportDialog> {
+  final _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('بازیابی پشتیبان'),
+      content: SizedBox(
+        width: 520,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('متن پشتیبانی را که قبلاً از فهمینو کپی کرده‌ای اینجا وارد کن.'),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _controller,
+              minLines: 4,
+              maxLines: 10,
+              textDirection: TextDirection.ltr,
+              decoration: const InputDecoration(
+                hintText: 'متن JSON پشتیبان',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: TextButton.icon(
+                onPressed: () async {
+                  final clipboard = await Clipboard.getData('text/plain');
+                  if (!mounted) return;
+                  _controller.text = clipboard?.text ?? '';
+                },
+                icon: const Icon(Icons.content_paste_rounded),
+                label: const Text('چسباندن از کلیپ‌بورد'),
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('انصراف'),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.pop(context, _controller.text.trim()),
+          child: const Text('بررسی پشتیبان'),
+        ),
+      ],
     );
   }
 }
