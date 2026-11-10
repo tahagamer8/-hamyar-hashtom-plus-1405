@@ -45,10 +45,16 @@ class _MemoryAssetBundle extends CachingAssetBundle {
 
   @override
   Future<ByteData> load(String key) async {
-    if (key != 'assets/content/catalog_fa.json') {
+    final value = switch (key) {
+      'assets/content/catalog_fa.json' => catalog,
+      'assets/content/pdf_resources.json' =>
+        '{"schemaVersion":1,"subjects":{"math":{"notes":[],"samples":[]}}}',
+      _ => null,
+    };
+    if (value == null) {
       throw FlutterError('Unexpected test asset: $key');
     }
-    return ByteData.sublistView(Uint8List.fromList(utf8.encode(catalog)));
+    return ByteData.sublistView(Uint8List.fromList(utf8.encode(value)));
   }
 }
 
@@ -308,10 +314,12 @@ void main() {
     expect(find.textContaining('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
   });
 
-  testWidgets('notes content loads from catalog bundle', (tester) async {
+  testWidgets('notes section is PDF-only and includes the offline chapter PDF', (tester) async {
     await tester.pumpWidget(_contentApp('notes'));
     await _pumpUiFrames(tester);
-    expect(find.text('قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید.'), findsOneWidget);
+    expect(find.text('جزوه‌های آموزشی؛ فقط فایل PDF'), findsOneWidget);
+    expect(find.text('جزوهٔ فصل 1 - فهمینو'), findsOneWidget);
+    expect(find.text('مشاهده PDF'), findsOneWidget);
   });
 
   testWidgets('step-by-step solution loads from catalog bundle', (tester) async {
@@ -344,34 +352,24 @@ void main() {
     expect(find.textContaining('پاسخ: ۳/۴'), findsOneWidget);
   });
 
-  testWidgets('sample question library offers chapter and term modes', (tester) async {
+  testWidgets('sample questions section is PDF-only', (tester) async {
     await tester.pumpWidget(_contentApp('sampleExams'));
     await _pumpUiFrames(tester);
-
-    expect(find.text('فصل‌به‌فصل'), findsOneWidget);
-    expect(find.text('نوبت اول و دوم'), findsOneWidget);
-
-    await tester.tap(find.text('نوبت اول و دوم'));
-    await _pumpUiFrames(tester);
-    expect(find.text('نوبت اول'), findsOneWidget);
-    expect(find.text('نوبت دوم'), findsOneWidget);
-
-    await tester.tap(find.text('شروع آزمون تیزهوشان نوبت اول'));
-    await _pumpUiFrames(tester);
-    expect(find.text('آزمون تألیفی تیزهوشان نوبت اول'), findsOneWidget);
-    expect(find.text('ثبت و پایان آزمون'), findsOneWidget);
+    expect(find.text('نمونه‌سؤال‌ها؛ فقط فایل PDF'), findsOneWidget);
+    expect(find.text('نمونه‌سؤال فصل 1 - فهمینو'), findsOneWidget);
+    expect(find.text('مشاهده PDF'), findsOneWidget);
   });
 
-  testWidgets('sample questions reveal answer key on demand', (tester) async {
-    await tester.pumpWidget(_contentApp('sampleExams'));
+  testWidgets('per-lesson question bank checks an answer and shows its explanation', (tester) async {
+    await tester.pumpWidget(_contentApp('lessonQuestions'));
     await _pumpUiFrames(tester);
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
-    expect(find.text('پاسخ: ۳/۴'), findsNothing);
-    await tester.scrollUntilVisible(find.text('نمایش پاسخ و توضیح'), 250);
-    await _pumpUiFrames(tester);
-    await tester.tap(find.text('نمایش پاسخ و توضیح'));
+    expect(find.textContaining('آفرین، پاسخ درست است.'), findsNothing);
+    await tester.tap(find.text('۳/۴').first);
     await tester.pump();
-    expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
+    await tester.tap(find.text('بررسی پاسخ'));
+    await tester.pump();
+    expect(find.textContaining('آفرین، پاسخ درست است.'), findsOneWidget);
     expect(find.textContaining('۱/۲ برابر ۲/۴ است'), findsOneWidget);
   });
 

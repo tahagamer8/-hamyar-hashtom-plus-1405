@@ -7,7 +7,7 @@ import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/fa
 import 'package:hamyar_hashtom_plus/features/progress/presentation/providers/learning_progress_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
-import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/sample_question_library_screen.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_resource_library_screen.dart';
 import 'package:hamyar_hashtom_plus/features/documents/presentation/widgets/subject_pdf_card.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/widgets/book_page_gallery.dart';
 
@@ -164,11 +164,16 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               chapters: chapters,
             );
           }
-          if (_feature == AppFeature.sampleExams) {
-            return SampleQuestionLibraryScreen(
+          if (_feature == AppFeature.notes ||
+              _feature == AppFeature.sampleExams) {
+            return PdfResourceLibraryScreen(
               subjectId: widget.subjectId,
               subjectTitle: subject['title'] as String? ?? 'درس',
               chapters: chapters,
+              kind: _feature == AppFeature.notes
+                  ? PdfResourceKind.notes
+                  : PdfResourceKind.samples,
+              initialChapterIndex: widget.initialChapterIndex,
             );
           }
           if (chapters.isEmpty) {
@@ -288,13 +293,27 @@ class _ChapterContent extends ConsumerWidget {
         .toList(growable: false);
     final questions =
         (chapter['questions'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
+    final advancedQuestions =
+        (chapter['advancedQuestions'] as List<dynamic>? ?? [])
+            .cast<Map<String, dynamic>>();
     final pageAssets = (chapter['bookPageImages'] as List<dynamic>? ?? [])
         .whereType<String>()
         .toList(growable: false);
     final isCompleted = ref.watch(learningProgressProvider).contains(progressKey);
 
     if (feature == AppFeature.quiz) {
-      return _QuizChapter(title: title, questions: questions);
+      return _QuizChapter(
+        key: ValueKey('$progressKey:${feature.name}'),
+        title: title,
+        questions: questions,
+      );
+    }
+    if (feature == AppFeature.lessonQuestions) {
+      return _QuizChapter(
+        key: ValueKey('$progressKey:${feature.name}'),
+        title: title,
+        questions: [...questions, ...advancedQuestions],
+      );
     }
 
     return Card(
@@ -472,6 +491,7 @@ class _ChapterContent extends ConsumerWidget {
             title: 'کارت‌های مرور این بخش',
             icon: Icons.style_rounded,
             child: _FlashcardDeck(
+              key: ValueKey(progressKey),
               cards: [
                 for (var i = 0; i < points.length; i++)
                   _StudyFlashcard(
@@ -589,7 +609,7 @@ class _ReadOnlyQuestionState extends State<_ReadOnlyQuestion> {
 }
 
 class _QuizChapter extends StatefulWidget {
-  const _QuizChapter({required this.title, required this.questions});
+  const _QuizChapter({super.key, required this.title, required this.questions});
   final String title;
   final List<Map<String, dynamic>> questions;
 
@@ -796,7 +816,8 @@ class _LearningPageHeader extends StatelessWidget {
     AppFeature.notes => 'خلاصه‌ها و نکته‌های مهم را سریع مرور کن.',
     AppFeature.flashcards => 'با یادآوری فعال، نکته‌ها و پرسش‌ها را تمرین کن.',
     AppFeature.solutions => 'راه‌حل‌ها را مرحله‌به‌مرحله دنبال کن.',
-    AppFeature.sampleExams => 'سؤال‌ها را تمرین کن و پاسخ را بررسی کن.',
+    AppFeature.sampleExams => 'نمونه‌سؤال‌های PDF فصل و نیم‌سال را ببین.',
+    AppFeature.lessonQuestions => 'پرسش‌های این فصل را حل کن و پاسخ و توضیح را بررسی کن.',
     AppFeature.quiz => 'دانسته‌هایت را با آزمون بسنج.',
     AppFeature.favorites => 'مطالب نشان‌شدهٔ خودت را ببین.',
   };
@@ -923,7 +944,7 @@ class _StudyFlashcard {
 }
 
 class _FlashcardDeck extends StatefulWidget {
-  const _FlashcardDeck({required this.cards});
+  const _FlashcardDeck({super.key, required this.cards});
   final List<_StudyFlashcard> cards;
 
   @override

@@ -49,6 +49,11 @@ class AndroidBrandingTests(unittest.TestCase):
             self.assertIn(APP_ID, gradle)
             self.assertIn(APP_LABEL, manifest)
             self.assertIn('@mipmap/ic_launcher', manifest)
+            self.assertIn(
+                '<uses-permission android:name="android.permission.INTERNET" />',
+                manifest,
+            )
+            self.assertEqual(manifest.count('android.permission.INTERNET'), 1)
 
             for density in ("mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"):
                 self.assertTrue(
