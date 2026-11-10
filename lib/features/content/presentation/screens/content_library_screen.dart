@@ -738,7 +738,6 @@ class _ReadOnlyQuestionState extends State<_ReadOnlyQuestion> {
     final answer = widget.question['answer'];
     final isShort = type == 'short_answer';
     final isTrueFalse = type == 'true_false';
-    final trueFalseOptions = const ['درست', 'نادرست'];
     final hasAnswer = isShort
         ? answer is String && answer.trim().isNotEmpty
         : isTrueFalse
