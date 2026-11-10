@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/features/progress/presentation/providers/learning_progress_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
