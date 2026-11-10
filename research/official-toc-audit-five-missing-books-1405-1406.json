@@ -282,7 +282,7 @@
       "httpStatus": 200,
       "contentType": "application/pdf",
       "pdfTotalPages": 144,
-      "pdfPagesParsed": 18,
+      "pdfPagesParsed": 144,
       "tocStatus": "partial_ocr_rows_missing",
       "chapterMappingsVerified": 0,
       "visibleChapterRows": [
@@ -374,9 +374,11 @@
         }
       ],
       "notes": [
-        "۱۸ صفحهٔ ابتدایی PDF پردازش شد؛ OCR بخشی از سطرهای فهرست و شماره‌صفحه‌ها را جا انداخته است.",
-        "فهرست قابل مشاهده ساختار فصل‌ها را نشان می‌دهد، اما برای تطبیق کامل همهٔ درس‌ها به بازبینی انسانی PDF نیاز است."
-      ]
+        "استخراج متن PDF برای همهٔ ۱۴۴ صفحه با parser موفق بود؛ این وضعیت فقط به استخراج متن اشاره دارد، نه بازبینی چشمی یا تأیید همهٔ سطرهای فهرست.",
+        "OCR و چیدمان فهرست بعضی از سطرها و شماره‌صفحه‌ها را جا انداخت؛ فهرست همچنان ناقص است و عنوان و صفحهٔ آغاز بعضی درس‌ها تأیید نشده‌اند.",
+        "شمارهٔ فیزیکی صفحهٔ PDF در برابر صفحات چاپی و آغاز فصل‌ها برای هیچ فصل تأیید نشده است؛ chapterMappingsVerified همچنان صفر است."
+      ],
+      "pdfTextExtractionStatus": "all_pages_extracted"
     },
     {
       "subjectId": "quran",
