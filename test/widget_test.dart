@@ -245,7 +245,7 @@ void main() {
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('VIII'), findsOneWidget);
     expect(find.text('دسترسی سریع'), findsOneWidget);
-    expect(find.text('راهنمای آفلاین فهمینو', skipOffstage: false), findsOneWidget);
+    expect(find.text('معلم خصوصی هوشمند فهمینو', skipOffstage: false), findsOneWidget);
 
   });
 
@@ -622,10 +622,10 @@ void main() {
     });
     await tester.pump();
     await _pumpUiFrames(tester);
-    expect(find.text('راهنمای آفلاین فهمینو'), findsOneWidget);
-    expect(find.textContaining('پرسش‌ها از دستگاه خارج نمی‌شوند'), findsOneWidget);
+    expect(find.text('معلم خصوصی فهمینو'), findsOneWidget);
+    expect(find.textContaining('همه‌چیز روی دستگاه انجام می‌شود'), findsOneWidget);
     expect(find.text('همهٔ فصل‌های این درس'), findsOneWidget);
-    expect(find.byTooltip('پاسخ از محتوای فهمینو'), findsOneWidget);
+    expect(find.byTooltip('ارسال پرسش'), findsOneWidget);
 
     await tester.enterText(find.byType(TextField), 'پست الکترونیکی چیست؟');
     await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
