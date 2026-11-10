@@ -36,6 +36,29 @@ def _set_manifest_attribute(xml: str, name: str, value: str) -> str:
     return updated
 
 
+def _ensure_internet_permission(xml: str) -> str:
+    """Put INTERNET permission in the main manifest used by release builds."""
+    permission_pattern = re.compile(
+        r'<uses-permission\\b[^>]*android:name="android\\.permission\\.INTERNET"'
+    )
+    if permission_pattern.search(xml):
+        return xml
+
+    updated, count = re.subn(
+        r"(\\s*)(<application\\b)",
+        lambda match: (
+            f'{match.group(1)}<uses-permission '
+            'android:name="android.permission.INTERNET" />\\n'
+            f"{match.group(1)}{match.group(2)}"
+        ),
+        xml,
+        count=1,
+    )
+    if count != 1:
+        raise RuntimeError("Could not add Android INTERNET permission")
+    return updated
+
+
 def _set_gradle_setting(text: str, setting: str, value: str) -> str:
     pattern = re.compile(
         rf'(?m)^(\s*{setting}\s*(?:=\s*)?)[\'"][^\'"]+[\'"]'
@@ -72,6 +95,7 @@ def configure_android_branding(root: Path = ROOT) -> None:
     gradle_path.write_text(gradle, encoding="utf-8")
 
     manifest = manifest_path.read_text(encoding="utf-8")
+    manifest = _ensure_internet_permission(manifest)
     manifest = _set_manifest_attribute(manifest, "label", APP_LABEL)
     manifest = _set_manifest_attribute(manifest, "icon", "@mipmap/ic_launcher")
     manifest = _set_manifest_attribute(
@@ -138,6 +162,11 @@ def configure_android_branding(root: Path = ROOT) -> None:
 
     if APP_ID not in gradle or APP_LABEL not in manifest:
         raise RuntimeError("Fahmino Android identity/label verification failed.")
+    if not re.search(
+        r'<uses-permission\\b[^>]*android:name="android\\.permission\\.INTERNET"',
+        manifest,
+    ):
+        raise RuntimeError("Android INTERNET permission is missing from release manifest.")
     required = [
         res_dir / f"mipmap-{density}" / "ic_launcher.png"
         for density in DENSITIES
