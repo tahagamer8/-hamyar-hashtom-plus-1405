@@ -26,6 +26,10 @@ void main() {
       find.byType(TextField),
       'مرور فصل اول علوم',
     );
+    await tester.tap(find.byType(DropdownButtonFormField<String>));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('علوم تجربی').last);
+    await tester.pumpAndSettle();
     await tester.tap(find.text('ذخیره برنامه'));
     await tester.pumpAndSettle();
 
