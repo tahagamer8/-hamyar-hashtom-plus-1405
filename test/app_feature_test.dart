@@ -22,5 +22,10 @@ void main() {
         feature.title.trim().isNotEmpty &&
         feature.description.trim().isNotEmpty), isTrue);
     expect(AppFeature.favorites.isSubjectSection, isFalse);
+    expect(AppFeature.studyPlanner.isSubjectSection, isFalse);
+    expect(AppFeature.mistakes.isSubjectSection, isFalse);
+    expect(AppFeature.values.every((feature) =>
+        feature.title.trim().isNotEmpty && feature.description.trim().isNotEmpty),
+        isTrue);
   });
 }
