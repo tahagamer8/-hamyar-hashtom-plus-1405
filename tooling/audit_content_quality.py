@@ -10,8 +10,10 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from datetime import date
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 EXPECTED_SUBJECTS = (
     "arabic", "art", "english", "english_workbook", "math", "persian",
@@ -28,6 +30,46 @@ NON_MCQ_TYPES = {
 
 def clean_text(value: Any) -> str:
     return value.strip() if isinstance(value, str) else ""
+
+
+OFFICIAL_LINK_STATUSES = {
+    "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+    "official_pdf_toc_parsed_printed_pages_only",
+    "official_pdf_partially_parsed_toc_ocr_incomplete",
+    "official_pdf_content_parsed",
+}
+
+
+def official_source_link_verified(source: Any) -> bool:
+    """Count official portal records independently from PDF parsing depth."""
+    if not isinstance(source, dict):
+        return False
+    portal = urlparse(clean_text(source.get("portalUrl")))
+    pdf = urlparse(clean_text(source.get("pdfUrl")))
+    return (
+        portal.scheme in {"http", "https"}
+        and portal.hostname == "chap.sch.ir"
+        and pdf.scheme in {"http", "https"}
+        and pdf.hostname == "chap.sch.ir"
+        and pdf.path.lower().endswith(".pdf")
+        and bool(clean_text(source.get("bookCode")))
+        and bool(re.fullmatch(r"\d{4}-\d{4}", clean_text(source.get("schoolYear"))))
+        and clean_text(source.get("verificationStatus")) in OFFICIAL_LINK_STATUSES
+    )
+
+
+def pdf_parse_level(source: Any) -> str:
+    """Describe parser coverage without confusing a TOC read with full PDF review."""
+    if not isinstance(source, dict):
+        return "none"
+    status = clean_text(source.get("verificationStatus"))
+    if status == "official_pdf_content_parsed":
+        return "full"
+    if status == "official_pdf_toc_parsed_printed_pages_only":
+        return "toc_complete"
+    if status == "official_pdf_partially_parsed_toc_ocr_incomplete":
+        return "partial"
+    return "none"
 
 
 def question_format(question: dict[str, Any]) -> str:
@@ -61,26 +103,54 @@ def question_is_valid(question: dict[str, Any]) -> bool:
 
 
 def source_is_mapped(pack: dict[str, Any], chapter: dict[str, Any]) -> bool:
+    """Require parsed official-PDF evidence and a chapter-specific verified mapping.
+
+    Portal metadata, internal page hints, sourceLesson and the legacy
+    textbookContentsVerified flag are intentionally not treated as evidence.
+    """
     source = pack.get("textbookSource")
-    source = source if isinstance(source, dict) else {}
-    has_pdf_reference = bool(
-        clean_text(source.get("pdfUrl")) or clean_text(pack.get("textbookSourceFile"))
-    )
-    has_edition = bool(
-        clean_text(pack.get("textbookEdition")) or clean_text(source.get("schoolYear"))
-    )
-    has_page_range = (
-        isinstance(chapter.get("pageStart"), int)
-        and not isinstance(chapter.get("pageStart"), bool)
-        and isinstance(chapter.get("pageEnd"), int)
-        and not isinstance(chapter.get("pageEnd"), bool)
-        and chapter["pageStart"] <= chapter["pageEnd"]
-    )
-    nested_lessons = chapter.get("textbookLessons")
-    has_lesson_reference = bool(clean_text(chapter.get("sourceLesson"))) or (
-        isinstance(nested_lessons, list) and len(nested_lessons) > 0
-    )
-    return has_pdf_reference and has_edition and has_page_range and has_lesson_reference
+    if not isinstance(source, dict):
+        return False
+
+    pdf_url = clean_text(source.get("pdfUrl"))
+    parsed_url = urlparse(pdf_url)
+    if parsed_url.scheme not in {"http", "https"} or parsed_url.hostname != "chap.sch.ir":
+        return False
+    if not clean_text(source.get("bookCode")):
+        return False
+    if not re.fullmatch(r"\d{4}-\d{4}", clean_text(source.get("schoolYear"))):
+        return False
+    if source.get("verificationStatus") != "official_pdf_content_parsed":
+        return False
+
+    mapping = chapter.get("officialTextbookMapping")
+    if not isinstance(mapping, dict) or mapping.get("status") != "verified":
+        return False
+    if not clean_text(mapping.get("officialTitle")):
+        return False
+
+    page_start = mapping.get("pdfPageStart")
+    page_end = mapping.get("pdfPageEnd")
+    if (
+        not isinstance(page_start, int)
+        or isinstance(page_start, bool)
+        or not isinstance(page_end, int)
+        or isinstance(page_end, bool)
+        or page_start < 1
+        or page_end < page_start
+    ):
+        return False
+
+    if mapping.get("verificationMethod") not in {"toc_and_page_heading", "editorial_review"}:
+        return False
+    verified_at = clean_text(mapping.get("verifiedAt"))
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", verified_at):
+        return False
+    try:
+        date.fromisoformat(verified_at)
+    except ValueError:
+        return False
+    return True
 
 
 def exam_questions(chapter: dict[str, Any]) -> list[dict[str, Any]]:
@@ -147,33 +217,36 @@ def audit_chapter(
     all_valid = bool(questions) and valid_count == len(questions)
     all_explained = bool(questions) and explained_count == len(questions)
 
-    gaps: list[str] = []
+    educational_gaps: list[str] = []
     if not has_lesson:
-        gaps.append("درسنامهٔ مستقل و کافی ثبت نشده (خلاصه جای درسنامه نیست)")
+        educational_gaps.append("درسنامهٔ مستقل و کافی ثبت نشده (خلاصه جای درسنامه نیست)")
     if len(points) < 3:
-        gaps.append("توضیح مفاهیم/نکته‌ها کمتر از حداقل ممیزی است")
+        educational_gaps.append("توضیح مفاهیم/نکته‌ها کمتر از حداقل ممیزی است")
     if len(example) < 80:
-        gaps.append("مثال کمتر از ۸۰ نویسه است؛ نیازمند بازبینی انسانی")
+        educational_gaps.append("مثال کمتر از ۸۰ نویسه است؛ نیازمند بازبینی انسانی")
     if len(steps) < 3 or len(step_text) < 80:
-        gaps.append("مثال حل‌شده یا مراحل گام‌به‌گام کافی ثبت نشده")
+        educational_gaps.append("مثال حل‌شده یا مراحل گام‌به‌گام کافی ثبت نشده")
     if len(base_questions) < 5:
-        gaps.append("تمرین‌های پایه کمتر از ۵ پرسش است")
+        educational_gaps.append("تمرین‌های پایه کمتر از ۵ پرسش است")
     if all_multiple_choice:
-        gaps.append("همهٔ پرسش‌ها چهارگزینه‌ای‌اند؛ تنوع قالب وجود ندارد")
+        educational_gaps.append("همهٔ پرسش‌ها چهارگزینه‌ای‌اند؛ تنوع قالب وجود ندارد")
     if not has_exam:
-        gaps.append("آزمون مستقل فصل با حداقل ۵ پرسش و پاسخ معتبر ثبت نشده")
+        educational_gaps.append("آزمون مستقل فصل با حداقل ۵ پرسش و پاسخ معتبر ثبت نشده")
     if not all_valid:
-        gaps.append("حداقل یک سؤال کلید پاسخ/ساختار معتبر ندارد")
+        educational_gaps.append("حداقل یک سؤال کلید پاسخ/ساختار معتبر ندارد")
     if not all_explained:
-        gaps.append("حداقل یک سؤال پاسخ تشریحی ندارد")
+        educational_gaps.append("حداقل یک سؤال پاسخ تشریحی ندارد")
     if generic_count:
-        gaps.append("پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند")
+        educational_gaps.append("پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند")
     if tautological_count:
-        gaps.append("توضیح پرسش استدلالی عین گزینهٔ درست را تکرار می‌کند")
+        educational_gaps.append("توضیح پرسش استدلالی عین گزینهٔ درست را تکرار می‌کند")
     if len(mistakes) < 2:
-        gaps.append("کمتر از دو نکتهٔ اشتباه رایج ثبت شده")
+        educational_gaps.append("کمتر از دو نکتهٔ اشتباه رایج ثبت شده")
+
+    educationally_incomplete = bool(educational_gaps)
+    gaps = list(educational_gaps)
     if not mapped_source:
-        gaps.append("منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست")
+        gaps.append("PDF رسمی پردازش‌شده و نگاشت اختصاصی عنوان/صفحهٔ این فصل ثبت نشده است")
 
     complete = (
         has_lesson
@@ -192,6 +265,8 @@ def audit_chapter(
         and tautological_count == 0
     )
     status = "کامل" if complete else ("نیازمند منبع" if not mapped_source else "ناقص")
+    source_mapping = chapter.get("officialTextbookMapping")
+    source_mapping = source_mapping if isinstance(source_mapping, dict) else {}
 
     return {
         "index": index,
@@ -215,6 +290,13 @@ def audit_chapter(
         "commonMistakeCount": len(mistakes),
         "hasChapterExam": has_exam,
         "sourceMapped": mapped_source,
+        "sourceStatus": "verified" if mapped_source else "needs_official_pdf_review",
+        "educationallyIncomplete": educationally_incomplete,
+        "officialTextbookTitle": clean_text(source_mapping.get("officialTitle")),
+        "officialPdfPageStart": source_mapping.get("pdfPageStart"),
+        "officialPdfPageEnd": source_mapping.get("pdfPageEnd"),
+        "officialMappingMethod": clean_text(source_mapping.get("verificationMethod")),
+        "officialMappingVerifiedAt": clean_text(source_mapping.get("verifiedAt")),
         "pageStart": chapter.get("pageStart"),
         "pageEnd": chapter.get("pageEnd"),
         "sourceLesson": clean_text(chapter.get("sourceLesson")),
@@ -270,6 +352,8 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
                 if clean_text(pack.get("textbookSourceFile"))
                 else "official PDF source not recorded"
             )
+        source_link_verified = official_source_link_verified(source)
+        parse_level = pdf_parse_level(source)
         subjects.append(
             {
                 "id": subject_id,
@@ -279,6 +363,8 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
                 "advancedQuestionCount": sum(row["advancedQuestionCount"] for row in rows),
                 "questionCount": sum(row["questionCount"] for row in rows),
                 "sourceMappedCount": sum(row["sourceMapped"] for row in rows),
+                "sourceUnverifiedCount": sum(not row["sourceMapped"] for row in rows),
+                "educationallyIncompleteCount": sum(row["educationallyIncomplete"] for row in rows),
                 "needsSourceCount": sum(row["status"] == "نیازمند منبع" for row in rows),
                 "incompleteCount": sum(row["status"] == "ناقص" for row in rows),
                 "completeCount": sum(row["status"] == "کامل" for row in rows),
@@ -296,6 +382,8 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
                 "textbookEdition": clean_text(pack.get("textbookEdition")) or clean_text(source.get("schoolYear")),
                 "textbookSourceUrl": clean_text(source.get("pdfUrl")),
                 "textbookSourceStatus": source_status,
+                "officialSourceLinkVerified": source_link_verified,
+                "pdfParseLevel": parse_level,
             }
         )
 
@@ -313,11 +401,22 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
     totals = {
         "subjectCount": len(subjects),
         "officialSourceLinkVerifiedSubjectCount": sum(
-            subject["textbookSourceStatus"].startswith("official_portal_record_and_pdf_link_verified")
-            for subject in subjects
+            subject["officialSourceLinkVerified"] for subject in subjects
         ),
         "pdfContentParsedSubjectCount": sum(
-            "pdf_content_parsed" in subject["textbookSourceStatus"] for subject in subjects
+            subject["pdfParseLevel"] != "none" for subject in subjects
+        ),
+        "pdfFullContentParsedSubjectCount": sum(
+            subject["pdfParseLevel"] == "full" for subject in subjects
+        ),
+        "pdfTocCompleteSubjectCount": sum(
+            subject["pdfParseLevel"] == "toc_complete" for subject in subjects
+        ),
+        "pdfTocPartialSubjectCount": sum(
+            subject["pdfParseLevel"] == "partial" for subject in subjects
+        ),
+        "pdfNotParsedSubjectCount": sum(
+            subject["pdfParseLevel"] == "none" for subject in subjects
         ),
         "sectionCount": len(sections),
         "baseQuestionCount": sum(row["baseQuestionCount"] for row in sections),
@@ -329,6 +428,8 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         "nonMultipleChoiceQuestionCount": len(all_questions) - multiple_choice_questions,
         "duplicateQuestionPromptCount": len(question_texts) - len(set(question_texts)),
         "sourceMappedCount": sum(row["sourceMapped"] for row in sections),
+        "sourceUnverifiedCount": sum(not row["sourceMapped"] for row in sections),
+        "educationallyIncompleteCount": sum(row["educationallyIncomplete"] for row in sections),
         "needsSourceCount": sum(row["status"] == "نیازمند منبع" for row in sections),
         "incompleteCount": sum(row["status"] == "ناقص" for row in sections),
         "completeCount": sum(row["status"] == "کامل" for row in sections),
@@ -345,8 +446,20 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         ),
     }
     return {
-        "auditDate": "2026-11-09",
-        "method": "Conservative structural and traceability audit; not a certification of factual accuracy.",
+        "auditDate": date.today().isoformat(),
+        "method": "Conservative pedagogical audit plus strict official-PDF and chapter-specific evidence validation; not a certification of factual accuracy.",
+        "sourceMappingRequirements": {
+            "officialHost": "chap.sch.ir",
+            "sourceVerificationStatus": "official_pdf_content_parsed",
+            "chapterMapping": [
+                "status=verified",
+                "officialTitle is non-empty",
+                "positive ordered physical PDF page range",
+                "verificationMethod is toc_and_page_heading or editorial_review",
+                "verifiedAt is a valid ISO date",
+            ],
+            "legacyFlagsAreNotEvidence": ["textbookContentsVerified", "sourceLesson", "textbookSourceFile"],
+        },
         "thresholdNotes": {
             "dedicatedLessonCharacters": 350,
             "exampleCharacters": 80,
@@ -366,15 +479,15 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
 def render_markdown(report: dict[str, Any]) -> str:
     totals = report["totals"]
     lines = [
-        "# ممیزی کیفیت واقعی محتوای فهمینو — ۱۴۰۵/۰۸/۱۸",
+        "# ممیزی کیفیت واقعی محتوای فهمینو",
         "",
-        "**تاریخ:** ۹ نوامبر ۲۰۲۶  ",
+        f"**تاریخ:** {report['auditDate']}  ",
         "**روش:** ممیزی محافظه‌کارانهٔ ساختار، کفایت آموزشی و ردیابی منبع؛ این گزارش صحت علمی را تأیید نمی‌کند.",
         "",
         "## نتیجهٔ کلی",
         "",
         f"- بسته‌های درسی: **{totals['subjectCount']}**",
-        f"- پیوند رسمی PDF تأییدشده: **{totals['officialSourceLinkVerifiedSubjectCount']} از {totals['subjectCount']}**؛ PDF پردازش‌شده: **{totals['pdfContentParsedSubjectCount']}**",
+        f"- رکورد و پیوند رسمی معتبر: **{totals['officialSourceLinkVerifiedSubjectCount']} از {totals['subjectCount']}**؛ PDF دارای خروجی parser: **{totals['pdfContentParsedSubjectCount']}** (فهرست کامل: **{totals['pdfTocCompleteSubjectCount']}**، OCR ناقص: **{totals['pdfTocPartialSubjectCount']}**، پردازش کامل محتوا: **{totals['pdfFullContentParsedSubjectCount']}**، پردازش‌نشده: **{totals['pdfNotParsedSubjectCount']}**)",
         f"- بخش‌ها/درس‌ها/پودمان‌ها: **{totals['sectionCount']}**",
         f"- پرسش‌های پایه: **{totals['baseQuestionCount']}**",
         f"- پرسش‌های افزودهٔ موسوم به استدلالی: **{totals['advancedQuestionCount']}**",
@@ -392,21 +505,23 @@ def render_markdown(report: dict[str, Any]) -> str:
         "### وضعیت فصل‌به‌فصل",
         "",
         f"- **کامل: {totals['completeCount']}**",
-        f"- **ناقص: {totals['incompleteCount']}**",
-        f"- **نیازمند منبع/نگاشت: {totals['needsSourceCount']}**",
+        f"- **ناقص از نظر وضعیت نهایی: {totals['incompleteCount']}**",
+        f"- **نیازمند منبع رسمی/نگاشت فصل: {totals['needsSourceCount']}**",
+        f"- **دارای نقص آموزشی مستقل (هم‌پوشان با وضعیت منبع): {totals['educationallyIncompleteCount']}**",
+        f"- **فاقد شاهد PDF رسمی و نگاشت اختصاصی فصل: {totals['sourceUnverifiedCount']}**",
         "",
-        "هیچ بخشی صرفاً به‌دلیل داشتن عنوان، خلاصه، سؤال یا پاسخ‌نامه کامل محسوب نشده است. وضعیت «نیازمند منبع» یعنی نسخه/فایل منبع و نگاشت دقیق صفحه و عنوان برای همان بخش هنوز در داده‌ها قابل ردیابی نیست.",
+        "وضعیت منبع و کفایت آموزشی دو محور مستقل‌اند. پیوند رسمی یا پرچم قدیمی textbookContentsVerified به معنی پردازش PDF نیست. برای تطبیق رسمی، PDF باید واقعاً پردازش شده و برای همان فصل عنوان رسمی، بازهٔ صفحهٔ فیزیکی PDF، روش بررسی و تاریخ تأیید ثبت شود. نقص آموزشی حتی وقتی وضعیت نهایی «نیازمند منبع» است جداگانه شمرده می‌شود.",
         "",
         "## خلاصهٔ درس‌به‌درس",
         "",
-        "| بسته | بخش | سؤال پایه | سؤال افزوده | منبع‌نگاشت‌شده | ناقص | نیازمند منبع | درسنامه | آزمون فصل |",
+        "| بسته | بخش | سؤال پایه | سؤال افزوده | PDF و فصل تأییدشده | نقص آموزشی | وضعیت نهایی | درسنامه | آزمون فصل |",
         "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for subject in report["subjects"]:
         lines.append(
             f"| {subject['title']} ({subject['id']}) | {subject['chapterCount']} | "
             f"{subject['baseQuestionCount']} | {subject['advancedQuestionCount']} | "
-            f"{subject['sourceMappedCount']} | {subject['incompleteCount']} | "
+            f"{subject['sourceMappedCount']} | {subject['educationallyIncompleteCount']} | "
             f"{subject['needsSourceCount']} | {subject['dedicatedLessonCount']} | "
             f"{subject['chapterExamCount']} |"
         )
@@ -415,8 +530,8 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             "## فهرست کامل فصل‌به‌فصل",
             "",
-            "| درس | بخش | وضعیت | صفحه | سؤال پایه/افزوده | شکاف‌های شناسایی‌شده |",
-            "|---|---|---|---:|---:|---|",
+            "| درس | بخش | وضعیت نهایی | نقص آموزشی | صفحهٔ داخلی بسته (تأییدنشده) | صفحهٔ PDF رسمی | شکاف‌ها |",
+            "|---|---|---|---|---:|---:|---|",
         ]
     )
     for row in report["sections"]:
@@ -426,11 +541,18 @@ def render_markdown(report: dict[str, Any]) -> str:
             else "—"
         )
         gaps = "؛ ".join(row["gaps"]) or "—"
+        official_page = (
+            f"{row['officialPdfPageStart']}–{row['officialPdfPageEnd']}"
+            if isinstance(row.get("officialPdfPageStart"), int)
+            and isinstance(row.get("officialPdfPageEnd"), int)
+            else "تأییدنشده"
+        )
         safe_title = row["title"].replace("|", "\\|")
         safe_subject = row["subjectTitle"].replace("|", "\\|")
+        educational_status = "ناقص" if row["educationallyIncomplete"] else "قبول ساختاری"
         lines.append(
-            f"| {safe_subject} | {safe_title} | **{row['status']}** | {page} | "
-            f"{row['baseQuestionCount']}/{row['advancedQuestionCount']} | {gaps} |"
+            f"| {safe_subject} | {safe_title} | **{row['status']}** | {educational_status} | "
+            f"{page} | {official_page} | {gaps} |"
         )
     lines.extend(
         [
@@ -445,7 +567,7 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             "## وضعیت منابع رسمیِ پنج کتابی که قبلاً غایب بودند",
             "",
-            "برای هر پنج کتاب، صفحهٔ رسمی پایگاه کتاب‌های درسی و پیوند مستقیم PDF سال ۱۴۰۵–۱۴۰۶ پیدا شد. پیوند و مشخصات در بستهٔ JSON همان درس ثبت شده است؛ خود PDF در این اجرا دانلود یا صفحه‌به‌صفحه تحلیل نشده و هیچ محتوای دارای حق نشر کپی نشده است.",
+            "برای هر پنج کتاب، صفحهٔ رسمی و پیوند PDF سال ۱۴۰۵–۱۴۰۶ ثبت شده است. در پردازش تکمیلی ۱۰ نوامبر ۲۰۲۶، فهرست ریاضی به‌طور کامل از نظر عنوان و شمارهٔ چاپی استخراج شد؛ PDF فارسی، قرآن و پیام‌های آسمان فقط به‌صورت ناقص OCR شدند؛ PDF نگارش با خطای داخلی parser خوانده نشد. این نتایج جایگزین نگاشت فصل به صفحهٔ فیزیکی PDF نیستند و هیچ متن درس یا تصویر کتاب کپی نشده است.",
             "",
             "- قرآن، کد ۸۰۱: [صفحهٔ رسمی](http://chap.sch.ir/books/14210) — [PDF رسمی](http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C801.pdf) — ۱۲٫۴ مگابایت",
             "- پیام‌های آسمان، کد ۸۰۲: [صفحهٔ رسمی](http://chap.sch.ir/books/14217) — [PDF رسمی](http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C802.pdf) — ۱۴٫۲۸ مگابایت",
@@ -458,7 +580,7 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             "## گام بعدی",
             "",
-            "ابتدا PDFهای رسمیِ دارای لینک را در محیط مجاز دریافت و از نظر نسخه، تعداد صفحات و فهرست مطالب بررسی کن؛ سپس برای ۵ کتاب تازه‌یافته، نگاشت فصل/درس/صفحه را تکمیل کن. بعد از آن باید درسنامه و نمونه‌های تألیفیِ هر فصل بازنویسی شوند و قالب‌های غیرچهارگزینه‌ای و آزمون فصل با پاسخ تشریحی اضافه شوند.",
+            "برای ریاضی، شمارهٔ فیزیکی PDF و صفحهٔ آغاز هر فصل را با مشاهدهٔ خود صفحات تأیید کن؛ OCR فارسی، قرآن و پیام‌های آسمان را با بازبینی صفحه‌ای کامل کن؛ برای PDF نگارش مسیر دریافت مجاز و قابل‌پردازش پیدا کن. پس از آن نگاشت رسمی فصل‌ها را ثبت کن و درسنامه، تمرین متنوع و آزمون فصلِ تألیفی را به‌ترتیب تکمیل کن.",
             "",
         ]
     )
