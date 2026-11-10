@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 
-/// Downloads only direct HTTPS PDFs from the two benchmark resource hosts.
+/// Downloads direct HTTPS PDFs while enforcing host, redirect, time and size limits.
 class PdfBytesLoader {
   PdfBytesLoader({
     http.Client? client,
@@ -15,26 +15,70 @@ class PdfBytesLoader {
     'static.paadars.com',
   };
 
+  static const Set<int> _redirectCodes = {301, 302, 303, 307, 308};
+
   final http.Client _client;
   final int maxBytes;
   final Duration timeout;
 
+  bool _isAllowed(Uri uri) =>
+      uri.scheme == 'https' &&
+      allowedHosts.contains(uri.host) &&
+      uri.userInfo.isEmpty;
+
+  Future<http.StreamedResponse> _sendWithSafeRedirects(Uri initialUri) async {
+    var uri = initialUri;
+
+    for (var redirect = 0; redirect <= 4; redirect++) {
+      if (!_isAllowed(uri)) {
+        throw const FormatException('نشانی یا مسیر تغییرمسیر PDF مجاز نیست.');
+      }
+
+      final request = http.Request('GET', uri)..followRedirects = false;
+      final response = await _client.send(request).timeout(timeout);
+
+      if (!_redirectCodes.contains(response.statusCode)) {
+        return response;
+      }
+
+      final location = response.headers['location'];
+      await response.stream.drain<void>();
+      if (location == null || location.trim().isEmpty || redirect == 4) {
+        throw const FormatException('مسیر PDF بیش از حد تغییر کرد یا ناقص است.');
+      }
+
+      final nextUri = uri.resolve(location);
+      if (!_isAllowed(nextUri)) {
+        throw const FormatException(
+          'میزبان فایل PDF به نشانی تأییدنشده تغییرمسیر داد.',
+        );
+      }
+      uri = nextUri;
+    }
+
+    throw const FormatException('تعداد تغییرمسیرهای PDF بیش از حد مجاز است.');
+  }
+
   Future<Uint8List> load(Uri uri) async {
-    if (uri.scheme != 'https' ||
-        !allowedHosts.contains(uri.host) ||
-        uri.userInfo.isNotEmpty) {
+    if (!_isAllowed(uri)) {
       throw const FormatException('نشانی امن و مجاز PDF معتبر نیست.');
     }
 
-    final request = http.Request('GET', uri);
-    final response = await _client.send(request).timeout(timeout);
-
+    final response = await _sendWithSafeRedirects(uri);
     if (response.statusCode != 200) {
+      await response.stream.drain<void>();
       throw HttpException('دریافت PDF ناموفق بود (کد ${response.statusCode}).');
+    }
+
+    final contentType = response.headers['content-type']?.toLowerCase() ?? '';
+    if (contentType.contains('text/html')) {
+      await response.stream.drain<void>();
+      throw const FormatException('میزبان به‌جای PDF یک صفحهٔ وب برگرداند.');
     }
 
     final advertisedLength = response.contentLength;
     if (advertisedLength != null && advertisedLength > maxBytes) {
+      await response.stream.drain<void>();
       throw const FormatException('حجم PDF بیشتر از حد مجاز است.');
     }
 
