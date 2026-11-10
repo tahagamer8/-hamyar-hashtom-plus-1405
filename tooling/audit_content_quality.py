@@ -53,7 +53,7 @@ def official_source_link_verified(source: Any) -> bool:
         and pdf.hostname == "chap.sch.ir"
         and pdf.path.lower().endswith(".pdf")
         and bool(clean_text(source.get("bookCode")))
-        and bool(re.fullmatch(r"\\d{4}-\\d{4}", clean_text(source.get("schoolYear"))))
+        and bool(re.fullmatch(r"\d{4}-\d{4}", clean_text(source.get("schoolYear"))))
         and clean_text(source.get("verificationStatus")) in OFFICIAL_LINK_STATUSES
     )
 
