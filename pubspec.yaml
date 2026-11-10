@@ -35,6 +35,19 @@ flutter:
     - assets/images/fahmino_app_icon.jpg
     - assets/generated_pdfs/
     - assets/generated_pdfs/chapters/
+    - assets/generated_pdfs/chapters/arabic/
+    - assets/generated_pdfs/chapters/art/
+    - assets/generated_pdfs/chapters/english/
+    - assets/generated_pdfs/chapters/english_workbook/
+    - assets/generated_pdfs/chapters/math/
+    - assets/generated_pdfs/chapters/persian/
+    - assets/generated_pdfs/chapters/quran/
+    - assets/generated_pdfs/chapters/religion/
+    - assets/generated_pdfs/chapters/science/
+    - assets/generated_pdfs/chapters/social/
+    - assets/generated_pdfs/chapters/thinking/
+    - assets/generated_pdfs/chapters/work/
+    - assets/generated_pdfs/chapters/writing/
   fonts:
     - family: Vazirmatn
       fonts:
