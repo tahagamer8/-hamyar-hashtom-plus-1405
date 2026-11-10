@@ -140,7 +140,11 @@ jobs:
               raise SystemExit(f"Expected 290 unique chapter PDFs, got {len(expected)}")
 
           apk_dir = Path("build/app/outputs/flutter-apk")
-          for apk in sorted(apk_dir.glob("app-*-release.apk")):
+          apks = sorted(apk_dir.glob("app-*-release.apk"))
+          if len(apks) != 3:
+              raise SystemExit(f"Expected three split-ABI APKs, found {len(apks)}")
+
+          for apk in apks:
               with zipfile.ZipFile(apk) as archive:
                   packaged = set(archive.namelist())
               missing = expected - packaged
