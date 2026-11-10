@@ -19,7 +19,7 @@ class HomeFeatureGrid extends StatelessWidget {
           crossAxisCount: 2,
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          childAspectRatio: 1.28,
+          childAspectRatio: 1.18,
         ),
         itemBuilder: (context, index) =>
             _FeatureTile(feature: AppFeature.values[index]),
@@ -57,10 +57,15 @@ class _FeatureTile extends StatelessWidget {
       child: InkWell(
         borderRadius: radius,
         onTap: () {
-          if (feature == AppFeature.favorites) {
-            context.go(AppRoutes.favorites);
-          } else {
-            context.push(AppRoutes.featureSubjects(feature.name));
+          switch (feature) {
+            case AppFeature.favorites:
+              context.go(AppRoutes.favorites);
+            case AppFeature.studyPlanner:
+              context.push(AppRoutes.studyPlanner);
+            case AppFeature.mistakes:
+              context.push(AppRoutes.mistakes);
+            default:
+              context.push(AppRoutes.featureSubjects(feature.name));
           }
         },
         child: Stack(
