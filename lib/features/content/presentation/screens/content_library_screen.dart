@@ -810,7 +810,8 @@ class _LearningPageHeader extends StatelessWidget {
     AppFeature.notes => 'خلاصه‌ها و نکته‌های مهم را سریع مرور کن.',
     AppFeature.flashcards => 'با یادآوری فعال، نکته‌ها و پرسش‌ها را تمرین کن.',
     AppFeature.solutions => 'راه‌حل‌ها را مرحله‌به‌مرحله دنبال کن.',
-    AppFeature.sampleExams => 'سؤال‌ها را تمرین کن و پاسخ را بررسی کن.',
+    AppFeature.sampleExams => 'نمونه‌سؤال‌های PDF فصل و نیم‌سال را ببین.',
+    AppFeature.lessonQuestions => 'پرسش‌های این فصل را حل کن و پاسخ و توضیح را بررسی کن.',
     AppFeature.quiz => 'دانسته‌هایت را با آزمون بسنج.',
     AppFeature.favorites => 'مطالب نشان‌شدهٔ خودت را ببین.',
   };
