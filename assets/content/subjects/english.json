@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": "1405.11.1",
+  "contentVersion": "2026.11.10.1",
   "subjectId": "english",
   "title": "زبان انگلیسی",
   "chapters": [
@@ -64,17 +64,121 @@
       "examTerm": "first",
       "advancedQuestions": [
         {
-          "question": "برای پرسش «Which question asks about a person's country?» پاسخ «Where are you from?» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
-          "options": [
-            "What days do you ...? asks on which days an activity happens.",
-            "Where are you from? asks about a person's country or place of origin.",
-            "Wednesday comes after Tuesday.",
-            "The question asks about time, so a day/time answer is appropriate."
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: What is the nationality of a person from Canada?",
+          "questionType": "short_answer",
+          "answer": "Canadian",
+          "explanation": "پاسخ پیشنهادی: Canadian. A person from Canada is Canadian. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: asking and answering about country and nationality.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which question asks about a person's country?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "Where are you from?",
+          "explanation": "پاسخ پیشنهادی: Where are you from?. Where are you from? asks about a person's country or place of origin. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: country names and nationality words such as Iran/Iranian and Canada/Canadian.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: asking and answering about country and nationality.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: asking and answering about country and nationality.» در بخش «Unit 1: My Nationality» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
+          "source": "تألیفی فهمینو"
+        }
+      ],
+      "lessonContent": "درسنامهٔ تألیفی فهمینو: Unit 1: My Nationality\n\nهدف یادگیری\nدر پایان این بخش باید بتوانی مفهوم اصلی را با زبان خودت توضیح بدهی، نکته‌های مهم را تشخیص بدهی و آن‌ها را در پرسش و مثال به کار ببری.\n\nشرح مفهوم\nTheme: My Nationality. Students practice introducing themselves and other people, asking where someone is from, naming countries and nationalities, and spelling familiar words. Learning should combine listening, speaking, reading and writing.\n\nنکته‌ها را دقیق بخوان\n1. Communication: asking and answering about country and nationality.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 1: My Nationality» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n2. Vocabulary: country names and nationality words such as Iran/Iranian and Canada/Canadian.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 1: My Nationality» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n3. Listening and speaking: understanding short introductions and introducing a classmate.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 1: My Nationality» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n4. Reading and writing: recognizing and spelling familiar words; practicing common letter combinations.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 1: My Nationality» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n\nنمونه و روش بررسی\nPair practice: introduce a classmate to a visitor and ask where the visitor is from.\nهنگام حل نمونه، اول داده‌ها و خواسته را جدا کن؛ سپس نکتهٔ مربوط را انتخاب کن. پاسخ نهایی را بدون توضیح رها نکن و دلیل انتخاب روش را هم بنویس.\n\nمراحل حل و یادگیری\n1. کشور را مشخص می‌کنیم.\n2. صفت ملیت را انتخاب می‌کنیم.\n3. جمله را با فاعل و فعل مناسب می‌سازیم.\n\nخطاهایی که باید مراقبشان باشی\n1. نام کشور با ملیت یکی نیست؛ country نام کشور و nationality صفت یا نام ملیت است.\n2. نام کشورها و ملیت‌ها در انگلیسی با حرف بزرگ آغاز می‌شوند؛ مثل Iran و Iranian.\nاگر به پاسخ متفاوتی رسیدی، ابتدا صورت سؤال و شرط‌های آن را دوباره بخوان؛ سپس راه‌حل را گام‌به‌گام با مفهوم‌های همین بخش مقایسه کن.\n\nجمع‌بندی و خودسنجی\nمهم‌ترین پیام این بخش را در دو جمله خلاصه کن. بعد به این پرسش پاسخ بده: «What is the nationality of a person from Canada?»؛ پاسخ را با دلیل توضیح بده و در پایان یک مثال هم‌موضوع بنویس.",
+      "lessonContentVersion": "2026.11.10.1",
+      "learningObjectives": [
+        "بتوانی Communication: asking and answering about country and nationality.",
+        "بتوانی Vocabulary: country names and nationality words such as Iran/Iranian and Canada/Canadian.",
+        "بتوانی Listening and speaking: understanding short introductions and introducing a classmate.",
+        "بتوانی Reading and writing: recognizing and spelling familiar words; practicing common letter combinations."
+      ],
+      "workedExamples": [
+        {
+          "title": "نمونهٔ راهنمای فصل",
+          "problem": "Pair practice: introduce a classmate to a visitor and ask where the visitor is from.",
+          "answer": "جمله را با فاعل و فعل مناسب می‌سازیم.",
+          "explanation": "Theme: My Nationality. Students practice introducing themselves and other people, asking where someone is from, naming countries and nationalities, and spelling familiar words. Learning should combine listening, speaking, reading and writing.",
+          "steps": [
+            "کشور را مشخص می‌کنیم.",
+            "صفت ملیت را انتخاب می‌کنیم.",
+            "جمله را با فاعل و فعل مناسب می‌سازیم."
           ],
-          "answer": 1,
-          "explanation": "استدلال درست: Where are you from? asks about a person's country or place of origin.",
-          "difficulty": "استدلالی",
-          "questionType": "reasoning",
+          "difficulty": "پایه"
+        },
+        {
+          "title": "تمرین نمونه با پاسخ تشریحی",
+          "problem": "What is the nationality of a person from Canada?",
+          "answer": "Canadian",
+          "explanation": "A person from Canada is Canadian.",
+          "steps": [
+            "صورت مسئله را دقیق بخوان و مشخص کن چه چیزی خواسته شده است.",
+            "مفهوم مرتبط را از نکته‌های فصل پیدا کن: Vocabulary: country names and nationality words such as Iran/Iranian and Canada/Canadian..",
+            "پاسخ پیشنهادی را با دلیل و اطلاعات مسئله مقایسه کن.",
+            "در پایان، نتیجه را دوباره با پرسش اصلی تطبیق بده."
+          ],
+          "difficulty": "کاربردی"
+        }
+      ],
+      "chapterExam": [
+        {
+          "question": "What is the nationality of a person from Canada?",
+          "options": [
+            "Canadian",
+            "Chinese",
+            "Brazilian",
+            "Iranian"
+          ],
+          "answer": 0,
+          "explanation": "A person from Canada is Canadian."
+        },
+        {
+          "question": "Which question asks about a person's country?",
+          "options": [
+            "Where are you from?",
+            "How old are you?",
+            "What time is it?",
+            "How are you today?"
+          ],
+          "answer": 0,
+          "explanation": "Where are you from? asks about a person's country or place of origin."
+        },
+        {
+          "question": "Which spelling is correct for the nationality of a person from Iran?",
+          "options": [
+            "Iranian",
+            "Iranean",
+            "Iranish",
+            "Iraner"
+          ],
+          "answer": 0,
+          "explanation": "The correct word is Iranian."
+        },
+        {
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: What is the nationality of a person from Canada?",
+          "questionType": "short_answer",
+          "answer": "Canadian",
+          "explanation": "پاسخ پیشنهادی: Canadian. A person from Canada is Canadian. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: asking and answering about country and nationality.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which question asks about a person's country?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "Where are you from?",
+          "explanation": "پاسخ پیشنهادی: Where are you from?. Where are you from? asks about a person's country or place of origin. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: country names and nationality words such as Iran/Iranian and Canada/Canadian.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: asking and answering about country and nationality.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: asking and answering about country and nationality.» در بخش «Unit 1: My Nationality» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
           "source": "تألیفی فهمینو"
         }
       ]
@@ -139,17 +243,121 @@
       "examTerm": "first",
       "advancedQuestions": [
         {
-          "question": "برای پرسش «Which answer is suitable for “When do you study English?”» پاسخ «On Monday mornings.» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
-          "options": [
-            "A person from Canada is Canadian.",
-            "Where are you from? asks about a person's country or place of origin.",
-            "The question asks about time, so a day/time answer is appropriate.",
-            "The correct word is Iranian."
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: Which expression asks about the day of an activity?",
+          "questionType": "short_answer",
+          "answer": "What days do you ...?",
+          "explanation": "پاسخ پیشنهادی: What days do you ...?. What days do you ...? asks on which days an activity happens. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: talking about daily activities and weekly routines.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which word names the day after Tuesday?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "Wednesday",
+          "explanation": "پاسخ پیشنهادی: Wednesday. Wednesday comes after Tuesday. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: days of the week and common activities.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: talking about daily activities and weekly routines.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: talking about daily activities and weekly routines.» در بخش «Unit 2: My Week» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
+          "source": "تألیفی فهمینو"
+        }
+      ],
+      "lessonContent": "درسنامهٔ تألیفی فهمینو: Unit 2: My Week\n\nهدف یادگیری\nدر پایان این بخش باید بتوانی مفهوم اصلی را با زبان خودت توضیح بدهی، نکته‌های مهم را تشخیص بدهی و آن‌ها را در پرسش و مثال به کار ببری.\n\nشرح مفهوم\nTheme: My Week. Students talk about daily routines and weekly activities, ask when and on which days activities happen, and understand short conversations about helping and planning.\n\nنکته‌ها را دقیق بخوان\n1. Communication: talking about daily activities and weekly routines.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 2: My Week» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n2. Vocabulary: days of the week and common activities.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 2: My Week» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n3. Listening and speaking: asking about a person's schedule and responding clearly.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 2: My Week» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n4. Reading and writing: completing simple weekly schedules and writing about familiar routines.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 2: My Week» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n\nنمونه و روش بررسی\nAsk a partner what they do on two different days, then write a short weekly schedule.\nهنگام حل نمونه، اول داده‌ها و خواسته را جدا کن؛ سپس نکتهٔ مربوط را انتخاب کن. پاسخ نهایی را بدون توضیح رها نکن و دلیل انتخاب روش را هم بنویس.\n\nمراحل حل و یادگیری\n1. روزهای فعالیت را مشخص می‌کنیم.\n2. فاعل و فعل مناسب را انتخاب می‌کنیم.\n3. قید تکرار را در جای مناسب می‌گذاریم.\n\nخطاهایی که باید مراقبشان باشی\n1. برای روزهای هفته معمولاً از on استفاده می‌کنیم؛ روز را با ساعت یا بخش روز اشتباه نگیر.\n2. در برنامهٔ هفتگی، فعالیت و روز آن را با فاعل و فعل درست بنویس؛ فقط فهرست واژه‌ها کافی نیست.\nاگر به پاسخ متفاوتی رسیدی، ابتدا صورت سؤال و شرط‌های آن را دوباره بخوان؛ سپس راه‌حل را گام‌به‌گام با مفهوم‌های همین بخش مقایسه کن.\n\nجمع‌بندی و خودسنجی\nمهم‌ترین پیام این بخش را در دو جمله خلاصه کن. بعد به این پرسش پاسخ بده: «Which expression asks about the day of an activity?»؛ پاسخ را با دلیل توضیح بده و در پایان یک مثال هم‌موضوع بنویس.",
+      "lessonContentVersion": "2026.11.10.1",
+      "learningObjectives": [
+        "بتوانی Communication: talking about daily activities and weekly routines.",
+        "بتوانی Vocabulary: days of the week and common activities.",
+        "بتوانی Listening and speaking: asking about a person's schedule and responding clearly.",
+        "بتوانی Reading and writing: completing simple weekly schedules and writing about familiar routines."
+      ],
+      "workedExamples": [
+        {
+          "title": "نمونهٔ راهنمای فصل",
+          "problem": "Ask a partner what they do on two different days, then write a short weekly schedule.",
+          "answer": "قید تکرار را در جای مناسب می‌گذاریم.",
+          "explanation": "Theme: My Week. Students talk about daily routines and weekly activities, ask when and on which days activities happen, and understand short conversations about helping and planning.",
+          "steps": [
+            "روزهای فعالیت را مشخص می‌کنیم.",
+            "فاعل و فعل مناسب را انتخاب می‌کنیم.",
+            "قید تکرار را در جای مناسب می‌گذاریم."
           ],
-          "answer": 2,
-          "explanation": "استدلال درست: The question asks about time, so a day/time answer is appropriate.",
-          "difficulty": "استدلالی",
-          "questionType": "reasoning",
+          "difficulty": "پایه"
+        },
+        {
+          "title": "تمرین نمونه با پاسخ تشریحی",
+          "problem": "Which expression asks about the day of an activity?",
+          "answer": "What days do you ...?",
+          "explanation": "What days do you ...? asks on which days an activity happens.",
+          "steps": [
+            "صورت مسئله را دقیق بخوان و مشخص کن چه چیزی خواسته شده است.",
+            "مفهوم مرتبط را از نکته‌های فصل پیدا کن: Vocabulary: days of the week and common activities..",
+            "پاسخ پیشنهادی را با دلیل و اطلاعات مسئله مقایسه کن.",
+            "در پایان، نتیجه را دوباره با پرسش اصلی تطبیق بده."
+          ],
+          "difficulty": "کاربردی"
+        }
+      ],
+      "chapterExam": [
+        {
+          "question": "Which expression asks about the day of an activity?",
+          "options": [
+            "What days do you ...?",
+            "Where are you from?",
+            "What is your hobby?",
+            "What's the matter?"
+          ],
+          "answer": 0,
+          "explanation": "What days do you ...? asks on which days an activity happens."
+        },
+        {
+          "question": "Which word names the day after Tuesday?",
+          "options": [
+            "Wednesday",
+            "Monday",
+            "Friday",
+            "Sunday"
+          ],
+          "answer": 0,
+          "explanation": "Wednesday comes after Tuesday."
+        },
+        {
+          "question": "Which answer is suitable for “When do you study English?”",
+          "options": [
+            "On Monday mornings.",
+            "I am Iranian.",
+            "I have a headache.",
+            "I can swim."
+          ],
+          "answer": 0,
+          "explanation": "The question asks about time, so a day/time answer is appropriate."
+        },
+        {
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: Which expression asks about the day of an activity?",
+          "questionType": "short_answer",
+          "answer": "What days do you ...?",
+          "explanation": "پاسخ پیشنهادی: What days do you ...?. What days do you ...? asks on which days an activity happens. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: talking about daily activities and weekly routines.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which word names the day after Tuesday?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "Wednesday",
+          "explanation": "پاسخ پیشنهادی: Wednesday. Wednesday comes after Tuesday. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: days of the week and common activities.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: talking about daily activities and weekly routines.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: talking about daily activities and weekly routines.» در بخش «Unit 2: My Week» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
           "source": "تألیفی فهمینو"
         }
       ]
@@ -214,17 +422,121 @@
       "examTerm": "first",
       "advancedQuestions": [
         {
-          "question": "برای پرسش «Which answer is suitable for “Can you ride a bicycle?”» پاسخ «Yes, I can.» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
-          "options": [
-            "A person from Canada is Canadian.",
-            "Where are you from? asks about a person's country or place of origin.",
-            "The correct word is Iranian.",
-            "The question asks about ability, so yes/no with can is suitable."
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: Which question asks about someone's ability?",
+          "questionType": "short_answer",
+          "answer": "Can you swim?",
+          "explanation": "پاسخ پیشنهادی: Can you swim?. Can you swim? asks whether someone has the ability to swim. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: asking and answering about abilities.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «What does “I am good at drawing” mean?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "I draw well.",
+          "explanation": "پاسخ پیشنهادی: I draw well.. The sentence says that the speaker is skilled at drawing. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: activities and skills such as swimming, drawing and speaking.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: asking and answering about abilities.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: asking and answering about abilities.» در بخش «Unit 3: My Abilities» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
+          "source": "تألیفی فهمینو"
+        }
+      ],
+      "lessonContent": "درسنامهٔ تألیفی فهمینو: Unit 3: My Abilities\n\nهدف یادگیری\nدر پایان این بخش باید بتوانی مفهوم اصلی را با زبان خودت توضیح بدهی، نکته‌های مهم را تشخیص بدهی و آن‌ها را در پرسش و مثال به کار ببری.\n\nشرح مفهوم\nTheme: My Abilities. Students describe what they can do, ask about other people's abilities, and understand short conversations about skills and activities.\n\nنکته‌ها را دقیق بخوان\n1. Communication: asking and answering about abilities.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 3: My Abilities» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n2. Vocabulary: activities and skills such as swimming, drawing and speaking.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 3: My Abilities» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n3. Listening and speaking: asking a classmate what they are good at.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 3: My Abilities» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n4. Reading and writing: understanding short descriptions of abilities and writing about one's own skills.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 3: My Abilities» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n\nنمونه و روش بررسی\nAsk a classmate about two activities and introduce one ability they have to the group.\nهنگام حل نمونه، اول داده‌ها و خواسته را جدا کن؛ سپس نکتهٔ مربوط را انتخاب کن. پاسخ نهایی را بدون توضیح رها نکن و دلیل انتخاب روش را هم بنویس.\n\nمراحل حل و یادگیری\n1. توانایی را مشخص می‌کنیم.\n2. فاعل را می‌آوریم.\n3. can یا can't و شکل ساده فعل را می‌نویسیم.\n\nخطاهایی که باید مراقبشان باشی\n1. بعد از can و can't فعل به شکل ساده می‌آید؛ به آن s یا to اضافه نکن.\n2. can و can't خودشان توانایی یا ناتوانی را نشان می‌دهند؛ برای پرسش از ترتیب Can + subject استفاده کن.\nاگر به پاسخ متفاوتی رسیدی، ابتدا صورت سؤال و شرط‌های آن را دوباره بخوان؛ سپس راه‌حل را گام‌به‌گام با مفهوم‌های همین بخش مقایسه کن.\n\nجمع‌بندی و خودسنجی\nمهم‌ترین پیام این بخش را در دو جمله خلاصه کن. بعد به این پرسش پاسخ بده: «Which question asks about someone's ability?»؛ پاسخ را با دلیل توضیح بده و در پایان یک مثال هم‌موضوع بنویس.",
+      "lessonContentVersion": "2026.11.10.1",
+      "learningObjectives": [
+        "بتوانی Communication: asking and answering about abilities.",
+        "بتوانی Vocabulary: activities and skills such as swimming, drawing and speaking.",
+        "بتوانی Listening and speaking: asking a classmate what they are good at.",
+        "بتوانی Reading and writing: understanding short descriptions of abilities and writing about one's own skills."
+      ],
+      "workedExamples": [
+        {
+          "title": "نمونهٔ راهنمای فصل",
+          "problem": "Ask a classmate about two activities and introduce one ability they have to the group.",
+          "answer": "can یا can't و شکل ساده فعل را می‌نویسیم.",
+          "explanation": "Theme: My Abilities. Students describe what they can do, ask about other people's abilities, and understand short conversations about skills and activities.",
+          "steps": [
+            "توانایی را مشخص می‌کنیم.",
+            "فاعل را می‌آوریم.",
+            "can یا can't و شکل ساده فعل را می‌نویسیم."
           ],
-          "answer": 3,
-          "explanation": "استدلال درست: The question asks about ability, so yes/no with can is suitable.",
-          "difficulty": "استدلالی",
-          "questionType": "reasoning",
+          "difficulty": "پایه"
+        },
+        {
+          "title": "تمرین نمونه با پاسخ تشریحی",
+          "problem": "Which question asks about someone's ability?",
+          "answer": "Can you swim?",
+          "explanation": "Can you swim? asks whether someone has the ability to swim.",
+          "steps": [
+            "صورت مسئله را دقیق بخوان و مشخص کن چه چیزی خواسته شده است.",
+            "مفهوم مرتبط را از نکته‌های فصل پیدا کن: Vocabulary: activities and skills such as swimming, drawing and speaking..",
+            "پاسخ پیشنهادی را با دلیل و اطلاعات مسئله مقایسه کن.",
+            "در پایان، نتیجه را دوباره با پرسش اصلی تطبیق بده."
+          ],
+          "difficulty": "کاربردی"
+        }
+      ],
+      "chapterExam": [
+        {
+          "question": "Which question asks about someone's ability?",
+          "options": [
+            "Can you swim?",
+            "Where do you live?",
+            "What is the date?",
+            "How is the weather?"
+          ],
+          "answer": 0,
+          "explanation": "Can you swim? asks whether someone has the ability to swim."
+        },
+        {
+          "question": "What does “I am good at drawing” mean?",
+          "options": [
+            "I draw well.",
+            "I do not like drawing.",
+            "I am from Draw.",
+            "I draw every morning."
+          ],
+          "answer": 0,
+          "explanation": "The sentence says that the speaker is skilled at drawing."
+        },
+        {
+          "question": "Which answer is suitable for “Can you ride a bicycle?”",
+          "options": [
+            "Yes, I can.",
+            "I am from Iran.",
+            "It is Wednesday.",
+            "I have a cold."
+          ],
+          "answer": 0,
+          "explanation": "The question asks about ability, so yes/no with can is suitable."
+        },
+        {
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: Which question asks about someone's ability?",
+          "questionType": "short_answer",
+          "answer": "Can you swim?",
+          "explanation": "پاسخ پیشنهادی: Can you swim?. Can you swim? asks whether someone has the ability to swim. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: asking and answering about abilities.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «What does “I am good at drawing” mean?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "I draw well.",
+          "explanation": "پاسخ پیشنهادی: I draw well.. The sentence says that the speaker is skilled at drawing. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: activities and skills such as swimming, drawing and speaking.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: asking and answering about abilities.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: asking and answering about abilities.» در بخش «Unit 3: My Abilities» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
           "source": "تألیفی فهمینو"
         }
       ]
@@ -289,17 +601,121 @@
       "examTerm": "first",
       "advancedQuestions": [
         {
-          "question": "برای پرسش «Which question asks about a health problem?» پاسخ «What's the matter?» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: What does “headache” mean?",
+          "questionType": "short_answer",
+          "answer": "سردرد",
+          "explanation": "پاسخ پیشنهادی: سردرد. Headache means سردرد. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: talking about health problems and giving advice.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which expression gives advice?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "You should get some rest.",
+          "explanation": "پاسخ پیشنهادی: You should get some rest.. You should ... is used to give advice. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: common problems such as headache and toothache.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: talking about health problems and giving advice.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: talking about health problems and giving advice.» در بخش «Unit 4: My Health» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
+          "source": "تألیفی فهمینو"
+        }
+      ],
+      "lessonContent": "درسنامهٔ تألیفی فهمینو: Unit 4: My Health\n\nهدف یادگیری\nدر پایان این بخش باید بتوانی مفهوم اصلی را با زبان خودت توضیح بدهی، نکته‌های مهم را تشخیص بدهی و آن‌ها را در پرسش و مثال به کار ببری.\n\nشرح مفهوم\nTheme: My Health. Students name common health problems, ask how someone feels, and give simple health advice. Role-play supports listening and speaking in everyday situations.\n\nنکته‌ها را دقیق بخوان\n1. Communication: talking about health problems and giving advice.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 4: My Health» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n2. Vocabulary: common problems such as headache and toothache.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 4: My Health» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n3. Listening and speaking: asking what is wrong and suggesting suitable help.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 4: My Health» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n4. Reading and writing: understanding short health messages and writing simple advice.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 4: My Health» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n\nنمونه و روش بررسی\nRole-play: one student describes a simple health problem; the other gives a suitable, safe suggestion.\nهنگام حل نمونه، اول داده‌ها و خواسته را جدا کن؛ سپس نکتهٔ مربوط را انتخاب کن. پاسخ نهایی را بدون توضیح رها نکن و دلیل انتخاب روش را هم بنویس.\n\nمراحل حل و یادگیری\n1. مشکل را بیان می‌کنیم.\n2. پرسش مناسب می‌پرسیم.\n3. پاسخ و توصیه ساده می‌دهیم.\n\nخطاهایی که باید مراقبشان باشی\n1. برای بیان مشکل معمولاً از ساختار مناسب مانند have a headache یا have a toothache استفاده می‌شود؛ واژهٔ نشانه را با خود بیماری اشتباه نگیر.\n2. در توصیهٔ ساده، بعد از should فعل ساده می‌آید؛ به should شکل گذشته یا s اضافه نکن.\nاگر به پاسخ متفاوتی رسیدی، ابتدا صورت سؤال و شرط‌های آن را دوباره بخوان؛ سپس راه‌حل را گام‌به‌گام با مفهوم‌های همین بخش مقایسه کن.\n\nجمع‌بندی و خودسنجی\nمهم‌ترین پیام این بخش را در دو جمله خلاصه کن. بعد به این پرسش پاسخ بده: «What does “headache” mean?»؛ پاسخ را با دلیل توضیح بده و در پایان یک مثال هم‌موضوع بنویس.",
+      "lessonContentVersion": "2026.11.10.1",
+      "learningObjectives": [
+        "بتوانی Communication: talking about health problems and giving advice.",
+        "بتوانی Vocabulary: common problems such as headache and toothache.",
+        "بتوانی Listening and speaking: asking what is wrong and suggesting suitable help.",
+        "بتوانی Reading and writing: understanding short health messages and writing simple advice."
+      ],
+      "workedExamples": [
+        {
+          "title": "نمونهٔ راهنمای فصل",
+          "problem": "Role-play: one student describes a simple health problem; the other gives a suitable, safe suggestion.",
+          "answer": "پاسخ و توصیه ساده می‌دهیم.",
+          "explanation": "Theme: My Health. Students name common health problems, ask how someone feels, and give simple health advice. Role-play supports listening and speaking in everyday situations.",
+          "steps": [
+            "مشکل را بیان می‌کنیم.",
+            "پرسش مناسب می‌پرسیم.",
+            "پاسخ و توصیه ساده می‌دهیم."
+          ],
+          "difficulty": "پایه"
+        },
+        {
+          "title": "تمرین نمونه با پاسخ تشریحی",
+          "problem": "What does “headache” mean?",
+          "answer": "سردرد",
+          "explanation": "Headache means سردرد.",
+          "steps": [
+            "صورت مسئله را دقیق بخوان و مشخص کن چه چیزی خواسته شده است.",
+            "مفهوم مرتبط را از نکته‌های فصل پیدا کن: Vocabulary: common problems such as headache and toothache..",
+            "پاسخ پیشنهادی را با دلیل و اطلاعات مسئله مقایسه کن.",
+            "در پایان، نتیجه را دوباره با پرسش اصلی تطبیق بده."
+          ],
+          "difficulty": "کاربردی"
+        }
+      ],
+      "chapterExam": [
+        {
+          "question": "What does “headache” mean?",
           "options": [
-            "What's the matter? asks what problem someone has.",
-            "A person from Canada is Canadian.",
-            "Where are you from? asks about a person's country or place of origin.",
-            "The correct word is Iranian."
+            "سردرد",
+            "گلودرد",
+            "دندان‌درد",
+            "کمردرد"
           ],
           "answer": 0,
-          "explanation": "استدلال درست: What's the matter? asks what problem someone has.",
-          "difficulty": "استدلالی",
-          "questionType": "reasoning",
+          "explanation": "Headache means سردرد."
+        },
+        {
+          "question": "Which expression gives advice?",
+          "options": [
+            "You should get some rest.",
+            "Where are you from?",
+            "What is your hobby?",
+            "I am from Canada."
+          ],
+          "answer": 0,
+          "explanation": "You should ... is used to give advice."
+        },
+        {
+          "question": "Which question asks about a health problem?",
+          "options": [
+            "What's the matter?",
+            "What days do you study?",
+            "Where is the park?",
+            "Can you draw?"
+          ],
+          "answer": 0,
+          "explanation": "What's the matter? asks what problem someone has."
+        },
+        {
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: What does “headache” mean?",
+          "questionType": "short_answer",
+          "answer": "سردرد",
+          "explanation": "پاسخ پیشنهادی: سردرد. Headache means سردرد. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: talking about health problems and giving advice.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which expression gives advice?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "You should get some rest.",
+          "explanation": "پاسخ پیشنهادی: You should get some rest.. You should ... is used to give advice. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: common problems such as headache and toothache.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: talking about health problems and giving advice.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: talking about health problems and giving advice.» در بخش «Unit 4: My Health» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
           "source": "تألیفی فهمینو"
         }
       ]
@@ -364,17 +780,121 @@
       "examTerm": "second",
       "advancedQuestions": [
         {
-          "question": "برای پرسش «Which place is usually used to borrow books?» پاسخ «library» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
-          "options": [
-            "A person from Canada is Canadian.",
-            "A library is a place where people can read or borrow books.",
-            "Where are you from? asks about a person's country or place of origin.",
-            "The correct word is Iranian."
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: Which word means «بیمارستان»?",
+          "questionType": "short_answer",
+          "answer": "hospital",
+          "explanation": "پاسخ پیشنهادی: hospital. Hospital means بیمارستان. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: describing a city and asking about places.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which place is usually used to borrow books?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "library",
+          "explanation": "پاسخ پیشنهادی: library. A library is a place where people can read or borrow books. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: common city places and location words.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: describing a city and asking about places.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: describing a city and asking about places.» در بخش «Unit 5: My City» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
+          "source": "تألیفی فهمینو"
+        }
+      ],
+      "lessonContent": "درسنامهٔ تألیفی فهمینو: Unit 5: My City\n\nهدف یادگیری\nدر پایان این بخش باید بتوانی مفهوم اصلی را با زبان خودت توضیح بدهی، نکته‌های مهم را تشخیص بدهی و آن‌ها را در پرسش و مثال به کار ببری.\n\nشرح مفهوم\nTheme: My City. Students describe places in a city, ask about locations and understand simple information about familiar places.\n\nنکته‌ها را دقیق بخوان\n1. Communication: describing a city and asking about places.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 5: My City» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n2. Vocabulary: common city places and location words.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 5: My City» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n3. Listening and speaking: asking for and giving simple information about places.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 5: My City» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n4. Reading and writing: understanding a short description or map-based text and writing about a familiar city.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 5: My City» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n\nنمونه و روش بررسی\nDescribe three places in your city and explain where one of them is in relation to another.\nهنگام حل نمونه، اول داده‌ها و خواسته را جدا کن؛ سپس نکتهٔ مربوط را انتخاب کن. پاسخ نهایی را بدون توضیح رها نکن و دلیل انتخاب روش را هم بنویس.\n\nمراحل حل و یادگیری\n1. مکان‌های مهم را انتخاب می‌کنیم.\n2. مفرد یا جمع بودن را می‌سنجیم.\n3. از there is یا there are استفاده می‌کنیم.\n\nخطاهایی که باید مراقبشان باشی\n1. there is برای اسم مفرد و there are برای اسم جمع به کار می‌رود؛ انتخاب را بر اساس اسم بعد از آن انجام بده.\n2. نام مکان را با جایگاه آن اشتباه نگیر؛ توصیف یک شهر باید مکان‌ها و رابطهٔ مکانی را روشن کند.\nاگر به پاسخ متفاوتی رسیدی، ابتدا صورت سؤال و شرط‌های آن را دوباره بخوان؛ سپس راه‌حل را گام‌به‌گام با مفهوم‌های همین بخش مقایسه کن.\n\nجمع‌بندی و خودسنجی\nمهم‌ترین پیام این بخش را در دو جمله خلاصه کن. بعد به این پرسش پاسخ بده: «Which word means «بیمارستان»?»؛ پاسخ را با دلیل توضیح بده و در پایان یک مثال هم‌موضوع بنویس.",
+      "lessonContentVersion": "2026.11.10.1",
+      "learningObjectives": [
+        "بتوانی Communication: describing a city and asking about places.",
+        "بتوانی Vocabulary: common city places and location words.",
+        "بتوانی Listening and speaking: asking for and giving simple information about places.",
+        "بتوانی Reading and writing: understanding a short description or map-based text and writing about a familiar city."
+      ],
+      "workedExamples": [
+        {
+          "title": "نمونهٔ راهنمای فصل",
+          "problem": "Describe three places in your city and explain where one of them is in relation to another.",
+          "answer": "از there is یا there are استفاده می‌کنیم.",
+          "explanation": "Theme: My City. Students describe places in a city, ask about locations and understand simple information about familiar places.",
+          "steps": [
+            "مکان‌های مهم را انتخاب می‌کنیم.",
+            "مفرد یا جمع بودن را می‌سنجیم.",
+            "از there is یا there are استفاده می‌کنیم."
           ],
-          "answer": 1,
-          "explanation": "استدلال درست: A library is a place where people can read or borrow books.",
-          "difficulty": "استدلالی",
-          "questionType": "reasoning",
+          "difficulty": "پایه"
+        },
+        {
+          "title": "تمرین نمونه با پاسخ تشریحی",
+          "problem": "Which word means «بیمارستان»?",
+          "answer": "hospital",
+          "explanation": "Hospital means بیمارستان.",
+          "steps": [
+            "صورت مسئله را دقیق بخوان و مشخص کن چه چیزی خواسته شده است.",
+            "مفهوم مرتبط را از نکته‌های فصل پیدا کن: Vocabulary: common city places and location words..",
+            "پاسخ پیشنهادی را با دلیل و اطلاعات مسئله مقایسه کن.",
+            "در پایان، نتیجه را دوباره با پرسش اصلی تطبیق بده."
+          ],
+          "difficulty": "کاربردی"
+        }
+      ],
+      "chapterExam": [
+        {
+          "question": "Which word means «بیمارستان»?",
+          "options": [
+            "hospital",
+            "library",
+            "park",
+            "museum"
+          ],
+          "answer": 0,
+          "explanation": "Hospital means بیمارستان."
+        },
+        {
+          "question": "Which place is usually used to borrow books?",
+          "options": [
+            "library",
+            "stadium",
+            "airport",
+            "restaurant"
+          ],
+          "answer": 0,
+          "explanation": "A library is a place where people can read or borrow books."
+        },
+        {
+          "question": "Which question is useful when asking about a place?",
+          "options": [
+            "Where is the museum?",
+            "How old are you?",
+            "Can you swim?",
+            "What is your nationality?"
+          ],
+          "answer": 0,
+          "explanation": "Where is the museum? asks for the location of a place."
+        },
+        {
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: Which word means «بیمارستان»?",
+          "questionType": "short_answer",
+          "answer": "hospital",
+          "explanation": "پاسخ پیشنهادی: hospital. Hospital means بیمارستان. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: describing a city and asking about places.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which place is usually used to borrow books?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "library",
+          "explanation": "پاسخ پیشنهادی: library. A library is a place where people can read or borrow books. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: common city places and location words.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: describing a city and asking about places.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: describing a city and asking about places.» در بخش «Unit 5: My City» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
           "source": "تألیفی فهمینو"
         }
       ]
@@ -439,17 +959,121 @@
       "examTerm": "second",
       "advancedQuestions": [
         {
-          "question": "برای پرسش «Which sentence best describes a natural place?» پاسخ «There is a river near the village.» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
-          "options": [
-            "A person from Canada is Canadian.",
-            "Where are you from? asks about a person's country or place of origin.",
-            "The sentence describes a natural feature near a village.",
-            "The correct word is Iranian."
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: What does “village” mean?",
+          "questionType": "short_answer",
+          "answer": "روستا",
+          "explanation": "پاسخ پیشنهادی: روستا. Village means روستا. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: describing a village and its surroundings.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which word means «رودخانه»?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "river",
+          "explanation": "پاسخ پیشنهادی: river. River means رودخانه. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: nature and village words such as river, field and mountain.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: describing a village and its surroundings.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: describing a village and its surroundings.» در بخش «Unit 6: My Village» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
+          "source": "تألیفی فهمینو"
+        }
+      ],
+      "lessonContent": "درسنامهٔ تألیفی فهمینو: Unit 6: My Village\n\nهدف یادگیری\nدر پایان این بخش باید بتوانی مفهوم اصلی را با زبان خودت توضیح بدهی، نکته‌های مهم را تشخیص بدهی و آن‌ها را در پرسش و مثال به کار ببری.\n\nشرح مفهوم\nTheme: My Village. Students describe village life, natural places and familiar activities, and compare features of places using simple spoken and written language.\n\nنکته‌ها را دقیق بخوان\n1. Communication: describing a village and its surroundings.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 6: My Village» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n2. Vocabulary: nature and village words such as river, field and mountain.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 6: My Village» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n3. Listening and speaking: talking about familiar places and daily life.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 6: My Village» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n4. Reading and writing: understanding and producing short descriptions of a village.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 6: My Village» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n\nنمونه و روش بررسی\nWrite a short description of a village or rural place, including two natural features and one activity.\nهنگام حل نمونه، اول داده‌ها و خواسته را جدا کن؛ سپس نکتهٔ مربوط را انتخاب کن. پاسخ نهایی را بدون توضیح رها نکن و دلیل انتخاب روش را هم بنویس.\n\nمراحل حل و یادگیری\n1. موضوع پرسش را مشخص می‌کنیم: مکان یا آب‌وهوا.\n2. واژه‌های مناسب مکان و فصل را انتخاب می‌کنیم.\n3. جمله را با فاعل و فعل درست می‌سازیم.\n\nخطاهایی که باید مراقبشان باشی\n1. نام فصل‌ها و ویژگی‌های آب‌وهوا را با هم اشتباه نگیر؛ برای مثال season با weather یکسان نیست.\n2. برای توصیف مکان، از واژهٔ دقیق مانند river، field یا mountain استفاده کن؛ واژه‌های طبیعی را جابه‌جا نکن.\nاگر به پاسخ متفاوتی رسیدی، ابتدا صورت سؤال و شرط‌های آن را دوباره بخوان؛ سپس راه‌حل را گام‌به‌گام با مفهوم‌های همین بخش مقایسه کن.\n\nجمع‌بندی و خودسنجی\nمهم‌ترین پیام این بخش را در دو جمله خلاصه کن. بعد به این پرسش پاسخ بده: «What does “village” mean?»؛ پاسخ را با دلیل توضیح بده و در پایان یک مثال هم‌موضوع بنویس.",
+      "lessonContentVersion": "2026.11.10.1",
+      "learningObjectives": [
+        "بتوانی Communication: describing a village and its surroundings.",
+        "بتوانی Vocabulary: nature and village words such as river, field and mountain.",
+        "بتوانی Listening and speaking: talking about familiar places and daily life.",
+        "بتوانی Reading and writing: understanding and producing short descriptions of a village."
+      ],
+      "workedExamples": [
+        {
+          "title": "نمونهٔ راهنمای فصل",
+          "problem": "Write a short description of a village or rural place, including two natural features and one activity.",
+          "answer": "جمله را با فاعل و فعل درست می‌سازیم.",
+          "explanation": "Theme: My Village. Students describe village life, natural places and familiar activities, and compare features of places using simple spoken and written language.",
+          "steps": [
+            "موضوع پرسش را مشخص می‌کنیم: مکان یا آب‌وهوا.",
+            "واژه‌های مناسب مکان و فصل را انتخاب می‌کنیم.",
+            "جمله را با فاعل و فعل درست می‌سازیم."
           ],
-          "answer": 2,
-          "explanation": "استدلال درست: The sentence describes a natural feature near a village.",
-          "difficulty": "استدلالی",
-          "questionType": "reasoning",
+          "difficulty": "پایه"
+        },
+        {
+          "title": "تمرین نمونه با پاسخ تشریحی",
+          "problem": "What does “village” mean?",
+          "answer": "روستا",
+          "explanation": "Village means روستا.",
+          "steps": [
+            "صورت مسئله را دقیق بخوان و مشخص کن چه چیزی خواسته شده است.",
+            "مفهوم مرتبط را از نکته‌های فصل پیدا کن: Vocabulary: nature and village words such as river, field and mountain..",
+            "پاسخ پیشنهادی را با دلیل و اطلاعات مسئله مقایسه کن.",
+            "در پایان، نتیجه را دوباره با پرسش اصلی تطبیق بده."
+          ],
+          "difficulty": "کاربردی"
+        }
+      ],
+      "chapterExam": [
+        {
+          "question": "What does “village” mean?",
+          "options": [
+            "روستا",
+            "شهر",
+            "کشور",
+            "خیابان"
+          ],
+          "answer": 0,
+          "explanation": "Village means روستا."
+        },
+        {
+          "question": "Which word means «رودخانه»?",
+          "options": [
+            "river",
+            "mountain",
+            "field",
+            "forest"
+          ],
+          "answer": 0,
+          "explanation": "River means رودخانه."
+        },
+        {
+          "question": "Which sentence best describes a natural place?",
+          "options": [
+            "There is a river near the village.",
+            "I am from Canada.",
+            "I have a headache.",
+            "I can play chess."
+          ],
+          "answer": 0,
+          "explanation": "The sentence describes a natural feature near a village."
+        },
+        {
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: What does “village” mean?",
+          "questionType": "short_answer",
+          "answer": "روستا",
+          "explanation": "پاسخ پیشنهادی: روستا. Village means روستا. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: describing a village and its surroundings.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which word means «رودخانه»?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "river",
+          "explanation": "پاسخ پیشنهادی: river. River means رودخانه. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: nature and village words such as river, field and mountain.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: describing a village and its surroundings.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: describing a village and its surroundings.» در بخش «Unit 6: My Village» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
           "source": "تألیفی فهمینو"
         }
       ]
@@ -514,17 +1138,121 @@
       "examTerm": "second",
       "advancedQuestions": [
         {
-          "question": "برای پرسش «Which question asks about a person's hobby?» پاسخ «What is your hobby?» انتخاب شده است. کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟",
-          "options": [
-            "A person from Canada is Canadian.",
-            "Where are you from? asks about a person's country or place of origin.",
-            "The correct word is Iranian.",
-            "What is your hobby? asks about a favourite free-time activity."
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: What does “hobby” mean?",
+          "questionType": "short_answer",
+          "answer": "سرگرمی",
+          "explanation": "پاسخ پیشنهادی: سرگرمی. Hobby means سرگرمی. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: asking and answering about hobbies and free time.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which question asks about a person's hobby?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "What is your hobby?",
+          "explanation": "پاسخ پیشنهادی: What is your hobby?. What is your hobby? asks about a favourite free-time activity. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: common activities such as reading, swimming and playing games.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: asking and answering about hobbies and free time.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: asking and answering about hobbies and free time.» در بخش «Unit 7: My Hobbies» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
+          "source": "تألیفی فهمینو"
+        }
+      ],
+      "lessonContent": "درسنامهٔ تألیفی فهمینو: Unit 7: My Hobbies\n\nهدف یادگیری\nدر پایان این بخش باید بتوانی مفهوم اصلی را با زبان خودت توضیح بدهی، نکته‌های مهم را تشخیص بدهی و آن‌ها را در پرسش و مثال به کار ببری.\n\nشرح مفهوم\nTheme: My Hobbies. Students talk about hobbies and free-time activities, ask others about their interests, and understand short descriptions of what people enjoy doing.\n\nنکته‌ها را دقیق بخوان\n1. Communication: asking and answering about hobbies and free time.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 7: My Hobbies» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n2. Vocabulary: common activities such as reading, swimming and playing games.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 7: My Hobbies» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n3. Listening and speaking: asking a partner about favourite activities.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 7: My Hobbies» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n4. Reading and writing: describing a hobby and writing a few sentences about free time.\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع «Unit 7: My Hobbies» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز.\n\nنمونه و روش بررسی\nAsk a partner about a favourite hobby and write three original sentences about when and why they enjoy it.\nهنگام حل نمونه، اول داده‌ها و خواسته را جدا کن؛ سپس نکتهٔ مربوط را انتخاب کن. پاسخ نهایی را بدون توضیح رها نکن و دلیل انتخاب روش را هم بنویس.\n\nمراحل حل و یادگیری\n1. فعالیت یا سرگرمی مورد نظر را انتخاب می‌کنیم.\n2. از واژه مناسب برای علاقه یا پرسش استفاده می‌کنیم.\n3. جمله را با ترتیب درست می‌نویسیم.\n\nخطاهایی که باید مراقبشان باشی\n1. برای بیان علاقه به فعالیت، ساختارهایی مانند like + verb-ing یا enjoy + verb-ing را با شکل سادهٔ فعل اشتباه نگیر.\n2. پرسش دربارهٔ سرگرمی با پاسخ دربارهٔ توانایی یکسان نیست؛ hobby و ability را از هم جدا کن.\nاگر به پاسخ متفاوتی رسیدی، ابتدا صورت سؤال و شرط‌های آن را دوباره بخوان؛ سپس راه‌حل را گام‌به‌گام با مفهوم‌های همین بخش مقایسه کن.\n\nجمع‌بندی و خودسنجی\nمهم‌ترین پیام این بخش را در دو جمله خلاصه کن. بعد به این پرسش پاسخ بده: «What does “hobby” mean?»؛ پاسخ را با دلیل توضیح بده و در پایان یک مثال هم‌موضوع بنویس.",
+      "lessonContentVersion": "2026.11.10.1",
+      "learningObjectives": [
+        "بتوانی Communication: asking and answering about hobbies and free time.",
+        "بتوانی Vocabulary: common activities such as reading, swimming and playing games.",
+        "بتوانی Listening and speaking: asking a partner about favourite activities.",
+        "بتوانی Reading and writing: describing a hobby and writing a few sentences about free time."
+      ],
+      "workedExamples": [
+        {
+          "title": "نمونهٔ راهنمای فصل",
+          "problem": "Ask a partner about a favourite hobby and write three original sentences about when and why they enjoy it.",
+          "answer": "جمله را با ترتیب درست می‌نویسیم.",
+          "explanation": "Theme: My Hobbies. Students talk about hobbies and free-time activities, ask others about their interests, and understand short descriptions of what people enjoy doing.",
+          "steps": [
+            "فعالیت یا سرگرمی مورد نظر را انتخاب می‌کنیم.",
+            "از واژه مناسب برای علاقه یا پرسش استفاده می‌کنیم.",
+            "جمله را با ترتیب درست می‌نویسیم."
           ],
-          "answer": 3,
-          "explanation": "استدلال درست: What is your hobby? asks about a favourite free-time activity.",
-          "difficulty": "استدلالی",
-          "questionType": "reasoning",
+          "difficulty": "پایه"
+        },
+        {
+          "title": "تمرین نمونه با پاسخ تشریحی",
+          "problem": "What does “hobby” mean?",
+          "answer": "سرگرمی",
+          "explanation": "Hobby means سرگرمی.",
+          "steps": [
+            "صورت مسئله را دقیق بخوان و مشخص کن چه چیزی خواسته شده است.",
+            "مفهوم مرتبط را از نکته‌های فصل پیدا کن: Vocabulary: common activities such as reading, swimming and playing games..",
+            "پاسخ پیشنهادی را با دلیل و اطلاعات مسئله مقایسه کن.",
+            "در پایان، نتیجه را دوباره با پرسش اصلی تطبیق بده."
+          ],
+          "difficulty": "کاربردی"
+        }
+      ],
+      "chapterExam": [
+        {
+          "question": "What does “hobby” mean?",
+          "options": [
+            "سرگرمی",
+            "ملیت",
+            "بیماری",
+            "برنامه هفتگی"
+          ],
+          "answer": 0,
+          "explanation": "Hobby means سرگرمی."
+        },
+        {
+          "question": "Which question asks about a person's hobby?",
+          "options": [
+            "What is your hobby?",
+            "Where are you from?",
+            "What's the matter?",
+            "What time is it?"
+          ],
+          "answer": 0,
+          "explanation": "What is your hobby? asks about a favourite free-time activity."
+        },
+        {
+          "question": "Which word means «مطالعه کردن»?",
+          "options": [
+            "reading",
+            "swimming",
+            "running",
+            "drawing"
+          ],
+          "answer": 0,
+          "explanation": "Reading means مطالعه کردن or خواندن."
+        },
+        {
+          "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: What does “hobby” mean?",
+          "questionType": "short_answer",
+          "answer": "سرگرمی",
+          "explanation": "پاسخ پیشنهادی: سرگرمی. Hobby means سرگرمی. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Communication: asking and answering about hobbies and free time.",
+          "difficulty": "پایه",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "پرسش «Which question asks about a person's hobby?» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+          "questionType": "short_answer",
+          "answer": "What is your hobby?",
+          "explanation": "پاسخ پیشنهادی: What is your hobby?. What is your hobby? asks about a favourite free-time activity. برای بررسی پاسخ، این نکته را هم در نظر بگیر: Vocabulary: common activities such as reading, swimming and playing games.",
+          "difficulty": "کاربردی",
+          "source": "تألیفی فهمینو"
+        },
+        {
+          "question": "درست یا نادرست: Communication: asking and answering about hobbies and free time.",
+          "questionType": "true_false",
+          "answer": "درست",
+          "explanation": "این گزاره با نکتهٔ آموزشی «Communication: asking and answering about hobbies and free time.» در بخش «Unit 7: My Hobbies» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
+          "difficulty": "مفهومی",
           "source": "تألیفی فهمینو"
         }
       ]
@@ -543,5 +1271,16 @@
   },
   "textbookSourceFile": "English-8_Daneshchi.iR.pdf",
   "textbookContentsVerified": true,
-  "sampleQuestionBankVersion": 1
+  "sampleQuestionBankVersion": 1,
+  "contentEnhancement": {
+    "version": "2026.11.10.1",
+    "authoredLessons": true,
+    "mixedQuestionFormats": [
+      "multiple_choice",
+      "short_answer",
+      "true_false"
+    ],
+    "chapterExamCount": 42,
+    "sourceVerificationNote": "درسنامه‌ها و پرسش‌ها تألیفی‌اند و از بستهٔ محتوایی فهمینو ساخته شده‌اند. نگاشت صفحه به کتاب رسمی فقط در صورت وجود مدرک مستقل ثبت می‌شود."
+  }
 }
