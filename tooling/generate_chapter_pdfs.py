@@ -63,20 +63,32 @@ def build_questions_pdf(subject: dict, chapter: dict, output: Path, st: dict) ->
     story = [
         Spacer(1, 10 * mm),
         Paragraph(rtl(subject["title"]), st["title"]),
-        Paragraph(rtl("نمونه‌سؤال‌های فصل | فهمینو | پایه هشتم"), st["subtitle"]),
+        Paragraph(rtl("بانک تمرین و آزمون فصل | فهمینو | پایه هشتم"), st["subtitle"]),
         Paragraph(rtl(chapter["title"]), st["chapter"]),
-        Paragraph(rtl(f"{len(questions)} سؤال چهارگزینه‌ای؛ پاسخ‌نامه در انتهای فایل قرار دارد."), st["note"]),
+        Paragraph(
+            rtl(f"{len(questions)} پرسش در قالب‌های چهارگزینه‌ای، درست/نادرست و پاسخ کوتاه؛ پاسخ‌نامه در انتهای فایل قرار دارد."),
+            st["note"],
+        ),
         HRFlowable(width="100%", thickness=1, color=colors.HexColor("#C7D2FE")),
         Spacer(1, 4 * mm),
     ]
+
     for number, (question, kind) in enumerate(questions, 1):
         block = [
             Paragraph(rtl(f"{number}. {question['question']}"), st["question"]),
             Paragraph(rtl(kind), st["note"]),
         ]
-        for index, option in enumerate(question["options"]):
-            letter = LETTERS[index] if index < len(LETTERS) else str(index + 1)
-            block.append(Paragraph(rtl(f"{letter}) {option}"), st["option"]))
+        options = question.get("options")
+        if isinstance(options, list):
+            for index, option in enumerate(options):
+                letter = LETTERS[index] if index < len(LETTERS) else str(index + 1)
+                block.append(Paragraph(rtl(f"{letter}) {option}"), st["option"]))
+        elif question.get("questionType") == "true_false":
+            block.append(Paragraph(rtl("درست  □     نادرست  □"), st["option"]))
+        else:
+            block.append(Paragraph(rtl("پاسخ کوتاه خود را بنویس:"), st["note"]))
+            block.append(Spacer(1, 10 * mm))
+            block.append(HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#CBD5E1")))
         story.append(KeepTogether(block))
         story.append(Spacer(1, 2 * mm))
 
@@ -86,11 +98,18 @@ def build_questions_pdf(subject: dict, chapter: dict, output: Path, st: dict) ->
         Paragraph(rtl(chapter["title"]), st["subtitle"]),
     ])
     for number, (question, kind) in enumerate(questions, 1):
-        answer = question["options"][question["answer"]]
+        options = question.get("options")
+        raw_answer = question.get("answer")
+        if isinstance(options, list) and isinstance(raw_answer, int) and 0 <= raw_answer < len(options):
+            answer = str(options[raw_answer])
+        elif isinstance(raw_answer, str):
+            answer = raw_answer
+        else:
+            answer = "پاسخ ثبت نشده است"
         story.append(KeepTogether([
             Paragraph(rtl(f"{number}. {kind}"), st["question"]),
-            Paragraph(rtl("پاسخ درست: " + answer), st["body"]),
-            Paragraph(rtl("توضیح: " + question["explanation"]), st["body"]),
+            Paragraph(rtl("پاسخ: " + answer), st["body"]),
+            Paragraph(rtl("توضیح: " + str(question.get("explanation", ""))), st["body"]),
             Spacer(1, 3 * mm),
         ]))
     doc = SimpleDocTemplate(
@@ -99,7 +118,6 @@ def build_questions_pdf(subject: dict, chapter: dict, output: Path, st: dict) ->
         title=f"Fahmino {subject['title']} - {chapter['title']} - Questions",
     )
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
-
 
 def main() -> None:
     parser = argparse.ArgumentParser()
