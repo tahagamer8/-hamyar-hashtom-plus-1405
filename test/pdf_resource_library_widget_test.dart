@@ -8,6 +8,13 @@ import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
+  Future<void> pumpResourceScreen(WidgetTester tester) async {
+    await tester.pump();
+    for (var frame = 0; frame < 12; frame++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+  }
+
   Future<List<Map<String, dynamic>>> loadMathChapters() async {
     final raw = await rootBundle.loadString('assets/content/subjects/math.json');
     final pack = jsonDecode(raw) as Map<String, dynamic>;
@@ -27,7 +34,7 @@ void main() {
         ),
       ),
     ));
-    await tester.pumpAndSettle();
+    await pumpResourceScreen(tester);
 
     expect(find.text('جزوه‌های آموزشی؛ فقط فایل PDF'), findsOneWidget);
     expect(find.text('جزوهٔ فصل 1 - فهمینو'), findsOneWidget);
