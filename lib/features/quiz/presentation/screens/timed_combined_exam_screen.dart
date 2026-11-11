@@ -274,10 +274,10 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
         child: Card(
           color: colors.surfaceContainerLow,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
             child: Column(
               children: [
-                Icon(icon, color: colors.primary, size: 24),
+                Icon(icon, color: colors.primary, size: 23),
                 const SizedBox(height: 8),
                 Text(value, style: theme.textTheme.titleLarge),
                 const SizedBox(height: 3),
@@ -290,105 +290,127 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
       );
     }
 
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 28),
+    return Column(
       children: [
-        Container(
-          padding: const EdgeInsets.all(22),
-          decoration: BoxDecoration(
-            color: colors.primaryContainer,
-            borderRadius: BorderRadius.circular(26),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        Expanded(
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
             children: [
               Container(
-                width: 54,
-                height: 54,
+                padding: const EdgeInsets.all(22),
                 decoration: BoxDecoration(
-                  color: colors.onPrimaryContainer.withAlpha(12),
-                  borderRadius: BorderRadius.circular(18),
+                  color: colors.primaryContainer,
+                  borderRadius: BorderRadius.circular(26),
                 ),
-                child: Icon(Icons.assignment_turned_in_rounded,
-                    color: colors.onPrimaryContainer, size: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 54,
+                      height: 54,
+                      decoration: BoxDecoration(
+                        color: colors.onPrimaryContainer.withAlpha(12),
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      child: Icon(Icons.assignment_turned_in_rounded,
+                          color: colors.onPrimaryContainer, size: 30),
+                    ),
+                    const SizedBox(height: 18),
+                    Text('آماده‌ای دانسته‌هایت را بسنجی؟',
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          color: colors.onPrimaryContainer,
+                        )),
+                    const SizedBox(height: 7),
+                    Text(
+                      'آزمون ${widget.examTitle ?? widget.subjectTitle} از سؤال‌های فصل‌های این درس ساخته شده است.',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colors.onPrimaryContainer,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 18),
-              Text('آماده‌ای دانسته‌هایت را بسنجی؟',
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    color: colors.onPrimaryContainer,
-                  )),
-              const SizedBox(height: 7),
-              Text(
-                'آزمون ${widget.examTitle ?? widget.subjectTitle} از سؤال‌های فصل‌های این درس ساخته شده است.',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: colors.onPrimaryContainer,
+              Row(
+                children: [
+                  stat(
+                    icon: Icons.quiz_outlined,
+                    label: 'تعداد سؤال',
+                    value: '${questions.length}',
+                  ),
+                  const SizedBox(width: 8),
+                  stat(
+                    icon: Icons.timer_outlined,
+                    label: 'زمان آزمون',
+                    value: '$minutes دقیقه',
+                  ),
+                  const SizedBox(width: 8),
+                  stat(
+                    icon: Icons.menu_book_outlined,
+                    label: 'فصل‌ها',
+                    value: '$chapterCount',
+                  ),
+                ],
+              ),
+              const SizedBox(height: 18),
+              Text('قبل از شروع', style: theme.textTheme.titleMedium),
+              const SizedBox(height: 10),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      _instructionRow(
+                        theme,
+                        Icons.play_circle_outline_rounded,
+                        'زمان‌سنج فقط پس از زدن دکمهٔ شروع فعال می‌شود.',
+                      ),
+                      const SizedBox(height: 12),
+                      _instructionRow(
+                        theme,
+                        Icons.shuffle_rounded,
+                        'سؤال‌ها از فصل‌های مختلف به‌صورت متعادل انتخاب شده‌اند.',
+                      ),
+                      const SizedBox(height: 12),
+                      _instructionRow(
+                        theme,
+                        Icons.fact_check_outlined,
+                        'پس از پایان، کارنامه و پاسخ‌نامهٔ تشریحی را می‌بینی.',
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 18),
-        Row(
-          children: [
-            stat(
-              icon: Icons.quiz_outlined,
-              label: 'تعداد سؤال',
-              value: '${questions.length}',
+        SafeArea(
+          top: false,
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
+            decoration: BoxDecoration(
+              color: colors.surface,
+              border: Border(
+                top: BorderSide(color: colors.outlineVariant.withAlpha(90)),
+              ),
             ),
-            const SizedBox(width: 10),
-            stat(
-              icon: Icons.timer_outlined,
-              label: 'زمان آزمون',
-              value: '$minutes دقیقه',
-            ),
-            const SizedBox(width: 10),
-            stat(
-              icon: Icons.menu_book_outlined,
-              label: 'فصل‌ها',
-              value: '$chapterCount',
-            ),
-          ],
-        ),
-        const SizedBox(height: 18),
-        Text('قبل از شروع', style: theme.textTheme.titleMedium),
-        const SizedBox(height: 10),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _instructionRow(
-                  theme,
-                  Icons.play_circle_outline_rounded,
-                  'زمان‌سنج فقط پس از زدن دکمهٔ شروع فعال می‌شود.',
+                FilledButton.icon(
+                  onPressed: startExam,
+                  icon: const Icon(Icons.play_arrow_rounded),
+                  label: const Text('شروع آزمون'),
                 ),
-                const SizedBox(height: 12),
-                _instructionRow(
-                  theme,
-                  Icons.shuffle_rounded,
-                  'سؤال‌ها از فصل‌های مختلف به‌صورت متعادل انتخاب شده‌اند.',
-                ),
-                const SizedBox(height: 12),
-                _instructionRow(
-                  theme,
-                  Icons.fact_check_outlined,
-                  'پس از پایان، کارنامه و پاسخ‌نامهٔ تشریحی را می‌بینی.',
+                const SizedBox(height: 6),
+                TextButton.icon(
+                  onPressed: _showHistory,
+                  icon: const Icon(Icons.history_rounded),
+                  label: const Text('مشاهدهٔ سوابق آزمون'),
                 ),
               ],
             ),
           ),
-        ),
-        const SizedBox(height: 18),
-        FilledButton.icon(
-          onPressed: startExam,
-          icon: const Icon(Icons.play_arrow_rounded),
-          label: const Text('شروع آزمون'),
-        ),
-        const SizedBox(height: 8),
-        OutlinedButton.icon(
-          onPressed: _showHistory,
-          icon: const Icon(Icons.history_rounded),
-          label: const Text('مشاهدهٔ سوابق آزمون'),
         ),
       ],
     );
