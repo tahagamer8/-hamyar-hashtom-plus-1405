@@ -160,8 +160,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               chapters: chapters,
             );
           }
-          if (_feature == AppFeature.notes || _feature == AppFeature.sampleExams) {
-            final questionsOnly = _feature == AppFeature.sampleExams;
+          if (_feature == AppFeature.notes) {
             return ListView(
               padding: const EdgeInsets.all(20),
               children: [
@@ -171,16 +170,66 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  questionsOnly
-                      ? 'نمونه‌سؤال‌های این درس در قالب PDF، همراه با پاسخ‌نامه و توضیح‌ها.'
-                      : 'جزوهٔ آموزشی این درس در قالب PDF برای مطالعه و مرور.',
+                  'جزوهٔ این درس به‌صورت PDF و با فصل‌بندی درون فایل ارائه شده است.',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 18),
                 SubjectPdfCard(
                   subjectId: widget.subjectId,
                   subjectTitle: subject['title'] as String? ?? 'درس',
-                  questionsOnly: questionsOnly,
+                ),
+              ],
+            );
+          }
+          if (_feature == AppFeature.sampleExams) {
+            final titleStyle = Theme.of(context).textTheme.titleMedium;
+            return ListView(
+              padding: const EdgeInsets.all(20),
+              children: [
+                Text(
+                  subject['title'] as String? ?? 'درس',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'نمونه‌سؤال‌ها و آزمون‌های تمرینی این درس، همراه با پاسخ‌نامه و توضیح، به‌صورت PDF و آفلاین.',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 20),
+                Text('بانک فصل‌به‌فصل', style: titleStyle),
+                const SizedBox(height: 8),
+                SubjectPdfCard(
+                  subjectId: widget.subjectId,
+                  subjectTitle: subject['title'] as String? ?? 'درس',
+                  questionsOnly: true,
+                ),
+                const SizedBox(height: 8),
+                Text('آزمون‌های نوبت اول و دوم', style: titleStyle),
+                const SizedBox(height: 8),
+                SubjectPdfCard(
+                  subjectId: widget.subjectId,
+                  subjectTitle: subject['title'] as String? ?? 'درس',
+                  questionsOnly: true,
+                  examType: 'firstTerm',
+                ),
+                SubjectPdfCard(
+                  subjectId: widget.subjectId,
+                  subjectTitle: subject['title'] as String? ?? 'درس',
+                  questionsOnly: true,
+                  examType: 'secondTerm',
+                ),
+                const SizedBox(height: 8),
+                Text('آمادگی آزمون‌های تیزهوشان', style: titleStyle),
+                const SizedBox(height: 8),
+                SubjectPdfCard(
+                  subjectId: widget.subjectId,
+                  subjectTitle: subject['title'] as String? ?? 'درس',
+                  questionsOnly: true,
+                  examType: 'gifted',
+                ),
+                Text(
+                  'پرسش‌های بخش تیزهوشان تألیفی‌اند و آزمون رسمی سمپاد نیستند.',
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
             );
