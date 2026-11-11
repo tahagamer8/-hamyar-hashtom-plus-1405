@@ -311,7 +311,7 @@ void main() {
     await tester.pumpWidget(_contentApp('sampleExams'));
     await _pumpUiFrames(tester);
     expect(find.text('نمونه‌سؤال فصل‌به‌فصل PDF ریاضی'), findsOneWidget);
-    expect(find.text('نمایش داخل برنامه'), findsNWidgets(4));
+    expect(find.text('نمایش داخل برنامه'), findsNWidgets(3));
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsNothing);
     expect(find.text('شروع آزمون تیزهوشان نوبت اول'), findsNothing);
   });
