@@ -83,6 +83,17 @@ def source_is_mapped(pack: dict[str, Any], chapter: dict[str, Any]) -> bool:
     return has_pdf_reference and has_edition and has_page_range and has_lesson_reference
 
 
+def source_content_is_verified(pack: dict[str, Any], chapter: dict[str, Any]) -> bool:
+    source = pack.get("textbookSource")
+    source = source if isinstance(source, dict) else {}
+    return (
+        clean_text(source.get("contentVerificationStatus")) == "pdf_content_parsed"
+        and bool(clean_text(source.get("contentVerifiedAt")))
+        and clean_text(chapter.get("sourceVerificationStatus")) == "page_content_reviewed"
+        and bool(clean_text(chapter.get("sourceVerifiedAt")))
+    )
+
+
 def exam_questions(chapter: dict[str, Any]) -> list[dict[str, Any]]:
     value = chapter.get("chapterExam", chapter.get("exam"))
     if isinstance(value, list):
@@ -126,6 +137,7 @@ def audit_chapter(
     exam = exam_questions(chapter)
     has_exam = len(exam) >= 5 and all(question_is_valid(question) for question in exam)
     mapped_source = source_is_mapped(pack, chapter)
+    content_verified = source_content_is_verified(pack, chapter)
     generic_count = sum(
         bool(GENERIC_REASONING.fullmatch(clean_text(question.get("question"))))
         for question in advanced_questions
@@ -156,9 +168,9 @@ def audit_chapter(
         gaps.append("مثال کمتر از ۸۰ نویسه است؛ نیازمند بازبینی انسانی")
     if len(steps) < 3 or len(step_text) < 80:
         gaps.append("مثال حل‌شده یا مراحل گام‌به‌گام کافی ثبت نشده")
-    if len(base_questions) < 2:
-        gaps.append("کمتر از دو سؤال چهارگزینه‌ای پایه ثبت شده است")
-    if len(formats) < 2:
+    if len(base_questions) < 5:
+        gaps.append("کمتر از پنج تمرین پایه ثبت شده است")
+    if len(formats) < 3:
         gaps.append("قالب تمرین‌ها متنوع نیست؛ حداقل سه قالب لازم است")
     if all_multiple_choice:
         gaps.append("همهٔ پرسش‌ها چهارگزینه‌ای‌اند؛ تنوع قالب وجود ندارد")
@@ -176,6 +188,8 @@ def audit_chapter(
         gaps.append("کمتر از دو نکتهٔ اشتباه رایج ثبت شده")
     if not mapped_source:
         gaps.append("منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست")
+    if not content_verified:
+        gaps.append("PDF رسمی و محتوای صفحهٔ این فصل هنوز پردازش و بازبینی نشده است")
 
     complete = (
         has_lesson
@@ -183,13 +197,14 @@ def audit_chapter(
         and len(example) >= 80
         and len(steps) >= 3
         and len(step_text) >= 80
-        and len(base_questions) >= 2
-        and len(formats) >= 2
+        and len(base_questions) >= 5
+        and len(formats) >= 3
         and has_exam
         and all_valid
         and all_explained
         and len(mistakes) >= 2
         and mapped_source
+        and content_verified
         and generic_count == 0
         and tautological_count == 0
     )
@@ -221,6 +236,7 @@ def audit_chapter(
             if isinstance(chapter.get("workedExamples"), list) else 0,
         "lessonContentCharacters": len(lesson_text),
         "sourceMapped": mapped_source,
+        "sourceContentVerified": content_verified,
         "pageStart": chapter.get("pageStart"),
         "pageEnd": chapter.get("pageEnd"),
         "sourceLesson": clean_text(chapter.get("sourceLesson")),
@@ -285,6 +301,7 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
                 "advancedQuestionCount": sum(row["advancedQuestionCount"] for row in rows),
                 "questionCount": sum(row["questionCount"] for row in rows),
                 "sourceMappedCount": sum(row["sourceMapped"] for row in rows),
+                "sourceContentVerifiedCount": sum(row["sourceContentVerified"] for row in rows),
                 "needsSourceCount": sum(row["status"] == "نیازمند منبع" for row in rows),
                 "incompleteCount": sum(row["status"] == "ناقص" for row in rows),
                 "completeCount": sum(row["status"] == "کامل" for row in rows),
@@ -302,6 +319,7 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
                 "textbookEdition": clean_text(pack.get("textbookEdition")) or clean_text(source.get("schoolYear")),
                 "textbookSourceUrl": clean_text(source.get("pdfUrl")),
                 "textbookSourceStatus": source_status,
+                "textbookContentVerificationStatus": clean_text(source.get("contentVerificationStatus")),
             }
         )
 
@@ -323,7 +341,8 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
             for subject in subjects
         ),
         "pdfContentParsedSubjectCount": sum(
-            "pdf_content_parsed" in subject["textbookSourceStatus"] for subject in subjects
+            subject["textbookContentVerificationStatus"] == "pdf_content_parsed"
+            for subject in subjects
         ),
         "sectionCount": len(sections),
         "baseQuestionCount": sum(row["baseQuestionCount"] for row in sections),
@@ -335,6 +354,7 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         "nonMultipleChoiceQuestionCount": len(all_questions) - multiple_choice_questions,
         "duplicateQuestionPromptCount": len(question_texts) - len(set(question_texts)),
         "sourceMappedCount": sum(row["sourceMapped"] for row in sections),
+        "sourceContentVerifiedCount": sum(row["sourceContentVerified"] for row in sections),
         "needsSourceCount": sum(row["status"] == "نیازمند منبع" for row in sections),
         "incompleteCount": sum(row["status"] == "ناقص" for row in sections),
         "completeCount": sum(row["status"] == "کامل" for row in sections),
@@ -351,8 +371,8 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         ),
     }
     return {
-        "auditDate": "2026-11-09",
-        "method": "Conservative structural and traceability audit; not a certification of factual accuracy.",
+        "auditDate": "2026-11-11",
+        "method": "Conservative structural and traceability audit; a section cannot be complete until its official PDF content and page mapping are parsed and reviewed; not a certification of factual accuracy.",
         "thresholdNotes": {
             "dedicatedLessonCharacters": 350,
             "exampleCharacters": 80,
@@ -372,15 +392,16 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
 def render_markdown(report: dict[str, Any]) -> str:
     totals = report["totals"]
     lines = [
-        "# ممیزی کیفیت واقعی محتوای فهمینو — ۱۴۰۵/۰۸/۱۸",
+        "# ممیزی کیفیت واقعی محتوای فهمینو — ۱۴۰۵/۰۸/۲۰",
         "",
-        "**تاریخ:** ۹ نوامبر ۲۰۲۶  ",
+        "**تاریخ:** ۱۱ نوامبر ۲۰۲۶  ",
         "**روش:** ممیزی محافظه‌کارانهٔ ساختار، کفایت آموزشی و ردیابی منبع؛ این گزارش صحت علمی را تأیید نمی‌کند.",
         "",
         "## نتیجهٔ کلی",
         "",
         f"- بسته‌های درسی: **{totals['subjectCount']}**",
-        f"- پیوند رسمی PDF تأییدشده: **{totals['officialSourceLinkVerifiedSubjectCount']} از {totals['subjectCount']}**؛ PDF پردازش‌شده: **{totals['pdfContentParsedSubjectCount']}**",
+        f"- پیوند رسمی PDF ثبت‌شده/تأییدشده: **{totals['officialSourceLinkVerifiedSubjectCount']} از {totals['subjectCount']}**؛ PDF پردازش‌شده: **{totals['pdfContentParsedSubjectCount']}**",
+        f"- فصل‌های دارای پردازش PDF و بازبینی محتوای صفحه: **{totals['sourceContentVerifiedCount']} از {totals['sectionCount']}**",
         f"- بخش‌ها/درس‌ها/پودمان‌ها: **{totals['sectionCount']}**",
         f"- پرسش‌های پایه: **{totals['baseQuestionCount']}**",
         f"- پرسش‌های افزودهٔ موسوم به استدلالی: **{totals['advancedQuestionCount']}**",
@@ -401,18 +422,18 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- **ناقص: {totals['incompleteCount']}**",
         f"- **نیازمند منبع/نگاشت: {totals['needsSourceCount']}**",
         "",
-        "هیچ بخشی صرفاً به‌دلیل داشتن عنوان، خلاصه، سؤال یا پاسخ‌نامه کامل محسوب نشده است. وضعیت «نیازمند منبع» یعنی نسخه/فایل منبع و نگاشت دقیق صفحه و عنوان برای همان بخش هنوز در داده‌ها قابل ردیابی نیست.",
+        "هیچ بخشی صرفاً به‌دلیل داشتن عنوان، خلاصه، سؤال یا پاسخ‌نامه کامل محسوب نشده است. وضعیت «کامل» علاوه بر کفایت ساختاری، به ثبت پردازش PDF رسمی و بازبینی محتوای همان صفحه نیاز دارد. داشتن لینک PDF یا شماره صفحه به‌تنهایی کافی نیست. وضعیت «نیازمند منبع» یعنی نگاشت دقیق صفحه و عنوان برای همان بخش هنوز در داده‌ها قابل ردیابی نیست.",
         "",
         "## خلاصهٔ درس‌به‌درس",
         "",
-        "| بسته | بخش | سؤال پایه | سؤال افزوده | منبع‌نگاشت‌شده | ناقص | نیازمند منبع | درسنامه | آزمون فصل |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| بسته | بخش | سؤال پایه | سؤال افزوده | منبع‌نگاشت‌شده | PDF/صفحه‌تأییدشده | ناقص | نیازمند منبع | درسنامه | آزمون فصل |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for subject in report["subjects"]:
         lines.append(
             f"| {subject['title']} ({subject['id']}) | {subject['chapterCount']} | "
             f"{subject['baseQuestionCount']} | {subject['advancedQuestionCount']} | "
-            f"{subject['sourceMappedCount']} | {subject['incompleteCount']} | "
+            f"{subject['sourceMappedCount']} | {subject['sourceContentVerifiedCount']} | {subject['incompleteCount']} | "
             f"{subject['needsSourceCount']} | {subject['dedicatedLessonCount']} | "
             f"{subject['chapterExamCount']} |"
         )
