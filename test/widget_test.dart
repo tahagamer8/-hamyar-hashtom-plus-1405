@@ -316,10 +316,27 @@ void main() {
     expect(find.text('شروع آزمون تیزهوشان نوبت اول'), findsNothing);
   });
 
+  testWidgets('exam briefing keeps timer stopped until the learner starts', (tester) async {
+    await tester.pumpWidget(_contentApp('quiz'));
+    await _pumpUiFrames(tester);
+    expect(find.text('آزمون جامع ریاضی'), findsOneWidget);
+    expect(find.text('آماده‌ای دانسته‌هایت را بسنجی؟'), findsOneWidget);
+    expect(find.text('10 دقیقه'), findsOneWidget);
+    expect(find.text('10:00'), findsNothing);
+    await tester.pump(const Duration(seconds: 3));
+    expect(find.text('10 دقیقه'), findsOneWidget);
+    await tester.tap(find.text('شروع آزمون'));
+    await tester.pump();
+    expect(find.text('10:00'), findsOneWidget);
+  });
+
   testWidgets('combined quiz has a timer and reveals answers after submission', (tester) async {
     await tester.pumpWidget(_contentApp('quiz'));
     await _pumpUiFrames(tester);
     expect(find.text('آزمون جامع ریاضی'), findsOneWidget);
+    expect(find.text('10 دقیقه'), findsOneWidget);
+    await tester.tap(find.text('شروع آزمون'));
+    await tester.pump();
     expect(find.text('10:00'), findsOneWidget);
     await tester.pump(const Duration(seconds: 1));
     expect(find.text('09:59'), findsOneWidget);
@@ -338,6 +355,8 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     await tester.pumpWidget(_contentApp('quiz'));
     await _pumpUiFrames(tester);
+    await tester.tap(find.text('شروع آزمون'));
+    await tester.pump();
 
     await tester.tap(find.text('ثبت و پایان آزمون'));
     await _pumpUiFrames(tester);
