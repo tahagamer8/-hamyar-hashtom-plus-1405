@@ -229,8 +229,8 @@ void main() {
       const MaterialApp(home: Scaffold(body: LearningPdfsCard())),
     );
 
-    expect(find.text('نمایش داخل برنامه'), findsNWidgets(2));
-    expect(find.text('دانلود PDF'), findsNWidgets(2));
+    expect(find.text('نمایش داخل برنامه'), findsNWidgets(5));
+    expect(find.text('دانلود PDF'), findsNWidgets(5));
   });
 
   testWidgets('home screen renders Fahmino branding', (tester) async {
@@ -310,7 +310,7 @@ void main() {
   testWidgets('sample questions are presented only as a PDF', (tester) async {
     await tester.pumpWidget(_contentApp('sampleExams'));
     await _pumpUiFrames(tester);
-    expect(find.text('نمونه‌سؤال PDF ریاضی'), findsOneWidget);
+    expect(find.text('نمونه‌سؤال فصل‌به‌فصل PDF ریاضی'), findsOneWidget);
     expect(find.text('نمایش داخل برنامه'), findsOneWidget);
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsNothing);
     expect(find.text('شروع آزمون تیزهوشان نوبت اول'), findsNothing);
