@@ -48,7 +48,7 @@ class MainShell extends StatelessWidget {
             NavigationDestination(
               icon: Icon(Icons.bookmark_border_rounded),
               selectedIcon: Icon(Icons.bookmark_rounded),
-              label: 'ذخیره‌ها',
+              label: 'علاقه‌مندی‌ها',
             ),
             NavigationDestination(
               icon: Icon(Icons.tune_rounded),
