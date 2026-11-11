@@ -106,6 +106,21 @@ jobs:
       - name: Build release APKs
         run: flutter build apk --release --split-per-abi
 
+      - name: Verify release package identity and version
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK="build/app/outputs/flutter-apk/app-arm64-v8a-release.apk"
+          EXPECTED_APPLICATION_ID="ir.fahmino.clone.fahminoseparate"
+          EXPECTED_VERSION_NAME="2.2.0"
+          EXPECTED_VERSION_CODE="5"
+          test -s "$APK"
+          AAPT="$(find "$ANDROID_HOME/build-tools" -type f -name aapt | sort -V | tail -n 1)"
+          test -n "$AAPT"
+          BADGING="$("$AAPT" dump badging "$APK")"
+          printf '%s\n' "$BADGING" | grep -F "package: name='$EXPECTED_APPLICATION_ID' versionCode='$EXPECTED_VERSION_CODE' versionName='$EXPECTED_VERSION_NAME'"
+          echo "Verified applicationId=$EXPECTED_APPLICATION_ID version=$EXPECTED_VERSION_NAME+$EXPECTED_VERSION_CODE"
+
       - uses: actions/upload-artifact@v4
         with:
           name: fahmino-separate-apk
