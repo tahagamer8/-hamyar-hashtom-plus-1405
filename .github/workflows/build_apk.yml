@@ -118,8 +118,31 @@ jobs:
           AAPT="$(find "$ANDROID_HOME/build-tools" -type f -name aapt | sort -V | tail -n 1)"
           test -n "$AAPT"
           BADGING="$("$AAPT" dump badging "$APK")"
-          printf '%s\n' "$BADGING" | grep -F "package: name='$EXPECTED_APPLICATION_ID' versionCode='$EXPECTED_VERSION_CODE' versionName='$EXPECTED_VERSION_NAME'"
-          echo "Verified applicationId=$EXPECTED_APPLICATION_ID version=$EXPECTED_VERSION_NAME+$EXPECTED_VERSION_CODE"
+          PACKAGE_LINE="$(printf '%s\n' "$BADGING" | grep -m1 "^package:")"
+          echo "APK package metadata: $PACKAGE_LINE"
+          python - "$PACKAGE_LINE" "$EXPECTED_APPLICATION_ID" "$EXPECTED_VERSION_NAME" "$EXPECTED_VERSION_CODE" <<'PY'
+          import re
+          import sys
+
+          line, expected_id, expected_name, expected_code = sys.argv[1:]
+          metadata = dict(re.findall(r"([A-Za-z]+)='([^']*)'", line))
+          expected = {
+              "name": expected_id,
+              "versionName": expected_name,
+              "versionCode": expected_code,
+          }
+          for key, value in expected.items():
+              actual = metadata.get(key)
+              if actual != value:
+                  raise SystemExit(
+                      f"APK {key} mismatch: expected {value!r}, got {actual!r}. "
+                      f"Full metadata: {line}"
+                  )
+          print(
+              f"Verified applicationId={metadata['name']} "
+              f"version={metadata['versionName']}+{metadata['versionCode']}"
+          )
+          PY
 
       - uses: actions/upload-artifact@v4
         with:
