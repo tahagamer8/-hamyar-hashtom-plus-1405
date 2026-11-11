@@ -36,7 +36,7 @@ jobs:
             flutter create --platforms=android --project-name fahminoseparate --org ir.fahmino.clone /tmp/fahmino
             cp -r /tmp/fahmino/android ./android
           fi
-          sed -i 's/android:label="[^"]*"/android:label="فهمینو نسخه جدا"/' android/app/src/main/AndroidManifest.xml
+          sed -i 's/android:label="[^"]*"/android:label="فهمینو"/' android/app/src/main/AndroidManifest.xml
 
       - name: Cache Gradle distributions and dependencies
         uses: gradle/actions/setup-gradle@v6
@@ -68,14 +68,30 @@ jobs:
 
       - name: Generate Persian PDF assets
         run: |
+          rm -f assets/generated_pdfs/*.pdf
           python tooling/generate_learning_pdfs.py --subjects-dir assets/content/subjects --output-dir assets/generated_pdfs
           test -s assets/generated_pdfs/Fahmino-Grade8-Notes-FA.pdf
           test -s assets/generated_pdfs/Fahmino-Grade8-Sample-Questions-FA.pdf
-          test "$(find assets/generated_pdfs -maxdepth 1 -name 'Fahmino-*-FA.pdf' | wc -l)" -eq 28
+          test -s assets/generated_pdfs/Fahmino-Grade8-First-Term-Exam-FA.pdf
+          test -s assets/generated_pdfs/Fahmino-Grade8-Second-Term-Exam-FA.pdf
+          test -s assets/generated_pdfs/Fahmino-Grade8-Gifted-Questions-FA.pdf
+          test "$(find assets/generated_pdfs -maxdepth 1 -name 'Fahmino-*-FA.pdf' | wc -l)" -eq 70
           for subject in arabic art english english_workbook math persian quran religion science social thinking work writing; do
             test -s "assets/generated_pdfs/Fahmino-$subject-Notes-FA.pdf"
             test -s "assets/generated_pdfs/Fahmino-$subject-Questions-FA.pdf"
+            test -s "assets/generated_pdfs/Fahmino-$subject-First-Term-FA.pdf"
+            test -s "assets/generated_pdfs/Fahmino-$subject-Second-Term-FA.pdf"
+            test -s "assets/generated_pdfs/Fahmino-$subject-Gifted-FA.pdf"
           done
+          python - <<'PY'
+          from pathlib import Path
+          pdfs = sorted(Path("assets/generated_pdfs").glob("Fahmino-*-FA.pdf"))
+          assert len(pdfs) == 70, f"Expected 70 PDFs, found {len(pdfs)}"
+          for path in pdfs:
+              with path.open("rb") as pdf:
+                  assert pdf.read(5) == b"%PDF-", f"Invalid PDF header: {path}"
+          print(f"Validated {len(pdfs)} non-empty PDF files.")
+          PY
 
       - name: Install dependencies
         run: flutter pub get
