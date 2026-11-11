@@ -441,7 +441,7 @@ void main() {
     final shortAnswerField = find.byKey(const ValueKey('short-answer-1'));
     await tester.ensureVisible(shortAnswerField);
     await tester.pump();
-    await tester.enterText(shortAnswerField, '۳/۴');
+    await tester.enterText(shortAnswerField, '۲/۴');
     await tester.pump();
     final shortAnswerCheck = find.byKey(const ValueKey('check-question-1'));
     await tester.ensureVisible(shortAnswerCheck);
@@ -449,7 +449,7 @@ void main() {
     expect(tester.widget<FilledButton>(shortAnswerCheck).onPressed, isNotNull);
     await tester.tap(shortAnswerCheck);
     await tester.pumpAndSettle();
-    expect(find.textContaining('پاسخ پیشنهادی: ۳/۴'), findsOneWidget);
+    expect(find.textContaining('پاسخ پیشنهادی: ۲/۴'), findsOneWidget);
 
     final trueOption = find.descendant(
       of: find.byKey(const ValueKey('question-options-3')),
