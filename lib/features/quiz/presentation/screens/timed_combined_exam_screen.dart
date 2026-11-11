@@ -240,44 +240,168 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
 
   Widget _exam(ThemeData theme) {
     final q = questions[current];
-    return Column(children: [
-      LinearProgressIndicator(value: (current + 1) / questions.length),
-      Padding(padding: const EdgeInsets.all(12), child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [Text('سؤال ${current + 1} از ${questions.length}'), Text('${answers.length} پاسخ ثبت‌شده') ])),
-      Expanded(child: ListView(padding: const EdgeInsets.all(16), children: [
-        Card(child: Padding(padding: const EdgeInsets.all(16), child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(q['chapter'].toString(), style: theme.textTheme.labelLarge?.copyWith(color: theme.colorScheme.primary)),
-            const SizedBox(height: 12),
-            Text(q['question'].toString(), style: theme.textTheme.titleMedium),
-            const SizedBox(height: 12),
-            RadioGroup<int>(
-              groupValue: answers[current],
-              onChanged: (value) { if (value != null) setState(() => answers[current] = value); },
-              child: Column(children: [
-                for (var i = 0; i < (q['options'] as List).length; i++)
-                  RadioListTile<int>(value: i, title: Text((q['options'] as List)[i].toString()), contentPadding: EdgeInsets.zero),
-              ]),
+    final colors = theme.colorScheme;
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(child: Text('پیشرفت آزمون', style: theme.textTheme.labelLarge)),
+                  Text('${current + 1} از ${questions.length}',
+                    style: theme.textTheme.labelLarge?.copyWith(
+                      color: colors.primary, fontWeight: FontWeight.w800)),
+                ],
+              ),
+              const SizedBox(height: 9),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: LinearProgressIndicator(
+                  value: (current + 1) / questions.length,
+                  minHeight: 7,
+                  backgroundColor: colors.surfaceContainerHighest,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Icon(Icons.check_circle_outline_rounded, size: 18, color: colors.primary),
+                  const SizedBox(width: 6),
+                  Text('${answers.length} پاسخ ثبت‌شده', style: theme.textTheme.bodySmall),
+                  const Spacer(),
+                  Text('${questions.length - answers.length} باقی‌مانده',
+                    style: theme.textTheme.bodySmall?.copyWith(color: colors.onSurfaceVariant)),
+                ],
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+            children: [
+              Card(
+                color: colors.surfaceContainerLow,
+                child: Padding(
+                  padding: const EdgeInsets.all(18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: colors.secondaryContainer,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Text(q['chapter'].toString(),
+                          style: theme.textTheme.labelMedium?.copyWith(
+                            color: colors.onSecondaryContainer, fontWeight: FontWeight.w700)),
+                      ),
+                      const SizedBox(height: 16),
+                      Text('سؤال ${current + 1}',
+                        style: theme.textTheme.labelLarge?.copyWith(color: colors.primary)),
+                      const SizedBox(height: 7),
+                      Text(q['question'].toString(),
+                        style: theme.textTheme.titleMedium?.copyWith(height: 1.65)),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text('گزینهٔ درست را انتخاب کن', style: theme.textTheme.titleSmall),
+              const SizedBox(height: 8),
+              RadioGroup<int>(
+                groupValue: answers[current],
+                onChanged: (value) { if (value != null) setState(() => answers[current] = value); },
+                child: Column(
+                  children: [
+                    for (var i = 0; i < (q['options'] as List).length; i++)
+                      Card(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        color: answers[current] == i
+                            ? colors.primaryContainer.withAlpha(150)
+                            : colors.surface,
+                        child: RadioListTile<int>(
+                          value: i,
+                          title: Text((q['options'] as List)[i].toString()),
+                          contentPadding: const EdgeInsetsDirectional.only(start: 12, end: 14),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Icon(Icons.grid_view_rounded, size: 18, color: colors.onSurfaceVariant),
+                  const SizedBox(width: 7),
+                  Text('رفتن به سؤال', style: theme.textTheme.titleSmall),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  for (var i = 0; i < questions.length; i++)
+                    SizedBox(
+                      width: 42,
+                      height: 42,
+                      child: OutlinedButton(
+                        onPressed: () => setState(() => current = i),
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: current == i
+                              ? colors.primary
+                              : answers.containsKey(i) ? colors.tertiaryContainer : colors.surface,
+                          foregroundColor: current == i ? colors.onPrimary : colors.onSurface,
+                          side: BorderSide(color: current == i ? colors.primary : colors.outlineVariant),
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        ),
+                        child: Text('${i + 1}'),
+                      ),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        SafeArea(
+          top: false,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
+            child: Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: current == 0 ? null : () => setState(() => current--),
+                    child: const Text('قبلی'),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  flex: 2,
+                  child: current < questions.length - 1
+                      ? FilledButton.icon(
+                          onPressed: () => setState(() => current++),
+                          icon: const Icon(Icons.arrow_back_rounded),
+                          label: const Text('سؤال بعدی'),
+                        )
+                      : FilledButton.icon(
+                          onPressed: confirmFinish,
+                          icon: const Icon(Icons.check_rounded),
+                          label: const Text('ثبت و پایان آزمون'),
+                        ),
+                ),
+              ],
             ),
-          ]))),
-        Wrap(spacing: 6, runSpacing: 6, children: [
-          for (var i = 0; i < questions.length; i++)
-            SizedBox(width: 40, height: 38, child: OutlinedButton(
-              onPressed: () => setState(() => current = i),
-              style: OutlinedButton.styleFrom(backgroundColor: current == i
-                ? theme.colorScheme.primaryContainer : answers.containsKey(i) ? theme.colorScheme.tertiaryContainer : null,
-                padding: EdgeInsets.zero), child: Text('${i + 1}'))),
-        ]),
-      ])),
-      SafeArea(top: false, child: Padding(padding: const EdgeInsets.all(12), child: Row(children: [
-        OutlinedButton(onPressed: current == 0 ? null : () => setState(() => current--), child: const Text('قبلی')),
-        const Spacer(),
-        if (current < questions.length - 1)
-          FilledButton(onPressed: () => setState(() => current++), child: const Text('بعدی'))
-        else FilledButton(onPressed: confirmFinish, child: const Text('ثبت و پایان آزمون')),
-      ]))),
-    ]);
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _result(ThemeData theme) {
