@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_reader_screen.dart';
 
 class LearningPdfsCard extends StatefulWidget {
   const LearningPdfsCard({super.key});
@@ -13,7 +13,6 @@ class LearningPdfsCard extends StatefulWidget {
 }
 
 class _LearningPdfsCardState extends State<LearningPdfsCard> {
-  String? _opening;
   String? _downloading;
 
   Future<File> _copyAssetTo(String fileName, Directory directory) async {
@@ -32,26 +31,12 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
   }
 
   Future<void> _openPdf(String fileName, String label) async {
-    if (_opening != null) return;
-    setState(() => _opening = fileName);
-    try {
-      final directory = await getTemporaryDirectory();
-      final file = await _copyAssetTo(fileName, directory);
-      final result = await OpenFilex.open(file.path, type: 'application/pdf');
-      if (!mounted) return;
-      if (result.type != ResultType.done) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('باز کردن فایل $label ممکن نشد: ${result.message}')),
-        );
-      }
-    } catch (_) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('فایل $label در این نسخه موجود نیست.')),
-      );
-    } finally {
-      if (mounted) setState(() => _opening = null);
-    }
+    await Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (_) => PdfReaderScreen(
+        assetPath: 'assets/generated_pdfs/' + fileName,
+        title: label,
+      ),
+    ));
   }
 
   Future<void> _downloadPdf(String fileName, String label) async {
@@ -80,24 +65,17 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
     required String label,
     required IconData icon,
   }) {
-    final opening = _opening == fileName;
     final downloading = _downloading == fileName;
-    final busy = opening || downloading;
+    final busy = downloading;
     return Row(
       children: [
         Expanded(
           child: OutlinedButton.icon(
-            onPressed: busy || _opening != null || _downloading != null
+            onPressed: busy
                 ? null
                 : () => _openPdf(fileName, label),
-            icon: opening
-                ? const SizedBox(
-                    width: 16,
-                    height: 16,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : Icon(icon),
-            label: const Text('نمایش PDF'),
+            icon: Icon(icon),
+            label: const Text('نمایش داخل برنامه'),
           ),
         ),
         const SizedBox(width: 8),
