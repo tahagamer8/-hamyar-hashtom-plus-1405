@@ -109,6 +109,7 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
   late int secondsLeft;
   int current = 0;
   bool submitted = false;
+  bool started = false;
 
   @override
   void initState() {
@@ -118,17 +119,20 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
       questionLimit: widget.questionLimit,
     );
     secondsLeft = max(600, questions.length * 60);
-    if (questions.isNotEmpty) {
-      timer = Timer.periodic(const Duration(seconds: 1), (t) {
-        if (!mounted || submitted) return t.cancel();
-        if (secondsLeft <= 1) {
-          setState(() => secondsLeft = 0);
-          finish();
-        } else {
-          setState(() => secondsLeft--);
-        }
-      });
-    }
+  }
+
+  void startExam() {
+    if (started || submitted || questions.isEmpty) return;
+    setState(() => started = true);
+    timer = Timer.periodic(const Duration(seconds: 1), (t) {
+      if (!mounted || submitted) return t.cancel();
+      if (secondsLeft <= 1) {
+        setState(() => secondsLeft = 0);
+        finish();
+      } else {
+        setState(() => secondsLeft--);
+      }
+    });
   }
 
   @override
@@ -231,10 +235,173 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
         body: const Center(child: Text('برای این درس هنوز سؤال ثبت نشده است.')));
     }
     return Scaffold(
-      appBar: AppBar(title: Text(submitted ? 'نتیجه آزمون' : (widget.examTitle ?? 'آزمون جامع ${widget.subjectTitle}')),
-        actions: [if (!submitted) Padding(padding: const EdgeInsetsDirectional.only(end: 12),
-          child: Center(child: Chip(avatar: const Icon(Icons.timer_outlined, size: 18), label: Text(clock))))]),
-      body: submitted ? _result(theme) : _exam(theme),
+      appBar: AppBar(
+        title: Text(submitted
+            ? 'نتیجه آزمون'
+            : (widget.examTitle ?? 'آزمون جامع ${widget.subjectTitle}')),
+        actions: [
+          if (started && !submitted)
+            Padding(
+              padding: const EdgeInsetsDirectional.only(end: 12),
+              child: Center(
+                child: Chip(
+                  avatar: const Icon(Icons.timer_outlined, size: 18),
+                  label: Text(clock),
+                ),
+              ),
+            ),
+        ],
+      ),
+      body: submitted
+          ? _result(theme)
+          : started
+              ? _exam(theme)
+              : _intro(theme),
+    );
+  }
+
+  Widget _intro(ThemeData theme) {
+    final colors = theme.colorScheme;
+    final chapterCount = questions.map((q) => q['chapter']).toSet().length;
+    final minutes = (secondsLeft / 60).ceil();
+
+    Widget stat({
+      required IconData icon,
+      required String label,
+      required String value,
+    }) {
+      return Expanded(
+        child: Card(
+          color: colors.surfaceContainerLow,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            child: Column(
+              children: [
+                Icon(icon, color: colors.primary, size: 24),
+                const SizedBox(height: 8),
+                Text(value, style: theme.textTheme.titleLarge),
+                const SizedBox(height: 3),
+                Text(label, style: theme.textTheme.bodySmall,
+                    textAlign: TextAlign.center),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 28),
+      children: [
+        Container(
+          padding: const EdgeInsets.all(22),
+          decoration: BoxDecoration(
+            color: colors.primaryContainer,
+            borderRadius: BorderRadius.circular(26),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 54,
+                height: 54,
+                decoration: BoxDecoration(
+                  color: colors.onPrimaryContainer.withAlpha(12),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Icon(Icons.assignment_turned_in_rounded,
+                    color: colors.onPrimaryContainer, size: 30),
+              ),
+              const SizedBox(height: 18),
+              Text('آماده‌ای دانسته‌هایت را بسنجی؟',
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    color: colors.onPrimaryContainer,
+                  )),
+              const SizedBox(height: 7),
+              Text(
+                'آزمون ${widget.examTitle ?? widget.subjectTitle} از سؤال‌های فصل‌های این درس ساخته شده است.',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: colors.onPrimaryContainer,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 18),
+        Row(
+          children: [
+            stat(
+              icon: Icons.quiz_outlined,
+              label: 'تعداد سؤال',
+              value: '${questions.length}',
+            ),
+            const SizedBox(width: 10),
+            stat(
+              icon: Icons.timer_outlined,
+              label: 'زمان آزمون',
+              value: '$minutes دقیقه',
+            ),
+            const SizedBox(width: 10),
+            stat(
+              icon: Icons.menu_book_outlined,
+              label: 'فصل‌ها',
+              value: '$chapterCount',
+            ),
+          ],
+        ),
+        const SizedBox(height: 18),
+        Text('قبل از شروع', style: theme.textTheme.titleMedium),
+        const SizedBox(height: 10),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                _instructionRow(
+                  theme,
+                  Icons.play_circle_outline_rounded,
+                  'زمان‌سنج فقط پس از زدن دکمهٔ شروع فعال می‌شود.',
+                ),
+                const SizedBox(height: 12),
+                _instructionRow(
+                  theme,
+                  Icons.shuffle_rounded,
+                  'سؤال‌ها از فصل‌های مختلف به‌صورت متعادل انتخاب شده‌اند.',
+                ),
+                const SizedBox(height: 12),
+                _instructionRow(
+                  theme,
+                  Icons.fact_check_outlined,
+                  'پس از پایان، کارنامه و پاسخ‌نامهٔ تشریحی را می‌بینی.',
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 18),
+        FilledButton.icon(
+          onPressed: startExam,
+          icon: const Icon(Icons.play_arrow_rounded),
+          label: const Text('شروع آزمون'),
+        ),
+        const SizedBox(height: 8),
+        OutlinedButton.icon(
+          onPressed: _showHistory,
+          icon: const Icon(Icons.history_rounded),
+          label: const Text('مشاهدهٔ سوابق آزمون'),
+        ),
+      ],
+    );
+  }
+
+  Widget _instructionRow(ThemeData theme, IconData icon, String text) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, color: theme.colorScheme.primary, size: 21),
+        const SizedBox(width: 10),
+        Expanded(child: Text(text, style: theme.textTheme.bodyMedium)),
+      ],
     );
   }
 
