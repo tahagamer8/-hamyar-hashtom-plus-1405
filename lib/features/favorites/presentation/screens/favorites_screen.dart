@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hamyar_hashtom_plus/core/router/app_routes.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_reader_screen.dart';
 
 class FavoritesScreen extends ConsumerStatefulWidget {
   const FavoritesScreen({super.key});
@@ -27,8 +28,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
     final raw = await bundle.loadString('assets/content/catalog_fa.json');
     final catalog = jsonDecode(raw) as Map<String, dynamic>;
     _legacyCatalog = Map<String, dynamic>.from(catalog);
-    // Resolve current favorites against the same independently versioned packs
-    // used by the lesson and search screens.
+
     for (final id in catalog.keys.toList()) {
       try {
         final packRaw = await bundle.loadString('assets/content/subjects/$id.json');
@@ -65,10 +65,59 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
+
           final catalog = snapshot.data!;
-          final entries = <({String subjectId, String subjectTitle, String title, int? chapterIndex})>[];
+          final entries = <
+              ({
+                String subjectId,
+                String subjectTitle,
+                String title,
+                String destination,
+                String favoriteKey,
+                String? pdfAssetPath,
+                bool isPdf,
+              })>[];
+
           for (final key in favorites) {
             final parts = key.split('::');
+
+            // New document favorites: pdf::<subjectId>::<notes|questions>.
+            if (parts.length == 3 && parts[0] == 'pdf') {
+              final subjectId = parts[1];
+              final kind = parts[2];
+              const titles = {
+                'notes': 'جزوه PDF',
+                'questions': 'نمونه‌سؤال فصل‌به‌فصل PDF',
+                'firstTerm': 'آزمون نوبت اول PDF',
+                'secondTerm': 'آزمون نوبت دوم PDF',
+                'gifted': 'پرسش‌های استدلالی سمپاد PDF',
+              };
+              final title = titles[kind];
+              if (title == null) continue;
+              final subject = catalog[subjectId] as Map<String, dynamic>?;
+              if (subject == null) continue;
+              final featureId = kind == 'notes' ? 'notes' : 'sampleExams';
+              const fileSuffixes = {
+                'notes': 'Notes',
+                'questions': 'Questions',
+                'firstTerm': 'First-Term',
+                'secondTerm': 'Second-Term',
+                'gifted': 'Gifted',
+              };
+              entries.add((
+                subjectId: subjectId,
+                subjectTitle: subject['title'] as String? ?? subjectId,
+                title: title,
+                destination: '${AppRoutes.subjectDetail(subjectId)}/$featureId',
+                favoriteKey: key,
+                pdfAssetPath:
+                    'assets/generated_pdfs/Fahmino-$subjectId-${fileSuffixes[kind]}-FA.pdf',
+                isPdf: true,
+              ));
+              continue;
+            }
+
+            // Existing chapter favorites keep their original key format.
             if (parts.length != 2) continue;
             final subjectId = parts.first;
             final title = parts.last;
@@ -83,14 +132,15 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                 subjectId: subjectId,
                 subjectTitle: subject['title'] as String? ?? subjectId,
                 title: title,
-                chapterIndex: index,
+                destination:
+                    '${AppRoutes.subjectDetail(subjectId)}/lessons?chapter=$index',
+                favoriteKey: key,
+                pdfAssetPath: null,
+                isPdf: false,
               ));
               continue;
             }
 
-            // Keep older saved bookmarks visible if their chapter title was
-            // renamed in the new pack. Open the subject so the student can
-            // choose the corresponding current chapter rather than guessing.
             final legacy = _legacyCatalog[subjectId] as Map<String, dynamic>?;
             final legacyChapters = legacy?['chapters'] as List<dynamic>? ?? [];
             if (legacyChapters.any((item) =>
@@ -99,10 +149,14 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                 subjectId: subjectId,
                 subjectTitle: subject['title'] as String? ?? subjectId,
                 title: title,
-                chapterIndex: null,
+                destination: AppRoutes.subjectDetail(subjectId),
+                favoriteKey: key,
+                pdfAssetPath: null,
+                isPdf: false,
               ));
             }
           }
+
           if (entries.isEmpty) {
             return const Center(
               child: Padding(
@@ -114,34 +168,52 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                     SizedBox(height: 12),
                     Text('هنوز مطلبی نشان نکرده‌ای.'),
                     SizedBox(height: 6),
-                    Text('در صفحه آموزش هر فصل، روی نشانک بزن تا اینجا ذخیره شود.',
-                        textAlign: TextAlign.center),
+                    Text(
+                      'در صفحهٔ هر فصل یا کنار PDF جزوه و نمونه‌سؤال، روی نشانک بزن تا اینجا ذخیره شود.',
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
               ),
             );
           }
+
           return ListView.separated(
             padding: const EdgeInsets.all(16),
             itemCount: entries.length,
             separatorBuilder: (_, __) => const SizedBox(height: 8),
             itemBuilder: (context, index) {
               final entry = entries[index];
-              final destination = entry.chapterIndex == null
-                  ? AppRoutes.subjectDetail(entry.subjectId)
-                  : '${AppRoutes.subjectDetail(entry.subjectId)}/lessons?chapter=${entry.chapterIndex}';
               return Card(
                 child: ListTile(
-                  leading: const Icon(Icons.bookmark_rounded),
+                  leading: Icon(
+                    entry.isPdf
+                        ? Icons.picture_as_pdf_rounded
+                        : Icons.bookmark_rounded,
+                  ),
                   title: Text(entry.title),
                   subtitle: Text(entry.subjectTitle),
-                  onTap: () => context.go(destination),
+                  onTap: () {
+                    final assetPath = entry.pdfAssetPath;
+                    if (assetPath != null) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => PdfReaderScreen(
+                            assetPath: assetPath,
+                            title: '${entry.title} ${entry.subjectTitle}',
+                          ),
+                        ),
+                      );
+                    } else {
+                      context.go(entry.destination);
+                    }
+                  },
                   trailing: IconButton(
                     tooltip: 'حذف از علاقه‌مندی‌ها',
                     icon: const Icon(Icons.close_rounded),
-                    onPressed: () => ref.read(favoritesProvider.notifier).toggle(
-                      '${entry.subjectId}::${entry.title}',
-                    ),
+                    onPressed: () => ref
+                        .read(favoritesProvider.notifier)
+                        .toggle(entry.favoriteKey),
                   ),
                 ),
               );

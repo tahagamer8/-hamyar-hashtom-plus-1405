@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
-import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/sample_question_library_screen.dart';
 import 'package:hamyar_hashtom_plus/features/documents/presentation/widgets/subject_pdf_card.dart';
 import 'package:hamyar_hashtom_plus/features/content/presentation/widgets/book_page_gallery.dart';
 
@@ -161,11 +160,167 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
               chapters: chapters,
             );
           }
+          if (_feature == AppFeature.notes) {
+            return ListView(
+              padding: const EdgeInsets.all(20),
+              children: [
+                Text(
+                  subject['title'] as String? ?? 'درس',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'جزوهٔ این درس به‌صورت PDF و با فصل‌بندی درون فایل ارائه شده است.',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 18),
+                SubjectPdfCard(
+                  subjectId: widget.subjectId,
+                  subjectTitle: subject['title'] as String? ?? 'درس',
+                ),
+              ],
+            );
+          }
           if (_feature == AppFeature.sampleExams) {
-            return SampleQuestionLibraryScreen(
-              subjectId: widget.subjectId,
-              subjectTitle: subject['title'] as String? ?? 'درس',
-              chapters: chapters,
+            final theme = Theme.of(context);
+            final titleStyle = theme.textTheme.titleMedium;
+            final subjectTitle = subject['title'] as String? ?? 'درس';
+            Widget section({
+              required IconData icon,
+              required String title,
+              required String subtitle,
+              required Widget child,
+            }) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 18),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.secondaryContainer,
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: Icon(icon, color: theme.colorScheme.onSecondaryContainer),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(title, style: titleStyle),
+                              const SizedBox(height: 2),
+                              Text(subtitle, style: theme.textTheme.bodySmall),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    child,
+                  ],
+                ),
+              );
+            }
+
+            return ListView(
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(26),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.quiz_rounded,
+                              size: 25, color: theme.colorScheme.onPrimaryContainer),
+                          const SizedBox(width: 9),
+                          Text('مرکز تمرین و ارزیابی',
+                              style: theme.textTheme.labelLarge?.copyWith(
+                                color: theme.colorScheme.onPrimaryContainer,
+                              )),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Text(subjectTitle,
+                          style: theme.textTheme.headlineSmall?.copyWith(
+                            color: theme.colorScheme.onPrimaryContainer,
+                          )),
+                      const SizedBox(height: 6),
+                      Text(
+                        'نمونه‌سؤال‌ها را بر اساس فصل یا نوبت انتخاب کن و پاسخ‌نامه را در PDFخوان فهمینو ببین.',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onPrimaryContainer,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 22),
+                section(
+                  icon: Icons.menu_book_rounded,
+                  title: 'نمونه‌سؤال فصل‌به‌فصل',
+                  subtitle: 'تمرین موضوعی برای مرور هر بخش از کتاب',
+                  child: SubjectPdfCard(
+                    subjectId: widget.subjectId,
+                    subjectTitle: subjectTitle,
+                    questionsOnly: true,
+                  ),
+                ),
+                section(
+                  icon: Icons.event_note_rounded,
+                  title: 'آزمون‌های نوبتی',
+                  subtitle: 'جمع‌بندی مباحث نیم‌سال اول و دوم',
+                  child: Column(
+                    children: [
+                      SubjectPdfCard(
+                        subjectId: widget.subjectId,
+                        subjectTitle: subjectTitle,
+                        questionsOnly: true,
+                        examType: 'firstTerm',
+                      ),
+                      SubjectPdfCard(
+                        subjectId: widget.subjectId,
+                        subjectTitle: subjectTitle,
+                        questionsOnly: true,
+                        examType: 'secondTerm',
+                      ),
+                    ],
+                  ),
+                ),
+                section(
+                  icon: Icons.psychology_alt_rounded,
+                  title: 'تمرین‌های پیشرفته',
+                  subtitle: 'پرسش‌های استدلالی برای به چالش کشیدن یادگیری',
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SubjectPdfCard(
+                        subjectId: widget.subjectId,
+                        subjectTitle: subjectTitle,
+                        questionsOnly: true,
+                        examType: 'gifted',
+                      ),
+                      Padding(
+                        padding: const EdgeInsetsDirectional.only(start: 4, end: 4, bottom: 4),
+                        child: Text(
+                          'این پرسش‌ها تألیفی‌اند و آزمون رسمی سمپاد محسوب نمی‌شوند.',
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             );
           }
           if (chapters.isEmpty) {

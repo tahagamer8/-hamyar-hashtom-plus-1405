@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_reader_screen.dart';
 
 class LearningPdfsCard extends StatefulWidget {
   const LearningPdfsCard({super.key});
@@ -13,7 +13,6 @@ class LearningPdfsCard extends StatefulWidget {
 }
 
 class _LearningPdfsCardState extends State<LearningPdfsCard> {
-  String? _opening;
   String? _downloading;
 
   Future<File> _copyAssetTo(String fileName, Directory directory) async {
@@ -32,26 +31,12 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
   }
 
   Future<void> _openPdf(String fileName, String label) async {
-    if (_opening != null) return;
-    setState(() => _opening = fileName);
-    try {
-      final directory = await getTemporaryDirectory();
-      final file = await _copyAssetTo(fileName, directory);
-      final result = await OpenFilex.open(file.path, type: 'application/pdf');
-      if (!mounted) return;
-      if (result.type != ResultType.done) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('باز کردن فایل $label ممکن نشد: ${result.message}')),
-        );
-      }
-    } catch (_) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('فایل $label در این نسخه موجود نیست.')),
-      );
-    } finally {
-      if (mounted) setState(() => _opening = null);
-    }
+    await Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (_) => PdfReaderScreen(
+        assetPath: 'assets/generated_pdfs/' + fileName,
+        title: label,
+      ),
+    ));
   }
 
   Future<void> _downloadPdf(String fileName, String label) async {
@@ -80,32 +65,23 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
     required String label,
     required IconData icon,
   }) {
-    final opening = _opening == fileName;
     final downloading = _downloading == fileName;
-    final busy = opening || downloading;
+    final busy = _downloading != null;
     return Row(
       children: [
         Expanded(
           child: OutlinedButton.icon(
-            onPressed: busy || _opening != null || _downloading != null
+            onPressed: busy
                 ? null
                 : () => _openPdf(fileName, label),
-            icon: opening
-                ? const SizedBox(
-                    width: 16,
-                    height: 16,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : Icon(icon),
-            label: const Text('نمایش PDF'),
+            icon: Icon(icon),
+            label: const Text('نمایش داخل برنامه'),
           ),
         ),
         const SizedBox(width: 8),
         Expanded(
           child: FilledButton.tonalIcon(
-            onPressed: busy || _opening != null || _downloading != null
-                ? null
-                : () => _downloadPdf(fileName, label),
+            onPressed: busy ? null : () => _downloadPdf(fileName, label),
             icon: downloading
                 ? const SizedBox(
                     width: 16,
@@ -134,25 +110,43 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
               children: [
                 Icon(Icons.picture_as_pdf_rounded, color: theme.colorScheme.primary),
                 const SizedBox(width: 8),
-                Text('جزوه و نمونه‌سؤال PDF', style: theme.textTheme.titleMedium),
+                Text('مرکز فایل‌های PDF پایه هشتم', style: theme.textTheme.titleMedium),
               ],
             ),
             const SizedBox(height: 6),
             Text(
-              'نمایش فایل و ذخیره برای استفادهٔ آفلاین دو گزینهٔ جدا هستند.',
+              'جزوه، بانک پرسش‌ها، آزمون‌های دو نوبت و پرسش‌های استدلالی؛ همه داخل برنامه و بدون اینترنت.',
               style: theme.textTheme.bodySmall,
             ),
             const SizedBox(height: 12),
             _pdfActions(
               fileName: 'Fahmino-Grade8-Notes-FA.pdf',
-              label: 'جزوه',
+              label: 'جزوهٔ همهٔ درس‌ها',
               icon: Icons.menu_book_rounded,
             ),
             const SizedBox(height: 8),
             _pdfActions(
               fileName: 'Fahmino-Grade8-Sample-Questions-FA.pdf',
-              label: 'نمونه‌سؤال',
+              label: 'بانک پرسش فصل‌به‌فصل',
               icon: Icons.assignment_rounded,
+            ),
+            const SizedBox(height: 8),
+            _pdfActions(
+              fileName: 'Fahmino-Grade8-First-Term-Exam-FA.pdf',
+              label: 'آزمون‌های نوبت اول',
+              icon: Icons.looks_one_rounded,
+            ),
+            const SizedBox(height: 8),
+            _pdfActions(
+              fileName: 'Fahmino-Grade8-Second-Term-Exam-FA.pdf',
+              label: 'آزمون‌های نوبت دوم',
+              icon: Icons.looks_two_rounded,
+            ),
+            const SizedBox(height: 8),
+            _pdfActions(
+              fileName: 'Fahmino-Grade8-Gifted-Questions-FA.pdf',
+              label: 'پرسش‌های استدلالی آمادگی سمپاد',
+              icon: Icons.psychology_alt_rounded,
             ),
           ],
         ),

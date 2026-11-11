@@ -229,8 +229,8 @@ void main() {
       const MaterialApp(home: Scaffold(body: LearningPdfsCard())),
     );
 
-    expect(find.text('نمایش PDF'), findsNWidgets(2));
-    expect(find.text('دانلود PDF'), findsNWidgets(2));
+    expect(find.text('نمایش داخل برنامه'), findsNWidgets(5));
+    expect(find.text('دانلود PDF'), findsNWidgets(5));
   });
 
   testWidgets('home screen renders Fahmino branding', (tester) async {
@@ -293,10 +293,12 @@ void main() {
     expect(find.textContaining('عددهای گویا را می‌توان'), findsOneWidget);
   });
 
-  testWidgets('notes content loads from catalog bundle', (tester) async {
+  testWidgets('notes are presented as a PDF rather than inline text', (tester) async {
     await tester.pumpWidget(_contentApp('notes'));
     await _pumpUiFrames(tester);
-    expect(find.text('قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید.'), findsOneWidget);
+    expect(find.text('جزوه PDF ریاضی'), findsOneWidget);
+    expect(find.text('نمایش داخل برنامه'), findsOneWidget);
+    expect(find.text('قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید.'), findsNothing);
   });
 
   testWidgets('step-by-step solution loads from catalog bundle', (tester) async {
@@ -305,41 +307,36 @@ void main() {
     expect(find.text('مخرج مشترک ۶ انتخاب می‌کنیم.'), findsOneWidget);
   });
 
-  testWidgets('sample question library offers chapter and term modes', (tester) async {
+  testWidgets('sample questions are presented only as a PDF', (tester) async {
     await tester.pumpWidget(_contentApp('sampleExams'));
     await _pumpUiFrames(tester);
-
-    expect(find.text('فصل‌به‌فصل'), findsOneWidget);
-    expect(find.text('نوبت اول و دوم'), findsOneWidget);
-
-    await tester.tap(find.text('نوبت اول و دوم'));
-    await _pumpUiFrames(tester);
-    expect(find.text('نوبت اول'), findsOneWidget);
-    expect(find.text('نوبت دوم'), findsOneWidget);
-
-    await tester.tap(find.text('شروع آزمون تیزهوشان نوبت اول'));
-    await _pumpUiFrames(tester);
-    expect(find.text('آزمون تألیفی تیزهوشان نوبت اول'), findsOneWidget);
-    expect(find.text('ثبت و پایان آزمون'), findsOneWidget);
+    expect(find.text('نمونه‌سؤال فصل‌به‌فصل PDF ریاضی'), findsOneWidget);
+    expect(find.text('نمایش داخل برنامه'), findsAtLeastNWidgets(1));
+    expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsNothing);
+    expect(find.text('شروع آزمون تیزهوشان نوبت اول'), findsNothing);
   });
 
-  testWidgets('sample questions reveal answer key on demand', (tester) async {
-    await tester.pumpWidget(_contentApp('sampleExams'));
+  testWidgets('exam briefing keeps timer stopped until the learner starts', (tester) async {
+    await tester.pumpWidget(_contentApp('quiz'));
     await _pumpUiFrames(tester);
-    expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
-    expect(find.text('پاسخ: ۳/۴'), findsNothing);
-    await tester.scrollUntilVisible(find.text('نمایش پاسخ و توضیح'), 250);
-    await _pumpUiFrames(tester);
-    await tester.tap(find.text('نمایش پاسخ و توضیح'));
+    expect(find.text('آزمون جامع ریاضی'), findsOneWidget);
+    expect(find.text('آماده‌ای دانسته‌هایت را بسنجی؟'), findsOneWidget);
+    expect(find.text('10 دقیقه'), findsOneWidget);
+    expect(find.text('10:00'), findsNothing);
+    await tester.pump(const Duration(seconds: 3));
+    expect(find.text('10 دقیقه'), findsOneWidget);
+    await tester.tap(find.text('شروع آزمون'));
     await tester.pump();
-    expect(find.text('پاسخ: ۳/۴'), findsOneWidget);
-    expect(find.textContaining('۱/۲ برابر ۲/۴ است'), findsOneWidget);
+    expect(find.text('10:00'), findsOneWidget);
   });
 
   testWidgets('combined quiz has a timer and reveals answers after submission', (tester) async {
     await tester.pumpWidget(_contentApp('quiz'));
     await _pumpUiFrames(tester);
     expect(find.text('آزمون جامع ریاضی'), findsOneWidget);
+    expect(find.text('10 دقیقه'), findsOneWidget);
+    await tester.tap(find.text('شروع آزمون'));
+    await tester.pump();
     expect(find.text('10:00'), findsOneWidget);
     await tester.pump(const Duration(seconds: 1));
     expect(find.text('09:59'), findsOneWidget);
@@ -358,6 +355,8 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     await tester.pumpWidget(_contentApp('quiz'));
     await _pumpUiFrames(tester);
+    await tester.tap(find.text('شروع آزمون'));
+    await tester.pump();
 
     await tester.tap(find.text('ثبت و پایان آزمون'));
     await _pumpUiFrames(tester);
@@ -538,6 +537,38 @@ void main() {
       find.text('پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی'),
       findsOneWidget,
     );
+  });
+
+
+  testWidgets('PDF favorites include term and gifted exam documents', (tester) async {
+    SharedPreferences.setMockInitialValues({
+      'fahmino_favorites_v1': [
+        'pdf::math::firstTerm',
+        'pdf::math::secondTerm',
+        'pdf::math::gifted',
+      ],
+    });
+    const catalog = r'{"math":{"title":"ریاضی","chapters":[]}}';
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: DefaultAssetBundle(
+            bundle: _MapAssetBundle({
+              'assets/content/catalog_fa.json': catalog,
+            }),
+            child: const FavoritesScreen(),
+          ),
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    });
+    await tester.pump();
+
+    expect(find.text('آزمون نوبت اول PDF'), findsOneWidget);
+    expect(find.text('آزمون نوبت دوم PDF'), findsOneWidget);
+    expect(find.text('پرسش‌های استدلالی سمپاد PDF'), findsOneWidget);
   });
 
   testWidgets('offline study helper reads current subject packs', (tester) async {
