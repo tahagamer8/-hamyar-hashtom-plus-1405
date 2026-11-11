@@ -520,6 +520,38 @@ void main() {
     );
   });
 
+
+  testWidgets('PDF favorites include term and gifted exam documents', (tester) async {
+    SharedPreferences.setMockInitialValues({
+      'fahmino_favorites_v1': [
+        'pdf::math::firstTerm',
+        'pdf::math::secondTerm',
+        'pdf::math::gifted',
+      ],
+    });
+    const catalog = r'{"math":{"title":"ریاضی","chapters":[]}}';
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: DefaultAssetBundle(
+            bundle: _MapAssetBundle({
+              'assets/content/catalog_fa.json': catalog,
+            }),
+            child: const FavoritesScreen(),
+          ),
+        ),
+      ),
+    );
+    await tester.runAsync(() async {
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    });
+    await tester.pump();
+
+    expect(find.text('آزمون نوبت اول PDF'), findsOneWidget);
+    expect(find.text('آزمون نوبت دوم PDF'), findsOneWidget);
+    expect(find.text('پرسش‌های استدلالی سمپاد PDF'), findsOneWidget);
+  });
+
   testWidgets('offline study helper reads current subject packs', (tester) async {
     const catalog = r'{"work":{"title":"کار و فناوری","chapters":[{"title":"عنوان قدیمی","summary":"نسخه قدیمی","points":[],"example":"","solutionSteps":[],"questions":[]} ]}}';
     const workPack = r'{"schemaVersion":1,"subjectId":"work","title":"کار و فناوری","chapters":[{"title":"پودمان ۱: شهروند الکترونیکی (۱)؛ اتصال به شبکه و پست الکترونیکی","summary":"پست الکترونیکی برای ارسال پیام و سند به یک یا چند گیرنده استفاده می‌شود.","points":["صندوق دریافت و پیوست را مدیریت کن."],"example":"یک ایمیل تمرینی بنویس.","solutionSteps":["گیرنده را وارد کن."],"questions":[]}]}';
