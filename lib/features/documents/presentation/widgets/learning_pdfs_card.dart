@@ -66,7 +66,7 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
     required IconData icon,
   }) {
     final downloading = _downloading == fileName;
-    final busy = downloading;
+    final busy = _downloading != null;
     return Row(
       children: [
         Expanded(
@@ -81,9 +81,7 @@ class _LearningPdfsCardState extends State<LearningPdfsCard> {
         const SizedBox(width: 8),
         Expanded(
           child: FilledButton.tonalIcon(
-            onPressed: busy || _opening != null || _downloading != null
-                ? null
-                : () => _downloadPdf(fileName, label),
+            onPressed: busy ? null : () => _downloadPdf(fileName, label),
             icon: downloading
                 ? const SizedBox(
                     width: 16,
