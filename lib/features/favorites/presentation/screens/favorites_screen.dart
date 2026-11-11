@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hamyar_hashtom_plus/core/router/app_routes.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_reader_screen.dart';
 
 class FavoritesScreen extends ConsumerStatefulWidget {
   const FavoritesScreen({super.key});
@@ -73,6 +74,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                 String title,
                 String destination,
                 String favoriteKey,
+                String? pdfAssetPath,
                 bool isPdf,
               })>[];
 
@@ -95,12 +97,21 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
               final subject = catalog[subjectId] as Map<String, dynamic>?;
               if (subject == null) continue;
               final featureId = kind == 'notes' ? 'notes' : 'sampleExams';
+              const fileSuffixes = {
+                'notes': 'Notes',
+                'questions': 'Questions',
+                'firstTerm': 'First-Term',
+                'secondTerm': 'Second-Term',
+                'gifted': 'Gifted',
+              };
               entries.add((
                 subjectId: subjectId,
                 subjectTitle: subject['title'] as String? ?? subjectId,
                 title: title,
                 destination: '${AppRoutes.subjectDetail(subjectId)}/$featureId',
                 favoriteKey: key,
+                pdfAssetPath:
+                    'assets/generated_pdfs/Fahmino-$subjectId-${fileSuffixes[kind]}-FA.pdf',
                 isPdf: true,
               ));
               continue;
@@ -124,6 +135,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                 destination:
                     '${AppRoutes.subjectDetail(subjectId)}/lessons?chapter=$index',
                 favoriteKey: key,
+                pdfAssetPath: null,
                 isPdf: false,
               ));
               continue;
@@ -180,7 +192,21 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                   ),
                   title: Text(entry.title),
                   subtitle: Text(entry.subjectTitle),
-                  onTap: () => context.go(entry.destination),
+                  onTap: () {
+                    final assetPath = entry.pdfAssetPath;
+                    if (assetPath != null) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => PdfReaderScreen(
+                            assetPath: assetPath,
+                            title: '${entry.title} ${entry.subjectTitle}',
+                          ),
+                        ),
+                      );
+                    } else {
+                      context.go(entry.destination);
+                    }
+                  },
                   trailing: IconButton(
                     tooltip: 'حذف از علاقه‌مندی‌ها',
                     icon: const Icon(Icons.close_rounded),
