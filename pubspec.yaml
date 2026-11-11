@@ -16,6 +16,7 @@ dependencies:
   shared_preferences: ^2.3.3
   open_filex: ^5.0.0
   path_provider: ^2.1.5
+  pdfx: ^2.11.0
 
 dev_dependencies:
   flutter_test:
