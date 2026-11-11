@@ -13,11 +13,15 @@ class SubjectPdfCard extends ConsumerStatefulWidget {
     required this.subjectId,
     required this.subjectTitle,
     this.questionsOnly = false,
+    this.examType,
   });
 
   final String subjectId;
   final String subjectTitle;
   final bool questionsOnly;
+
+  /// One of firstTerm, secondTerm, or gifted; ignored for notes and the full bank.
+  final String? examType;
 
   @override
   ConsumerState<SubjectPdfCard> createState() => _SubjectPdfCardState();
@@ -27,11 +31,40 @@ class _SubjectPdfCardState extends ConsumerState<SubjectPdfCard> {
   bool _busy = false;
   bool _downloaded = false;
 
-  String get _fileName =>
-      'Fahmino-${widget.subjectId}${widget.questionsOnly ? '-Questions' : '-Notes'}-FA.pdf';
-  String get _documentLabel => widget.questionsOnly ? 'نمونه‌سؤال' : 'جزوه';
-  String get _favoriteKey =>
-      'pdf::${widget.subjectId}::${widget.questionsOnly ? 'questions' : 'notes'}';
+  String get _kind {
+    if (!widget.questionsOnly) return 'notes';
+    return switch (widget.examType) {
+      'firstTerm' => 'firstTerm',
+      'secondTerm' => 'secondTerm',
+      'gifted' => 'gifted',
+      _ => 'questions',
+    };
+  }
+
+  String get _fileName {
+    final suffix = switch (_kind) {
+      'notes' => 'Notes',
+      'questions' => 'Questions',
+      'firstTerm' => 'First-Term',
+      'secondTerm' => 'Second-Term',
+      'gifted' => 'Gifted',
+      _ => 'Questions',
+    };
+    return 'Fahmino-${widget.subjectId}-$suffix-FA.pdf';
+  }
+
+  String get _documentLabel {
+    return switch (_kind) {
+      'notes' => 'جزوه',
+      'questions' => 'نمونه‌سؤال فصل‌به‌فصل',
+      'firstTerm' => 'آزمون نوبت اول',
+      'secondTerm' => 'آزمون نوبت دوم',
+      'gifted' => 'پرسش‌های استدلالی سمپاد',
+      _ => 'نمونه‌سؤال',
+    };
+  }
+
+  String get _favoriteKey => 'pdf::${widget.subjectId}::$_kind';
 
   Future<File> _file() async {
     final root = await getApplicationDocumentsDirectory();
