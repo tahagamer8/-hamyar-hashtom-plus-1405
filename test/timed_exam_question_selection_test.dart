@@ -11,6 +11,16 @@ Map<String, dynamic> _question(String prompt, {int answer = 0}) => {
 };
 
 void main() {
+
+  test('subject exam defaults to a practical 20-question set', () {
+    const screen = TimedCombinedExamScreen(
+      subjectTitle: 'ریاضی',
+      chapters: [],
+    );
+
+    expect(screen.questionLimit, 20);
+  });
+
   test('limited term exam samples questions evenly across chapters', () {
     final chapters = List.generate(
       4,
