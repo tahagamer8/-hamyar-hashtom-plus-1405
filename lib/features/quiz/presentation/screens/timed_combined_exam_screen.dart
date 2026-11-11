@@ -89,7 +89,7 @@ class TimedCombinedExamScreen extends StatefulWidget {
     required this.subjectTitle,
     required this.chapters,
     this.examTitle,
-    this.questionLimit,
+    this.questionLimit = 20,
   });
   final String subjectTitle;
   final List<Map<String, dynamic>> chapters;
