@@ -5,9 +5,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_reader_screen.dart';
 
 class SubjectPdfCard extends StatefulWidget {
-  const SubjectPdfCard({super.key, required this.subjectId, required this.subjectTitle});
+  const SubjectPdfCard({super.key, required this.subjectId, required this.subjectTitle, this.questionsOnly = false});
   final String subjectId;
   final String subjectTitle;
+  final bool questionsOnly;
   @override
   State<SubjectPdfCard> createState() => _SubjectPdfCardState();
 }
@@ -15,7 +16,8 @@ class SubjectPdfCard extends StatefulWidget {
 class _SubjectPdfCardState extends State<SubjectPdfCard> {
   bool _busy = false;
   bool _downloaded = false;
-  String get _fileName => 'Fahmino-${widget.subjectId}-FA.pdf';
+  String get _fileName => 'Fahmino-' + widget.subjectId + (widget.questionsOnly ? '-Questions-FA.pdf' : '-Notes-FA.pdf');
+  String get _documentLabel => widget.questionsOnly ? 'نمونه‌سؤال' : 'جزوه';
 
   Future<File> _file() async {
     final root = await getApplicationDocumentsDirectory();
@@ -52,7 +54,7 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
       if (!mounted) return;
       setState(() => _downloaded = true);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('PDF ${widget.subjectTitle} برای استفادهٔ آفلاین ذخیره شد.')),
+        SnackBar(content: Text(_documentLabel + ' ' + widget.subjectTitle + ' برای استفادهٔ آفلاین ذخیره شد.')),
       );
     } catch (_) {
       if (!mounted) return;
@@ -68,7 +70,7 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
     await Navigator.of(context).push(MaterialPageRoute<void>(
       builder: (_) => PdfReaderScreen(
         assetPath: 'assets/generated_pdfs/' + _fileName,
-        title: 'جزوهٔ ' + widget.subjectTitle,
+        title: _documentLabel + ' ' + widget.subjectTitle,
       ),
     ));
   }
@@ -84,11 +86,11 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
           Row(children: [
             Icon(Icons.picture_as_pdf_rounded, color: theme.colorScheme.primary),
             const SizedBox(width: 8),
-            Expanded(child: Text('جزوهٔ PDF ${widget.subjectTitle}', style: theme.textTheme.titleSmall)),
+            Expanded(child: Text(_documentLabel + ' PDF ' + widget.subjectTitle, style: theme.textTheme.titleSmall)),
             if (_downloaded) const Icon(Icons.offline_pin_rounded, color: Colors.green, size: 20),
           ]),
           const SizedBox(height: 5),
-          Text('برای مشاهده، نمایش PDF را بزن؛ برای نگهداری و استفادهٔ آفلاین، دانلود را انتخاب کن.',
+          Text('فایل را داخل فهمینو بخوان یا برای استفادهٔ آفلاین ذخیره کن.',
               style: theme.textTheme.bodySmall),
           const SizedBox(height: 10),
           Wrap(spacing: 8, runSpacing: 8, children: [
