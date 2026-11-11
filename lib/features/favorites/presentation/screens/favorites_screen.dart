@@ -151,6 +151,7 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                 title: title,
                 destination: AppRoutes.subjectDetail(subjectId),
                 favoriteKey: key,
+                pdfAssetPath: null,
                 isPdf: false,
               ));
             }
