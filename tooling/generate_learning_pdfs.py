@@ -103,38 +103,54 @@ def add_chapter_notes(story, chapter, st):
         for i, step in enumerate(chapter["solutionSteps"], 1):
             story.append(Paragraph(rtl(f"{i}. {step}"), st["body"]))
 
-def build_subject_pdf(sid, subject, output, st):
-    questions = [(chapter["title"], q) for chapter in subject["chapters"] for q in [*chapter["questions"], *chapter.get("advancedQuestions", [])]]
+def build_subject_pdf(sid, subject, output, st, questions_only=False):
+    questions = [(chapter["title"], q) for chapter in subject["chapters"]
+                 for q in [*chapter["questions"], *chapter.get("advancedQuestions", [])]]
+    heading = "نمونه‌سؤال‌ها" if questions_only else "جزوهٔ آموزشی"
     story = [
         Spacer(1, 18*mm),
         Paragraph(rtl(subject["title"]), st["title"]),
-        Paragraph(rtl("جزوهٔ آموزشی، نکته‌ها، مثال‌ها و نمونه‌سؤال‌های تألیفی | فهمینو | پایه هشتم"), st["subtitle"]),
+        Paragraph(rtl(heading + " | فهمینو | پایه هشتم"), st["subtitle"]),
         HRFlowable(width="100%", thickness=1, color=colors.HexColor("#C7D2FE")),
         Spacer(1, 5*mm),
-        Paragraph(rtl("این فایل از محتوای آموزشی تألیفیِ فعلی فهمینو ساخته شده است؛ کتاب رسمی و همهٔ فعالیت‌های آن را جایگزین نمی‌کند. برای متن کامل و فعالیت‌های رسمی، به کتاب درسی همان سال مراجعه کن."), st["note"]),
+        Paragraph(rtl(
+            "این فایل از محتوای آموزشی تألیفیِ فعلی فهمینو ساخته شده است؛ "
+            "کتاب رسمی و همهٔ فعالیت‌های آن را جایگزین نمی‌کند. "
+            "برای متن کامل و فعالیت‌های رسمی، به کتاب درسی همان سال مراجعه کن."
+        ), st["note"]),
     ]
-    for chapter in subject["chapters"]:
-        add_chapter_notes(story, chapter, st)
-    story.append(PageBreak())
-    story.append(Paragraph(rtl("نمونه‌سؤال‌ها"), st["title"]))
-    letters = ["الف", "ب", "پ", "ت", "ث", "ج"]
-    for i, (chapter_title, q) in enumerate(questions, 1):
-        block = [Paragraph(rtl(f"{i}. {q['question']}"), st["question"]),
-                 Paragraph(rtl("درس: " + chapter_title), st["note"])]
-        for oi, option in enumerate(q["options"]):
-            block.append(Paragraph(rtl(f"{letters[oi] if oi < len(letters) else oi+1}) {option}"), st["option"]))
-        story.append(KeepTogether(block))
-    story.append(PageBreak())
-    story.append(Paragraph(rtl("پاسخ‌نامه و توضیح‌ها"), st["title"]))
-    for i, (chapter_title, q) in enumerate(questions, 1):
-        story.append(KeepTogether([
-            Paragraph(rtl(f"{i}. {chapter_title}"), st["question"]),
-            Paragraph(rtl("پاسخ درست: " + q["options"][q["answer"]]), st["body"]),
-            Paragraph(rtl("توضیح: " + q["explanation"]), st["body"]),
-            Spacer(1, 2*mm),
-        ]))
-    doc = SimpleDocTemplate(str(output), pagesize=A4, rightMargin=18*mm, leftMargin=18*mm,
-        topMargin=17*mm, bottomMargin=20*mm, title=f"Fahmino {subject['title']}")
+
+    if questions_only:
+        story.append(Spacer(1, 4*mm))
+        story.append(Paragraph(rtl("پرسش‌ها"), st["subject"]))
+        letters = ["الف", "ب", "پ", "ت", "ث", "ج"]
+        for i, (chapter_title, q) in enumerate(questions, 1):
+            block = [
+                Paragraph(rtl(f"{i}. {q['question']}"), st["question"]),
+                Paragraph(rtl("درس: " + chapter_title), st["note"]),
+            ]
+            for oi, option in enumerate(q["options"]):
+                letter = letters[oi] if oi < len(letters) else str(oi + 1)
+                block.append(Paragraph(rtl(f"{letter}) {option}"), st["option"]))
+            story.append(KeepTogether(block))
+
+        story.append(PageBreak())
+        story.append(Paragraph(rtl("پاسخ‌نامه و توضیح‌ها"), st["title"]))
+        for i, (chapter_title, q) in enumerate(questions, 1):
+            story.append(KeepTogether([
+                Paragraph(rtl(f"{i}. {chapter_title}"), st["question"]),
+                Paragraph(rtl("پاسخ درست: " + q["options"][q["answer"]]), st["body"]),
+                Paragraph(rtl("توضیح: " + q["explanation"]), st["body"]),
+                Spacer(1, 2*mm),
+            ]))
+    else:
+        for chapter in subject["chapters"]:
+            add_chapter_notes(story, chapter, st)
+
+    doc = SimpleDocTemplate(
+        str(output), pagesize=A4, rightMargin=18*mm, leftMargin=18*mm,
+        topMargin=17*mm, bottomMargin=20*mm, title=f"Fahmino {subject['title']}"
+    )
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
 
 def build_combined(subjects, output, st, questions_only=False):
@@ -188,7 +204,8 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     st = styles()
     for sid, subject in subjects.items():
-        build_subject_pdf(sid, subject, out / f"Fahmino-{sid}-FA.pdf", st)
+        build_subject_pdf(sid, subject, out / f"Fahmino-{sid}-Notes-FA.pdf", st, questions_only=False)
+        build_subject_pdf(sid, subject, out / f"Fahmino-{sid}-Questions-FA.pdf", st, questions_only=True)
     build_combined(subjects, out / "Fahmino-Grade8-Notes-FA.pdf", st, False)
     build_combined(subjects, out / "Fahmino-Grade8-Sample-Questions-FA.pdf", st, True)
     print(f"Generated {len(subjects)} subject PDFs and 2 combined PDFs.")
