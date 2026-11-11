@@ -83,14 +83,22 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
             if (parts.length == 3 && parts[0] == 'pdf') {
               final subjectId = parts[1];
               final kind = parts[2];
-              if (kind != 'notes' && kind != 'questions') continue;
+              const titles = {
+                'notes': 'جزوه PDF',
+                'questions': 'نمونه‌سؤال فصل‌به‌فصل PDF',
+                'firstTerm': 'آزمون نوبت اول PDF',
+                'secondTerm': 'آزمون نوبت دوم PDF',
+                'gifted': 'پرسش‌های استدلالی سمپاد PDF',
+              };
+              final title = titles[kind];
+              if (title == null) continue;
               final subject = catalog[subjectId] as Map<String, dynamic>?;
               if (subject == null) continue;
-              final featureId = kind == 'questions' ? 'sampleExams' : 'notes';
+              final featureId = kind == 'notes' ? 'notes' : 'sampleExams';
               entries.add((
                 subjectId: subjectId,
                 subjectTitle: subject['title'] as String? ?? subjectId,
-                title: kind == 'questions' ? 'نمونه‌سؤال PDF' : 'جزوه PDF',
+                title: title,
                 destination: '${AppRoutes.subjectDetail(subjectId)}/$featureId',
                 favoriteKey: key,
                 isPdf: true,
