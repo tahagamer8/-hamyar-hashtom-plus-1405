@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:hamyar_hashtom_plus/features/documents/presentation/screens/pdf_reader_screen.dart';
 
 class SubjectPdfCard extends StatefulWidget {
   const SubjectPdfCard({super.key, required this.subjectId, required this.subjectTitle});
@@ -65,34 +65,12 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
   }
 
   Future<void> _open() async {
-    if (_busy) return;
-    setState(() => _busy = true);
-    try {
-      // Display works independently from the explicit offline-download action.
-      final saved = await _file();
-      File fileToOpen = saved;
-      if (!await saved.exists() || await saved.length() == 0) {
-        final data = await rootBundle.load('assets/generated_pdfs/$_fileName');
-        final cache = await getTemporaryDirectory();
-        fileToOpen = File('${cache.path}/$_fileName');
-        await fileToOpen.writeAsBytes(
-          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
-          flush: true,
-        );
-      }
-      final result = await OpenFilex.open(fileToOpen.path, type: 'application/pdf');
-      if (mounted && result.type != ResultType.done) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('نمایش PDF ممکن نشد: ${result.message}')),
-        );
-      }
-    } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('فایل PDF این بخش در این نسخه موجود نیست یا نمایشگر PDF نصب نشده است.')),
-      );
-    } finally {
-      if (mounted) setState(() => _busy = false);
-    }
+    await Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (_) => PdfReaderScreen(
+        assetPath: 'assets/generated_pdfs/' + _fileName,
+        title: 'جزوهٔ ' + widget.subjectTitle,
+      ),
+    ));
   }
 
   @override
@@ -124,7 +102,7 @@ class _SubjectPdfCardState extends State<SubjectPdfCard> {
             OutlinedButton.icon(
               onPressed: _busy ? null : _open,
               icon: const Icon(Icons.picture_as_pdf_outlined),
-              label: const Text('نمایش PDF'),
+              label: const Text('نمایش داخل برنامه'),
             ),
           ]),
         ]),
