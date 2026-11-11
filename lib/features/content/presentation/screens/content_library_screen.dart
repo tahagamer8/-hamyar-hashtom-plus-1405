@@ -182,54 +182,143 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
             );
           }
           if (_feature == AppFeature.sampleExams) {
-            final titleStyle = Theme.of(context).textTheme.titleMedium;
+            final theme = Theme.of(context);
+            final titleStyle = theme.textTheme.titleMedium;
+            final subjectTitle = subject['title'] as String? ?? 'درس';
+            Widget section({
+              required IconData icon,
+              required String title,
+              required String subtitle,
+              required Widget child,
+            }) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 18),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.secondaryContainer,
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: Icon(icon, color: theme.colorScheme.onSecondaryContainer),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(title, style: titleStyle),
+                              const SizedBox(height: 2),
+                              Text(subtitle, style: theme.textTheme.bodySmall),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    child,
+                  ],
+                ),
+              );
+            }
+
             return ListView(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
               children: [
-                Text(
-                  subject['title'] as String? ?? 'درس',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(26),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.quiz_rounded,
+                              size: 25, color: theme.colorScheme.onPrimaryContainer),
+                          const SizedBox(width: 9),
+                          Text('مرکز تمرین و ارزیابی',
+                              style: theme.textTheme.labelLarge?.copyWith(
+                                color: theme.colorScheme.onPrimaryContainer,
+                              )),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Text(subjectTitle,
+                          style: theme.textTheme.headlineSmall?.copyWith(
+                            color: theme.colorScheme.onPrimaryContainer,
+                          )),
+                      const SizedBox(height: 6),
+                      Text(
+                        'نمونه‌سؤال‌ها را بر اساس فصل یا نوبت انتخاب کن و پاسخ‌نامه را در PDFخوان فهمینو ببین.',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onPrimaryContainer,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  'نمونه‌سؤال‌ها و آزمون‌های تمرینی این درس، همراه با پاسخ‌نامه و توضیح، به‌صورت PDF و آفلاین.',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                const SizedBox(height: 22),
+                section(
+                  icon: Icons.menu_book_rounded,
+                  title: 'نمونه‌سؤال فصل‌به‌فصل',
+                  subtitle: 'تمرین موضوعی برای مرور هر بخش از کتاب',
+                  child: SubjectPdfCard(
+                    subjectId: widget.subjectId,
+                    subjectTitle: subjectTitle,
+                    questionsOnly: true,
+                  ),
                 ),
-                const SizedBox(height: 20),
-                Text('بانک فصل‌به‌فصل', style: titleStyle),
-                const SizedBox(height: 8),
-                SubjectPdfCard(
-                  subjectId: widget.subjectId,
-                  subjectTitle: subject['title'] as String? ?? 'درس',
-                  questionsOnly: true,
+                section(
+                  icon: Icons.event_note_rounded,
+                  title: 'آزمون‌های نوبتی',
+                  subtitle: 'جمع‌بندی مباحث نیم‌سال اول و دوم',
+                  child: Column(
+                    children: [
+                      SubjectPdfCard(
+                        subjectId: widget.subjectId,
+                        subjectTitle: subjectTitle,
+                        questionsOnly: true,
+                        examType: 'firstTerm',
+                      ),
+                      SubjectPdfCard(
+                        subjectId: widget.subjectId,
+                        subjectTitle: subjectTitle,
+                        questionsOnly: true,
+                        examType: 'secondTerm',
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 8),
-                Text('آزمون‌های نوبت اول و دوم', style: titleStyle),
-                const SizedBox(height: 8),
-                SubjectPdfCard(
-                  subjectId: widget.subjectId,
-                  subjectTitle: subject['title'] as String? ?? 'درس',
-                  questionsOnly: true,
-                  examType: 'firstTerm',
-                ),
-                SubjectPdfCard(
-                  subjectId: widget.subjectId,
-                  subjectTitle: subject['title'] as String? ?? 'درس',
-                  questionsOnly: true,
-                  examType: 'secondTerm',
-                ),
-                const SizedBox(height: 8),
-                Text('آمادگی آزمون‌های تیزهوشان', style: titleStyle),
-                const SizedBox(height: 8),
-                SubjectPdfCard(
-                  subjectId: widget.subjectId,
-                  subjectTitle: subject['title'] as String? ?? 'درس',
-                  questionsOnly: true,
-                  examType: 'gifted',
-                ),
-                Text(
-                  'پرسش‌های بخش تیزهوشان تألیفی‌اند و آزمون رسمی سمپاد نیستند.',
-                  style: Theme.of(context).textTheme.bodySmall,
+                section(
+                  icon: Icons.psychology_alt_rounded,
+                  title: 'تمرین‌های پیشرفته',
+                  subtitle: 'پرسش‌های استدلالی برای به چالش کشیدن یادگیری',
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SubjectPdfCard(
+                        subjectId: widget.subjectId,
+                        subjectTitle: subjectTitle,
+                        questionsOnly: true,
+                        examType: 'gifted',
+                      ),
+                      Padding(
+                        padding: const EdgeInsetsDirectional.only(start: 4, end: 4, bottom: 4),
+                        child: Text(
+                          'این پرسش‌ها تألیفی‌اند و آزمون رسمی سمپاد محسوب نمی‌شوند.',
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             );
