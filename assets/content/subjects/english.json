@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": "2026.11.10.2",
+  "contentVersion": "2026.11.12.1",
   "subjectId": "english",
   "title": "زبان انگلیسی",
   "chapters": [
@@ -183,6 +183,25 @@
           "difficulty": "مفهومی",
           "source": "تألیفی فهمینو"
         }
+      ],
+      "essayQuestions": [
+        {
+          "question": "دربارهٔ «Unit 1: My Nationality» یک پاسخ تشریحی منظم بنویس. ابتدا موضوع و مفهوم اصلی این بخش را با زبان خودت توضیح بده؛ سپس دست‌کم دو نکتهٔ مهم آن را شرح بده، برای یکی از آن‌ها مثال یا کاربردی تازه بیاور و در پایان نتیجه‌گیری کن.",
+          "questionType": "essay",
+          "answerGuidelines": [
+            "Theme: My Nationality. Students practice introducing themselves and other people, asking where someone is from, naming countries and nationalities, and spelling familiar words. Learning should combine listening, speaking, reading and writing.",
+            "Communication: asking and answering about country and nationality.",
+            "Vocabulary: country names and nationality words such as Iran/Iranian and Canada/Canadian.",
+            "Listening and speaking: understanding short introductions and introducing a classmate."
+          ],
+          "evaluationCriteria": [
+            "توضیح درست مفهوم اصلی و استفاده از واژه‌های علمی یا ادبی مناسب",
+            "شرح دست‌کم دو نکتهٔ مرتبط با محتوای همین فصل",
+            "ارائهٔ مثال، شاهد یا کاربرد مرتبط و روشن",
+            "پاسخ منظم، کامل و دارای نتیجه‌گیری"
+          ],
+          "source": "تألیفی فهمینو"
+        }
       ]
     },
     {
@@ -360,6 +379,25 @@
           "answer": "درست",
           "explanation": "این گزاره با نکتهٔ آموزشی «Communication: talking about daily activities and weekly routines.» در بخش «Unit 2: My Week» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
           "difficulty": "مفهومی",
+          "source": "تألیفی فهمینو"
+        }
+      ],
+      "essayQuestions": [
+        {
+          "question": "دربارهٔ «Unit 2: My Week» یک پاسخ تشریحی منظم بنویس. ابتدا موضوع و مفهوم اصلی این بخش را با زبان خودت توضیح بده؛ سپس دست‌کم دو نکتهٔ مهم آن را شرح بده، برای یکی از آن‌ها مثال یا کاربردی تازه بیاور و در پایان نتیجه‌گیری کن.",
+          "questionType": "essay",
+          "answerGuidelines": [
+            "Theme: My Week. Students talk about daily routines and weekly activities, ask when and on which days activities happen, and understand short conversations about helping and planning.",
+            "Communication: talking about daily activities and weekly routines.",
+            "Vocabulary: days of the week and common activities.",
+            "Listening and speaking: asking about a person's schedule and responding clearly."
+          ],
+          "evaluationCriteria": [
+            "توضیح درست مفهوم اصلی و استفاده از واژه‌های علمی یا ادبی مناسب",
+            "شرح دست‌کم دو نکتهٔ مرتبط با محتوای همین فصل",
+            "ارائهٔ مثال، شاهد یا کاربرد مرتبط و روشن",
+            "پاسخ منظم، کامل و دارای نتیجه‌گیری"
+          ],
           "source": "تألیفی فهمینو"
         }
       ]
@@ -543,6 +581,25 @@
           "difficulty": "مفهومی",
           "source": "تألیفی فهمینو"
         }
+      ],
+      "essayQuestions": [
+        {
+          "question": "دربارهٔ «Unit 3: My Abilities» یک پاسخ تشریحی منظم بنویس. ابتدا موضوع و مفهوم اصلی این بخش را با زبان خودت توضیح بده؛ سپس دست‌کم دو نکتهٔ مهم آن را شرح بده، برای یکی از آن‌ها مثال یا کاربردی تازه بیاور و در پایان نتیجه‌گیری کن.",
+          "questionType": "essay",
+          "answerGuidelines": [
+            "Theme: My Abilities. Students describe what they can do, ask about other people's abilities, and understand short conversations about skills and activities.",
+            "Communication: asking and answering about abilities.",
+            "Vocabulary: activities and skills such as swimming, drawing and speaking.",
+            "Listening and speaking: asking a classmate what they are good at."
+          ],
+          "evaluationCriteria": [
+            "توضیح درست مفهوم اصلی و استفاده از واژه‌های علمی یا ادبی مناسب",
+            "شرح دست‌کم دو نکتهٔ مرتبط با محتوای همین فصل",
+            "ارائهٔ مثال، شاهد یا کاربرد مرتبط و روشن",
+            "پاسخ منظم، کامل و دارای نتیجه‌گیری"
+          ],
+          "source": "تألیفی فهمینو"
+        }
       ]
     },
     {
@@ -724,6 +781,25 @@
           "difficulty": "مفهومی",
           "source": "تألیفی فهمینو"
         }
+      ],
+      "essayQuestions": [
+        {
+          "question": "دربارهٔ «Unit 4: My Health» یک پاسخ تشریحی منظم بنویس. ابتدا موضوع و مفهوم اصلی این بخش را با زبان خودت توضیح بده؛ سپس دست‌کم دو نکتهٔ مهم آن را شرح بده، برای یکی از آن‌ها مثال یا کاربردی تازه بیاور و در پایان نتیجه‌گیری کن.",
+          "questionType": "essay",
+          "answerGuidelines": [
+            "Theme: My Health. Students name common health problems, ask how someone feels, and give simple health advice. Role-play supports listening and speaking in everyday situations.",
+            "Communication: talking about health problems and giving advice.",
+            "Vocabulary: common problems such as headache and toothache.",
+            "Listening and speaking: asking what is wrong and suggesting suitable help."
+          ],
+          "evaluationCriteria": [
+            "توضیح درست مفهوم اصلی و استفاده از واژه‌های علمی یا ادبی مناسب",
+            "شرح دست‌کم دو نکتهٔ مرتبط با محتوای همین فصل",
+            "ارائهٔ مثال، شاهد یا کاربرد مرتبط و روشن",
+            "پاسخ منظم، کامل و دارای نتیجه‌گیری"
+          ],
+          "source": "تألیفی فهمینو"
+        }
       ]
     },
     {
@@ -901,6 +977,25 @@
           "answer": "درست",
           "explanation": "این گزاره با نکتهٔ آموزشی «Communication: describing a city and asking about places.» در بخش «Unit 5: My City» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
           "difficulty": "مفهومی",
+          "source": "تألیفی فهمینو"
+        }
+      ],
+      "essayQuestions": [
+        {
+          "question": "دربارهٔ «Unit 5: My City» یک پاسخ تشریحی منظم بنویس. ابتدا موضوع و مفهوم اصلی این بخش را با زبان خودت توضیح بده؛ سپس دست‌کم دو نکتهٔ مهم آن را شرح بده، برای یکی از آن‌ها مثال یا کاربردی تازه بیاور و در پایان نتیجه‌گیری کن.",
+          "questionType": "essay",
+          "answerGuidelines": [
+            "Theme: My City. Students describe places in a city, ask about locations and understand simple information about familiar places.",
+            "Communication: describing a city and asking about places.",
+            "Vocabulary: common city places and location words.",
+            "Listening and speaking: asking for and giving simple information about places."
+          ],
+          "evaluationCriteria": [
+            "توضیح درست مفهوم اصلی و استفاده از واژه‌های علمی یا ادبی مناسب",
+            "شرح دست‌کم دو نکتهٔ مرتبط با محتوای همین فصل",
+            "ارائهٔ مثال، شاهد یا کاربرد مرتبط و روشن",
+            "پاسخ منظم، کامل و دارای نتیجه‌گیری"
+          ],
           "source": "تألیفی فهمینو"
         }
       ]
@@ -1082,6 +1177,25 @@
           "difficulty": "مفهومی",
           "source": "تألیفی فهمینو"
         }
+      ],
+      "essayQuestions": [
+        {
+          "question": "دربارهٔ «Unit 6: My Village» یک پاسخ تشریحی منظم بنویس. ابتدا موضوع و مفهوم اصلی این بخش را با زبان خودت توضیح بده؛ سپس دست‌کم دو نکتهٔ مهم آن را شرح بده، برای یکی از آن‌ها مثال یا کاربردی تازه بیاور و در پایان نتیجه‌گیری کن.",
+          "questionType": "essay",
+          "answerGuidelines": [
+            "Theme: My Village. Students describe village life, natural places and familiar activities, and compare features of places using simple spoken and written language.",
+            "Communication: describing a village and its surroundings.",
+            "Vocabulary: nature and village words such as river, field and mountain.",
+            "Listening and speaking: talking about familiar places and daily life."
+          ],
+          "evaluationCriteria": [
+            "توضیح درست مفهوم اصلی و استفاده از واژه‌های علمی یا ادبی مناسب",
+            "شرح دست‌کم دو نکتهٔ مرتبط با محتوای همین فصل",
+            "ارائهٔ مثال، شاهد یا کاربرد مرتبط و روشن",
+            "پاسخ منظم، کامل و دارای نتیجه‌گیری"
+          ],
+          "source": "تألیفی فهمینو"
+        }
       ]
     },
     {
@@ -1259,6 +1373,25 @@
           "answer": "درست",
           "explanation": "این گزاره با نکتهٔ آموزشی «Communication: asking and answering about hobbies and free time.» در بخش «Unit 7: My Hobbies» سازگار است. هنگام پاسخ‌گویی، مفهوم گزاره را با تعریف و مثال همان بخش بسنج.",
           "difficulty": "مفهومی",
+          "source": "تألیفی فهمینو"
+        }
+      ],
+      "essayQuestions": [
+        {
+          "question": "دربارهٔ «Unit 7: My Hobbies» یک پاسخ تشریحی منظم بنویس. ابتدا موضوع و مفهوم اصلی این بخش را با زبان خودت توضیح بده؛ سپس دست‌کم دو نکتهٔ مهم آن را شرح بده، برای یکی از آن‌ها مثال یا کاربردی تازه بیاور و در پایان نتیجه‌گیری کن.",
+          "questionType": "essay",
+          "answerGuidelines": [
+            "Theme: My Hobbies. Students talk about hobbies and free-time activities, ask others about their interests, and understand short descriptions of what people enjoy doing.",
+            "Communication: asking and answering about hobbies and free time.",
+            "Vocabulary: common activities such as reading, swimming and playing games.",
+            "Listening and speaking: asking a partner about favourite activities."
+          ],
+          "evaluationCriteria": [
+            "توضیح درست مفهوم اصلی و استفاده از واژه‌های علمی یا ادبی مناسب",
+            "شرح دست‌کم دو نکتهٔ مرتبط با محتوای همین فصل",
+            "ارائهٔ مثال، شاهد یا کاربرد مرتبط و روشن",
+            "پاسخ منظم، کامل و دارای نتیجه‌گیری"
+          ],
           "source": "تألیفی فهمینو"
         }
       ]
