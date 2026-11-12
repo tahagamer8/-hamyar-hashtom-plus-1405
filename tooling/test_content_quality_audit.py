@@ -24,17 +24,30 @@ def complete_fixture():
         "pageStart": 10,
         "pageEnd": 20,
         "sourceLesson": "فصل آزمایشی",
+        "sourceVerificationStatus": "page_content_reviewed",
+        "sourceVerifiedAt": "2026-11-11",
         "questions": [valid_mcq(i) for i in range(4)] + [{
             "question": "نتیجه را با یک جمله توضیح بده.",
             "questionType": "short_answer",
             "answer": "نتیجه با داده‌ها سازگار است.",
             "explanation": "در پاسخ تشریحی باید رابطهٔ داده‌ها و نتیجه بیان شود.",
+        }, {
+            "question": "درست یا نادرست: نتیجه با داده‌های مسئله سازگار است.",
+            "questionType": "true_false",
+            "answer": "درست",
+            "explanation": "با جای‌گذاری نتیجه در رابطه، سازگاری آن بررسی می‌شود.",
         }],
         "chapterExam": [valid_mcq(i + 10) for i in range(5)],
     }
     pack = {
         "textbookEdition": "چاپ آزمایشی ۱۴۰۵",
         "textbookSourceFile": "sample.pdf",
+        "textbookSource": {
+            "pdfUrl": "https://example.edu/sample.pdf",
+            "schoolYear": "1405-1406",
+            "contentVerificationStatus": "pdf_content_parsed",
+            "contentVerifiedAt": "2026-11-11",
+        },
     }
     return pack, chapter
 
@@ -45,18 +58,35 @@ class ContentQualityAuditTests(unittest.TestCase):
         result = audit_chapter("sample", "نمونه", pack, chapter, 1)
         self.assertEqual(result["status"], "کامل")
         self.assertTrue(result["sourceMapped"])
+        self.assertTrue(result["sourceContentVerified"])
         self.assertTrue(result["hasDedicatedLesson"])
         self.assertTrue(result["hasChapterExam"])
-        self.assertEqual(result["questionFormats"], ["multiple_choice", "short_answer"])
+        self.assertEqual(result["questionFormats"], ["multiple_choice", "short_answer", "true_false"])
         self.assertEqual(result["gaps"], [])
 
     def test_missing_official_source_is_not_misreported_as_complete(self):
         pack, chapter = complete_fixture()
         pack.pop("textbookSourceFile")
         pack.pop("textbookEdition")
+        pack.pop("textbookSource")
         result = audit_chapter("sample", "نمونه", pack, chapter, 1)
         self.assertEqual(result["status"], "نیازمند منبع")
         self.assertFalse(result["sourceMapped"])
+        self.assertFalse(result["sourceContentVerified"])
+
+    def test_official_link_without_pdf_and_page_review_is_incomplete(self):
+        pack, chapter = complete_fixture()
+        pack["textbookSource"]["contentVerificationStatus"] = (
+            "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed"
+        )
+        pack["textbookSource"].pop("contentVerifiedAt")
+        chapter.pop("sourceVerificationStatus")
+        chapter.pop("sourceVerifiedAt")
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["status"], "ناقص")
+        self.assertTrue(result["sourceMapped"])
+        self.assertFalse(result["sourceContentVerified"])
+        self.assertIn("PDF رسمی و محتوای صفحهٔ این فصل هنوز پردازش و بازبینی نشده است", result["gaps"])
 
     def test_generic_reasoning_wrapper_and_tautology_are_flagged(self):
         pack, chapter = complete_fixture()

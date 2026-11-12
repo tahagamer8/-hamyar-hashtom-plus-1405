@@ -438,12 +438,12 @@ void main() {
     );
     await _pumpUiFrames(tester);
 
-    final shortAnswerField = find.byKey(const ValueKey('short-answer-1'));
+    final shortAnswerField = find.byKey(const ValueKey('short-answer-2'));
     await tester.ensureVisible(shortAnswerField);
     await tester.pump();
     await tester.enterText(shortAnswerField, '۲/۴');
     await tester.pump();
-    final shortAnswerCheck = find.byKey(const ValueKey('check-question-1'));
+    final shortAnswerCheck = find.byKey(const ValueKey('check-question-2'));
     await tester.ensureVisible(shortAnswerCheck);
     await tester.pump();
     expect(tester.widget<FilledButton>(shortAnswerCheck).onPressed, isNotNull);
