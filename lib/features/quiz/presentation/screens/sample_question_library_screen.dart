@@ -41,9 +41,12 @@ class _SampleQuestionLibraryScreenState
         (chapter['questions'] as List<dynamic>? ?? []).whereType<Map>();
     final advanced =
         (chapter['advancedQuestions'] as List<dynamic>? ?? []).whereType<Map>();
+    final essays =
+        (chapter['essayQuestions'] as List<dynamic>? ?? []).whereType<Map>();
     return [
       ...normal.map((item) => Map<String, dynamic>.from(item)),
       ...advanced.map((item) => Map<String, dynamic>.from(item)),
+      ...essays.map((item) => Map<String, dynamic>.from(item)),
     ];
   }
 
@@ -295,13 +298,25 @@ class _SampleQuestionCardState extends State<_SampleQuestionCard> {
         (answer == 'درست' || answer == 'نادرست');
     final isShortAnswer =
         type == 'short_answer' && answer is String && answer.trim().isNotEmpty;
+    final isEssay = type == 'essay';
+    final answerGuidelines =
+        (question['answerGuidelines'] as List<dynamic>? ?? [])
+            .whereType<String>()
+            .where((item) => item.trim().isNotEmpty)
+            .toList();
+    final evaluationCriteria =
+        (question['evaluationCriteria'] as List<dynamic>? ?? [])
+            .whereType<String>()
+            .where((item) => item.trim().isNotEmpty)
+            .toList();
     final isMultipleChoice = options.length >= 2 &&
         answer is int &&
         answer >= 0 &&
         answer < options.length;
     final isAdvanced = question['difficulty'] != null ||
         type == 'reasoning' ||
-        type == 'short_answer';
+        type == 'short_answer' ||
+        isEssay;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
@@ -314,9 +329,11 @@ class _SampleQuestionCardState extends State<_SampleQuestionCard> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(
-                  isShortAnswer
-                      ? 'پرسش پاسخ‌کوتاه'
-                      : isBoolean
+                  isEssay
+                      ? 'پرسش تشریحی'
+                      : isShortAnswer
+                          ? 'پرسش پاسخ‌کوتاه'
+                          : isBoolean
                           ? 'درست یا نادرست'
                           : 'پرسش چالشی · ${question['difficulty'] ?? 'تکمیلی'}',
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -351,33 +368,43 @@ class _SampleQuestionCardState extends State<_SampleQuestionCard> {
                     ),
                 ],
               )
-            else if (isShortAnswer)
+            else if (isEssay || isShortAnswer)
               TextField(
-                key: ValueKey('sample-short-answer-${widget.number}'),
+                key: ValueKey(
+                  isEssay
+                      ? 'sample-essay-answer-${widget.number}'
+                      : 'sample-short-answer-${widget.number}',
+                ),
                 controller: _responseController,
                 enabled: !_showAnswer,
-                minLines: 1,
-                maxLines: 3,
+                minLines: isEssay ? 5 : 1,
+                maxLines: isEssay ? 10 : 3,
                 textDirection: TextDirection.rtl,
+                textAlign: TextAlign.start,
                 onChanged: (_) => setState(() {}),
-                decoration: const InputDecoration(
-                  hintText: 'پاسخت را با بیان خودت بنویس...',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  hintText: isEssay
+                      ? 'پاسخت را در چند جمله و با ذکر دلیل و مثال بنویس...'
+                      : 'پاسخت را با بیان خودت بنویس...',
+                  alignLabelWithHint: true,
+                  border: const OutlineInputBorder(),
                 ),
               )
             else
               const Text('ساختار این پرسش کامل نیست و پاسخ آن نمایش داده نمی‌شود.'),
             const SizedBox(height: 8),
-            if (isShortAnswer || isBoolean)
+            if (isShortAnswer || isEssay || isBoolean)
               FilledButton.tonal(
                 key: ValueKey('sample-check-${widget.number}'),
                 onPressed: _showAnswer ||
-                        (isShortAnswer
+                        ((isShortAnswer || isEssay)
                             ? _responseController.text.trim().isEmpty
                             : _selectedBoolean == null)
                     ? null
                     : () => setState(() => _showAnswer = true),
-                child: const Text('بررسی پاسخ'),
+                child: Text(
+                  isEssay ? 'ثبت پاسخ و نمایش معیارهای ارزیابی' : 'بررسی پاسخ',
+                ),
               )
             else
               TextButton.icon(
@@ -417,7 +444,34 @@ class _SampleQuestionCardState extends State<_SampleQuestionCard> {
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.w700,
                   ),
+                )
+              else if (isEssay) ...[
+                Text(
+                  'این پرسش پاسخ یکتای کوتاه ندارد؛ نوشته‌ات را با نکته‌ها و معیارهای زیر بررسی کن.',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
+                if (answerGuidelines.isNotEmpty) ...[
+                  const SizedBox(height: 8),
+                  const Text('نکته‌های محتوایی برای پاسخ:'),
+                  for (final item in answerGuidelines)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4, right: 8),
+                      child: Text('• $item'),
+                    ),
+                ],
+                if (evaluationCriteria.isNotEmpty) ...[
+                  const SizedBox(height: 8),
+                  const Text('معیارهای ارزیابی:'),
+                  for (final item in evaluationCriteria)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4, right: 8),
+                      child: Text('□ $item'),
+                    ),
+                ],
+              ],
               if (question['explanation'] is String)
                 Padding(
                   padding: const EdgeInsets.only(top: 6),
