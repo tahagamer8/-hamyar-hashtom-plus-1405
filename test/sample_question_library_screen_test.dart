@@ -20,6 +20,14 @@ void main() {
           'explanation': 'تقسیم بر صفر تعریف نشده است.',
         },
       ],
+      'essayQuestions': [
+        {
+          'question': 'توضیح بده چرا برای جمع کسرها باید واحدهای هم‌اندازه داشته باشیم و یک مثال بساز.',
+          'questionType': 'essay',
+          'answerGuidelines': ['مخرج مشترک واحدها را هم‌اندازه می‌کند.'],
+          'evaluationCriteria': ['توضیح مفهوم', 'ارائهٔ مثال', 'نتیجه‌گیری'],
+        },
+      ],
     },
   ];
 
@@ -53,6 +61,39 @@ void main() {
 
     expect(find.textContaining('پاسخ پیشنهادی: برای هم‌اندازه کردن واحدها و جمع صورت‌ها.'), findsOneWidget);
     expect(find.textContaining('مخرج مشترک نشان می‌دهد'), findsOneWidget);
+  });
+
+  testWidgets('sample question library supports essay answers and rubric', (tester) async {
+    tester.view.physicalSize = const Size(900, 1600);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: SampleQuestionLibraryScreen(
+            subjectId: 'math',
+            subjectTitle: 'ریاضی',
+            chapters: chapters,
+          ),
+        ),
+      ),
+    );
+
+    final response = find.byKey(const ValueKey('sample-essay-answer-3'));
+    await tester.ensureVisible(response);
+    await tester.enterText(response, 'چون باید قسمت‌ها هم‌اندازه باشند؛ مثلاً...');
+    await tester.pump();
+
+    final submit = find.byKey(const ValueKey('sample-check-3'));
+    expect(tester.widget<FilledButton>(submit).onPressed, isNotNull);
+    await tester.tap(submit);
+    await tester.pump();
+
+    expect(find.textContaining('این پرسش پاسخ یکتای کوتاه ندارد'), findsOneWidget);
+    expect(find.text('مخرج مشترک واحدها را هم‌اندازه می‌کند.'), findsOneWidget);
+    expect(find.text('ارائهٔ مثال'), findsOneWidget);
   });
 
   testWidgets('sample question library checks true-false answers', (tester) async {
