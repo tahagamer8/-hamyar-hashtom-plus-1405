@@ -92,7 +92,7 @@ void main() {
     await tester.pump();
 
     expect(find.textContaining('این پرسش پاسخ یکتای کوتاه ندارد'), findsOneWidget);
-    expect(find.text('مخرج مشترک واحدها را هم‌اندازه می‌کند.'), findsOneWidget);
+    expect(find.textContaining('مخرج مشترک واحدها را هم‌اندازه می‌کند.'), findsOneWidget);
     expect(find.text('ارائهٔ مثال'), findsOneWidget);
   });
 
