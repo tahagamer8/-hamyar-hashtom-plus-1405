@@ -438,16 +438,34 @@ void main() {
     );
     await _pumpUiFrames(tester);
 
-    final shortAnswerField = find.byKey(const ValueKey('short-answer-1'));
-    await tester.ensureVisible(shortAnswerField);
+    // The first short-answer item asks for the reason; the second asks for
+    // the equivalent fraction. Keep each expected answer aligned to its index.
+    final reasoningField = find.byKey(const ValueKey('short-answer-1'));
+    await tester.ensureVisible(reasoningField);
     await tester.pump();
-    await tester.enterText(shortAnswerField, '۲/۴');
+    await tester.enterText(reasoningField, 'برای هم‌اندازه کردن واحدها');
     await tester.pump();
-    final shortAnswerCheck = find.byKey(const ValueKey('check-question-1'));
-    await tester.ensureVisible(shortAnswerCheck);
+    final reasoningCheck = find.byKey(const ValueKey('check-question-1'));
+    await tester.ensureVisible(reasoningCheck);
     await tester.pump();
-    expect(tester.widget<FilledButton>(shortAnswerCheck).onPressed, isNotNull);
-    await tester.tap(shortAnswerCheck);
+    expect(tester.widget<FilledButton>(reasoningCheck).onPressed, isNotNull);
+    await tester.tap(reasoningCheck);
+    await tester.pumpAndSettle();
+    expect(
+      find.textContaining('پاسخ پیشنهادی: برای هم‌اندازه کردن واحدها و جمع صورت‌ها.'),
+      findsOneWidget,
+    );
+
+    final fractionField = find.byKey(const ValueKey('short-answer-2'));
+    await tester.ensureVisible(fractionField);
+    await tester.pump();
+    await tester.enterText(fractionField, '۲/۴');
+    await tester.pump();
+    final fractionCheck = find.byKey(const ValueKey('check-question-2'));
+    await tester.ensureVisible(fractionCheck);
+    await tester.pump();
+    expect(tester.widget<FilledButton>(fractionCheck).onPressed, isNotNull);
+    await tester.tap(fractionCheck);
     await tester.pumpAndSettle();
     expect(find.textContaining('پاسخ پیشنهادی: ۲/۴'), findsOneWidget);
 
