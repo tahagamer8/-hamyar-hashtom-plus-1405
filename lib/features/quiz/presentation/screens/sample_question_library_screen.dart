@@ -359,6 +359,7 @@ class _SampleQuestionCardState extends State<_SampleQuestionCard> {
                 minLines: 1,
                 maxLines: 3,
                 textDirection: TextDirection.rtl,
+                onChanged: (_) => setState(() {}),
                 decoration: const InputDecoration(
                   hintText: 'پاسخت را با بیان خودت بنویس...',
                   border: OutlineInputBorder(),
