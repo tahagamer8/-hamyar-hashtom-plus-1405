@@ -21,36 +21,60 @@ List<Map<String, dynamic>> buildBalancedExamQuestions({
     final chapterTitle = chapter['title'] is String
         ? chapter['title'] as String
         : 'درس';
-    final rawItems = <dynamic>[
-      ...(chapter['questions'] as List<dynamic>? ?? const []),
-      ...(chapter['advancedQuestions'] as List<dynamic>? ?? const []),
-    ];
+    final examBank = chapter['chapterExam'];
+    final rawItems = examBank is List
+        ? examBank
+        : <dynamic>[
+            ...(chapter['questions'] as List<dynamic>? ?? const []),
+            ...(chapter['advancedQuestions'] as List<dynamic>? ?? const []),
+          ];
     final pool = <Map<String, dynamic>>[];
+    final seenPrompts = <String>{};
 
     for (final item in rawItems) {
       if (item is! Map) continue;
       final question = Map<String, dynamic>.from(item);
-      final options = question['options'];
-      final answer = question['answer'];
       final prompt = question['question'];
+      final explanation = question['explanation'];
       if (prompt is! String ||
           prompt.trim().isEmpty ||
-          options is! List ||
-          options.length < 2 ||
-          !options.every((option) => option is String) ||
-          answer is! int ||
-          answer < 0 ||
-          answer >= options.length) {
+          explanation is! String ||
+          explanation.trim().isEmpty ||
+          !seenPrompts.add(prompt.trim())) {
         continue;
       }
+
+      final type = question['questionType'] as String? ?? 'multiple_choice';
+      final rawOptions = question['options'];
+      final rawAnswer = question['answer'];
+      List<String>? options;
+      int? answer;
+
+      if (rawOptions is List &&
+          rawOptions.length >= 2 &&
+          rawOptions.every((option) => option is String && option.trim().isNotEmpty) &&
+          rawAnswer is int &&
+          rawAnswer >= 0 &&
+          rawAnswer < rawOptions.length) {
+        options = rawOptions.cast<String>();
+        answer = rawAnswer;
+      } else if (type == 'true_false' &&
+          (rawAnswer == 'درست' || rawAnswer == 'نادرست')) {
+        options = const ['درست', 'نادرست'];
+        answer = rawAnswer == 'درست' ? 0 : 1;
+      } else {
+        // Open-answer items are practiced in the lesson-question section,
+        // where the learner can compare their written response to a rubric.
+        continue;
+      }
+
       pool.add({
         'chapter': chapterTitle,
         'question': prompt,
         'options': options,
         'answer': answer,
-        'explanation': question['explanation'] is String
-            ? question['explanation']
-            : '',
+        'explanation': explanation,
+        'questionType': type,
       });
     }
 
@@ -148,15 +172,46 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
     try {
       final preferences = await SharedPreferences.getInstance();
       final key = widget.examTitle == null ? 'fahmino_exam_history_${widget.subjectTitle}' : widget.historyKey;
+      final now = DateTime.now().toIso8601String();
       final previous = preferences.getStringList(key) ?? <String>[];
       final percent = (score * 100 / questions.length).round();
+      final wrongAnswers = <Map<String, dynamic>>[];
+      for (var index = 0; index < questions.length; index++) {
+        final question = questions[index];
+        final correct = question['answer'] as int;
+        final selected = answers[index];
+        if (selected == correct) continue;
+        final options = (question['options'] as List<dynamic>).whereType<String>().toList();
+        wrongAnswers.add({
+          'date': now,
+          'subjectTitle': widget.subjectTitle,
+          'examTitle': widget.examTitle ?? 'آزمون جامع',
+          'chapter': question['chapter'] as String? ?? 'درس',
+          'question': question['question'] as String? ?? '',
+          'selectedAnswer': selected != null && selected >= 0 && selected < options.length
+              ? options[selected]
+              : 'بی‌پاسخ',
+          'correctAnswer': correct >= 0 && correct < options.length
+              ? options[correct]
+              : 'ثبت نشده',
+          'explanation': question['explanation'] as String? ?? '',
+        });
+      }
       previous.insert(0, jsonEncode({
-        'date': DateTime.now().toIso8601String(),
+        'date': now,
         'score': score,
         'total': questions.length,
         'percent': percent,
+        'wrongAnswerCount': wrongAnswers.length,
       }));
       await preferences.setStringList(key, previous.take(20).toList());
+
+      if (wrongAnswers.isNotEmpty) {
+        const mistakeKey = 'fahmino_wrong_answers_v1';
+        final storedMistakes = preferences.getStringList(mistakeKey) ?? <String>[];
+        storedMistakes.insertAll(0, wrongAnswers.map(jsonEncode));
+        await preferences.setStringList(mistakeKey, storedMistakes.take(300).toList());
+      }
     } catch (_) {
       // A failed local history write must not block the exam result.
     }
@@ -289,6 +344,42 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
         Text('$score پاسخ درست از ${questions.length} سؤال'),
         Text('${answers.length} پاسخ ثبت‌شده'),
       ]))),
+      if (answers.length < questions.length || score < questions.length) ...[
+        const SizedBox(height: 12),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('مرور پاسخ‌های نیازمند تمرین',
+                    style: theme.textTheme.titleMedium),
+                const SizedBox(height: 8),
+                for (var i = 0; i < questions.length; i++)
+                  if (answers[i] != questions[i]['answer'])
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(questions[i]['question'] as String,
+                              style: theme.textTheme.titleSmall),
+                          Text('پاسخ تو: ${answers[i] == null ? 'بی‌پاسخ' : (questions[i]['options'] as List)[answers[i]!]}'),
+                          Text('پاسخ درست: ${(questions[i]['options'] as List)[questions[i]['answer'] as int]}',
+                              style: TextStyle(color: theme.colorScheme.primary,
+                                  fontWeight: FontWeight.w700)),
+                          Text(questions[i]['explanation'] as String? ?? ''),
+                        ],
+                      ),
+                    ),
+                const SizedBox(height: 4),
+                Text('این سؤال‌ها برای مرور آفلاین در بخش «مرور اشتباهات» ذخیره می‌شوند.',
+                    style: theme.textTheme.bodySmall),
+              ],
+            ),
+          ),
+        ),
+      ],
       const SizedBox(height: 12),
       OutlinedButton.icon(
         onPressed: _showHistory,

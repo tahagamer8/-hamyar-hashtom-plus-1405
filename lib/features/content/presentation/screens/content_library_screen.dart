@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hamyar_hashtom_plus/features/favorites/presentation/providers/favorites_provider.dart';
 import 'package:hamyar_hashtom_plus/features/progress/presentation/providers/learning_progress_provider.dart';
 import 'package:hamyar_hashtom_plus/core/constants/app_feature.dart';
@@ -53,12 +54,43 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
     }
   }
 
+  bool _isValidQuestion(dynamic item) {
+    if (item is! Map<String, dynamic>) return false;
+    final prompt = item['question'];
+    final explanation = item['explanation'];
+    final answer = item['answer'];
+    if (prompt is! String || prompt.trim().isEmpty ||
+        explanation is! String || explanation.trim().isEmpty) {
+      return false;
+    }
+
+    final options = item['options'];
+    if (options is List) {
+      return options.length >= 2 &&
+          options.every((option) => option is String && option.trim().isNotEmpty) &&
+          answer is int &&
+          answer >= 0 &&
+          answer < options.length;
+    }
+
+    switch (item['questionType']) {
+      case 'short_answer':
+        return answer is String && answer.trim().isNotEmpty;
+      case 'true_false':
+        return answer == 'درست' || answer == 'نادرست';
+      default:
+        return false;
+    }
+  }
+
   bool _isValidSubjectPack(Map<String, dynamic> subject) {
-    if (subject['title'] is! String || (subject['title'] as String).trim().isEmpty) {
+    if (subject['title'] is! String ||
+        (subject['title'] as String).trim().isEmpty) {
       return false;
     }
     final chapters = subject['chapters'];
     if (chapters is! List || chapters.isEmpty) return false;
+
     return chapters.every((value) {
       if (value is! Map<String, dynamic>) return false;
       final title = value['title'];
@@ -68,30 +100,43 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
       final steps = value['solutionSteps'];
       final questions = value['questions'];
       final advancedQuestions = value['advancedQuestions'];
+      final chapterExam = value['chapterExam'];
+      final lessonContent = value['lessonContent'];
+      final workedExamples = value['workedExamples'];
+
       if (title is! String || title.trim().isEmpty ||
           summary is! String || points is! List ||
           !points.every((item) => item is String) ||
           example is! String || steps is! List ||
           !steps.every((item) => item is String) ||
           questions is! List ||
-          (advancedQuestions != null && advancedQuestions is! List)) {
+          (advancedQuestions != null && advancedQuestions is! List) ||
+          (chapterExam != null && chapterExam is! List) ||
+          (lessonContent != null && lessonContent is! String) ||
+          (workedExamples != null && workedExamples is! List)) {
         return false;
       }
+
       final allQuestions = [
         ...questions,
         ...(advancedQuestions as List<dynamic>? ?? const []),
+        ...(chapterExam as List<dynamic>? ?? const []),
       ];
-      return allQuestions.every((item) {
-        if (item is! Map<String, dynamic>) return false;
-        final options = item['options'];
-        final answer = item['answer'];
-        return item['question'] is String &&
-            (item['question'] as String).trim().isNotEmpty &&
-            options is List && options.length >= 2 &&
-            options.every((option) => option is String) &&
-            answer is int && answer >= 0 && answer < options.length &&
-            item['explanation'] is String;
-      });
+      if (!allQuestions.every(_isValidQuestion)) return false;
+
+      if (workedExamples is List) {
+        for (final item in workedExamples) {
+          if (item is! Map<String, dynamic> ||
+              item['problem'] is! String ||
+              item['answer'] is! String ||
+              item['explanation'] is! String ||
+              item['steps'] is! List ||
+              !(item['steps'] as List).every((step) => step is String)) {
+            return false;
+          }
+        }
+      }
+      return true;
     });
   }
 
@@ -230,6 +275,7 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
                     const SizedBox(height: 12),
                     _ChapterContent(
                       chapter: selectedChapter,
+                      subjectTitle: subject['title'] as String? ?? 'درس',
                       feature: _feature,
                       favoriteKey: '${widget.subjectId}::${selectedChapter['title']}',
                       progressKey: '${widget.subjectId}::${selectedChapter['title']}',
@@ -274,8 +320,15 @@ class _ContentLibraryScreenState extends ConsumerState<ContentLibraryScreen> {
 }
 
 class _ChapterContent extends ConsumerWidget {
-  const _ChapterContent({required this.chapter, required this.feature, required this.favoriteKey, required this.progressKey});
+  const _ChapterContent({
+    required this.chapter,
+    required this.subjectTitle,
+    required this.feature,
+    required this.favoriteKey,
+    required this.progressKey,
+  });
   final Map<String, dynamic> chapter;
+  final String subjectTitle;
   final AppFeature feature;
   final String favoriteKey;
   final String progressKey;
@@ -285,6 +338,10 @@ class _ChapterContent extends ConsumerWidget {
     final theme = Theme.of(context);
     final title = chapter['title'] as String? ?? 'درس';
     final summary = chapter['summary'] as String? ?? '';
+    final lessonContent = chapter['lessonContent'] as String? ?? '';
+    final workedExamples = (chapter['workedExamples'] as List<dynamic>? ?? [])
+        .whereType<Map<String, dynamic>>()
+        .toList(growable: false);
     final points = (chapter['points'] as List<dynamic>? ?? []).cast<String>();
     final steps = (chapter['solutionSteps'] as List<dynamic>? ?? [])
         .cast<String>();
@@ -305,6 +362,7 @@ class _ChapterContent extends ConsumerWidget {
       return _QuizChapter(
         key: ValueKey('$progressKey:${feature.name}'),
         title: title,
+        subjectTitle: subjectTitle,
         questions: questions,
       );
     }
@@ -312,6 +370,7 @@ class _ChapterContent extends ConsumerWidget {
       return _QuizChapter(
         key: ValueKey('$progressKey:${feature.name}'),
         title: title,
+        subjectTitle: subjectTitle,
         questions: [...questions, ...advancedQuestions],
       );
     }
@@ -411,7 +470,73 @@ class _ChapterContent extends ConsumerWidget {
               const SizedBox(height: 12),
             ],
             if (feature == AppFeature.lessons) ...[
+              if (lessonContent.trim().isNotEmpty)
+                ExpansionTile(
+                  tilePadding: EdgeInsets.zero,
+                  leading: Icon(Icons.menu_book_rounded,
+                      color: theme.colorScheme.primary),
+                  title: const Text('درسنامهٔ کامل این بخش'),
+                  subtitle: const Text('شرح مفهومی، اهداف و خودسنجی'),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 12, end: 12, bottom: 14,
+                      ),
+                      child: SelectableText(
+                        lessonContent,
+                        textDirection: TextDirection.rtl,
+                        style: theme.textTheme.bodyMedium?.copyWith(height: 1.8),
+                      ),
+                    ),
+                  ],
+                ),
               Text(summary, style: theme.textTheme.bodyMedium),
+              if (workedExamples.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                _ContentPanel(
+                  title: 'مثال‌های حل‌شده',
+                  icon: Icons.calculate_outlined,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (final item in workedExamples) ...[
+                        Text(
+                          item['title'] as String? ?? 'نمونهٔ آموزشی',
+                          style: theme.textTheme.titleSmall,
+                        ),
+                        const SizedBox(height: 6),
+                        Text(item['problem'] as String),
+                        const SizedBox(height: 8),
+                        for (var stepIndex = 0;
+                            stepIndex < (item['steps'] as List).length;
+                            stepIndex++)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 6),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('${stepIndex + 1}. '),
+                                Expanded(
+                                  child: Text((item['steps'] as List)[stepIndex] as String),
+                                ),
+                              ],
+                            ),
+                          ),
+                        Text(
+                          'پاسخ پیشنهادی: ${item['answer']}',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
+                        Text(item['explanation'] as String),
+                        if (item != workedExamples.last)
+                          const Divider(height: 24),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
               if (points.isNotEmpty) ...[
                 const SizedBox(height: 12),
                 Text('نکته‌های کلیدی', style: theme.textTheme.titleSmall),
@@ -515,8 +640,53 @@ class _ChapterContent extends ConsumerWidget {
             ),
           ),
         ] else if (feature == AppFeature.solutions) ...[
-              Text(chapter['example'] as String? ?? 'مثال آموزشی',
-                  style: theme.textTheme.bodyMedium),
+              if (workedExamples.isNotEmpty)
+                _ContentPanel(
+                  title: 'مثال‌های حل‌شده',
+                  icon: Icons.calculate_outlined,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (final item in workedExamples) ...[
+                        Text(
+                          item['title'] as String? ?? 'نمونهٔ آموزشی',
+                          style: theme.textTheme.titleSmall,
+                        ),
+                        const SizedBox(height: 6),
+                        Text(item['problem'] as String),
+                        const SizedBox(height: 8),
+                        for (var stepIndex = 0;
+                            stepIndex < (item['steps'] as List).length;
+                            stepIndex++)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 6),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('${stepIndex + 1}. '),
+                                Expanded(
+                                  child: Text((item['steps'] as List)[stepIndex] as String),
+                                ),
+                              ],
+                            ),
+                          ),
+                        Text(
+                          'پاسخ پیشنهادی: ${item['answer']}',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
+                        Text(item['explanation'] as String),
+                        if (item != workedExamples.last)
+                          const Divider(height: 24),
+                      ],
+                    ],
+                  ),
+                )
+              else
+                Text(chapter['example'] as String? ?? 'مثال آموزشی',
+                    style: theme.textTheme.bodyMedium),
               const SizedBox(height: 10),
               for (var i = 0; i < steps.length; i++)
                 Padding(
@@ -572,9 +742,25 @@ class _ReadOnlyQuestionState extends State<_ReadOnlyQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    final options = (widget.question['options'] as List<dynamic>? ?? []).cast<String>();
-    final answer = widget.question['answer'] as int? ?? -1;
-    final hasAnswer = answer >= 0 && answer < options.length;
+    final options = (widget.question['options'] as List<dynamic>? ?? [])
+        .whereType<String>()
+        .toList();
+    final type = widget.question['questionType'] as String? ?? 'multiple_choice';
+    final answer = widget.question['answer'];
+    final isShort = type == 'short_answer';
+    final isTrueFalse = type == 'true_false';
+    final hasAnswer = isShort
+        ? answer is String && answer.trim().isNotEmpty
+        : isTrueFalse
+            ? answer == 'درست' || answer == 'نادرست'
+            : answer is int && answer >= 0 && answer < options.length;
+    final answerText = isShort
+        ? answer as String? ?? 'ثبت نشده'
+        : isTrueFalse
+            ? answer as String? ?? 'ثبت نشده'
+            : hasAnswer
+                ? options[answer as int]
+                : 'ثبت نشده';
     return Padding(
       padding: const EdgeInsets.only(top: 12),
       child: Column(
@@ -582,11 +768,14 @@ class _ReadOnlyQuestionState extends State<_ReadOnlyQuestion> {
         children: [
           Text('${widget.number}. ${widget.question['question']}',
               style: Theme.of(context).textTheme.titleSmall),
-          for (var i = 0; i < options.length; i++)
-            Padding(
-              padding: const EdgeInsets.only(top: 5),
-              child: Text('${String.fromCharCode(65 + i)}) ${options[i]}'),
-            ),
+          if (isTrueFalse)
+            const Text('درست / نادرست')
+          else
+            for (var i = 0; i < options.length; i++)
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Text('${String.fromCharCode(65 + i)}) ${options[i]}'),
+              ),
           const SizedBox(height: 5),
           TextButton.icon(
             onPressed: () => setState(() => _showAnswer = !_showAnswer),
@@ -595,7 +784,7 @@ class _ReadOnlyQuestionState extends State<_ReadOnlyQuestion> {
           ),
           if (_showAnswer) ...[
             Text(
-              'پاسخ: ${hasAnswer ? options[answer] : 'ثبت نشده'}',
+              isShort ? 'پاسخ پیشنهادی: $answerText' : 'پاسخ: $answerText',
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             if (widget.question['explanation'] is String)
@@ -609,8 +798,14 @@ class _ReadOnlyQuestionState extends State<_ReadOnlyQuestion> {
 }
 
 class _QuizChapter extends StatefulWidget {
-  const _QuizChapter({super.key, required this.title, required this.questions});
+  const _QuizChapter({
+    super.key,
+    required this.title,
+    required this.subjectTitle,
+    required this.questions,
+  });
   final String title;
+  final String subjectTitle;
   final List<Map<String, dynamic>> questions;
 
   @override
@@ -619,7 +814,61 @@ class _QuizChapter extends StatefulWidget {
 
 class _QuizChapterState extends State<_QuizChapter> {
   final Map<int, int> _answers = {};
+  final Map<int, TextEditingController> _textAnswers = {};
   final Set<int> _checked = {};
+
+  TextEditingController _controllerFor(int index) =>
+      _textAnswers.putIfAbsent(index, TextEditingController.new);
+
+  Future<void> _saveWrongAnswer({
+    required Map<String, dynamic> question,
+    required List<String> options,
+    required int selected,
+    required int correct,
+  }) async {
+    if (selected < 0 || selected >= options.length ||
+        correct < 0 || correct >= options.length) {
+      return;
+    }
+    try {
+      final preferences = await SharedPreferences.getInstance();
+      const key = 'fahmino_wrong_answers_v1';
+      final stored = preferences.getStringList(key) ?? <String>[];
+      final record = {
+        'date': DateTime.now().toIso8601String(),
+        'subjectTitle': widget.subjectTitle,
+        'examTitle': 'تمرین فصل',
+        'chapter': widget.title,
+        'question': question['question'] as String? ?? '',
+        'selectedAnswer': options[selected],
+        'correctAnswer': options[correct],
+        'explanation': question['explanation'] as String? ?? '',
+      };
+      stored.insert(0, jsonEncode(record));
+      await preferences.setStringList(key, stored.take(300).toList());
+    } catch (_) {
+      // The lesson question remains available even if local history fails.
+    }
+  }
+
+  int? _correctOption(Map<String, dynamic> question) {
+    final answer = question['answer'];
+    if (question['questionType'] == 'true_false') {
+      if (answer == 'درست') return 0;
+      if (answer == 'نادرست') return 1;
+      return null;
+    }
+    if (answer is int) return answer;
+    return null;
+  }
+
+  @override
+  void dispose() {
+    for (final controller in _textAnswers.values) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -633,16 +882,19 @@ class _QuizChapterState extends State<_QuizChapter> {
           children: [
             Text(widget.title, style: theme.textTheme.titleMedium),
             const SizedBox(height: 8),
-            const Text('پاسخ‌ها را انتخاب کن و نتیجه را بررسی کن.'),
+            const Text('پاسخ‌ها را انتخاب کن یا بنویس و سپس نتیجه را بررسی کن.'),
             for (var q = 0; q < widget.questions.length; q++)
               _buildQuestion(context, q, widget.questions[q]),
             if (widget.questions.isNotEmpty)
               Align(
-                alignment: Alignment.centerLeft,
+                alignment: AlignmentDirectional.centerStart,
                 child: TextButton.icon(
                   onPressed: () => setState(() {
                     _answers.clear();
                     _checked.clear();
+                    for (final controller in _textAnswers.values) {
+                      controller.clear();
+                    }
                   }),
                   icon: const Icon(Icons.refresh_rounded),
                   label: const Text('شروع دوباره'),
@@ -655,47 +907,98 @@ class _QuizChapterState extends State<_QuizChapter> {
   }
 
   Widget _buildQuestion(
-      BuildContext context, int index, Map<String, dynamic> question) {
-    final options =
-        (question['options'] as List<dynamic>? ?? []).cast<String>();
-    final correct = question['answer'] as int? ?? -1;
+    BuildContext context,
+    int index,
+    Map<String, dynamic> question,
+  ) {
+    final theme = Theme.of(context);
+    final type = question['questionType'] as String? ?? 'multiple_choice';
+    final isShortAnswer = type == 'short_answer';
+    final options = type == 'true_false'
+        ? const ['درست', 'نادرست']
+        : (question['options'] as List<dynamic>? ?? const [])
+            .whereType<String>()
+            .toList(growable: false);
+    final correct = _correctOption(question);
     final checked = _checked.contains(index);
+    final controller = isShortAnswer ? _controllerFor(index) : null;
+
     return Padding(
       padding: const EdgeInsets.only(top: 18),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('${index + 1}. ${question['question']}',
-              style: Theme.of(context).textTheme.titleSmall),
-          RadioGroup<int>(
-            groupValue: _answers[index],
-            onChanged: (value) {
-              if (!checked && value != null) {
-                setState(() => _answers[index] = value);
-              }
-            },
-            child: IgnorePointer(
-              ignoring: checked,
-              child: Column(
-                children: [
-                  for (var option = 0; option < options.length; option++)
-                    RadioListTile<int>(
-                      dense: true,
-                      contentPadding: EdgeInsets.zero,
-                      value: option,
-                      title: Text(options[option]),
-                    ),
-                ],
-              ),
-            ),
+          Text(
+            '${index + 1}. ${question['question']}',
+            style: theme.textTheme.titleSmall,
           ),
+          const SizedBox(height: 8),
+          if (isShortAnswer)
+            TextField(
+              key: ValueKey('short-answer-$index'),
+              controller: controller,
+              enabled: !checked,
+              minLines: 1,
+              maxLines: 4,
+              textDirection: TextDirection.rtl,
+              decoration: const InputDecoration(
+                labelText: 'پاسخ خودت را بنویس',
+                alignLabelWithHint: true,
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (_) {
+                if (!checked) setState(() {});
+              },
+            )
+          else if (options.length >= 2 && correct != null)
+            RadioGroup<int>(
+              key: ValueKey('question-options-$index'),
+              groupValue: _answers[index],
+              onChanged: (value) {
+                if (!checked && value != null) {
+                  setState(() => _answers[index] = value);
+                }
+              },
+              child: IgnorePointer(
+                ignoring: checked,
+                child: Column(
+                  children: [
+                    for (var option = 0; option < options.length; option++)
+                      RadioListTile<int>(
+                        dense: true,
+                        contentPadding: EdgeInsets.zero,
+                        value: option,
+                        title: Text(options[option]),
+                      ),
+                  ],
+                ),
+              ),
+            )
+          else
+            const Text('ساختار این پرسش برای پاسخ‌گویی تعاملی معتبر نیست.'),
           if (!checked)
             Align(
-              alignment: Alignment.centerLeft,
+              alignment: AlignmentDirectional.centerStart,
               child: FilledButton.tonal(
-                onPressed: _answers.containsKey(index)
+                key: ValueKey('check-question-$index'),
+                onPressed: isShortAnswer
                     ? () => setState(() => _checked.add(index))
-                    : null,
+                    : (_answers.containsKey(index)
+                        ? () async {
+                            setState(() => _checked.add(index));
+                            final selected = _answers[index];
+                            if (selected != null &&
+                                correct != null &&
+                                selected != correct) {
+                              await _saveWrongAnswer(
+                                question: question,
+                                options: options,
+                                selected: selected,
+                                correct: correct,
+                              );
+                            }
+                          }
+                        : null),
                 child: const Text('بررسی پاسخ'),
               ),
             )
@@ -704,16 +1007,33 @@ class _QuizChapterState extends State<_QuizChapter> {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: ( _answers[index] == correct
-                        ? Colors.green
-                        : Theme.of(context).colorScheme.error)
-                    .withAlpha(18),
+                color: isShortAnswer
+                    ? theme.colorScheme.secondaryContainer.withAlpha(80)
+                    : ((_answers[index] == correct
+                            ? Colors.green
+                            : theme.colorScheme.error)
+                        .withAlpha(18)),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Text(
-                '${_answers[index] == correct ? 'آفرین، پاسخ درست است.' : 'پاسخ درست: ${correct >= 0 && correct < options.length ? options[correct] : 'ثبت نشده'}'}\n'
-                '${question['explanation'] ?? ''}',
-              ),
+              child: isShortAnswer
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'پاسخ پیشنهادی: ${question['answer']}',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        const Text('پاسخ خودت را با پاسخ پیشنهادی و دلیل زیر مقایسه کن.'),
+                        Text(question['explanation'] as String? ?? ''),
+                      ],
+                    )
+                  : Text(
+                      '${_answers[index] == correct ? 'آفرین، پاسخ درست است.' : 'پاسخ درست: ${correct != null && correct >= 0 && correct < options.length ? options[correct] : 'ثبت نشده'}'}\n'
+                      '${question['explanation'] ?? ''}',
+                    ),
             ),
           const Divider(height: 24),
         ],
@@ -820,6 +1140,8 @@ class _LearningPageHeader extends StatelessWidget {
     AppFeature.lessonQuestions => 'پرسش‌های این فصل را حل کن و پاسخ و توضیح را بررسی کن.',
     AppFeature.quiz => 'دانسته‌هایت را با آزمون بسنج.',
     AppFeature.favorites => 'مطالب نشان‌شدهٔ خودت را ببین.',
+    AppFeature.studyPlanner => 'زمان‌بندی مطالعه و امتحان‌ها.',
+    AppFeature.mistakes => 'مرور سؤال‌های اشتباه و بی‌پاسخ.',
   };
 
   @override

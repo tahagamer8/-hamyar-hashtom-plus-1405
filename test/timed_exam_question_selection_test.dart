@@ -66,6 +66,43 @@ void main() {
     expect(selected.first['chapter'], isA<String>());
   });
 
+  test('exam builder normalizes true-false and skips open-answer questions', () {
+    final chapters = [
+      {
+        'title': 'عددهای گویا',
+        'chapterExam': [
+          _question('پرسش چهارگزینه‌ای'),
+          {
+            'question': 'مخرج کسر نباید صفر باشد.',
+            'questionType': 'true_false',
+            'answer': 'درست',
+            'explanation': 'تقسیم بر صفر تعریف نشده است.',
+          },
+          {
+            'question': 'یک تعریف را با بیان خودت بنویس.',
+            'questionType': 'short_answer',
+            'answer': 'پاسخ تشریحی',
+            'explanation': 'این پاسخ باید با معیار مقایسه شود.',
+          },
+        ],
+      },
+    ];
+
+    final selected = buildBalancedExamQuestions(
+      chapters: chapters,
+      random: Random(9),
+    );
+
+    expect(selected, hasLength(2));
+    final trueFalse = selected.singleWhere(
+      (item) => item['questionType'] == 'true_false',
+    );
+    expect(trueFalse['options'], ['درست', 'نادرست']);
+    expect(trueFalse['answer'], 0);
+    expect(selected.map((item) => item['question']),
+        contains('پرسش چهارگزینه‌ای'));
+  });
+
   test('exam builder respects the limit and caps it at available questions', () {
     final chapters = [
       {'title': 'فصل اول', 'questions': [_question('۱'), _question('۲')]},

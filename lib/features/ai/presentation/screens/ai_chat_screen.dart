@@ -13,10 +13,16 @@ class _AiChatScreenState extends State<AiChatScreen> {
   final _controller = TextEditingController();
   final _scrollController = ScrollController();
   final _visibleMessages = <_ChatMessage>[];
+
   Map<String, dynamic> _catalog = {};
   String? _selectedSubjectId;
   int _selectedChapterIndex = -1;
   bool _catalogRequested = false;
+
+  List<Map<String, dynamic>> _quizQuestions = [];
+  int _quizIndex = 0;
+  int _quizCorrect = 0;
+  bool _awaitingQuizAnswer = false;
 
   @override
   void didChangeDependencies() {
@@ -32,11 +38,11 @@ class _AiChatScreenState extends State<AiChatScreen> {
       final raw = await bundle.loadString('assets/content/catalog_fa.json');
       final decoded = jsonDecode(raw);
       if (decoded is! Map<String, dynamic> || !mounted) return;
-      // Load the independently versioned subject packs first, matching the
-      // lesson and search screens so the offline helper sees current content.
+
       for (final id in decoded.keys.toList()) {
         try {
-          final packRaw = await bundle.loadString('assets/content/subjects/$id.json');
+          final packRaw =
+              await bundle.loadString('assets/content/subjects/' + id + '.json');
           final pack = jsonDecode(packRaw);
           if (pack is Map<String, dynamic> &&
               pack['subjectId'] == id &&
@@ -46,19 +52,22 @@ class _AiChatScreenState extends State<AiChatScreen> {
             decoded[id] = pack;
           }
         } on FlutterError {
-          // Retain the legacy catalog entry when no separate pack exists.
+          // Keep the legacy catalog entry if a separate pack is unavailable.
         } on FormatException {
-          // Retain the legacy catalog entry when a pack is malformed.
+          // Keep the legacy entry if a pack is malformed.
         } on TypeError {
-          // Reject invalid pack shapes without breaking the offline helper.
+          // Reject malformed pack shapes without breaking the tutor.
         }
       }
+
+      if (!mounted) return;
       setState(() {
         _catalog = decoded;
         _selectedSubjectId = decoded.isEmpty ? null : decoded.keys.first;
       });
     } catch (_) {
-      // The local helper stays available with a clear empty state.
+      if (!mounted) return;
+      setState(() => _catalog = {});
     }
   }
 
@@ -69,19 +78,39 @@ class _AiChatScreenState extends State<AiChatScreen> {
     super.dispose();
   }
 
-  String _normalise(String value) => value
-      .toLowerCase()
-      .replaceAll('ي', 'ی')
-      .replaceAll('ك', 'ک')
-      .replaceAll(RegExp('[ًٌٍَُِّْٰ]'), '')
-      .replaceAll(RegExp('[^0-9a-zA-Zء-ی]+'), ' ')
-      .trim();
+  Map<String, dynamic>? get _selectedSubject {
+    final value =
+        _selectedSubjectId == null ? null : _catalog[_selectedSubjectId];
+    return value is Map<String, dynamic> ? value : null;
+  }
+
+  List<Map<String, dynamic>> get _subjectChapters =>
+      (_selectedSubject?['chapters'] as List<dynamic>? ?? [])
+          .whereType<Map<String, dynamic>>()
+          .toList(growable: false);
+
+  String _normalise(String value) {
+    var result = value
+        .toLowerCase()
+        .replaceAll('ي', 'ی')
+        .replaceAll('ك', 'ک')
+        .replaceAll(RegExp('[ًٌٍَُِّْٰ]'), '')
+        .replaceAll(RegExp('[^0-9a-zA-Zء-ی۰-۹]+'), ' ')
+        .trim();
+
+    const digits = '۰۱۲۳۴۵۶۷۸۹';
+    for (var i = 0; i < digits.length; i++) {
+      result = result.replaceAll(digits[i], i.toString());
+    }
+    return result;
+  }
 
   Set<String> _tokens(String value) {
     const stopWords = {
       'و', 'در', 'از', 'به', 'را', 'که', 'این', 'آن', 'برای', 'با',
       'چیست', 'چگونه', 'کدام', 'است', 'هست', 'شود', 'می', 'یک', 'من',
-      'لطفا', 'لطفاً', 'میشه', 'کن', 'کنید',
+      'لطفا', 'میشه', 'کن', 'کنید', 'فصل', 'درس', 'راهنمایی', 'بده',
+      'بدهید', 'برام', 'همین', 'خودم', 'منو',
     };
     return _normalise(value)
         .split(' ')
@@ -90,158 +119,390 @@ class _AiChatScreenState extends State<AiChatScreen> {
   }
 
   int _score(String text, Set<String> tokens) {
-    final textTokens = _tokens(text);
-    return tokens.intersection(textTokens).length;
+    if (tokens.isEmpty) return 0;
+    return tokens.intersection(_tokens(text)).length;
   }
 
-  String _answerLocally(String question) {
-    final subject = _selectedSubjectId == null
-        ? null
-        : _catalog[_selectedSubjectId];
-    if (subject is! Map<String, dynamic>) {
-      return 'محتوای این درس هنوز روی دستگاه بارگذاری نشده است. بعداً دوباره بخش درس‌ها را بررسی کن.';
-    }
+  List<Map<String, dynamic>> _chaptersForQuestion(
+    String question, {
+    required bool preferSingleChapter,
+  }) {
+    final chapters = _subjectChapters;
+    if (chapters.isEmpty) return const [];
 
-    final chapters = (subject['chapters'] as List<dynamic>? ?? [])
-        .whereType<Map<String, dynamic>>()
-        .toList();
-    if (chapters.isEmpty) return 'برای این درس هنوز محتوای آموزشی ثبت نشده است.';
+    if (_selectedChapterIndex >= 0) {
+      final index = _selectedChapterIndex.clamp(0, chapters.length - 1);
+      return [chapters[index]];
+    }
+    if (preferSingleChapter) return [chapters.first];
 
     final tokens = _tokens(question);
-    final scored = <({Map<String, dynamic> chapter, int index, int score})>[];
-    for (var i = 0; i < chapters.length; i++) {
-      final chapter = chapters[i];
-      final points = (chapter['points'] as List<dynamic>? ?? []).whereType<String>();
-      final questions = (chapter['questions'] as List<dynamic>? ?? [])
-          .whereType<Map<String, dynamic>>()
-          .map((item) => item['question'])
-          .whereType<String>();
+    if (tokens.isEmpty) return [chapters.first];
+
+    final scored = <({Map<String, dynamic> chapter, int score})>[];
+    for (final chapter in chapters) {
       final searchable = [
         chapter['title'] as String? ?? '',
         chapter['summary'] as String? ?? '',
         chapter['example'] as String? ?? '',
-        ...points,
-        ...questions,
-        ...((chapter['solutionSteps'] as List<dynamic>? ?? []).whereType<String>()),
-        ...((chapter['commonMistakes'] as List<dynamic>? ?? []).whereType<String>()),
+        ...((chapter['points'] as List<dynamic>? ?? []).whereType<String>()),
+        ...((chapter['solutionSteps'] as List<dynamic>? ?? [])
+            .whereType<String>()),
+        ...((chapter['commonMistakes'] as List<dynamic>? ?? [])
+            .whereType<String>()),
+        ...((chapter['questions'] as List<dynamic>? ?? [])
+            .whereType<Map<String, dynamic>>()
+            .map((item) => item['question'])
+            .whereType<String>()),
       ].join(' ');
-      scored.add((chapter: chapter, index: i, score: _score(searchable, tokens)));
+      scored.add((chapter: chapter, score: _score(searchable, tokens)));
     }
 
-    // A learner can search the selected chapter or all chapters in the
-    // current subject. The default is subject-wide retrieval so a relevant
-    // chapter is not missed simply because another chapter was first.
-    final selectedOnly = _selectedChapterIndex >= 0;
-    final selectedIndex = _selectedChapterIndex >= scored.length
-        ? scored.length - 1
-        : (_selectedChapterIndex < 0 ? 0 : _selectedChapterIndex);
-    final candidates = selectedOnly ? [scored[selectedIndex]] : scored;
-    final best = tokens.isEmpty
-        ? [candidates.first]
-        : (candidates.where((item) => item.score > 0).toList()
-          ..sort((a, b) => b.score.compareTo(a.score)))
-            .take(selectedOnly ? 1 : 3)
-            .toList();
-    if (best.isEmpty) {
-      return selectedOnly
-          ? 'در فصل انتخاب‌شده مطلبی با این واژه‌ها پیدا نکردم. فصل دیگری را انتخاب کن یا جست‌وجوی همهٔ فصل‌ها را فعال کن.'
-          : 'در محتوای ثبت‌شدهٔ این درس مطلبی با این واژه‌ها پیدا نکردم. عبارت دیگری را امتحان کن یا فصل مرتبط را باز کن.';
+    scored.sort((a, b) => b.score.compareTo(a.score));
+    return scored
+        .where((item) => item.score > 0)
+        .take(2)
+        .map((item) => item.chapter)
+        .toList(growable: false);
+  }
+
+  String _answerLocally(String question) {
+    final subject = _selectedSubject;
+    if (subject == null) {
+      return 'محتوای درس هنوز بارگذاری نشده است. بستهٔ محتوای همین درس را بررسی کن.';
+    }
+    if (_subjectChapters.isEmpty) {
+      return 'برای این درس هنوز فصل آموزشی ثبت نشده است.';
     }
 
-    final asksForExample = RegExp('مثال|حل|مرحله|گام|محاسبه|تمرین').hasMatch(question);
-    final asksForQuestions = RegExp('سوال|سؤال|آزمون|تست|تمرین').hasMatch(question);
-    final asksForMistakes = RegExp('اشتباه|خطا|غلط|نکته|نکات').hasMatch(question);
+    final wantsLesson =
+        RegExp('آموزش|یاد بده|درسنامه|از پایه|توضیح فصل').hasMatch(question);
+    final wantsExample =
+        RegExp('مثال|حل|مرحله|گام|محاسبه').hasMatch(question);
+    final wantsMistakes =
+        RegExp('اشتباه|خطا|غلط|نکته|نکات').hasMatch(question);
+    final wantsPractice =
+        RegExp('تمرین|سوال|سؤال|پرسش').hasMatch(question);
+
+    final chapters = _chaptersForQuestion(
+      question,
+      preferSingleChapter: wantsLesson || wantsExample || wantsMistakes,
+    );
+    if (chapters.isEmpty) {
+      return 'در محتوای ثبت‌شدهٔ این درس مورد روشنی برای این عبارت پیدا نکردم. نام فصل یا متن دقیق پرسشت را بنویس.';
+    }
+
+    final subjectTitle = subject['title'] as String? ?? 'درس';
     final out = StringBuffer()
-      ..writeln('راهنمای آفلاین فهمینو — ' + (subject['title'] as String? ?? 'درس'))
-      ..writeln('این پاسخ از محتوای ذخیره‌شده در برنامه پیدا شده است؛ مدل هوش مصنوعی مولد نیست.')
+      ..writeln('معلم خصوصی فهمینو · ' + subjectTitle)
+      ..writeln(
+        'این راهنما از محتوای ذخیره‌شدهٔ فهمینو استفاده می‌کند؛ پاسخ رسمی کتاب یا مدل هوش مصنوعی مولد نیست.',
+      )
       ..writeln();
 
-    for (final result in best) {
-      final chapter = result.chapter;
-      out.writeln('**' + (chapter['title'] as String? ?? 'بخش آموزشی') + '**');
+    for (final chapter in chapters) {
+      final title = chapter['title'] as String? ?? 'بخش آموزشی';
       final summary = chapter['summary'] as String? ?? '';
-      if (summary.isNotEmpty) {
-        out.writeln(summary);
-        out.writeln();
-      }
-
-      final points = (chapter['points'] as List<dynamic>? ?? [])
+      final points =
+          (chapter['points'] as List<dynamic>? ?? []).whereType<String>().toList();
+      final example = chapter['example'] as String? ?? '';
+      final steps = (chapter['solutionSteps'] as List<dynamic>? ?? [])
           .whereType<String>()
           .toList();
-      final relevantPoints = tokens.isEmpty
-          ? points.take(4).toList()
-          : points.where((point) => _score(point, tokens) > 0).take(4).toList();
-      final chosenPoints = relevantPoints.isNotEmpty
-          ? relevantPoints
-          : points.take(3).toList();
-      if (chosenPoints.isNotEmpty) {
-        out.writeln('نکته‌های مرتبط:');
-        for (final point in chosenPoints) {
-          out.writeln('• ' + point);
-        }
-        out.writeln();
-      }
+      final mistakes = (chapter['commonMistakes'] as List<dynamic>? ?? [])
+          .whereType<String>()
+          .toList();
+      final lessonContent = chapter['lessonContent'] as String? ?? '';
+      final workedExamples = (chapter['workedExamples'] as List<dynamic>? ?? [])
+          .whereType<Map<String, dynamic>>()
+          .toList(growable: false);
 
-      if (asksForExample) {
-        final example = chapter['example'] as String? ?? '';
-        final steps = (chapter['solutionSteps'] as List<dynamic>? ?? [])
-            .whereType<String>()
-            .toList();
-        if (example.isNotEmpty) out.writeln('مثال آموزشی: ' + example);
+      out.writeln('### ' + title);
+      if (wantsLesson) {
+        out.writeln('**درسنامهٔ کامل فهمینو:**');
+        if (lessonContent.trim().isNotEmpty) {
+          out.writeln(lessonContent);
+          out.writeln();
+        }
+        out.writeln('**آموزش مفهومی و مرور سریع:**');
+        if (summary.isNotEmpty) out.writeln(summary);
+        if (points.isNotEmpty) {
+          out.writeln('**نکته‌های کلیدی:**');
+          for (final point in points.take(6)) {
+            out.writeln('• ' + point);
+          }
+        }
+        if (example.isNotEmpty) out.writeln('**مثال آموزشی:** ' + example);
         if (steps.isNotEmpty) {
-          out.writeln('مراحل ثبت‌شده در فهمینو:');
+          out.writeln('**حل مرحله‌به‌مرحله:**');
           for (var i = 0; i < steps.length; i++) {
             out.writeln((i + 1).toString() + '. ' + steps[i]);
           }
         }
-        out.writeln();
-      }
-
-      if (asksForQuestions) {
-        final questions = (chapter['questions'] as List<dynamic>? ?? [])
-            .whereType<Map<String, dynamic>>()
-            .take(3)
-            .toList();
-        if (questions.isNotEmpty) {
-          out.writeln('چند پرسش تمرینی از همین بخش:');
-          for (var i = 0; i < questions.length; i++) {
-            out.writeln((i + 1).toString() + '. ' + (questions[i]['question'] as String? ?? ''));
-          }
-        }
-        out.writeln();
-      }
-
-      if (asksForMistakes) {
-        final mistakes = (chapter['commonMistakes'] as List<dynamic>? ?? [])
-            .whereType<String>()
-            .toList();
         if (mistakes.isNotEmpty) {
-          out.writeln('اشتباهات رایج این درس:');
-          for (final mistake in mistakes) {
+          out.writeln('**مراقب این اشتباه‌ها باش:**');
+          for (final mistake in mistakes.take(4)) {
             out.writeln('• ' + mistake);
           }
-          out.writeln();
-        } else {
-          out.writeln('برای این فصل هنوز نکتهٔ اشتباهات رایج ثبت نشده است.');
         }
+        out.writeln(
+          'حالا بدون نگاه‌کردن به متن بالا، مفهوم اصلی را در یک جمله برای خودت توضیح بده.',
+        );
+      } else {
+        if (summary.isNotEmpty) out.writeln(summary);
+
+        final tokens = _tokens(question);
+        final matchedPoints = tokens.isEmpty
+            ? points.take(4).toList()
+            : points
+                .where((point) => _score(point, tokens) > 0)
+                .take(5)
+                .toList();
+        if (matchedPoints.isNotEmpty) {
+          out.writeln('**نکته‌های مرتبط:**');
+          for (final point in matchedPoints) {
+            out.writeln('• ' + point);
+          }
+        }
+
+        if (wantsExample) {
+          if (workedExamples.isNotEmpty) {
+            out.writeln('**مثال‌های حل‌شده:**');
+            for (final item in workedExamples.take(2)) {
+              out.writeln(item['title'] as String? ?? 'نمونهٔ آموزشی');
+              out.writeln('پرسش: ' + (item['problem'] as String? ?? ''));
+              final exampleSteps = (item['steps'] as List<dynamic>? ?? [])
+                  .whereType<String>();
+              var stepIndex = 1;
+              for (final step in exampleSteps) {
+                out.writeln((stepIndex++).toString() + '. ' + step);
+              }
+              out.writeln('پاسخ پیشنهادی: ' + (item['answer'] as String? ?? ''));
+              out.writeln('دلیل: ' + (item['explanation'] as String? ?? ''));
+            }
+          } else if (example.isNotEmpty) {
+            out.writeln('**مثال آموزشی:** ' + example);
+          }
+          if (steps.isNotEmpty) {
+            out.writeln('**مراحل حل:**');
+            for (var i = 0; i < steps.length; i++) {
+              out.writeln((i + 1).toString() + '. ' + steps[i]);
+            }
+          }
+          if (example.isEmpty && steps.isEmpty) {
+            out.writeln('برای این فصل هنوز مثال حل‌شدهٔ جداگانه ثبت نشده است.');
+          }
+        }
+
+        if (wantsMistakes) {
+          if (mistakes.isEmpty) {
+            out.writeln('برای این فصل هنوز فهرست اشتباهات رایج ثبت نشده است.');
+          } else {
+            out.writeln('**اشتباهات رایج:**');
+            for (final mistake in mistakes) {
+              out.writeln('• ' + mistake);
+            }
+          }
+        }
+
+        if (wantsPractice) {
+          final chapterExam = chapter['chapterExam'];
+          final questions = chapterExam is List
+              ? chapterExam.whereType<Map<String, dynamic>>().toList()
+              : [
+                  ...((chapter['questions'] as List<dynamic>? ?? [])
+                      .whereType<Map<String, dynamic>>()),
+                  ...((chapter['advancedQuestions'] as List<dynamic>? ?? [])
+                      .whereType<Map<String, dynamic>>()),
+                ];
+          if (questions.isEmpty) {
+            out.writeln('برای این فصل هنوز پرسش تمرینی ثبت نشده است.');
+          } else {
+            out.writeln('**برای تمرین بیشتر:**');
+            for (final item in questions.take(3)) {
+              out.writeln('• ' + (item['question'] as String? ?? ''));
+            }
+          }
+        }
+      }
+      out.writeln();
+    }
+
+    out.write(
+      'یادآوری: این مطالب برای یادگیری و تمرین‌اند؛ تا وقتی صفحه و پاسخ با نسخهٔ رسمی کتاب تطبیق داده نشده، آن‌ها را پاسخ قطعی کتاب در نظر نگیر.',
+    );
+    return out.toString();
+  }
+
+  String _startQuiz() {
+    final chapters = _selectedChapterIndex >= 0
+        ? _chaptersForQuestion('', preferSingleChapter: true)
+        : _subjectChapters;
+    final questions = <Map<String, dynamic>>[];
+
+    for (final chapter in chapters) {
+      final bank = chapter['chapterExam'];
+      final values = bank is List
+          ? bank
+          : <dynamic>[
+              ...(chapter['questions'] as List<dynamic>? ?? []),
+              ...(chapter['advancedQuestions'] as List<dynamic>? ?? []),
+            ];
+      for (final value in values.whereType<Map<String, dynamic>>()) {
+        final prompt = value['question'];
+        final explanation = value['explanation'];
+        if (prompt is! String || prompt.trim().isEmpty ||
+            explanation is! String || explanation.trim().isEmpty) {
+          continue;
+        }
+        final type = value['questionType'] as String? ?? 'multiple_choice';
+        final rawOptions = value['options'];
+        final rawAnswer = value['answer'];
+        List<String>? options;
+        int? answer;
+
+        if (rawOptions is List &&
+            rawOptions.length >= 2 &&
+            rawOptions.every((item) => item is String) &&
+            rawAnswer is int &&
+            rawAnswer >= 0 &&
+            rawAnswer < rawOptions.length) {
+          options = rawOptions.cast<String>();
+          answer = rawAnswer;
+        } else if (type == 'true_false' &&
+            (rawAnswer == 'درست' || rawAnswer == 'نادرست')) {
+          options = const ['درست', 'نادرست'];
+          answer = rawAnswer == 'درست' ? 0 : 1;
+        } else {
+          // Open-answer practice is available in the lesson-question section.
+          continue;
+        }
+
+        questions.add({
+          ...value,
+          'options': options,
+          'answer': answer,
+          '_chapterTitle': chapter['title'] as String? ?? 'فصل',
+        });
       }
     }
 
-    out.write('این راهنما فقط محتوای ذخیره‌شدهٔ فهمینو را جست‌وجو می‌کند و پاسخ‌ساز اینترنتی نیست. محتوای درس‌ها را با کتاب رسمی مدرسه تطبیق بده.');
+    if (questions.isEmpty) {
+      _awaitingQuizAnswer = false;
+      return 'برای فصل انتخاب‌شده هنوز پرسش چهارگزینه‌ای یا درست/نادرست معتبر ثبت نشده است.';
+    }
+
+    _quizQuestions = questions.take(5).toList(growable: false);
+    _quizIndex = 0;
+    _quizCorrect = 0;
+    _awaitingQuizAnswer = true;
+    return 'آزمون کوتاه شروع شد. پاسخ را با شمارهٔ گزینه یا حرف الف، ب، پ، ت بفرست؛ بعد از هر پاسخ، دلیلش را توضیح می‌دهم.\n\n' +
+        _currentQuizQuestion();
+  }
+
+  String _currentQuizQuestion() {
+    final question = _quizQuestions[_quizIndex];
+    final options = (question['options'] as List<dynamic>).whereType<String>();
+    const labels = ['الف', 'ب', 'پ', 'ت', 'ث', 'ج'];
+    final out = StringBuffer()
+      ..writeln('سؤال ' +
+          (_quizIndex + 1).toString() +
+          ' از ' +
+          _quizQuestions.length.toString())
+      ..writeln(question['question'] as String);
+    for (var i = 0; i < options.length; i++) {
+      final label = i < labels.length ? labels[i] : (i + 1).toString();
+      out.writeln(label + ') ' + options.elementAt(i));
+    }
+    out.write('پاسخت کدام گزینه است؟');
+    return out.toString();
+  }
+
+  int? _parseQuizAnswer(String value, List<String> options) {
+    final normalised = _normalise(value).replaceAll(' ', '');
+    const letters = {'الف': 0, 'ب': 1, 'پ': 2, 'ت': 3, 'ث': 4, 'ج': 5};
+    if (letters.containsKey(normalised)) return letters[normalised];
+
+    final numeric = int.tryParse(normalised);
+    if (numeric != null && numeric >= 1 && numeric <= options.length) {
+      return numeric - 1;
+    }
+
+    for (var i = 0; i < options.length; i++) {
+      if (_normalise(options[i]).replaceAll(' ', '') == normalised) return i;
+    }
+    return null;
+  }
+
+  String _gradeQuizAnswer(String response) {
+    if (!_awaitingQuizAnswer ||
+        _quizQuestions.isEmpty ||
+        _quizIndex >= _quizQuestions.length) {
+      _awaitingQuizAnswer = false;
+      return 'آزمون فعالی وجود ندارد. از دکمهٔ «آزمون کوتاه» برای شروع دوباره استفاده کن.';
+    }
+
+    final question = _quizQuestions[_quizIndex];
+    final options =
+        (question['options'] as List<dynamic>).whereType<String>().toList();
+    final chosen = _parseQuizAnswer(response, options);
+    if (chosen == null) {
+      return 'پاسخت را با شمارهٔ گزینه یا حرف الف، ب، پ یا ت بفرست تا بتوانم آن را بررسی کنم.';
+    }
+
+    final correct = question['answer'] as int;
+    final isCorrect = chosen == correct;
+    if (isCorrect) _quizCorrect++;
+
+    final out = StringBuffer()
+      ..writeln(isCorrect ? 'آفرین، این پاسخ درست است.' : 'این گزینه درست نیست.')
+      ..writeln('پاسخ درست: ' + options[correct])
+      ..writeln('توضیح: ' + (question['explanation'] as String));
+
+    _quizIndex++;
+    if (_quizIndex < _quizQuestions.length) {
+      out
+        ..writeln()
+        ..writeln(_currentQuizQuestion());
+    } else {
+      _awaitingQuizAnswer = false;
+      out
+        ..writeln()
+        ..writeln('آزمون تمام شد: ' +
+            _quizCorrect.toString() +
+            ' پاسخ درست از ' +
+            _quizQuestions.length.toString() +
+            ' سؤال.')
+        ..writeln('برای مرور، فصل را انتخاب کن و «آموزش فصل» یا «اشتباهات رایج» را بزن.');
+      _quizQuestions = [];
+    }
     return out.toString();
   }
 
   void _send() {
-    final question = _controller.text.trim();
-    if (question.isEmpty) return;
+    final prompt = _controller.text.trim();
+    if (prompt.isEmpty) return;
 
     _controller.clear();
-    final answer = _answerLocally(question);
+    final isQuizRequest =
+        RegExp('آزمون|ازم سوال|از من سوال|امتحان بگیر|سؤال بپرس')
+            .hasMatch(prompt);
+    final answer = _awaitingQuizAnswer
+        ? _gradeQuizAnswer(prompt)
+        : isQuizRequest
+            ? _startQuiz()
+            : _answerLocally(prompt);
+
     setState(() {
-      _visibleMessages.add(_ChatMessage(text: question, isUser: true));
+      _visibleMessages.add(_ChatMessage(text: prompt, isUser: true));
       _visibleMessages.add(_ChatMessage(text: answer, isUser: false));
     });
     _scrollToBottom();
+  }
+
+  void _sendQuickPrompt(String prompt) {
+    _controller.text = prompt;
+    _send();
   }
 
   void _scrollToBottom() {
@@ -256,16 +517,29 @@ class _AiChatScreenState extends State<AiChatScreen> {
     });
   }
 
+  void _resetChat() {
+    setState(() {
+      _visibleMessages.clear();
+      _quizQuestions = [];
+      _quizIndex = 0;
+      _quizCorrect = 0;
+      _awaitingQuizAnswer = false;
+      _controller.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final chapters = _subjectChapters;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('راهنمای آفلاین فهمینو'),
+        title: const Text('معلم خصوصی فهمینو'),
         actions: [
           IconButton(
             tooltip: 'گفت‌وگوی تازه',
-            onPressed: () => setState(_visibleMessages.clear),
+            onPressed: _resetChat,
             icon: const Icon(Icons.refresh_rounded),
           ),
         ],
@@ -273,14 +547,20 @@ class _AiChatScreenState extends State<AiChatScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.sizeOf(context).height * 0.4,
+              ),
+              child: SingleChildScrollView(
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
               color: theme.colorScheme.surfaceContainerHighest.withAlpha(110),
               child: Column(
                 children: [
                   const Text(
-                    'راهنمای آفلاین بر پایهٔ محتوای همین برنامه؛ پرسش‌ها از دستگاه خارج نمی‌شوند. به Gemini یا سرویس ابری وصل نیست.',
+                    'آموزش مرحله‌ای و آزمون تعاملی بر پایهٔ محتوای ذخیره‌شدهٔ فهمینو. '
+                    'همه‌چیز روی دستگاه انجام می‌شود؛ این بخش به مدل مولد اینترنتی وصل نیست.',
                     textAlign: TextAlign.center,
                   ),
                   if (_catalog.isNotEmpty) ...[
@@ -307,27 +587,17 @@ class _AiChatScreenState extends State<AiChatScreen> {
                       onChanged: (value) => setState(() {
                         _selectedSubjectId = value;
                         _selectedChapterIndex = -1;
+                        _quizQuestions = [];
+                        _awaitingQuizAnswer = false;
                       }),
                     ),
-                    const SizedBox(height: 8),
-                    Builder(builder: (context) {
-                      final subject = _selectedSubjectId == null
-                          ? null
-                          : _catalog[_selectedSubjectId];
-                      final chapters = subject is Map<String, dynamic>
-                          ? (subject['chapters'] as List<dynamic>? ?? [])
-                              .whereType<Map<String, dynamic>>()
-                              .toList()
-                          : <Map<String, dynamic>>[];
-                      if (chapters.isEmpty) return const SizedBox.shrink();
-                      final selectedIndex = _selectedChapterIndex >= chapters.length
-                          ? chapters.length - 1
-                          : _selectedChapterIndex;
-                      return DropdownButtonFormField<int>(
-                        initialValue: selectedIndex,
+                    if (chapters.isNotEmpty) ...[
+                      const SizedBox(height: 8),
+                      DropdownButtonFormField<int>(
+                        initialValue: _selectedChapterIndex,
                         isExpanded: true,
                         decoration: const InputDecoration(
-                          labelText: 'محدودهٔ جست‌وجو',
+                          labelText: 'فصل یا محدودهٔ آموزش',
                           isDense: true,
                           border: OutlineInputBorder(),
                         ),
@@ -339,16 +609,64 @@ class _AiChatScreenState extends State<AiChatScreen> {
                           for (var i = 0; i < chapters.length; i++)
                             DropdownMenuItem(
                               value: i,
-                              child: Text(chapters[i]['title'] as String? ?? 'بخش ' + (i + 1).toString()),
+                              child: Text(
+                                chapters[i]['title'] as String? ?? 'فصل ' + (i + 1).toString(),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                         ],
                         onChanged: (value) => setState(() {
                           _selectedChapterIndex = value ?? -1;
+                          _quizQuestions = [];
+                          _awaitingQuizAnswer = false;
                         }),
-                      );
-                    }),
+                      ),
+                    ],
+                    const SizedBox(height: 10),
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text(
+                        'شروع سریع',
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      alignment: WrapAlignment.start,
+                      children: [
+                        ActionChip(
+                          avatar: const Icon(Icons.school_outlined, size: 18),
+                          label: const Text('آموزش فصل'),
+                          onPressed: () =>
+                              _sendQuickPrompt('این فصل را از پایه آموزش بده'),
+                        ),
+                        ActionChip(
+                          avatar: const Icon(Icons.calculate_outlined, size: 18),
+                          label: const Text('مثال حل‌شده'),
+                          onPressed: () =>
+                              _sendQuickPrompt('یک مثال را مرحله‌به‌مرحله حل کن'),
+                        ),
+                        ActionChip(
+                          avatar: const Icon(Icons.quiz_outlined, size: 18),
+                          label: const Text('آزمون کوتاه'),
+                          onPressed: () => _sendQuickPrompt('از من آزمون بگیر'),
+                        ),
+                        ActionChip(
+                          avatar: const Icon(Icons.lightbulb_outline, size: 18),
+                          label: const Text('اشتباهات رایج'),
+                          onPressed: () =>
+                              _sendQuickPrompt('اشتباهات رایج این فصل چیست؟'),
+                        ),
+                      ],
+                    ),
                   ],
                 ],
+                  ),
+                ),
               ),
             ),
             Expanded(
@@ -377,7 +695,9 @@ class _AiChatScreenState extends State<AiChatScreen> {
                       textInputAction: TextInputAction.send,
                       onSubmitted: (_) => _send(),
                       decoration: InputDecoration(
-                        hintText: 'سؤالت را بنویس...',
+                        hintText: _awaitingQuizAnswer
+                            ? 'پاسخت را با الف، ب، پ یا ت بنویس...'
+                            : 'سؤالت را از معلم خصوصی بپرس...',
                         counterText: '',
                         filled: true,
                         border: OutlineInputBorder(
@@ -393,9 +713,9 @@ class _AiChatScreenState extends State<AiChatScreen> {
                   ),
                   const SizedBox(width: 8),
                   IconButton.filled(
-                    tooltip: 'پاسخ از محتوای فهمینو',
+                    tooltip: 'ارسال پرسش',
                     onPressed: _send,
-                    icon: const Icon(Icons.search_rounded),
+                    icon: const Icon(Icons.send_rounded),
                   ),
                 ],
               ),
@@ -457,13 +777,13 @@ class _EmptyChat extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.offline_bolt_rounded,
+            Icon(Icons.school_rounded,
                 size: 54, color: theme.colorScheme.primary),
             const SizedBox(height: 14),
             Text('از کجا شروع کنیم؟', style: theme.textTheme.titleLarge),
             const SizedBox(height: 8),
             const Text(
-              'مثلاً بپرس: «عددهای گویا چیست؟» یا «این تمرین را مرحله‌به‌مرحله توضیح بده.»',
+              'درس و فصل را انتخاب کن؛ بعد از معلم خصوصی بخواه آموزش بدهد، مثال حل کند یا از تو آزمون بگیرد.',
               textAlign: TextAlign.center,
             ),
           ],

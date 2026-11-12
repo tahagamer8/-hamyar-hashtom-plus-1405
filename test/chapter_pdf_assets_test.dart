@@ -11,7 +11,7 @@ void main() {
     'quran', 'religion', 'science', 'social', 'thinking', 'work', 'writing',
   ];
 
-  test('every chapter has separate offline notes and questions PDFs', () async {
+  test('every chapter PDF is a valid, loadable Flutter asset', () async {
     var chapterCount = 0;
     for (final subjectId in subjects) {
       final raw = await rootBundle.loadString(
@@ -25,10 +25,16 @@ void main() {
       for (var index = 0; index < chapters.length; index++) {
         final prefix = 'assets/generated_pdfs/chapters/$subjectId/'
             'Fahmino-$subjectId-Chapter-${index + 1}';
-        final notes = await rootBundle.load('$prefix-Notes-FA.pdf');
-        final questions = await rootBundle.load('$prefix-Questions-FA.pdf');
-        expect(notes.lengthInBytes, greaterThan(500), reason: '$subjectId/$index notes');
-        expect(questions.lengthInBytes, greaterThan(500), reason: '$subjectId/$index questions');
+        for (final suffix in ['Notes', 'Questions']) {
+          final path = '$prefix-$suffix-FA.pdf';
+          final data = await rootBundle.load(path);
+          expect(data.lengthInBytes, greaterThan(500), reason: path);
+          final bytes = data.buffer.asUint8List(
+            data.offsetInBytes,
+            data.lengthInBytes,
+          );
+          expect(ascii.decode(bytes.take(4).toList()), '%PDF', reason: path);
+        }
         chapterCount++;
       }
     }

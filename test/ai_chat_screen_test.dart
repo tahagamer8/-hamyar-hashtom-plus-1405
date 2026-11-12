@@ -6,130 +6,178 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hamyar_hashtom_plus/features/ai/presentation/screens/ai_chat_screen.dart';
 
-const _testCatalog = r'''
-{
-  "math": {
-    "title": "ریاضی",
-    "chapters": [{
-      "title": "عددهای صحیح و گویا",
-      "summary": "عددهای گویا را می‌توان به صورت کسر نوشت.",
-      "points": ["قرینهٔ هر عدد با تغییر علامت آن به دست می‌آید."],
-      "example": "مثال: ۱/۲ + ۱/۳ را حساب کن.",
-      "solutionSteps": ["مخرج مشترک ۶ انتخاب می‌کنیم.", "۱/۲ = ۳/۶ و ۱/۳ = ۲/۶.", "۳/۶ + ۲/۶ = ۵/۶."],
-      "commonMistakes": ["در جمع کسرها ابتدا مخرج مشترک بگیر."],
-      "questions": [{
-        "question": "حاصل ۱/۲ + ۱/۴ کدام است؟",
-        "options": ["۱/۶", "۲/۶", "۳/۴", "۱"],
-        "answer": 2,
-        "explanation": "۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ = ۳/۴."
-      }]
-    }, {
-      "title": "زاویه‌ها",
-      "summary": "زاویه از دو نیم‌خط با مبدأ مشترک تشکیل می‌شود.",
-      "points": ["مبدأ دو نیم‌خط رأس زاویه است."],
-      "example": "اندازه زاویه را با نقاله می‌سنجیم.",
-      "solutionSteps": ["مرکز نقاله را روی رأس قرار بده."],
-      "commonMistakes": ["واحد اندازه‌گیری زاویه درجه است."],
-      "questions": []
-    }]
+class _TutorAssetBundle extends CachingAssetBundle {
+  static const _catalog = '''
+  {
+    "math": {
+      "title": "ریاضی هشتم",
+      "chapters": []
+    }
   }
-}
-''';
+  ''';
 
-class _TestAssetBundle extends CachingAssetBundle {
+  static const _mathPack = '''
+  {
+    "schemaVersion": 1,
+    "subjectId": "math",
+    "title": "ریاضی هشتم",
+    "chapters": [
+      {
+        "title": "عددهای صحیح و گویا",
+        "summary": "عددهای گویا به شکل کسر نوشته می‌شوند و مخرج آن‌ها نباید صفر باشد.",
+        "lessonContent": "درسنامهٔ کامل عددهای گویا: عدد گویا را می‌توان به شکل a/b نوشت که a و b عدد صحیح‌اند و b صفر نیست. برای جمع و تفریق کسرها ابتدا مخرج مشترک پیدا می‌کنیم. سپس صورت‌ها را با توجه به علامت‌ها جمع یا تفریق می‌کنیم و مخرج را ثابت نگه می‌داریم. در پایان، اگر ممکن بود کسر را ساده می‌کنیم. هنگام حل مسئله، اول داده‌ها و خواسته را جدا کن و بعد روش مناسب را انتخاب کن.",
+        "points": [
+          "مخرج کسر نباید صفر باشد.",
+          "برای جمع کسرها ابتدا مخرج مشترک می‌گیریم."
+        ],
+        "example": "۱/۲ + ۱/۴ = ۳/۴",
+        "solutionSteps": [
+          "مخرج مشترک ۴ انتخاب می‌کنیم.",
+          "۱/۲ را به ۲/۴ تبدیل می‌کنیم.",
+          "۲/۴ + ۱/۴ = ۳/۴"
+        ],
+        "commonMistakes": [
+          "صورت و مخرج را بدون مخرج مشترک با هم جمع نکن."
+        ],
+        "workedExamples": [
+          {
+            "title": "جمع کسرها",
+            "problem": "۱/۲ + ۱/۴",
+            "answer": "۳/۴",
+            "explanation": "ابتدا ۱/۲ را به ۲/۴ تبدیل می‌کنیم و سپس صورت‌ها را جمع می‌کنیم.",
+            "steps": ["مخرج مشترک ۴ انتخاب می‌کنیم.", "۱/۲ را به ۲/۴ تبدیل می‌کنیم.", "۲/۴ + ۱/۴ = ۳/۴"]
+          },
+          {
+            "title": "تمرین همراه",
+            "problem": "حاصل ۱/۲ + ۱/۴ کدام است؟",
+            "answer": "۳/۴",
+            "explanation": "۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ برابر ۳/۴ می‌شود.",
+            "steps": ["مخرج‌ها را به ۴ تبدیل کن.", "صورت‌های ۲ و ۱ را جمع کن.", "پاسخ ۳/۴ است."]
+          }
+        ],
+        "chapterExam": [
+          {
+            "question": "حاصل ۱/۲ + ۱/۴ کدام است؟",
+            "options": ["۱/۲", "۳/۴", "۱", "۱/۴"],
+            "answer": 1,
+            "explanation": "۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ برابر ۳/۴ می‌شود."
+          },
+          {
+            "question": "درست یا نادرست: مخرج یک کسر نباید صفر باشد.",
+            "questionType": "true_false",
+            "answer": "درست",
+            "explanation": "تقسیم بر صفر تعریف نشده است."
+          }
+        ],
+        "questions": [
+          {
+            "question": "حاصل ۱/۲ + ۱/۴ کدام است؟",
+            "options": ["۱/۲", "۳/۴", "۱", "۱/۴"],
+            "answer": 1,
+            "explanation": "۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ برابر ۳/۴ می‌شود."
+          }
+        ],
+        "advancedQuestions": []
+      }
+    ]
+  }
+  ''';
+
   @override
   Future<ByteData> load(String key) async {
-    if (key != 'assets/content/catalog_fa.json') {
-      throw FlutterError('Unexpected test asset: $key');
+    final String? value = switch (key) {
+      'assets/content/catalog_fa.json' => _catalog,
+      'assets/content/subjects/math.json' => _mathPack,
+      _ => null,
+    };
+    if (value == null) {
+      throw FlutterError('Unexpected tutor test asset: $key');
     }
-    return ByteData.sublistView(
-      Uint8List.fromList(utf8.encode(_testCatalog)),
-    );
-  }
-}
-
-Widget _testApp() => MaterialApp(
-      home: DefaultAssetBundle(
-        bundle: _TestAssetBundle(),
-        child: const AiChatScreen(),
-      ),
-    );
-
-Future<void> _pumpUiFrames(WidgetTester tester) async {
-  // Bounded frame pumping avoids hanging forever on repeating animations.
-  await tester.pump();
-  for (var i = 0; i < 7; i++) {
-    await tester.pump(const Duration(milliseconds: 100));
+    return ByteData.sublistView(Uint8List.fromList(utf8.encode(value)));
   }
 }
 
 void main() {
-  testWidgets('offline study guide shows lesson selectors and message input', (tester) async {
-    await tester.pumpWidget(_testApp());
-    await _pumpUiFrames(tester);
+  TestWidgetsFlutterBinding.ensureInitialized();
 
-    expect(find.text('راهنمای آفلاین فهمینو'), findsOneWidget);
-    expect(find.text('از کجا شروع کنیم؟'), findsOneWidget);
-    expect(find.byType(TextField), findsOneWidget);
-    expect(find.byType(DropdownButtonFormField<String>), findsOneWidget);
-    expect(find.byType(DropdownButtonFormField<int>), findsOneWidget);
-    expect(find.byTooltip('پاسخ از محتوای فهمینو'), findsOneWidget);
-    expect(find.textContaining('پرسش‌ها از دستگاه خارج نمی‌شوند'), findsOneWidget);
-  });
+  String tutorMessages(WidgetTester tester) => tester
+      .widgetList<SelectableText>(find.byType(SelectableText))
+      .map((widget) => widget.data ?? '')
+      .join('\n');
 
-  testWidgets('offline guide answers from the selected chapter without a network call', (tester) async {
-    await tester.pumpWidget(_testApp());
-    await _pumpUiFrames(tester);
-
-    await tester.enterText(find.byType(TextField), 'عددهای گویا چیست؟');
-    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
-
-    expect(find.textContaining('عددهای گویا را می‌توان به صورت کسر نوشت.'), findsOneWidget);
-    expect(find.textContaining('پاسخ‌ساز اینترنتی نیست'), findsOneWidget);
-  });
-
-  testWidgets('offline guide can show chapter-specific common mistakes', (tester) async {
-    await tester.pumpWidget(_testApp());
-    await _pumpUiFrames(tester);
-
-    await tester.enterText(find.byType(TextField), 'اشتباهات رایج کسرها چیست؟');
-    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
-
-    expect(find.textContaining('در جمع کسرها ابتدا مخرج مشترک بگیر.'), findsOneWidget);
-  });
-
-  testWidgets('offline guide can answer from a later selected chapter', (tester) async {
-    await tester.pumpWidget(_testApp());
-    await _pumpUiFrames(tester);
-
-    await tester.tap(find.byType(DropdownButtonFormField<int>));
+  Future<void> openTutor(WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: DefaultAssetBundle(
+          bundle: _TutorAssetBundle(),
+          child: const AiChatScreen(),
+        ),
+      ),
+    );
     await tester.pumpAndSettle();
-    await tester.tap(find.text('زاویه‌ها').last);
-    await tester.pump();
+  }
 
-    await tester.enterText(find.byType(TextField), 'زاویه چیست؟');
-    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
+  testWidgets('private tutor teaches a selected chapter from local content',
+      (tester) async {
+    await openTutor(tester);
 
-    expect(find.textContaining('زاویه از دو نیم‌خط با مبدأ مشترک تشکیل می‌شود.'), findsOneWidget);
+    expect(find.text('معلم خصوصی فهمینو'), findsOneWidget);
+    expect(find.text('آموزش فصل'), findsOneWidget);
+
+    await tester.ensureVisible(find.text('آموزش فصل'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('آموزش فصل'));
+    await tester.pumpAndSettle();
+
+    expect(tutorMessages(tester), contains('عددهای گویا به شکل کسر نوشته می‌شوند'));
+    expect(tutorMessages(tester), contains('حل مرحله‌به‌مرحله'));
+    expect(tutorMessages(tester), contains('مخرج مشترک ۴ انتخاب می‌کنیم.'));
+    expect(tutorMessages(tester), contains('مراقب این اشتباه‌ها باش'));
+    expect(tutorMessages(tester), contains('درسنامهٔ کامل عددهای گویا'));
   });
 
-  testWidgets('offline guide searches all chapters when the all-chapters filter is selected', (tester) async {
-    await tester.pumpWidget(_testApp());
-    await _pumpUiFrames(tester);
+  testWidgets('private tutor runs an interactive quiz and explains the answer',
+      (tester) async {
+    await openTutor(tester);
 
-    await tester.enterText(find.byType(TextField), 'زاویه چیست؟');
-    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
+    await tester.ensureVisible(find.text('آزمون کوتاه'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('آزمون کوتاه'));
+    await tester.pumpAndSettle();
 
-    expect(find.textContaining('زاویه از دو نیم‌خط با مبدأ مشترک تشکیل می‌شود.'), findsOneWidget);
-    expect(find.textContaining('عددهای گویا را می‌توان به صورت کسر نوشت.'), findsNothing);
+    expect(tutorMessages(tester), contains('حاصل ۱/۲ + ۱/۴ کدام است؟'));
+    expect(tutorMessages(tester), contains('پاسخت کدام گزینه است؟'));
+
+    await tester.enterText(find.byType(TextField), 'ب');
+    await tester.tap(find.byTooltip('ارسال پرسش'));
+    await tester.pumpAndSettle();
+
+    expect(tutorMessages(tester), contains('آفرین، این پاسخ درست است.'));
+    expect(
+      tutorMessages(tester),
+      contains('۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ برابر ۳/۴ می‌شود.'),
+    );
+    expect(tutorMessages(tester), contains('درست یا نادرست: مخرج یک کسر نباید صفر باشد.'));
+    await tester.enterText(find.byType(TextField), 'الف');
+    await tester.tap(find.byTooltip('ارسال پرسش'));
+    await tester.pumpAndSettle();
+    expect(tutorMessages(tester), contains('2 پاسخ درست از 2 سؤال'));
   });
 
+  testWidgets('private tutor asks for a valid option before grading a quiz',
+      (tester) async {
+    await openTutor(tester);
+
+    await tester.ensureVisible(find.text('آزمون کوتاه'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('آزمون کوتاه'));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'شاید');
+    await tester.tap(find.byTooltip('ارسال پرسش'));
+    await tester.pumpAndSettle();
+
+    expect(tutorMessages(tester), contains('با شمارهٔ گزینه یا حرف الف، ب، پ یا ت'));
+    expect(tutorMessages(tester), contains('پاسخت کدام گزینه است؟'));
+  });
 }

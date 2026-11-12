@@ -180,7 +180,7 @@ void main() {
     expect((artChapters[2] as Map<String, dynamic>)['choiceTopics'], ['بافت', 'چاپ دستی']);
   });
 
-  test('all 145 sections include an authored reasoning question and a term assignment', () async {
+  test('all 145 sections include authored lessons, mixed practice and chapter exams', () async {
     const ids = <String>[
       'math', 'science', 'persian', 'writing', 'arabic', 'english',
       'social', 'religion', 'quran', 'thinking', 'work',
@@ -188,41 +188,102 @@ void main() {
     ];
     var sections = 0;
     var advancedQuestions = 0;
+    var chapterExamQuestions = 0;
+    var shortAnswerCount = 0;
+    var trueFalseCount = 0;
+    var essayQuestionCount = 0;
+
     for (final id in ids) {
       final raw = await rootBundle.loadString('assets/content/subjects/$id.json');
       final pack = jsonDecode(raw) as Map<String, dynamic>;
       expect(pack['sampleQuestionBankVersion'], 1, reason: id);
+      expect(pack['contentVersion'], '2026.11.12.1', reason: id);
       final chapters = pack['chapters'] as List<dynamic>;
       final firstTerm = <Map<String, dynamic>>[];
       final secondTerm = <Map<String, dynamic>>[];
+
       for (final value in chapters) {
         final chapter = value as Map<String, dynamic>;
         sections++;
+        final title = chapter['title'] as String;
         final term = chapter['examTerm'];
-        expect(term, anyOf('first', 'second'), reason: chapter['title'] as String);
+        expect(term, anyOf('first', 'second'), reason: title);
         if (term == 'first') firstTerm.add(chapter);
         if (term == 'second') secondTerm.add(chapter);
 
+        final lesson = chapter['lessonContent'] as String;
+        expect(lesson.trim().length, greaterThanOrEqualTo(350), reason: title);
+        expect(chapter['learningObjectives'], isA<List<dynamic>>(), reason: title);
+        expect(chapter['workedExamples'], isA<List<dynamic>>(), reason: title);
+        final examples = chapter['workedExamples'] as List<dynamic>;
+        expect(examples.length, greaterThanOrEqualTo(2), reason: title);
+        for (final exampleValue in examples) {
+          final example = exampleValue as Map<String, dynamic>;
+          expect((example['problem'] as String).trim(), isNotEmpty, reason: title);
+          expect((example['answer'] as String).trim(), isNotEmpty, reason: title);
+          expect((example['explanation'] as String).trim(), isNotEmpty, reason: title);
+          expect(example['steps'], isA<List<dynamic>>(), reason: title);
+        }
+
         final questions = chapter['advancedQuestions'] as List<dynamic>;
-        expect(questions, hasLength(1), reason: chapter['title'] as String);
-        final question = questions.single as Map<String, dynamic>;
-        final options = question['options'] as List<dynamic>;
-        final answer = question['answer'] as int;
-        expect(question['questionType'], 'reasoning');
-        expect(question['difficulty'], 'استدلالی');
-        expect(question['source'], 'تألیفی فهمینو');
-        expect((question['question'] as String).trim(), isNotEmpty);
-        expect(options, hasLength(4));
-        expect(options.toSet().length, 4);
-        expect(answer, inInclusiveRange(0, 3));
-        expect((question['explanation'] as String).trim(), isNotEmpty);
-        advancedQuestions += questions.length;
+        expect(questions, hasLength(3), reason: title);
+        final shortAnswers = questions
+            .where((item) => (item as Map<String, dynamic>)['questionType'] == 'short_answer')
+            .toList();
+        final trueFalse = questions
+            .where((item) => (item as Map<String, dynamic>)['questionType'] == 'true_false')
+            .toList();
+        expect(shortAnswers, hasLength(2), reason: title);
+        expect(trueFalse, hasLength(1), reason: title);
+
+        for (final questionValue in questions) {
+          final question = questionValue as Map<String, dynamic>;
+          expect(question['source'], 'تألیفی فهمینو', reason: title);
+          expect((question['question'] as String).trim(), isNotEmpty, reason: title);
+          expect((question['explanation'] as String).trim(), isNotEmpty, reason: title);
+          expect((question['difficulty'] as String).trim(), isNotEmpty, reason: title);
+          if (question['questionType'] == 'short_answer') {
+            expect((question['answer'] as String).trim(), isNotEmpty, reason: title);
+            shortAnswerCount++;
+          } else {
+            expect(question['questionType'], 'true_false', reason: title);
+            expect(question['answer'], anyOf('درست', 'نادرست'), reason: title);
+            trueFalseCount++;
+          }
+          advancedQuestions++;
+        }
+
+        final essays = chapter['essayQuestions'] as List<dynamic>;
+        expect(essays, hasLength(1), reason: title);
+        final essay = essays.single as Map<String, dynamic>;
+        expect(essay['questionType'], 'essay', reason: title);
+        expect(essay['source'], 'تألیفی فهمینو', reason: title);
+        expect((essay['question'] as String).trim(), isNotEmpty, reason: title);
+        expect(essay['answerGuidelines'], isA<List<dynamic>>(), reason: title);
+        expect(essay['evaluationCriteria'], hasLength(4), reason: title);
+        essayQuestionCount++;
+
+        final exam = chapter['chapterExam'] as List<dynamic>;
+        expect(exam.length, greaterThanOrEqualTo(5), reason: title);
+        expect(
+          exam.every((item) => item is Map<String, dynamic> &&
+              (item['question'] as String? ?? '').trim().isNotEmpty &&
+              (item['explanation'] as String? ?? '').trim().isNotEmpty),
+          isTrue,
+          reason: title,
+        );
+        chapterExamQuestions += exam.length;
       }
       expect(firstTerm, isNotEmpty, reason: id);
       expect(secondTerm, isNotEmpty, reason: id);
     }
+
     expect(sections, 145);
-    expect(advancedQuestions, 145);
+    expect(advancedQuestions, 435);
+    expect(shortAnswerCount, 290);
+    expect(trueFalseCount, 145);
+    expect(essayQuestionCount, 145);
+    expect(chapterExamQuestions, greaterThanOrEqualTo(725));
   });
 
   test('all 13 subject packs reference official 1405-1406 textbook PDFs', () async {

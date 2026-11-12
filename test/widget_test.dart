@@ -38,6 +38,51 @@ const _testCatalog = r'''
 }
 ''';
 
+const _mixedFormatCatalog = r'''
+{
+  "math": {
+    "title": "ریاضی",
+    "chapters": [{
+      "title": "عددهای صحیح و گویا",
+      "summary": "عددهای گویا را می‌توان به صورت کسر نوشت و مخرج نباید صفر باشد.",
+      "points": ["مخرج کسر نباید صفر باشد."],
+      "example": "۱/۲ + ۱/۴ = ۳/۴",
+      "solutionSteps": ["مخرج مشترک ۴ انتخاب می‌کنیم.", "۱/۲ را به ۲/۴ تبدیل می‌کنیم.", "۲/۴ + ۱/۴ = ۳/۴."],
+      "commonMistakes": ["در جمع کسرها ابتدا مخرج مشترک بگیر."],
+      "questions": [{
+        "question": "حاصل ۱/۲ + ۱/۴ کدام است؟",
+        "options": ["۱/۶", "۲/۶", "۳/۴", "۱"],
+        "answer": 2,
+        "explanation": "۱/۲ برابر ۲/۴ است؛ پس ۲/۴ + ۱/۴ = ۳/۴."
+      }],
+      "advancedQuestions": [
+        {
+          "question": "پاسخ کوتاه: چرا برای جمع کسرها مخرج مشترک می‌گیریم؟",
+          "questionType": "short_answer",
+          "answer": "برای هم‌اندازه کردن واحدها و جمع صورت‌ها.",
+          "explanation": "مخرج مشترک نشان می‌دهد قسمت‌های کسر هم‌اندازه شده‌اند.",
+          "difficulty": "مفهومی"
+        },
+        {
+          "question": "پاسخ کوتاه: ۱/۲ را با مخرج ۴ بنویس.",
+          "questionType": "short_answer",
+          "answer": "۲/۴",
+          "explanation": "صورت و مخرج را در ۲ ضرب می‌کنیم.",
+          "difficulty": "پایه"
+        },
+        {
+          "question": "درست یا نادرست: در پرسش «حاصل ۱/۲ + ۱/۴ کدام است؟»، پاسخ «۱/۶» درست است.",
+          "questionType": "true_false",
+          "answer": "نادرست",
+          "explanation": "۱/۶ درست نیست؛ ابتدا ۱/۲ را به ۲/۴ تبدیل می‌کنیم و پاسخ ۳/۴ می‌شود.",
+          "difficulty": "کاربردی"
+        }
+      ]
+    }]
+  }
+}
+''';
+
 class _MemoryAssetBundle extends CachingAssetBundle {
   _MemoryAssetBundle(this.catalog);
 
@@ -245,7 +290,7 @@ void main() {
     expect(find.text(AppConstants.appName), findsWidgets);
     expect(find.text('VIII'), findsOneWidget);
     expect(find.text('دسترسی سریع'), findsOneWidget);
-    expect(find.text('راهنمای آفلاین فهمینو', skipOffstage: false), findsOneWidget);
+    expect(find.text('معلم خصوصی هوشمند فهمینو', skipOffstage: false), findsOneWidget);
 
   });
 
@@ -365,12 +410,137 @@ void main() {
     await _pumpUiFrames(tester);
     expect(find.textContaining('حاصل ۱/۲ + ۱/۴ کدام است؟'), findsOneWidget);
     expect(find.textContaining('آفرین، پاسخ درست است.'), findsNothing);
+    await tester.ensureVisible(find.text('۳/۴').first);
+    await tester.pump();
     await tester.tap(find.text('۳/۴').first);
+    await tester.pump();
+    await tester.ensureVisible(find.text('بررسی پاسخ'));
     await tester.pump();
     await tester.tap(find.text('بررسی پاسخ'));
     await tester.pump();
     expect(find.textContaining('آفرین، پاسخ درست است.'), findsOneWidget);
     expect(find.textContaining('۱/۲ برابر ۲/۴ است'), findsOneWidget);
+  });
+
+  testWidgets('lesson question bank supports written answers and true-false checks', (tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: DefaultAssetBundle(
+            bundle: _MemoryAssetBundle(_mixedFormatCatalog),
+            child: const ContentLibraryScreen(
+              subjectId: 'math',
+              featureId: 'lessonQuestions',
+            ),
+          ),
+        ),
+      ),
+    );
+    await _pumpUiFrames(tester);
+
+    // The first short-answer item asks for the reason; the second asks for
+    // the equivalent fraction. Keep each expected answer aligned to its index.
+    final reasoningField = find.byKey(const ValueKey('short-answer-1'));
+    await tester.ensureVisible(reasoningField);
+    await tester.pump();
+    await tester.enterText(reasoningField, 'برای هم‌اندازه کردن واحدها');
+    await tester.pump();
+    final reasoningCheck = find.byKey(const ValueKey('check-question-1'));
+    await tester.ensureVisible(reasoningCheck);
+    await tester.pump();
+    expect(tester.widget<FilledButton>(reasoningCheck).onPressed, isNotNull);
+    await tester.tap(reasoningCheck);
+    await tester.pumpAndSettle();
+    expect(
+      find.textContaining('پاسخ پیشنهادی: برای هم‌اندازه کردن واحدها و جمع صورت‌ها.'),
+      findsOneWidget,
+    );
+
+    final fractionField = find.byKey(const ValueKey('short-answer-2'));
+    await tester.ensureVisible(fractionField);
+    await tester.pump();
+    await tester.enterText(fractionField, '۲/۴');
+    await tester.pump();
+    final fractionCheck = find.byKey(const ValueKey('check-question-2'));
+    await tester.ensureVisible(fractionCheck);
+    await tester.pump();
+    expect(tester.widget<FilledButton>(fractionCheck).onPressed, isNotNull);
+    await tester.tap(fractionCheck);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('پاسخ پیشنهادی: ۲/۴'), findsOneWidget);
+
+    final trueOption = find.descendant(
+      of: find.byKey(const ValueKey('question-options-3')),
+      matching: find.text('نادرست'),
+    );
+    await tester.ensureVisible(trueOption);
+    await tester.pump();
+    await tester.tap(trueOption);
+    await tester.pump();
+    final trueFalseCheck = find.byKey(const ValueKey('check-question-3'));
+    await tester.ensureVisible(trueFalseCheck);
+    await tester.pump();
+    await tester.tap(trueFalseCheck);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('آفرین، پاسخ درست است.'), findsOneWidget);
+  });
+
+  testWidgets('chapter practice stores an incorrect answer for offline review',
+      (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(_contentApp('lessonQuestions'));
+    await _pumpUiFrames(tester);
+
+    final wrongOption = find.text('۱/۶').first;
+    await tester.ensureVisible(wrongOption);
+    await tester.pump();
+    await tester.tap(wrongOption);
+    await tester.pump();
+
+    final check = find.byKey(const ValueKey('check-question-0'));
+    await tester.ensureVisible(check);
+    await tester.pump();
+    await tester.tap(check);
+    await tester.pumpAndSettle();
+
+    final preferences = await SharedPreferences.getInstance();
+    final rows = preferences.getStringList('fahmino_wrong_answers_v1');
+    expect(rows, isNotNull);
+    expect(rows, hasLength(1));
+    final record = jsonDecode(rows!.single) as Map<String, dynamic>;
+    expect(record['subjectTitle'], 'ریاضی');
+    expect(record['question'], 'حاصل ۱/۲ + ۱/۴ کدام است؟');
+    expect(record['selectedAnswer'], '۱/۶');
+    expect(record['correctAnswer'], '۳/۴');
+  });
+
+  testWidgets('timed exam stores wrong answers and answer explanations',
+      (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(_contentApp('quiz'));
+    await _pumpUiFrames(tester);
+
+    final wrongOption = find.text('۱/۶').first;
+    await tester.ensureVisible(wrongOption);
+    await tester.pump();
+    await tester.tap(wrongOption);
+    await tester.pump();
+
+    await tester.tap(find.text('ثبت و پایان آزمون'));
+    await _pumpUiFrames(tester);
+    await tester.tap(find.text('ثبت آزمون'));
+    await _pumpUiFrames(tester);
+
+    final preferences = await SharedPreferences.getInstance();
+    final rows = preferences.getStringList('fahmino_wrong_answers_v1');
+    expect(rows, isNotNull);
+    expect(rows, hasLength(1));
+    final record = jsonDecode(rows!.single) as Map<String, dynamic>;
+    expect(record['subjectTitle'], 'ریاضی');
+    expect(record['question'], 'حاصل ۱/۲ + ۱/۴ کدام است؟');
+    expect(record['selectedAnswer'], '۱/۶');
+    expect(record['correctAnswer'], '۳/۴');
+    expect(record['explanation'], contains('۱/۲ برابر ۲/۴ است'));
   });
 
   testWidgets('combined quiz has a timer and reveals answers after submission', (tester) async {
@@ -498,6 +668,8 @@ void main() {
     await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump();
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
@@ -530,6 +702,8 @@ void main() {
     await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump();
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
@@ -562,6 +736,8 @@ void main() {
     await _pumpUiFrames(tester);
 
     expect(find.text('اشتباهات رایج'), findsOneWidget);
+    await tester.ensureVisible(find.text('اشتباهات رایج'));
+    await tester.pump();
     await tester.tap(find.text('اشتباهات رایج'));
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pump(const Duration(milliseconds: 400));
@@ -618,13 +794,13 @@ void main() {
     });
     await tester.pump();
     await _pumpUiFrames(tester);
-    expect(find.text('راهنمای آفلاین فهمینو'), findsOneWidget);
-    expect(find.textContaining('پرسش‌ها از دستگاه خارج نمی‌شوند'), findsOneWidget);
+    expect(find.text('معلم خصوصی فهمینو'), findsOneWidget);
+    expect(find.textContaining('همه‌چیز روی دستگاه انجام می‌شود'), findsOneWidget);
     expect(find.text('همهٔ فصل‌های این درس'), findsOneWidget);
-    expect(find.byTooltip('پاسخ از محتوای فهمینو'), findsOneWidget);
+    expect(find.byTooltip('ارسال پرسش'), findsOneWidget);
 
     await tester.enterText(find.byType(TextField), 'پست الکترونیکی چیست؟');
-    await tester.tap(find.byTooltip('پاسخ از محتوای فهمینو'));
+    await tester.tap(find.byTooltip('ارسال پرسش'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
     expect(

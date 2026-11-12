@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
 
       - uses: subosito/flutter-action@v2
         with:
@@ -114,6 +114,44 @@ jobs:
 
       - name: Build release APKs
         run: flutter build apk --release --split-per-abi
+
+      - name: Verify offline chapter PDFs are packaged in every ABI APK
+        run: |
+          python - <<'PY'
+          import json
+          import zipfile
+          from pathlib import Path
+
+          subject_dir = Path("assets/content/subjects")
+          subject_ids = [
+              "arabic", "art", "english", "english_workbook", "math",
+              "persian", "quran", "religion", "science", "social",
+              "thinking", "work", "writing",
+          ]
+          expected = set()
+          for subject_id in subject_ids:
+              pack = json.loads((subject_dir / f"{subject_id}.json").read_text(encoding="utf-8"))
+              for index, _chapter in enumerate(pack["chapters"], start=1):
+                  prefix = f"assets/flutter_assets/assets/generated_pdfs/chapters/{subject_id}/Fahmino-{subject_id}-Chapter-{index}"
+                  expected.add(prefix + "-Notes-FA.pdf")
+                  expected.add(prefix + "-Questions-FA.pdf")
+
+          if len(expected) != 290:
+              raise SystemExit(f"Expected 290 unique chapter PDFs, got {len(expected)}")
+
+          apk_dir = Path("build/app/outputs/flutter-apk")
+          apks = sorted(apk_dir.glob("app-*-release.apk"))
+          if len(apks) != 3:
+              raise SystemExit(f"Expected three split-ABI APKs, found {len(apks)}")
+
+          for apk in apks:
+              with zipfile.ZipFile(apk) as archive:
+                  packaged = set(archive.namelist())
+              missing = expected - packaged
+              if missing:
+                  raise SystemExit(f"{apk.name} is missing {len(missing)} chapter PDFs: {sorted(missing)[:5]}")
+              print(f"{apk.name}: verified all {len(expected)} chapter PDFs")
+          PY
 
       - uses: actions/upload-artifact@v4
         with:

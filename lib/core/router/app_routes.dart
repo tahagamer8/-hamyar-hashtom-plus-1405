@@ -8,6 +8,8 @@ abstract final class AppRoutes {
   static const String favorites = '/favorites';
   static const String settings = '/settings';
   static const String ai = '/ai';
+  static const String studyPlanner = '/study-planner';
+  static const String mistakes = '/mistakes';
 
   static String subjectDetail(String id) => '$subjects/$id';
 }

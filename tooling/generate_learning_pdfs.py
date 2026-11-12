@@ -46,12 +46,30 @@ def load_subjects(directory: Path) -> dict:
             for key in ("title", "summary", "points", "example", "solutionSteps", "questions"):
                 if key not in chapter:
                     raise ValueError(f"Missing {key}: {sid}/{chapter.get('title')}")
+            if not isinstance(chapter.get("lessonContent"), str) or len(chapter["lessonContent"].strip()) < 350:
+                raise ValueError(f"Missing authored lesson content: {sid}/{chapter.get('title')}")
+            if not isinstance(chapter.get("workedExamples"), list) or len(chapter["workedExamples"]) < 2:
+                raise ValueError(f"Missing worked examples: {sid}/{chapter.get('title')}")
+            if not isinstance(chapter.get("chapterExam"), list) or len(chapter["chapterExam"]) < 5:
+                raise ValueError(f"Missing chapter exam: {sid}/{chapter.get('title')}")
             for q in [*chapter["questions"], *chapter.get("advancedQuestions", [])]:
-                opts, answer = q.get("options"), q.get("answer")
-                if not isinstance(opts, list) or len(opts) < 2 or not isinstance(answer, int) or not 0 <= answer < len(opts):
-                    raise ValueError(f"Invalid question: {sid}/{q.get('question')}")
-                if not q.get("explanation"):
-                    raise ValueError(f"Missing explanation: {sid}/{q.get('question')}")
+                prompt = q.get("question")
+                explanation = q.get("explanation")
+                answer = q.get("answer")
+                if not isinstance(prompt, str) or not prompt.strip() or not isinstance(explanation, str) or not explanation.strip():
+                    raise ValueError(f"Invalid prompt/explanation: {sid}/{q.get('question')}")
+                options = q.get("options")
+                if isinstance(options, list):
+                    if len(options) < 2 or not all(isinstance(option, str) and option.strip() for option in options) or not isinstance(answer, int) or isinstance(answer, bool) or not 0 <= answer < len(options):
+                        raise ValueError(f"Invalid MCQ: {sid}/{q.get('question')}")
+                elif q.get("questionType") == "short_answer":
+                    if not isinstance(answer, str) or not answer.strip():
+                        raise ValueError(f"Invalid short answer: {sid}/{q.get('question')}")
+                elif q.get("questionType") == "true_false":
+                    if answer not in ("درست", "نادرست"):
+                        raise ValueError(f"Invalid true/false: {sid}/{q.get('question')}")
+                else:
+                    raise ValueError(f"Unsupported question type: {sid}/{q.get('question')}")
         subjects[sid] = data
     if len(subjects) != 13:
         raise ValueError(f"Expected 13 current subject packs, found {len(subjects)}")
@@ -92,59 +110,139 @@ def footer(canvas, doc):
 def add_chapter_notes(story, chapter, st):
     story.append(Paragraph(rtl(chapter["title"]), st["chapter"]))
     story.append(Paragraph(rtl(chapter["summary"]), st["body"]))
+
+    lesson = chapter.get("lessonContent", "")
+    if lesson:
+        story.append(Paragraph(rtl("درسنامهٔ کامل و اهداف یادگیری"), st["question"]))
+        for line in lesson.splitlines():
+            cleaned = line.strip()
+            if not cleaned:
+                story.append(Spacer(1, 1.2 * mm))
+            elif len(cleaned) < 45 and not cleaned.endswith((".", "؟", "؛")):
+                story.append(Paragraph(rtl(cleaned), st["question"]))
+            else:
+                story.append(Paragraph(rtl(cleaned), st["body"]))
+
+    objectives = chapter.get("learningObjectives", [])
+    if objectives:
+        story.append(Paragraph(rtl("پس از مطالعه باید بتوانی"), st["question"]))
+        for objective in objectives:
+            story.append(Paragraph(rtl("• " + objective), st["body"]))
+
     if chapter["points"]:
         story.append(Paragraph(rtl("نکته‌های کلیدی"), st["question"]))
         for point in chapter["points"]:
             story.append(Paragraph(rtl("• " + point), st["body"]))
-    if chapter.get("example"):
+
+    examples = chapter.get("workedExamples", [])
+    if examples:
+        story.append(Paragraph(rtl("نمونه‌های حل‌شده"), st["question"]))
+        for number, example in enumerate(examples, 1):
+            block = [
+                Paragraph(rtl(f"{number}. {example.get('title', 'نمونهٔ آموزشی')}"), st["question"]),
+                Paragraph(rtl("پرسش: " + str(example.get("problem", ""))), st["body"]),
+            ]
+            for step_no, step in enumerate(example.get("steps", []), 1):
+                block.append(Paragraph(rtl(f"{step_no}. {step}"), st["body"]))
+            block.extend([
+                Paragraph(rtl("پاسخ پیشنهادی: " + str(example.get("answer", ""))), st["body"]),
+                Paragraph(rtl("دلیل: " + str(example.get("explanation", ""))), st["body"]),
+                Spacer(1, 2 * mm),
+            ])
+            story.append(KeepTogether(block))
+    elif chapter.get("example"):
         story.append(Paragraph(rtl("مثال آموزشی: " + chapter["example"]), st["question"]))
+
     if chapter["solutionSteps"]:
         story.append(Paragraph(rtl("مراحل حل یا انجام کار"), st["question"]))
         for i, step in enumerate(chapter["solutionSteps"], 1):
             story.append(Paragraph(rtl(f"{i}. {step}"), st["body"]))
 
+    mistakes = chapter.get("commonMistakes", [])
+    if mistakes:
+        story.append(Paragraph(rtl("خطاهای رایج و راه پیشگیری"), st["question"]))
+        for mistake in mistakes:
+            story.append(Paragraph(rtl("• " + mistake), st["body"]))
+
+def append_question_pdf(story, number, chapter_title, question, st):
+    prompt = str(question.get("question", ""))
+    kind = question.get("questionType", "multiple_choice")
+    block = [
+        Paragraph(rtl(f"{number}. {prompt}"), st["question"]),
+        Paragraph(rtl("درس: " + chapter_title), st["note"]),
+    ]
+    options = question.get("options")
+    if isinstance(options, list):
+        labels = ["الف", "ب", "پ", "ت", "ث", "ج", "چ", "ح"]
+        for index, option in enumerate(options):
+            label = labels[index] if index < len(labels) else str(index + 1)
+            block.append(Paragraph(rtl(f"{label}) {option}"), st["option"]))
+    elif kind == "true_false":
+        block.append(Paragraph(rtl("درست  □     نادرست  □"), st["option"]))
+    elif kind == "short_answer":
+        block.append(Paragraph(rtl("پاسخ کوتاه خود را در جای خالی بنویس:"), st["note"]))
+        block.append(Spacer(1, 10 * mm))
+        block.append(HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#CBD5E1")))
+    story.append(KeepTogether(block))
+    story.append(Spacer(1, 2 * mm))
+
+
+def question_answer_text(question):
+    options = question.get("options")
+    answer = question.get("answer")
+    if isinstance(options, list) and isinstance(answer, int) and 0 <= answer < len(options):
+        return str(options[answer])
+    if isinstance(answer, str):
+        return answer
+    return "پاسخ ثبت نشده است"
+
+
+def append_answer_pdf(story, number, label, question, st):
+    answer = question_answer_text(question)
+    story.append(KeepTogether([
+        Paragraph(rtl(f"{number}. {label}"), st["question"]),
+        Paragraph(rtl("پاسخ: " + answer), st["body"]),
+        Paragraph(rtl("توضیح: " + str(question.get("explanation", ""))), st["body"]),
+        Spacer(1, 2 * mm),
+    ]))
+
 def build_subject_pdf(sid, subject, output, st):
-    questions = [(chapter["title"], q) for chapter in subject["chapters"] for q in [*chapter["questions"], *chapter.get("advancedQuestions", [])]]
+    questions = [
+        (chapter["title"], q)
+        for chapter in subject["chapters"]
+        for q in [*chapter["questions"], *chapter.get("advancedQuestions", [])]
+    ]
     story = [
         Spacer(1, 18*mm),
         Paragraph(rtl(subject["title"]), st["title"]),
-        Paragraph(rtl("جزوهٔ آموزشی، نکته‌ها، مثال‌ها و نمونه‌سؤال‌های تألیفی | فهمینو | پایه هشتم"), st["subtitle"]),
+        Paragraph(rtl("درسنامه، مثال حل‌شده، تمرین و آزمون کوتاه | فهمینو | پایه هشتم"), st["subtitle"]),
         HRFlowable(width="100%", thickness=1, color=colors.HexColor("#C7D2FE")),
         Spacer(1, 5*mm),
-        Paragraph(rtl("این فایل از محتوای آموزشی تألیفیِ فعلی فهمینو ساخته شده است؛ کتاب رسمی و همهٔ فعالیت‌های آن را جایگزین نمی‌کند. برای متن کامل و فعالیت‌های رسمی، به کتاب درسی همان سال مراجعه کن."), st["note"]),
+        Paragraph(rtl("این فایل از محتوای آموزشی تألیفیِ فهمینو ساخته شده است؛ کتاب رسمی و همهٔ فعالیت‌های آن را جایگزین نمی‌کند. برای متن و فعالیت‌های رسمی، به کتاب درسی همان سال مراجعه کن."), st["note"]),
     ]
     for chapter in subject["chapters"]:
         add_chapter_notes(story, chapter, st)
     story.append(PageBreak())
-    story.append(Paragraph(rtl("نمونه‌سؤال‌ها"), st["title"]))
-    letters = ["الف", "ب", "پ", "ت", "ث", "ج"]
+    story.append(Paragraph(rtl("بانک تمرین و نمونه‌سؤال"), st["title"]))
     for i, (chapter_title, q) in enumerate(questions, 1):
-        block = [Paragraph(rtl(f"{i}. {q['question']}"), st["question"]),
-                 Paragraph(rtl("درس: " + chapter_title), st["note"])]
-        for oi, option in enumerate(q["options"]):
-            block.append(Paragraph(rtl(f"{letters[oi] if oi < len(letters) else oi+1}) {option}"), st["option"]))
-        story.append(KeepTogether(block))
+        append_question_pdf(story, i, chapter_title, q, st)
     story.append(PageBreak())
     story.append(Paragraph(rtl("پاسخ‌نامه و توضیح‌ها"), st["title"]))
     for i, (chapter_title, q) in enumerate(questions, 1):
-        story.append(KeepTogether([
-            Paragraph(rtl(f"{i}. {chapter_title}"), st["question"]),
-            Paragraph(rtl("پاسخ درست: " + q["options"][q["answer"]]), st["body"]),
-            Paragraph(rtl("توضیح: " + q["explanation"]), st["body"]),
-            Spacer(1, 2*mm),
-        ]))
+        append_answer_pdf(story, i, chapter_title, q, st)
     doc = SimpleDocTemplate(str(output), pagesize=A4, rightMargin=18*mm, leftMargin=18*mm,
         topMargin=17*mm, bottomMargin=20*mm, title=f"Fahmino {subject['title']}")
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
 
 def build_combined(subjects, output, st, questions_only=False):
-    story = [Spacer(1, 18*mm),
-        Paragraph(rtl("بانک جزوه‌های پایه هشتم" if not questions_only else "بانک نمونه‌سؤال‌های پایه هشتم"), st["title"]),
-        Paragraph(rtl("فهمینو | محتوای تألیفی و آموزشیِ فعلی برنامه"), st["subtitle"]),
+    story = [
+        Spacer(1, 18*mm),
+        Paragraph(rtl("بانک درسنامه‌های پایه هشتم" if not questions_only else "بانک تمرین‌های پایه هشتم"), st["title"]),
+        Paragraph(rtl("فهمینو | محتوای تألیفی آموزشی با پاسخ و توضیح"), st["subtitle"]),
         Paragraph(rtl("این فایل جایگزین کامل کتاب‌های درسی و همهٔ فعالیت‌های رسمی نیست."), st["note"]),
-        PageBreak()]
+        PageBreak(),
+    ]
     answer_rows = []
-    letters = ["الف", "ب", "پ", "ت", "ث", "ج"]
     number = 0
     for subject in subjects.values():
         story.append(Paragraph(rtl(subject["title"]), st["subject"]))
@@ -153,22 +251,16 @@ def build_combined(subjects, output, st, questions_only=False):
                 add_chapter_notes(story, chapter, st)
             else:
                 story.append(Paragraph(rtl(chapter["title"]), st["chapter"]))
-            for q in [*chapter["questions"], *chapter.get("advancedQuestions", [])]:
+            for question in [*chapter["questions"], *chapter.get("advancedQuestions", [])]:
                 number += 1
                 if questions_only:
-                    story.append(Paragraph(rtl(f"{number}. {q['question']}"), st["question"]))
-                    for oi, option in enumerate(q["options"]):
-                        story.append(Paragraph(rtl(f"{letters[oi] if oi < len(letters) else oi+1}) {option}"), st["option"]))
-                answer_rows.append((number, subject["title"], chapter["title"], q))
+                    append_question_pdf(story, number, chapter["title"], question, st)
+                answer_rows.append((number, subject["title"], chapter["title"], question))
     if questions_only:
         story.append(PageBreak())
         story.append(Paragraph(rtl("پاسخ‌نامه و توضیح‌ها"), st["title"]))
-        for num, subj, chap, q in answer_rows:
-            story.append(KeepTogether([
-                Paragraph(rtl(f"{num}. {subj} — {chap}"), st["question"]),
-                Paragraph(rtl("پاسخ درست: " + q["options"][q["answer"]]), st["body"]),
-                Paragraph(rtl("توضیح: " + q["explanation"]), st["body"]),
-                Spacer(1, 2*mm)]))
+        for num, subj, chap, question in answer_rows:
+            append_answer_pdf(story, num, f"{subj} — {chap}", question, st)
     doc = SimpleDocTemplate(str(output), pagesize=A4, rightMargin=18*mm, leftMargin=18*mm,
         topMargin=17*mm, bottomMargin=20*mm, title="Fahmino Grade 8")
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
