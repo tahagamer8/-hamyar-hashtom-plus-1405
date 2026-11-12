@@ -191,12 +191,13 @@ void main() {
     var chapterExamQuestions = 0;
     var shortAnswerCount = 0;
     var trueFalseCount = 0;
+    var essayQuestionCount = 0;
 
     for (final id in ids) {
       final raw = await rootBundle.loadString('assets/content/subjects/$id.json');
       final pack = jsonDecode(raw) as Map<String, dynamic>;
       expect(pack['sampleQuestionBankVersion'], 1, reason: id);
-      expect(pack['contentVersion'], '2026.11.10.2', reason: id);
+      expect(pack['contentVersion'], '2026.11.12.1', reason: id);
       final chapters = pack['chapters'] as List<dynamic>;
       final firstTerm = <Map<String, dynamic>>[];
       final secondTerm = <Map<String, dynamic>>[];
@@ -252,6 +253,16 @@ void main() {
           advancedQuestions++;
         }
 
+        final essays = chapter['essayQuestions'] as List<dynamic>;
+        expect(essays, hasLength(1), reason: title);
+        final essay = essays.single as Map<String, dynamic>;
+        expect(essay['questionType'], 'essay', reason: title);
+        expect(essay['source'], 'تألیفی فهمینو', reason: title);
+        expect((essay['question'] as String).trim(), isNotEmpty, reason: title);
+        expect(essay['answerGuidelines'], isA<List<dynamic>>(), reason: title);
+        expect(essay['evaluationCriteria'], hasLength(4), reason: title);
+        essayQuestionCount++;
+
         final exam = chapter['chapterExam'] as List<dynamic>;
         expect(exam.length, greaterThanOrEqualTo(5), reason: title);
         expect(
@@ -271,6 +282,7 @@ void main() {
     expect(advancedQuestions, 435);
     expect(shortAnswerCount, 290);
     expect(trueFalseCount, 145);
+    expect(essayQuestionCount, 145);
     expect(chapterExamQuestions, greaterThanOrEqualTo(725));
   });
 
