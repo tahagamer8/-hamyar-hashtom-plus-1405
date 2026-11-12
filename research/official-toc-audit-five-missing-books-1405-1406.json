@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-11-10",
+  "schoolYear": "1405-1406",
+  "publisher": "پایگاه کتاب‌های درسی، اداره کل نظارت بر نشر و توزیع مواد آموزشی",
+  "officialHost": "chap.sch.ir",
+  "scope": [
+    "math",
+    "persian",
+    "writing",
+    "quran",
+    "religion"
+  ],
+  "method": "استخراج محدود فهرست مطالب از صفحات ابتدایی PDF رسمی با PDF parser؛ فقط عنوان‌ها و شماره‌صفحه‌های چاپی ثبت شده‌اند.",
+  "copyright": {
+    "lessonProseStored": false,
+    "pageImagesStored": false,
+    "officialPdfsBundled": false,
+    "onlyMetadataAndShortTableOfContentsHeadingsStored": true
+  },
+  "strictMappingRule": {
+    "physicalPdfPageRangeRequired": true,
+    "printedPageNumbersAreNotPhysicalPdfPageIndices": true,
+    "chapterMappingStatusForAllFive": "not_verified",
+    "reason": "فهرست مطالب به‌تنهایی شمارهٔ فیزیکی صفحات PDF و تطبیق عنوان فصل با صفحهٔ آغاز آن را اثبات نمی‌کند."
+  },
+  "books": [
+    {
+      "subjectId": "math",
+      "bookCode": "805",
+      "officialTitle": "ریاضی (هشتم)",
+      "officialPageUrl": "http://chap.sch.ir/books/14220",
+      "officialPdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C805.pdf",
+      "parserAccessUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C805.pdf?download=1",
+      "parserStatus": "parsed",
+      "httpStatus": 200,
+      "contentType": "application/pdf",
+      "pdfTotalPages": 160,
+      "pdfPagesParsed": 24,
+      "tocStatus": "complete_toc_extracted",
+      "editionEvidence": "چاپ سیزدهم ۱۴۰۵",
+      "printedPageRange": {
+        "start": 1,
+        "end": 150
+      },
+      "chapterCount": 9,
+      "lessonCount": 34,
+      "chapterMappingsVerified": 0,
+      "chapters": [
+        {
+          "number": 1,
+          "title": "عددهای صحیح و گویا",
+          "printedPageStart": 1,
+          "printedPageEnd": 18,
+          "reviewPrintedPage": 18,
+          "lessons": [
+            {
+              "title": "یادآوری عددهای صحیح",
+              "printedPage": 2
+            },
+            {
+              "title": "معرفی عددهای گویا",
+              "printedPage": 6
+            },
+            {
+              "title": "جمع و تفریق عددهای گویا",
+              "printedPage": 10
+            },
+            {
+              "title": "ضرب و تقسیم عددهای گویا",
+              "printedPage": 14
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "title": "عددهای اول",
+          "printedPageStart": 19,
+          "printedPageEnd": 28,
+          "reviewPrintedPage": 28,
+          "lessons": [
+            {
+              "title": "یادآوری عددهای اول",
+              "printedPage": 20
+            },
+            {
+              "title": "تعیین عددهای اول",
+              "printedPage": 24
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "چندضلعی‌ها",
+          "printedPageStart": 29,
+          "printedPageEnd": 50,
+          "reviewPrintedPage": 50,
+          "lessons": [
+            {
+              "title": "چندضلعی‌ها و تقارن",
+              "printedPage": 30
+            },
+            {
+              "title": "توازی و تعامد",
+              "printedPage": 34
+            },
+            {
+              "title": "چهارضلعی‌ها",
+              "printedPage": 38
+            },
+            {
+              "title": "زاویه‌های داخلی",
+              "printedPage": 42
+            },
+            {
+              "title": "زاویه‌های خارجی",
+              "printedPage": 46
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "title": "جبر و معادله",
+          "printedPageStart": 51,
+          "printedPageEnd": 68,
+          "reviewPrintedPage": 68,
+          "lessons": [
+            {
+              "title": "ساده کردن عبارت‌های جبری",
+              "printedPage": 52
+            },
+            {
+              "title": "پیدا کردن مقدار یک عبارت جبری",
+              "printedPage": 56
+            },
+            {
+              "title": "تجزیه عبارت‌های جبری",
+              "printedPage": 60
+            },
+            {
+              "title": "معادله",
+              "printedPage": 64
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "title": "بردار و مختصات",
+          "printedPageStart": 69,
+          "printedPageEnd": 82,
+          "reviewPrintedPage": 82,
+          "lessons": [
+            {
+              "title": "جمع بردارها",
+              "printedPage": 70
+            },
+            {
+              "title": "ضرب عدد در بردار",
+              "printedPage": 74
+            },
+            {
+              "title": "بردارهای واحد مختصات",
+              "printedPage": 78
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "title": "مثلث",
+          "printedPageStart": 83,
+          "printedPageEnd": 100,
+          "reviewPrintedPage": 100,
+          "lessons": [
+            {
+              "title": "رابطهٔ فیثاغورس",
+              "printedPage": 84
+            },
+            {
+              "title": "شکل‌های هم‌نهشت",
+              "printedPage": 88
+            },
+            {
+              "title": "مثلث‌های هم‌نهشت",
+              "printedPage": 92
+            },
+            {
+              "title": "هم‌نهشتی مثلث‌های قائم‌الزاویه",
+              "printedPage": 96
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "title": "توان و جذر",
+          "printedPageStart": 101,
+          "printedPageEnd": 118,
+          "reviewPrintedPage": 118,
+          "lessons": [
+            {
+              "title": "توان",
+              "printedPage": 102
+            },
+            {
+              "title": "تقسیم اعداد توان‌دار",
+              "printedPage": 106
+            },
+            {
+              "title": "جذر تقریبی",
+              "printedPage": 110
+            },
+            {
+              "title": "نمایش اعداد رادیکالی روی محور اعداد",
+              "printedPage": 114
+            },
+            {
+              "title": "خواص ضرب و تقسیم رادیکال‌ها",
+              "printedPage": 115
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "title": "آمار و احتمال",
+          "printedPageStart": 119,
+          "printedPageEnd": 136,
+          "reviewPrintedPage": 136,
+          "lessons": [
+            {
+              "title": "دسته‌بندی داده‌ها",
+              "printedPage": 120
+            },
+            {
+              "title": "میانگین داده‌ها",
+              "printedPage": 124
+            },
+            {
+              "title": "احتمال یا اندازه‌گیری شانس",
+              "printedPage": 128
+            },
+            {
+              "title": "بررسی حالت‌های ممکن",
+              "printedPage": 132
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "title": "دایره",
+          "printedPageStart": 137,
+          "printedPageEnd": 150,
+          "reviewPrintedPage": 150,
+          "lessons": [
+            {
+              "title": "خط و دایره",
+              "printedPage": 138
+            },
+            {
+              "title": "زاویه‌های مرکزی",
+              "printedPage": 142
+            },
+            {
+              "title": "زاویه‌های محاطی",
+              "printedPage": 146
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "فهرست ۹ فصل و ۳۴ عنوان درس از بخش فهرست مطالب PDF رسمی استخراج شد.",
+        "شماره‌های ثبت‌شده، شمارهٔ چاپی کتاب هستند؛ شمارهٔ فیزیکی صفحه در فایل PDF هنوز برای هر فصل تعیین نشده است.",
+        "فهرست مطالب کامل استخراج شد، اما این کار به‌تنهایی تطبیق صفحه‌به‌صفحه یا تأیید محتوای آموزشی نیست."
+      ]
+    },
+    {
+      "subjectId": "persian",
+      "bookCode": "803",
+      "officialTitle": "فارسی (هشتم)",
+      "officialPageUrl": "http://chap.sch.ir/books/14218",
+      "officialPdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C803.pdf",
+      "parserAccessUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C803.pdf?download=1",
+      "parserStatus": "parsed",
+      "httpStatus": 200,
+      "contentType": "application/pdf",
+      "pdfTotalPages": 144,
+      "pdfPagesParsed": 18,
+      "tocStatus": "partial_ocr_rows_missing",
+      "chapterMappingsVerified": 0,
+      "visibleChapterRows": [
+        {
+          "title": "فصل اول: زیبایی آفرینش",
+          "printedPageStart": 11
+        },
+        {
+          "title": "فصل دوم: شکفتن",
+          "printedPageStart": 29
+        },
+        {
+          "title": "فصل آزاد: ادبیات بومی (۱)",
+          "printedPageStart": 43
+        },
+        {
+          "title": "فصل سوم: سبک زندگی",
+          "printedPageStart": 47
+        },
+        {
+          "title": "فصل چهارم: نام‌ها و یادها",
+          "printedPageStart": 67
+        },
+        {
+          "title": "فصل پنجم: اسلام و انقلاب اسلامی",
+          "printedPageStart": 89
+        },
+        {
+          "title": "فصل آزاد: ادبیات بومی (۲)",
+          "printedPageStart": 107
+        },
+        {
+          "title": "فصل ششم: ادبیات جهان",
+          "printedPageStart": 113
+        }
+      ],
+      "visibleLessonRows": [
+        {
+          "title": "درس اول: پیش از اینها",
+          "printedPage": 12
+        },
+        {
+          "title": "درس دوم: خوب جهان را ببین / صورتگر ماهر",
+          "printedPage": null
+        },
+        {
+          "title": "درس پنجم: درس آزاد",
+          "printedPage": 44
+        },
+        {
+          "title": "درس هفتم: آداب نیکان / انسان، فناوری، اخلاق",
+          "printedPage": null
+        },
+        {
+          "title": "درس هشتم: آزادگی",
+          "printedPage": null
+        },
+        {
+          "title": "درس نهم: نوجوان باهوش / آشپززاده وزیر / گریه امیر",
+          "printedPage": 68
+        },
+        {
+          "title": "درس دهم: قلم سحرآمیز / دو نامه",
+          "printedPage": 75
+        },
+        {
+          "title": "درس دوازدهم: شیر حق",
+          "printedPage": 90
+        },
+        {
+          "title": "درس سیزدهم: ادبیات انقلاب / ادبیات انقلاب، انقلاب ادبیات",
+          "printedPage": 94
+        },
+        {
+          "title": "درس چهاردهم: یاد حسین",
+          "printedPage": 99
+        },
+        {
+          "title": "درس پانزدهم: درس آزاد",
+          "printedPage": 108
+        },
+        {
+          "title": "درس شانزدهم: پرنده آزادی / کودکان سنگ",
+          "printedPage": 114
+        },
+        {
+          "title": "درس هفدهم: راه خوشبختی",
+          "printedPage": 120
+        }
+      ],
+      "notes": [
+        "۱۸ صفحهٔ ابتدایی PDF پردازش شد؛ OCR بخشی از سطرهای فهرست و شماره‌صفحه‌ها را جا انداخته است.",
+        "فهرست قابل مشاهده ساختار فصل‌ها را نشان می‌دهد، اما برای تطبیق کامل همهٔ درس‌ها به بازبینی انسانی PDF نیاز است."
+      ]
+    },
+    {
+      "subjectId": "quran",
+      "bookCode": "801",
+      "officialTitle": "آموزش قرآن (هشتم)",
+      "officialPageUrl": "http://chap.sch.ir/books/14210",
+      "officialPdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C801.pdf",
+      "parserAccessUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C801.pdf?download=1",
+      "parserStatus": "parsed",
+      "httpStatus": 200,
+      "contentType": "application/pdf",
+      "pdfTotalPages": 124,
+      "pdfPagesParsed": 18,
+      "tocStatus": "partial_ocr_missing_rows",
+      "chapterMappingsVerified": 0,
+      "visibleLessonHeadings": [
+        "درس سوم: همه عالم جمال طلعت اوست؛ تا که را چشم این نظر باشد",
+        "درس چهارم: چون سلیمان از خدا حاجت بخواه؛ والدینت را دعا کن هر پگاه",
+        "درس پنجم: ای وارث پیمبر و قرآن و دین بیا",
+        "درس ششم: معبودهای باطل چون تار عنکبوت‌اند؛ با نسیم ایمان، معدوم و بی‌ثبات‌اند",
+        "درس هشتم: راهرو گر صد هنر دارد، توکل بایدش",
+        "درس نهم: کدام دانه فرو رفت در زمین که نرست؟ چرا به دانه انسانت این گمان باشد؟",
+        "درس دهم: دستور خدا، سلام بر توست؛ ذکر تو و احترام بر توست",
+        "درس یازدهم: همنشین تو از تو به باشد؛ تا تو را عقل و دین بیفزاید",
+        "درس دوازدهم: یا غافر الخطایا! دریاب بینوا را؛ یا واهب العطایا! تغییر ده قضا را"
+      ],
+      "notes": [
+        "فهرست استخراج‌شده برای همهٔ ۱۲ درس کامل نیست؛ عنوان‌های درس ۱، ۲ و ۷ در خروجی قابل اتکا دیده نشدند.",
+        "شماره‌های ۳۴۲، ۳۶۴ و مانند آن در OCR به صفحه‌های قرآن کریم اشاره دارند، نه شمارهٔ چاپی کتاب درسی؛ برای نگاشت صفحهٔ کتاب استفاده نشده‌اند."
+      ]
+    },
+    {
+      "subjectId": "religion",
+      "bookCode": "802",
+      "officialTitle": "پیام‌های آسمان (هشتم)",
+      "officialPageUrl": "http://chap.sch.ir/books/14217",
+      "officialPdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C802.pdf",
+      "parserAccessUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C802.pdf?download=1",
+      "parserStatus": "parsed",
+      "httpStatus": 200,
+      "contentType": "application/pdf",
+      "pdfTotalPages": 164,
+      "pdfPagesParsed": 18,
+      "tocStatus": "partial_table_layout_ocr_incomplete",
+      "chapterMappingsVerified": 0,
+      "visibleChapterHeadings": [
+        "فصل اول: خداشناسی",
+        "فصل چهارم: راه و توشه",
+        "فصل پنجم: اخلاق",
+        "فصل ششم: جامعه اسلامی"
+      ],
+      "visibleLessonHeadings": [
+        "درس هشتم: نشان ارزشمندی",
+        "درس نهم: تدبیر زندگانی",
+        "درس دهم: دو سرمایه گرانبها",
+        "درس یازدهم: آفت‌های زبان",
+        "درس دوازدهم: ارزش کار",
+        "درس چهاردهم: ما مسلمانان"
+      ],
+      "notes": [
+        "جدول فهرست در OCR ترتیب سلول‌ها و شماره‌صفحه‌ها را از دست داده است؛ عنوان‌های دیده‌شده برای نگاشت فصل/صفحه کافی نیستند.",
+        "چند عنوان درس در متن معرفی کتاب هم دیده می‌شود، اما به‌عنوان ردیف فهرست یا صفحهٔ چاپی ثبت نشده‌اند."
+      ]
+    },
+    {
+      "subjectId": "writing",
+      "bookCode": "804",
+      "officialTitle": "نگارش (هشتم)",
+      "officialPageUrl": "http://chap.sch.ir/books/14219",
+      "officialPdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C804.pdf",
+      "parserAccessUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C804.pdf?download=1",
+      "parserStatus": "failed_internal_error",
+      "httpStatus": null,
+      "contentType": null,
+      "pdfTotalPages": null,
+      "pdfPagesParsed": 0,
+      "tocStatus": "not_parsed",
+      "chapterMappingsVerified": 0,
+      "notes": [
+        "رکورد رسمی و پیوند PDF موجود است، اما دو تلاش پردازش PDF با خطای داخلی ابزار پایان یافتند.",
+        "هیچ عنوان فصل، شماره‌صفحه یا محتوای کتاب از روی حدس ثبت نشده است."
+      ]
+    }
+  ]
+}

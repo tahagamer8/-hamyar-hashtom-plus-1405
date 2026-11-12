@@ -828,7 +828,16 @@
     }
   ],
   "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
-  "textbookSource": "کتاب رسمی پایه هشتم، سازمان پژوهش و برنامه‌ریزی آموزشی؛ مرجع انتشار رسمی: https://chap.sch.ir/",
+  "textbookSource": {
+    "portalUrl": "http://chap.sch.ir/books/14229",
+    "pdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C817.pdf",
+    "schoolYear": "1405-1406",
+    "bookCode": "817",
+    "fileName": "C817.pdf",
+    "fileSizeMB": "14.67",
+    "verificationStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
+    "verifiedAt": "2026-11-09"
+  },
   "textbookSourceFile": "Fanavari-8_Daneshchi.iR.pdf",
   "textbookContentsVerified": true,
   "sampleQuestionBankVersion": 1

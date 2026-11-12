@@ -957,5 +957,22 @@
       ]
     }
   ],
-  "sampleQuestionBankVersion": 1
+  "sampleQuestionBankVersion": 1,
+  "textbookSource": {
+    "portalUrl": "http://chap.sch.ir/books/14217",
+    "pdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C802.pdf",
+    "schoolYear": "1405-1406",
+    "bookCode": "802",
+    "fileName": "C802.pdf",
+    "fileSizeMB": "14.28",
+    "verificationStatus": "official_pdf_partially_parsed_toc_ocr_incomplete",
+    "verifiedAt": "2026-11-09",
+    "pdfTotalPages": 164,
+    "pdfPagesParsed": 18,
+    "parserAccessUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C802.pdf?download=1",
+    "tocExtractionStatus": "partial_table_layout_ocr_incomplete",
+    "tocParsedAt": "2026-11-10",
+    "tocVerificationMethod": "official_pdf_toc_parser",
+    "physicalPdfPageMappingStatus": "not_verified"
+  }
 }
