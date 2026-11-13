@@ -66,6 +66,20 @@ jobs:
       - name: Test Persian PDF text direction
         run: python -m unittest tooling.test_pdf_bidi
 
+      - name: Test chapter coverage audit rules
+        run: python -m unittest tooling.test_chapter_coverage_audit
+
+      - name: Generate chapter-by-chapter coverage report
+        run: python tooling/audit_chapter_coverage.py
+
+      - name: Upload chapter coverage audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fahmino-chapter-coverage-audit
+          path: research/generated/chapter-coverage-audit-2026-11-13.*
+          if-no-files-found: error
+
       - name: Generate Persian PDF assets
         run: |
           python tooling/generate_learning_pdfs.py --subjects-dir assets/content/subjects --output-dir assets/generated_pdfs
