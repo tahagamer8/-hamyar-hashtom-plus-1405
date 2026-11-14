@@ -14,7 +14,7 @@ SUBJECT_IDS = (
     "arabic", "art", "english", "english_workbook", "math", "persian",
     "quran", "religion", "science", "social", "thinking", "work", "writing",
 )
-AUDIT_DATE = "2026-11-13"
+AUDIT_DATE = "2026-11-14"
 AUDITED_REF = "audit/textbook-alignment-1405"
 
 GAP_LABELS = {
@@ -91,7 +91,8 @@ def audit_chapter(subject_id: str, index: int, chapter: dict[str, Any]) -> dict[
         and len(q["explanation"].strip()) >= 20
         for q in questions
     )
-    question_types = sorted({_question_type(q) for q in questions if isinstance(q, dict)})
+    question_type_counts = Counter(_question_type(q) for q in questions if isinstance(q, dict))
+    question_types = sorted(question_type_counts)
 
     has_page_start = _is_int(chapter.get("pageStart"))
     has_page_end = _is_int(chapter.get("pageEnd"))
@@ -182,6 +183,7 @@ def audit_chapter(subject_id: str, index: int, chapter: dict[str, Any]) -> dict[
             "commonMistakeCount": len(mistakes),
             "sampleQuestionCount": len(questions),
             "questionTypes": question_types,
+            "questionTypeCounts": dict(sorted(question_type_counts.items())),
             "validInlineAnswerCount": valid_answers,
             "explainedQuestionCount": explained,
             "substantialExplanationCount": substantial_explanations,
@@ -205,6 +207,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
     total_explained = 0
     total_substantial_explanations = 0
     total_question_types: Counter[str] = Counter()
+    total_chapter_type_presence_counts: Counter[str] = Counter()
     missing_files: list[str] = []
 
     for subject_id in SUBJECT_IDS:
@@ -223,6 +226,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
         explained = 0
         substantial = 0
         question_types: Counter[str] = Counter()
+        chapter_type_presence_counts: Counter[str] = Counter()
         for index, chapter in enumerate(chapters_data, start=1):
             if not isinstance(chapter, dict):
                 chapter = {}
@@ -235,7 +239,8 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
             valid_answers += audited["metrics"]["validInlineAnswerCount"]
             explained += audited["metrics"]["explainedQuestionCount"]
             substantial += audited["metrics"]["substantialExplanationCount"]
-            question_types.update(audited["metrics"]["questionTypes"])
+            question_types.update(audited["metrics"]["questionTypeCounts"])
+            chapter_type_presence_counts.update(audited["metrics"]["questionTypes"])
             for question in questions:
                 if isinstance(question, dict) and isinstance(question.get("question"), str):
                     all_question_texts.append(question["question"])
@@ -253,6 +258,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
                 "needs_source": counts.get("needs_source", 0),
             },
             "questionTypeCounts": dict(sorted(question_types.items())),
+            "chapterTypePresenceCounts": dict(sorted(chapter_type_presence_counts.items())),
             "chapters": chapters,
         })
         total_questions += question_count
@@ -260,6 +266,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
         total_explained += explained
         total_substantial_explanations += substantial
         total_question_types.update(question_types)
+        total_chapter_type_presence_counts.update(chapter_type_presence_counts)
 
     normalized = Counter(
         normalize_question(text)
@@ -302,6 +309,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
             "questionsWithExplanation": total_explained,
             "questionsWithExplanationAtLeast20Chars": total_substantial_explanations,
             "questionTypeCounts": dict(sorted(total_question_types.items())),
+            "chapterTypePresenceCounts": dict(sorted(total_chapter_type_presence_counts.items())),
             "exactDuplicateQuestionGroups": duplicate_groups,
             "exactDuplicateQuestionCopies": duplicate_copies,
             "statusCounts": {
@@ -359,7 +367,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- بخش‌ها/فصل‌ها/درس‌ها: **{totals['chapterCount']}**",
         f"- سؤال‌ها: **{totals['questionCount']}**؛ پاسخ‌های درون‌سؤالی معتبر: **{totals['validInlineAnswers']}**",
         f"- سؤال دارای توضیح: **{totals['questionsWithExplanation']}**؛ توضیح با حداقل ۲۰ نویسه: **{totals['questionsWithExplanationAtLeast20Chars']}**",
-        f"- نوع سؤال: {totals['questionTypeCounts']}",
+        f"- توزیع نوع سؤال بر اساس تعداد واقعی سؤال‌ها: {totals['questionTypeCounts']}",
+        f"- تعداد فصل‌های دارای هر نوع سؤال: {totals['chapterTypePresenceCounts']}",
         f"- تکرار دقیق متن سؤال پس از نرمال‌سازی: **{totals['exactDuplicateQuestionGroups']} گروه**",
         f"- وضعیت فصل‌ها: **کامل {totals['statusCounts']['complete']} / ناقص {totals['statusCounts']['incomplete']} / نیازمند منبع {totals['statusCounts']['needs_source']}**",
         f"- فصل دارای حداقل ۵ سؤال: **{totals['chaptersWithAtLeast5Questions']}**",
@@ -433,8 +442,8 @@ def main() -> int:
     if report["totals"]["missingPackageIds"]:
         raise SystemExit("Missing subject packs: " + ", ".join(report["totals"]["missingPackageIds"]))
 
-    json_path = output_dir / "chapter-coverage-audit-2026-11-13.json"
-    markdown_path = output_dir / "chapter-coverage-audit-2026-11-13.md"
+    json_path = output_dir / "chapter-coverage-audit-2026-11-14.json"
+    markdown_path = output_dir / "chapter-coverage-audit-2026-11-14.md"
     json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     markdown_path.write_text(render_markdown(report), encoding="utf-8")
 
