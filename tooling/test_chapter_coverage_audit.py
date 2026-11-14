@@ -1,6 +1,14 @@
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
-from tooling.audit_chapter_coverage import audit_chapter, normalize_question
+from tooling.audit_chapter_coverage import (
+    SUBJECT_IDS,
+    audit_chapter,
+    build_report,
+    normalize_question,
+)
 
 
 def complete_fixture():
@@ -88,6 +96,53 @@ class ChapterCoverageAuditTests(unittest.TestCase):
         ]
         result = audit_chapter("sample", 1, chapter)
         self.assertIn("question_types_not_diverse", result["gaps"])
+
+    def test_aggregate_question_type_counts_count_question_instances(self):
+        with tempfile.TemporaryDirectory() as directory:
+            subjects_dir = Path(directory)
+            for subject_id in SUBJECT_IDS:
+                payload = {"title": subject_id, "chapters": []}
+                if subject_id == "math":
+                    chapter = complete_fixture()
+                    chapter["questions"] = [
+                        {
+                            "questionType": "multiple_choice",
+                            "question": "پرسش چهارگزینه‌ای یک",
+                            "options": ["الف", "ب"],
+                            "answer": 0,
+                            "explanation": "توضیح کافی برای پرسش چهارگزینه‌ای اول.",
+                        },
+                        {
+                            "questionType": "multiple_choice",
+                            "question": "پرسش چهارگزینه‌ای دو",
+                            "options": ["الف", "ب"],
+                            "answer": 1,
+                            "explanation": "توضیح کافی برای پرسش چهارگزینه‌ای دوم.",
+                        },
+                        {
+                            "questionType": "essay",
+                            "question": "پرسش تشریحی",
+                            "answer": "پاسخ نمونه",
+                            "explanation": "توضیح کافی برای پاسخ تشریحی نمونه.",
+                        },
+                    ]
+                    payload["chapters"] = [chapter]
+                (subjects_dir / f"{subject_id}.json").write_text(
+                    json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+                )
+
+            report = build_report(subjects_dir)
+            self.assertEqual(report["totals"]["questionCount"], 3)
+            self.assertEqual(
+                report["totals"]["questionTypeCounts"],
+                {"essay": 1, "multiple_choice": 2},
+            )
+            self.assertEqual(
+                report["totals"]["chapterTypePresenceCounts"],
+                {"essay": 1, "multiple_choice": 1},
+            )
+            math = next(subject for subject in report["subjects"] if subject["id"] == "math")
+            self.assertEqual(math["questionTypeCounts"], {"essay": 1, "multiple_choice": 2})
 
     def test_question_normalization_ignores_spacing_and_punctuation(self):
         self.assertEqual(
