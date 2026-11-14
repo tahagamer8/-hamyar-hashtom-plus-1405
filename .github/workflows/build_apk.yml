@@ -77,7 +77,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: fahmino-chapter-coverage-audit
-          path: research/generated/chapter-coverage-audit-2026-11-13.*
+          path: research/generated/chapter-coverage-audit-2026-11-14.*
           if-no-files-found: error
 
       - name: Generate Persian PDF assets
