@@ -69,6 +69,9 @@ jobs:
       - name: Test chapter coverage audit rules
         run: python -m unittest tooling.test_chapter_coverage_audit
 
+      - name: Test math content regressions
+        run: python -m unittest tooling.test_math_content_regressions
+
       - name: Generate chapter-by-chapter coverage report
         run: python tooling/audit_chapter_coverage.py
 
