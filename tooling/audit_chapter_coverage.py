@@ -152,9 +152,9 @@ def audit_chapter(subject_id: str, index: int, chapter: dict[str, Any]) -> dict[
         gaps.append("fewer_than_5_sample_questions")
     if len(question_types) < 2:
         gaps.append("question_types_not_diverse")
-    if valid_answers != len(questions):
+    if valid_answers != len(all_questions):
         gaps.append("invalid_or_missing_inline_answers")
-    if explained != len(questions):
+    if explained != len(all_questions):
         gaps.append("missing_question_explanations")
     if not has_chapter_test:
         gaps.append("chapter_test_missing")
