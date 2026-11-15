@@ -144,6 +144,50 @@ class ChapterCoverageAuditTests(unittest.TestCase):
             math = next(subject for subject in report["subjects"] if subject["id"] == "math")
             self.assertEqual(math["questionTypeCounts"], {"essay": 1, "multiple_choice": 2})
 
+    def test_advanced_questions_are_included_in_totals_and_explanations(self):
+        with tempfile.TemporaryDirectory() as directory:
+            subjects_dir = Path(directory)
+            for subject_id in SUBJECT_IDS:
+                payload = {"title": subject_id, "chapters": []}
+                if subject_id == "math":
+                    chapter = complete_fixture()
+                    chapter["advancedQuestions"] = [
+                        {
+                            "questionType": "reasoning",
+                            "question": "استدلال پیشرفتهٔ یک",
+                            "options": ["نادرست", "درست"],
+                            "answer": 1,
+                            "explanation": "توضیح استدلالی پیشرفته با جزئیات کافی.",
+                        },
+                        {
+                            "questionType": "reasoning",
+                            "question": "استدلال پیشرفتهٔ دو",
+                            "options": ["الف", "ب"],
+                            "answer": 0,
+                            "explanation": "توضیح دوم برای استدلال پیشرفته با جزئیات کافی.",
+                        },
+                    ]
+                    payload["chapters"] = [chapter]
+                (subjects_dir / f"{subject_id}.json").write_text(
+                    json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+                )
+
+            report = build_report(subjects_dir)
+            totals = report["totals"]
+            self.assertEqual(totals["baseQuestionCount"], 5)
+            self.assertEqual(totals["advancedQuestionCount"], 2)
+            self.assertEqual(totals["questionCount"], 7)
+            self.assertEqual(totals["validInlineAnswers"], 7)
+            self.assertEqual(totals["questionsWithExplanation"], 7)
+            self.assertEqual(totals["questionTypeCounts"]["reasoning"], 2)
+            self.assertEqual(totals["baseQuestionTypeCounts"]["multiple_choice"], 1)
+            self.assertEqual(totals["advancedQuestionTypeCounts"]["reasoning"], 2)
+            math = next(subject for subject in report["subjects"] if subject["id"] == "math")
+            chapter_metrics = math["chapters"][0]["metrics"]
+            self.assertEqual(chapter_metrics["sampleQuestionCount"], 5)
+            self.assertEqual(chapter_metrics["advancedQuestionCount"], 2)
+            self.assertEqual(chapter_metrics["totalQuestionCount"], 7)
+
     def test_question_normalization_ignores_spacing_and_punctuation(self):
         self.assertEqual(
             normalize_question("پرسشِ نمونه، با فاصله"),
