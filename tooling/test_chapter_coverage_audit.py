@@ -187,6 +187,7 @@ class ChapterCoverageAuditTests(unittest.TestCase):
             self.assertEqual(chapter_metrics["sampleQuestionCount"], 5)
             self.assertEqual(chapter_metrics["advancedQuestionCount"], 2)
             self.assertEqual(chapter_metrics["totalQuestionCount"], 7)
+            self.assertEqual(math["chapters"][0]["status"], "complete")
 
     def test_question_normalization_ignores_spacing_and_punctuation(self):
         self.assertEqual(
