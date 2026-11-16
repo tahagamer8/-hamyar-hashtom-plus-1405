@@ -14,8 +14,13 @@ SUBJECT_IDS = (
     "arabic", "art", "english", "english_workbook", "math", "persian",
     "quran", "religion", "science", "social", "thinking", "work", "writing",
 )
-AUDIT_DATE = "2026-11-15"
-AUDITED_REF = "audit/textbook-alignment-1405"
+AUDIT_DATE = "2026-11-16"
+AUDITED_REF = "release/fahmino-2.4.0-version-sync-20261115"
+AUDITED_COMMIT = "55e78ce0d5ee0fd1883aad51dbe461b787358351"
+
+QUALITY_WARNING_LABELS = {
+    "advanced_question_answer_echoes_explanation": "گزینهٔ صحیح سؤال پیشرفته با توضیح همان سؤال تکرار شده؛ نیازمند بازبینی آموزشی",
+}
 
 GAP_LABELS = {
     "missing_official_reference_fields": "ارجاع صفحه/درس کامل نیست",
@@ -62,6 +67,24 @@ def _answer_is_valid(question: dict[str, Any]) -> bool:
     return answer is not None and str(answer).strip() != ""
 
 
+def _advanced_question_answer_echoes_explanation(question: dict[str, Any]) -> bool:
+    options = question.get("options")
+    answer = question.get("answer")
+    explanation = question.get("explanation")
+    if not isinstance(options, list) or not _is_int(answer) or not 0 <= answer < len(options):
+        return False
+    if not isinstance(explanation, str) or not explanation.strip():
+        return False
+    selected_option = options[answer]
+    if not isinstance(selected_option, str):
+        return False
+    normalized_explanation = explanation.strip()
+    prefix = "استدلال درست:"
+    if normalized_explanation.startswith(prefix):
+        normalized_explanation = normalized_explanation[len(prefix):].strip()
+    return normalize_question(selected_option) == normalize_question(normalized_explanation)
+
+
 def audit_chapter(subject_id: str, index: int, chapter: dict[str, Any]) -> dict[str, Any]:
     questions = chapter.get("questions")
     if not isinstance(questions, list):
@@ -103,6 +126,14 @@ def audit_chapter(subject_id: str, index: int, chapter: dict[str, Any]) -> dict[
     question_type_counts.update(advanced_question_type_counts)
     question_types = sorted(base_question_type_counts)
     advanced_question_types = sorted(advanced_question_type_counts)
+    advanced_question_explanation_echo_count = sum(
+        _advanced_question_answer_echoes_explanation(question)
+        for question in advanced_questions
+        if isinstance(question, dict)
+    )
+    quality_warnings: list[str] = []
+    if advanced_question_explanation_echo_count:
+        quality_warnings.append("advanced_question_answer_echoes_explanation")
 
     has_page_start = _is_int(chapter.get("pageStart"))
     has_page_end = _is_int(chapter.get("pageEnd"))
@@ -193,6 +224,7 @@ def audit_chapter(subject_id: str, index: int, chapter: dict[str, Any]) -> dict[
             "commonMistakeCount": len(mistakes),
             "sampleQuestionCount": len(questions),
             "advancedQuestionCount": len(advanced_questions),
+            "advancedQuestionExplanationEchoCount": advanced_question_explanation_echo_count,
             "totalQuestionCount": len(all_questions),
             "questionTypes": question_types,
             "advancedQuestionTypes": advanced_question_types,
@@ -210,6 +242,7 @@ def audit_chapter(subject_id: str, index: int, chapter: dict[str, Any]) -> dict[
             "officialMappingVerified": official_mapping_verified,
             "humanReviewApproved": human_review_approved,
         },
+        "qualityWarnings": quality_warnings,
         "gaps": gaps,
     }
 
@@ -223,6 +256,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
     total_valid_answers = 0
     total_explained = 0
     total_substantial_explanations = 0
+    total_advanced_question_explanation_echoes = 0
     total_question_types: Counter[str] = Counter()
     total_base_question_types: Counter[str] = Counter()
     total_advanced_question_types: Counter[str] = Counter()
@@ -247,6 +281,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
         valid_answers = 0
         explained = 0
         substantial = 0
+        advanced_question_explanation_echoes = 0
         question_types: Counter[str] = Counter()
         base_question_types: Counter[str] = Counter()
         advanced_question_types: Counter[str] = Counter()
@@ -269,6 +304,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
             valid_answers += audited["metrics"]["validInlineAnswerCount"]
             explained += audited["metrics"]["explainedQuestionCount"]
             substantial += audited["metrics"]["substantialExplanationCount"]
+            advanced_question_explanation_echoes += audited["metrics"]["advancedQuestionExplanationEchoCount"]
             question_types.update(audited["metrics"]["questionTypeCounts"])
             base_question_types.update(audited["metrics"]["baseQuestionTypeCounts"])
             advanced_question_types.update(audited["metrics"]["advancedQuestionTypeCounts"])
@@ -287,6 +323,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
             "questionCount": question_count,
             "baseQuestionCount": base_question_count,
             "advancedQuestionCount": advanced_question_count,
+            "advancedQuestionExplanationEchoCount": advanced_question_explanation_echoes,
             "statusCounts": {
                 "complete": counts.get("complete", 0),
                 "incomplete": counts.get("incomplete", 0),
@@ -305,6 +342,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
         total_valid_answers += valid_answers
         total_explained += explained
         total_substantial_explanations += substantial
+        total_advanced_question_explanation_echoes += advanced_question_explanation_echoes
         total_question_types.update(question_types)
         total_base_question_types.update(base_question_types)
         total_advanced_question_types.update(advanced_question_types)
@@ -326,6 +364,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
     return {
         "auditDate": AUDIT_DATE,
         "auditedRef": AUDITED_REF,
+        "auditedCommit": AUDITED_COMMIT,
         "scope": "ساختار قابل مشاهدهٔ ۱۳ بستهٔ JSON؛ این ممیزی جایگزین تطبیق علمی و بازبینی انسانی نیست.",
         "method": {
             "summaryMinimumCharacters": 100,
@@ -335,6 +374,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
             "minimumCommonMistakes": 2,
             "minimumSampleQuestions": 5,
             "minimumDistinctQuestionTypes": 2,
+            "advancedQuestionExplanationEchoDetection": "exact normalized match between the selected option and explanation after removing the common prefix; review warning only, not an automatic scientific verdict",
             "completeRequires": [
                 "all structural minimums",
                 "chapter test and its separate answer key",
@@ -353,6 +393,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
             "validInlineAnswers": total_valid_answers,
             "questionsWithExplanation": total_explained,
             "questionsWithExplanationAtLeast20Chars": total_substantial_explanations,
+            "advancedQuestionsWithExplanationEcho": total_advanced_question_explanation_echoes,
             "questionTypeCounts": dict(sorted(total_question_types.items())),
             "baseQuestionTypeCounts": dict(sorted(total_base_question_types.items())),
             "advancedQuestionTypeCounts": dict(sorted(total_advanced_question_types.items())),
@@ -395,6 +436,7 @@ def build_report(subjects_dir: Path) -> dict[str, Any]:
             "فیلد example همراه با solutionSteps به‌تنهایی اثبات نمی‌کند که مثال واقعاً حل‌شده و از نظر علمی درست است.",
             "وجود pageStart/pageEnd و عنوان درس، تطبیق صفحه‌به‌صفحه با PDF رسمی را ثابت نمی‌کند.",
             "سؤال‌های فعلی فقط از روی ساختار JSON شمارش شده‌اند؛ صحت علمی آن‌ها با داوری انسانی تأیید نشده است.",
+            "تکرار گزینهٔ صحیح در توضیح سؤال پیشرفته یک هشدار برای بازبینی کیفیت است و به‌تنهایی خطای علمی را اثبات نمی‌کند.",
             "تمام وضعیت‌های complete نیازمند ثبت صریح تأیید نگاشت رسمی و بازبینی انسانی هستند.",
         ],
         "subjects": subjects,
@@ -420,6 +462,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- فصل‌های دارای نوع سؤال پایه: {totals['chapterTypePresenceCounts']}؛ پیشرفته: {totals['advancedChapterTypePresenceCounts']}",
         f"- تکرار دقیق متن سؤال پس از نرمال‌سازی: **{totals['exactDuplicateQuestionGroups']} گروه**",
         f"- وضعیت فصل‌ها: **کامل {totals['statusCounts']['complete']} / ناقص {totals['statusCounts']['incomplete']} / نیازمند منبع {totals['statusCounts']['needs_source']}**",
+        f"- سؤال پیشرفته با گزینهٔ صحیح تکرارشده در توضیح: **{totals['advancedQuestionsWithExplanationEcho']}** (هشدار بازبینی، نه حکم قطعی خطا)",
         f"- فصل دارای حداقل ۵ سؤال نمونهٔ پایه: **{totals['chaptersWithAtLeast5Questions']}**",
         f"- فصل دارای آزمون مستقل: **{totals['chaptersWithChapterTest']}**",
         f"- فصل دارای پاسخ‌نامهٔ مستقل آزمون: **{totals['chaptersWithSeparateAnswerKey']}**",
@@ -451,17 +494,21 @@ def render_markdown(report: dict[str, Any]) -> str:
         lines.extend([
             f"### {subject['title']} ({subject['id']})",
             "",
-            "| # | عنوان | وضعیت | صفحه آغاز–پایان | سؤال | کمبودهای اصلی |",
-            "|---:|---|---|---|---:|---|",
+            "| # | عنوان | وضعیت | صفحه آغاز–پایان | سؤال | هشدار کیفیت | کمبودهای اصلی |",
+            "|---:|---|---|---|---:|---|---|",
         ])
         for chapter in subject["chapters"]:
             ref = chapter["reference"]
             start = ref["pageStart"] if ref["pageStart"] is not None else "؟"
             end = ref["pageEnd"] if ref["pageEnd"] is not None else "؟"
             gaps = "، ".join(GAP_LABELS.get(gap, gap) for gap in chapter["gaps"])
+            warnings = "، ".join(
+                QUALITY_WARNING_LABELS.get(warning, warning)
+                for warning in chapter["qualityWarnings"]
+            )
             lines.append(
                 f"| {chapter['chapterIndex']} | {chapter['title']} | {chapter['status']} | "
-                f"{start}–{end} | {chapter['metrics']['sampleQuestionCount']} | {gaps} |"
+                f"{start}–{end} | {chapter['metrics']['sampleQuestionCount']} | {warnings} | {gaps} |"
             )
         lines.append("")
 
@@ -491,8 +538,8 @@ def main() -> int:
     if report["totals"]["missingPackageIds"]:
         raise SystemExit("Missing subject packs: " + ", ".join(report["totals"]["missingPackageIds"]))
 
-    json_path = output_dir / "chapter-coverage-audit-2026-11-15.json"
-    markdown_path = output_dir / "chapter-coverage-audit-2026-11-15.md"
+    json_path = output_dir / f"chapter-coverage-audit-{AUDIT_DATE}.json"
+    markdown_path = output_dir / f"chapter-coverage-audit-{AUDIT_DATE}.md"
     json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     markdown_path.write_text(render_markdown(report), encoding="utf-8")
 

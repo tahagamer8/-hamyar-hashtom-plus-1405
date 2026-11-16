@@ -144,6 +144,36 @@ class ChapterCoverageAuditTests(unittest.TestCase):
             math = next(subject for subject in report["subjects"] if subject["id"] == "math")
             self.assertEqual(math["questionTypeCounts"], {"essay": 1, "multiple_choice": 2})
 
+    def test_advanced_question_answer_echoing_explanation_is_flagged(self):
+        chapter = complete_fixture()
+        chapter["advancedQuestions"] = [
+            {
+                "questionType": "reasoning",
+                "question": "کدام استدلال پاسخ را توضیح می‌دهد؟",
+                "options": ["دلیل درست", "گزینهٔ دیگر"],
+                "answer": 0,
+                "explanation": "استدلال درست: دلیل درست",
+            }
+        ]
+        result = audit_chapter("sample", 1, chapter)
+        self.assertEqual(result["metrics"]["advancedQuestionExplanationEchoCount"], 1)
+        self.assertIn("advanced_question_answer_echoes_explanation", result["qualityWarnings"])
+
+    def test_advanced_question_distinct_explanation_is_not_flagged(self):
+        chapter = complete_fixture()
+        chapter["advancedQuestions"] = [
+            {
+                "questionType": "reasoning",
+                "question": "کدام عدد بین دو کسر قرار دارد؟",
+                "options": ["۵/۱۲", "۱/۴"],
+                "answer": 0,
+                "explanation": "زیرا با مخرج مشترک ۱۲، چهار دوازدهم کمتر از پنج دوازدهم و شش دوازدهم بیشتر است.",
+            }
+        ]
+        result = audit_chapter("sample", 1, chapter)
+        self.assertEqual(result["metrics"]["advancedQuestionExplanationEchoCount"], 0)
+        self.assertNotIn("advanced_question_answer_echoes_explanation", result["qualityWarnings"])
+
     def test_advanced_questions_are_included_in_totals_and_explanations(self):
         with tempfile.TemporaryDirectory() as directory:
             subjects_dir = Path(directory)
@@ -157,7 +187,7 @@ class ChapterCoverageAuditTests(unittest.TestCase):
                             "question": "استدلال پیشرفتهٔ یک",
                             "options": ["نادرست", "درست"],
                             "answer": 1,
-                            "explanation": "توضیح استدلالی پیشرفته با جزئیات کافی.",
+                            "explanation": "استدلال درست: درست",
                         },
                         {
                             "questionType": "reasoning",
@@ -179,6 +209,7 @@ class ChapterCoverageAuditTests(unittest.TestCase):
             self.assertEqual(totals["questionCount"], 7)
             self.assertEqual(totals["validInlineAnswers"], 7)
             self.assertEqual(totals["questionsWithExplanation"], 7)
+            self.assertEqual(totals["advancedQuestionsWithExplanationEcho"], 1)
             self.assertEqual(totals["questionTypeCounts"]["reasoning"], 2)
             self.assertEqual(totals["baseQuestionTypeCounts"]["multiple_choice"], 1)
             self.assertEqual(totals["advancedQuestionTypeCounts"]["reasoning"], 2)
@@ -186,6 +217,7 @@ class ChapterCoverageAuditTests(unittest.TestCase):
             chapter_metrics = math["chapters"][0]["metrics"]
             self.assertEqual(chapter_metrics["sampleQuestionCount"], 5)
             self.assertEqual(chapter_metrics["advancedQuestionCount"], 2)
+            self.assertEqual(chapter_metrics["advancedQuestionExplanationEchoCount"], 1)
             self.assertEqual(chapter_metrics["totalQuestionCount"], 7)
             self.assertEqual(math["chapters"][0]["status"], "complete")
 
