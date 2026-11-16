@@ -538,8 +538,8 @@ def main() -> int:
     if report["totals"]["missingPackageIds"]:
         raise SystemExit("Missing subject packs: " + ", ".join(report["totals"]["missingPackageIds"]))
 
-    json_path = output_dir / "chapter-coverage-audit-2026-11-15.json"
-    markdown_path = output_dir / "chapter-coverage-audit-2026-11-15.md"
+    json_path = output_dir / f"chapter-coverage-audit-{AUDIT_DATE}.json"
+    markdown_path = output_dir / f"chapter-coverage-audit-{AUDIT_DATE}.md"
     json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     markdown_path.write_text(render_markdown(report), encoding="utf-8")
 
