@@ -66,6 +66,9 @@ jobs:
       - name: Test Persian PDF text direction
         run: python -m unittest tooling.test_pdf_bidi
 
+      - name: Test math reasoning content quality
+        run: python -m unittest tooling.test_math_reasoning_quality
+
       - name: Generate Persian PDF assets
         run: |
           python tooling/generate_learning_pdfs.py --subjects-dir assets/content/subjects --output-dir assets/generated_pdfs
