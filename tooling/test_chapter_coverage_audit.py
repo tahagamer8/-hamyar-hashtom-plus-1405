@@ -228,5 +228,24 @@ class ChapterCoverageAuditTests(unittest.TestCase):
         )
 
 
+    def test_math_prime_reasoning_item_has_distinct_explanation_and_valid_options(self):
+        repository_root = Path(__file__).resolve().parents[1]
+        math_data = json.loads(
+            (repository_root / "assets/content/subjects/math.json").read_text(encoding="utf-8")
+        )
+        chapter = next(item for item in math_data["chapters"] if item["title"] == "عددهای اول")
+        question = chapter["advancedQuestions"][0]
+        self.assertEqual(len(question["options"]), 4)
+        self.assertEqual(len(set(question["options"])), 4)
+        self.assertTrue(0 <= question["answer"] < len(question["options"]))
+        selected_option = question["options"][question["answer"]]
+        self.assertNotEqual(
+            normalize_question(selected_option),
+            normalize_question(question["explanation"]),
+        )
+        self.assertIn("ریشهٔ دوم", selected_option)
+        self.assertIn("اگر ۳۷ مرکب بود", question["explanation"])
+
+
 if __name__ == "__main__":
     unittest.main()
