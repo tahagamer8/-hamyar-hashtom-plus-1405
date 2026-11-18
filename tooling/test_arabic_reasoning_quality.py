@@ -7,7 +7,8 @@ from pathlib import Path
 
 def normalize(value: str) -> str:
     value = unicodedata.normalize("NFKC", value).casefold()
-    value = re.sub(r"[\\u200c\\u200d\\u0640\\u064b-\\u065f\\u0670]", "", value)
+    value = value.replace("\\u200c", "").replace("\\u200d", "").replace("\\u0640", "")
+    value = re.sub("[\\u064b-\\u065f\\u0670]", "", value)
     return re.sub(r"[\\W_]+", "", value, flags=re.UNICODE)
 
 
