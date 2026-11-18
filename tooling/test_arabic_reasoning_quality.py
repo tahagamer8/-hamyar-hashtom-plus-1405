@@ -1,15 +1,12 @@
 import json
-import re
 import unicodedata
 import unittest
 from pathlib import Path
 
 
 def normalize(value: str) -> str:
-    value = unicodedata.normalize("NFKC", value).casefold()
-    value = value.replace("\\u200c", "").replace("\\u200d", "").replace("\\u0640", "")
-    value = re.sub("[\\u064b-\\u065f\\u0670]", "", value)
-    return re.sub(r"[\\W_]+", "", value, flags=re.UNICODE)
+    value = unicodedata.normalize("NFKC", value).casefold().replace("\u0640", "")
+    return "".join(ch for ch in value if ch.isalnum())
 
 
 class ArabicReasoningQualityTests(unittest.TestCase):
