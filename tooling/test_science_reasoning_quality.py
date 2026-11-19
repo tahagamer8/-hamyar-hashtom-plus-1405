@@ -4,8 +4,8 @@ import unittest
 from pathlib import Path
 
 
+def normalize(value: str) -> str:
     value = unicodedata.normalize("NFKC", value).casefold().replace("ـ", "")
-    value = unicodedata.normalize("NFKC", value).casefold().replace("\\u0640", "")
     return "".join(ch for ch in value if ch.isalnum())
 
 
