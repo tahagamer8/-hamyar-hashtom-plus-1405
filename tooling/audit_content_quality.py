@@ -21,6 +21,15 @@ GENERIC_REASONING = re.compile(
     r"^برای پرسش «.+» پاسخ «.+» انتخاب شده است\. "
     r"کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟$"
 )
+GENERIC_LEARNING_GOAL = (
+    "در پایان این بخش باید بتوانی مفهوم اصلی را با زبان خودت توضیح بدهی، "
+    "نکته‌های مهم را تشخیص بدهی و آن‌ها را در پرسش و مثال به کار ببری."
+)
+GENERIC_POINT_EXPLANATION = re.compile(
+    r"برای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع "
+    r"«[^»]+» توضیح بده\. سپس یک نمونهٔ تازه از خودت بساز\."
+)
+GENERIC_FINAL_CHECK_STEP = "بررسی نهایی: پاسخ خود را با خواستهٔ پرسش و نکتهٔ"
 NON_MCQ_TYPES = {
     "short_answer", "fill_blank", "true_false", "matching", "constructed_response",
 }
@@ -69,7 +78,7 @@ def source_is_mapped(pack: dict[str, Any], chapter: dict[str, Any]) -> bool:
     has_edition = bool(
         clean_text(pack.get("textbookEdition")) or clean_text(source.get("schoolYear"))
     )
-    has_page_range = (
+    has_printed_page_range = (
         isinstance(chapter.get("pageStart"), int)
         and not isinstance(chapter.get("pageStart"), bool)
         and isinstance(chapter.get("pageEnd"), int)
@@ -80,7 +89,31 @@ def source_is_mapped(pack: dict[str, Any], chapter: dict[str, Any]) -> bool:
     has_lesson_reference = bool(clean_text(chapter.get("sourceLesson"))) or (
         isinstance(nested_lessons, list) and len(nested_lessons) > 0
     )
-    return has_pdf_reference and has_edition and has_page_range and has_lesson_reference
+
+    # Printed page numbers and a PDF URL do not prove where a chapter begins
+    # inside the physical PDF. Require explicit, reviewable mapping evidence.
+    mapping = chapter.get("sourceMapping")
+    mapping = mapping if isinstance(mapping, dict) else {}
+    physical_start = mapping.get("pdfPhysicalPageStart")
+    physical_end = mapping.get("pdfPhysicalPageEnd")
+    has_verified_pdf_mapping = (
+        mapping.get("status") == "verified"
+        and isinstance(physical_start, int)
+        and not isinstance(physical_start, bool)
+        and physical_start >= 1
+        and isinstance(physical_end, int)
+        and not isinstance(physical_end, bool)
+        and physical_end >= physical_start
+        and bool(clean_text(mapping.get("verifiedAt")))
+        and bool(clean_text(mapping.get("method")))
+    )
+    return (
+        has_pdf_reference
+        and has_edition
+        and has_printed_page_range
+        and has_lesson_reference
+        and has_verified_pdf_mapping
+    )
 
 
 def exam_questions(chapter: dict[str, Any]) -> list[dict[str, Any]]:
@@ -146,6 +179,11 @@ def audit_chapter(
     )
     all_valid = bool(questions) and valid_count == len(questions)
     all_explained = bool(questions) and explained_count == len(questions)
+    generic_learning_goal_count = lesson_text.count(GENERIC_LEARNING_GOAL)
+    generic_point_explanation_count = len(GENERIC_POINT_EXPLANATION.findall(lesson_text))
+    generic_final_check_step_count = sum(
+        GENERIC_FINAL_CHECK_STEP in clean_text(step) for step in steps
+    )
 
     gaps: list[str] = []
     if not has_lesson:
@@ -168,6 +206,12 @@ def audit_chapter(
         gaps.append("حداقل یک سؤال کلید پاسخ/ساختار معتبر ندارد")
     if not all_explained:
         gaps.append("حداقل یک سؤال پاسخ تشریحی ندارد")
+    if generic_learning_goal_count:
+        gaps.append("درسنامه شامل جملهٔ هدف یادگیری قالبی است و طول متن به‌تنهایی کفایت آن را ثابت نمی‌کند")
+    if generic_point_explanation_count:
+        gaps.append("توضیح نکته‌ها از الگوی عمومی تکرارشونده استفاده می‌کند؛ برای هر نکته شرح اختصاصی لازم است")
+    if generic_final_check_step_count:
+        gaps.append("مراحل حل شامل گام بازبینی عمومی و تکراری است؛ گام مرتبط با همان مسئله لازم است")
     if generic_count:
         gaps.append("پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند")
     if tautological_count:
@@ -175,9 +219,9 @@ def audit_chapter(
     if len(mistakes) < 2:
         gaps.append("کمتر از دو نکتهٔ اشتباه رایج ثبت شده")
     if not mapped_source:
-        gaps.append("منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست")
+        gaps.append("نگاشت فصل به صفحات فیزیکی PDF رسمی با شاهد، روش و تاریخ بازبینی ثبت‌شده تأیید نشده")
 
-    complete = (
+    pedagogical_complete = (
         has_lesson
         and len(points) >= 3
         and len(example) >= 80
@@ -189,11 +233,18 @@ def audit_chapter(
         and all_valid
         and all_explained
         and len(mistakes) >= 2
-        and mapped_source
         and generic_count == 0
         and tautological_count == 0
+        and generic_learning_goal_count == 0
+        and generic_point_explanation_count == 0
+        and generic_final_check_step_count == 0
     )
-    status = "کامل" if complete else ("نیازمند منبع" if not mapped_source else "ناقص")
+    complete = pedagogical_complete and mapped_source
+    status = (
+        "کامل"
+        if complete
+        else ("نیازمند منبع" if not mapped_source and pedagogical_complete else "ناقص")
+    )
 
     return {
         "index": index,
@@ -220,7 +271,22 @@ def audit_chapter(
         "workedExampleCount": len(chapter.get("workedExamples", []))
             if isinstance(chapter.get("workedExamples"), list) else 0,
         "lessonContentCharacters": len(lesson_text),
+        "pedagogicalComplete": pedagogical_complete,
+        "genericLearningGoalCount": generic_learning_goal_count,
+        "genericPointExplanationCount": generic_point_explanation_count,
+        "genericFinalCheckStepCount": generic_final_check_step_count,
         "sourceMapped": mapped_source,
+        "sourceMappingStatus": clean_text(
+            (chapter.get("sourceMapping") if isinstance(chapter.get("sourceMapping"), dict) else {}).get("status")
+        ) or "not_verified",
+        "pdfPhysicalPageStart": (
+            chapter.get("sourceMapping", {}).get("pdfPhysicalPageStart")
+            if isinstance(chapter.get("sourceMapping"), dict) else None
+        ),
+        "pdfPhysicalPageEnd": (
+            chapter.get("sourceMapping", {}).get("pdfPhysicalPageEnd")
+            if isinstance(chapter.get("sourceMapping"), dict) else None
+        ),
         "pageStart": chapter.get("pageStart"),
         "pageEnd": chapter.get("pageEnd"),
         "sourceLesson": clean_text(chapter.get("sourceLesson")),
@@ -285,8 +351,8 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
                 "advancedQuestionCount": sum(row["advancedQuestionCount"] for row in rows),
                 "questionCount": sum(row["questionCount"] for row in rows),
                 "sourceMappedCount": sum(row["sourceMapped"] for row in rows),
-                "needsSourceCount": sum(row["status"] == "نیازمند منبع" for row in rows),
-                "incompleteCount": sum(row["status"] == "ناقص" for row in rows),
+                "needsSourceCount": sum(not row["sourceMapped"] for row in rows),
+                "incompleteCount": sum(not row["pedagogicalComplete"] for row in rows),
                 "completeCount": sum(row["status"] == "کامل" for row in rows),
                 "dedicatedLessonCount": sum(row["hasDedicatedLesson"] for row in rows),
                 "chapterExamCount": sum(row["hasChapterExam"] for row in rows),
@@ -335,9 +401,11 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         "nonMultipleChoiceQuestionCount": len(all_questions) - multiple_choice_questions,
         "duplicateQuestionPromptCount": len(question_texts) - len(set(question_texts)),
         "sourceMappedCount": sum(row["sourceMapped"] for row in sections),
-        "needsSourceCount": sum(row["status"] == "نیازمند منبع" for row in sections),
-        "incompleteCount": sum(row["status"] == "ناقص" for row in sections),
+        "needsSourceCount": sum(not row["sourceMapped"] for row in sections),
+        "incompleteCount": sum(not row["pedagogicalComplete"] for row in sections),
         "completeCount": sum(row["status"] == "کامل" for row in sections),
+        "sectionsWithBothGapsCount": sum(not row["pedagogicalComplete"] and not row["sourceMapped"] for row in sections),
+        "genericTemplateSectionCount": sum(row["genericLearningGoalCount"] > 0 or row["genericPointExplanationCount"] > 0 or row["genericFinalCheckStepCount"] > 0 for row in sections),
         "dedicatedLessonCount": sum(row["hasDedicatedLesson"] for row in sections),
         "chapterExamCount": sum(row["hasChapterExam"] for row in sections),
         "genericReasoningSectionCount": sum(row["genericReasoningQuestionCount"] > 0 for row in sections),
@@ -351,7 +419,7 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         ),
     }
     return {
-        "auditDate": "2026-11-09",
+        "auditDate": "2026-11-20",
         "method": "Conservative structural and traceability audit; not a certification of factual accuracy.",
         "thresholdNotes": {
             "dedicatedLessonCharacters": 350,
@@ -372,9 +440,9 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
 def render_markdown(report: dict[str, Any]) -> str:
     totals = report["totals"]
     lines = [
-        "# ممیزی کیفیت واقعی محتوای فهمینو — ۱۴۰۵/۰۸/۱۸",
+        f"# ممیزی کیفیت محتوای فهمینو — {report['auditDate']}",
         "",
-        "**تاریخ:** ۹ نوامبر ۲۰۲۶  ",
+        f"**تاریخ:** {report['auditDate']}  ",
         "**روش:** ممیزی محافظه‌کارانهٔ ساختار، کفایت آموزشی و ردیابی منبع؛ این گزارش صحت علمی را تأیید نمی‌کند.",
         "",
         "## نتیجهٔ کلی",
@@ -398,10 +466,12 @@ def render_markdown(report: dict[str, Any]) -> str:
         "### وضعیت فصل‌به‌فصل",
         "",
         f"- **کامل: {totals['completeCount']}**",
-        f"- **ناقص: {totals['incompleteCount']}**",
-        f"- **نیازمند منبع/نگاشت: {totals['needsSourceCount']}**",
+        f"- **ناقص از نظر کفایت آموزشی: {totals['incompleteCount']}**",
+        f"- **دارای نگاشت فیزیکی PDF تأییدنشده: {totals['needsSourceCount']}**",
+        f"- **دارای هر دو نوع شکاف: {totals['sectionsWithBothGapsCount']}**",
+        f"- **دارای متن قالبی تکرارشونده: {totals['genericTemplateSectionCount']}**",
         "",
-        "هیچ بخشی صرفاً به‌دلیل داشتن عنوان، خلاصه، سؤال یا پاسخ‌نامه کامل محسوب نشده است. وضعیت «نیازمند منبع» یعنی نسخه/فایل منبع و نگاشت دقیق صفحه و عنوان برای همان بخش هنوز در داده‌ها قابل ردیابی نیست.",
+        "شمارش شکاف آموزشی و شکاف منبع هم‌پوشانی دارد. وضعیت «نیازمند منبع» فقط وقتی ثبت می‌شود که معیارهای ساختاری آموزشی پاس شده باشند اما نگاشت فیزیکی PDF موجود نباشد؛ اگر متن قالبی/تکراری یا کمبود آموزشی هم وجود داشته باشد، وضعیت «ناقص» است و شکاف منبع جداگانه در شمارش بالا باقی می‌ماند. این ممیزی ساختاری صحت علمی را تأیید نمی‌کند.",
         "",
         "## خلاصهٔ درس‌به‌درس",
         "",
@@ -421,7 +491,7 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             "## فهرست کامل فصل‌به‌فصل",
             "",
-            "| درس | بخش | وضعیت | صفحه | سؤال پایه/افزوده | شکاف‌های شناسایی‌شده |",
+            "| درس | بخش | وضعیت | صفحهٔ چاپی | صفحهٔ فیزیکی PDF | سؤال پایه/افزوده | شکاف‌های شناسایی‌شده |",
             "|---|---|---|---:|---:|---|",
         ]
     )
@@ -434,8 +504,14 @@ def render_markdown(report: dict[str, Any]) -> str:
         gaps = "؛ ".join(row["gaps"]) or "—"
         safe_title = row["title"].replace("|", "\\|")
         safe_subject = row["subjectTitle"].replace("|", "\\|")
+        physical_page = (
+            f"{row['pdfPhysicalPageStart']}–{row['pdfPhysicalPageEnd']}"
+            if isinstance(row.get("pdfPhysicalPageStart"), int)
+            and isinstance(row.get("pdfPhysicalPageEnd"), int)
+            else "تأییدنشده"
+        )
         lines.append(
-            f"| {safe_subject} | {safe_title} | **{row['status']}** | {page} | "
+            f"| {safe_subject} | {safe_title} | **{row['status']}** | {page} | {physical_page} | "
             f"{row['baseQuestionCount']}/{row['advancedQuestionCount']} | {gaps} |"
         )
     lines.extend(
