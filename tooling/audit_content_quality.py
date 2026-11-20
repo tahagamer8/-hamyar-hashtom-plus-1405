@@ -351,8 +351,8 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
                 "advancedQuestionCount": sum(row["advancedQuestionCount"] for row in rows),
                 "questionCount": sum(row["questionCount"] for row in rows),
                 "sourceMappedCount": sum(row["sourceMapped"] for row in rows),
-                "needsSourceCount": sum(row["status"] == "نیازمند منبع" for row in rows),
-                "incompleteCount": sum(row["status"] == "ناقص" for row in rows),
+                "needsSourceCount": sum(not row["sourceMapped"] for row in rows),
+                "incompleteCount": sum(not row["pedagogicalComplete"] for row in rows),
                 "completeCount": sum(row["status"] == "کامل" for row in rows),
                 "dedicatedLessonCount": sum(row["hasDedicatedLesson"] for row in rows),
                 "chapterExamCount": sum(row["hasChapterExam"] for row in rows),
@@ -401,9 +401,11 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         "nonMultipleChoiceQuestionCount": len(all_questions) - multiple_choice_questions,
         "duplicateQuestionPromptCount": len(question_texts) - len(set(question_texts)),
         "sourceMappedCount": sum(row["sourceMapped"] for row in sections),
-        "needsSourceCount": sum(row["status"] == "نیازمند منبع" for row in sections),
-        "incompleteCount": sum(row["status"] == "ناقص" for row in sections),
+        "needsSourceCount": sum(not row["sourceMapped"] for row in sections),
+        "incompleteCount": sum(not row["pedagogicalComplete"] for row in sections),
         "completeCount": sum(row["status"] == "کامل" for row in sections),
+        "sectionsWithBothGapsCount": sum(not row["pedagogicalComplete"] and not row["sourceMapped"] for row in sections),
+        "genericTemplateSectionCount": sum(row["genericLearningGoalCount"] > 0 or row["genericPointExplanationCount"] > 0 or row["genericFinalCheckStepCount"] > 0 for row in sections),
         "dedicatedLessonCount": sum(row["hasDedicatedLesson"] for row in sections),
         "chapterExamCount": sum(row["hasChapterExam"] for row in sections),
         "genericReasoningSectionCount": sum(row["genericReasoningQuestionCount"] > 0 for row in sections),
@@ -417,7 +419,7 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         ),
     }
     return {
-        "auditDate": "2026-11-09",
+        "auditDate": "2026-11-20",
         "method": "Conservative structural and traceability audit; not a certification of factual accuracy.",
         "thresholdNotes": {
             "dedicatedLessonCharacters": 350,
