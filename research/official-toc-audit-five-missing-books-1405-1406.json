@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "verifiedAt": "2026-11-10",
+  "verifiedAt": "2026-11-20",
   "schoolYear": "1405-1406",
   "publisher": "پایگاه کتاب‌های درسی، اداره کل نظارت بر نشر و توزیع مواد آموزشی",
   "officialHost": "chap.sch.ir",
@@ -11,7 +11,7 @@
     "quran",
     "religion"
   ],
-  "method": "استخراج محدود فهرست مطالب از صفحات ابتدایی PDF رسمی با PDF parser؛ فقط عنوان‌ها و شماره‌صفحه‌های چاپی ثبت شده‌اند.",
+  "method": "Live recheck of the five official chap.sch.ir records and PDF endpoints on 2026-11-20; PDF parser used for limited opening-page extraction and metadata only. Printed page numbers are kept separate from physical PDF page indices.",
   "copyright": {
     "lessonProseStored": false,
     "pageImagesStored": false,
@@ -269,7 +269,18 @@
         "فهرست ۹ فصل و ۳۴ عنوان درس از بخش فهرست مطالب PDF رسمی استخراج شد.",
         "شماره‌های ثبت‌شده، شمارهٔ چاپی کتاب هستند؛ شمارهٔ فیزیکی صفحه در فایل PDF هنوز برای هر فصل تعیین نشده است.",
         "فهرست مطالب کامل استخراج شد، اما این کار به‌تنهایی تطبیق صفحه‌به‌صفحه یا تأیید محتوای آموزشی نیست."
-      ]
+      ],
+      "liveRecheck": {
+        "checkedAt": "2026-11-20",
+        "catalogRecordStatus": "http_200",
+        "schoolYear": "1405-1406",
+        "bookCode": "805",
+        "pdfStatus": "http_200",
+        "contentType": "application/pdf",
+        "totalPages": 160,
+        "parsedPagesThisRecheck": 1,
+        "note": "Live catalog and PDF endpoint rechecked. Prior TOC extraction covers 24 pages and lists 9 chapters/34 lessons; printed-to-physical PDF page mapping remains unverified."
+      }
     },
     {
       "subjectId": "persian",
@@ -378,7 +389,18 @@
         "OCR و چیدمان فهرست بعضی از سطرها و شماره‌صفحه‌ها را جا انداخت؛ فهرست همچنان ناقص است و عنوان و صفحهٔ آغاز بعضی درس‌ها تأیید نشده‌اند.",
         "شمارهٔ فیزیکی صفحهٔ PDF در برابر صفحات چاپی و آغاز فصل‌ها برای هیچ فصل تأیید نشده است؛ chapterMappingsVerified همچنان صفر است."
       ],
-      "pdfTextExtractionStatus": "all_pages_extracted"
+      "pdfTextExtractionStatus": "all_pages_extracted",
+      "liveRecheck": {
+        "checkedAt": "2026-11-20",
+        "catalogRecordStatus": "http_200",
+        "schoolYear": "1405-1406",
+        "bookCode": "803",
+        "pdfStatus": "http_200",
+        "contentType": "application/pdf",
+        "totalPages": 144,
+        "parsedPagesThisRecheck": 1,
+        "note": "Live catalog and PDF endpoint rechecked. Prior parser extracted all 144 pages, but OCR missed TOC rows; no physical PDF page mapping is verified."
+      }
     },
     {
       "subjectId": "quran",
@@ -408,7 +430,18 @@
       "notes": [
         "فهرست استخراج‌شده برای همهٔ ۱۲ درس کامل نیست؛ عنوان‌های درس ۱، ۲ و ۷ در خروجی قابل اتکا دیده نشدند.",
         "شماره‌های ۳۴۲، ۳۶۴ و مانند آن در OCR به صفحه‌های قرآن کریم اشاره دارند، نه شمارهٔ چاپی کتاب درسی؛ برای نگاشت صفحهٔ کتاب استفاده نشده‌اند."
-      ]
+      ],
+      "liveRecheck": {
+        "checkedAt": "2026-11-20",
+        "catalogRecordStatus": "http_200",
+        "schoolYear": "1405-1406",
+        "bookCode": "801",
+        "pdfStatus": "http_200",
+        "contentType": "application/pdf",
+        "totalPages": 124,
+        "parsedPagesThisRecheck": 1,
+        "note": "Live catalog and PDF endpoint rechecked. Prior extraction covered 18 pages; only 9 of the expected 12 lesson headings were recoverable. No physical PDF page mapping is verified."
+      }
     },
     {
       "subjectId": "religion",
@@ -441,7 +474,18 @@
       "notes": [
         "جدول فهرست در OCR ترتیب سلول‌ها و شماره‌صفحه‌ها را از دست داده است؛ عنوان‌های دیده‌شده برای نگاشت فصل/صفحه کافی نیستند.",
         "چند عنوان درس در متن معرفی کتاب هم دیده می‌شود، اما به‌عنوان ردیف فهرست یا صفحهٔ چاپی ثبت نشده‌اند."
-      ]
+      ],
+      "liveRecheck": {
+        "checkedAt": "2026-11-20",
+        "catalogRecordStatus": "http_200",
+        "schoolYear": "1405-1406",
+        "bookCode": "802",
+        "pdfStatus": "http_200",
+        "contentType": "application/pdf",
+        "totalPages": 164,
+        "parsedPagesThisRecheck": 1,
+        "note": "Live catalog and PDF endpoint rechecked. Prior extraction covered 18 pages; table-layout OCR recovered only partial chapter and lesson headings. No physical PDF page mapping is verified."
+      }
     },
     {
       "subjectId": "writing",
@@ -450,17 +494,43 @@
       "officialPageUrl": "http://chap.sch.ir/books/14219",
       "officialPdfUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C804.pdf",
       "parserAccessUrl": "http://chap.sch.ir/sites/default/files/lbooks/1405-1406/558/C804.pdf?download=1",
-      "parserStatus": "failed_internal_error",
-      "httpStatus": null,
-      "contentType": null,
-      "pdfTotalPages": null,
-      "pdfPagesParsed": 0,
-      "tocStatus": "not_parsed",
+      "parserStatus": "parsed",
+      "httpStatus": 200,
+      "contentType": "application/pdf",
+      "pdfTotalPages": 104,
+      "pdfPagesParsed": 8,
+      "tocStatus": "partial_ocr_rows_missing",
       "chapterMappingsVerified": 0,
       "notes": [
-        "رکورد رسمی و پیوند PDF موجود است، اما دو تلاش پردازش PDF با خطای داخلی ابزار پایان یافتند.",
-        "هیچ عنوان فصل، شماره‌صفحه یا محتوای کتاب از روی حدس ثبت نشده است."
-      ]
+        "رکورد رسمی و PDF در بازبینی زندهٔ ۲۰ نوامبر ۲۰۲۶ با پاسخ HTTP 200 و content-type برابر application/pdf تأیید شدند؛ فایل ۱۰۴ صفحه دارد.",
+        "پردازش PDF اکنون برای ۸ صفحهٔ نخست موفق است. فهرست مطالب ۷ عنوان درس را نشان می‌دهد؛ عنوان درس دوم و شماره‌صفحه‌های چاپی از OCR قابل اتکا بازیابی نشدند.",
+        "در مقدمهٔ کتاب، ساختار هشت‌درسی ذکر شده است؛ عنوان گمشدهٔ درس دوم حدس زده نشده است.",
+        "شمارهٔ فیزیکی صفحات PDF برای هیچ فصل/درس تأیید نشده و chapterMappingsVerified صفر باقی می‌ماند.",
+        "متن و تصاویر کتاب در مخزن کپی نشده‌اند."
+      ],
+      "liveRecheck": {
+        "checkedAt": "2026-11-20",
+        "catalogRecordStatus": "http_200",
+        "schoolYear": "1405-1406",
+        "bookCode": "804",
+        "pdfStatus": "http_200",
+        "contentType": "application/pdf",
+        "totalPages": 104,
+        "parsedPagesThisRecheck": 8,
+        "note": "Live PDF parsing now succeeds for the first 8 of 104 pages. The TOC exposes seven lesson headings but OCR does not recover lesson 2 or reliable printed page numbers. No physical PDF page mapping is verified."
+      },
+      "editionEvidence": "چاپ سیزدهم ۱۴۰۵",
+      "visibleLessonHeadings": [
+        "درس اول: پس از تفکر و طراحی نقشهٔ ذهنی، بنویسیم",
+        "درس سوم: ببینیم و بنویسیم",
+        "درس چهارم: گوش بدهیم و بنویسیم",
+        "درس پنجم: لمس کنیم، ببوییم، بچشیم و بنویسیم",
+        "درس ششم: با سنجش و مقایسه، آسان‌تر بنویسیم",
+        "درس هفتم: با جانشین‌سازی، راحت‌تر بنویسیم",
+        "درس هشتم: دگرگونه ببینیم و گونه‌گون بنویسیم"
+      ],
+      "pdfTextExtractionStatus": "first_8_pages_extracted_toc_partial"
     }
-  ]
+  ],
+  "lastLiveRecheckAt": "2026-11-20"
 }
