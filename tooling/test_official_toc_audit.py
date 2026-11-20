@@ -53,8 +53,12 @@ class OfficialTocEvidenceTests(unittest.TestCase):
         self.assertEqual(self.books["persian"]["tocStatus"], "partial_ocr_rows_missing")
         self.assertEqual(self.books["quran"]["tocStatus"], "partial_ocr_missing_rows")
         self.assertEqual(self.books["religion"]["tocStatus"], "partial_table_layout_ocr_incomplete")
-        self.assertEqual(self.books["writing"]["tocStatus"], "not_parsed")
-        self.assertEqual(self.books["writing"]["pdfPagesParsed"], 0)
+        writing = self.books["writing"]
+        self.assertEqual(writing["parserStatus"], "parsed")
+        self.assertEqual(writing["tocStatus"], "partial_ocr_rows_missing")
+        self.assertEqual(writing["pdfTotalPages"], 104)
+        self.assertEqual(writing["pdfPagesParsed"], 8)
+        self.assertEqual(writing["chapterMappingsVerified"], 0)
 
     def test_official_link_verification_is_separate_from_pdf_parse_depth(self):
         statuses = {
