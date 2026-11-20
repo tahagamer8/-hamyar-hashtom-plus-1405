@@ -80,6 +80,15 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertEqual(result["status"], "نیازمند منبع")
         self.assertFalse(result["sourceMapped"])
 
+    def test_pedagogical_gaps_remain_incomplete_even_when_source_is_unverified(self):
+        pack, chapter = complete_fixture()
+        chapter.pop("sourceMapping")
+        chapter["lessonContent"] = "درسنامهٔ کوتاه"
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["status"], "ناقص")
+        self.assertFalse(result["sourceMapped"])
+        self.assertIn("درسنامهٔ مستقل و کافی ثبت نشده (خلاصه جای درسنامه نیست)", result["gaps"])
+
     def test_generic_reasoning_wrapper_and_tautology_are_flagged(self):
         pack, chapter = complete_fixture()
         chapter["advancedQuestions"] = [{
