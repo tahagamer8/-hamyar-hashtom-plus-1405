@@ -24,6 +24,13 @@ def complete_fixture():
         "pageStart": 10,
         "pageEnd": 20,
         "sourceLesson": "فصل آزمایشی",
+        "sourceMapping": {
+            "status": "verified",
+            "pdfPhysicalPageStart": 12,
+            "pdfPhysicalPageEnd": 22,
+            "verifiedAt": "2026-11-20",
+            "method": "manual visual comparison with the official PDF contents and printed page range",
+        },
         "questions": [valid_mcq(i) for i in range(4)] + [{
             "question": "نتیجه را با یک جمله توضیح بده.",
             "questionType": "short_answer",
@@ -54,6 +61,21 @@ class ContentQualityAuditTests(unittest.TestCase):
         pack, chapter = complete_fixture()
         pack.pop("textbookSourceFile")
         pack.pop("textbookEdition")
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["status"], "نیازمند منبع")
+        self.assertFalse(result["sourceMapped"])
+
+    def test_printed_pages_and_pdf_url_do_not_prove_physical_pdf_mapping(self):
+        pack, chapter = complete_fixture()
+        chapter.pop("sourceMapping")
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["status"], "نیازمند منبع")
+        self.assertFalse(result["sourceMapped"])
+        self.assertTrue(any("صفحات فیزیکی PDF" in gap for gap in result["gaps"]))
+
+    def test_physical_pdf_mapping_requires_valid_range_and_review_metadata(self):
+        pack, chapter = complete_fixture()
+        chapter["sourceMapping"]["pdfPhysicalPageStart"] = 0
         result = audit_chapter("sample", "نمونه", pack, chapter, 1)
         self.assertEqual(result["status"], "نیازمند منبع")
         self.assertFalse(result["sourceMapped"])
