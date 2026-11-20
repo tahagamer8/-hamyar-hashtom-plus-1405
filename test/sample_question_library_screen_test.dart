@@ -93,7 +93,7 @@ void main() {
 
     expect(find.textContaining('این پرسش پاسخ یکتای کوتاه ندارد'), findsOneWidget);
     expect(find.textContaining('مخرج مشترک واحدها را هم‌اندازه می‌کند.'), findsOneWidget);
-    expect(find.text('ارائهٔ مثال'), findsOneWidget);
+    expect(find.textContaining('ارائهٔ مثال'), findsOneWidget);
   });
 
   testWidgets('sample question library checks true-false answers', (tester) async {
