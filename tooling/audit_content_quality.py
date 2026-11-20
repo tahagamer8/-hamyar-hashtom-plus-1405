@@ -69,7 +69,7 @@ def source_is_mapped(pack: dict[str, Any], chapter: dict[str, Any]) -> bool:
     has_edition = bool(
         clean_text(pack.get("textbookEdition")) or clean_text(source.get("schoolYear"))
     )
-    has_page_range = (
+    has_printed_page_range = (
         isinstance(chapter.get("pageStart"), int)
         and not isinstance(chapter.get("pageStart"), bool)
         and isinstance(chapter.get("pageEnd"), int)
@@ -80,7 +80,31 @@ def source_is_mapped(pack: dict[str, Any], chapter: dict[str, Any]) -> bool:
     has_lesson_reference = bool(clean_text(chapter.get("sourceLesson"))) or (
         isinstance(nested_lessons, list) and len(nested_lessons) > 0
     )
-    return has_pdf_reference and has_edition and has_page_range and has_lesson_reference
+
+    # Printed page numbers and a PDF URL do not prove where a chapter begins
+    # inside the physical PDF. Require explicit, reviewable mapping evidence.
+    mapping = chapter.get("sourceMapping")
+    mapping = mapping if isinstance(mapping, dict) else {}
+    physical_start = mapping.get("pdfPhysicalPageStart")
+    physical_end = mapping.get("pdfPhysicalPageEnd")
+    has_verified_pdf_mapping = (
+        mapping.get("status") == "verified"
+        and isinstance(physical_start, int)
+        and not isinstance(physical_start, bool)
+        and physical_start >= 1
+        and isinstance(physical_end, int)
+        and not isinstance(physical_end, bool)
+        and physical_end >= physical_start
+        and bool(clean_text(mapping.get("verifiedAt")))
+        and bool(clean_text(mapping.get("method")))
+    )
+    return (
+        has_pdf_reference
+        and has_edition
+        and has_printed_page_range
+        and has_lesson_reference
+        and has_verified_pdf_mapping
+    )
 
 
 def exam_questions(chapter: dict[str, Any]) -> list[dict[str, Any]]:
@@ -175,7 +199,7 @@ def audit_chapter(
     if len(mistakes) < 2:
         gaps.append("کمتر از دو نکتهٔ اشتباه رایج ثبت شده")
     if not mapped_source:
-        gaps.append("منبع رسمی/نسخه یا نگاشت عنوان و بازهٔ صفحه کامل نیست")
+        gaps.append("نگاشت فصل به صفحات فیزیکی PDF رسمی با شاهد، روش و تاریخ بازبینی ثبت‌شده تأیید نشده")
 
     complete = (
         has_lesson
@@ -221,6 +245,17 @@ def audit_chapter(
             if isinstance(chapter.get("workedExamples"), list) else 0,
         "lessonContentCharacters": len(lesson_text),
         "sourceMapped": mapped_source,
+        "sourceMappingStatus": clean_text(
+            (chapter.get("sourceMapping") if isinstance(chapter.get("sourceMapping"), dict) else {}).get("status")
+        ) or "not_verified",
+        "pdfPhysicalPageStart": (
+            chapter.get("sourceMapping", {}).get("pdfPhysicalPageStart")
+            if isinstance(chapter.get("sourceMapping"), dict) else None
+        ),
+        "pdfPhysicalPageEnd": (
+            chapter.get("sourceMapping", {}).get("pdfPhysicalPageEnd")
+            if isinstance(chapter.get("sourceMapping"), dict) else None
+        ),
         "pageStart": chapter.get("pageStart"),
         "pageEnd": chapter.get("pageEnd"),
         "sourceLesson": clean_text(chapter.get("sourceLesson")),
