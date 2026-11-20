@@ -201,7 +201,7 @@ def audit_chapter(
     if not mapped_source:
         gaps.append("نگاشت فصل به صفحات فیزیکی PDF رسمی با شاهد، روش و تاریخ بازبینی ثبت‌شده تأیید نشده")
 
-    complete = (
+    pedagogical_complete = (
         has_lesson
         and len(points) >= 3
         and len(example) >= 80
@@ -213,11 +213,15 @@ def audit_chapter(
         and all_valid
         and all_explained
         and len(mistakes) >= 2
-        and mapped_source
         and generic_count == 0
         and tautological_count == 0
     )
-    status = "کامل" if complete else ("نیازمند منبع" if not mapped_source else "ناقص")
+    complete = pedagogical_complete and mapped_source
+    status = (
+        "کامل"
+        if complete
+        else ("نیازمند منبع" if not mapped_source and pedagogical_complete else "ناقص")
+    )
 
     return {
         "index": index,
