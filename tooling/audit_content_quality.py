@@ -21,6 +21,15 @@ GENERIC_REASONING = re.compile(
     r"^برای پرسش «.+» پاسخ «.+» انتخاب شده است\. "
     r"کدام استدلال، درستی این انتخاب را بهتر توضیح می‌دهد؟$"
 )
+GENERIC_LEARNING_GOAL = (
+    "در پایان این بخش باید بتوانی مفهوم اصلی را با زبان خودت توضیح بدهی، "
+    "نکته‌های مهم را تشخیص بدهی و آن‌ها را در پرسش و مثال به کار ببری."
+)
+GENERIC_POINT_EXPLANATION = re.compile(
+    r"برای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع "
+    r"«[^»]+» توضیح بده\. سپس یک نمونهٔ تازه از خودت بساز\."
+)
+GENERIC_FINAL_CHECK_STEP = "بررسی نهایی: پاسخ خود را با خواستهٔ پرسش و نکتهٔ"
 NON_MCQ_TYPES = {
     "short_answer", "fill_blank", "true_false", "matching", "constructed_response",
 }
@@ -170,6 +179,11 @@ def audit_chapter(
     )
     all_valid = bool(questions) and valid_count == len(questions)
     all_explained = bool(questions) and explained_count == len(questions)
+    generic_learning_goal_count = lesson_text.count(GENERIC_LEARNING_GOAL)
+    generic_point_explanation_count = len(GENERIC_POINT_EXPLANATION.findall(lesson_text))
+    generic_final_check_step_count = sum(
+        GENERIC_FINAL_CHECK_STEP in clean_text(step) for step in steps
+    )
 
     gaps: list[str] = []
     if not has_lesson:
@@ -192,6 +206,12 @@ def audit_chapter(
         gaps.append("حداقل یک سؤال کلید پاسخ/ساختار معتبر ندارد")
     if not all_explained:
         gaps.append("حداقل یک سؤال پاسخ تشریحی ندارد")
+    if generic_learning_goal_count:
+        gaps.append("درسنامه شامل جملهٔ هدف یادگیری قالبی است و طول متن به‌تنهایی کفایت آن را ثابت نمی‌کند")
+    if generic_point_explanation_count:
+        gaps.append("توضیح نکته‌ها از الگوی عمومی تکرارشونده استفاده می‌کند؛ برای هر نکته شرح اختصاصی لازم است")
+    if generic_final_check_step_count:
+        gaps.append("مراحل حل شامل گام بازبینی عمومی و تکراری است؛ گام مرتبط با همان مسئله لازم است")
     if generic_count:
         gaps.append("پرسش استدلالی از قالب بازنویسی سؤال پایه استفاده می‌کند")
     if tautological_count:
@@ -215,6 +235,9 @@ def audit_chapter(
         and len(mistakes) >= 2
         and generic_count == 0
         and tautological_count == 0
+        and generic_learning_goal_count == 0
+        and generic_point_explanation_count == 0
+        and generic_final_check_step_count == 0
     )
     complete = pedagogical_complete and mapped_source
     status = (
@@ -248,6 +271,10 @@ def audit_chapter(
         "workedExampleCount": len(chapter.get("workedExamples", []))
             if isinstance(chapter.get("workedExamples"), list) else 0,
         "lessonContentCharacters": len(lesson_text),
+        "pedagogicalComplete": pedagogical_complete,
+        "genericLearningGoalCount": generic_learning_goal_count,
+        "genericPointExplanationCount": generic_point_explanation_count,
+        "genericFinalCheckStepCount": generic_final_check_step_count,
         "sourceMapped": mapped_source,
         "sourceMappingStatus": clean_text(
             (chapter.get("sourceMapping") if isinstance(chapter.get("sourceMapping"), dict) else {}).get("status")
