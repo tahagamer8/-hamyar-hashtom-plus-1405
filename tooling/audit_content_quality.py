@@ -440,9 +440,9 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
 def render_markdown(report: dict[str, Any]) -> str:
     totals = report["totals"]
     lines = [
-        "# ممیزی کیفیت واقعی محتوای فهمینو — ۱۴۰۵/۰۸/۱۸",
+        f"# ممیزی کیفیت محتوای فهمینو — {report['auditDate']}",
         "",
-        "**تاریخ:** ۹ نوامبر ۲۰۲۶  ",
+        f"**تاریخ:** {report['auditDate']}  ",
         "**روش:** ممیزی محافظه‌کارانهٔ ساختار، کفایت آموزشی و ردیابی منبع؛ این گزارش صحت علمی را تأیید نمی‌کند.",
         "",
         "## نتیجهٔ کلی",
@@ -466,10 +466,12 @@ def render_markdown(report: dict[str, Any]) -> str:
         "### وضعیت فصل‌به‌فصل",
         "",
         f"- **کامل: {totals['completeCount']}**",
-        f"- **ناقص: {totals['incompleteCount']}**",
-        f"- **نیازمند منبع/نگاشت: {totals['needsSourceCount']}**",
+        f"- **ناقص از نظر کفایت آموزشی: {totals['incompleteCount']}**",
+        f"- **دارای نگاشت فیزیکی PDF تأییدنشده: {totals['needsSourceCount']}**",
+        f"- **دارای هر دو نوع شکاف: {totals['sectionsWithBothGapsCount']}**",
+        f"- **دارای متن قالبی تکرارشونده: {totals['genericTemplateSectionCount']}**",
         "",
-        "هیچ بخشی صرفاً به‌دلیل داشتن عنوان، خلاصه، سؤال یا پاسخ‌نامه کامل محسوب نشده است. وضعیت «نیازمند منبع» یعنی نسخه/فایل منبع و نگاشت دقیق صفحه و عنوان برای همان بخش هنوز در داده‌ها قابل ردیابی نیست.",
+        "شمارش شکاف آموزشی و شکاف منبع هم‌پوشانی دارد. وضعیت «نیازمند منبع» فقط وقتی ثبت می‌شود که معیارهای ساختاری آموزشی پاس شده باشند اما نگاشت فیزیکی PDF موجود نباشد؛ اگر متن قالبی/تکراری یا کمبود آموزشی هم وجود داشته باشد، وضعیت «ناقص» است و شکاف منبع جداگانه در شمارش بالا باقی می‌ماند. این ممیزی ساختاری صحت علمی را تأیید نمی‌کند.",
         "",
         "## خلاصهٔ درس‌به‌درس",
         "",
@@ -489,7 +491,7 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             "## فهرست کامل فصل‌به‌فصل",
             "",
-            "| درس | بخش | وضعیت | صفحه | سؤال پایه/افزوده | شکاف‌های شناسایی‌شده |",
+            "| درس | بخش | وضعیت | صفحهٔ چاپی | صفحهٔ فیزیکی PDF | سؤال پایه/افزوده | شکاف‌های شناسایی‌شده |",
             "|---|---|---|---:|---:|---|",
         ]
     )
@@ -502,8 +504,14 @@ def render_markdown(report: dict[str, Any]) -> str:
         gaps = "؛ ".join(row["gaps"]) or "—"
         safe_title = row["title"].replace("|", "\\|")
         safe_subject = row["subjectTitle"].replace("|", "\\|")
+        physical_page = (
+            f"{row['pdfPhysicalPageStart']}–{row['pdfPhysicalPageEnd']}"
+            if isinstance(row.get("pdfPhysicalPageStart"), int)
+            and isinstance(row.get("pdfPhysicalPageEnd"), int)
+            else "تأییدنشده"
+        )
         lines.append(
-            f"| {safe_subject} | {safe_title} | **{row['status']}** | {page} | "
+            f"| {safe_subject} | {safe_title} | **{row['status']}** | {page} | {physical_page} | "
             f"{row['baseQuestionCount']}/{row['advancedQuestionCount']} | {gaps} |"
         )
     lines.extend(
