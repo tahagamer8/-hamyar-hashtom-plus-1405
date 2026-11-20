@@ -89,6 +89,29 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertFalse(result["sourceMapped"])
         self.assertIn("درسنامهٔ مستقل و کافی ثبت نشده (خلاصه جای درسنامه نیست)", result["gaps"])
 
+    def test_repeated_learning_goal_and_point_templates_are_not_complete_content(self):
+        pack, chapter = complete_fixture()
+        chapter["lessonContent"] += (
+            "\\nدر پایان این بخش باید بتوانی مفهوم اصلی را با زبان خودت توضیح بدهی، "
+            "نکته‌های مهم را تشخیص بدهی و آن‌ها را در پرسش و مثال به کار ببری."
+            "\\nبرای فهم این نکته، آن را به عبارت‌های کلیدی تقسیم کن و ارتباطش را با موضوع "
+            "«فصل آزمایشی» توضیح بده. سپس یک نمونهٔ تازه از خودت بساز."
+        )
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["genericLearningGoalCount"], 1)
+        self.assertEqual(result["genericPointExplanationCount"], 1)
+        self.assertEqual(result["status"], "ناقص")
+
+    def test_generic_final_check_step_is_not_counted_as_a_real_solution_step(self):
+        pack, chapter = complete_fixture()
+        chapter["solutionSteps"].append(
+            "بررسی نهایی: پاسخ خود را با خواستهٔ پرسش و نکتهٔ «فصل آزمایشی» "
+            "مقایسه کن و دلیل درستی یا نادرستی آن را با یک جمله توضیح بده."
+        )
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["genericFinalCheckStepCount"], 1)
+        self.assertEqual(result["status"], "ناقص")
+
     def test_generic_reasoning_wrapper_and_tautology_are_flagged(self):
         pack, chapter = complete_fixture()
         chapter["advancedQuestions"] = [{
