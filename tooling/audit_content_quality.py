@@ -228,7 +228,7 @@ def audit_chapter(
         and len(steps) >= 3
         and len(step_text) >= 80
         and len(base_questions) >= 2
-        and len(formats) >= 2
+        and len(formats) >= 3
         and has_exam
         and all_valid
         and all_explained
