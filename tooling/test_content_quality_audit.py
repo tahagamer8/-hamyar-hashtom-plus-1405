@@ -36,6 +36,11 @@ def complete_fixture():
             "questionType": "short_answer",
             "answer": "نتیجه با داده‌ها سازگار است.",
             "explanation": "در پاسخ تشریحی باید رابطهٔ داده‌ها و نتیجه بیان شود.",
+        }, {
+            "question": "این گزاره درست است یا نادرست؟",
+            "questionType": "true_false",
+            "answer": "درست",
+            "explanation": "گزاره با تعریف ارائه‌شده در صورت مسئله سازگار است.",
         }],
         "chapterExam": [valid_mcq(i + 10) for i in range(5)],
     }
@@ -54,8 +59,19 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertTrue(result["sourceMapped"])
         self.assertTrue(result["hasDedicatedLesson"])
         self.assertTrue(result["hasChapterExam"])
-        self.assertEqual(result["questionFormats"], ["multiple_choice", "short_answer"])
+        self.assertEqual(result["questionFormats"], ["multiple_choice", "short_answer", "true_false"])
         self.assertEqual(result["gaps"], [])
+
+    def test_two_question_formats_are_not_enough_for_a_complete_chapter(self):
+        pack, chapter = complete_fixture()
+        chapter["questions"] = [
+            question for question in chapter["questions"]
+            if question.get("questionType") != "true_false"
+        ]
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["status"], "ناقص")
+        self.assertEqual(result["questionFormats"], ["multiple_choice", "short_answer"])
+        self.assertIn("قالب تمرین‌ها متنوع نیست؛ حداقل سه قالب لازم است", result["gaps"])
 
     def test_missing_official_source_is_not_misreported_as_complete(self):
         pack, chapter = complete_fixture()
