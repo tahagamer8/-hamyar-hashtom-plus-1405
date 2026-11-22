@@ -120,7 +120,7 @@ class ContentQualityAuditTests(unittest.TestCase):
         result = audit_chapter("sample", "نمونه", pack, chapter, 1)
         self.assertEqual(result["status"], "ناقص")
         self.assertEqual(result["questionFormats"], ["multiple_choice", "short_answer"])
-        self.assertIn("قالب تمرین‌ها متنوع نیست؛ حداقل سه قالب لازم است", result["gaps"])
+        self.assertIn("قالب‌های مستقل تمرین‌ها متنوع نیست؛ حداقل سه قالب مستقل لازم است", result["gaps"])
 
     def test_missing_official_source_is_not_misreported_as_complete(self):
         pack, chapter = complete_fixture()
