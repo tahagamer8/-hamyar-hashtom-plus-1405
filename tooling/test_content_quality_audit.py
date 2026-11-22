@@ -62,6 +62,15 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertEqual(result["questionFormats"], ["multiple_choice", "short_answer", "true_false"])
         self.assertEqual(result["gaps"], [])
 
+    def test_four_base_practice_questions_are_not_enough_even_with_three_formats(self):
+        pack, chapter = complete_fixture()
+        chapter["questions"] = chapter["questions"][:2] + chapter["questions"][-2:]
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(result["baseQuestionCount"], 4)
+        self.assertEqual(result["questionFormats"], ["multiple_choice", "short_answer", "true_false"])
+        self.assertEqual(result["status"], "ناقص")
+        self.assertIn("کمتر از پنج پرسش پایه ثبت شده است", result["gaps"])
+
     def test_two_question_formats_are_not_enough_for_a_complete_chapter(self):
         pack, chapter = complete_fixture()
         chapter["questions"] = [

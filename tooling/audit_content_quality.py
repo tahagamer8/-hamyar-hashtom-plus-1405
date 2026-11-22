@@ -194,8 +194,8 @@ def audit_chapter(
         gaps.append("مثال کمتر از ۸۰ نویسه است؛ نیازمند بازبینی انسانی")
     if len(steps) < 3 or len(step_text) < 80:
         gaps.append("مثال حل‌شده یا مراحل گام‌به‌گام کافی ثبت نشده")
-    if len(base_questions) < 2:
-        gaps.append("کمتر از دو سؤال چهارگزینه‌ای پایه ثبت شده است")
+    if len(base_questions) < 5:
+        gaps.append("کمتر از پنج پرسش پایه ثبت شده است")
     if len(formats) < 3:
         gaps.append("قالب تمرین‌ها متنوع نیست؛ حداقل سه قالب لازم است")
     if all_multiple_choice:
@@ -227,7 +227,7 @@ def audit_chapter(
         and len(example) >= 80
         and len(steps) >= 3
         and len(step_text) >= 80
-        and len(base_questions) >= 2
+        and len(base_questions) >= 5
         and len(formats) >= 3
         and has_exam
         and all_valid
