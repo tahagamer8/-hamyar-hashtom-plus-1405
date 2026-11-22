@@ -30,6 +30,11 @@ GENERIC_POINT_EXPLANATION = re.compile(
     r"«[^»]+» توضیح بده\. سپس یک نمونهٔ تازه از خودت بساز\."
 )
 GENERIC_FINAL_CHECK_STEP = "بررسی نهایی: پاسخ خود را با خواستهٔ پرسش و نکتهٔ"
+SHORT_ANSWER_BASE_WRAPPER_PREFIX = "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: "
+REPHRASED_BASE_PROMPT = re.compile(
+    r"^پرسش «(.+)» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس\.$"
+)
+TRUE_FALSE_POINT_WRAPPER_PREFIX = "درست یا نادرست: "
 NON_MCQ_TYPES = {
     "short_answer", "fill_blank", "true_false", "matching", "constructed_response",
 }
@@ -45,6 +50,23 @@ def question_format(question: dict[str, Any]) -> str:
         return "multiple_choice"
     kind = clean_text(question.get("questionType"))
     return kind or "untyped"
+
+
+def normalized_text(value: Any) -> str:
+    return re.sub(r"\s+", " ", clean_text(value)).casefold()
+
+
+def is_tautological_reasoning(question: dict[str, Any]) -> bool:
+    options = question.get("options")
+    answer = question.get("answer")
+    return bool(
+        isinstance(options, list)
+        and isinstance(answer, int)
+        and not isinstance(answer, bool)
+        and 0 <= answer < len(options)
+        and clean_text(question.get("explanation"))
+        == "استدلال درست: " + clean_text(options[answer])
+    )
 
 
 def question_is_valid(question: dict[str, Any]) -> bool:
@@ -135,7 +157,6 @@ def audit_chapter(
     questions = [
         item for item in [*base_questions, *advanced_questions] if isinstance(item, dict)
     ]
-    formats = sorted({question_format(question) for question in questions})
     valid_count = sum(question_is_valid(question) for question in questions)
     explained_count = sum(bool(clean_text(question.get("explanation"))) for question in questions)
 
@@ -162,16 +183,56 @@ def audit_chapter(
     generic_count = sum(
         bool(GENERIC_REASONING.fullmatch(clean_text(question.get("question"))))
         for question in advanced_questions
+        if isinstance(question, dict)
     )
     tautological_count = sum(
-        bool(
-            isinstance(question.get("options"), list)
-            and isinstance(question.get("answer"), int)
-            and 0 <= question["answer"] < len(question["options"])
-            and clean_text(question.get("explanation"))
-            == "استدلال درست: " + clean_text(question["options"][question["answer"]])
-        )
+        is_tautological_reasoning(question)
         for question in advanced_questions
+        if isinstance(question, dict)
+    )
+    base_prompts = {
+        normalized_text(question.get("question"))
+        for question in base_questions
+        if isinstance(question, dict) and clean_text(question.get("question"))
+    }
+    point_texts = {normalized_text(point) for point in points if clean_text(point)}
+    reused_base_prompt_count = 0
+    reused_point_restatement_count = 0
+    independent_advanced_questions: list[dict[str, Any]] = []
+    for question in advanced_questions:
+        if not isinstance(question, dict):
+            continue
+        prompt = clean_text(question.get("question"))
+        if prompt.startswith(SHORT_ANSWER_BASE_WRAPPER_PREFIX):
+            wrapped_prompt = prompt[len(SHORT_ANSWER_BASE_WRAPPER_PREFIX):]
+            if normalized_text(wrapped_prompt) in base_prompts:
+                reused_base_prompt_count += 1
+                continue
+        rephrased_match = REPHRASED_BASE_PROMPT.fullmatch(prompt)
+        if rephrased_match and normalized_text(rephrased_match.group(1)) in base_prompts:
+            reused_base_prompt_count += 1
+            continue
+        if prompt.startswith(TRUE_FALSE_POINT_WRAPPER_PREFIX):
+            restated_point = prompt[len(TRUE_FALSE_POINT_WRAPPER_PREFIX):]
+            if normalized_text(restated_point) in point_texts:
+                reused_point_restatement_count += 1
+                continue
+        if GENERIC_REASONING.fullmatch(prompt) or is_tautological_reasoning(question):
+            continue
+        independent_advanced_questions.append(question)
+
+    independent_questions = [
+        item
+        for item in [*base_questions, *independent_advanced_questions]
+        if isinstance(item, dict)
+    ]
+    formats = sorted({question_format(question) for question in questions})
+    independent_formats = sorted(
+        {question_format(question) for question in independent_questions}
+    )
+    non_independent_advanced_count = (
+        sum(isinstance(question, dict) for question in advanced_questions)
+        - len(independent_advanced_questions)
     )
     all_multiple_choice = bool(questions) and all(
         isinstance(question.get("options"), list) and len(question["options"]) >= 2
@@ -196,8 +257,12 @@ def audit_chapter(
         gaps.append("مثال حل‌شده یا مراحل گام‌به‌گام کافی ثبت نشده")
     if len(base_questions) < 5:
         gaps.append("کمتر از پنج پرسش پایه ثبت شده است")
-    if len(formats) < 3:
-        gaps.append("قالب تمرین‌ها متنوع نیست؛ حداقل سه قالب لازم است")
+    if len(independent_formats) < 3:
+        gaps.append("قالب‌های مستقل تمرین‌ها متنوع نیست؛ حداقل سه قالب مستقل لازم است")
+    if reused_base_prompt_count:
+        gaps.append("پرسش‌های افزوده صرفاً بازنویسی پرسش‌های پایه‌اند و تمرین مستقل محسوب نمی‌شوند")
+    if reused_point_restatement_count:
+        gaps.append("پرسش درست/نادرست صرفاً یک نکتهٔ فهرست‌شده را تکرار می‌کند و تمرین مستقل محسوب نمی‌شود")
     if all_multiple_choice:
         gaps.append("همهٔ پرسش‌ها چهارگزینه‌ای‌اند؛ تنوع قالب وجود ندارد")
     if not has_exam:
@@ -228,7 +293,7 @@ def audit_chapter(
         and len(steps) >= 3
         and len(step_text) >= 80
         and len(base_questions) >= 5
-        and len(formats) >= 3
+        and len(independent_formats) >= 3
         and has_exam
         and all_valid
         and all_explained
@@ -258,6 +323,10 @@ def audit_chapter(
         "validQuestionCount": valid_count,
         "explainedQuestionCount": explained_count,
         "questionFormats": formats,
+        "independentQuestionFormats": independent_formats,
+        "reusedBasePromptAdvancedQuestionCount": reused_base_prompt_count,
+        "reusedPointRestatementCount": reused_point_restatement_count,
+        "nonIndependentAdvancedQuestionCount": non_independent_advanced_count,
         "allQuestionsMultipleChoice": all_multiple_choice,
         "hasDedicatedLesson": has_lesson,
         "summaryCharacters": len(clean_text(chapter.get("summary"))),
@@ -356,6 +425,15 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
                 "completeCount": sum(row["status"] == "کامل" for row in rows),
                 "dedicatedLessonCount": sum(row["hasDedicatedLesson"] for row in rows),
                 "chapterExamCount": sum(row["hasChapterExam"] for row in rows),
+                "reusedBasePromptAdvancedQuestionCount": sum(
+                    row["reusedBasePromptAdvancedQuestionCount"] for row in rows
+                ),
+                "reusedPointRestatementCount": sum(
+                    row["reusedPointRestatementCount"] for row in rows
+                ),
+                "sectionsWithReusedAdvancedPromptsCount": sum(
+                    row["nonIndependentAdvancedQuestionCount"] > 0 for row in rows
+                ),
                 "genericReasoningCount": sum(row["genericReasoningQuestionCount"] > 0 for row in rows),
                 "tautologicalReasoningCount": sum(
                     row["tautologicalReasoningExplanationCount"] > 0 for row in rows
@@ -408,6 +486,15 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         "genericTemplateSectionCount": sum(row["genericLearningGoalCount"] > 0 or row["genericPointExplanationCount"] > 0 or row["genericFinalCheckStepCount"] > 0 for row in sections),
         "dedicatedLessonCount": sum(row["hasDedicatedLesson"] for row in sections),
         "chapterExamCount": sum(row["hasChapterExam"] for row in sections),
+        "reusedBasePromptAdvancedQuestionCount": sum(
+            row["reusedBasePromptAdvancedQuestionCount"] for row in sections
+        ),
+        "reusedPointRestatementCount": sum(
+            row["reusedPointRestatementCount"] for row in sections
+        ),
+        "sectionsWithReusedAdvancedPromptsCount": sum(
+            row["nonIndependentAdvancedQuestionCount"] > 0 for row in sections
+        ),
         "genericReasoningSectionCount": sum(row["genericReasoningQuestionCount"] > 0 for row in sections),
         "tautologicalReasoningSectionCount": sum(
             row["tautologicalReasoningExplanationCount"] > 0 for row in sections
