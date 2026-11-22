@@ -71,6 +71,46 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertEqual(result["status"], "ناقص")
         self.assertIn("کمتر از پنج پرسش پایه ثبت شده است", result["gaps"])
 
+    def test_advanced_wrappers_reusing_base_prompts_and_points_do_not_count_as_independent_formats(self):
+        pack, chapter = complete_fixture()
+        chapter["questions"] = [valid_mcq(i) for i in range(5)]
+        base = chapter["questions"]
+        point = "تقسیم بر صفر تعریف نشده است."
+        chapter["points"] = [point, "نکتهٔ دوم", "نکتهٔ سوم"]
+        chapter["advancedQuestions"] = [
+            {
+                "question": "بدون دیدن گزینه‌ها، به این پرسش پاسخ کوتاه بده: " + base[0]["question"],
+                "questionType": "short_answer",
+                "answer": "پاسخ پایه",
+                "explanation": "این پاسخ همان پرسش پایه را تکرار می‌کند.",
+            },
+            {
+                "question": "پرسش «" + base[1]["question"] + "» را با بیان خودت پاسخ بده و یک دلیل کوتاه بنویس.",
+                "questionType": "short_answer",
+                "answer": "پاسخ بازنویسی‌شده",
+                "explanation": "این صورت نیز همان پرسش پایه را بازنویسی می‌کند.",
+            },
+            {
+                "question": "درست یا نادرست: " + point,
+                "questionType": "true_false",
+                "answer": "درست",
+                "explanation": "این گزاره عین یکی از نکته‌های فهرست‌شده است.",
+            },
+        ]
+        result = audit_chapter("sample", "نمونه", pack, chapter, 1)
+        self.assertEqual(
+            result["questionFormats"],
+            ["multiple_choice", "short_answer", "true_false"],
+        )
+        self.assertEqual(result["independentQuestionFormats"], ["multiple_choice"])
+        self.assertEqual(result["reusedBasePromptAdvancedQuestionCount"], 2)
+        self.assertEqual(result["reusedPointRestatementCount"], 1)
+        self.assertEqual(result["nonIndependentAdvancedQuestionCount"], 3)
+        self.assertEqual(result["status"], "ناقص")
+        self.assertTrue(
+            any("قالب‌های مستقل تمرین‌ها" in gap for gap in result["gaps"])
+        )
+
     def test_two_question_formats_are_not_enough_for_a_complete_chapter(self):
         pack, chapter = complete_fixture()
         chapter["questions"] = [
