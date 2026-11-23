@@ -1,4 +1,6 @@
+import json
 import unittest
+from pathlib import Path
 
 from tooling.audit_content_quality import audit_chapter, question_is_valid
 
@@ -52,6 +54,33 @@ def complete_fixture():
 
 
 class ContentQualityAuditTests(unittest.TestCase):
+
+    def test_science_mixtures_chapter_has_original_lesson_and_independent_formats(self):
+        root = Path(__file__).resolve().parents[1]
+        pack = json.loads(
+            (root / "assets/content/subjects/science.json").read_text(encoding="utf-8")
+        )
+        chapter = pack["chapters"][0]
+        result = audit_chapter("science", pack["title"], pack, chapter, 1)
+
+        self.assertEqual(chapter["title"], "مخلوط و جداسازی مواد")
+        self.assertTrue(result["pedagogicalComplete"])
+        self.assertFalse(result["sourceMapped"])
+        self.assertEqual(result["status"], "نیازمند منبع")
+        self.assertEqual(result["baseQuestionCount"], 5)
+        self.assertEqual(result["advancedQuestionCount"], 3)
+        self.assertEqual(
+            result["independentQuestionFormats"],
+            ["multiple_choice", "short_answer", "true_false"],
+        )
+        self.assertEqual(result["reusedBasePromptAdvancedQuestionCount"], 0)
+        self.assertEqual(result["reusedPointRestatementCount"], 0)
+        self.assertEqual(result["genericLearningGoalCount"], 0)
+        self.assertEqual(result["genericPointExplanationCount"], 0)
+        self.assertEqual(result["genericFinalCheckStepCount"], 0)
+        self.assertTrue(result["hasChapterExam"])
+        self.assertEqual(result["chapterExamQuestionCount"], 8)
+
     def test_complete_requires_all_pedagogical_and_source_gates(self):
         pack, chapter = complete_fixture()
         result = audit_chapter("sample", "نمونه", pack, chapter, 1)
