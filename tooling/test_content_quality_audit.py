@@ -79,7 +79,7 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertEqual(result["genericPointExplanationCount"], 0)
         self.assertEqual(result["genericFinalCheckStepCount"], 0)
         self.assertTrue(result["hasChapterExam"])
-        self.assertEqual(result["chapterExamQuestionCount"], 7)
+        self.assertEqual(result["chapterExamQuestionCount"], 8)
 
     def test_complete_requires_all_pedagogical_and_source_gates(self):
         pack, chapter = complete_fixture()
