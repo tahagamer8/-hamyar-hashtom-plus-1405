@@ -68,7 +68,7 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertFalse(result["sourceMapped"])
         self.assertEqual(result["status"], "نیازمند منبع")
         self.assertEqual(result["baseQuestionCount"], 5)
-        self.assertEqual(result["advancedQuestionCount"], 2)
+        self.assertEqual(result["advancedQuestionCount"], 3)
         self.assertEqual(
             result["independentQuestionFormats"],
             ["multiple_choice", "short_answer", "true_false"],
