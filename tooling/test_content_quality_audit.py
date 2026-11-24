@@ -56,7 +56,7 @@ def complete_fixture():
 def normalize_toc_title(value):
     return "".join(
         character for character in value
-        if not character.isspace() and character not in "\\u200c\\u200f"
+        if not character.isspace() and ord(character) not in (0x200c, 0x200f)
     ).replace("ي", "ی").replace("ك", "ک")
 
 
