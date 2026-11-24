@@ -53,7 +53,72 @@ def complete_fixture():
     return pack, chapter
 
 
+def normalize_toc_title(value):
+    return "".join(
+        character for character in value
+        if not character.isspace() and character not in "\\u200c\\u200f"
+    ).replace("ي", "ی").replace("ك", "ک")
+
+
 class ContentQualityAuditTests(unittest.TestCase):
+
+
+    def test_science_official_toc_is_recorded_without_claiming_physical_pdf_mapping(self):
+        root = Path(__file__).resolve().parents[1]
+        pack = json.loads(
+            (root / "assets/content/subjects/science.json").read_text(encoding="utf-8")
+        )
+        source = pack["textbookSource"]
+        parser = source["pdfParserVerification"]
+        self.assertEqual(source["bookCode"], "806")
+        self.assertEqual(source["schoolYear"], "1405-1406")
+        self.assertEqual(parser["httpStatus"], 200)
+        self.assertEqual(parser["contentType"], "application/pdf")
+        self.assertEqual(parser["parsedPhysicalPages"], 24)
+        self.assertEqual(parser["totalPhysicalPages"], 152)
+        self.assertEqual(parser["tocEntryCount"], 15)
+        self.assertEqual(parser["exactTitleMatchCount"], 11)
+        self.assertEqual(parser["ocrAmbiguousTitleCount"], 4)
+        self.assertEqual(parser["physicalPageMappingStatus"], "not_verified")
+
+        expected = [
+            ("مخلوط و جداسازی مواد", 1, "مخلوط و جداسازی مواد", "verified"),
+            ("تغییرهای شیمیایی در خدمت زندگی", 9, "تغییرهای شیمایی در خدمت‌زندگی", "ocr_ambiguous"),
+            ("از درون اتم چه خبر", 21, "از درون آنم چه خبر", "ocr_ambiguous"),
+            ("تنظیم عصبی", 28, "تنظیم عصبی", "verified"),
+            ("حس و حرکت", 35, "حس و حرکت", "verified"),
+            ("تنظیم هورمونی", 47, "تنظیم هورمونی", "verified"),
+            ("الفبای زیست‌فناوری", 55, "الفای زیست فناوری", "ocr_ambiguous"),
+            ("تولیدمثل در جانداران", 65, "تولیدمثل در جانداران", "verified"),
+            ("الکتریسیته", 76, "الکتریسییته", "ocr_ambiguous"),
+            ("مغناطیس", 89, "مغناطیس", "verified"),
+            ("کانی‌ها", 97, "کانی ها", "verified"),
+            ("سنگ‌ها", 104, "سنگ ها", "verified"),
+            ("هوازدگی", 114, "هوازدگی", "verified"),
+            ("نور و ویژگی‌های آن", 122, "نور و ویژگی‌های آن", "verified"),
+            ("شکست نور", 136, "شکست نور", "verified"),
+        ]
+        self.assertEqual(len(pack["chapters"]), len(expected))
+        for index, (title, printed_page, toc_entry, title_status) in enumerate(expected, 1):
+            chapter = pack["chapters"][index - 1]
+            mapping = chapter["sourceMapping"]
+            self.assertEqual(chapter["title"], title)
+            self.assertEqual(chapter["pageStart"], printed_page)
+            self.assertEqual(mapping["officialTocEntry"], toc_entry)
+            self.assertEqual(mapping["printedPageStart"], printed_page)
+            self.assertEqual(mapping["titleMatchStatus"], title_status)
+            self.assertEqual(mapping["physicalPdfPageMappingStatus"], "not_verified")
+            if title_status == "verified":
+                self.assertEqual(normalize_toc_title(title), normalize_toc_title(toc_entry))
+            else:
+                self.assertEqual(
+                    mapping["status"],
+                    "printed_toc_entry_found_title_ocr_ambiguous_physical_pdf_unverified",
+                )
+            result = audit_chapter("science", pack["title"], pack, chapter, index)
+            self.assertTrue(result["printedTocEntryFound"])
+            self.assertFalse(result["sourceMapped"])
+            self.assertIsNone(result["pdfPhysicalPageStart"])
 
     def test_science_mixtures_chapter_has_original_lesson_and_independent_formats(self):
         root = Path(__file__).resolve().parents[1]
