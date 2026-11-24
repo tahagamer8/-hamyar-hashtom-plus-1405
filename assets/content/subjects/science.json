@@ -3816,7 +3816,7 @@
     "bookCode": "806",
     "fileName": "C806.pdf",
     "fileSizeMB": "7.7",
-    "verificationStatus": "official_portal_record_and_pdf_link_verified_pdf_parser_read_24_of_152_physical_pages_toc_extracted_physical_page_mapping_pending",
+    "verificationStatus": "official_portal_record_and_pdf_link_verified_pdf_content_parsed_24_of_152_physical_pages_toc_extracted_physical_page_mapping_pending",
     "verifiedAt": "2026-11-24",
     "pdfParserVerification": {
       "parser": "Firecrawl PDF parser",
