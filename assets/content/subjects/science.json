@@ -245,7 +245,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_verified_physical_pdf_unverified",
+        "officialTocEntry": "مخلوط و جداسازی مواد",
+        "titleMatchStatus": "verified",
+        "printedPageStart": 1,
+        "printedPageEnd": 8,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "تغییرهای شیمیایی در خدمت زندگی",
@@ -485,7 +498,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_entry_found_title_ocr_ambiguous_physical_pdf_unverified",
+        "officialTocEntry": "تغییرهای شیمایی در خدمت‌زندگی",
+        "titleMatchStatus": "ocr_ambiguous",
+        "printedPageStart": 9,
+        "printedPageEnd": 20,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "از درون اتم چه خبر",
@@ -727,7 +753,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_entry_found_title_ocr_ambiguous_physical_pdf_unverified",
+        "officialTocEntry": "از درون آنم چه خبر",
+        "titleMatchStatus": "ocr_ambiguous",
+        "printedPageStart": 21,
+        "printedPageEnd": 27,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "تنظیم عصبی",
@@ -967,7 +1006,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_verified_physical_pdf_unverified",
+        "officialTocEntry": "تنظیم عصبی",
+        "titleMatchStatus": "verified",
+        "printedPageStart": 28,
+        "printedPageEnd": 34,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "حس و حرکت",
@@ -1207,7 +1259,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_verified_physical_pdf_unverified",
+        "officialTocEntry": "حس و حرکت",
+        "titleMatchStatus": "verified",
+        "printedPageStart": 35,
+        "printedPageEnd": 46,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "تنظیم هورمونی",
@@ -1447,7 +1512,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_verified_physical_pdf_unverified",
+        "officialTocEntry": "تنظیم هورمونی",
+        "titleMatchStatus": "verified",
+        "printedPageStart": 47,
+        "printedPageEnd": 54,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "الفبای زیست‌فناوری",
@@ -1687,7 +1765,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_entry_found_title_ocr_ambiguous_physical_pdf_unverified",
+        "officialTocEntry": "الفای زیست فناوری",
+        "titleMatchStatus": "ocr_ambiguous",
+        "printedPageStart": 55,
+        "printedPageEnd": 64,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "تولیدمثل در جانداران",
@@ -1927,7 +2018,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_verified_physical_pdf_unverified",
+        "officialTocEntry": "تولیدمثل در جانداران",
+        "titleMatchStatus": "verified",
+        "printedPageStart": 65,
+        "printedPageEnd": 75,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "الکتریسیته",
@@ -2169,7 +2273,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_entry_found_title_ocr_ambiguous_physical_pdf_unverified",
+        "officialTocEntry": "الکتریسییته",
+        "titleMatchStatus": "ocr_ambiguous",
+        "printedPageStart": 76,
+        "printedPageEnd": 88,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "مغناطیس",
@@ -2411,7 +2528,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_verified_physical_pdf_unverified",
+        "officialTocEntry": "مغناطیس",
+        "titleMatchStatus": "verified",
+        "printedPageStart": 89,
+        "printedPageEnd": 96,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "کانی‌ها",
@@ -2651,7 +2781,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_verified_physical_pdf_unverified",
+        "officialTocEntry": "کانی ها",
+        "titleMatchStatus": "verified",
+        "printedPageStart": 97,
+        "printedPageEnd": 103,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "سنگ‌ها",
@@ -2893,7 +3036,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_verified_physical_pdf_unverified",
+        "officialTocEntry": "سنگ ها",
+        "titleMatchStatus": "verified",
+        "printedPageStart": 104,
+        "printedPageEnd": 113,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "هوازدگی",
@@ -3133,7 +3289,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_verified_physical_pdf_unverified",
+        "officialTocEntry": "هوازدگی",
+        "titleMatchStatus": "verified",
+        "printedPageStart": 114,
+        "printedPageEnd": 121,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "نور و ویژگی‌های آن",
@@ -3373,7 +3542,20 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_verified_physical_pdf_unverified",
+        "officialTocEntry": "نور و ویژگی‌های آن",
+        "titleMatchStatus": "verified",
+        "printedPageStart": 122,
+        "printedPageEnd": 135,
+        "printedPageEndMethod": "derived_from_next_official_toc_start_minus_one",
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     },
     {
       "title": "شکست نور",
@@ -3612,7 +3794,18 @@
           ],
           "source": "تألیفی فهمینو"
         }
-      ]
+      ],
+      "sourceMapping": {
+        "status": "printed_toc_verified_physical_pdf_unverified",
+        "officialTocEntry": "شکست نور",
+        "titleMatchStatus": "verified",
+        "printedPageStart": 136,
+        "pdfPhysicalPageStart": null,
+        "pdfPhysicalPageEnd": null,
+        "physicalPdfPageMappingStatus": "not_verified",
+        "verifiedAt": "2026-11-24",
+        "method": "Firecrawl PDF parser returned the official C806.pdf table of contents while extracting physical pages 1-24 of 152. Printed chapter starts were captured from the TOC; physical PDF page offsets were not independently mapped."
+      }
     }
   ],
   "textbookEdition": "چاپ سیزدهم، ۱۴۰۵",
@@ -3623,8 +3816,21 @@
     "bookCode": "806",
     "fileName": "C806.pdf",
     "fileSizeMB": "7.7",
-    "verificationStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
-    "verifiedAt": "2026-11-09"
+    "verificationStatus": "official_portal_record_and_pdf_link_verified_pdf_content_parsed_24_of_152_physical_pages_toc_extracted_physical_page_mapping_pending",
+    "verifiedAt": "2026-11-24",
+    "pdfParserVerification": {
+      "parser": "Firecrawl PDF parser",
+      "httpStatus": 200,
+      "contentType": "application/pdf",
+      "parsedPhysicalPages": 24,
+      "totalPhysicalPages": 152,
+      "parsedAt": "2026-11-24",
+      "tocEntryCount": 15,
+      "tocExtractionStatus": "chapter_start_rows_extracted; four titles have OCR ambiguity",
+      "exactTitleMatchCount": 11,
+      "ocrAmbiguousTitleCount": 4,
+      "physicalPageMappingStatus": "not_verified"
+    }
   },
   "textbookSourceFile": "Oloom-8_Daneshchi.iR.pdf",
   "textbookContentsVerified": true,

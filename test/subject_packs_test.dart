@@ -310,9 +310,47 @@ void main() {
       expect(source['bookCode'], entry.value['code'], reason: entry.key);
       expect(source['portalUrl'], contains('/books/${entry.value['portalId']}'), reason: entry.key);
       expect(source['pdfUrl'], contains(entry.value['file']), reason: entry.key);
-      expect(source['verificationStatus'],
-          'official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed',
-          reason: entry.key);
+      final expectedVerificationStatus = entry.key == 'science'
+          ? 'official_portal_record_and_pdf_link_verified_pdf_content_parsed_24_of_152_physical_pages_toc_extracted_physical_page_mapping_pending'
+          : 'official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed';
+      expect(source['verificationStatus'], expectedVerificationStatus, reason: entry.key);
+
+      if (entry.key == 'science') {
+        final parser = source['pdfParserVerification'] as Map<String, dynamic>;
+        expect(parser['parser'], 'Firecrawl PDF parser');
+        expect(parser['httpStatus'], 200);
+        expect(parser['contentType'], 'application/pdf');
+        expect(parser['parsedPhysicalPages'], 24);
+        expect(parser['totalPhysicalPages'], 152);
+        expect(parser['tocEntryCount'], 15);
+        expect(parser['exactTitleMatchCount'], 11);
+        expect(parser['ocrAmbiguousTitleCount'], 4);
+        expect(parser['physicalPageMappingStatus'], 'not_verified');
+
+        final chapters = pack['chapters'] as List<dynamic>;
+        expect(chapters, hasLength(15), reason: 'science');
+        final verifiedTitles = <Map<String, dynamic>>[];
+        final ambiguousTitles = <Map<String, dynamic>>[];
+        for (final value in chapters) {
+          final chapter = value as Map<String, dynamic>;
+          final mapping = chapter['sourceMapping'] as Map<String, dynamic>;
+          expect(mapping['physicalPdfPageMappingStatus'], 'not_verified',
+              reason: chapter['title'] as String);
+          expect(mapping['pdfPhysicalPageStart'], isNull,
+              reason: chapter['title'] as String);
+          expect(mapping['printedPageStart'], chapter['pageStart'],
+              reason: chapter['title'] as String);
+          if (mapping['titleMatchStatus'] == 'verified') {
+            verifiedTitles.add(chapter);
+          } else {
+            expect(mapping['titleMatchStatus'], 'ocr_ambiguous',
+                reason: chapter['title'] as String);
+            ambiguousTitles.add(chapter);
+          }
+        }
+        expect(verifiedTitles, hasLength(11));
+        expect(ambiguousTitles, hasLength(4));
+      }
     }
   });
 

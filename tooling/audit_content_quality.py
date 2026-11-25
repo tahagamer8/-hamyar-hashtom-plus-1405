@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -283,8 +284,21 @@ def audit_chapter(
         gaps.append("توضیح پرسش استدلالی عین گزینهٔ درست را تکرار می‌کند")
     if len(mistakes) < 2:
         gaps.append("کمتر از دو نکتهٔ اشتباه رایج ثبت شده")
+    mapping = chapter.get("sourceMapping")
+    mapping = mapping if isinstance(mapping, dict) else {}
+    printed_toc_status = clean_text(mapping.get("status"))
+    printed_toc_entry_found = printed_toc_status in {
+        "printed_toc_verified_physical_pdf_unverified",
+        "printed_toc_entry_found_title_ocr_ambiguous_physical_pdf_unverified",
+    }
+    printed_toc_title_verified = printed_toc_entry_found and mapping.get("titleMatchStatus") == "verified"
+    printed_toc_title_ambiguous = printed_toc_entry_found and mapping.get("titleMatchStatus") == "ocr_ambiguous"
+
     if not mapped_source:
-        gaps.append("نگاشت فصل به صفحات فیزیکی PDF رسمی با شاهد، روش و تاریخ بازبینی ثبت‌شده تأیید نشده")
+        if printed_toc_entry_found:
+            gaps.append("ورودی فهرست رسمی و شماره صفحه چاپی استخراج شده، اما نگاشت به صفحه فیزیکی PDF با شاهد مستقل تأیید نشده")
+        else:
+            gaps.append("نگاشت فصل به صفحات فیزیکی PDF رسمی با شاهد، روش و تاریخ بازبینی ثبت‌شده تأیید نشده")
 
     pedagogical_complete = (
         has_lesson
@@ -345,9 +359,11 @@ def audit_chapter(
         "genericPointExplanationCount": generic_point_explanation_count,
         "genericFinalCheckStepCount": generic_final_check_step_count,
         "sourceMapped": mapped_source,
-        "sourceMappingStatus": clean_text(
-            (chapter.get("sourceMapping") if isinstance(chapter.get("sourceMapping"), dict) else {}).get("status")
-        ) or "not_verified",
+        "sourceMappingStatus": printed_toc_status or "not_verified",
+        "printedTocEntryFound": printed_toc_entry_found,
+        "printedTocTitleVerified": printed_toc_title_verified,
+        "printedTocTitleAmbiguous": printed_toc_title_ambiguous,
+        "printedTocPageStart": mapping.get("printedPageStart"),
         "pdfPhysicalPageStart": (
             chapter.get("sourceMapping", {}).get("pdfPhysicalPageStart")
             if isinstance(chapter.get("sourceMapping"), dict) else None
@@ -420,6 +436,9 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
                 "advancedQuestionCount": sum(row["advancedQuestionCount"] for row in rows),
                 "questionCount": sum(row["questionCount"] for row in rows),
                 "sourceMappedCount": sum(row["sourceMapped"] for row in rows),
+                "printedTocEntryFoundCount": sum(row["printedTocEntryFound"] for row in rows),
+                "printedTocTitleVerifiedCount": sum(row["printedTocTitleVerified"] for row in rows),
+                "printedTocTitleAmbiguousCount": sum(row["printedTocTitleAmbiguous"] for row in rows),
                 "needsSourceCount": sum(not row["sourceMapped"] for row in rows),
                 "incompleteCount": sum(not row["pedagogicalComplete"] for row in rows),
                 "completeCount": sum(row["status"] == "کامل" for row in rows),
@@ -479,6 +498,9 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         "nonMultipleChoiceQuestionCount": len(all_questions) - multiple_choice_questions,
         "duplicateQuestionPromptCount": len(question_texts) - len(set(question_texts)),
         "sourceMappedCount": sum(row["sourceMapped"] for row in sections),
+        "printedTocEntryFoundCount": sum(row["printedTocEntryFound"] for row in sections),
+        "printedTocTitleVerifiedCount": sum(row["printedTocTitleVerified"] for row in sections),
+        "printedTocTitleAmbiguousCount": sum(row["printedTocTitleAmbiguous"] for row in sections),
         "needsSourceCount": sum(not row["sourceMapped"] for row in sections),
         "incompleteCount": sum(not row["pedagogicalComplete"] for row in sections),
         "completeCount": sum(row["status"] == "کامل" for row in sections),
@@ -506,7 +528,7 @@ def audit_subjects(subjects_dir: Path) -> dict[str, Any]:
         ),
     }
     return {
-        "auditDate": "2026-11-20",
+        "auditDate": date.today().isoformat(),
         "method": "Conservative structural and traceability audit; not a certification of factual accuracy.",
         "thresholdNotes": {
             "dedicatedLessonCharacters": 350,
@@ -552,6 +574,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         "### وضعیت فصل‌به‌فصل",
         "",
+        f"- ورودی فهرست رسمی استخراج‌شده: **{totals['printedTocEntryFoundCount']}**",
+        f"- عنوان فهرست با تطبیق روشن: **{totals['printedTocTitleVerifiedCount']}**؛ OCR مبهم: **{totals['printedTocTitleAmbiguousCount']}**",
         f"- **کامل: {totals['completeCount']}**",
         f"- **ناقص از نظر کفایت آموزشی: {totals['incompleteCount']}**",
         f"- **دارای نگاشت فیزیکی PDF تأییدنشده: {totals['needsSourceCount']}**",
@@ -578,8 +602,8 @@ def render_markdown(report: dict[str, Any]) -> str:
             "",
             "## فهرست کامل فصل‌به‌فصل",
             "",
-            "| درس | بخش | وضعیت | صفحهٔ چاپی | صفحهٔ فیزیکی PDF | سؤال پایه/افزوده | شکاف‌های شناسایی‌شده |",
-            "|---|---|---|---:|---:|---|",
+            "| درس | بخش | وضعیت | صفحهٔ چاپی | فهرست رسمی | صفحهٔ فیزیکی PDF | سؤال پایه/افزوده | شکاف‌های شناسایی‌شده |",
+            "|---|---|---|---:|---|---:|---|---|",
         ]
     )
     for row in report["sections"]:
@@ -597,8 +621,13 @@ def render_markdown(report: dict[str, Any]) -> str:
             and isinstance(row.get("pdfPhysicalPageEnd"), int)
             else "تأییدنشده"
         )
+        toc_status = (
+            "عنوان تأییدشده"
+            if row.get("printedTocTitleVerified")
+            else ("OCR مبهم" if row.get("printedTocTitleAmbiguous") else "ثبت‌نشده")
+        )
         lines.append(
-            f"| {safe_subject} | {safe_title} | **{row['status']}** | {page} | {physical_page} | "
+            f"| {safe_subject} | {safe_title} | **{row['status']}** | {page} | {toc_status} | {physical_page} | "
             f"{row['baseQuestionCount']}/{row['advancedQuestionCount']} | {gaps} |"
         )
     lines.extend(
