@@ -146,6 +146,34 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertTrue(result["hasChapterExam"])
         self.assertEqual(result["chapterExamQuestionCount"], 8)
 
+    def test_science_chemical_change_chapter_has_original_lesson_and_independent_practice(self):
+        root = Path(__file__).resolve().parents[1]
+        pack = json.loads(
+            (root / "assets/content/subjects/science.json").read_text(encoding="utf-8")
+        )
+        chapter = pack["chapters"][1]
+        result = audit_chapter("science", pack["title"], pack, chapter, 2)
+
+        self.assertEqual(chapter["title"], "تغییرهای شیمیایی در خدمت زندگی")
+        self.assertGreaterEqual(len(chapter["lessonContent"]), 350)
+        self.assertEqual(len(chapter["questions"]), 5)
+        self.assertEqual(len(chapter["advancedQuestions"]), 3)
+        self.assertEqual(len(chapter["workedExamples"]), 2)
+        self.assertEqual(len(chapter["chapterExam"]), 8)
+        self.assertEqual(
+            result["independentQuestionFormats"],
+            ["multiple_choice", "short_answer", "true_false"],
+        )
+        self.assertEqual(result["reusedBasePromptAdvancedQuestionCount"], 0)
+        self.assertEqual(result["reusedPointRestatementCount"], 0)
+        self.assertEqual(result["genericLearningGoalCount"], 0)
+        self.assertEqual(result["genericPointExplanationCount"], 0)
+        self.assertEqual(result["genericFinalCheckStepCount"], 0)
+        self.assertTrue(result["pedagogicalComplete"])
+        self.assertFalse(result["sourceMapped"])
+        self.assertEqual(result["status"], "نیازمند منبع")
+        self.assertTrue(all(len(step) >= 80 for step in chapter["solutionSteps"]))
+
     def test_complete_requires_all_pedagogical_and_source_gates(self):
         pack, chapter = complete_fixture()
         result = audit_chapter("sample", "نمونه", pack, chapter, 1)
