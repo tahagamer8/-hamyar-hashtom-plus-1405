@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hamyar_hashtom_plus/core/router/app_routes.dart';
 import 'package:hamyar_hashtom_plus/core/widgets/section_header.dart';
+import 'package:hamyar_hashtom_plus/features/home/presentation/widgets/exam_sections_card.dart';
 import 'package:hamyar_hashtom_plus/features/home/presentation/widgets/home_feature_grid.dart';
 import 'package:hamyar_hashtom_plus/features/home/presentation/widgets/home_header.dart';
 import 'package:hamyar_hashtom_plus/features/home/presentation/widgets/home_subjects_list.dart';
@@ -61,6 +62,7 @@ class HomeScreen extends StatelessWidget {
             ])),
           )),
         )),
+        const SliverToBoxAdapter(child: ExamSectionsCard()),
         const SliverToBoxAdapter(child: LearningPdfsCard()),
         SliverToBoxAdapter(child: SectionHeader(
           title: 'درس‌های پایه هشتم', actionLabel: 'همه درس‌ها',

@@ -13,6 +13,8 @@ import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/subje
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/subjects_screen.dart';
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/feature_subjects_screen.dart';
 import 'package:hamyar_hashtom_plus/features/planner/presentation/screens/study_planner_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/interactive_exams_home_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/mcq_tests_home_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -54,6 +56,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(path: AppRoutes.ai, builder: (context, state) => const AiChatScreen()),
       GoRoute(path: AppRoutes.planner, builder: (context, state) => const StudyPlannerScreen()),
+      GoRoute(path: AppRoutes.mcqTests, builder: (context, state) => const McqTestsHomeScreen()),
+      GoRoute(path: AppRoutes.interactiveExams, builder: (context, state) => const InteractiveExamsHomeScreen()),
     ],
     errorBuilder: (context, state) => const _NotFoundScreen(),
   );
