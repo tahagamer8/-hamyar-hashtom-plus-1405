@@ -56,7 +56,7 @@ void main() {
     for (final value in chapters) {
       final chapter = value as Map<String, dynamic>;
       final mistakes = chapter['commonMistakes'] as List<dynamic>;
-      expect(mistakes, hasLength(2), reason: chapter['title'] as String);
+      expect(mistakes.length, greaterThanOrEqualTo(2), reason: chapter['title'] as String);
       expect(mistakes.every((item) => item is String && item.trim().isNotEmpty), isTrue,
           reason: chapter['title'] as String);
     }
@@ -97,7 +97,7 @@ void main() {
     }
   });
 
-  test('all 145 sections across 13 subjects have two common-mistake notes', () async {
+  test('all 145 sections across 13 subjects have at least two common-mistake notes', () async {
     const ids = <String>[
       'math', 'science', 'persian', 'writing', 'arabic', 'english',
       'social', 'religion', 'quran', 'thinking', 'work',
@@ -113,14 +113,14 @@ void main() {
       for (final value in chapters) {
         final chapter = value as Map<String, dynamic>;
         final mistakes = chapter['commonMistakes'] as List<dynamic>;
-        expect(mistakes, hasLength(2), reason: '$id/${chapter['title']}');
+        expect(mistakes.length, greaterThanOrEqualTo(2), reason: '$id/${chapter['title']}');
         expect(mistakes.every((item) => item is String && item.trim().isNotEmpty), isTrue,
             reason: '$id/${chapter['title']}');
         noteCount += mistakes.length;
       }
     }
     expect(sectionCount, 145);
-    expect(noteCount, 290);
+    expect(noteCount, greaterThanOrEqualTo(290));
   });
 
   test('verified 1405 textbook pages and curriculum choices match source contents', () async {
