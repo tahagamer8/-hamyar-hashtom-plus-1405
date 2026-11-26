@@ -2624,8 +2624,24 @@
     "bookCode": "805",
     "fileName": "C805.pdf",
     "fileSizeMB": "7.67",
-    "verificationStatus": "official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed",
-    "verifiedAt": "2026-11-09"
+    "verificationStatus": "official_portal_record_pdf_http_200_front_matter_2_pages_parsed_and_total_page_count_reported_full_text_not_reviewed",
+    "verifiedAt": "2026-11-26",
+    "pdfParserVerification": {
+      "parser": "Firecrawl PDF parser",
+      "httpStatus": 200,
+      "contentType": "application/pdf",
+      "parsedPhysicalPages": 2,
+      "totalPhysicalPages": 160,
+      "parsedAt": "2026-11-26",
+      "verificationScope": "front_matter_and_pdf_metadata_only",
+      "titleGradeSchoolYearVerified": true,
+      "officialPublisher": "سازمان پژوهش و برنامه‌ریزی آموزشی",
+      "copyrightNoticeDetected": true,
+      "copyrightNoticeSummary": "صفحات آغازین مالکیت اثر را متعلق به سازمان پژوهش و برنامه‌ریزی آموزشی اعلام می‌کنند و تکثیر یا استفادهٔ بدون مجوز را منع می‌کنند.",
+      "fullTextReviewStatus": "not_reviewed",
+      "tableOfContentsStatus": "not_reviewed",
+      "physicalPageMappingStatus": "not_verified"
+    }
   },
   "sampleQuestionBankVersion": 1,
   "contentEnhancement": {
