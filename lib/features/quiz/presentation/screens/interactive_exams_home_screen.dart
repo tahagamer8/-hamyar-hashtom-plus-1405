@@ -59,7 +59,7 @@ class InteractiveExamsHomeScreen extends ConsumerWidget {
         _ExamTile(
           tileKey: examKey(mixedExamId),
           icon: Icons.shuffle_rounded,
-          title: 'آزمون ترکیبی همه دروس',
+          title: 'آزمون جامع همه دروس',
           subtitle:
               '$mixedQuestions سؤال • ${examMinutes(total, mixedExamQuestionLimit)} دقیقه',
           enabled: true,

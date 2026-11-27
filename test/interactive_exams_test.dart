@@ -76,7 +76,7 @@ void main() {
 
     expect(find.byKey(InteractiveExamsHomeScreen.examKey(mixedExamId)),
         findsOneWidget);
-    expect(find.text('آزمون ترکیبی همه دروس'), findsOneWidget);
+    expect(find.text('آزمون جامع همه دروس'), findsOneWidget);
     // Math: 14 questions, 14 minutes. Mixed: the same 14 questions overall.
     expect(find.text('14 سؤال • 14 دقیقه'), findsNWidgets(2));
 
@@ -196,7 +196,7 @@ void main() {
     expect(find.text('پاسخ‌نامه و توضیحات'), findsOneWidget);
   });
 
-  testWidgets('mixed exam opens with questions from several subjects',
+  testWidgets('mixed exam opens titled as a combined exam of all subjects',
       (tester) async {
     final router = _router();
     addTearDown(router.dispose);
@@ -205,6 +205,9 @@ void main() {
     await tester.tap(find.byKey(InteractiveExamsHomeScreen.examKey(mixedExamId)));
     await tester.pumpAndSettle();
     expect(find.byType(TimedCombinedExamScreen), findsOneWidget);
-    expect(find.text('آزمون ترکیبی'), findsWidgets);
+    // The app bar title; the hub tile behind it is off-stage.
+    expect(find.text('آزمون جامع همه دروس'), findsWidgets);
+    // No duplicated word such as "آزمون آزمون".
+    expect(find.textContaining('آزمون آزمون'), findsNothing);
   });
 }

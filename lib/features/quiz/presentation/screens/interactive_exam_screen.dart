@@ -50,9 +50,10 @@ class InteractiveExamScreen extends ConsumerWidget {
           }
           // Shuffled so a limited exam samples chapters from every subject.
           chapters.shuffle();
+          // No examTitle: the screen then titles itself "آزمون جامع همه
+          // دروس" and keeps its history under the subject title.
           return TimedCombinedExamScreen(
             subjectTitle: 'همه دروس',
-            examTitle: 'آزمون ترکیبی',
             chapters: chapters,
             questionLimit: mixedExamQuestionLimit,
           );
