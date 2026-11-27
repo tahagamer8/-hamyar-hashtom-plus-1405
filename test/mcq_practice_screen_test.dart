@@ -49,11 +49,20 @@ Widget _pushedApp({Random? random, ThemeData? theme}) => _app(
       theme: theme,
     );
 
+/// A tall surface keeps the whole question grid on screen for taps.
+void _tallView(WidgetTester tester) {
+  tester.view.physicalSize = const Size(600, 1400);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+}
+
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
   testWidgets('answers every question, scores it and shows the review',
       (tester) async {
+    _tallView(tester);
     await tester.pumpWidget(_app(McqPracticeScreen(
       levelId: 'intermediate',
       subjectId: 'math',
@@ -97,6 +106,7 @@ void main() {
   });
 
   testWidgets('question navigation keeps the chosen answers', (tester) async {
+    _tallView(tester);
     await tester.pumpWidget(_app(McqPracticeScreen(
       levelId: 'intermediate',
       subjectId: 'math',
@@ -182,6 +192,7 @@ void main() {
   });
 
   testWidgets('retry starts a fresh session', (tester) async {
+    _tallView(tester);
     await tester.pumpWidget(_app(McqPracticeScreen(
       levelId: 'advanced',
       subjectId: 'math',

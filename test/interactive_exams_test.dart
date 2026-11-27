@@ -49,6 +49,14 @@ Future<void> _pumpFrames(WidgetTester tester) async {
   }
 }
 
+/// A tall surface keeps the whole question grid on screen for taps.
+void _tallView(WidgetTester tester) {
+  tester.view.physicalSize = const Size(600, 1400);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+}
+
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
@@ -165,6 +173,7 @@ void main() {
   });
 
   testWidgets('submitting by hand shows no time-out notice', (tester) async {
+    _tallView(tester);
     final router = _router();
     addTearDown(router.dispose);
     await tester.pumpWidget(_routerApp(router));
