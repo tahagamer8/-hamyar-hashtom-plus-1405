@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hamyar_hashtom_plus/core/theme/app_colors.dart';
+import 'package:hamyar_hashtom_plus/core/theme/app_tokens.dart';
 
 /// Design language inspired by Samsung One UI:
 /// calm surfaces, generous touch targets, rounded geometry and clear hierarchy.
@@ -29,7 +30,7 @@ abstract final class AppTheme {
 
     return base.copyWith(
       scaffoldBackgroundColor:
-          isLight ? const Color(0xFFF3F5FA) : AppColors.darkBackground,
+          isLight ? AppColors.lightBackground : AppColors.darkBackground,
       textTheme: _textTheme(
         base.textTheme.apply(
           bodyColor: scheme.onSurface,
@@ -111,6 +112,48 @@ abstract final class AppTheme {
           textStyle: const TextStyle(
             fontFamily: fontFamily,
             fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          minimumSize: const Size(48, 52),
+          side: BorderSide(color: scheme.outline.withAlpha(isLight ? 140 : 110)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          textStyle: const TextStyle(
+            fontFamily: fontFamily,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          textStyle: const TextStyle(
+            fontFamily: fontFamily,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+      chipTheme: ChipThemeData(
+        shape: const StadiumBorder(),
+        side: BorderSide(color: scheme.outlineVariant.withAlpha(120)),
+        labelStyle: TextStyle(
+          fontFamily: fontFamily,
+          fontSize: 12.5,
+          fontWeight: FontWeight.w600,
+          color: scheme.onSurface,
+        ),
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        showDragHandle: true,
+        backgroundColor: surface,
+        surfaceTintColor: Colors.transparent,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(AppRadius.xl),
           ),
         ),
       ),

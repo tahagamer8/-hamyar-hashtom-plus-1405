@@ -7,6 +7,10 @@ class SubjectStyle {
   final Color color;
 }
 
+/// Icon and accent color of each grade-eight subject.
+///
+/// Every subject in the catalog has its own icon; unknown ids fall back to a
+/// neutral book so new content never crashes the UI.
 SubjectStyle styleForSubject(String id) {
   switch (id) {
     case 'math':
@@ -23,6 +27,8 @@ SubjectStyle styleForSubject(String id) {
       return const SubjectStyle(Icons.public_rounded, Color(0xFF0284C7));
     case 'english':
       return const SubjectStyle(Icons.language_rounded, Color(0xFF7C3AED));
+    case 'english_workbook':
+      return const SubjectStyle(Icons.spellcheck_rounded, Color(0xFF6D28D9));
     case 'religion':
       return const SubjectStyle(Icons.auto_stories_rounded, Color(0xFF0D9488));
     case 'quran':
@@ -31,6 +37,8 @@ SubjectStyle styleForSubject(String id) {
       return const SubjectStyle(Icons.psychology_rounded, Color(0xFFDB2777));
     case 'work':
       return const SubjectStyle(Icons.construction_rounded, Color(0xFFEA580C));
+    case 'art':
+      return const SubjectStyle(Icons.palette_rounded, Color(0xFFC026D3));
     default:
       return const SubjectStyle(Icons.book_rounded, Color(0xFF4F46E5));
   }
