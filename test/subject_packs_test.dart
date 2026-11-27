@@ -310,10 +310,43 @@ void main() {
       expect(source['bookCode'], entry.value['code'], reason: entry.key);
       expect(source['portalUrl'], contains('/books/${entry.value['portalId']}'), reason: entry.key);
       expect(source['pdfUrl'], contains(entry.value['file']), reason: entry.key);
-      final expectedVerificationStatus = entry.key == 'science'
-          ? 'official_portal_record_and_pdf_link_verified_pdf_content_parsed_24_of_152_physical_pages_toc_extracted_physical_page_mapping_pending'
-          : 'official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed';
-      expect(source['verificationStatus'], expectedVerificationStatus, reason: entry.key);
+      const metadataPageCounts = <String, int>{
+        'math': 160,
+        'persian': 144,
+        'writing': 104,
+        'quran': 124,
+        'religion': 164,
+      };
+      if (metadataPageCounts.containsKey(entry.key)) {
+        expect(
+          source['verificationStatus'],
+          'official_portal_record_pdf_http_200_front_matter_2_pages_parsed_and_total_page_count_reported_full_text_not_reviewed',
+          reason: entry.key,
+        );
+        final parser = source['pdfParserVerification'] as Map<String, dynamic>;
+        expect(parser['parser'], 'Firecrawl PDF parser', reason: entry.key);
+        expect(parser['httpStatus'], 200, reason: entry.key);
+        expect(parser['contentType'], 'application/pdf', reason: entry.key);
+        expect(parser['parsedPhysicalPages'], 2, reason: entry.key);
+        expect(parser['totalPhysicalPages'], metadataPageCounts[entry.key],
+            reason: entry.key);
+        expect(parser['verificationScope'], 'front_matter_and_pdf_metadata_only',
+            reason: entry.key);
+        expect(parser['titleGradeSchoolYearVerified'], isTrue, reason: entry.key);
+        expect(parser['officialPublisher'], 'سازمان پژوهش و برنامه‌ریزی آموزشی',
+            reason: entry.key);
+        expect(parser['copyrightNoticeDetected'], isTrue, reason: entry.key);
+        expect(parser['fullTextReviewStatus'], 'not_reviewed', reason: entry.key);
+        expect(parser['tableOfContentsStatus'], 'not_reviewed', reason: entry.key);
+        expect(parser['physicalPageMappingStatus'], 'not_verified',
+            reason: entry.key);
+        expect(source['verifiedAt'], '2026-11-26', reason: entry.key);
+      } else {
+        final expectedVerificationStatus = entry.key == 'science'
+            ? 'official_portal_record_and_pdf_link_verified_pdf_content_parsed_24_of_152_physical_pages_toc_extracted_physical_page_mapping_pending'
+            : 'official_portal_record_and_pdf_link_verified_not_downloaded_or_parsed';
+        expect(source['verificationStatus'], expectedVerificationStatus, reason: entry.key);
+      }
 
       if (entry.key == 'science') {
         final parser = source['pdfParserVerification'] as Map<String, dynamic>;
