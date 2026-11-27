@@ -13,7 +13,10 @@ import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/subje
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/subjects_screen.dart';
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/feature_subjects_screen.dart';
 import 'package:hamyar_hashtom_plus/features/planner/presentation/screens/study_planner_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/interactive_exam_screen.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/interactive_exams_home_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/mcq_practice_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/mcq_subject_picker_screen.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/mcq_tests_home_screen.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -56,8 +59,35 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(path: AppRoutes.ai, builder: (context, state) => const AiChatScreen()),
       GoRoute(path: AppRoutes.planner, builder: (context, state) => const StudyPlannerScreen()),
-      GoRoute(path: AppRoutes.mcqTests, builder: (context, state) => const McqTestsHomeScreen()),
-      GoRoute(path: AppRoutes.interactiveExams, builder: (context, state) => const InteractiveExamsHomeScreen()),
+      GoRoute(
+        path: AppRoutes.mcqTests,
+        builder: (context, state) => const McqTestsHomeScreen(),
+        routes: [
+          GoRoute(
+            path: ':levelId',
+            builder: (context, state) => McqSubjectPickerScreen(levelId: state.pathParameters['levelId']!),
+            routes: [
+              GoRoute(
+                path: ':subjectId',
+                builder: (context, state) => McqPracticeScreen(
+                  levelId: state.pathParameters['levelId']!,
+                  subjectId: state.pathParameters['subjectId']!,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      GoRoute(
+        path: AppRoutes.interactiveExams,
+        builder: (context, state) => const InteractiveExamsHomeScreen(),
+        routes: [
+          GoRoute(
+            path: ':examId',
+            builder: (context, state) => InteractiveExamScreen(examId: state.pathParameters['examId']!),
+          ),
+        ],
+      ),
     ],
     errorBuilder: (context, state) => const _NotFoundScreen(),
   );

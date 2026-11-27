@@ -110,6 +110,8 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
   int current = 0;
   bool submitted = false;
   bool started = false;
+  bool timedOut = false;
+  DateTime _lastTick = DateTime.now();
 
   @override
   void initState() {
@@ -124,13 +126,23 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
   void startExam() {
     if (started || submitted || questions.isEmpty) return;
     setState(() => started = true);
+    _lastTick = DateTime.now();
     timer = Timer.periodic(const Duration(seconds: 1), (t) {
-      if (!mounted || submitted) return t.cancel();
-      if (secondsLeft <= 1) {
+      if (!mounted || submitted) {
+        t.cancel();
+        return;
+      }
+      // Count the real time since the last tick: if the app was in the
+      // background the timer may have been suspended, and the exam clock must
+      // not stop with it. A normal tick counts one second.
+      final now = DateTime.now();
+      final elapsed = max(1, now.difference(_lastTick).inSeconds);
+      _lastTick = now;
+      if (secondsLeft <= elapsed) {
         setState(() => secondsLeft = 0);
-        finish();
+        finish(expired: true);
       } else {
-        setState(() => secondsLeft--);
+        setState(() => secondsLeft -= elapsed);
       }
     });
   }
@@ -141,10 +153,13 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
     super.dispose();
   }
 
-  void finish() {
+  void finish({bool expired = false}) {
     if (submitted) return;
     timer?.cancel();
-    setState(() => submitted = true);
+    setState(() {
+      submitted = true;
+      timedOut = expired;
+    });
     _saveResult();
   }
 
@@ -224,6 +239,25 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
     if (ok == true && mounted) finish();
   }
 
+  /// Asks before leaving a running exam so answers are not lost by accident.
+  Future<void> _confirmLeave() async {
+    final answered = answers.length;
+    final leave = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('خروج از آزمون'),
+        content: Text(answered == 0
+            ? 'آزمون در حال اجراست. خارج می‌شوی؟'
+            : '$answered پاسخ ثبت‌شده از دست می‌رود و نتیجه‌ای ذخیره نمی‌شود. خارج می‌شوی؟'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(dialogContext, false), child: const Text('ادامه آزمون')),
+          FilledButton(onPressed: () => Navigator.pop(dialogContext, true), child: const Text('خروج')),
+        ],
+      ),
+    );
+    if (leave == true && mounted) Navigator.of(context).pop();
+  }
+
   String get clock => '${(secondsLeft ~/ 60).toString().padLeft(2, '0')}:${(secondsLeft % 60).toString().padLeft(2, '0')}';
   int get score => List.generate(questions.length, (i) => answers[i] == questions[i]['answer'] ? 1 : 0).fold(0, (a, b) => a + b);
 
@@ -234,29 +268,37 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
       return Scaffold(appBar: AppBar(title: const Text('آزمون آنلاین')),
         body: const Center(child: Text('برای این درس هنوز سؤال ثبت نشده است.')));
     }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(submitted
-            ? 'نتیجه آزمون'
-            : (widget.examTitle ?? 'آزمون جامع ${widget.subjectTitle}')),
-        actions: [
-          if (started && !submitted)
-            Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
-              child: Center(
-                child: Chip(
-                  avatar: const Icon(Icons.timer_outlined, size: 18),
-                  label: Text(clock),
+    return PopScope(
+      canPop: !started || submitted,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          _confirmLeave();
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(submitted
+              ? 'نتیجه آزمون'
+              : (widget.examTitle ?? 'آزمون جامع ${widget.subjectTitle}')),
+          actions: [
+            if (started && !submitted)
+              Padding(
+                padding: const EdgeInsetsDirectional.only(end: 12),
+                child: Center(
+                  child: Chip(
+                    avatar: const Icon(Icons.timer_outlined, size: 18),
+                    label: Text(clock),
+                  ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
+        body: submitted
+            ? _result(theme)
+            : started
+                ? _exam(theme)
+                : _intro(theme),
       ),
-      body: submitted
-          ? _result(theme)
-          : started
-              ? _exam(theme)
-              : _intro(theme),
     );
   }
 
@@ -596,6 +638,17 @@ class _TimedCombinedExamScreenState extends State<TimedCombinedExamScreen> {
   Widget _result(ThemeData theme) {
     final percent = (score * 100 / questions.length).round();
     return ListView(padding: const EdgeInsets.all(16), children: [
+      if (timedOut)
+        Card(
+          color: theme.colorScheme.errorContainer,
+          child: ListTile(
+            leading: Icon(Icons.timer_off_outlined, color: theme.colorScheme.onErrorContainer),
+            title: Text('زمان آزمون تمام شد',
+                style: TextStyle(color: theme.colorScheme.onErrorContainer)),
+            subtitle: Text('پاسخ‌های ثبت‌شده تا همین لحظه تصحیح شد.',
+                style: TextStyle(color: theme.colorScheme.onErrorContainer)),
+          ),
+        ),
       Card(child: Padding(padding: const EdgeInsets.all(20), child: Column(children: [
         const Icon(Icons.emoji_events_outlined, size: 44),
         Text('نمره: $percent٪', style: theme.textTheme.headlineSmall),

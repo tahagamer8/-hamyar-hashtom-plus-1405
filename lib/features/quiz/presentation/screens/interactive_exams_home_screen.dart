@@ -1,144 +1,148 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hamyar_hashtom_plus/core/router/app_routes.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/domain/subject_pack.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/providers/quiz_providers.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/interactive_exam_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/widgets/quiz_status_views.dart';
 
-/// Informational hub of the Interactive Exams section.
-///
-/// Nothing here is tappable yet; the existing timed exams inside each
-/// subject are unchanged.
-class InteractiveExamsHomeScreen extends StatelessWidget {
+/// Hub of the Interactive Exams section: timed exams per subject plus one
+/// mixed exam. A subject without real questions is listed but disabled.
+class InteractiveExamsHomeScreen extends ConsumerWidget {
   const InteractiveExamsHomeScreen({super.key});
 
-  static const List<_Feature> _features = [
-    _Feature(
-      Icons.timer_rounded,
-      'آزمون زمان‌دار',
-      'زمان‌سنج و پایان خودکار آزمون',
-    ),
-    _Feature(
-      Icons.fact_check_rounded,
-      'ثبت پاسخ',
-      'پاسخ‌ها را ثبت کن و آزمون را پایان بده',
-    ),
-    _Feature(
-      Icons.calculate_rounded,
-      'تصحیح خودکار',
-      'نمره بلافاصله محاسبه می‌شود',
-    ),
-    _Feature(
-      Icons.rate_review_rounded,
-      'مرور پاسخ‌ها',
-      'پاسخ درست و توضیح هر پرسش را ببین',
-    ),
-    _Feature(
-      Icons.insights_rounded,
-      'تحلیل عملکرد',
-      'نقاط قوت و ضعف خودت را بشناس',
-    ),
-  ];
+  static Key examKey(String examId) => ValueKey('interactive-exam-$examId');
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colors = theme.colorScheme;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final packs = ref.watch(subjectPacksProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('آزمون‌های تعاملی')),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-        children: [
-          Text(
-            'آزمونی شبیه شرایط واقعی، با بازخورد کامل بعد از پایان.',
-            style: theme.textTheme.bodyMedium
-                ?.copyWith(color: colors.onSurfaceVariant),
-          ),
-          const SizedBox(height: 12),
-          Card(
-            margin: EdgeInsets.zero,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Column(
-                children: [
-                  for (final feature in _features) _FeatureRow(feature: feature),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 12),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(
-                Icons.info_outline_rounded,
-                size: 18,
-                color: colors.onSurfaceVariant,
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  'این بخش فعلاً اطلاع‌رسانی است. آزمون‌های زمان‌دار موجود در درس‌ها بدون تغییر باقی می‌مانند.',
-                  style: theme.textTheme.bodySmall
-                      ?.copyWith(color: colors.onSurfaceVariant),
-                ),
-              ),
-            ],
-          ),
-        ],
+      body: packs.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => QuizErrorView(
+          onRetry: () => ref.invalidate(subjectPacksProvider),
+        ),
+        data: (list) => _content(context, list),
       ),
+    );
+  }
+
+  Widget _content(BuildContext context, List<SubjectPack> list) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final counts = {for (final pack in list) pack.id: pack.examQuestions.length};
+    final total = counts.values.fold<int>(0, (sum, value) => sum + value);
+    if (list.isEmpty || total == 0) {
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: Text(
+            'هنوز سؤالی برای آزمون ثبت نشده است.',
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+    final mixedQuestions =
+        total < mixedExamQuestionLimit ? total : mixedExamQuestionLimit;
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+      children: [
+        Text(
+          'آزمون زمان‌دار با کارنامه و پاسخ‌نامه. زمان از دکمهٔ شروع آغاز می‌شود و با پایان زمان، پاسخ‌های ثبت‌شده تصحیح می‌شوند.',
+          style: theme.textTheme.bodyMedium
+              ?.copyWith(color: colors.onSurfaceVariant),
+        ),
+        const SizedBox(height: 12),
+        _ExamTile(
+          tileKey: examKey(mixedExamId),
+          icon: Icons.shuffle_rounded,
+          title: 'آزمون ترکیبی همه دروس',
+          subtitle:
+              '$mixedQuestions سؤال • ${examMinutes(total, mixedExamQuestionLimit)} دقیقه',
+          enabled: true,
+          examId: mixedExamId,
+        ),
+        const SizedBox(height: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          child: Text('آزمون هر درس', style: theme.textTheme.titleSmall),
+        ),
+        for (final pack in list)
+          _ExamTile(
+            tileKey: examKey(pack.id),
+            icon: Icons.menu_book_rounded,
+            title: pack.title,
+            subtitle: counts[pack.id]! > 0
+                ? '${counts[pack.id]! < subjectExamQuestionLimit ? counts[pack.id] : subjectExamQuestionLimit} سؤال • ${examMinutes(counts[pack.id]!, subjectExamQuestionLimit)} دقیقه'
+                : 'هنوز سؤالی ثبت نشده است',
+            enabled: counts[pack.id]! > 0,
+            examId: pack.id,
+          ),
+      ],
     );
   }
 }
 
-class _Feature {
-  const _Feature(this.icon, this.title, this.subtitle);
+class _ExamTile extends StatelessWidget {
+  const _ExamTile({
+    required this.tileKey,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.enabled,
+    required this.examId,
+  });
 
+  final Key tileKey;
   final IconData icon;
   final String title;
   final String subtitle;
-}
-
-class _FeatureRow extends StatelessWidget {
-  const _FeatureRow({required this.feature});
-
-  final _Feature feature;
+  final bool enabled;
+  final String examId;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        children: [
-          Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              color: colors.secondaryContainer,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Icon(
-              feature.icon,
-              color: colors.onSecondaryContainer,
-              size: 20,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  feature.title,
-                  style: theme.textTheme.titleSmall
-                      ?.copyWith(fontWeight: FontWeight.w800),
-                ),
-                Text(
-                  feature.subtitle,
-                  style: theme.textTheme.bodySmall
-                      ?.copyWith(color: colors.onSurfaceVariant),
-                ),
-              ],
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Card(
+        margin: EdgeInsets.zero,
+        clipBehavior: Clip.antiAlias,
+        child: ListTile(
+          key: tileKey,
+          enabled: enabled,
+          onTap:
+              enabled ? () => context.push(AppRoutes.interactiveExam(examId)) : null,
+          leading: Opacity(
+            opacity: enabled ? 1 : 0.6,
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: colors.secondaryContainer,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: colors.onSecondaryContainer, size: 22),
             ),
           ),
-        ],
+          title: Text(
+            title,
+            style: theme.textTheme.titleSmall
+                ?.copyWith(fontWeight: FontWeight.w800),
+          ),
+          subtitle: Text(subtitle),
+          trailing: Icon(
+            enabled
+                ? Icons.arrow_back_ios_new_rounded
+                : Icons.lock_outline_rounded,
+            size: enabled ? 14 : 18,
+            color: enabled ? null : colors.onSurfaceVariant,
+          ),
+        ),
       ),
     );
   }

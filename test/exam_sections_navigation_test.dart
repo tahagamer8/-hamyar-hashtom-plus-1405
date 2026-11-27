@@ -10,10 +10,15 @@ import 'package:hamyar_hashtom_plus/features/content/presentation/screens/conten
 import 'package:hamyar_hashtom_plus/features/home/presentation/widgets/exam_sections_card.dart';
 import 'package:hamyar_hashtom_plus/features/planner/presentation/screens/study_planner_screen.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/domain/mcq_level.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/providers/quiz_providers.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/interactive_exams_home_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/mcq_subject_picker_screen.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/mcq_tests_home_screen.dart';
+import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/feature_subjects_screen.dart';
 import 'package:hamyar_hashtom_plus/features/subjects/presentation/screens/subject_detail_screen.dart';
+
+import 'helpers/quiz_fixtures.dart';
 
 Future<void> _pumpFrames(WidgetTester tester) async {
   // Bounded frame pumping avoids hanging on repeating animations.
@@ -30,17 +35,31 @@ void _setViewSize(WidgetTester tester, Size size) {
   addTearDown(tester.view.resetDevicePixelRatio);
 }
 
-/// Hosts a single screen in RTL with an adjustable text scale.
-Widget _host(Widget home, {double textScale = 1}) => MaterialApp(
-      builder: (context, child) => MediaQuery(
-        data: MediaQuery.of(context)
-            .copyWith(textScaler: TextScaler.linear(textScale)),
-        child: Directionality(
-          textDirection: TextDirection.rtl,
-          child: child!,
-        ),
+List<Override> _fixtureOverrides({bool empty = false}) => [
+      subjectPacksProvider.overrideWith(
+        (ref) async => empty ? [] : fixturePacks(),
       ),
-      home: home,
+    ];
+
+/// Hosts a single screen in RTL with an adjustable text scale.
+Widget _host(
+  Widget home, {
+  double textScale = 1,
+  List<Override>? overrides,
+}) =>
+    ProviderScope(
+      overrides: overrides ?? _fixtureOverrides(),
+      child: MaterialApp(
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: TextScaler.linear(textScale)),
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: child!,
+          ),
+        ),
+        home: home,
+      ),
     );
 
 Widget _cardHost() => const Scaffold(
@@ -54,6 +73,9 @@ void main() {
     test('new exam routes are independent top-level paths', () {
       expect(AppRoutes.mcqTests, '/mcq-tests');
       expect(AppRoutes.interactiveExams, '/interactive-exams');
+      expect(AppRoutes.mcqLevel('intermediate'), '/mcq-tests/intermediate');
+      expect(AppRoutes.mcqPractice('advanced', 'math'), '/mcq-tests/advanced/math');
+      expect(AppRoutes.interactiveExam('mixed'), '/interactive-exams/mixed');
     });
 
     test('existing route constants are unchanged', () {
@@ -124,7 +146,7 @@ void main() {
   group('MCQ hub', () {
     testWidgets('shows four levels', (tester) async {
       await tester.pumpWidget(_host(const McqTestsHomeScreen()));
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       for (final level in McqLevel.values) {
         expect(find.byKey(McqTestsHomeScreen.levelKey(level)), findsOneWidget,
@@ -140,7 +162,7 @@ void main() {
     testWidgets('only Easy and SAMPAD carry the coming-soon badge',
         (tester) async {
       await tester.pumpWidget(_host(const McqTestsHomeScreen()));
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(find.byKey(McqTestsHomeScreen.badgeKey(McqLevel.easy)),
           findsOneWidget);
@@ -153,10 +175,42 @@ void main() {
       expect(find.text('به‌زودی'), findsNWidgets(2));
     });
 
-    testWidgets('all four levels are disabled and not tappable',
+    testWidgets('Easy and SAMPAD stay disabled even when content exists',
         (tester) async {
       await tester.pumpWidget(_host(const McqTestsHomeScreen()));
-      await tester.pump();
+      await tester.pumpAndSettle();
+
+      for (final level in [McqLevel.easy, McqLevel.sampad]) {
+        final tile = tester.widget<ListTile>(
+          find.byKey(McqTestsHomeScreen.levelKey(level)),
+        );
+        expect(tile.enabled, isFalse, reason: level.id);
+        expect(tile.onTap, isNull, reason: level.id);
+      }
+    });
+
+    testWidgets('Intermediate and Advanced open only with real questions',
+        (tester) async {
+      await tester.pumpWidget(_host(const McqTestsHomeScreen()));
+      await tester.pumpAndSettle();
+
+      for (final level in [McqLevel.intermediate, McqLevel.advanced]) {
+        final tile = tester.widget<ListTile>(
+          find.byKey(McqTestsHomeScreen.levelKey(level)),
+        );
+        expect(tile.enabled, isTrue, reason: level.id);
+        expect(tile.onTap, isNotNull, reason: level.id);
+      }
+      expect(find.text('12 سؤال در 1 درس'), findsOneWidget);
+      expect(find.text('2 سؤال در 1 درس'), findsOneWidget);
+    });
+
+    testWidgets('all four levels are disabled when no question exists',
+        (tester) async {
+      await tester.pumpWidget(
+        _host(const McqTestsHomeScreen(), overrides: _fixtureOverrides(empty: true)),
+      );
+      await tester.pumpAndSettle();
 
       for (final level in McqLevel.values) {
         final tile = tester.widget<ListTile>(
@@ -165,35 +219,53 @@ void main() {
         expect(tile.enabled, isFalse, reason: level.id);
         expect(tile.onTap, isNull, reason: level.id);
       }
+      expect(find.text('هنوز سؤالی برای این سطح ثبت نشده است'), findsNWidgets(2));
+    });
 
+    testWidgets('shows a retry when the content cannot load', (tester) async {
+      await tester.pumpWidget(_host(
+        const McqTestsHomeScreen(),
+        overrides: [
+          subjectPacksProvider.overrideWith((ref) async => throw StateError('x')),
+        ],
+      ));
+      await tester.pumpAndSettle();
+      expect(find.text('تلاش دوباره'), findsOneWidget);
+      final tile = tester.widget<ListTile>(
+        find.byKey(McqTestsHomeScreen.levelKey(McqLevel.intermediate)),
+      );
+      expect(tile.enabled, isFalse);
+    });
+
+    testWidgets('level and subject selection reach the practice screen',
+        (tester) async {
+      _setViewSize(tester, const Size(400, 900));
+      final container = ProviderContainer(overrides: _fixtureOverrides());
+      addTearDown(container.dispose);
+      await tester.pumpWidget(UncontrolledProviderScope(
+        container: container,
+        child: const HamyarApp(),
+      ));
+      await _pumpFrames(tester);
+      final router = container.read(appRouterProvider);
+
+      router.go(AppRoutes.mcqTests);
+      await _pumpFrames(tester);
       await tester.tap(
         find.byKey(McqTestsHomeScreen.levelKey(McqLevel.intermediate)),
       );
-      await tester.tap(
-        find.byKey(McqTestsHomeScreen.levelKey(McqLevel.easy)),
+      await _pumpFrames(tester);
+      expect(find.byType(McqSubjectPickerScreen), findsOneWidget);
+
+      final art = tester.widget<ListTile>(
+        find.byKey(McqSubjectPickerScreen.subjectKey('art')),
       );
-      await tester.pump();
-      expect(find.byType(McqTestsHomeScreen), findsOneWidget);
-      expect(tester.takeException(), isNull);
-    });
-  });
+      expect(art.enabled, isFalse);
+      expect(find.text('بدون سؤال برای این سطح'), findsOneWidget);
 
-  group('interactive hub', () {
-    testWidgets('is informational only', (tester) async {
-      await tester.pumpWidget(_host(const InteractiveExamsHomeScreen()));
-      await tester.pump();
-
-      expect(find.text('آزمون‌های تعاملی'), findsOneWidget);
-      expect(find.text('آزمون زمان‌دار'), findsOneWidget);
-      expect(find.text('ثبت پاسخ'), findsOneWidget);
-      expect(find.text('تصحیح خودکار'), findsOneWidget);
-      expect(find.text('مرور پاسخ‌ها'), findsOneWidget);
-      expect(find.text('تحلیل عملکرد'), findsOneWidget);
-
-      expect(find.byType(ListTile), findsNothing);
-      expect(find.byType(FilledButton), findsNothing);
-      expect(find.byType(OutlinedButton), findsNothing);
-      expect(find.byType(TextButton), findsNothing);
+      await tester.tap(find.byKey(McqSubjectPickerScreen.subjectKey('math')));
+      await _pumpFrames(tester);
+      expect(find.text('1 از 10'), findsOneWidget);
     });
   });
 
@@ -207,11 +279,12 @@ void main() {
             final screens = <String, Widget>{
               'exam card': _cardHost(),
               'MCQ hub': const McqTestsHomeScreen(),
+              'MCQ subjects': const McqSubjectPickerScreen(levelId: 'intermediate'),
               'interactive hub': const InteractiveExamsHomeScreen(),
             };
             for (final entry in screens.entries) {
               await tester.pumpWidget(_host(entry.value, textScale: scale));
-              await tester.pump();
+              await tester.pumpAndSettle();
               expect(tester.takeException(), isNull, reason: entry.key);
             }
           },
@@ -240,7 +313,9 @@ void main() {
         AppRoutes.subjectDetail('math'): SubjectDetailScreen,
         '${AppRoutes.subjectDetail('math')}/lessons': ContentLibraryScreen,
         AppRoutes.mcqTests: McqTestsHomeScreen,
+        AppRoutes.mcqLevel('intermediate'): McqSubjectPickerScreen,
         AppRoutes.interactiveExams: InteractiveExamsHomeScreen,
+        AppRoutes.interactiveExam(mixedPlaceholder): TimedCombinedExamScreen,
       };
 
       for (final entry in expectations.entries) {
@@ -252,3 +327,6 @@ void main() {
     });
   });
 }
+
+/// Route id of the mixed exam (kept local so the test file reads on its own).
+const String mixedPlaceholder = 'mixed';

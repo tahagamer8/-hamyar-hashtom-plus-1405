@@ -10,5 +10,8 @@ abstract final class AppRoutes {
   static const String planner = '/planner';
   static const String mcqTests = '/mcq-tests';
   static const String interactiveExams = '/interactive-exams';
+  static String mcqLevel(String levelId) => '$mcqTests/$levelId';
+  static String mcqPractice(String levelId, String subjectId) => '$mcqTests/$levelId/$subjectId';
+  static String interactiveExam(String examId) => '$interactiveExams/$examId';
   static String subjectDetail(String id) => '$subjects/$id';
 }
