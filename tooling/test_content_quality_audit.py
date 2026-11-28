@@ -193,7 +193,7 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertEqual(result["status"], "نیازمند منبع")
         self.assertEqual(
             result["independentQuestionFormats"],
-            ["fill_blank", "multiple_choice", "short_answer", "true_false"],
+            ["multiple_choice", "short_answer", "true_false"],
         )
         self.assertEqual(result["reusedBasePromptAdvancedQuestionCount"], 0)
         self.assertEqual(result["reusedPointRestatementCount"], 0)
