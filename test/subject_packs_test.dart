@@ -197,7 +197,7 @@ void main() {
       final raw = await rootBundle.loadString('assets/content/subjects/$id.json');
       final pack = jsonDecode(raw) as Map<String, dynamic>;
       expect(pack['sampleQuestionBankVersion'], 1, reason: id);
-      expect(pack['contentVersion'], id == 'science' ? '2026.11.28.1' : '2026.11.12.1', reason: id);
+      expect(pack['contentVersion'], id == 'science' ? '2026.11.28.2' : '2026.11.12.1', reason: id);
       final chapters = pack['chapters'] as List<dynamic>;
       final firstTerm = <Map<String, dynamic>>[];
       final secondTerm = <Map<String, dynamic>>[];
