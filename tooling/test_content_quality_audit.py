@@ -174,6 +174,48 @@ class ContentQualityAuditTests(unittest.TestCase):
         self.assertEqual(result["status"], "نیازمند منبع")
         self.assertTrue(all(len(step) >= 80 for step in chapter["solutionSteps"]))
 
+    def test_science_atomic_structure_chapter_has_independent_original_learning_pack(self):
+        root = Path(__file__).resolve().parents[1]
+        pack = json.loads(
+            (root / "assets/content/subjects/science.json").read_text(encoding="utf-8")
+        )
+        chapter = pack["chapters"][2]
+        result = audit_chapter("science", pack["title"], pack, chapter, 3)
+
+        self.assertEqual(chapter["title"], "از درون اتم چه خبر")
+        self.assertGreaterEqual(len(chapter["lessonContent"]), 350)
+        self.assertEqual(len(chapter["questions"]), 5)
+        self.assertEqual(len(chapter["advancedQuestions"]), 3)
+        self.assertEqual(len(chapter["workedExamples"]), 2)
+        self.assertEqual(len(chapter["chapterExam"]), 8)
+        self.assertTrue(result["pedagogicalComplete"])
+        self.assertFalse(result["sourceMapped"])
+        self.assertEqual(result["status"], "نیازمند منبع")
+        self.assertEqual(
+            result["independentQuestionFormats"],
+            ["fill_blank", "multiple_choice", "short_answer", "true_false"],
+        )
+        self.assertEqual(result["reusedBasePromptAdvancedQuestionCount"], 0)
+        self.assertEqual(result["reusedPointRestatementCount"], 0)
+        self.assertEqual(result["genericLearningGoalCount"], 0)
+        self.assertEqual(result["genericPointExplanationCount"], 0)
+        self.assertEqual(result["genericFinalCheckStepCount"], 0)
+        self.assertTrue(all(len(step) >= 80 for step in chapter["solutionSteps"]))
+
+        verification = chapter["sourceMapping"]["chapterContentVerification"]
+        self.assertEqual(verification["httpStatus"], 200)
+        self.assertEqual(verification["parsedPhysicalPages"], 60)
+        self.assertEqual(verification["totalPhysicalPages"], 152)
+        self.assertEqual(verification["reportedPrintedPageStart"], 21)
+        self.assertEqual(verification["reportedPrintedPageEnd"], 27)
+        self.assertEqual(
+            verification["physicalPdfPageMappingStatus"], "not_verified"
+        )
+        self.assertEqual(
+            verification["evidenceStatus"],
+            "parser_query_extracted_not_manually_visually_confirmed",
+        )
+
     def test_complete_requires_all_pedagogical_and_source_gates(self):
         pack, chapter = complete_fixture()
         result = audit_chapter("sample", "نمونه", pack, chapter, 1)
