@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hamyar_hashtom_plus/features/quiz/presentation/screens/timed_combined_exam_screen.dart';
 
@@ -11,6 +13,8 @@ Map<String, dynamic> _question(String prompt, {int answer = 0}) => {
 };
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   test('limited term exam samples questions evenly across chapters', () {
     final chapters = List.generate(
       4,
@@ -122,5 +126,26 @@ void main() {
 
     expect(tooMany, hasLength(3));
     expect(fewer, hasLength(2));
+  });
+
+  test('science atomic-structure chapter exam keeps all eight items in the timed exam', () async {
+    final raw = await rootBundle.loadString('assets/content/subjects/science.json');
+    final pack = jsonDecode(raw) as Map<String, dynamic>;
+    final chapters = pack['chapters'] as List<dynamic>;
+    final chapter = Map<String, dynamic>.from(chapters[2] as Map);
+
+    final selected = buildBalancedExamQuestions(
+      chapters: [chapter],
+      random: Random(11),
+    );
+
+    expect(selected, hasLength(8));
+    expect(
+      selected.every(
+        (question) =>
+            question['options'] is List && question['answer'] is int,
+      ),
+      isTrue,
+    );
   });
 }
